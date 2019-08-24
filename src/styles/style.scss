@@ -1,0 +1,10 @@
+@import 'includes/vars';
+@import 'includes/extends';
+@import 'includes/general';
+
+@import 'parts/header';
+@import 'parts/footer';
+
+@import 'pages/index';
+
+@import 'overrides/mui';

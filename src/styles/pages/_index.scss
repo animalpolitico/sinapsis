@@ -1,0 +1,38 @@
+#ss_page_home{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4rem 4rem;
+  margin: 0 auto;
+  .ss_hb_cols{
+    width: 100%;
+    @extend .flex;
+    .ss_hb_col{
+      flex: 1;
+      #ss_hb_ctas{
+        margin-top: 2rem;
+        transition: all 0.5s ease;
+        opacity: 0;
+        &.ss_hb_finished{
+          opacity: 1;
+        }
+        .MuiButton-root{
+          margin-right: 1rem;
+        }
+      }
+      #ss_home_brain_text{
+        .ss_hb_tt{
+          font-size: 3.5rem;
+          text-transform: uppercase;
+          div{
+            margin-bottom: 0.5rem;
+            background: $yellow;
+            color: #222;
+            display: inline-block;
+            box-sizing: border-box;
+            padding: 0.3rem 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
