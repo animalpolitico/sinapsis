@@ -27,9 +27,9 @@ export default class Index extends React.Component{
                 Crear una base de datos
               </Button>
               <Link to="/cruzar">
-              <Button color="primary" size="large" variant="contained">
-                Comenzar a cruzar
-              </Button>
+                <Button color="primary" size="large" variant="contained">
+                  Comenzar a cruzar
+                </Button>
               </Link>
             </div>
           </div>

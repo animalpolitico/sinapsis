@@ -12,7 +12,7 @@ import Footer from './parts/footer';
 /* Páginas */
 import Index from './pages/index';
 import Cruzar from './pages/cruzar';
-import Playground from './pages/playground';
+import DbBuilderPage from './pages/dbbuilder';
 import NotFound from './pages/404';
 
 const theme = createMuiTheme({
@@ -37,7 +37,7 @@ export default class App extends React.Component{
               <Switch>
                 <Route path="/" exact component={Index} />
                 <Route path="/cruzar" exact component={Cruzar} />
-                <Route path="/playground" exact component={Playground} />
+                <Route path="/construir" exact component={DbBuilderPage} />
                 <Route path="*" component={NotFound} />
               </Switch>
             </div>

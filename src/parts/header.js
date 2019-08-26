@@ -18,9 +18,11 @@ export default class Header extends React.Component{
                 <Button color="primary" variant="outlined">
                   Tutoriales
                 </Button>
-                <Button color="primary" variant="outlined">
-                  Construir base de datos
-                </Button>
+                <Link to="/construir">
+                  <Button color="primary" variant="outlined">
+                    Construir base de datos
+                  </Button>
+                </Link>
                 <Button color="primary" variant="outlined">
                   Demo
                 </Button>

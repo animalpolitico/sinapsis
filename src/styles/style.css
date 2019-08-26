@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Chivo:300,300i,400,400i,700,700i,900,900i&display=swap");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_ap, #ss_header_c_logo, #ss_page_home .ss_hb_cols {
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_ap, #ss_header_c_logo, #ss_info_fixed_bar_container .ss_info_cols, #ss_page_home .ss_hb_cols {
   display: flex;
   flex-wrap: nowrap; }
 
@@ -25,7 +26,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  font-family: 'Chivo', serif; }
+  font-family: "Chivo", serif; }
 
 #binder {
   width: 100%;
@@ -38,6 +39,9 @@
   width: 100%;
   box-sizing: border-box;
   position: relative; }
+  .ss_page_container {
+    width: 90%;
+    margin: 2rem auto; }
 
 a, a:link, a:visited, a:hover {
   color: inherit;
@@ -100,6 +104,43 @@ a, a:link, a:visited, a:hover {
   width: 100%;
   background: #2A3BFE;
   height: 100px; }
+
+#ss_info_fixed_bar {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem 5% 2rem;
+  border-bottom: 1px solid #ccc; }
+  #ss_info_fixed_bar_container {
+    width: 100%; }
+    #ss_info_fixed_bar_container .ss_info_cols .ss_info_col {
+      flex: 1;
+      box-sizing: border-box;
+      padding: 0; }
+  #ss_info_fixed_bar .ss_form_info {
+    width: 100%; }
+    #ss_info_fixed_bar .ss_form_info_db_name {
+      width: 100%; }
+      #ss_info_fixed_bar .ss_form_info_db_name_input {
+        width: 100%; }
+        #ss_info_fixed_bar .ss_form_info_db_name_input .MuiInputLabel-root {
+          display: none; }
+          #ss_info_fixed_bar .ss_form_info_db_name_input .MuiInputLabel-root.Mui-focused {
+            display: block; }
+        #ss_info_fixed_bar .ss_form_info_db_name_input .MuiInputLabel-root.Mui-error {
+          display: block; }
+        #ss_info_fixed_bar .ss_form_info_db_name_input .MuiInputBase-root {
+          line-height: 3rem;
+          font-family: "Chivo", serif;
+          font-size: 3rem;
+          color: #2A3BFE; }
+          #ss_info_fixed_bar .ss_form_info_db_name_input .MuiInputBase-root:not(.Mui-focused)::after, #ss_info_fixed_bar .ss_form_info_db_name_input .MuiInputBase-root:not(.Mui-focused)::before {
+            display: none; }
+    #ss_info_fixed_bar .ss_form_info_db_metadata {
+      width: 100%;
+      margin-top: 0.5rem; }
+      #ss_info_fixed_bar .ss_form_info_db_metadata_r {
+        margin-top: 0.25rem;
+        font-size: 0.8rem; }
 
 #ss_page_home {
   width: 100%;
