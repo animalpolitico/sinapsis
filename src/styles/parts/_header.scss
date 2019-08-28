@@ -23,6 +23,30 @@
       align-items: center;
       box-sizing: border-box;
       padding: 0 1rem;
+      .ss_header_c_m_menu, .ss_header_c_m_dots{
+        @extend .flex;
+        align-items: center;
+      }
+      .ss_header_c_m_menu{
+        width: 2px;
+        overflow: hidden;
+        // transform: translateX(1000px);
+        transition: all 0.2s ease;
+      }
+      .ss_header_c_m_dots{
+        @extend .flex;
+        align-items: center;
+        padding: 0.5rem 0 0.5rem 1rem;
+        cursor: pointer;
+        background: white;
+        div{
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: $yellow;
+          margin-left: 5px;
+        }
+      }
       .MuiButton-root{
         margin-left: 1rem;
       }
@@ -49,15 +73,21 @@
       @extend .flex;
       font-weight: 600;
       align-items: center;
-      color: $blue;
+      color: lighten($blue, 10%);
       .badge{
         padding: 2px 8px;
         font-size: 0.7rem;
         background: $yellow;
-        color: #222;
+        color: white;
         font-weight: 600;
         border-radius: 10px;
         margin-left: 10px;
+      }
+    }
+    &.ss_showmenu{
+      .ss_header_c_m_menu{
+        width: auto!important;
+        transform: none;
       }
     }
   }

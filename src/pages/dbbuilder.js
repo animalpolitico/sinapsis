@@ -9,15 +9,34 @@ import 'moment/locale/es';
 import DbFactory from '../funcs/dbClass';
 import { sinapsisDbObject } from '../vars/sinapsisDbStructure';
 
-moment.locale('es');
+/** Componentes **/
+import DbBuilderToolbar from '../parts/dbbuilder/toolbar';
+import DBNewDatabase from '../parts/dbbuilder/newdb';
+
 
 var dbf = new DbFactory(sinapsisDbObject);
-dbf.normalize();
+var dbf_obj = dbf.set();
+window.dbf = dbf;
 
 export default class DbBuilderPage extends React.Component{
   render(){
     return(
-      <h1>Hola</h1>
+      <div className="ss_page">
+        <DbBuilderToolbar ref={(ref) => this.toolbar = ref}/>
+        <div className="ss_dbbuilder">
+          <DbBuilderSidebar />
+        </div>
+      </div>
+    )
+  }
+}
+
+class DbBuilderSidebar extends React.Component{
+  render(){
+    return(
+      <div className="ss_dbbuilder_sidebar">
+        <DBNewDatabase />
+      </div>
     )
   }
 }

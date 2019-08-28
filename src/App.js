@@ -18,7 +18,7 @@ import NotFound from './pages/404';
 const theme = createMuiTheme({
     palette: {
       primary: {
-        main: '#2A3BFE'
+        main: '#1f2153'
       },
     },
 });

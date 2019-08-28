@@ -1,0 +1,80 @@
+.ss_db_toolbar{
+  width: 100%;
+  position: fixed;
+  top: $menuh;
+  z-index: 88;
+  &_info{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 4rem;
+    background: #fcfcfc;
+    border-bottom: 1px solid #ccc;
+    @extend .flex;
+    align-items: center;
+    &_td{
+      &.ss_db_lastmodified{
+        font-size: 0.8rem;
+        color: #aaa;
+      }
+      &.ss_db_ctas{
+        flex: 1;
+        @extend .flex;
+        justify-content: flex-end;
+        align-items: center;
+        box-sizing: border-box;
+        padding-right: 1rem;
+        .MuiButton-root{
+          margin-left: 1rem;
+        }
+      }
+      .ss_db_builder_project_name{
+        position: relative;
+        &_icon{
+          height: 100%;
+          position: absolute;
+          right: 0;
+          top: 0;
+          pointer-events: none;
+          display: none;
+          align-items: center;
+          justify-content: center;
+          transform: translateX(-50%);
+          .material-icons{
+            font-size: 1.2rem;
+            color: #888;
+          }
+        }
+        input{
+          font-size: 1rem;
+          color: rgb(39, 30, 74);
+          background: none;
+          border: 0;
+          font-family: $f;
+          box-sizing: border-box;
+          padding: 0.25rem 0.5rem;
+          font-weight: 600;
+          border: 1px solid transparent;
+          transform: translateX(-0.5rem);
+          &:focus{
+            outline: 0;
+            border-color: #ccc;
+          }
+        }
+        &.ss_error{
+          input{
+            border-color: rgb(198, 125, 102);
+            &::placeholder{
+              color: rgb(198, 125, 102);
+              font-weight: 500;
+            }
+          }
+        }
+        &:hover:not(.ss_focused){
+          .ss_db_builder_project_name_icon{
+            display: flex;
+          }
+        }
+      }
+    }
+  }
+}

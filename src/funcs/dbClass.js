@@ -1,3 +1,7 @@
+import moment from 'moment';
+import 'moment/locale/es';
+moment.locale('es');
+
 var ntol = require('number-to-letter');
 var slugify = require('slugify');
 
@@ -14,7 +18,71 @@ export default class DbFactory {
       DbInfo = [];
       console.error('Sinapsis: No hay ninguna estructura de formulario seleccionada. Esto ocasionará errores inesperados.');
     }
+    this.classVersion = '0.0.1';
+    this.version = 0;
     this.originalData = DbInfo;
+  }
+
+  /**
+  * Crea un objeto que después podrá ser exportado
+  *
+  * @param void
+  * @return obj
+  **/
+  set(){
+    this.obj = {
+      projectStructure: this.originalData,
+      classVersion: this.classVersion,
+      version: this.version
+    };
+    return this.setCreated();
+  }
+
+  /**
+  * Establece la fecha inicial
+  *
+  * @param void
+  * @return obj
+  **/
+  setCreated(){
+    if(this.obj.created){
+      return this.obj;
+    }
+    var created = moment.now();
+    this.obj.created = created;
+    return this.obj;
+  }
+
+  /**
+  * Establece el nombre de la base
+  *
+  * @param string
+  * @return obj
+  **/
+  setName(v){
+    var o = this.obj;
+    if(!o.info){
+      o.info = {};
+    }
+    o.info.name = v;
+    o.info.slug = slugify(v, {lower: true});
+    this.obj = o;
+    this.setModified();
+    return o;
+  }
+
+  /**
+  * Establece la fecha de modificación
+  *
+  * @param void
+  * @return obj
+  **/
+  setModified(){
+    var modified = moment.now();
+    this.obj.modified = modified;
+    this.version++;
+    this.obj.version = this.version;
+    return this.obj;
   }
 
   /**
@@ -54,10 +122,7 @@ export default class DbFactory {
         o = [...o, ...inputs];
       }
     }
-
-
-
-
+    return o;
   }
 
   /**
@@ -83,6 +148,32 @@ export default class DbFactory {
     }
     return o;
   }
+
+  /**
+  * Obtiene el objeto principal
+  *
+  * @param void
+  * @return object
+  **/
+  getMainObject(){
+    var g = this.originalData;
+    var f = g.filter(function(g){
+      return g.ismain ? true : false;
+    });
+    return f[0];
+  }
+
+  /**
+  * Obtiene el tamaño aproximado del objeto
+  *
+  * @param void
+  * @return int bits
+  **/
+  getObjectSize(){
+    var j = JSON.stringify(this.obj);
+    return j.length;
+  }
+
 
 
 

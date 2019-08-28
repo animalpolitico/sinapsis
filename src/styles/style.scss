@@ -4,7 +4,10 @@
 
 @import 'parts/header';
 @import 'parts/footer';
-@import 'parts/formInfo';
+
+@import 'parts/dbbuilder/general';
+@import 'parts/dbbuilder/toolbar';
+
 
 @import 'pages/index';
 

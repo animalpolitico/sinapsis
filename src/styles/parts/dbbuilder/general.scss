@@ -1,0 +1,17 @@
+.ss_dbbuilder{
+  width: 100%;
+  box-sizing: border-box;
+  background: white;
+  position: relative;
+  top: 45px;
+  height: calc(100vh - 90px);
+  &_sidebar{
+    width: 35%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    background: $blue;
+  }
+}

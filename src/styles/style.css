@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Chivo:300,300i,400,400i,700,700i,900,900i&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_ap, #ss_header_c_logo, #ss_info_fixed_bar_container .ss_info_cols, #ss_page_home .ss_hb_cols {
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, #ss_page_home .ss_hb_cols {
   display: flex;
   flex-wrap: nowrap; }
 
@@ -70,6 +70,23 @@ a, a:link, a:visited, a:hover {
       align-items: center;
       box-sizing: border-box;
       padding: 0 1rem; }
+      #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots {
+        align-items: center; }
+      #ss_header_c_m .ss_header_c_m_menu {
+        width: 2px;
+        overflow: hidden;
+        transition: all 0.2s ease; }
+      #ss_header_c_m .ss_header_c_m_dots {
+        align-items: center;
+        padding: 0.5rem 0 0.5rem 1rem;
+        cursor: pointer;
+        background: white; }
+        #ss_header_c_m .ss_header_c_m_dots div {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #d64cc8;
+          margin-left: 5px; }
       #ss_header_c_m .MuiButton-root {
         margin-left: 1rem; }
     #ss_header_c_ap {
@@ -90,57 +107,99 @@ a, a:link, a:visited, a:hover {
       letter-spacing: 1px;
       font-weight: 600;
       align-items: center;
-      color: #2A3BFE; }
+      color: #292a54; }
       #ss_header_c_logo .badge {
         padding: 2px 8px;
         font-size: 0.7rem;
-        background: #F0FF04;
-        color: #222;
+        background: #d64cc8;
+        color: white;
         font-weight: 600;
         border-radius: 10px;
         margin-left: 10px; }
+    #ss_header_c.ss_showmenu .ss_header_c_m_menu {
+      width: auto !important;
+      transform: none; }
 
 #ss_footer {
   width: 100%;
-  background: #2A3BFE;
+  background: #f0f0f0;
   height: 100px; }
 
-#ss_info_fixed_bar {
+.ss_dbbuilder {
   width: 100%;
   box-sizing: border-box;
-  padding: 1rem 5% 2rem;
-  border-bottom: 1px solid #ccc; }
-  #ss_info_fixed_bar_container {
-    width: 100%; }
-    #ss_info_fixed_bar_container .ss_info_cols .ss_info_col {
+  background: white;
+  position: relative;
+  top: 45px;
+  height: calc(100vh - 90px); }
+  .ss_dbbuilder_sidebar {
+    width: 35%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    background: #181932; }
+
+.ss_db_toolbar {
+  width: 100%;
+  position: fixed;
+  top: 70px;
+  z-index: 88; }
+  .ss_db_toolbar_info {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 4rem;
+    background: #fcfcfc;
+    border-bottom: 1px solid #ccc;
+    align-items: center; }
+    .ss_db_toolbar_info_td.ss_db_lastmodified {
+      font-size: 0.8rem;
+      color: #aaa; }
+    .ss_db_toolbar_info_td.ss_db_ctas {
       flex: 1;
+      justify-content: flex-end;
+      align-items: center;
       box-sizing: border-box;
-      padding: 0; }
-  #ss_info_fixed_bar .ss_form_info {
-    width: 100%; }
-    #ss_info_fixed_bar .ss_form_info_db_name {
-      width: 100%; }
-      #ss_info_fixed_bar .ss_form_info_db_name_input {
-        width: 100%; }
-        #ss_info_fixed_bar .ss_form_info_db_name_input .MuiInputLabel-root {
-          display: none; }
-          #ss_info_fixed_bar .ss_form_info_db_name_input .MuiInputLabel-root.Mui-focused {
-            display: block; }
-        #ss_info_fixed_bar .ss_form_info_db_name_input .MuiInputLabel-root.Mui-error {
-          display: block; }
-        #ss_info_fixed_bar .ss_form_info_db_name_input .MuiInputBase-root {
-          line-height: 3rem;
-          font-family: "Chivo", serif;
-          font-size: 3rem;
-          color: #2A3BFE; }
-          #ss_info_fixed_bar .ss_form_info_db_name_input .MuiInputBase-root:not(.Mui-focused)::after, #ss_info_fixed_bar .ss_form_info_db_name_input .MuiInputBase-root:not(.Mui-focused)::before {
-            display: none; }
-    #ss_info_fixed_bar .ss_form_info_db_metadata {
-      width: 100%;
-      margin-top: 0.5rem; }
-      #ss_info_fixed_bar .ss_form_info_db_metadata_r {
-        margin-top: 0.25rem;
-        font-size: 0.8rem; }
+      padding-right: 1rem; }
+      .ss_db_toolbar_info_td.ss_db_ctas .MuiButton-root {
+        margin-left: 1rem; }
+    .ss_db_toolbar_info_td .ss_db_builder_project_name {
+      position: relative; }
+      .ss_db_toolbar_info_td .ss_db_builder_project_name_icon {
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        pointer-events: none;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(-50%); }
+        .ss_db_toolbar_info_td .ss_db_builder_project_name_icon .material-icons {
+          font-size: 1.2rem;
+          color: #888; }
+      .ss_db_toolbar_info_td .ss_db_builder_project_name input {
+        font-size: 1rem;
+        color: #271e4a;
+        background: none;
+        border: 0;
+        font-family: "Chivo", serif;
+        box-sizing: border-box;
+        padding: 0.25rem 0.5rem;
+        font-weight: 600;
+        border: 1px solid transparent;
+        transform: translateX(-0.5rem); }
+        .ss_db_toolbar_info_td .ss_db_builder_project_name input:focus {
+          outline: 0;
+          border-color: #ccc; }
+      .ss_db_toolbar_info_td .ss_db_builder_project_name.ss_error input {
+        border-color: #c67d66; }
+        .ss_db_toolbar_info_td .ss_db_builder_project_name.ss_error input::placeholder {
+          color: #c67d66;
+          font-weight: 500; }
+      .ss_db_toolbar_info_td .ss_db_builder_project_name:hover:not(.ss_focused) .ss_db_builder_project_name_icon {
+        display: flex; }
 
 #ss_page_home {
   width: 100%;
@@ -164,7 +223,7 @@ a, a:link, a:visited, a:hover {
         text-transform: uppercase; }
         #ss_page_home .ss_hb_cols .ss_hb_col #ss_home_brain_text .ss_hb_tt div {
           margin-bottom: 0.5rem;
-          background: #F0FF04;
+          background: #d64cc8;
           color: #222;
           display: inline-block;
           box-sizing: border-box;
