@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Chivo:300,300i,400,400i,700,700i,900,900i&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_db_view_name, #ss_page_home .ss_hb_cols {
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, .ss_db_view_name, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, #ss_page_home .ss_hb_cols {
   display: flex;
   flex-wrap: nowrap; }
 
@@ -14,7 +14,7 @@
   top: 50%;
   transform: translateY(-50%); }
 
-.cxy {
+.cxy, .ss_db_view_empresas .ss_db_ve_c_nocontent_icon .material-icons {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -205,7 +205,8 @@ a, a:link, a:visited, a:hover {
   width: 100%; }
 
 .ss_dbbuilder_sidebar_dbs_nav {
-  width: 100%; }
+  width: 100%;
+  overflow-x: auto; }
   .ss_dbbuilder_sidebar_dbs_nav_td {
     cursor: pointer;
     background: #181932;
@@ -223,7 +224,20 @@ a, a:link, a:visited, a:hover {
       text-overflow: ellipsis;
       color: white;
       font-size: 0.9rem;
-      overflow: hidden; }
+      overflow: hidden;
+      align-items: center;
+      justify-content: center; }
+      .ss_dbbuilder_sidebar_dbs_nav_td_input .ss_dbtab_circle {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 5px;
+        flex-shrink: 0; }
+      .ss_dbbuilder_sidebar_dbs_nav_td_input span {
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
     .ss_dbbuilder_sidebar_dbs_nav_td.ss_active {
       min-width: 100px;
       border-color: #f0efd1;
@@ -277,8 +291,78 @@ a, a:link, a:visited, a:hover {
       border-color: red; }
   .ss_db_view_empresas {
     width: 100%;
-    background: blue;
-    height: 300px; }
+    height: 300px;
+    border-top: 2px solid beige;
+    box-sizing: border-box;
+    padding: 1rem; }
+    .ss_db_view_empresas_title {
+      color: white;
+      font-weight: 400;
+      align-items: center; }
+      .ss_db_view_empresas_title_btn {
+        display: inline-block;
+        background: #d64cc8;
+        margin-left: 5px;
+        padding: 0.12rem 0.5rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+        border-radius: 0.8rem; }
+    .ss_db_view_empresas .ss_db_ve_c {
+      width: 100%; }
+      .ss_db_view_empresas .ss_db_ve_c_nocontent {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 2rem 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        margin-top: 1rem;
+        flex-direction: column;
+        align-items: center; }
+        .ss_db_view_empresas .ss_db_ve_c_nocontent_icon {
+          width: 100px;
+          height: 100px;
+          position: relative;
+          border-radius: 50%;
+          background: #e73524; }
+          .ss_db_view_empresas .ss_db_ve_c_nocontent_icon .material-icons {
+            display: block;
+            font-size: 3rem;
+            color: white; }
+        .ss_db_view_empresas .ss_db_ve_c_nocontent_des {
+          width: 100%; }
+          .ss_db_view_empresas .ss_db_ve_c_nocontent_des p {
+            color: white;
+            text-align: center; }
+          .ss_db_view_empresas .ss_db_ve_c_nocontent_des_cta {
+            width: 100%;
+            text-align: center; }
+            .ss_db_view_empresas .ss_db_ve_c_nocontent_des_cta a {
+              text-decoration: underline;
+              color: white; }
+  .ss_db_view .ss_db_ve_c_empresas_list {
+    width: 100%;
+    margin: 1rem 0; }
+  .ss_db_view .db_empresa {
+    width: 100%;
+    margin: 0.5rem 0; }
+    .ss_db_view .db_empresa_container {
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      padding: 0.5rem;
+      background: #212b4e;
+      border-radius: 0.2rem;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      align-items: center; }
+      .ss_db_view .db_empresa_container_indicator {
+        width: 5px;
+        height: 5px;
+        border: 2px solid transparent;
+        margin-right: 5px;
+        background: red;
+        border-radius: 50%; }
+      .ss_db_view .db_empresa_container_name {
+        color: white;
+        flex: 1; }
 
 #ss_page_home {
   width: 100%;

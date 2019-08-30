@@ -37,8 +37,31 @@ export default class DbBuilderToolbar extends React.Component{
       var mm = m.fromNow();
       modifiedCronned(mm);
     }, 1000 * 2);
+  }
 
-
+  loadFile(e){
+    this.setState({
+      isloading: true
+    })
+    var self = this;
+    var em = document.getElementById('ss_file_input');
+    var f = em.files;
+    if(f[0]){
+      var file = f[0];
+      var reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.onload = function(ev){
+        var t =  ev.target.result;
+        var obj = window.dbf.setFile(t);
+        setTimeout(function(){
+          self.props.parent.forceRender();
+          self.toolbarname.handleChange(obj.info.name);
+          self.setState({
+            isloading: false
+          })
+        }, 500);
+      }
+    }
   }
 
   render(){
@@ -46,7 +69,7 @@ export default class DbBuilderToolbar extends React.Component{
       <div className="ss_db_toolbar">
         <div className="ss_db_toolbar_info">
           <div className="ss_db_toolbar_info_td">
-            <DbBuilderToolbarName parent={this}/>
+            <DbBuilderToolbarName parent={this} ref={(ref) => this.toolbarname = ref}/>
           </div>
           {
             this.state.modifiedString ?
@@ -67,6 +90,7 @@ export default class DbBuilderToolbar extends React.Component{
             <Fab size="small" color="primary" onClick={() => window.dbf.createProjectFile()}>
               <Icon>settings_applications</Icon>
             </Fab>
+            <input type="file" accept=".json,.sinapsis" id="ss_file_input" onChange={(e) => this.loadFile(e)}/>
             <Fab size="small" color="primary" onClick={() => window.dbf.createProjectFile()}>
               <Icon>get_app</Icon>
             </Fab>
@@ -91,7 +115,7 @@ class DbBuilderToolbarName extends React.Component{
   }
 
   handleChange(e){
-    var v = e.target.value;
+    var v = e;
     var err = v ? false : true;
     this.setState({
       project_name: v,
@@ -121,7 +145,7 @@ class DbBuilderToolbarName extends React.Component{
         <input
           type="text"
           placeholder="Nombre del proyecto"
-          onChange={(e) => this.handleChange(e)}
+          onChange={(e) => this.handleChange(e.target.value)}
           onBlur={() => this.setState({focused: false})}
           onFocus={() => this.setState({focused: true})}
           value={this.state.project_name}

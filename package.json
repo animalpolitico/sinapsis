@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.3.2",
+    "color-generator": "^0.1.0",
     "file-saver": "^2.0.2",
     "jszip": "^3.2.2",
     "moment": "^2.24.0",

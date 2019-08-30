@@ -5,7 +5,9 @@ moment.locale('es');
 var ntol = require('number-to-letter');
 var slugify = require('slugify');
 var JSZip = require("jszip");
+
 const uuidv4 = require('uuid/v4');
+var gen = require('color-generator');
 
 export default class DbFactory {
 
@@ -15,16 +17,12 @@ export default class DbFactory {
   * @param array
   * @return void
   **/
-  constructor(DbInfo){
-    if(!DbInfo){
-      DbInfo = [];
-      console.error('Sinapsis: No hay ninguna estructura de formulario seleccionada. Esto ocasionará errores inesperados.');
-    }
+  constructor(){
     this.classVersion = '0.0.1';
     this.version = 0;
     this.saves = 0;
     this.manualSaves = 0;
-    this.originalData = DbInfo;
+    this.originalData = [];
   }
 
   /**
@@ -35,17 +33,24 @@ export default class DbFactory {
   **/
   set(){
     this.obj = {
+      uid: this.createUid(),
       info: {
         name: 'Proyecto sin nombre',
         slug: 'proyecto-sin-nombre'
       },
-      projectStructure: this.originalData,
+      projectStructure: 'sinapsis_empresas',
       classVersion: this.classVersion,
       saves: 0,
       modified: false,
       version: this.version
     };
     return this.setCreated();
+  }
+
+  setFile(t){
+    var obj = JSON.parse(decodeURI(atob(t)));
+    this.obj = obj;
+    return obj;
   }
 
   /**
@@ -202,19 +207,17 @@ export default class DbFactory {
   **/
   createProjectFile(){
     var d = this.obj;
-    d.snps = 1921;
     d.savedAt = moment.now();
     d.saves = d.saves + 1;
-    var j = JSON.stringify(d);
-    var o = btoa(j);
-    var txt = o;
+    var s = JSON.stringify(d);
+    var j = btoa(encodeURI(s));
+    var txt = j;
     var kbsize = txt.length * 0.000125;
-
+    console.log('kbsize', kbsize);
     var name = d.info.slug + '_v'+ d.version + '_b_' + d.saves;
     var zip = new JSZip();
-
-    zip.file(name + '.sinapsis', txt, {base64: true});
-
+    zip.file(name + '.sinapsis', txt, {binary: true});
+    zip.file(name + '_dev.json', s, {binary: true});
     zip.generateAsync({type: "blob"})
     .then(function(content) {
         saveAs(content, name + ".zip");
@@ -257,13 +260,17 @@ export default class DbFactory {
     var uid = this.createUid();
     var o = {
       id: uid,
-      name: 'BD #'+ (x+1)
+      name: 'BD #'+ (x+1),
+      created: moment.now(),
+      color: gen().rgbString()
     }
     dbs[uid] = o;
     this.setModified();
     this.obj.dbs = dbs;
     return uid;
   }
+
+
 
   /**
   * Reemplaza el objeto de la base de datos
@@ -273,9 +280,32 @@ export default class DbFactory {
   **/
   editDb(uid, db){
     var dbs = this.getDbs();
+    db.modified = moment.now();
     dbs[uid] = db;
     this.setModified();
     return dbs;
+  }
+
+  /**
+  * Añade una empresa a una base de datos
+  *
+  * @param db
+  * @return db
+  **/
+  addEmpresaToDb(db, v){
+    if(!db.empresas){
+      db.empresas = {};
+    }
+    var empresa = {
+      name: v,
+      slug: slugify(v, {lower: true}),
+      uid: this.createUid()
+    };
+    db.empresas[empresa.uid] = empresa;
+
+    this.editDb(db.id, db);
+
+    return db;
   }
 
   /**
@@ -288,6 +318,8 @@ export default class DbFactory {
     var dbs = this.getDbs();
     return dbs[uid];
   }
+
+
 
 
 }

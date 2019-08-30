@@ -4,6 +4,7 @@
 .ss_dbbuilder_sidebar_dbs_nav{
   width: 100%;
   @extend .flex;
+  overflow-x: auto;
   &_td{
     cursor: pointer;
     background: $blue;
@@ -24,6 +25,22 @@
       color: white;
       font-size: 0.9rem;
       overflow: hidden;
+      @extend .flex;
+      align-items: center;
+      justify-content: center;
+      .ss_dbtab_circle{
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 5px;
+        flex-shrink: 0;
+      }
+      span{
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
     }
     &.ss_active{
       min-width: 100px;

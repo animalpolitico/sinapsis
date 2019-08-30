@@ -42,8 +42,96 @@
 
   &_empresas{
     width: 100%;
-    background: blue;
     height: 300px;
+    border-top: 2px solid beige;
+    box-sizing: border-box;
+    padding: 1rem;
+    &_title{
+      color: white;
+      font-weight: 400;
+      @extend .flex;
+      align-items: center;
+      &_btn{
+        display: inline-block;
+        background: $yellow;
+        margin-left: 5px;
+        padding: 0.12rem 0.5rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+        border-radius: 0.8rem;
+      }
+    }
+    .ss_db_ve_c{
+      width: 100%;
+      &_nocontent{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 2rem 1rem;
+        background: rgba(white, 0.05);
+        margin-top: 1rem;
+        @extend .flex;
+        flex-direction: column;
+        align-items: center;
+        &_icon{
+          width: 100px;
+          height: 100px;
+          position: relative;
+          border-radius: 50%;
+          background: rgb(231, 53, 36);
+          .material-icons{
+            display: block;
+            @extend .cxy;
+            font-size: 3rem;
+            color: white;
+          }
+        }
+        &_des{
+          width: 100%;
+          p{
+            color: white;
+            text-align: center;
+          }
+          &_cta{
+            width: 100%;
+            text-align: center;
+            a{
+              text-decoration: underline;
+              color: white;
+            }
+          }
+        }
+      }
+    }
   }
-
+  .ss_db_ve_c_empresas_list{
+    width: 100%;
+    margin: 1rem 0;
+  }
+  .db_empresa{
+    width: 100%;
+    margin: 0.5rem 0;
+    &_container{
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      padding: 0.5rem;
+      background: rgb(33, 43, 78);
+      border-radius: 0.2rem;
+      box-shadow: 2px 2px 4px rgba(black, 0.2);
+      @extend .flex;
+      align-items: center;
+      &_indicator{
+        width: 5px;
+        height: 5px;
+        border: 2px solid transparent;
+        margin-right: 5px;
+        background: red;
+        border-radius: 50%;
+      }
+      &_name{
+        color: white;
+        flex: 1;
+      }
+    }
+  }
 }
