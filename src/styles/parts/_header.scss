@@ -1,9 +1,8 @@
 #ss_header{
   width: 100%;
   height: $menuh;
-  background: white;
+  background: $blue;
   position: relative;
-  border-bottom: 1px solid $gray;
   position: fixed;
   top: 0;
   left: 0;
@@ -39,6 +38,7 @@
         padding: 0.5rem 0 0.5rem 1rem;
         cursor: pointer;
         background: white;
+        display: none;
         div{
           width: 7px;
           height: 7px;
@@ -68,20 +68,20 @@
     &_logo{
       text-transform: uppercase;
       color: white;
-      font-size: 2rem;
+      font-size: 1.5rem;
       letter-spacing: 1px;
       @extend .flex;
       font-weight: 600;
       align-items: center;
-      color: lighten($blue, 10%);
+      color: white;
       .badge{
         padding: 2px 8px;
-        font-size: 0.7rem;
+        font-size: 0.5rem;
         background: $yellow;
         color: white;
         font-weight: 600;
         border-radius: 10px;
-        margin-left: 10px;
+        margin-left: 5px;
       }
     }
     &.ss_showmenu{

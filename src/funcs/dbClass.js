@@ -1,9 +1,11 @@
 import moment from 'moment';
 import 'moment/locale/es';
+import { saveAs } from 'file-saver';
 moment.locale('es');
-
 var ntol = require('number-to-letter');
 var slugify = require('slugify');
+var JSZip = require("jszip");
+const uuidv4 = require('uuid/v4');
 
 export default class DbFactory {
 
@@ -20,6 +22,8 @@ export default class DbFactory {
     }
     this.classVersion = '0.0.1';
     this.version = 0;
+    this.saves = 0;
+    this.manualSaves = 0;
     this.originalData = DbInfo;
   }
 
@@ -31,8 +35,14 @@ export default class DbFactory {
   **/
   set(){
     this.obj = {
+      info: {
+        name: 'Proyecto sin nombre',
+        slug: 'proyecto-sin-nombre'
+      },
       projectStructure: this.originalData,
       classVersion: this.classVersion,
+      saves: 0,
+      modified: false,
       version: this.version
     };
     return this.setCreated();
@@ -83,6 +93,16 @@ export default class DbFactory {
     this.version++;
     this.obj.version = this.version;
     return this.obj;
+  }
+
+  /**
+  * Obtiene el timestamp de modificación
+  *
+  * @param void
+  * @return int | false
+  **/
+  getModified(){
+    return this.obj.modified;
   }
 
   /**
@@ -174,7 +194,100 @@ export default class DbFactory {
     return j.length;
   }
 
+  /**
+  * Construye un archivo .sinapsis
+  *
+  * @param void
+  * @return Blob
+  **/
+  createProjectFile(){
+    var d = this.obj;
+    d.snps = 1921;
+    d.savedAt = moment.now();
+    d.saves = d.saves + 1;
+    var j = JSON.stringify(d);
+    var o = btoa(j);
+    var txt = o;
+    var kbsize = txt.length * 0.000125;
 
+    var name = d.info.slug + '_v'+ d.version + '_b_' + d.saves;
+    var zip = new JSZip();
+
+    zip.file(name + '.sinapsis', txt, {base64: true});
+
+    zip.generateAsync({type: "blob"})
+    .then(function(content) {
+        saveAs(content, name + ".zip");
+    });
+  }
+
+  /**
+  * Obtiene las bases de datos
+  *
+  * @param void
+  * @return array
+  **/
+  getDbs(){
+    var dbs = this.obj.dbs;
+    if(!dbs){
+      dbs = {};
+    }
+    return dbs;
+  }
+
+  /**
+  * Crea un uid
+  *
+  * @param void
+  * @return string
+  **/
+  createUid(){
+    return uuidv4();
+  }
+
+  /**
+  * Crea una base de datos
+  *
+  * @param void
+  * @return uid
+  **/
+  addDb(){
+    var dbs = this.getDbs();
+    var x = Object.values(dbs).length;
+    var uid = this.createUid();
+    var o = {
+      id: uid,
+      name: 'BD #'+ (x+1)
+    }
+    dbs[uid] = o;
+    this.setModified();
+    this.obj.dbs = dbs;
+    return uid;
+  }
+
+  /**
+  * Reemplaza el objeto de la base de datos
+  *
+  * @param uid
+  * @return dbs
+  **/
+  editDb(uid, db){
+    var dbs = this.getDbs();
+    dbs[uid] = db;
+    this.setModified();
+    return dbs;
+  }
+
+  /**
+  * Obtiene la base de datos
+  *
+  * @param uid
+  * @return obj
+  **/
+  getDb(uid){
+    var dbs = this.getDbs();
+    return dbs[uid];
+  }
 
 
 }

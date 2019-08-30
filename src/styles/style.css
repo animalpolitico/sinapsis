@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Chivo:300,300i,400,400i,700,700i,900,900i&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, #ss_page_home .ss_hb_cols {
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_db_view_name, #ss_page_home .ss_hb_cols {
   display: flex;
   flex-wrap: nowrap; }
 
@@ -32,7 +32,7 @@
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
-  padding-top: 70px;
+  padding-top: 50px;
   min-height: 100vh; }
 
 .ss_page {
@@ -49,10 +49,9 @@ a, a:link, a:visited, a:hover {
 
 #ss_header {
   width: 100%;
-  height: 70px;
-  background: white;
+  height: 50px;
+  background: #181932;
   position: relative;
-  border-bottom: 1px solid #ccc;
   position: fixed;
   top: 0;
   left: 0;
@@ -80,7 +79,8 @@ a, a:link, a:visited, a:hover {
         align-items: center;
         padding: 0.5rem 0 0.5rem 1rem;
         cursor: pointer;
-        background: white; }
+        background: white;
+        display: none; }
         #ss_header_c_m .ss_header_c_m_dots div {
           width: 7px;
           height: 7px;
@@ -91,8 +91,8 @@ a, a:link, a:visited, a:hover {
         margin-left: 1rem; }
     #ss_header_c_ap {
       box-sizing: border-box;
-      width: 70px;
-      height: 70px;
+      width: 50px;
+      height: 50px;
       justify-content: center;
       align-items: center;
       margin-right: 0.5rem;
@@ -103,19 +103,19 @@ a, a:link, a:visited, a:hover {
     #ss_header_c_logo {
       text-transform: uppercase;
       color: white;
-      font-size: 2rem;
+      font-size: 1.5rem;
       letter-spacing: 1px;
       font-weight: 600;
       align-items: center;
-      color: #292a54; }
+      color: white; }
       #ss_header_c_logo .badge {
         padding: 2px 8px;
-        font-size: 0.7rem;
+        font-size: 0.5rem;
         background: #d64cc8;
         color: white;
         font-weight: 600;
         border-radius: 10px;
-        margin-left: 10px; }
+        margin-left: 5px; }
     #ss_header_c.ss_showmenu .ss_header_c_m_menu {
       width: auto !important;
       transform: none; }
@@ -130,32 +130,30 @@ a, a:link, a:visited, a:hover {
   box-sizing: border-box;
   background: white;
   position: relative;
-  top: 45px;
-  height: calc(100vh - 90px); }
+  top: 50px;
+  overflow: hidden;
+  padding-top: 6px; }
   .ss_dbbuilder_sidebar {
     width: 35%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    background: #181932; }
+    background: #181932;
+    min-height: 90vh;
+    margin: 0;
+    overflow: hidden; }
 
 .ss_db_toolbar {
   width: 100%;
   position: fixed;
-  top: 70px;
+  top: 50px;
   z-index: 88; }
   .ss_db_toolbar_info {
     width: 100%;
     box-sizing: border-box;
     padding: 0.5rem 4rem;
-    background: #fcfcfc;
-    border-bottom: 1px solid #ccc;
+    background: #101021;
     align-items: center; }
     .ss_db_toolbar_info_td.ss_db_lastmodified {
       font-size: 0.8rem;
-      color: #aaa; }
+      color: #f0f0f0; }
     .ss_db_toolbar_info_td.ss_db_ctas {
       flex: 1;
       justify-content: flex-end;
@@ -175,13 +173,13 @@ a, a:link, a:visited, a:hover {
         display: none;
         align-items: center;
         justify-content: center;
-        transform: translateX(-50%); }
+        transform: translateX(-70%); }
         .ss_db_toolbar_info_td .ss_db_builder_project_name_icon .material-icons {
           font-size: 1.2rem;
           color: #888; }
       .ss_db_toolbar_info_td .ss_db_builder_project_name input {
         font-size: 1rem;
-        color: #271e4a;
+        color: white;
         background: none;
         border: 0;
         font-family: "Chivo", serif;
@@ -189,10 +187,12 @@ a, a:link, a:visited, a:hover {
         padding: 0.25rem 0.5rem;
         font-weight: 600;
         border: 1px solid transparent;
-        transform: translateX(-0.5rem); }
+        transform: translateX(-0.5rem);
+        border-radius: 1rem; }
         .ss_db_toolbar_info_td .ss_db_builder_project_name input:focus {
           outline: 0;
-          border-color: #ccc; }
+          background: white;
+          color: #333; }
       .ss_db_toolbar_info_td .ss_db_builder_project_name.ss_error input {
         border-color: #c67d66; }
         .ss_db_toolbar_info_td .ss_db_builder_project_name.ss_error input::placeholder {
@@ -200,6 +200,85 @@ a, a:link, a:visited, a:hover {
           font-weight: 500; }
       .ss_db_toolbar_info_td .ss_db_builder_project_name:hover:not(.ss_focused) .ss_db_builder_project_name_icon {
         display: flex; }
+
+.ss_dbbuilder_sidebar_dbs {
+  width: 100%; }
+
+.ss_dbbuilder_sidebar_dbs_nav {
+  width: 100%; }
+  .ss_dbbuilder_sidebar_dbs_nav_td {
+    cursor: pointer;
+    background: #181932;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 5px;
+    border-bottom: 2px solid #d64cc8;
+    flex: 1;
+    position: relative; }
+    .ss_dbbuilder_sidebar_dbs_nav_td:first-child {
+      transform: none; }
+    .ss_dbbuilder_sidebar_dbs_nav_td_input {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: white;
+      font-size: 0.9rem;
+      overflow: hidden; }
+    .ss_dbbuilder_sidebar_dbs_nav_td.ss_active {
+      min-width: 100px;
+      border-color: #f0efd1;
+      background-color: #292a54; }
+    .ss_dbbuilder_sidebar_dbs_nav_td:hover {
+      background-color: #202243; }
+    .ss_dbbuilder_sidebar_dbs_nav_td.ss_db_newdb {
+      color: white;
+      white-space: nowrap;
+      min-width: 30px; }
+      .ss_dbbuilder_sidebar_dbs_nav_td.ss_db_newdb span {
+        font-size: 0.9rem;
+        font-weight: 600; }
+        .ss_dbbuilder_sidebar_dbs_nav_td.ss_db_newdb span:not(.material-icons) {
+          margin-left: 5px; }
+  .ss_dbbuilder_sidebar_dbs_nav.ss_overflow .ss_db_newdb .ss_db_nav_s {
+    display: none; }
+
+.ss_db_view {
+  width: 100%; }
+  .ss_db_view_name {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    align-items: center; }
+    .ss_db_view_name .material-icons {
+      margin-right: 5px;
+      color: #d2d2d2; }
+    .ss_db_view_name input {
+      flex: 1;
+      display: block;
+      padding: 0.5rem 0.75rem;
+      box-sizing: border-box;
+      border: 0;
+      font-size: 1.3rem;
+      font-family: "Chivo", serif;
+      font-weight: 600;
+      color: white;
+      background: none;
+      border-radius: 1.5rem;
+      border: 2px solid transparent; }
+      .ss_db_view_name input:focus {
+        outline: 0;
+        background: white;
+        color: #181932;
+        border-color: white;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); }
+    .ss_db_view_name.ss_error input {
+      background: transparent;
+      color: red;
+      border-color: red; }
+  .ss_db_view_empresas {
+    width: 100%;
+    background: blue;
+    height: 300px; }
 
 #ss_page_home {
   width: 100%;

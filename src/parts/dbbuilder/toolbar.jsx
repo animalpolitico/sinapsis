@@ -3,6 +3,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Icon from '@material-ui/core/Icon';
 import moment from 'moment';
 import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 import 'moment/locale/es';
 moment.locale('es');
 
@@ -27,31 +28,16 @@ export default class DbBuilderToolbar extends React.Component{
       })
     }
 
-    function setObjectSize(s){
-      self.setState({
-        objSizeString: s,
-        isloading: true
-      })
-    }
-
     setInterval(function(){
-      if(!self.state.modified){
+      var mdf = window.dbf.getModified();
+      if(!mdf){
         return;
       }
-      var m = moment(self.state.modified);
+      var m = moment(mdf);
       var mm = m.fromNow();
       modifiedCronned(mm);
     }, 1000 * 2);
 
-    setInterval(function(){
-      if(!self.state.modified){
-        return;
-      }
-      var l = window.dbf.getObjectSize();
-      var kb = l * 0.000125;
-      var s = Math.round(kb) + 'KB';
-      setObjectSize(s);
-    }, 20000);
 
   }
 
@@ -75,15 +61,15 @@ export default class DbBuilderToolbar extends React.Component{
             : null
           }
           <div className="ss_db_toolbar_info_td ss_db_ctas">
-            <Button color="primary" variant="outlined" size="small">
-              Protección de datos
-            </Button>
-            <Button color="primary" variant="outlined" size="small">
-              Info. del proyecto
-            </Button>
-            <Button color="primary" variant="contained" size="small">
-              Descargar archivo
-            </Button>
+            <Fab size="small" color="primary" onClick={() => window.dbf.createProjectFile()}>
+              <Icon>info</Icon>
+            </Fab>
+            <Fab size="small" color="primary" onClick={() => window.dbf.createProjectFile()}>
+              <Icon>settings_applications</Icon>
+            </Fab>
+            <Fab size="small" color="primary" onClick={() => window.dbf.createProjectFile()}>
+              <Icon>get_app</Icon>
+            </Fab>
           </div>
         </div>
         {

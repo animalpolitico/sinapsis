@@ -14,7 +14,11 @@ export default class DBNewDatabase extends React.Component{
     return(
       <div className="ss_new_db">
         <p>Añadir {mn.name}</p>
-        <DBFormGroup g={mn} />
+        {
+          gr.map(function(g){
+            return <DBFormGroup g={g} />
+          })
+        }
       </div>
     )
   }
@@ -24,12 +28,18 @@ class DBFormGroup extends React.Component{
   render(){
     var g = this.props.g;
     var groups = g.groups;
-    var mainGroup = groups[0];
+    if(!groups){
+      return <h1>Error</h1>;
+    }
     return(
       <div className="ss_ng_g">
         <h1>{g.name}</h1>
         <div className="ss_ng_gg">
-          <DBFormGroupGroup g={mainGroup} pg={g} />
+          {
+            g.groups.map(function(gg){
+              return <DBFormGroupGroup g={gg} pg={g} />
+            })
+          }
         </div>
       </div>
     )

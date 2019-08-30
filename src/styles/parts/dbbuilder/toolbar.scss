@@ -7,14 +7,13 @@
     width: 100%;
     box-sizing: border-box;
     padding: 0.5rem 4rem;
-    background: #fcfcfc;
-    border-bottom: 1px solid #ccc;
+    background: darken($blue, 5%);
     @extend .flex;
     align-items: center;
     &_td{
       &.ss_db_lastmodified{
         font-size: 0.8rem;
-        color: #aaa;
+        color: #f0f0f0;
       }
       &.ss_db_ctas{
         flex: 1;
@@ -38,7 +37,7 @@
           display: none;
           align-items: center;
           justify-content: center;
-          transform: translateX(-50%);
+          transform: translateX(-70%);
           .material-icons{
             font-size: 1.2rem;
             color: #888;
@@ -46,7 +45,7 @@
         }
         input{
           font-size: 1rem;
-          color: rgb(39, 30, 74);
+          color: white;
           background: none;
           border: 0;
           font-family: $f;
@@ -55,9 +54,11 @@
           font-weight: 600;
           border: 1px solid transparent;
           transform: translateX(-0.5rem);
+          border-radius: 1rem;
           &:focus{
             outline: 0;
-            border-color: #ccc;
+            background: white;
+            color: #333;
           }
         }
         &.ss_error{

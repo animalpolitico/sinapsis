@@ -1,0 +1,49 @@
+.ss_db_view{
+  width: 100%;
+  &_name{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    @extend .flex;
+    align-items: center;
+    .material-icons{
+      margin-right: 5px;
+      color: rgb(210, 210, 210);
+    }
+    input{
+      flex: 1;
+      display: block;
+      padding: 0.5rem 0.75rem;
+      box-sizing: border-box;
+      border: 0;
+      font-size: 1.3rem;
+      font-family: $f;
+      font-weight: 600;
+      color: white;
+      background: none;
+      border-radius: 1.5rem;
+      border: 2px solid transparent;
+      &:focus{
+        outline: 0;
+        background: white;
+        color: $blue;
+        border-color: white;
+        box-shadow: 2px 2px 4px rgba(black, 0.1);
+      }
+    }
+    &.ss_error{
+      input{
+        background: transparent;
+        color: red;
+        border-color: red;
+      }
+    }
+  }
+
+  &_empresas{
+    width: 100%;
+    background: blue;
+    height: 300px;
+  }
+
+}

@@ -1,0 +1,56 @@
+.ss_dbbuilder_sidebar_dbs{
+  width: 100%;
+}
+.ss_dbbuilder_sidebar_dbs_nav{
+  width: 100%;
+  @extend .flex;
+  &_td{
+    cursor: pointer;
+    background: $blue;
+    overflow: hidden;
+    @extend .flex;
+    justify-content:center;
+    align-items: center;
+    padding: 12px 5px;
+    border-bottom: 2px solid $yellow;
+    flex: 1;
+    position: relative;
+    &:first-child{
+      transform: none;
+    }
+    &_input{
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: white;
+      font-size: 0.9rem;
+      overflow: hidden;
+    }
+    &.ss_active{
+      min-width: 100px;
+      border-color: rgb(240, 239, 209);
+      background-color: lighten($blue, 10%);
+    }
+    &:hover{
+      background-color: lighten($blue, 5%);
+    }
+    &.ss_db_newdb{
+      color: white;
+      white-space: nowrap;
+      min-width: 30px;
+      span{
+        font-size: 0.9rem;
+        font-weight: 600;
+        &:not(.material-icons){
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+  &.ss_overflow{
+    .ss_db_newdb{
+      .ss_db_nav_s{
+        display: none;
+      }
+    }
+  }
+}
