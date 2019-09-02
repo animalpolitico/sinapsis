@@ -13,12 +13,12 @@
   overflow: hidden;
   box-sizing: border-box;
   padding-top: $menuh;
-  min-height: 100vh;
 }
 .ss_page{
   width: 100%;
   box-sizing: border-box;
   position: relative;
+  min-height: 90vh;
   &_container{
     width: 90%;
     margin: 2rem auto;

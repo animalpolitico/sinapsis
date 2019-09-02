@@ -8,39 +8,240 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
-
+import IconButton from '@material-ui/core/IconButton';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import moment from 'moment';
 import 'moment/locale/es';
-
-import DbFactory from '../funcs/dbClass';
-import { sinapsisDbObject } from '../vars/sinapsisDbStructure';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 /** Componentes **/
+import DbFactory from '../funcs/dbClass';
 import DbBuilderToolbar from '../parts/dbbuilder/toolbar';
-import DBNewDatabase from '../parts/dbbuilder/newdb';
+import DbEditEmpresa from '../parts/dbbuilder/edit';
 
-
-var dbf = new DbFactory(sinapsisDbObject);
+var dbf = new DbFactory();
 var dbf_obj = dbf.set();
 window.dbf = dbf;
 
+var store = require('store')
+
+
 export default class DbBuilderPage extends React.Component{
   state = {
-    control: ''
+    control: '',
+    showcontrol: true,
+    recoveroptions: [],
+    showrecoveroptions: false,
+    isautosaving: false
   }
-  forceRender(){
+
+  componentDidMount(){
+    this.startAutosave();
+    var uid = this.props.match.params.dbid;
+    if(uid){
+      var obj = store.get('sinapsis_'+uid);
+      if(obj){
+        var obj_j = JSON.parse(obj);
+        if(!obj_j.recovered){
+          obj_j.recovered = 0;
+        }
+        obj_j.recovered = obj_j.recovered + 1;
+        obj_j.recoveredAt = moment.now();
+        window.dbf.obj = obj_j;
+        this.setState({
+          showcontrol: false,
+          showrecoveroptions: false
+        })
+      }else{
+        this.props.history.push('/construir');
+      }
+    }
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.autosaveint);
+  }
+
+  startAutosave(){
+    var self = this;
+    var maxkbsize = 4000;
+    window.addEventListener('sinapsisModified', function(){
+      var isok = !self.state.showcontrol && window.dbf.obj.allowAutoSave;
+      if(isok){
+        self.setState({
+          isautosaving: true
+        })
+        clearTimeout(self.autosavingT);
+        var f = dbf.getAutoSaveFile();
+        var s = f.length;
+        var kbsize = s * 0.000125;
+        if(kbsize < maxkbsize){
+          var ky = 'sinapsis_' + dbf.obj.uid;
+          store.set(ky, f);
+          self.autosavingT = setTimeout(function(){
+            self.setState({
+              isautosaving: false
+            })
+          }, 1000)
+        }
+      }
+    });
+  }
+
+  startNewProject(){
+    var obj = window.dbf.set();
+
+    this.props.history.push('construir/'+obj.uid);
+
     this.setState({
-      control: 'fromfile'
+      control: 'newproject',
+      showcontrol: false
     })
   }
+
+  loadFile(e){
+    this.setState({
+      isloading: true
+    })
+    var self = this;
+    var em = document.getElementById('ss_file_input');
+    var f = em.files;
+    if(f[0]){
+      var file = f[0];
+      var reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.onload = function(ev){
+        var t =  ev.target.result;
+        var obj = window.dbf.setFile(t);
+        self.setState({
+          control: 'fromfile',
+          showcontrol: false
+        })
+      }
+    }
+  }
+
+  intentToRecover(){
+    var possibleDbs = [];
+    store.each(function(value, key){
+      if(key.indexOf('sinapsis_') > -1){
+        var o = JSON.parse(value);
+        possibleDbs.push(o);
+      }
+    })
+    this.setState({
+      showrecoveroptions: true,
+      recoveroptions: possibleDbs
+    })
+  }
+
+  selectRecoveredProject(){
+    var uid = this.state.selectedToRecover;
+    if(!uid){
+      return;
+    }
+    var obj = store.get('sinapsis_'+uid);
+    var obj_j = JSON.parse(obj);
+    if(!obj_j.recovered){
+      obj_j.recovered = 0;
+    }
+    obj_j.recovered = obj_j.recovered + 1;
+    obj_j.recoveredAt = moment.now();
+    window.dbf.obj = obj_j;
+
+    this.props.history.push('/construir/' + obj_j.uid);
+    this.setState({
+      showcontrol: false,
+      showrecoveroptions: false
+    })
+  }
+
   render(){
-    console.log('rerendering');
+    var self = this;
     return(
       <div className="ss_page">
-        <DbBuilderToolbar parent={this} ref={(ref) => this.toolbar = ref}/>
-        <div className="ss_dbbuilder">
-          <DbBuilderSidebar />
-        </div>
+        {
+          this.state.showcontrol ?
+            <div>
+              <div className="ss_dbbuilder_front">
+                <div className="ss_db_choose">
+                  <div className="ss_db_choose_td" onClick={() => this.startNewProject()}>
+                    <Icon>add</Icon>
+                    <div className="ss_db_choose_td_label">
+                      Nuevo proyecto<br/><span>Comienza un proyecto desde cero</span>
+                    </div>
+                  </div>
+                  <div className="ss_db_choose_td">
+                    <input
+                      type="file"
+                      accept=".sinapsis"
+                      id="ss_file_input"
+                      onChange={(e) => this.loadFile(e)}
+                    />
+                    <Icon>publish</Icon>
+                    <div className="ss_db_choose_td_label">
+                      Cargar proyecto<br/><span>Sube tu archivo .sinapsis</span>
+                    </div>
+                  </div>
+                  <div className="ss_db_choose_td" onClick={() => this.intentToRecover()}>
+                    <Icon>restore</Icon>
+                    <div className="ss_db_choose_td_label">
+                      Recuperar proyecto<br/><span>Desde la memoria de tu navegador.</span>
+                    </div>
+                  </div>
+                  <div className="ss_db_choose_td">
+                    <Icon>play_arrow</Icon>
+                    <div className="ss_db_choose_td_label">
+                      Iniciar demo<br/><span>Utiliza la base de datos de La Estafa Maestra</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <Dialog
+                  disableBackdropClick
+                  disableEscapeKeyDown
+                  maxWidth="xs"
+                  open={this.state.showrecoveroptions}
+                >
+                  <DialogTitle id="confirmation-dialog-title">Selecciona un proyecto</DialogTitle>
+                  <DialogContent dividers>
+                    <RadioGroup
+                      onChange={(e) => self.setState({ selectedToRecover: e.target.value})}
+                    >
+                    {
+                      this.state.recoveroptions.map(option => (
+                        <FormControlLabel value={option.uid} key={option.uid} control={<Radio />} label={option.info.name} />
+                      ))
+                    }
+                    </RadioGroup>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={() => this.setState({showrecoveroptions: false})} color="primary">
+                      Cancelar
+                    </Button>
+                    <Button disabled={this.state.selectedToRecover ? false : true} onClick={() => this.selectRecoveredProject()} color="primary">
+                      Seleccionar
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+            </div>
+          :
+            <div>
+              <DbBuilderToolbar parent={this} ref={(ref) => this.toolbar = ref}/>
+              {
+                this.state.isautosaving ?
+                <div id="ss_autosave_indicator">
+                  <CircularProgress disableShrink color="primary" size={30}/>
+                </div>
+                : null
+              }
+              <div className="ss_dbbuilder">
+                <DbBuilderSidebar />
+              </div>
+            </div>
+        }
       </div>
     )
   }
@@ -64,16 +265,16 @@ class DbBuilderSidebar extends React.Component{
     if(uid !== s.uid){
       this.fetchDbs();
     }
-
   }
-
   fetchDbs(){
     var dbf = window.dbf;
     this.setState({
       uid: dbf.obj.uid,
-      dbs: dbf.getDbs()
+      dbs: dbf.getDbs(),
+      db: false
     })
   }
+
   addDB(){
     var self = this;
     var dbf = window.dbf;
@@ -83,6 +284,7 @@ class DbBuilderSidebar extends React.Component{
       self.refs[dbId].handleClick();
     }, 10);
   }
+
   selectDb(uid){
     var dbf = window.dbf;
     var db = dbf.getDb(uid);
@@ -90,6 +292,7 @@ class DbBuilderSidebar extends React.Component{
       db: db
     })
   }
+
   render(){
     var self = this;
     var navCs = ['ss_dbbuilder_sidebar_dbs_nav'];
@@ -111,7 +314,7 @@ class DbBuilderSidebar extends React.Component{
             <div className="ss_dbbuilder_sidebar_dbs_view">
               {
                 this.state.db ?
-                <DbView db={this.state.db} navRef={this.refs[this.state.db.id]}/>
+                <DbView db={this.state.db} navRef={this.refs[this.state.db.id]} parent={self}/>
                 : null
               }
             </div>
@@ -124,16 +327,22 @@ class DbBuilderSidebar extends React.Component{
 class DbView extends React.Component{
   state = {
     showdialog: false,
-    dialogValue: ''
+    dialogValue: '',
+    showDeleteDialog: false
   }
   componentDidMount(){
     this.set();
+
+
+
   }
+
   componentDidUpdate(p, n){
     if(p.db.id !== this.props.db.id){
       this.set();
     }
   }
+
   set(){
     var db = this.props.db;
     this.setState({
@@ -141,6 +350,7 @@ class DbView extends React.Component{
       nameError: !db.name
     })
   }
+
   handleNameChange(e){
     var v = e.target.value;
     var db = this.state.db;
@@ -156,17 +366,27 @@ class DbView extends React.Component{
     })
     window.dbf.editDb(db.id, db);
   }
+
   showAddDialog(){
+    var self = this;
     this.setState({
       showdialog: true
     })
+    window.addEventListener("keypress", function _keyupListener(e){
+      if(e.keyCode == 13 && self.state.dialogValue && self.state.showdialog){
+        self.addEmpresa();
+      }
+    }, true);
   }
+
+
   handleDialogClose(){
     this.setState({
       showdialog: false,
       dialogValue: ''
     })
   }
+
   addEmpresa(){
     var v = this.state.dialogValue;
     this.handleDialogClose();
@@ -175,6 +395,21 @@ class DbView extends React.Component{
       db: db
     })
   }
+
+  intentDelete(){
+    this.setState({
+      showDeleteDialog: true
+    })
+  }
+
+  delete(){
+    window.dbf.deleteDb(this.state.db);
+    this.props.parent.fetchDbs();
+    this.setState({
+      showDeleteDialog: false
+    })
+  }
+
   render(){
     var dbf = window.dbf;
     var nameCs = ['ss_db_view_name'];
@@ -194,7 +429,28 @@ class DbView extends React.Component{
                 value={this.state.db.name}
                 onChange={(e) => this.handleNameChange(e)}
               />
+            <IconButton size="small" onClick={() => this.intentDelete()}>
+                <Icon>delete</Icon>
+              </IconButton>
             </div>
+
+            <Dialog open={this.state.showDeleteDialog} onClose={() => this.setState({ showDeleteDialog: false})}>
+              <DialogTitle>¿Estás segurx?</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  Se borraran todos los datos que hayas insertado.
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button color="primary" onClick={() => this.setState({ showDeleteDialog: false})}>
+                  Cancelar
+                </Button>
+                <Button color="primary" onClick={() => this.delete()}>
+                  Continuar
+                </Button>
+              </DialogActions>
+            </Dialog>
+
             <div className="ss_db_view_empresas">
               <div className="ss_db_view_empresas_title">
                 <span>Empresas en la base</span>
@@ -235,7 +491,30 @@ class DbView extends React.Component{
 }
 
 class DbEmpresasList extends React.Component{
+  state = {
+    showedit: false,
+    empresa: {}
+  }
+
+  componentDidUpdate(p, s){
+    if(p.db.id !== this.props.db.id){
+      this.setState({
+        forcerender: 2,
+        showedit: false,
+        empresa: {}
+      })
+    }
+  }
+
+  selectEmpresa(em){
+    this.setState({
+      showedit: true,
+      empresa: em
+    })
+  }
+
   render(){
+    var self = this;
     var db = this.props.db;
     var em = db.empresas;
     if(em){
@@ -250,7 +529,14 @@ class DbEmpresasList extends React.Component{
           <div className="ss_db_ve_c_empresas_list">
             {
               Object.values(em).map(function(empresa, k){
-                return <DbEmpresa empresa={empresa} db={db} key={k} />
+                return(
+                <DbEmpresa
+                    empresa={empresa}
+                    db={db}
+                    key={k}
+                    parent={self}
+                    active={self.state.empresa.uid == empresa.uid}
+                />)
               })
             }
           </div>
@@ -262,10 +548,17 @@ class DbEmpresasList extends React.Component{
             <div className="ss_db_ve_c_nocontent_des">
               <p>Sin empresas</p>
               <div className="ss_db_ve_c_nocontent_des_cta">
-                <a href="javascript:void(0)" onClick={() => this.props.parent.showAddDialog()}>Agregar empresa</a>
+                <a href="#" onClick={() => this.props.parent.showAddDialog()}>Agregar empresa</a>
               </div>
             </div>
           </div>
+        }
+        {
+          this.state.showedit ?
+          <div className="db_empresa_edit">
+            <DbEditEmpresa db={this.props.db} empresa={this.state.empresa} parent={this} />
+          </div>
+          : null
         }
       </div>
     )
@@ -273,6 +566,14 @@ class DbEmpresasList extends React.Component{
 }
 
 class DbEmpresa extends React.Component{
+  state = {
+    showedit: false
+  }
+
+  handleClick(){
+    this.props.parent.selectEmpresa(this.props.empresa);
+  }
+
   render(){
     var e = this.props.empresa;
     var cs = ['db_empresa'];
@@ -284,10 +585,9 @@ class DbEmpresa extends React.Component{
     if(e.fields){
       fieldsSize += e.fields.length;
     }
-
     return(
       <div className={cs.join(' ')} data-slug={e.slug}>
-        <div className="db_empresa_container">
+        <div className="db_empresa_container" onClick={() => this.handleClick()}>
           <div className="db_empresa_container_indicator"></div>
           <div className="db_empresa_container_name">
             {e.name}
@@ -296,6 +596,7 @@ class DbEmpresa extends React.Component{
 
           </div>
         </div>
+
       </div>
     )
   }

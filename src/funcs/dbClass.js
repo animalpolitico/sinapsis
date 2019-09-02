@@ -9,6 +9,8 @@ var JSZip = require("jszip");
 const uuidv4 = require('uuid/v4');
 var gen = require('color-generator');
 
+var onProjectModified = new Event('sinapsisModified');
+
 export default class DbFactory {
 
   /**
@@ -38,6 +40,7 @@ export default class DbFactory {
         name: 'Proyecto sin nombre',
         slug: 'proyecto-sin-nombre'
       },
+      allowAutoSave: true,
       projectStructure: 'sinapsis_empresas',
       classVersion: this.classVersion,
       saves: 0,
@@ -95,8 +98,8 @@ export default class DbFactory {
   setModified(){
     var modified = moment.now();
     this.obj.modified = modified;
-    this.version++;
-    this.obj.version = this.version;
+    this.obj.version = this.obj.version + 1;
+    window.dispatchEvent(onProjectModified);
     return this.obj;
   }
 
@@ -197,6 +200,23 @@ export default class DbFactory {
   getObjectSize(){
     var j = JSON.stringify(this.obj);
     return j.length;
+  }
+
+  /**
+  * Obtiene el JSON para autoguardado
+  *
+  * @param void
+  * @return string (JSON)
+  **/
+  getAutoSaveFile(){
+    var d = this.obj;
+    if(!d.autosaves){
+      d.autosaves = 0;
+    }
+    d.autosaves = d.autosaves + 1;
+    d.autoSavedAt = moment.now();
+    var j = JSON.stringify(d);
+    return j;
   }
 
   /**
@@ -302,9 +322,7 @@ export default class DbFactory {
       uid: this.createUid()
     };
     db.empresas[empresa.uid] = empresa;
-
     this.editDb(db.id, db);
-
     return db;
   }
 
@@ -319,7 +337,67 @@ export default class DbFactory {
     return dbs[uid];
   }
 
+  /**
+  * Elimina una base de datos
+  *
+  * @param db
+  * @return void
+  **/
+  deleteDb(db){
+    var uid = db.id;
+    delete this.obj.dbs[uid];
+    this.setModified();
+  }
 
+  /**
+  * Añade campos a una empresa
+  *
+  * @param dbuid
+  * @param euid
+  * @param fields
+  **/
+  addFieldsToEmpresa(dbuid, euid, fields){
+    var obj = this.obj;
+    var e = obj.dbs[dbuid].empresas[euid];
+    e.fields = fields;
+    this.obj.dbs[dbuid].empresas[euid] = e;
+    this.obj.dbs[dbuid].modified = moment.now();
+    this.setModified();
+    return e;
+  }
+
+  /**
+  * Guarda el nombre de una empresa
+  *
+  * @param dbuid
+  * @param euid
+  * @param name
+  **/
+  modifyEmpresaName(dbuid, euid, name){
+    var obj = this.obj;
+    var e = obj.dbs[dbuid].empresas[euid];
+    e.name = name;
+    e.slug = slugify(name, {lower: true});
+    this.obj.dbs[dbuid].empresas[euid] = e;
+    this.obj.dbs[dbuid].modified = moment.now();
+    this.setModified();
+    return e;
+  }
+
+  /**
+  * Obtiene la empresa de una db
+  *
+  * @param dbuid
+  * @param euid
+  **/
+  getEmpresa(dbuid, euid){
+    try{
+      var e = this.obj.dbs[dbuid].empresas[euid];
+      return e;
+    }catch{
+      console.error('No se encontró a la empresa.');
+    }
+  }
 
 
 }

@@ -37,6 +37,7 @@ export default class App extends React.Component{
               <Switch>
                 <Route path="/" exact component={Index} />
                 <Route path="/cruzar" exact component={Cruzar} />
+                <Route path="/construir/:dbid" component={DbBuilderPage} />
                 <Route path="/construir" exact component={DbBuilderPage} />
                 <Route path="*" component={NotFound} />
               </Switch>

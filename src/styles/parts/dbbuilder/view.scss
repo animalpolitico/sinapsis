@@ -117,9 +117,14 @@
       padding: 0.5rem;
       background: rgb(33, 43, 78);
       border-radius: 0.2rem;
+      cursor: pointer;
       box-shadow: 2px 2px 4px rgba(black, 0.2);
       @extend .flex;
       align-items: center;
+      transition: all 0.15s ease;
+      &:hover{
+        background: rgb(41, 54, 99);  
+      }
       &_indicator{
         width: 5px;
         height: 5px;

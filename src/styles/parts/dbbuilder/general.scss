@@ -3,15 +3,22 @@
   box-sizing: border-box;
   background: white;
   position: relative;
-  top: $menuh;
   overflow: hidden;
-  @extend .flex;
-  padding-top: 6px;
+  height: calc(100vh  - 50px);
   &_sidebar{
     width: 35%;
     background: $blue;
-    min-height: 90vh;
     margin: 0;
-    overflow: hidden;
+    position: absolute;
+    top: 55px;
+    height: 100%;
+    z-index: 10;
+    box-shadow: 4px 0 6px rgba(black, 0.4);
   }
+}
+#ss_autosave_indicator{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 9999;
 }

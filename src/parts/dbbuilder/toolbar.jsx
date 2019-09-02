@@ -15,19 +15,19 @@ export default class DbBuilderToolbar extends React.Component{
     objSizeString: ''
   }
   componentDidMount(){
-    this.setCronned()
+    this.setCronned();
+    var n = window.dbf.obj.info.name;
+    this.toolbarname.handleChange(n);
   }
 
   setCronned(){
     var self = this;
-
     function modifiedCronned(mm){
       self.setState({
         modifiedString: mm,
         isloading: false
       })
     }
-
     setInterval(function(){
       var mdf = window.dbf.getModified();
       if(!mdf){
@@ -64,6 +64,10 @@ export default class DbBuilderToolbar extends React.Component{
     }
   }
 
+  handleIntentToClick(e){
+
+  }
+
   render(){
     return(
       <div className="ss_db_toolbar">
@@ -90,7 +94,6 @@ export default class DbBuilderToolbar extends React.Component{
             <Fab size="small" color="primary" onClick={() => window.dbf.createProjectFile()}>
               <Icon>settings_applications</Icon>
             </Fab>
-            <input type="file" accept=".json,.sinapsis" id="ss_file_input" onChange={(e) => this.loadFile(e)}/>
             <Fab size="small" color="primary" onClick={() => window.dbf.createProjectFile()}>
               <Icon>get_app</Icon>
             </Fab>
