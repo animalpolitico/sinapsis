@@ -4,6 +4,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import red from '@material-ui/core/colors/red';
 import './styles/style.css'
+import buildLink from "./funcs/buildlink";
 
 /* Partes */
 import Header from './parts/header';
@@ -20,6 +21,9 @@ const theme = createMuiTheme({
       primary: {
         main: '#1f2153'
       },
+      secondary: {
+        main: '#f0f0f0'
+      }
     },
 });
 
@@ -35,10 +39,10 @@ export default class App extends React.Component{
           <Header />
             <div id="binder">
               <Switch>
-                <Route path="/" exact component={Index} />
-                <Route path="/cruzar" exact component={Cruzar} />
-                <Route path="/construir/:dbid" component={DbBuilderPage} />
-                <Route path="/construir" exact component={DbBuilderPage} />
+                <Route path={buildLink("/")} exact component={Index} />
+                <Route path={buildLink("/cruzar")} exact component={Cruzar} />
+                <Route path={buildLink("/construir/:dbid")} component={DbBuilderPage} />
+                <Route path={buildLink("/construir")} exact component={DbBuilderPage} />
                 <Route path="*" component={NotFound} />
               </Switch>
             </div>

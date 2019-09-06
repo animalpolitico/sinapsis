@@ -111,31 +111,41 @@
     width: 100%;
     margin: 0.5rem 0;
     &_container{
-      width: 100%;
+      width: calc(100% - 10px);
       box-sizing: border-box;
       position: relative;
       padding: 0.5rem;
       background: rgb(33, 43, 78);
-      border-radius: 0.2rem;
       cursor: pointer;
       box-shadow: 2px 2px 4px rgba(black, 0.2);
       @extend .flex;
       align-items: center;
       transition: all 0.15s ease;
       &:hover{
-        background: rgb(41, 54, 99);  
+        background: rgb(41, 54, 99);
       }
       &_indicator{
         width: 5px;
         height: 5px;
         border: 2px solid transparent;
         margin-right: 5px;
-        background: red;
+        background: rgb(13, 237, 130);
         border-radius: 50%;
       }
       &_name{
         color: white;
         flex: 1;
+      }
+    }
+    &.ss_active{
+      .db_empresa_container{
+        background:rgb(128, 35, 96);
+        transform: translateX(10px);
+      }
+    }
+    &.ss_new{
+      .db_empresa_container_indicator{
+        background-color: red;
       }
     }
   }

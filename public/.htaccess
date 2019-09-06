@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule    ^([A-Za-z0-9-]+)/?$   index.html  [NC,L,QSA]
+RewriteRule    ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$   index.html   [NC,L,QSA]

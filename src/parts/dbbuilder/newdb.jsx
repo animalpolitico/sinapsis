@@ -140,7 +140,6 @@ class DBFormRenderInput extends React.Component{
   }
 
   handleChange(v){
-    console.log('self', this);
   }
 
   render(){

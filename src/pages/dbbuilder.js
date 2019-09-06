@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import moment from 'moment';
 import 'moment/locale/es';
@@ -20,6 +21,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import DbFactory from '../funcs/dbClass';
 import DbBuilderToolbar from '../parts/dbbuilder/toolbar';
 import DbEditEmpresa from '../parts/dbbuilder/edit';
+import DbViz from '../parts/dbviz/dbviz';
+
 
 var dbf = new DbFactory();
 var dbf_obj = dbf.set();
@@ -239,6 +242,7 @@ export default class DbBuilderPage extends React.Component{
               }
               <div className="ss_dbbuilder">
                 <DbBuilderSidebar />
+                <DbViz />
               </div>
             </div>
         }
@@ -288,6 +292,7 @@ class DbBuilderSidebar extends React.Component{
   selectDb(uid){
     var dbf = window.dbf;
     var db = dbf.getDb(uid);
+    window.dbf.obj.selectedDb = uid;
     this.setState({
       db: db
     })
@@ -390,9 +395,10 @@ class DbView extends React.Component{
   addEmpresa(){
     var v = this.state.dialogValue;
     this.handleDialogClose();
-    var db = window.dbf.addEmpresaToDb(this.state.db, v);
+    var data = window.dbf.addEmpresaToDb(this.state.db, v);
+    this.empresalist.selectEmpresa(data[1])
     this.setState({
-      db: db
+      db: data[0]
     })
   }
 
@@ -456,7 +462,7 @@ class DbView extends React.Component{
                 <span>Empresas en la base</span>
                 <div className="ss_db_view_empresas_title_btn" style={{cursor: 'pointer'}} onClick={() => this.showAddDialog()}>Agregar</div>
               </div>
-              <DbEmpresasList parent={this} db={this.state.db} />
+              <DbEmpresasList ref={(ref) => this.empresalist = ref} parent={this} db={this.state.db} />
             </div>
 
           </div>
@@ -511,6 +517,20 @@ class DbEmpresasList extends React.Component{
       showedit: true,
       empresa: em
     })
+    window.dbf.obj.selectedEmpresa = em.uid;
+  }
+
+  closeDrawer(){
+    this.setState({
+      showedit: false,
+      empresa: {}
+    })
+    window.dbf.obj.selectedEmpresa = '';
+  }
+
+  deleteEmpresa(uid){
+    window.dbf.deleteEmpresa(this.props.db, uid);
+    this.closeDrawer();
   }
 
   render(){
@@ -570,7 +590,11 @@ class DbEmpresa extends React.Component{
     showedit: false
   }
 
+  componentDidUpdate(){
+  }
+
   handleClick(){
+    window.scroll(0, 0);
     this.props.parent.selectEmpresa(this.props.empresa);
   }
 
@@ -579,6 +603,10 @@ class DbEmpresa extends React.Component{
     var cs = ['db_empresa'];
     if(!e.fields){
       cs.push('ss_new');
+    }
+
+    if(this.props.active){
+      cs.push('ss_active');
     }
 
     var fieldsSize = 1;
@@ -639,6 +667,7 @@ class DbDbsNavigationTd extends React.Component{
     var em = document.getElementById(em_id);
     em.classList.add('ss_active');
     this.props.parent.selectDb(db.id);
+
   }
 
   render(){

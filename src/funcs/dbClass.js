@@ -1,6 +1,7 @@
 import moment from 'moment';
 import 'moment/locale/es';
 import { saveAs } from 'file-saver';
+import formatMoney from 'format-money';
 moment.locale('es');
 var ntol = require('number-to-letter');
 var slugify = require('slugify');
@@ -10,6 +11,8 @@ const uuidv4 = require('uuid/v4');
 var gen = require('color-generator');
 
 var onProjectModified = new Event('sinapsisModified');
+
+
 
 export default class DbFactory {
 
@@ -102,6 +105,60 @@ export default class DbFactory {
     window.dispatchEvent(onProjectModified);
     return this.obj;
   }
+
+  /**
+  * Crea los cruces
+  *
+  * @param void
+  * @return obj
+  **/
+  getMatches(){
+    var self = this;
+    var db = this.getDbs();
+    var dbA = Object.values(db);
+    /* Obtiene todos los campos */
+    var normalized = [];
+    dbA.map(function(_db){
+      var dbfields = [];
+      var empresas = _db.empresas;
+      if(empresas){
+        var empresasA = Object.values(empresas);
+        empresasA.map(function(empresa){
+          var eField = {
+            value: empresa.name,
+            fromdb: _db.id,
+            type: 'empresa',
+            matchWith: ['empresa', 'person']
+          };
+          dbfields = [...dbfields, eField];
+          var fields = self.getEmpresaMatchableFields(_db.id, empresa.uid);
+          fields.map(function(f){
+            f.type = f.matchWith[0];
+            dbfields = [...dbfields, f]
+          });
+        })
+        normalized = [...normalized, ...dbfields];
+      }
+    })
+    var nodes = {};
+    normalized.map(function(f){
+      var slug = slugify(f.type + '-' + f.value, {lower: true});
+      if(f.fromdb){
+        slug += f.fromdb;
+      }
+      if(!nodes[slug]){
+        nodes[slug] = {
+          id: slug,
+          name: f.value,
+          type: f.type,
+          fields: []
+        }
+      }
+      nodes[slug].fields.push(f);
+    })
+    return Object.values(nodes);
+  }
+
 
   /**
   * Obtiene el timestamp de modificación
@@ -233,7 +290,6 @@ export default class DbFactory {
     var j = btoa(encodeURI(s));
     var txt = j;
     var kbsize = txt.length * 0.000125;
-    console.log('kbsize', kbsize);
     var name = d.info.slug + '_v'+ d.version + '_b_' + d.saves;
     var zip = new JSZip();
     zip.file(name + '.sinapsis', txt, {binary: true});
@@ -280,7 +336,7 @@ export default class DbFactory {
     var uid = this.createUid();
     var o = {
       id: uid,
-      name: 'BD #'+ (x+1),
+      name: 'Nueva base de datos #'+ (x+1),
       created: moment.now(),
       color: gen().rgbString()
     }
@@ -323,7 +379,7 @@ export default class DbFactory {
     };
     db.empresas[empresa.uid] = empresa;
     this.editDb(db.id, db);
-    return db;
+    return [db, empresa];
   }
 
   /**
@@ -350,6 +406,18 @@ export default class DbFactory {
   }
 
   /**
+  * Elimina una empresa
+  *
+  * @param db
+  * @param uid
+  * @return void
+  **/
+  deleteEmpresa(db, uid){
+    delete this.obj.dbs[db.id].empresas[uid];
+    this.setModified();
+  }
+
+  /**
   * Añade campos a una empresa
   *
   * @param dbuid
@@ -365,6 +433,31 @@ export default class DbFactory {
     this.setModified();
     return e;
   }
+
+  /**
+  * Añade campos a una empresa respecto a un guid
+  *
+  * @param dbuid
+  * @param euid
+  * @param guid
+  * @param fields
+  **/
+  addFieldsFromGuid(dbuid, euid, guid, fields){
+    var obj = this.obj;
+    var e = obj.dbs[dbuid].empresas[euid];
+    var dbfields = e.fields;
+    if(!dbfields){
+      dbfields= {};
+    }
+    for(var key in fields){
+      var f = fields[key];
+      dbfields[key] = f;
+    }
+    this.obj.dbs[dbuid].empresas[euid].fields = dbfields;
+    this.obj.dbs[dbuid].modified = moment.now();
+    this.setModified();
+  }
+
 
   /**
   * Guarda el nombre de una empresa
@@ -399,5 +492,166 @@ export default class DbFactory {
     }
   }
 
+  /**
+  * Obtiene los campos de una empresa
+  *
+  * @param dbuid
+  * @param euid
+  * @return array
+  **/
+  getEmpresaFields(dbuid, euid){
+    try{
+      var e = this.getEmpresa(dbuid, euid);
+      if(!e.fields){
+        e.fields = {};
+      }
+      var ea = Object.values(e.fields);
+    }catch{
+      var ea = [];
+    }
+    return ea;
+  }
 
+  /**
+  * Obtiene solo los campos que hacen match
+  *
+  * @param void
+  * @return array
+  **/
+  getEmpresaMatchableFields(dbuid, euid){
+    var e = this.getEmpresaFields(dbuid, euid);
+    e = e.filter(function(f){
+      return f.matchWith && f.matchWith.length
+    });
+    return e;
+  }
+
+  /**
+  * Obtiene un campo
+  *
+  * @param dbuid
+  * @param euid
+  * @param slug
+  * @return obj | false
+  **/
+  getEmpresaField(dbuid, euid, slug){
+    var e = this.getEmpresa(dbuid, euid);
+    if(!e.fields){
+      e.fields = {};
+    }
+    var fs = e.fields;
+    return fs[slug] ? fs[slug] : false;
+  }
+
+  /**
+  * Obtiene los errores de empresas
+  *
+  * @param dbuid
+  * @param euid
+  * @return array
+  **/
+  getEmpresaErrors(dbuid, euid){
+    var o = {
+      error: [],
+      warning: [],
+      total: 0
+    };
+    var f = this.getEmpresaFields(dbuid, euid);
+    f = f.filter(function(field){
+      return !field.isvalid;
+    });
+    f.map(function(f){
+      var s = f.errorLegend;
+      if(!o[f.errorType]){
+        o[f.errorType] = [];
+      }
+      o.total = o.total + 1;
+      o[f.errorType] = [...o[f.errorType], s];
+    })
+    return o;
+  }
+
+  /**
+  * Añade un meta a la empresa
+  *
+  * @param dbid, euid, key, meta
+  * @return void
+  **/
+  addMetaToEmpresa(dbuid, euid, key, value){
+    var e = this.getEmpresa(dbuid, euid);
+    if(!e.meta){
+      e.meta = [];
+    }
+    e.meta[key] = value;
+    this.obj.dbs[dbuid].empresas[euid] = e;
+    this.obj.dbs[dbuid].modified = moment.now();
+    this.setModified();
+  }
+
+  /**
+  * Agrupa campos bajo el atributo group
+  *
+  * @param string
+  * @return obj
+  **/
+  getEmpresaGroupsByGroup(dbuid, euid, key){
+    var f = this.getEmpresaFields(dbuid, euid);
+    f = f.filter(function(field){
+      return field.group == key;
+    })
+    var o = {};
+    f.map(function(field){
+      var guid = field.groupUid;
+      if(!o[guid]){
+        o[guid] = [];
+      }
+      o[guid].push(field);
+    })
+    return Object.values(o);
+  }
+
+  /**
+  * Añade una empresa a partir de una transferencia
+  *
+  * @param dbid, euid, guid, fields
+  * @return new empresa
+  **/
+  addEmpresaFromTransferencia(db, empresa, guid, fs){
+    try{
+      var fields = fs;
+      var n = 'Empresa que recibió transferencia de ' + empresa.name;
+      Object.values(fields).map(function(field){
+        if(field.category == 'receptor'){
+          n = field.value;
+        }
+      })
+      var edb = this.addEmpresaToDb(db, n);
+      /* Añade la transferencia */
+      for(var key in fields){
+        fields[key].linkedWith = empresa.uid;
+        if(fields[key].category == 'emisor'){
+          fields[key].category = 'receptor'
+        }
+        if(fields[key].bigGroup == 'transferencia'){
+          fields[key].value = 'receptor';
+        }
+      }
+      this.addFieldsToEmpresa(db.id, edb[1].uid, fields);
+      return edb[1].uid;
+    }catch{
+      console.warn('Ocurrió un error al agregar la empresa de la transferencia.');
+      return false;
+    }
+  }
+
+  /**
+  * Formatea un número a moneda
+  *
+  * @param float
+  * @return string
+  **/
+  fm(f){
+    var o = formatMoney(f);
+    return o;
+  }
 }
