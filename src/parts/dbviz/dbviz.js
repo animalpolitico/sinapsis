@@ -41,23 +41,39 @@ class Nodes extends React.Component{
                    .attr('width', width)
                    .attr('height', height);
 
+    canvas.call(d3.zoom()
+            .extent([[0, 0], [width, height]])
+            .scaleExtent([-3, 8])
+            .on("zoom", function(z){
+              var d = d3.event.transform;
+              canvas.select('.nodes_container').attr('transform', d);
+            })
+          );
+
     var simulation = d3.forceSimulation()
-                       .force("link", d3.forceLink().id(function(d){
-                         console.log('d', d);
-                          return d.id;
-                        }))
-                       .force('charge', d3.forceManyBody(40))
-                       .force('collide', d3.forceCollide(40))
+                       .force("link",
+                          d3.forceLink()
+                            .id(function(d){
+                              return d.id;
+                            })
+                        )
+                       .force('charge', d3.forceManyBody(-20))
+                       .force('collide', d3.forceCollide(function(d){
+                         if(d.type == 'empresa'){
+                           return 50;
+                         }
+                         return 10;
+                       }))
                        .force('center', d3.forceCenter(width / 2, height / 2))
                        .force("y", d3.forceY())
                        .force("x", d3.forceX());
 
+   this.simulation = simulation;
    this.nodesContainer = canvas.append('g').attr('class', 'nodes_container');
    simulation.nodes(nodesData.nodes)
              .on('tick', this.drawNodes)
    simulation.force('link')
              .links(nodesData.links);
-
     setTimeout(function(){
       self.setState({
         loading: false
@@ -70,61 +86,90 @@ class Nodes extends React.Component{
     var data = this.nodesData;
     /* Nodos */
     this.nodesContainer.selectAll('*').remove();
-    /* Links */
-    data.links.forEach(function(d){
-      var line = self.nodesContainer.append('line')
-      line.attr("x1", d.source.x)
-          .attr("y1", d.source.y)
-          .attr("x2", d.target.x)
-          .attr('y2', d.target.y)
-          .attr("stroke-width", 1)
-          .attr('stroke', 'rgba(255,255,255,0.5)')
-    })
 
-    data.nodes.forEach(function(d){
-      var c = self.nodesContainer.append('circle');
-          c.attr('r', function(){
-            var t = d.type;
-            switch(t){
-              case "empresa":
-               return 20;
-              break;
-              default:
-               return 8;
-              break;
-            }
-          })
-           .attr('cx', d.x)
-           .attr('cy', d.y)
-           .attr('fill', function(){
-             var t = d.type;
-             switch(t){
-               case "empresa":
-                return "beige";
-               break;
-               case "website":
-                return 'hotpink';
-               break;
-               case "rfc":
-                return 'yellow';
-               break;
-               case "convenio":
-                return 'white';
-               break;
-               case "person":
-                return "green";
-               break;
-               case "instancia":
-                return "purple";
-               break;
-               default:
-                return 'blue';
-               break;
-             }
-           })
-    })
+    var links = self.nodesContainer
+                   .selectAll('line')
+                   .data(data.links)
+                   .enter()
+                   .append('line')
+                   .attr('x1', (d) => d.source.x)
+                   .attr('y1', (d) => d.source.y)
+                   .attr('x2', (d) => d.target.x)
+                   .attr('y2', (d) => d.target.y)
+                   .attr('stroke-width', 1)
+                   .attr('stroke', 'rgba(0,0,0,0.5)')
 
+    var nodes = self.nodesContainer
+                    .selectAll('circle')
+                    .data(data.nodes)
+                    .enter()
+                    .append('circle')
+                    .attr('r', function(d){
+                      var t = d.type;
+                      if(t == "empresa"){
+                        return 30;
+                      }
+                      return 10;
+                    })
+                    .attr('data-type', (d) => d.type)
+                    .attr('fill', function(d){
+                      var t = d.type;
+                      switch(t){
+                        case "empresa":
+                          return "black";
+                        break;
+                        case "rfc":
+                          return "blue";
+                        break;
+                        case "website":
+                          return "orange";
+                        break;
+                        case "person":
+                          return "hotpink";
+                        break;
+                        case "email":
+                          return "yellow";
+                        break;
+                        case "convenio":
+                          return "green";
+                        break;
+                        case "instancia":
+                          return "rgb(20, 151, 215)";
+                        break;
+                        default:
+                          return "#888888";
+                        break;
+                      }
+                    })
+                    .attr('cx', (d) => d.x)
+                    .attr('cy', (d) => d.y)
+                    .call(this.drag())
+  }
 
+  drag(){
+    var simulation = this.simulation;
+
+    function dragstarted(d) {
+       if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+       d.fx = d.x;
+       d.fy = d.y;
+     }
+
+     function dragged(d) {
+       d.fx = d3.event.x;
+       d.fy = d3.event.y;
+     }
+
+     function dragended(d) {
+       if (!d3.event.active) simulation.alphaTarget(0);
+       d.fx = d3.event.x;
+       d.fy = d3.event.y;
+     }
+
+   return  d3.drag()
+             .on("start", dragstarted)
+             .on("drag", dragged)
+             .on("end", dragended);
   }
 
   render(){

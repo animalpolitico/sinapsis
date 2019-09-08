@@ -7,6 +7,7 @@
     "@material-ui/core": "^4.3.2",
     "color-generator": "^0.1.0",
     "d3": "^5.11.0",
+    "d3-zoom": "^1.8.3",
     "file-saver": "^2.0.2",
     "format-money": "^1.0.0",
     "jszip": "^3.2.2",
