@@ -196,6 +196,7 @@ export default class DbFormGroupConvenio extends React.Component{
                     />
                     <DbInput
                       onChange={(slug, obj) => this.insertField(slug, obj)}
+                      matchWith={['convenio']}
                       name="Número de convenio"
                       type="text"
                       group="convenio"

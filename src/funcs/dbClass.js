@@ -125,6 +125,7 @@ export default class DbFactory {
         var empresasA = Object.values(empresas);
         empresasA.map(function(empresa){
           var eField = {
+            id: empresa.uid,
             value: empresa.name,
             fromdb: _db.id,
             type: 'empresa',
@@ -134,6 +135,7 @@ export default class DbFactory {
           var fields = self.getEmpresaMatchableFields(_db.id, empresa.uid);
           fields.map(function(f){
             f.type = f.matchWith[0];
+            f.empresauid = empresa.uid;
             dbfields = [...dbfields, f]
           });
         })
@@ -143,20 +145,40 @@ export default class DbFactory {
     var nodes = {};
     normalized.map(function(f){
       var slug = slugify(f.type + '-' + f.value, {lower: true});
-      if(f.fromdb){
-        slug += f.fromdb;
+      if(f.id){
+        slug = f.id;
       }
       if(!nodes[slug]){
         nodes[slug] = {
           id: slug,
           name: f.value,
           type: f.type,
-          fields: []
+          fields: [],
+          links: []
         }
       }
       nodes[slug].fields.push(f);
+      if(f.type !== 'empresa' ){
+        nodes[slug].links.push({
+          source: slug,
+          target: f.empresauid
+        })
+      }
     })
-    return Object.values(nodes);
+
+    var finalObj = {
+      nodes: [],
+      links: []
+    };
+
+    Object.values(nodes).map(function(e){
+      var links = e.links;
+      finalObj.links = [...finalObj.links, ...links];
+      delete e.links;
+      finalObj.nodes = [...finalObj.nodes, e];
+    });
+
+    return finalObj;
   }
 
 
