@@ -697,7 +697,11 @@ a, a:link, a:visited, a:hover {
     width: 100%;
     height: 600px;
     position: relative;
-    background: beige; }
+    background: #f0f0f0; }
+    .db_viz_nodes .node, .db_viz_nodes .nodes_label {
+      cursor: grab; }
+      .db_viz_nodes .node:active, .db_viz_nodes .nodes_label:active {
+        cursor: grabbing; }
 
 #ss_page_home {
   width: 100%;

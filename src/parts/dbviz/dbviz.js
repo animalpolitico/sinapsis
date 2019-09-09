@@ -27,6 +27,8 @@ class Nodes extends React.Component{
     })
   }
 
+
+
   set(){
     this.setState({
       loading: true
@@ -56,17 +58,13 @@ class Nodes extends React.Component{
                             .id(function(d){
                               return d.id;
                             })
+                            .distance(20)
                         )
-                       .force('charge', d3.forceManyBody(-20))
-                       .force('collide', d3.forceCollide(function(d){
-                         if(d.type == 'empresa'){
-                           return 50;
-                         }
-                         return 10;
-                       }))
+                       .force('charge', d3.forceManyBody())
+                       .force('collide', d3.forceCollide(80))
                        .force('center', d3.forceCenter(width / 2, height / 2))
-                       .force("y", d3.forceY())
-                       .force("x", d3.forceX());
+                       .force("y", d3.forceY(20))
+                       .force("x", d3.forceX(30));
 
    this.simulation = simulation;
    this.nodesContainer = canvas.append('g').attr('class', 'nodes_container');
@@ -74,6 +72,107 @@ class Nodes extends React.Component{
              .on('tick', this.drawNodes)
    simulation.force('link')
              .links(nodesData.links);
+
+    var data = this.nodesData;
+    var empresaMinMax = this.getEmpresaMinMax();
+    var circlesData = [];
+    var labelsData = [];
+
+    data.nodes.map(function(d){
+      var t = d.type;
+      var labelTypes = ['dependencia', 'instancia', 'titular'];
+      if(labelTypes.indexOf(t) > -1){
+        labelsData.push(d);
+      }else{
+        circlesData.push(d);
+      }
+    })
+
+    var links = self.nodesContainer
+                   .selectAll('line')
+                   .data(data.links)
+                   .enter()
+                   .append('line')
+                   .attr('stroke-width', 2)
+                   .attr('stroke', 'rgba(0,0,0,0.1)');
+    this.links = links;
+
+
+    var nodesLabels = self.nodesContainer
+                          .selectAll('.nodes_label')
+                          .data(labelsData)
+                          .enter(labelsData)
+                          .append('g')
+                          .attr('class', 'nodes_label')
+                          .call(this.drag())
+
+    nodesLabels.append('rect')
+               .attr('fill', '#222')
+               .attr('width', 80)
+               .attr('height', 18)
+               .attr('x', -40)
+               .attr('y', -15)
+
+    nodesLabels.append('text')
+               .text((d) => d.name.toUpperCase())
+               .attr('fill', 'white')
+               .attr('text-anchor', 'middle')
+
+
+
+    var nodesCircles = self.nodesContainer
+                      .selectAll('circle')
+                      .data(circlesData)
+                      .enter()
+                      .append('circle')
+                      .attr('class', 'node')
+                      .attr('data-name', (d) => d.name)
+                      .attr('r', function(d){
+                        var t = d.type;
+                        if(t == "empresa"){
+                          var s = d.sum ? d.sum : 0;
+                          var r = s / empresaMinMax.max;
+
+                          return (40 * r) + 15;
+
+                        }
+                        return 10;
+                      })
+                      .attr('data-type', (d) => d.type)
+                      .attr('fill', function(d){
+                        var t = d.type;
+                        switch(t){
+                          case "empresa":
+                            return "black";
+                          break;
+                          case "rfc":
+                            return "blue";
+                          break;
+                          case "website":
+                            return "orange";
+                          break;
+                          case "person":
+                            return "hotpink";
+                          break;
+                          case "email":
+                            return "yellow";
+                          break;
+                          case "convenio":
+                            return "green";
+                          break;
+                          case "instancia":
+                            return "rgb(20, 151, 215)";
+                          break;
+                          default:
+                            return "#888888";
+                          break;
+                        }
+                      })
+                      .call(this.drag())
+
+    this.nodesLabels = nodesLabels;
+    this.nodesCircles = nodesCircles;
+
     setTimeout(function(){
       self.setState({
         loading: false
@@ -81,76 +180,52 @@ class Nodes extends React.Component{
     }, 5000);
   }
 
+  getEmpresaMinMax(){
+    var d = this.nodesData;
+    var min = 0;
+    var max = 0;
+    var n = d.nodes;
+        n = Object.values(n);
+
+    n.map(function(e){
+      if(e.sum && e.type == 'empresa'){
+        min = Math.min(e.sum, min);
+        max = Math.max(e.sum, max);
+      }
+    })
+    return {
+      min: min,
+      max: max
+    }
+  }
+
   drawNodes = e => {
     var self = this;
     var data = this.nodesData;
     /* Nodos */
-    this.nodesContainer.selectAll('*').remove();
 
-    var links = self.nodesContainer
-                   .selectAll('line')
-                   .data(data.links)
-                   .enter()
-                   .append('line')
-                   .attr('x1', (d) => d.source.x)
-                   .attr('y1', (d) => d.source.y)
-                   .attr('x2', (d) => d.target.x)
-                   .attr('y2', (d) => d.target.y)
-                   .attr('stroke-width', 1)
-                   .attr('stroke', 'rgba(0,0,0,0.5)')
+    this.links
+        .attr('x1', (d) => d.source.x)
+        .attr('y1', (d) => d.source.y)
+        .attr('x2', (d) => d.target.x)
+        .attr('y2', (d) => d.target.y)
 
-    var nodes = self.nodesContainer
-                    .selectAll('circle')
-                    .data(data.nodes)
-                    .enter()
-                    .append('circle')
-                    .attr('r', function(d){
-                      var t = d.type;
-                      if(t == "empresa"){
-                        return 30;
-                      }
-                      return 10;
-                    })
-                    .attr('data-type', (d) => d.type)
-                    .attr('fill', function(d){
-                      var t = d.type;
-                      switch(t){
-                        case "empresa":
-                          return "black";
-                        break;
-                        case "rfc":
-                          return "blue";
-                        break;
-                        case "website":
-                          return "orange";
-                        break;
-                        case "person":
-                          return "hotpink";
-                        break;
-                        case "email":
-                          return "yellow";
-                        break;
-                        case "convenio":
-                          return "green";
-                        break;
-                        case "instancia":
-                          return "rgb(20, 151, 215)";
-                        break;
-                        default:
-                          return "#888888";
-                        break;
-                      }
-                    })
-                    .attr('cx', (d) => d.x)
-                    .attr('cy', (d) => d.y)
-                    .call(this.drag())
+    this.nodesCircles
+        .attr('cx', (d) => d.x)
+        .attr('cy', (d) => d.y)
+
+    this.nodesLabels.attr("transform", function(d) {
+            return "translate(" + d.x + "," + d.y + ")";
+          });
+
+
   }
 
   drag(){
     var simulation = this.simulation;
 
     function dragstarted(d) {
-       if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+       if (!d3.event.active) simulation.alphaTarget(0.5).restart();
        d.fx = d.x;
        d.fy = d.y;
      }

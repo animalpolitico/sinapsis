@@ -129,6 +129,7 @@ export default class DbFactory {
             value: empresa.name,
             fromdb: _db.id,
             type: 'empresa',
+            sum: self.getEmpresaSum(empresa),
             matchWith: ['empresa', 'person']
           };
           dbfields = [...dbfields, eField];
@@ -156,6 +157,9 @@ export default class DbFactory {
           fields: [],
           links: []
         }
+        if(f.sum){
+          nodes[slug].sum = f.sum;
+        }
       }
       nodes[slug].fields.push(f);
       if(f.type !== 'empresa' ){
@@ -179,6 +183,28 @@ export default class DbFactory {
     });
 
     return finalObj;
+  }
+
+  /**
+  * Obtiene la suma de empresa
+  *
+  * @param empresa
+  * @return int
+  **/
+  getEmpresaSum(empresa){
+    if(!empresa.fields){
+      return 0;
+    }
+    var f = Object.values(empresa.fields);
+    var i = 0;
+    f.map(function(d){
+      if(d.sumWith){
+        i += parseFloat(d.value)
+      }
+      console.log('d', d);
+    });
+    console.log('i', i);
+    return i;
   }
 
 
