@@ -29,6 +29,7 @@ var dbf_obj = dbf.set();
 window.dbf = dbf;
 
 var store = require('store')
+var onDrawerToggle = new Event('sinapsisDrawerToggle');
 
 
 export default class DbBuilderPage extends React.Component{
@@ -469,17 +470,16 @@ class DbView extends React.Component{
           : null
         }
         <Dialog open={this.state.showdialog} onClose={() => this.handleDialogClose()}>
-          <DialogTitle id="form-dialog-title">Nueva empresa</DialogTitle>
+          <DialogTitle id="form-dialog-title">Empresa nueva</DialogTitle>
             <DialogContent style={{width: 400}}>
             <DialogContentText>
-              Inserta la razón social de la empresa, después podrás añadir mucha más información.
+              Escribe el nombre de la empresa, más adelante podrás añadir el resto de información.
             </DialogContentText>
             <TextField
               autoFocus
               label="Razón social de la empresa"
               fullWidth
               onChange={(e) => this.setState({dialogValue: e.target.value})}
-              required
             />
           </DialogContent>
           <DialogActions>
@@ -517,6 +517,7 @@ class DbEmpresasList extends React.Component{
       showedit: true,
       empresa: em
     })
+    window.dispatchEvent(onDrawerToggle);
     window.dbf.obj.selectedEmpresa = em.uid;
   }
 
@@ -525,6 +526,7 @@ class DbEmpresasList extends React.Component{
       showedit: false,
       empresa: {}
     })
+    window.dispatchEvent(onDrawerToggle);
     window.dbf.obj.selectedEmpresa = '';
   }
 
@@ -554,6 +556,7 @@ class DbEmpresasList extends React.Component{
                     empresa={empresa}
                     db={db}
                     key={k}
+                    index={k}
                     parent={self}
                     active={self.state.empresa.uid == empresa.uid}
                 />)
@@ -618,7 +621,7 @@ class DbEmpresa extends React.Component{
         <div className="db_empresa_container" onClick={() => this.handleClick()}>
           <div className="db_empresa_container_indicator"></div>
           <div className="db_empresa_container_name">
-            {e.name}
+            {this.props.index + 1 +'. '} {e.name}
           </div>
           <div className="db_empresa_container_info">
 

@@ -25,6 +25,10 @@ class Nodes extends React.Component{
         self.set();
       }
     })
+    window.addEventListener('sinapsisDrawerToggle', function(){
+      d3.selectAll('#db_viz_nodes_canvas *').remove();
+      self.set();
+    })
   }
 
 
@@ -58,13 +62,12 @@ class Nodes extends React.Component{
                             .id(function(d){
                               return d.id;
                             })
-                            .distance(20)
                         )
-                       .force('charge', d3.forceManyBody())
-                       .force('collide', d3.forceCollide(80))
+                       .force('charge', d3.forceManyBody(0))
+                       .force('collide', d3.forceCollide(100))
                        .force('center', d3.forceCenter(width / 2, height / 2))
-                       .force("y", d3.forceY(20))
-                       .force("x", d3.forceX(30));
+                       .force("y", d3.forceY(0.01))
+                       .force("x", d3.forceX(0.01));
 
    this.simulation = simulation;
    this.nodesContainer = canvas.append('g').attr('class', 'nodes_container');
@@ -132,9 +135,11 @@ class Nodes extends React.Component{
                         if(t == "empresa"){
                           var s = d.sum ? d.sum : 0;
                           var r = s / empresaMinMax.max;
-
-                          return (40 * r) + 15;
-
+                          var n = (40 * r) + 15;
+                          if(isNaN(n)){
+                            n = 15;
+                          }
+                          return n;
                         }
                         return 10;
                       })
@@ -169,6 +174,27 @@ class Nodes extends React.Component{
                         }
                       })
                       .call(this.drag())
+                      .on('mouseenter', function(d){
+                        self.nodesContainer.selectAll('.viz_tooltip').remove();
+                        var g = self.nodesContainer
+                                .append('g')
+                                .attr('class', 'viz_tooltip')
+                                .attr("transform", "translate(" + d.x + "," + (d.y - 18) + ")");
+                        g.append('rect')
+                         .attr('width', 120)
+                         .attr('height', 14)
+                         .attr('x', -60)
+                         .attr('y', -12)
+                         .attr('fill', "white")
+
+                        g.append('text')
+                         .text(d.name)
+                         .attr('text-anchor', 'middle')
+                         .style('font-size', 12)
+                      })
+                      .on('mouseleave', function(d){
+                        self.nodesContainer.selectAll('.viz_tooltip').remove();
+                      })
 
     this.nodesLabels = nodesLabels;
     this.nodesCircles = nodesCircles;
@@ -223,9 +249,9 @@ class Nodes extends React.Component{
 
   drag(){
     var simulation = this.simulation;
-
+    var self = this;
     function dragstarted(d) {
-       if (!d3.event.active) simulation.alphaTarget(0.5).restart();
+       if (!d3.event.active) simulation.alphaTarget(0.1).restart();
        d.fx = d.x;
        d.fy = d.y;
      }
@@ -236,9 +262,9 @@ class Nodes extends React.Component{
      }
 
      function dragended(d) {
-       if (!d3.event.active) simulation.alphaTarget(0);
-       d.fx = d3.event.x;
-       d.fy = d3.event.y;
+       if (!d3.event.active) simulation.alphaTarget(0.1).restart();
+       d.fixed = true;
+       // self.drawNodes();
      }
 
    return  d3.drag()

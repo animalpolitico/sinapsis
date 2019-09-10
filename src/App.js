@@ -19,7 +19,7 @@ import NotFound from './pages/404';
 const theme = createMuiTheme({
     palette: {
       primary: {
-        main: '#1f2153'
+        main: '#2a2a2a'
       },
       secondary: {
         main: '#f0f0f0'
