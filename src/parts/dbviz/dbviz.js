@@ -96,8 +96,8 @@ class Nodes extends React.Component{
                    .data(data.links)
                    .enter()
                    .append('line')
-                   .attr('stroke-width', 2)
-                   .attr('stroke', 'rgba(0,0,0,0.1)');
+                   .attr('stroke-width', 3)
+                   .attr('stroke', 'rgba(21, 23, 245, 0.5)');
     this.links = links;
 
 
@@ -148,7 +148,7 @@ class Nodes extends React.Component{
                         var t = d.type;
                         switch(t){
                           case "empresa":
-                            return "black";
+                            return "white";
                           break;
                           case "rfc":
                             return "blue";

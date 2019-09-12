@@ -23,6 +23,7 @@ import DbBuilderToolbar from '../parts/dbbuilder/toolbar';
 import DbEditEmpresa from '../parts/dbbuilder/edit';
 import DbViz from '../parts/dbviz/dbviz';
 
+import buildLink from "../funcs/buildlink";
 
 var dbf = new DbFactory();
 var dbf_obj = dbf.set();
@@ -59,7 +60,8 @@ export default class DbBuilderPage extends React.Component{
           showrecoveroptions: false
         })
       }else{
-        this.props.history.push('/construir');
+        var url = buildLink('/construir');
+        this.props.history.push(url);
       }
     }
   }
@@ -96,8 +98,8 @@ export default class DbBuilderPage extends React.Component{
 
   startNewProject(){
     var obj = window.dbf.set();
-
-    this.props.history.push('construir/'+obj.uid);
+    var url = buildLink('/construir/' + obj.uid);
+    this.props.history.push(url);
 
     this.setState({
       control: 'newproject',
@@ -119,6 +121,8 @@ export default class DbBuilderPage extends React.Component{
       reader.onload = function(ev){
         var t =  ev.target.result;
         var obj = window.dbf.setFile(t);
+        var url = buildLink('/construir/' + obj.uid);
+        self.props.history.push(url);
         self.setState({
           control: 'fromfile',
           showcontrol: false

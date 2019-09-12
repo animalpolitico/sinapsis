@@ -170,6 +170,20 @@ export default class DbFactory {
       }
     })
 
+
+    /* Solo campos con conexiones */
+    var fnodes = {};
+    for(var key in nodes){
+      var n = nodes[key];
+      if(n.fields.length > 1 || n.type == 'empresa'){
+        fnodes[key] = n;
+      }
+    }
+
+    console.log('nodes', fnodes, nodes);
+
+    nodes = fnodes;
+
     var finalObj = {
       nodes: [],
       links: []
