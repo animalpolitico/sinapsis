@@ -26,8 +26,8 @@ class Nodes extends React.Component{
       }
     })
     window.addEventListener('sinapsisDrawerToggle', function(){
-      d3.selectAll('#db_viz_nodes_canvas *').remove();
-      self.set();
+      // d3.selectAll('#db_viz_nodes_canvas *').remove();
+      // self.set();
     })
   }
 
@@ -46,10 +46,11 @@ class Nodes extends React.Component{
     var canvas = d3.select("#db_viz_nodes_canvas")
                    .attr('width', width)
                    .attr('height', height);
-
+    this.canvas = canvas;
     canvas.call(d3.zoom()
             .extent([[0, 0], [width, height]])
             .scaleExtent([-3, 8])
+
             .on("zoom", function(z){
               var d = d3.event.transform;
               canvas.select('.nodes_container').attr('transform', d);
@@ -96,8 +97,8 @@ class Nodes extends React.Component{
                    .data(data.links)
                    .enter()
                    .append('line')
-                   .attr('stroke-width', 3)
-                   .attr('stroke', 'rgba(21, 23, 245, 0.5)');
+                   .attr('stroke-width', 5)
+                   .attr('stroke', 'rgba(40, 204, 233, 0.8)');
     this.links = links;
 
 
@@ -120,8 +121,6 @@ class Nodes extends React.Component{
                .text((d) => d.name.toUpperCase())
                .attr('fill', 'white')
                .attr('text-anchor', 'middle')
-
-
 
     var nodesCircles = self.nodesContainer
                       .selectAll('circle')
@@ -157,7 +156,7 @@ class Nodes extends React.Component{
                             return "orange";
                           break;
                           case "person":
-                            return "hotpink";
+                            return "rgb(254, 18, 53)";
                           break;
                           case "email":
                             return "yellow";
@@ -264,10 +263,10 @@ class Nodes extends React.Component{
      function dragended(d) {
        if (!d3.event.active) simulation.alphaTarget(0.1).restart();
        d.fixed = true;
-       // self.drawNodes();
+       simulation.stop();
      }
 
-   return  d3.drag()
+   return d3.drag()
              .on("start", dragstarted)
              .on("drag", dragged)
              .on("end", dragended);
