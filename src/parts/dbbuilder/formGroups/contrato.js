@@ -131,7 +131,7 @@ export default class DbFormGroupContrato extends React.Component{
         <ExpansionPanelSummary expandIcon={<Icon>expand_more</Icon>}>
           <div className="dbef_n">
             <div className="dbef_n_n">
-              Contratos
+              Contratos <span className="dbef_n_n_badge">{contratos.length}</span>
             </div>
             <div className="dbef_n_ctas">
               <div className="dbef_n_ctas_c" onClick={() => this.open()}>Añadir</div>

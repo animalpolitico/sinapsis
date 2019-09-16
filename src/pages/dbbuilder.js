@@ -64,6 +64,7 @@ export default class DbBuilderPage extends React.Component{
         this.props.history.push(url);
       }
     }
+    window.scroll(0,0);
   }
 
   componentWillUnmount(){
@@ -265,6 +266,8 @@ class DbBuilderSidebar extends React.Component{
   componentDidMount(){
     this.fetchDbs();
     this.refs = {};
+
+
   }
 
   componentDidUpdate(p, s){
@@ -316,7 +319,7 @@ class DbBuilderSidebar extends React.Component{
             <div className={navCs.join(' ')}>
               {
                 dbsA.map(function(db, k){
-                  return <DbDbsNavigationTd ref={(ref) => self.refs[db.id] = ref} parent={self} key={k} db={db} />
+                  return <DbDbsNavigationTd ref={(ref) => self.refs[db.id] = ref} parent={self} key={k} index={k} db={db} />
                 })
               }
               <DbDbsNavigationNewDb parent={this}/>
@@ -342,9 +345,6 @@ class DbView extends React.Component{
   }
   componentDidMount(){
     this.set();
-
-
-
   }
 
   componentDidUpdate(p, n){
@@ -522,6 +522,7 @@ class DbEmpresasList extends React.Component{
       empresa: em
     })
     window.dispatchEvent(onDrawerToggle);
+    document.body.classList.add('ss_showing_drawer');
     window.dbf.obj.selectedEmpresa = em.uid;
   }
 
@@ -530,6 +531,7 @@ class DbEmpresasList extends React.Component{
       showedit: false,
       empresa: {}
     })
+    document.body.classList.remove('ss_showing_drawer');
     window.dispatchEvent(onDrawerToggle);
     window.dbf.obj.selectedEmpresa = '';
   }
@@ -653,7 +655,13 @@ class DbDbsNavigationTd extends React.Component{
     isblurred: true
   }
   componentDidMount(){
+    var self = this;
     this.set();
+    if(this.props.index === 0){
+      setTimeout(function(){
+        self.handleClick();
+      }, 100);
+    }
   }
   set(){
     var db = this.props.db;
@@ -674,7 +682,6 @@ class DbDbsNavigationTd extends React.Component{
     var em = document.getElementById(em_id);
     em.classList.add('ss_active');
     this.props.parent.selectDb(db.id);
-
   }
 
   render(){

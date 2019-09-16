@@ -1,5 +1,8 @@
 import React from 'react';
 import * as d3 from "d3";
+import Icon from '@material-ui/core/Icon';
+import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 
 export default class DbViz extends React.Component{
 
@@ -14,7 +17,8 @@ export default class DbViz extends React.Component{
 
 class Nodes extends React.Component{
   state = {
-    loading: false
+    loading: false,
+    isPerfectZoom: true
   }
   componentDidMount(){
     var self = this;
@@ -26,14 +30,24 @@ class Nodes extends React.Component{
       }
     })
     window.addEventListener('sinapsisDrawerToggle', function(){
-      // d3.selectAll('#db_viz_nodes_canvas *').remove();
-      // self.set();
+      setTimeout(function(){
+        self.resize();
+      }, 300);
     })
   }
 
+  resize(){
+    var container = this.container;
+    const width = container.offsetWidth,
+          height = container.offsetHeight;
+    this.canvas.attr('width', width)
+               .attr('height', height);
+    this.setInitialZoom();
+  }
 
 
   set(){
+    d3.selectAll('#db_viz_nodes_canvas *').remove();
     this.setState({
       loading: true
     })
@@ -47,15 +61,7 @@ class Nodes extends React.Component{
                    .attr('width', width)
                    .attr('height', height);
     this.canvas = canvas;
-    canvas.call(d3.zoom()
-            .extent([[0, 0], [width, height]])
-            .scaleExtent([-3, 8])
 
-            .on("zoom", function(z){
-              var d = d3.event.transform;
-              canvas.select('.nodes_container').attr('transform', d);
-            })
-          );
 
     var simulation = d3.forceSimulation()
                        .force("link",
@@ -72,6 +78,20 @@ class Nodes extends React.Component{
 
    this.simulation = simulation;
    this.nodesContainer = canvas.append('g').attr('class', 'nodes_container');
+
+   var zoom = d3.zoom()
+                .extent([[0, 0], [width, height]])
+                .scaleExtent([-3, 8])
+                .on("zoom", function(z){
+                   var d = d3.event.transform;
+                   self.setState({
+                     isPerfectZoom: false
+                   })
+                   canvas.select('.nodes_container').attr('transform', d);
+                 });
+   this.zoom = zoom;
+   canvas.call(zoom)
+
    simulation.nodes(nodesData.nodes)
              .on('tick', this.drawNodes)
    simulation.force('link')
@@ -198,6 +218,8 @@ class Nodes extends React.Component{
     this.nodesLabels = nodesLabels;
     this.nodesCircles = nodesCircles;
 
+    this.setInitialZoom();
+
     setTimeout(function(){
       self.setState({
         loading: false
@@ -246,6 +268,24 @@ class Nodes extends React.Component{
 
   }
 
+  setInitialZoom(){
+    var self = this;
+    var container = this.container;
+    const width = container.offsetWidth,
+          height = container.offsetHeight;
+
+    var box = this.nodesContainer.node().getBBox();
+
+    var zoomIdentity = d3.zoomIdentity.scale(0.5).translate(width / 2, -height / -2);
+    this.nodesContainer.attr('transform', zoomIdentity);
+    this.canvas.call(this.zoom.transform, zoomIdentity);
+
+    this.setState({
+      isPerfectZoom: true
+    })
+
+  }
+
   drag(){
     var simulation = this.simulation;
     var self = this;
@@ -275,6 +315,14 @@ class Nodes extends React.Component{
   render(){
     return(
       <div className="db_viz_nodes" ref={(ref) => this.container = ref}>
+        <div id="db_viz_nodes_controls">
+          <Fab size="small" color="primary" onClick={() => this.set()}>
+            <Icon>autorenew</Icon>
+          </Fab>
+          <Fab size="small" color="primary" disabled={this.state.isPerfectZoom} onClick={() => this.setInitialZoom()}>
+            <Icon>center_focus_strong</Icon>
+          </Fab>
+        </div>
         <svg id="db_viz_nodes_canvas"></svg>
       </div>
     )

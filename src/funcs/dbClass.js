@@ -180,7 +180,6 @@ export default class DbFactory {
       }
     }
 
-    console.log('nodes', fnodes, nodes);
 
     nodes = fnodes;
 
@@ -215,9 +214,7 @@ export default class DbFactory {
       if(d.sumWith){
         i += parseFloat(d.value)
       }
-      console.log('d', d);
     });
-    console.log('i', i);
     return i;
   }
 

@@ -10,11 +10,31 @@
     height: 100%;
     position: relative;
     background: #0f0f0f;
+    #db_viz_nodes_controls{
+      position: absolute;
+      top: 0;
+      right: 0;
+      box-sizing: border-box;
+      padding: 1rem 2rem;
+      // background: rgba(white, 0.05);
+      @extend .flex;
+      flex-direction: column;
+      button{
+        margin: 0.5rem 0;
+      }
+    }
     .node, .nodes_label{
       cursor: grab;
       &:active{
         cursor: grabbing;
       }
     }
+  }
+}
+body.ss_showing_drawer{
+  .db_viz{
+    flex: auto;
+    width: 30%;
+    margin-left: 35%;
   }
 }

@@ -210,7 +210,7 @@
       box-sizing: border-box;
       padding: 0.75rem 0.75rem;
       margin: 0.75rem 0;
-      background: darken($blue, 10%);
+      background: darken($blue, 5%);
       &_c{
         @extend .flex;
         color: white;
@@ -218,6 +218,37 @@
         .ss_transaction_row_n{
           margin-right: 1rem;
           font-weight: 300;
+          @extend .flex;
+          align-items: center;
+          font-size: 0.9rem;
+          max-width: 85%;
+          &_d{
+            @extend .flex;
+            align-items: center;
+            &_a{
+              width: 30px;
+              text-align: center;
+            }
+            &_t{
+              line-height: 1;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
+              max-width: 140px;
+            }
+          }
+        }
+        .ss_transaction_row_n_c{
+          flex: 1;
+          @extend .flex;
+          justify-content: flex-end;
+          span{
+            display: inline-block;
+            background: $yellow;
+            font-size: 0.8rem;
+            padding: 0.25rem;
+            border-radius: 0.75rem;
+          }
         }
         .ss_transaction_row_d{
           flex: 1;
@@ -225,6 +256,7 @@
           text-overflow: ellipsis;
           overflow: hidden;
           font-size: 0.8rem;
+          text-align: right;
           color: #f0f0f0;
         }
       }

@@ -134,13 +134,24 @@ export default class DbInput extends React.Component{
     return slug;
   }
 
+  filterValue(v){
+    var t = this.props.type;
+
+    if(t == "currency"){
+      v = v.replace(/[^0-9.]/g, '');
+      v = parseFloat(v);
+    }
+
+    return v;
+  }
+
   saveLocalChanges(){
     var slug = this.getFieldSlug();
     var obj = {
       name: this.getName(),
       slug: slug,
       isvalid: this.state.isvalid,
-      value: this.state.value,
+      value: this.filterValue(this.state.value),
     }
 
     if(!this.state.isvalid){
@@ -204,6 +215,7 @@ export default class DbInput extends React.Component{
           <div className="ss_db_input_container_input">
             <input
               type="text"
+              placeholder={this.getName()}
               value={this.state.value}
               onChange={(e) => this.setValue(e.target.value)}
               onFocus={() => this.handleFocus()}
@@ -213,11 +225,11 @@ export default class DbInput extends React.Component{
           {
             !this.state.isvalid && this.props.errorLegend ?
             <div className="ss_db_input_container_error">
-              <Icon>{this.props.errorType == 'error' ? 'error' : 'warning'}</Icon> {this.props.errorLegend}
+              <Icon>{this.props.errorType == 'error' ? 'error' : 'warning'}</Icon> ({this.props.errorLegend})
             </div>
             : null
           }
-          <div className="ss_db_input_container_label">
+          <div className="ss_db_input_container_label" style={{display: 'none'}}>
             {this.getName()}
           </div>
         </div>

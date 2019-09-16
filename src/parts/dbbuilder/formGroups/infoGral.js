@@ -12,13 +12,26 @@ import Icon from '@material-ui/core/Icon';
 import DbInput from '../inputs';
 
 export default class DbFormGroupInfoGeneral extends React.Component{
+  state = {
+    open: true
+  }
+  componentDidMount(){
+  }
   render(){
     return(
-      <ExpansionPanel>
+      <>
+      <ExpansionPanel expanded={this.state.open} onChange={(e, ex) => this.setState({open: ex})}>
         <ExpansionPanelSummary expandIcon={<Icon>expand_more</Icon>}>
           <div className="dbef_n">
             <div className="dbef_n_n">
               Información general
+            </div>
+            <div className="dbef_n_ctas">
+              {
+                this.state.open ?
+                <div className="dbef_n_ctas_c" onClick={() => this.setState({open: false})}>Guardar</div>
+                : null
+              }
             </div>
           </div>
         </ExpansionPanelSummary>
@@ -31,7 +44,7 @@ export default class DbFormGroupInfoGeneral extends React.Component{
               name="RFC"
               type="text"
               errorType="warning"
-              errorLegend="Revisa que el formato de RFC sea válido"
+              errorLegend="Quizá debas eliminar guiones o puntos"
               empresa={this.props.empresa}
             />
             <DbInput
@@ -97,7 +110,9 @@ export default class DbFormGroupInfoGeneral extends React.Component{
             />
           </div>
         </ExpansionPanelDetails>
+        {this.props.children}
       </ExpansionPanel>
+      </>
     )
   }
 }

@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Chivo:300,300i,400,400i,700,700i,900,900i&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_error, .ss_db_input_select_container_error, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_td, #ss_page_home .ss_hb_cols {
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_error, .ss_db_input_select_container_error, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_nodes #db_viz_nodes_controls, #ss_page_home .ss_hb_cols {
   display: flex;
   flex-wrap: nowrap; }
 
@@ -563,19 +563,43 @@ a, a:link, a:visited, a:hover {
       box-sizing: border-box;
       padding: 0.75rem 0.75rem;
       margin: 0.75rem 0;
-      background: #111111; }
+      background: #1d1d1d; }
       .db_empresa_container_group_form_innerlist .ss_transaction_row_c {
         color: white;
         align-items: center; }
         .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n {
           margin-right: 1rem;
-          font-weight: 300; }
+          font-weight: 300;
+          align-items: center;
+          font-size: 0.9rem;
+          max-width: 85%; }
+          .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d {
+            align-items: center; }
+            .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d_a {
+              width: 30px;
+              text-align: center; }
+            .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d_t {
+              line-height: 1;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
+              max-width: 140px; }
+        .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c {
+          flex: 1;
+          justify-content: flex-end; }
+          .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c span {
+            display: inline-block;
+            background: #d64cc8;
+            font-size: 0.8rem;
+            padding: 0.25rem;
+            border-radius: 0.75rem; }
         .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_d {
           flex: 1;
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
           font-size: 0.8rem;
+          text-align: right;
           color: #f0f0f0; }
 
 .ss_db_input, .ss_db_input_select {
@@ -705,10 +729,24 @@ a, a:link, a:visited, a:hover {
     height: 100%;
     position: relative;
     background: #0f0f0f; }
+    .db_viz_nodes #db_viz_nodes_controls {
+      position: absolute;
+      top: 0;
+      right: 0;
+      box-sizing: border-box;
+      padding: 1rem 2rem;
+      flex-direction: column; }
+      .db_viz_nodes #db_viz_nodes_controls button {
+        margin: 0.5rem 0; }
     .db_viz_nodes .node, .db_viz_nodes .nodes_label {
       cursor: grab; }
       .db_viz_nodes .node:active, .db_viz_nodes .nodes_label:active {
         cursor: grabbing; }
+
+body.ss_showing_drawer .db_viz {
+  flex: auto;
+  width: 30%;
+  margin-left: 35%; }
 
 #ss_page_home {
   width: 100%;

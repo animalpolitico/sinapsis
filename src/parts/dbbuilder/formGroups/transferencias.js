@@ -139,7 +139,7 @@ export default class DbFormGroupTransferencias extends React.Component{
         <ExpansionPanelSummary expandIcon={<Icon>expand_more</Icon>}>
           <div className="dbef_n">
             <div className="dbef_n_n">
-              Transferencias
+              Transferencias <span className="dbef_n_n_badge">{transferencias.length}</span>
             </div>
             <div className="dbef_n_ctas">
               <div className="dbef_n_ctas_c" onClick={() => this.open()}>Añadir</div>

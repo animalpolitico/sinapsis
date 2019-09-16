@@ -329,6 +329,9 @@ class PersonRow extends React.Component{
           <div className="ss_transaction_row_n">
             {n}
           </div>
+          <div className="ss_transaction_row_n_c">
+            <span>Editar</span>
+          </div>
         </div>
       </div>
     )

@@ -20,11 +20,13 @@ export default class TransactionRow extends React.Component{
     if(this.props.receptorIsEmpresa){
       receptor = this.props.empresa.name;
     }
-    var mainName = receptor && emisor ? emisor + ' -> ' + receptor : this.props.singleName + ' #'+this.props.count;
-    var o = [
-      mainName,
-      monto ? monto : false
-    ];
+    // var mainName = receptor && emisor ? emisor + ' -> ' + receptor : this.props.singleName + ' #'+this.props.count;
+    var o = {
+      receptor: receptor,
+      emisor: emisor,
+      monto: monto,
+      showT: receptor && emisor
+    };
     return o;
   }
 
@@ -39,11 +41,30 @@ export default class TransactionRow extends React.Component{
       <div className="ss_transaction_row" onClick={() => this.edit()}>
         <div className="ss_transaction_row_c">
           <div className="ss_transaction_row_n">
-            {n[0]}
+            {
+              n.showT ?
+              <div className="ss_transaction_row_n_d">
+                <div className="ss_transaction_row_n_d_t">
+                  {n.emisor}
+                </div>
+                <div className="ss_transaction_row_n_d_a">
+                  →
+                </div>
+                <div className="ss_transaction_row_n_d_t">
+                  {n.receptor}
+                </div>
+              </div>
+              :
+              <div className="ss_transaction_row_n_full">
+                {this.props.singleName + ' #' + this.props.count}
+              </div>
+            }
+
+
           </div>
           <div className="ss_transaction_row_d">
             {
-              n[1] ? window.dbf.fm(n[1]) : null
+              n.monto ? window.dbf.fm(n.monto) : null
             }
           </div>
         </div>
