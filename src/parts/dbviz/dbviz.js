@@ -70,8 +70,8 @@ class Nodes extends React.Component{
                               return d.id;
                             })
                         )
-                       .force('charge', d3.forceManyBody(0))
-                       .force('collide', d3.forceCollide(100))
+                       .force('charge', null)
+                       .force('collide', d3.forceCollide(700).strength(0.6).iterations(2))
                        .force('center', d3.forceCenter(width / 2, height / 2))
                        .force("y", d3.forceY(0.01))
                        .force("x", d3.forceX(0.01));
@@ -97,6 +97,7 @@ class Nodes extends React.Component{
    simulation.force('link')
              .links(nodesData.links);
 
+
     var data = this.nodesData;
     var empresaMinMax = this.getEmpresaMinMax();
     var circlesData = [];
@@ -117,8 +118,8 @@ class Nodes extends React.Component{
                    .data(data.links)
                    .enter()
                    .append('line')
-                   .attr('stroke-width', 5)
-                   .attr('stroke', 'rgba(40, 204, 233, 0.8)');
+                   .attr('stroke-width', 8)
+                   .attr('stroke', 'rgba(90, 67, 231, 0.79)');
     this.links = links;
 
 
@@ -132,14 +133,15 @@ class Nodes extends React.Component{
 
     nodesLabels.append('rect')
                .attr('fill', '#222')
-               .attr('width', 80)
-               .attr('height', 18)
-               .attr('x', -40)
-               .attr('y', -15)
+               .attr('width', 2000)
+               .attr('height', 260)
+               .attr('x', -1000)
+               .attr('y', -210)
 
     nodesLabels.append('text')
                .text((d) => d.name.toUpperCase())
                .attr('fill', 'white')
+               .attr('font-size', 240)
                .attr('text-anchor', 'middle')
 
     var nodesCircles = self.nodesContainer
@@ -154,13 +156,13 @@ class Nodes extends React.Component{
                         if(t == "empresa"){
                           var s = d.sum ? d.sum : 0;
                           var r = s / empresaMinMax.max;
-                          var n = (40 * r) + 15;
+                          var n = (400 * r) + 55;
                           if(isNaN(n)){
-                            n = 15;
+                            n = 55;
                           }
                           return n;
                         }
-                        return 10;
+                        return 50;
                       })
                       .attr('data-type', (d) => d.type)
                       .attr('fill', function(d){
@@ -200,16 +202,17 @@ class Nodes extends React.Component{
                                 .attr('class', 'viz_tooltip')
                                 .attr("transform", "translate(" + d.x + "," + (d.y - 18) + ")");
                         g.append('rect')
-                         .attr('width', 120)
-                         .attr('height', 14)
-                         .attr('x', -60)
-                         .attr('y', -12)
+                         .attr('width', 3500)
+                         .attr('height', 180)
+                         .attr('x', -1750)
+                         .attr('y', -150)
                          .attr('fill', "white")
+                         .style('pointer-events', 'none')
 
                         g.append('text')
                          .text(d.name)
                          .attr('text-anchor', 'middle')
-                         .style('font-size', 12)
+                         .style('font-size', 120)
                       })
                       .on('mouseleave', function(d){
                         self.nodesContainer.selectAll('.viz_tooltip').remove();
@@ -276,7 +279,7 @@ class Nodes extends React.Component{
 
     var box = this.nodesContainer.node().getBBox();
 
-    var zoomIdentity = d3.zoomIdentity.scale(0.5).translate(width / 2, -height / -2);
+    var zoomIdentity = d3.zoomIdentity.scale(0.25).translate(width / 4, -height / -4);
     this.nodesContainer.attr('transform', zoomIdentity);
     this.canvas.call(this.zoom.transform, zoomIdentity);
 

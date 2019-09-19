@@ -128,6 +128,7 @@ export default class DbFactory {
             id: empresa.uid,
             value: empresa.name,
             fromdb: _db.id,
+            empresauid: empresa.uid,
             type: 'empresa',
             sum: self.getEmpresaSum(empresa),
             matchWith: ['empresa', 'person']
@@ -162,7 +163,7 @@ export default class DbFactory {
         }
       }
       nodes[slug].fields.push(f);
-      if(f.type !== 'empresa' ){
+      if(slug !== f.empresauid || true){
         nodes[slug].links.push({
           source: slug,
           target: f.empresauid

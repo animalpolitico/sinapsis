@@ -6,10 +6,13 @@
   "dependencies": {
     "@material-ui/core": "^4.3.2",
     "color-generator": "^0.1.0",
+    "csv": "^5.1.2",
+    "csvtojson": "^2.0.10",
     "d3": "^5.11.0",
     "d3-zoom": "^1.8.3",
     "file-saver": "^2.0.2",
     "format-money": "^1.0.0",
+    "fs": "0.0.1-security",
     "jszip": "^3.2.2",
     "moment": "^2.24.0",
     "number-to-letter": "^1.0.1",

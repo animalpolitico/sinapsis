@@ -14,6 +14,7 @@ import Footer from './parts/footer';
 import Index from './pages/index';
 import Cruzar from './pages/cruzar';
 import DbBuilderPage from './pages/dbbuilder';
+import DevSandbox from './pages/dev';
 import NotFound from './pages/404';
 
 const theme = createMuiTheme({
@@ -43,6 +44,7 @@ export default class App extends React.Component{
                 <Route path={buildLink("/cruzar")} exact component={Cruzar} />
                 <Route path={buildLink("/construir/:dbid")} component={DbBuilderPage} />
                 <Route path={buildLink("/construir")} exact component={DbBuilderPage} />
+                <Route path={buildLink("/devsandbox")} exact component={DevSandbox} />
                 <Route path="*" component={NotFound} />
               </Switch>
             </div>

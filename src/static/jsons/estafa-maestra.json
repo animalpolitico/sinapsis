@@ -1,0 +1,2009 @@
+{
+  "uid": "c19218b4-e253-4598-9858-63aac014e765",
+  "info": {
+    "name": "Estafa Maestra",
+    "slug": "estafa-maestra"
+  },
+  "allowAutoSave": true,
+  "projectStructure": "sinapsis_empresas",
+  "classVersion": "0.0.1",
+  "saves": 1,
+  "modified": 1568063428835,
+  "version": 1,
+  "created": 1568047521258,
+  "autosaves": 1,
+  "autoSavedAt": 1568063428835,
+  "dbs": {
+    "609a661d-5603-41fe-9759-6666b31ecbf5": {
+      "id": "609a661d-5603-41fe-9759-6666b31ecbf5",
+      "name": "Estafa Maestra",
+      "created": 1568755778840,
+      "color": "rgb(244, 41, 28)",
+      "modified": 1568755778840,
+      "empresas": {
+
+          "da7c9640-183a-465f-a9e6-95e451a05c65": {
+            "name": "ESTUDIOS Y SERVICIOS ECOLÓGICOS Y AMBIENTALES DE TABASCO (ESEAT)",
+            "slug": "estudios-y-servicios-ecologicos-y-ambientales-de-tabasco-(eseat)",
+            "uid": "da7c9640-183a-465f-a9e6-95e451a05c65",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ESE050114254",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "da7c9640-183a-465f-a9e6-95e451a05c65"
+              }
+            }
+          },
+          "b1e0cc6a-ef02-4787-88d3-cbb2276ef66c": {
+            "name": "REPRESENTACIONES Y DISTRIBUCIONES EVYA",
+            "slug": "representaciones-y-distribuciones-evya",
+            "uid": "b1e0cc6a-ef02-4787-88d3-cbb2276ef66c",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ROE- 911219-498",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "b1e0cc6a-ef02-4787-88d3-cbb2276ef66c"
+              }
+            }
+          },
+          "a50c37a9-b6aa-4cf2-b752-bf4149aea1e1": {
+            "name": "CCTI SA DE CV (Corporativo de Consultores en Tecnología de la Información)",
+            "slug": "ccti-sa-de-cv-(corporativo-de-consultores-en-tecnologia-de-la-informacion)",
+            "uid": "a50c37a9-b6aa-4cf2-b752-bf4149aea1e1",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "CCT040528412",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "a50c37a9-b6aa-4cf2-b752-bf4149aea1e1"
+              }
+            }
+          },
+          "a6100453-56a9-4363-849e-8d7fec0ee3fc": {
+            "name": "GRUPO INDUSTRIAL AHCOF MÉXICO SA DE CV",
+            "slug": "grupo-industrial-ahcof-mexico-sa-de-cv",
+            "uid": "a6100453-56a9-4363-849e-8d7fec0ee3fc",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "GIA130511CR9",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "a6100453-56a9-4363-849e-8d7fec0ee3fc"
+              }
+            }
+          },
+          "d918aa45-e7da-4ea9-94a2-0d4e7ba4df8f": {
+            "name": "PETRO TÉCNICA MÉXICO SA DE CV",
+            "slug": "petro-tecnica-mexico-sa-de-cv",
+            "uid": "d918aa45-e7da-4ea9-94a2-0d4e7ba4df8f",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "PTM070926H53",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "d918aa45-e7da-4ea9-94a2-0d4e7ba4df8f"
+              }
+            }
+          },
+          "db8d003a-58a9-4540-bea4-5f759f9b8bd4": {
+            "name": "INGENIERÍA Y SERVICIOS DE INSTALACIONES PETROLERAS DE MÉXICO SA DE CV",
+            "slug": "ingenieria-y-servicios-de-instalaciones-petroleras-de-mexico-sa-de-cv",
+            "uid": "db8d003a-58a9-4540-bea4-5f759f9b8bd4",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ISI120420GP9",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "db8d003a-58a9-4540-bea4-5f759f9b8bd4"
+              }
+            }
+          },
+          "ea0487ac-e0b6-46c6-98cb-4294c94fbaa2": {
+            "name": "EMMA PORRAGAS MIRÓN (PERSONA FÍSICA)",
+            "slug": "emma-porragas-miron-(persona-fisica)",
+            "uid": "ea0487ac-e0b6-46c6-98cb-4294c94fbaa2",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "POME660822IH0",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "ea0487ac-e0b6-46c6-98cb-4294c94fbaa2"
+              }
+            }
+          },
+          "2fb69e18-c651-473d-98f4-b576e400aef8": {
+            "name": "APOYO TÉCNICO OPERATIVO ANIQPAC",
+            "slug": "apoyo-tecnico-operativo-aniqpac",
+            "uid": "2fb69e18-c651-473d-98f4-b576e400aef8",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "AT0060530-D4A",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "2fb69e18-c651-473d-98f4-b576e400aef8"
+              }
+            }
+          },
+          "1043ae78-7e30-496d-a792-532b6ae23d77": {
+            "name": "BUREAU VERITAS MEXICANA",
+            "slug": "bureau-veritas-mexicana",
+            "uid": "1043ae78-7e30-496d-a792-532b6ae23d77",
+            "fields": {}
+          },
+          "cffeb9db-3df8-494e-acd2-3176ce19e2e1": {
+            "name": "CONSTRUCTORA Y COMERCIALIZADORA SAN PATRICIO",
+            "slug": "constructora-y-comercializadora-san-patricio",
+            "uid": "cffeb9db-3df8-494e-acd2-3176ce19e2e1",
+            "fields": {}
+          },
+          "82e21175-707b-490f-830f-036ec5061dbf": {
+            "name": "GRUPO DE ESPECIALISTAS EN ASESORÍA DE PROYECTOS ESTRATÉGICOS SA DE CV",
+            "slug": "grupo-de-especialistas-en-asesoria-de-proyectos-estrategicos-sa-de-cv",
+            "uid": "82e21175-707b-490f-830f-036ec5061dbf",
+            "fields": {}
+          },
+          "0576ce2a-7587-471f-b38b-5504acb7eb4d": {
+            "name": "MC TECNOLOGIES AND ENERGY SOLUTIONS",
+            "slug": "mc-tecnologies-and-energy-solutions",
+            "uid": "0576ce2a-7587-471f-b38b-5504acb7eb4d",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "TES-110914-SE4",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "0576ce2a-7587-471f-b38b-5504acb7eb4d"
+              }
+            }
+          },
+          "5524aa1d-04a6-4c4a-863f-c04c83ced979": {
+            "name": "Servicios y Asesorías Integrales en la Industria Petrolera Alexa SA DE CV",
+            "slug": "servicios-y-asesorias-integrales-en-la-industria-petrolera-alexa-sa-de-cv",
+            "uid": "5524aa1d-04a6-4c4a-863f-c04c83ced979",
+            "fields": {}
+          },
+          "20a23dd2-6e73-4368-ae2d-9204f63e12ad": {
+            "name": "Capacitación, Adiestramiento y Asesoría Profesional en México SA DE CV",
+            "slug": "capacitacion-adiestramiento-y-asesoria-profesional-en-mexico-sa-de-cv",
+            "uid": "20a23dd2-6e73-4368-ae2d-9204f63e12ad",
+            "fields": {}
+          },
+          "3192fc10-3776-42ae-87d3-953d1b847eb4": {
+            "name": "Servicio, Soporte y Soluciones Integrales del Sureste SA DE CV",
+            "slug": "servicio-soporte-y-soluciones-integrales-del-sureste-sa-de-cv",
+            "uid": "3192fc10-3776-42ae-87d3-953d1b847eb4",
+            "fields": {}
+          },
+          "353ce4a7-9c09-414b-86eb-ae45fce7285c": {
+            "name": "Asesorías Universales en Adiestramiento y Servicios Profesionales SA DE CV",
+            "slug": "asesorias-universales-en-adiestramiento-y-servicios-profesionales-sa-de-cv",
+            "uid": "353ce4a7-9c09-414b-86eb-ae45fce7285c",
+            "fields": {}
+          },
+          "0a0a5547-8729-4305-a0df-e35df9d77da5": {
+            "name": "Servicios en Tecnologías de Información SA DE CV",
+            "slug": "servicios-en-tecnologias-de-informacion-sa-de-cv",
+            "uid": "0a0a5547-8729-4305-a0df-e35df9d77da5",
+            "fields": {}
+          },
+          "41afda56-ea07-49cb-875a-10ceb55e9293": {
+            "name": "Mcquilling de México",
+            "slug": "mcquilling-de-mexico",
+            "uid": "41afda56-ea07-49cb-875a-10ceb55e9293",
+            "fields": {}
+          },
+          "87a6fda9-454f-493d-951c-781510d923b8": {
+            "name": "HOLMAL CONSTRUCCIONES SA DE CV",
+            "slug": "holmal-construcciones-sa-de-cv",
+            "uid": "87a6fda9-454f-493d-951c-781510d923b8",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "HCO 071112 SA9",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "87a6fda9-454f-493d-951c-781510d923b8"
+              }
+            }
+          },
+          "17deefcd-c555-4bd8-8be8-fbd5b2dcb10c": {
+            "name": "Novai SA de CV",
+            "slug": "novai-sa-de-cv",
+            "uid": "17deefcd-c555-4bd8-8be8-fbd5b2dcb10c",
+            "fields": {}
+          },
+          "a09ec2e1-cf32-46ef-8d09-7de7391d5bf4": {
+            "name": "Servicios Swift Star",
+            "slug": "servicios-swift-star",
+            "uid": "a09ec2e1-cf32-46ef-8d09-7de7391d5bf4",
+            "fields": {}
+          },
+          "d047bfcf-9a98-4042-9c63-35a3e6da36aa": {
+            "name": "Servicios Especializados Lets",
+            "slug": "servicios-especializados-lets",
+            "uid": "d047bfcf-9a98-4042-9c63-35a3e6da36aa",
+            "fields": {}
+          },
+          "7b7b4c24-ef82-4b16-95ae-232086000d05": {
+            "name": "Corporación Kirshee SA de CV",
+            "slug": "corporacion-kirshee-sa-de-cv",
+            "uid": "7b7b4c24-ef82-4b16-95ae-232086000d05",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "CKl1203164K6",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "7b7b4c24-ef82-4b16-95ae-232086000d05"
+              }
+            }
+          },
+          "99c2eeb5-a013-4c29-aacf-7d8b4393e76d": {
+            "name": "Desarrollos Empresariales Mosler SA de CV",
+            "slug": "desarrollos-empresariales-mosler-sa-de-cv",
+            "uid": "99c2eeb5-a013-4c29-aacf-7d8b4393e76d",
+            "fields": {}
+          },
+          "2726de88-6c34-4826-91b3-275c04a456f5": {
+            "name": "TELESAT TELECOMUNICACIONES Y SEGURIDAD SA DE CV",
+            "slug": "telesat-telecomunicaciones-y-seguridad-sa-de-cv",
+            "uid": "2726de88-6c34-4826-91b3-275c04a456f5",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "TSA-120612-QXA",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "2726de88-6c34-4826-91b3-275c04a456f5"
+              }
+            }
+          },
+          "764d5c77-ffeb-4627-b283-a1e40006b725": {
+            "name": "Kofasur Logística Servicios y Distribuciones",
+            "slug": "kofasur-logistica-servicios-y-distribuciones",
+            "uid": "764d5c77-ffeb-4627-b283-a1e40006b725",
+            "fields": {}
+          },
+          "30885f3c-eb5f-42c5-bb8f-9ba4016e0915": {
+            "name": "Saratof y Asociados Peninsulares, S.C.P.",
+            "slug": "saratof-y-asociados-peninsulares-s.c.p.",
+            "uid": "30885f3c-eb5f-42c5-bb8f-9ba4016e0915",
+            "fields": {}
+          },
+          "bfbb70ad-4df7-4740-8a17-a586e9845dc3": {
+            "name": "Administradora Loma S. de R.L. de CV",
+            "slug": "administradora-loma-s.-de-r.l.-de-cv",
+            "uid": "bfbb70ad-4df7-4740-8a17-a586e9845dc3",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ALO0711079TA",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "bfbb70ad-4df7-4740-8a17-a586e9845dc3"
+              }
+            }
+          },
+          "d81149f1-18eb-4c35-ac2c-44e6bf03069c": {
+            "name": "ISAI Business Group SA de CV",
+            "slug": "isai-business-group-sa-de-cv",
+            "uid": "d81149f1-18eb-4c35-ac2c-44e6bf03069c",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "IBG120302IL8",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "d81149f1-18eb-4c35-ac2c-44e6bf03069c"
+              }
+            }
+          },
+          "c9faae6f-b034-4643-8b5c-6e12331f8d82": {
+            "name": "JMSV Consultores SA de CV",
+            "slug": "jmsv-consultores-sa-de-cv",
+            "uid": "c9faae6f-b034-4643-8b5c-6e12331f8d82",
+            "fields": {}
+          },
+          "674b8e89-362b-4b88-8826-9750513de137": {
+            "name": "Surtra Comercializadora SA de CV",
+            "slug": "surtra-comercializadora-sa-de-cv",
+            "uid": "674b8e89-362b-4b88-8826-9750513de137",
+            "fields": {}
+          },
+          "0861f4aa-72ee-4a18-82dc-209af72e87ac": {
+            "name": "BSR Construction Projects SA de CV",
+            "slug": "bsr-construction-projects-sa-de-cv",
+            "uid": "0861f4aa-72ee-4a18-82dc-209af72e87ac",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "BCP120928PB6",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "0861f4aa-72ee-4a18-82dc-209af72e87ac"
+              }
+            }
+          },
+          "f62e6193-b949-4e84-ac99-6e5041d4d9b4": {
+            "name": "PRO SOURCE SA DE CV",
+            "slug": "pro-source-sa-de-cv",
+            "uid": "f62e6193-b949-4e84-ac99-6e5041d4d9b4",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "\nPSO0906094G1\n",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "f62e6193-b949-4e84-ac99-6e5041d4d9b4"
+              }
+            }
+          },
+          "1e598f88-d974-469c-8baa-b52851e38abf": {
+            "name": "COMERCIALIZADORA COSUR SA DE CV",
+            "slug": "comercializadora-cosur-sa-de-cv",
+            "uid": "1e598f88-d974-469c-8baa-b52851e38abf",
+            "fields": {}
+          },
+          "d3d44224-5df9-4e62-ac4b-e89e239fb5b5": {
+            "name": "CANTARELL SERVICES SA DE CV",
+            "slug": "cantarell-services-sa-de-cv",
+            "uid": "d3d44224-5df9-4e62-ac4b-e89e239fb5b5",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "CSE050605H60",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "d3d44224-5df9-4e62-ac4b-e89e239fb5b5"
+              }
+            }
+          },
+          "c300a37a-e691-4d29-81b0-c5e07b7b8745": {
+            "name": "ASESORÍA Y CONSEJERÍA CAYROS SA DE CV",
+            "slug": "asesoria-y-consejeria-cayros-sa-de-cv",
+            "uid": "c300a37a-e691-4d29-81b0-c5e07b7b8745",
+            "fields": {}
+          },
+          "7bbe6ff8-ceb2-4a56-8204-5486e03259bc": {
+            "name": "NOMARNA CONSTRUCCIONES E INGENIERÍA SA DE CV",
+            "slug": "nomarna-construcciones-e-ingenieria-sa-de-cv",
+            "uid": "7bbe6ff8-ceb2-4a56-8204-5486e03259bc",
+            "fields": {}
+          },
+          "6e0d6a93-9847-4c6e-a91c-3416f6b76e20": {
+            "name": "INSTITUTO MEXICANO DE COMPETENCIAS EN ADMINISTRACIÓN DE PROYECTOS (IMECAP)",
+            "slug": "instituto-mexicano-de-competencias-en-administracion-de-proyectos-(imecap)",
+            "uid": "6e0d6a93-9847-4c6e-a91c-3416f6b76e20",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "IMC120123BMA",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "6e0d6a93-9847-4c6e-a91c-3416f6b76e20"
+              }
+            }
+          },
+          "fd004d0f-beed-48ae-806e-b07b9837eff1": {
+            "name": "CONSULTORÍA Y ESTUDIOS DEL SURESTE SA DE CV",
+            "slug": "consultoria-y-estudios-del-sureste-sa-de-cv",
+            "uid": "fd004d0f-beed-48ae-806e-b07b9837eff1",
+            "fields": {}
+          },
+          "7e2f8aa8-9e0d-4b96-aadc-8c4082f3be3e": {
+            "name": "CORPORATIVO DE OBRAS Y SERVICIOS MÚLTIPLES DE LA REGIÓN SA DE CV (COMURSA)",
+            "slug": "corporativo-de-obras-y-servicios-multiples-de-la-region-sa-de-cv-(comursa)",
+            "uid": "7e2f8aa8-9e0d-4b96-aadc-8c4082f3be3e",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "COS050613C79",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "7e2f8aa8-9e0d-4b96-aadc-8c4082f3be3e"
+              }
+            }
+          },
+          "dc2ebc12-7565-4683-9e3a-5b7dcf66313f": {
+            "name": "SURFACE TECHNOLOGY SA DE CV",
+            "slug": "surface-technology-sa-de-cv",
+            "uid": "dc2ebc12-7565-4683-9e3a-5b7dcf66313f",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "STE1108036DA",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "dc2ebc12-7565-4683-9e3a-5b7dcf66313f"
+              }
+            }
+          },
+          "3952f7b9-95ff-4bb1-9b1d-ee5bc72f216d": {
+            "name": "MAHECA SA DE CV",
+            "slug": "maheca-sa-de-cv",
+            "uid": "3952f7b9-95ff-4bb1-9b1d-ee5bc72f216d",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "MAH101124II3",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "3952f7b9-95ff-4bb1-9b1d-ee5bc72f216d"
+              }
+            }
+          },
+          "aa08a2f3-e4f4-4c33-9713-c59d62a2660b": {
+            "name": "LOGISTIC PENINSULAR SA DE CV",
+            "slug": "logistic-peninsular-sa-de-cv",
+            "uid": "aa08a2f3-e4f4-4c33-9713-c59d62a2660b",
+            "fields": {}
+          },
+          "17cf4ebe-f311-47ac-8b3e-ca6a9a7c6d3c": {
+            "name": "APA INVESTMENTS SA DE CV",
+            "slug": "apa-investments-sa-de-cv",
+            "uid": "17cf4ebe-f311-47ac-8b3e-ca6a9a7c6d3c",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "AIN110315HM4",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "17cf4ebe-f311-47ac-8b3e-ca6a9a7c6d3c"
+              }
+            }
+          },
+          "898b13cb-55c4-446f-98e6-0c3bcbe96612": {
+            "name": "CONSTRUCCIÓN, SUMINISTROS Y ARRENDADORA LOMAX SA DE CV",
+            "slug": "construccion-suministros-y-arrendadora-lomax-sa-de-cv",
+            "uid": "898b13cb-55c4-446f-98e6-0c3bcbe96612",
+            "fields": {}
+          },
+          "fca8a487-3161-4bd3-a1b3-730548dd7921": {
+            "name": "PACIFIC ASISTENCE SA DE CV",
+            "slug": "pacific-asistence-sa-de-cv",
+            "uid": "fca8a487-3161-4bd3-a1b3-730548dd7921",
+            "fields": {}
+          },
+          "c7281d47-df4e-4cfb-b6f4-5070fc57aad9": {
+            "name": "PEN COMERCE SA DE CV",
+            "slug": "pen-comerce-sa-de-cv",
+            "uid": "c7281d47-df4e-4cfb-b6f4-5070fc57aad9",
+            "fields": {}
+          },
+          "d9775339-89f0-4d5e-97ea-a9ad1a00dac4": {
+            "name": "GLOBAL BAKER OIL SA DE CV",
+            "slug": "global-baker-oil-sa-de-cv",
+            "uid": "d9775339-89f0-4d5e-97ea-a9ad1a00dac4",
+            "fields": {}
+          },
+          "aff6886f-44a5-4e8b-8e5a-17f115541d02": {
+            "name": "ISA CORPORATIVO INDUSTRIAL EMPRESARIAL SA DE CV",
+            "slug": "isa-corporativo-industrial-empresarial-sa-de-cv",
+            "uid": "aff6886f-44a5-4e8b-8e5a-17f115541d02",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ICI111128QH3",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "aff6886f-44a5-4e8b-8e5a-17f115541d02"
+              }
+            }
+          },
+          "f7facd1f-f305-464b-abfe-cfe117fbad19": {
+            "name": "ECOSERVICIOS CONSTRUCCIONES Y SUMINISTROS INDUSTRIALES Y COOMERCIALES SA DE CV (ECOSERVS)",
+            "slug": "ecoservicios-construcciones-y-suministros-industriales-y-coomerciales-sa-de-cv-(ecoservs)",
+            "uid": "f7facd1f-f305-464b-abfe-cfe117fbad19",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ECS-090821-1V4",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "f7facd1f-f305-464b-abfe-cfe117fbad19"
+              }
+            }
+          },
+          "46b50d1f-0cbb-47ea-b565-82ed2ede055b": {
+            "name": "DRILLING AND COMPLETION SERVICES DE MEXICO, SA DE CV",
+            "slug": "drilling-and-completion-services-de-mexico-sa-de-cv",
+            "uid": "46b50d1f-0cbb-47ea-b565-82ed2ede055b",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "DCS120425615",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "46b50d1f-0cbb-47ea-b565-82ed2ede055b"
+              }
+            }
+          },
+          "cbd91a98-3ed4-4755-8906-8cfa8b86837e": {
+            "name": "Soluciones Analíticas y Prácticas de Procesos, S.A.",
+            "slug": "soluciones-analiticas-y-practicas-de-procesos-s.a.",
+            "uid": "cbd91a98-3ed4-4755-8906-8cfa8b86837e",
+            "fields": {}
+          },
+          "31377071-8511-437d-a7a5-667378f15297": {
+            "name": "Coatzasur, S.A. de C.V.",
+            "slug": "coatzasur-s.a.-de-c.v.",
+            "uid": "31377071-8511-437d-a7a5-667378f15297",
+            "fields": {}
+          },
+          "e8c414dd-a04a-42fd-bd08-2391ef76cfd2": {
+            "name": "Ruvari, S.A. de C.V.",
+            "slug": "ruvari-s.a.-de-c.v.",
+            "uid": "e8c414dd-a04a-42fd-bd08-2391ef76cfd2",
+            "fields": {}
+          },
+          "8ad568a6-bd25-42fa-95b4-d15bde327234": {
+            "name": "Vazru, S.A. de C.V.",
+            "slug": "vazru-s.a.-de-c.v.",
+            "uid": "8ad568a6-bd25-42fa-95b4-d15bde327234",
+            "fields": {}
+          },
+          "3e8544b4-9b28-43f2-a298-faa41691c190": {
+            "name": "INTEGRATED RESERVOIRD MANAGEMENT SERVICES DE MEXICO, SA DE CV",
+            "slug": "integrated-reservoird-management-services-de-mexico-sa-de-cv",
+            "uid": "3e8544b4-9b28-43f2-a298-faa41691c190",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "IRM120322F0",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "3e8544b4-9b28-43f2-a298-faa41691c190"
+              }
+            }
+          },
+          "5482c370-19ff-42c2-b7a0-306b920185cf": {
+            "name": "ENERGY OIL AND GAS SERVICES, SA DE CV",
+            "slug": "energy-oil-and-gas-services-sa-de-cv",
+            "uid": "5482c370-19ff-42c2-b7a0-306b920185cf",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "E0G100302D91",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "5482c370-19ff-42c2-b7a0-306b920185cf"
+              }
+            }
+          },
+          "58f18558-c4a4-411f-b422-6a8c70b061ed": {
+            "name": "E&P SOLUTIONS S. de R.L.",
+            "slug": "eandp-solutions-s.-de-r.l.",
+            "uid": "58f18558-c4a4-411f-b422-6a8c70b061ed",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ESO1004308R7",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "58f18558-c4a4-411f-b422-6a8c70b061ed"
+              }
+            }
+          },
+          "725bc72a-593a-4379-a7ba-ed029ca08c34": {
+            "name": "PETRÓLEO Y DESARROLLO DE TABASCO SA DE CV",
+            "slug": "petroleo-y-desarrollo-de-tabasco-sa-de-cv",
+            "uid": "725bc72a-593a-4379-a7ba-ed029ca08c34",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "PDD121112TZ8",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "725bc72a-593a-4379-a7ba-ed029ca08c34"
+              }
+            }
+          },
+          "6a7bea94-27ba-4007-a1d7-847e7c9756fd": {
+            "name": "LV DEIPS, SA DE CV",
+            "slug": "lv-deips-sa-de-cv",
+            "uid": "6a7bea94-27ba-4007-a1d7-847e7c9756fd",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "LDE110614CQ8",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "6a7bea94-27ba-4007-a1d7-847e7c9756fd"
+              }
+            }
+          },
+          "903646fd-4bf4-4621-bd27-58d6497b9f31": {
+            "name": "Grupo Comercial Bombasa, S. A. de C. V. ",
+            "slug": "grupo-comercial-bombasa-s.-a.-de-c.-v.",
+            "uid": "903646fd-4bf4-4621-bd27-58d6497b9f31",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "GCB110603KY1",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "903646fd-4bf4-4621-bd27-58d6497b9f31"
+              }
+            }
+          },
+          "8adb15a9-1062-4223-b620-497178fb62dc": {
+            "name": "FORTALITIA SA DE CV",
+            "slug": "fortalitia-sa-de-cv",
+            "uid": "8adb15a9-1062-4223-b620-497178fb62dc",
+            "fields": {}
+          },
+          "637b4186-d535-4bf0-8788-811e6f0aab62": {
+            "name": "Corporativo AMEVO, S. A. de C. V.",
+            "slug": "corporativo-amevo-s.-a.-de-c.-v.",
+            "uid": "637b4186-d535-4bf0-8788-811e6f0aab62",
+            "fields": {}
+          },
+          "c0969c66-5725-4174-aff9-dc705a83888f": {
+            "name": "CEO Marne México, S. A. de C. V.",
+            "slug": "ceo-marne-mexico-s.-a.-de-c.-v.",
+            "uid": "c0969c66-5725-4174-aff9-dc705a83888f",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "CMM130724FU3",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "c0969c66-5725-4174-aff9-dc705a83888f"
+              }
+            }
+          },
+          "ac760b22-0267-4f66-b7fa-b6667b7b6d46": {
+            "name": "Soluciones Globales REGGAN, S. A. de C. V.",
+            "slug": "soluciones-globales-reggan-s.-a.-de-c.-v.",
+            "uid": "ac760b22-0267-4f66-b7fa-b6667b7b6d46",
+            "fields": {}
+          },
+          "94522435-63e0-4f75-b630-819aebbdd76c": {
+            "name": "Comercializadora GEAR, S. A. de C. V.",
+            "slug": "comercializadora-gear-s.-a.-de-c.-v.",
+            "uid": "94522435-63e0-4f75-b630-819aebbdd76c",
+            "fields": {}
+          },
+          "c72d1212-aeb6-4dcf-8800-bd6415f07136": {
+            "name": "Intellego Servicios de Consultoría\n S.A. de C.V",
+            "slug": "intellego-servicios-de-consultoria-s.a.-de-c.v",
+            "uid": "c72d1212-aeb6-4dcf-8800-bd6415f07136",
+            "fields": {}
+          },
+          "796efdaa-8ea5-48ab-9ca9-08e1c738533d": {
+            "name": "Servicios para atención a Consultores Aporta ",
+            "slug": "servicios-para-atencion-a-consultores-aporta",
+            "uid": "796efdaa-8ea5-48ab-9ca9-08e1c738533d",
+            "fields": {}
+          },
+          "1d9c9111-aa70-468c-b862-a36e9a7e76cb": {
+            "name": "Asesores en informática SOFAC, S. C.",
+            "slug": "asesores-en-informatica-sofac-s.-c.",
+            "uid": "1d9c9111-aa70-468c-b862-a36e9a7e76cb",
+            "fields": {}
+          },
+          "168f932e-9908-4f0a-ade4-8e1eca5a1e57": {
+            "name": "T-LINE MEXICO SA DE CV",
+            "slug": "t-line-mexico-sa-de-cv",
+            "uid": "168f932e-9908-4f0a-ade4-8e1eca5a1e57",
+            "fields": {}
+          },
+          "24daf343-11e4-4e4f-bd3e-b5abe9b3a167": {
+            "name": "Comercialización de Software Extensión Limitada",
+            "slug": "comercializacion-de-software-extension-limitada",
+            "uid": "24daf343-11e4-4e4f-bd3e-b5abe9b3a167",
+            "fields": {}
+          },
+          "aa23a11c-a892-4d55-b708-8f7f5e1b96ac": {
+            "name": "QUITZE, S. A. de C. V.",
+            "slug": "quitze-s.-a.-de-c.-v.",
+            "uid": "aa23a11c-a892-4d55-b708-8f7f5e1b96ac",
+            "fields": {}
+          },
+          "84818b3f-e9e1-4b03-be1f-7ea5eec5ef99": {
+            "name": "SGC Capital Humano Consultores S. De R. L.",
+            "slug": "sgc-capital-humano-consultores-s.-de-r.-l.",
+            "uid": "84818b3f-e9e1-4b03-be1f-7ea5eec5ef99",
+            "fields": {}
+          },
+          "e9a70a51-5f89-4c57-b836-e77a66fa3cef": {
+            "name": "ND Negocios Digitales, S. A. de C. V.",
+            "slug": "nd-negocios-digitales-s.-a.-de-c.-v.",
+            "uid": "e9a70a51-5f89-4c57-b836-e77a66fa3cef",
+            "fields": {}
+          },
+          "55f6d150-3aae-4277-8919-82d1cac52120": {
+            "name": "IPMAQ Consultores, S. A. de C. V. ",
+            "slug": "ipmaq-consultores-s.-a.-de-c.-v.",
+            "uid": "55f6d150-3aae-4277-8919-82d1cac52120",
+            "fields": {}
+          },
+          "31b2f306-7329-4f11-a563-efdfce096a8a": {
+            "name": "Zetting Technologies S. A. de C. V.",
+            "slug": "zetting-technologies-s.-a.-de-c.-v.",
+            "uid": "31b2f306-7329-4f11-a563-efdfce096a8a",
+            "fields": {}
+          },
+          "56417f59-8f26-4ae8-84bf-87ee1da4a347": {
+            "name": "Sysvan, S. A. de C. V.",
+            "slug": "sysvan-s.-a.-de-c.-v.",
+            "uid": "56417f59-8f26-4ae8-84bf-87ee1da4a347",
+            "fields": {}
+          },
+          "be1c20c8-86b5-4234-80ee-6d4ca6dc6540": {
+            "name": "Corporativo Nevusi S.A. de C.V. ",
+            "slug": "corporativo-nevusi-s.a.-de-c.v.",
+            "uid": "be1c20c8-86b5-4234-80ee-6d4ca6dc6540",
+            "fields": {}
+          },
+          "86ab6fa3-2170-457f-8811-4019ef8c9d73": {
+            "name": "Pragmatic Soluciones Contables, S. A. de C. V.",
+            "slug": "pragmatic-soluciones-contables-s.-a.-de-c.-v.",
+            "uid": "86ab6fa3-2170-457f-8811-4019ef8c9d73",
+            "fields": {}
+          },
+          "7a0c2de5-b51c-4740-bfe8-1b4851a107e3": {
+            "name": "Evolution Software S. A. de C. V.",
+            "slug": "evolution-software-s.-a.-de-c.-v.",
+            "uid": "7a0c2de5-b51c-4740-bfe8-1b4851a107e3",
+            "fields": {}
+          },
+          "6c681596-a770-463c-adfa-50736b364e0e": {
+            "name": "Soluciones y Servicios Tecnológicos Integrados de México, S. A. de C. V.",
+            "slug": "soluciones-y-servicios-tecnologicos-integrados-de-mexico-s.-a.-de-c.-v.",
+            "uid": "6c681596-a770-463c-adfa-50736b364e0e",
+            "fields": {}
+          },
+          "3da79c3a-2a26-4ede-9444-d4fb9c8b21aa": {
+            "name": "Grupo INNOM S. A. de C. V.",
+            "slug": "grupo-innom-s.-a.-de-c.-v.",
+            "uid": "3da79c3a-2a26-4ede-9444-d4fb9c8b21aa",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "\n",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "3da79c3a-2a26-4ede-9444-d4fb9c8b21aa"
+              }
+            }
+          },
+          "4799c857-b4b3-491b-b1be-a57e3f91df3b": {
+            "name": "Grupo Tecnológico JXA S. A. de C. V.",
+            "slug": "grupo-tecnologico-jxa-s.-a.-de-c.-v.",
+            "uid": "4799c857-b4b3-491b-b1be-a57e3f91df3b",
+            "fields": {}
+          },
+          "27610a88-43f7-4603-843b-15a2d39268af": {
+            "name": "Promex Consutores S. A. de C. V.",
+            "slug": "promex-consutores-s.-a.-de-c.-v.",
+            "uid": "27610a88-43f7-4603-843b-15a2d39268af",
+            "fields": {}
+          },
+          "5c35953f-1b19-4f76-8e1c-ec4a9f45d309": {
+            "name": "Digital Docu Systems S. A. de C. V.",
+            "slug": "digital-docu-systems-s.-a.-de-c.-v.",
+            "uid": "5c35953f-1b19-4f76-8e1c-ec4a9f45d309",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "DDS-000404-S10",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "5c35953f-1b19-4f76-8e1c-ec4a9f45d309"
+              }
+            }
+          },
+          "58b36548-606e-4218-b8d4-dcf37d6fde32": {
+            "name": "Harbinter Soluciones S. A. de C. V.",
+            "slug": "harbinter-soluciones-s.-a.-de-c.-v.",
+            "uid": "58b36548-606e-4218-b8d4-dcf37d6fde32",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "HSO-030127-C73",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "58b36548-606e-4218-b8d4-dcf37d6fde32"
+              }
+            }
+          },
+          "83184697-e5db-4236-9add-04c34a4a5396": {
+            "name": "CNTI S.A. de C.V. ",
+            "slug": "cnti-s.a.-de-c.v.",
+            "uid": "83184697-e5db-4236-9add-04c34a4a5396",
+            "fields": {}
+          },
+          "9d8c6feb-7c66-4559-909b-174804b06d6e": {
+            "name": "Laro Digitalización y Servicios S.A. de C.V. ",
+            "slug": "laro-digitalizacion-y-servicios-s.a.-de-c.v.",
+            "uid": "9d8c6feb-7c66-4559-909b-174804b06d6e",
+            "fields": {}
+          },
+          "23d1eca3-a864-4b61-a469-c6fd9d32aec9": {
+            "name": "Soluciones en Sistemas Corflo S.A. de C.V. ",
+            "slug": "soluciones-en-sistemas-corflo-s.a.-de-c.v.",
+            "uid": "23d1eca3-a864-4b61-a469-c6fd9d32aec9",
+            "fields": {}
+          },
+          "4d56c3db-d950-4636-b6ca-c7bd1fd3917a": {
+            "name": "Comunicaciones y Desarrollo Computacional S.A. de C.V. ",
+            "slug": "comunicaciones-y-desarrollo-computacional-s.a.-de-c.v.",
+            "uid": "4d56c3db-d950-4636-b6ca-c7bd1fd3917a",
+            "fields": {}
+          },
+          "73ab1cd9-f0e9-432f-8b63-281f4d90c00a": {
+            "name": "Servicios Administrativos\n Zulma, S.A. de C.V",
+            "slug": "servicios-administrativos-zulma-s.a.-de-c.v",
+            "uid": "73ab1cd9-f0e9-432f-8b63-281f4d90c00a",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "SAZ120702GD4",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "73ab1cd9-f0e9-432f-8b63-281f4d90c00a"
+              }
+            }
+          },
+          "d9741d5a-6e0c-4313-a57c-dbc3ac15b11b": {
+            "name": "Servicios Profesionales Antal, S.A. de C.V.",
+            "slug": "servicios-profesionales-antal-s.a.-de-c.v.",
+            "uid": "d9741d5a-6e0c-4313-a57c-dbc3ac15b11b",
+            "fields": {}
+          },
+          "172c8c04-806f-4bcd-92aa-713edd18bcdd": {
+            "name": "IT Guardian Auditing &Consulting Services S. A. de C. V.",
+            "slug": "it-guardian-auditing-andconsulting-services-s.-a.-de-c.-v.",
+            "uid": "172c8c04-806f-4bcd-92aa-713edd18bcdd",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "IGA0501289T7",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "172c8c04-806f-4bcd-92aa-713edd18bcdd"
+              }
+            }
+          },
+          "a6ab5ca1-ff4b-4700-ba22-8a892ca6fc7a": {
+            "name": "Inteligencia y Tecnología Informática, S. A. de C. V.",
+            "slug": "inteligencia-y-tecnologia-informatica-s.-a.-de-c.-v.",
+            "uid": "a6ab5ca1-ff4b-4700-ba22-8a892ca6fc7a",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ITI980901TE1",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "a6ab5ca1-ff4b-4700-ba22-8a892ca6fc7a"
+              }
+            }
+          },
+          "145dc87d-2b31-4844-9290-59d2d374b10f": {
+            "name": "Plant Design de México, S.A. de C.V.",
+            "slug": "plant-design-de-mexico-s.a.-de-c.v.",
+            "uid": "145dc87d-2b31-4844-9290-59d2d374b10f",
+            "fields": {}
+          },
+          "90bcec53-c815-42d3-896f-d908e5e3967d": {
+            "name": "Sociedad de Ingeniería Petrolera de México, S.A. de C.V.",
+            "slug": "sociedad-de-ingenieria-petrolera-de-mexico-s.a.-de-c.v.",
+            "uid": "90bcec53-c815-42d3-896f-d908e5e3967d",
+            "fields": {}
+          },
+          "97d2c53e-968b-45f6-9ecf-8f6d0764ca99": {
+            "name": "Energy Integral Solutions, S.A. de C.V.",
+            "slug": "energy-integral-solutions-s.a.-de-c.v.",
+            "uid": "97d2c53e-968b-45f6-9ecf-8f6d0764ca99",
+            "fields": {}
+          },
+          "f8f38b91-5149-4a78-8410-cbd08a694b1a": {
+            "name": "Drilling Optimization Corporation, S.A. de C.V.",
+            "slug": "drilling-optimization-corporation-s.a.-de-c.v.",
+            "uid": "f8f38b91-5149-4a78-8410-cbd08a694b1a",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "DOC-091111-IZ2",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "f8f38b91-5149-4a78-8410-cbd08a694b1a"
+              }
+            }
+          },
+          "10647a13-4403-4461-b1ed-d7ba17aeeea3": {
+            "name": "Grupo Industrial PGS, S.A. de C.V.",
+            "slug": "grupo-industrial-pgs-s.a.-de-c.v.",
+            "uid": "10647a13-4403-4461-b1ed-d7ba17aeeea3",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "GIP120106665",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "10647a13-4403-4461-b1ed-d7ba17aeeea3"
+              }
+            }
+          },
+          "3c29c2b8-0d2d-4831-8115-b635dbc976e6": {
+            "name": "ACC Ingeniería Ambiental Aplicada, S.A. de C.V.",
+            "slug": "acc-ingenieria-ambiental-aplicada-s.a.-de-c.v.",
+            "uid": "3c29c2b8-0d2d-4831-8115-b635dbc976e6",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "AIA120507CA7",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "3c29c2b8-0d2d-4831-8115-b635dbc976e6"
+              }
+            }
+          },
+          "be4b4bf5-df00-4341-95c7-fdcc17aed860": {
+            "name": "Comercializadora Semideg, S. A. de C. V.",
+            "slug": "comercializadora-semideg-s.-a.-de-c.-v.",
+            "uid": "be4b4bf5-df00-4341-95c7-fdcc17aed860",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "CSE050217Q71",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "be4b4bf5-df00-4341-95c7-fdcc17aed860"
+              }
+            }
+          },
+          "d2e0ebc3-2a55-4a49-b7ed-771e16e63de9": {
+            "name": "Servicios especializados Blipe, S. A. de C. V.",
+            "slug": "servicios-especializados-blipe-s.-a.-de-c.-v.",
+            "uid": "d2e0ebc3-2a55-4a49-b7ed-771e16e63de9",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "SEB110907K88",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "d2e0ebc3-2a55-4a49-b7ed-771e16e63de9"
+              }
+            }
+          },
+          "27de8625-d77b-4eef-b005-6911a73c940a": {
+            "name": "Construcción y Desarrollo de Proyectos Goes, S. A. de C. V.",
+            "slug": "construccion-y-desarrollo-de-proyectos-goes-s.-a.-de-c.-v.",
+            "uid": "27de8625-d77b-4eef-b005-6911a73c940a",
+            "fields": {}
+          },
+          "7bad8e49-3429-446f-82b8-44342c687c8c": {
+            "name": "CRA Consultoría del Mayab, S. De R. L. De C. V.",
+            "slug": "cra-consultoria-del-mayab-s.-de-r.-l.-de-c.-v.",
+            "uid": "7bad8e49-3429-446f-82b8-44342c687c8c",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "CCM130521LD1",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "7bad8e49-3429-446f-82b8-44342c687c8c"
+              }
+            }
+          },
+          "6653e794-eaf0-4f31-98db-34f02ecbfcaa": {
+            "name": "Corprodicsa de México, S. De R. L. De C. V.",
+            "slug": "corprodicsa-de-mexico-s.-de-r.-l.-de-c.-v.",
+            "uid": "6653e794-eaf0-4f31-98db-34f02ecbfcaa",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "CME130225Q11",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "6653e794-eaf0-4f31-98db-34f02ecbfcaa"
+              }
+            }
+          },
+          "efa4950d-705a-46ef-99a4-5c7c3d1ae080": {
+            "name": "Constructora Cobos de Yucatán, S. A. de C. V.",
+            "slug": "constructora-cobos-de-yucatan-s.-a.-de-c.-v.",
+            "uid": "efa4950d-705a-46ef-99a4-5c7c3d1ae080",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "CCY120418MX4",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "efa4950d-705a-46ef-99a4-5c7c3d1ae080"
+              }
+            }
+          },
+          "e28a2cef-6fec-49f9-b3a7-e474ee2604a2": {
+            "name": "Desarrollo de Estrategias del Sureste, SCP.",
+            "slug": "desarrollo-de-estrategias-del-sureste-scp.",
+            "uid": "e28a2cef-6fec-49f9-b3a7-e474ee2604a2",
+            "fields": {}
+          },
+          "c557972e-c808-4b1c-ac8a-46a9c322b2e6": {
+            "name": "EP&S de México, S. A. de C. V.",
+            "slug": "epands-de-mexico-s.-a.-de-c.-v.",
+            "uid": "c557972e-c808-4b1c-ac8a-46a9c322b2e6",
+            "fields": {}
+          },
+          "7e7e3fa7-082c-4e79-be6d-c0926d2c52e7": {
+            "name": "Tecnologías Óptimas del Sur, S. A. de C. V.",
+            "slug": "tecnologias-optimas-del-sur-s.-a.-de-c.-v.",
+            "uid": "7e7e3fa7-082c-4e79-be6d-c0926d2c52e7",
+            "fields": {}
+          },
+          "5c6d6d55-f4c9-45fa-81b4-5c36d054edab": {
+            "name": "STI Petróleo, S. A. de C. V.",
+            "slug": "sti-petroleo-s.-a.-de-c.-v.",
+            "uid": "5c6d6d55-f4c9-45fa-81b4-5c36d054edab",
+            "fields": {}
+          },
+          "85dcc405-daf6-4632-8446-76de71a2a5f3": {
+            "name": "Servicios Integrales de Optimización Energética de México",
+            "slug": "servicios-integrales-de-optimizacion-energetica-de-mexico",
+            "uid": "85dcc405-daf6-4632-8446-76de71a2a5f3",
+            "fields": {}
+          },
+          "71b4f145-4456-489a-a91f-2fcc79442697": {
+            "name": "Teesa de México, S. A. de C. V.",
+            "slug": "teesa-de-mexico-s.-a.-de-c.-v.",
+            "uid": "71b4f145-4456-489a-a91f-2fcc79442697",
+            "fields": {}
+          },
+          "d236628e-20c6-46f1-89df-dbef650c1751": {
+            "name": "Energy Smart Solutions, S. A. de C. V.",
+            "slug": "energy-smart-solutions-s.-a.-de-c.-v.",
+            "uid": "d236628e-20c6-46f1-89df-dbef650c1751",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ESS101111CS3",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "d236628e-20c6-46f1-89df-dbef650c1751"
+              }
+            }
+          },
+          "86e16a8e-9870-49da-b698-b051391d69e0": {
+            "name": "Soluciones y Servicios Eficientes, S. A. de C. V.",
+            "slug": "soluciones-y-servicios-eficientes-s.-a.-de-c.-v.",
+            "uid": "86e16a8e-9870-49da-b698-b051391d69e0",
+            "fields": {}
+          },
+          "1e5a869b-5016-44bc-b3e2-d28f35c5b386": {
+            "name": "Servicios Corporativos Vabuga, S. A. de C. V.",
+            "slug": "servicios-corporativos-vabuga-s.-a.-de-c.-v.",
+            "uid": "1e5a869b-5016-44bc-b3e2-d28f35c5b386",
+            "fields": {}
+          },
+          "e5677f59-b509-4fdf-94a7-27f5ef641c57": {
+            "name": "Gewehr Desarrollo Industrial, S. A. de C. V.",
+            "slug": "gewehr-desarrollo-industrial-s.-a.-de-c.-v.",
+            "uid": "e5677f59-b509-4fdf-94a7-27f5ef641c57",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "GDI111108DV5",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "e5677f59-b509-4fdf-94a7-27f5ef641c57"
+              }
+            }
+          },
+          "f2f1687a-cde5-4110-b4de-934c5edeb72d": {
+            "name": "Grupo Borhnner Inmuebles, S. A. de C. V.",
+            "slug": "grupo-borhnner-inmuebles-s.-a.-de-c.-v.",
+            "uid": "f2f1687a-cde5-4110-b4de-934c5edeb72d",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "GBI111108TU0",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "f2f1687a-cde5-4110-b4de-934c5edeb72d"
+              }
+            }
+          },
+          "183f8468-2a91-4723-b3d2-998bd6aa2a03": {
+            "name": "Grupo Pramasotil, S. A. de C. V.",
+            "slug": "grupo-pramasotil-s.-a.-de-c.-v.",
+            "uid": "183f8468-2a91-4723-b3d2-998bd6aa2a03",
+            "fields": {}
+          },
+          "c07044a5-7f47-49c6-8970-cbedcf53b178": {
+            "name": "Calliston Ingeniería Especializada, S. A. de C. V.",
+            "slug": "calliston-ingenieria-especializada-s.-a.-de-c.-v.",
+            "uid": "c07044a5-7f47-49c6-8970-cbedcf53b178",
+            "fields": {}
+          },
+          "4a24a3b0-1037-4e2f-8cdd-4f14ae20f040": {
+            "name": "Sistindacema TMX, S. A. de C. V.",
+            "slug": "sistindacema-tmx-s.-a.-de-c.-v.",
+            "uid": "4a24a3b0-1037-4e2f-8cdd-4f14ae20f040",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "STM060915419",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "4a24a3b0-1037-4e2f-8cdd-4f14ae20f040"
+              }
+            }
+          },
+          "2a623b54-b422-448c-af57-368d567ea409": {
+            "name": "Grupo Industrial Maya, S. A. de C. V.",
+            "slug": "grupo-industrial-maya-s.-a.-de-c.-v.",
+            "uid": "2a623b54-b422-448c-af57-368d567ea409",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "GIM040903L96",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "2a623b54-b422-448c-af57-368d567ea409"
+              }
+            }
+          },
+          "fbbb3ad4-e8cc-4d56-9697-403eaac67c64": {
+            "name": "Aledis Consulting, S. C.",
+            "slug": "aledis-consulting-s.-c.",
+            "uid": "fbbb3ad4-e8cc-4d56-9697-403eaac67c64",
+            "fields": {}
+          },
+          "82797d1d-cf8b-4924-9927-637c9c4f70f0": {
+            "name": "JSP Proyección Tecnológica de México, S. A. de C. V.",
+            "slug": "jsp-proyeccion-tecnologica-de-mexico-s.-a.-de-c.-v.",
+            "uid": "82797d1d-cf8b-4924-9927-637c9c4f70f0",
+            "fields": {}
+          },
+          "e768a6fb-f43e-4df8-b55d-e186e3b638fe": {
+            "name": "Adasy Company, S A.",
+            "slug": "adasy-company-s-a.",
+            "uid": "e768a6fb-f43e-4df8-b55d-e186e3b638fe",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ADA1111252L5",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "e768a6fb-f43e-4df8-b55d-e186e3b638fe"
+              }
+            }
+          },
+          "cdf99175-063f-4a19-8792-78834f208271": {
+            "name": "GRL Consultores, S. A.",
+            "slug": "grl-consultores-s.-a.",
+            "uid": "cdf99175-063f-4a19-8792-78834f208271",
+            "fields": {}
+          },
+          "3ff45514-923c-41a6-89cc-f674a0a3932c": {
+            "name": "Impulsora de Tecnologías Petroleras, S. A. de C. V",
+            "slug": "impulsora-de-tecnologias-petroleras-s.-a.-de-c.-v",
+            "uid": "3ff45514-923c-41a6-89cc-f674a0a3932c",
+            "fields": {}
+          },
+          "32544b6c-bb9d-474a-b200-a5287b4bd2df": {
+            "name": "Grupo Empresarial Morales y de la Torre, S. C.",
+            "slug": "grupo-empresarial-morales-y-de-la-torre-s.-c.",
+            "uid": "32544b6c-bb9d-474a-b200-a5287b4bd2df",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "GEM120512PN4",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "32544b6c-bb9d-474a-b200-a5287b4bd2df"
+              }
+            }
+          },
+          "d96ede5b-e2b3-4c28-b5d9-dd3a01fd3a5f": {
+            "name": "S&C Constructores de Sistemas, S. A. de C. V.",
+            "slug": "sandc-constructores-de-sistemas-s.-a.-de-c.-v.",
+            "uid": "d96ede5b-e2b3-4c28-b5d9-dd3a01fd3a5f",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "SCS0512192FA",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "d96ede5b-e2b3-4c28-b5d9-dd3a01fd3a5f"
+              }
+            }
+          },
+          "3d9a5fb6-963d-4826-a1ca-fd50bfff2d0b": {
+            "name": "Asesorías Nacionales Expanders, S. A. de C. V.",
+            "slug": "asesorias-nacionales-expanders-s.-a.-de-c.-v.",
+            "uid": "3d9a5fb6-963d-4826-a1ca-fd50bfff2d0b",
+            "fields": {}
+          },
+          "4cf4cccb-815b-40cf-b091-77600b5f3a50": {
+            "name": "Nubaj y Nubaj Consulting, S. A. de C. V.",
+            "slug": "nubaj-y-nubaj-consulting-s.-a.-de-c.-v.",
+            "uid": "4cf4cccb-815b-40cf-b091-77600b5f3a50",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "NNC121031D79",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "4cf4cccb-815b-40cf-b091-77600b5f3a50"
+              }
+            }
+          },
+          "fe6e9be4-22f7-422c-a482-cef99c387c12": {
+            "name": "Interamericana de Negocios y Comercio, S. A. de C. V",
+            "slug": "interamericana-de-negocios-y-comercio-s.-a.-de-c.-v",
+            "uid": "fe6e9be4-22f7-422c-a482-cef99c387c12",
+            "fields": {}
+          },
+          "6fe3a3ca-cd71-4bbc-b0e1-686a28832afe": {
+            "name": "Administración y Desarrollo Empresarial Mega, S. A. de C. V.",
+            "slug": "administracion-y-desarrollo-empresarial-mega-s.-a.-de-c.-v.",
+            "uid": "6fe3a3ca-cd71-4bbc-b0e1-686a28832afe",
+            "fields": {}
+          },
+          "c7cfb8ed-2319-4d33-a774-0c59aef20510": {
+            "name": "Evyena Servicios, S. A. de C. V.",
+            "slug": "evyena-servicios-s.-a.-de-c.-v.",
+            "uid": "c7cfb8ed-2319-4d33-a774-0c59aef20510",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ESE101216EE8",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "c7cfb8ed-2319-4d33-a774-0c59aef20510"
+              }
+            }
+          },
+          "bcb178b3-2861-4077-bc96-bf2cd585dd75": {
+            "name": "IT Call Center S. A. de C. V.",
+            "slug": "it-call-center-s.-a.-de-c.-v.",
+            "uid": "bcb178b3-2861-4077-bc96-bf2cd585dd75",
+            "fields": {}
+          },
+          "0a74f5c2-4a6a-437b-bea9-6f2cad1dfab5": {
+            "name": "Consolidación de Servicios y sistemas Administrativos, S. A. de C. V.",
+            "slug": "consolidacion-de-servicios-y-sistemas-administrativos-s.-a.-de-c.-v.",
+            "uid": "0a74f5c2-4a6a-437b-bea9-6f2cad1dfab5",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "CSS120427EW1",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "0a74f5c2-4a6a-437b-bea9-6f2cad1dfab5"
+              }
+            }
+          },
+          "935d23b1-c5a7-4a50-813c-e3a8c56726ee": {
+            "name": "Icalma Servicios y Consultoría, S. A. de C. V.",
+            "slug": "icalma-servicios-y-consultoria-s.-a.-de-c.-v.",
+            "uid": "935d23b1-c5a7-4a50-813c-e3a8c56726ee",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ISC111007BF3",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "935d23b1-c5a7-4a50-813c-e3a8c56726ee"
+              }
+            }
+          },
+          "01baf8b7-9dfc-4bd7-8253-c5ee59cc9eac": {
+            "name": "Estrategia Solutions, S. A. de C. V.",
+            "slug": "estrategia-solutions-s.-a.-de-c.-v.",
+            "uid": "01baf8b7-9dfc-4bd7-8253-c5ee59cc9eac",
+            "fields": {}
+          },
+          "ac59687e-f41c-4b93-a3ac-d9c3feae73a2": {
+            "name": "Symmetrix Architecture, S.A. de C.V",
+            "slug": "symmetrix-architecture-s.a.-de-c.v",
+            "uid": "ac59687e-f41c-4b93-a3ac-d9c3feae73a2",
+            "fields": {}
+          },
+          "0794fa16-80a4-4449-bc57-d34101db2eda": {
+            "name": "Grupo Kensel S. A. de C. V.",
+            "slug": "grupo-kensel-s.-a.-de-c.-v.",
+            "uid": "0794fa16-80a4-4449-bc57-d34101db2eda",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "GKE121116C59",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "0794fa16-80a4-4449-bc57-d34101db2eda"
+              }
+            }
+          },
+          "4c50564c-1aba-4ab2-a937-4e864f65ded6": {
+            "name": "Bierika Consultores S. A. de C. V.",
+            "slug": "bierika-consultores-s.-a.-de-c.-v.",
+            "uid": "4c50564c-1aba-4ab2-a937-4e864f65ded6",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "BCO130828H91",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "4c50564c-1aba-4ab2-a937-4e864f65ded6"
+              }
+            }
+          },
+          "67e1602a-7885-4f31-aaa3-61c69e76bf00": {
+            "name": "Actri Tecnología y Servicios S. A. de C. V.",
+            "slug": "actri-tecnologia-y-servicios-s.-a.-de-c.-v.",
+            "uid": "67e1602a-7885-4f31-aaa3-61c69e76bf00",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ATS120608UZ6",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "67e1602a-7885-4f31-aaa3-61c69e76bf00"
+              }
+            }
+          },
+          "f6be308e-756f-4bfc-b1c6-585052600d57": {
+            "name": "Grupo Comercializador Cónclave S.A. de C.V. ",
+            "slug": "grupo-comercializador-conclave-s.a.-de-c.v.",
+            "uid": "f6be308e-756f-4bfc-b1c6-585052600d57",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "GCC090122MT8",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "f6be308e-756f-4bfc-b1c6-585052600d57"
+              }
+            }
+          },
+          "baebfa0c-4d82-49d8-9415-86818df9a3cd": {
+            "name": "Advanced Computer Knowledge, S. A. de C. V.",
+            "slug": "advanced-computer-knowledge-s.-a.-de-c.-v.",
+            "uid": "baebfa0c-4d82-49d8-9415-86818df9a3cd",
+            "fields": {}
+          },
+          "1a6991b3-f98e-45f9-8e60-43390229f682": {
+            "name": "ESGER, Servicios y Construcciones, S. A. de C. V.",
+            "slug": "esger-servicios-y-construcciones-s.-a.-de-c.-v.",
+            "uid": "1a6991b3-f98e-45f9-8e60-43390229f682",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "ESC110316AN4",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "1a6991b3-f98e-45f9-8e60-43390229f682"
+              }
+            }
+          },
+          "48bd7682-5c6b-41f6-a6bc-20a399c0e0e2": {
+            "name": "FRALO Soluciones Tecnológicas, S. A. de C. V. ",
+            "slug": "fralo-soluciones-tecnologicas-s.-a.-de-c.-v.",
+            "uid": "48bd7682-5c6b-41f6-a6bc-20a399c0e0e2",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "FST090204L25",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "48bd7682-5c6b-41f6-a6bc-20a399c0e0e2"
+              }
+            }
+          },
+          "b9c3fcf0-6301-4631-a309-32f9a6880a13": {
+            "name": "Dumago Systems Solutions, S. A. de C. V.",
+            "slug": "dumago-systems-solutions-s.-a.-de-c.-v.",
+            "uid": "b9c3fcf0-6301-4631-a309-32f9a6880a13",
+            "fields": {}
+          },
+          "aa0b182e-d30c-4b1f-a415-da57e6711c51": {
+            "name": "Prodasa, S. A. de C. V.",
+            "slug": "prodasa-s.-a.-de-c.-v.",
+            "uid": "aa0b182e-d30c-4b1f-a415-da57e6711c51",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "PRO940523OJ4",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "aa0b182e-d30c-4b1f-a415-da57e6711c51"
+              }
+            }
+          },
+          "a314240b-32a6-4ccb-9fa5-2156301a859c": {
+            "name": "Meve Soluciones S. A. de C. V.",
+            "slug": "meve-soluciones-s.-a.-de-c.-v.",
+            "uid": "a314240b-32a6-4ccb-9fa5-2156301a859c",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "MSO9807016KA",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "a314240b-32a6-4ccb-9fa5-2156301a859c"
+              }
+            }
+          },
+          "c26641c6-3f6e-45c8-a94f-13baa8959129": {
+            "name": "Comercializadora Integral de Productos Villaregia, S. A. de C. V.",
+            "slug": "comercializadora-integral-de-productos-villaregia-s.-a.-de-c.-v.",
+            "uid": "c26641c6-3f6e-45c8-a94f-13baa8959129",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "CIP111007RQ3",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "c26641c6-3f6e-45c8-a94f-13baa8959129"
+              }
+            }
+          },
+          "a42c1053-4f9d-42ee-8b1e-58bfe8df988b": {
+            "name": "Integradora de Capital Humano S. A. de C. V.",
+            "slug": "integradora-de-capital-humano-s.-a.-de-c.-v.",
+            "uid": "a42c1053-4f9d-42ee-8b1e-58bfe8df988b",
+            "fields": {}
+          },
+          "02eec0a4-7585-4cb4-8957-6d9aefaecf33": {
+            "name": "Factibilidad Empresarial de México, S. A. de C. V.",
+            "slug": "factibilidad-empresarial-de-mexico-s.-a.-de-c.-v.",
+            "uid": "02eec0a4-7585-4cb4-8957-6d9aefaecf33",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "FEM1204135T1",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "02eec0a4-7585-4cb4-8957-6d9aefaecf33"
+              }
+            }
+          },
+          "cc546f41-0fbc-44f7-a6ff-0fa4d930c835": {
+            "name": "Grupo Industrial y Servicios Yafed, S. A. de C. V.",
+            "slug": "grupo-industrial-y-servicios-yafed-s.-a.-de-c.-v.",
+            "uid": "cc546f41-0fbc-44f7-a6ff-0fa4d930c835",
+            "fields": {}
+          },
+          "b46faf03-ade5-4772-9948-61fcd9aea3cc": {
+            "name": "Desarrolladora Damalko, S. A. de C. V.",
+            "slug": "desarrolladora-damalko-s.-a.-de-c.-v.",
+            "uid": "b46faf03-ade5-4772-9948-61fcd9aea3cc",
+            "fields": {}
+          },
+          "a699ada8-c7c3-4479-8677-49dee9970bec": {
+            "name": "A. U. C. F. Servicios S. A. de C. V.",
+            "slug": "a.-u.-c.-f.-servicios-s.-a.-de-c.-v.",
+            "uid": "a699ada8-c7c3-4479-8677-49dee9970bec",
+            "fields": {}
+          },
+          "57ea29ec-203f-49da-a70b-bfaaded48c88": {
+            "name": "Seeroil de México, S. A. de C. V.",
+            "slug": "seeroil-de-mexico-s.-a.-de-c.-v.",
+            "uid": "57ea29ec-203f-49da-a70b-bfaaded48c88",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "SME070413S10",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "57ea29ec-203f-49da-a70b-bfaaded48c88"
+              }
+            }
+          },
+          "aeba3a2a-7a07-41c2-bd48-98085c4e9d20": {
+            "name": "Mejoramiento Integral del Negocio y la Administración S. C. P.",
+            "slug": "mejoramiento-integral-del-negocio-y-la-administracion-s.-c.-p.",
+            "uid": "aeba3a2a-7a07-41c2-bd48-98085c4e9d20",
+            "fields": {}
+          },
+          "7c55d81e-37f7-4977-b6c3-e9b55e11cdd8": {
+            "name": "Proveedora Colt S. A. de C. V.",
+            "slug": "proveedora-colt-s.-a.-de-c.-v.",
+            "uid": "7c55d81e-37f7-4977-b6c3-e9b55e11cdd8",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "PCO09022326A",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "7c55d81e-37f7-4977-b6c3-e9b55e11cdd8"
+              }
+            }
+          },
+          "ca1a6a8d-c05c-4b3d-bba8-164ea8d92501": {
+            "name": "Servicios Especializados Integrales de Tabasco S. A. de C. V.",
+            "slug": "servicios-especializados-integrales-de-tabasco-s.-a.-de-c.-v.",
+            "uid": "ca1a6a8d-c05c-4b3d-bba8-164ea8d92501",
+            "fields": {}
+          },
+          "b8b6fee9-cb1a-466b-9874-69392e971bc8": {
+            "name": "Recursos y Talentos en Administración, S. A. de C. V.",
+            "slug": "recursos-y-talentos-en-administracion-s.-a.-de-c.-v.",
+            "uid": "b8b6fee9-cb1a-466b-9874-69392e971bc8",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "RTE111001IT1",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "b8b6fee9-cb1a-466b-9874-69392e971bc8"
+              }
+            }
+          },
+          "279f8f5a-b2f6-415d-af02-6fde4df82cc2": {
+            "name": "Mexicana de Señales S. A. de C. V.",
+            "slug": "mexicana-de-senales-s.-a.-de-c.-v.",
+            "uid": "279f8f5a-b2f6-415d-af02-6fde4df82cc2",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "MSE991208QT2",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "279f8f5a-b2f6-415d-af02-6fde4df82cc2"
+              }
+            }
+          },
+          "f6b4afe2-a2f2-4b69-96f0-679709489f66": {
+            "name": "Servicios Corporativos Colorado S. C.",
+            "slug": "servicios-corporativos-colorado-s.-c.",
+            "uid": "f6b4afe2-a2f2-4b69-96f0-679709489f66",
+            "fields": {}
+          },
+          "36708068-ef23-47bd-a72b-f2d89dd78de2": {
+            "name": "Asesorías Contables y Jurídicas del Golfo de México S. C.",
+            "slug": "asesorias-contables-y-juridicas-del-golfo-de-mexico-s.-c.",
+            "uid": "36708068-ef23-47bd-a72b-f2d89dd78de2",
+            "fields": {}
+          },
+          "e1c9ba76-d5e9-4d76-9e17-9f280ca7a798": {
+            "name": "Corporación Colorado S. A de C. V.",
+            "slug": "corporacion-colorado-s.-a-de-c.-v.",
+            "uid": "e1c9ba76-d5e9-4d76-9e17-9f280ca7a798",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "CCO891117LR4",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "e1c9ba76-d5e9-4d76-9e17-9f280ca7a798"
+              }
+            }
+          },
+          "2d5737cd-2077-4971-b582-af6e2bad4fc3": {
+            "name": "Impactel S. A. de C. V.",
+            "slug": "impactel-s.-a.-de-c.-v.",
+            "uid": "2d5737cd-2077-4971-b582-af6e2bad4fc3",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "IMP960626T91",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "2d5737cd-2077-4971-b582-af6e2bad4fc3"
+              }
+            }
+          },
+          "85753135-b0ae-44eb-9ed4-caa944beeb9c": {
+            "name": "Consultoría en Recursos Administrativos y Humanos S. A. de C. V.",
+            "slug": "consultoria-en-recursos-administrativos-y-humanos-s.-a.-de-c.-v.",
+            "uid": "85753135-b0ae-44eb-9ed4-caa944beeb9c",
+            "fields": {}
+          },
+          "2fb98a69-5d1c-4fe6-80c1-f4b719d4fdf2": {
+            "name": "Cuántico Impulsores, S. A. de C. V.",
+            "slug": "cuantico-impulsores-s.-a.-de-c.-v.",
+            "uid": "2fb98a69-5d1c-4fe6-80c1-f4b719d4fdf2",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "CIM111004HB1",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "2fb98a69-5d1c-4fe6-80c1-f4b719d4fdf2"
+              }
+            }
+          },
+          "c6cd9247-0efe-42af-bc61-736cd1c92c34": {
+            "name": "Linux México S. A. de C.. V.",
+            "slug": "linux-mexico-s.-a.-de-c..-v.",
+            "uid": "c6cd9247-0efe-42af-bc61-736cd1c92c34",
+            "fields": {}
+          },
+          "3733f141-9402-485e-852b-16b181b76fb3": {
+            "name": "Distribuidora de Suministros y Servicios del Soconusco S. A. de C. V.",
+            "slug": "distribuidora-de-suministros-y-servicios-del-soconusco-s.-a.-de-c.-v.",
+            "uid": "3733f141-9402-485e-852b-16b181b76fb3",
+            "fields": {}
+          },
+          "81265373-eee5-44a4-836f-335ed391bdbd": {
+            "name": "Tecmasat Digitalización, S. A. de C. V.",
+            "slug": "tecmasat-digitalizacion-s.-a.-de-c.-v.",
+            "uid": "81265373-eee5-44a4-836f-335ed391bdbd",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "TDI120709PH7",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "81265373-eee5-44a4-836f-335ed391bdbd"
+              }
+            }
+          },
+          "60d7f63e-bd9d-4cab-ab0f-10943c5e0e16": {
+            "name": "Simmpapel, S. A. de C. V.",
+            "slug": "simmpapel-s.-a.-de-c.-v.",
+            "uid": "60d7f63e-bd9d-4cab-ab0f-10943c5e0e16",
+            "fields": {}
+          },
+          "15c9e1a9-8c5e-4d3e-90eb-d0a2e0e953de": {
+            "name": "Limón Publicistas, S. A. de C. V.",
+            "slug": "limon-publicistas-s.-a.-de-c.-v.",
+            "uid": "15c9e1a9-8c5e-4d3e-90eb-d0a2e0e953de",
+            "fields": {}
+          },
+          "cd5719ee-6ef8-46a3-bb94-45f30c9368f7": {
+            "name": "Grupo Dicosem Distribuidores, S. A. de C. V.",
+            "slug": "grupo-dicosem-distribuidores-s.-a.-de-c.-v.",
+            "uid": "cd5719ee-6ef8-46a3-bb94-45f30c9368f7",
+            "fields": {}
+          },
+          "7c2a961b-a3f0-4454-80ee-be3bf213fc4a": {
+            "name": "Soluciones Integrales en Servicios Industriales, S. A. de C. V.",
+            "slug": "soluciones-integrales-en-servicios-industriales-s.-a.-de-c.-v.",
+            "uid": "7c2a961b-a3f0-4454-80ee-be3bf213fc4a",
+            "fields": {}
+          },
+          "7017acb3-85c5-4398-9c01-fc514bfbd906": {
+            "name": "Eblue, S. A. de C. V.",
+            "slug": "eblue-s.-a.-de-c.-v.",
+            "uid": "7017acb3-85c5-4398-9c01-fc514bfbd906",
+            "fields": {}
+          },
+          "fc04bc95-336c-4a6b-9bdb-cf11fb032a2b": {
+            "name": "Enexpert S. A. de C. V.",
+            "slug": "enexpert-s.-a.-de-c.-v.",
+            "uid": "fc04bc95-336c-4a6b-9bdb-cf11fb032a2b",
+            "fields": {}
+          },
+          "02a9957a-2039-4311-8625-4eb94d52564a": {
+            "name": "Comunicaciones Dedicadas S. A. de C. V.",
+            "slug": "comunicaciones-dedicadas-s.-a.-de-c.-v.",
+            "uid": "02a9957a-2039-4311-8625-4eb94d52564a",
+            "fields": {}
+          },
+          "a5caf0cf-d3a2-4dc0-9141-aee6e5c2fdd9": {
+            "name": "C230 Consultores S. C.",
+            "slug": "c230-consultores-s.-c.",
+            "uid": "a5caf0cf-d3a2-4dc0-9141-aee6e5c2fdd9",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "CCO090203AV2",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "a5caf0cf-d3a2-4dc0-9141-aee6e5c2fdd9"
+              }
+            }
+          },
+          "d33b9330-0562-4b58-9415-418c0d8d4830": {
+            "name": "Precisión GPS S. A. de C. V.",
+            "slug": "precision-gps-s.-a.-de-c.-v.",
+            "uid": "d33b9330-0562-4b58-9415-418c0d8d4830",
+            "fields": {}
+          },
+          "98370140-324a-4411-9525-b557a7a6088f": {
+            "name": "Servicios Profesionales Gisnet S. C.",
+            "slug": "servicios-profesionales-gisnet-s.-c.",
+            "uid": "98370140-324a-4411-9525-b557a7a6088f",
+            "fields": {}
+          },
+          "84bfe99f-6e9e-497e-a84d-39ad313a1feb": {
+            "name": "Estructura Empresarial JPC ",
+            "slug": "estructura-empresarial-jpc",
+            "uid": "84bfe99f-6e9e-497e-a84d-39ad313a1feb",
+            "fields": {}
+          },
+          "bd556bf8-e081-4503-8c52-119b069bfac4": {
+            "name": "Grupo Empresarial MXEM ",
+            "slug": "grupo-empresarial-mxem",
+            "uid": "bd556bf8-e081-4503-8c52-119b069bfac4",
+            "fields": {}
+          },
+          "2458b340-824e-44df-bcd7-6a42d307b7fa": {
+            "name": "Expertise Servicios Profesionales S.A. de C.V. ",
+            "slug": "expertise-servicios-profesionales-s.a.-de-c.v.",
+            "uid": "2458b340-824e-44df-bcd7-6a42d307b7fa",
+            "fields": {}
+          },
+          "1e67c824-0e92-47d6-b83b-ece9547e21fb": {
+            "name": "Arroba Administración y Servicios S. A. de C. V",
+            "slug": "arroba-administracion-y-servicios-s.-a.-de-c.-v",
+            "uid": "1e67c824-0e92-47d6-b83b-ece9547e21fb",
+            "fields": {}
+          },
+          "68eebcf0-3dfe-449d-95ae-7fd20a5f9a46": {
+            "name": "Enterprise Management Service S. A. de C. V.",
+            "slug": "enterprise-management-service-s.-a.-de-c.-v.",
+            "uid": "68eebcf0-3dfe-449d-95ae-7fd20a5f9a46",
+            "fields": {
+              "rfc": {
+                "name": "RFC",
+                "slug": "rfc",
+                "value": "EMS050427V82",
+                "matchWith": [
+                  "rfc"
+                ],
+                "type": "rfc",
+                "empresauid": "68eebcf0-3dfe-449d-95ae-7fd20a5f9a46"
+              }
+            }
+          },
+          "c93a0905-6bcd-4f88-b143-963939cda557": {
+            "name": "Novirsa S.A. de C.V. ",
+            "slug": "novirsa-s.a.-de-c.v.",
+            "uid": "c93a0905-6bcd-4f88-b143-963939cda557",
+            "fields": {}
+          },
+          "87cdbb48-435d-4f4d-883e-eb851116ce6b": {
+            "name": "Publicidad y Mercadotecnia Infinitum S.A. de C.V. ",
+            "slug": "publicidad-y-mercadotecnia-infinitum-s.a.-de-c.v.",
+            "uid": "87cdbb48-435d-4f4d-883e-eb851116ce6b",
+            "fields": {}
+          },
+          "680a30d5-5a09-4092-8a45-cb584c400645": {
+            "name": "Prestadores de servicios",
+            "slug": "prestadores-de-servicios",
+            "uid": "680a30d5-5a09-4092-8a45-cb584c400645",
+            "fields": {}
+          }
+      }
+    }
+  },
+  "savedAt": 1568063450820
+}

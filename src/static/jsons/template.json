@@ -1,0 +1,20 @@
+{
+  "uid": "c19218b4-e253-4598-9858-63aac014e765",
+  "info": {
+    "name": "Estafa Maestra",
+    "slug": "estafa-maestra"
+  },
+  "allowAutoSave": true,
+  "projectStructure": "sinapsis_empresas",
+  "classVersion": "0.0.1",
+  "saves": 1,
+  "modified": 1568063428835,
+  "version": 1,
+  "created": 1568047521258,
+  "autosaves": 1,
+  "autoSavedAt": 1568063428835,
+  "dbs": {
+    
+  },
+  "savedAt": 1568063450820
+}
