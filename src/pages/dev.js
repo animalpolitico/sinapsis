@@ -111,7 +111,7 @@ class ConvertOldToDb{
         if(snps_ka[i].matchWith){
           ff.matchWith = snps_ka[i].matchWith;
         }
-        if(value){
+        if(value && value !== "SIN_DATO"){
           f[slug] = ff;
         }
       }
@@ -136,7 +136,8 @@ class ConvertOldToDb{
             value: value,
             group: inf.bigGroup,
             groupUid: cuid,
-            empresauid: uid
+            empresauid: uid,
+            guid: cuid
           };
           if(inf.type){
             ff.type = inf.type;
@@ -162,6 +163,7 @@ class ConvertOldToDb{
             group: inf.bigGroup,
             bigGroup: "persona",
             groupUid: cuid,
+            guid: cuid
           };
           f[slug] = ff;
         }
@@ -186,7 +188,8 @@ class ConvertOldToDb{
             value: value,
             group: inf.bigGroup,
             groupUid: cuid,
-            empresauid: uid
+            empresauid: uid,
+            guid: cuid
           };
           if(inf.type){
             ff.type = inf.type;
@@ -215,6 +218,7 @@ class ConvertOldToDb{
             group: inf.bigGroup,
             bigGroup: "persona",
             groupUid: cuid,
+            guid: cuid
           };
           f[slug] = ff;
         }
@@ -237,7 +241,8 @@ class ConvertOldToDb{
             value: value,
             group: inf.bigGroup,
             groupUid: cuid,
-            empresauid: uid
+            empresauid: uid,
+            guid: cuid
           };
           if(inf.type){
             ff.type = inf.type;
@@ -266,6 +271,7 @@ class ConvertOldToDb{
             group: inf.bigGroup,
             bigGroup: "persona",
             groupUid: cuid,
+            guid: cuid
           };
           f[slug] = ff;
         }
@@ -288,7 +294,8 @@ class ConvertOldToDb{
             value: value,
             group: inf.bigGroup,
             groupUid: cuid,
-            empresauid: uid
+            empresauid: uid,
+            guid: cuid
           };
           if(inf.type){
             ff.type = inf.type;
@@ -317,6 +324,7 @@ class ConvertOldToDb{
             group: inf.bigGroup,
             bigGroup: "persona",
             groupUid: cuid,
+            guid: cuid
           };
           f[slug] = ff;
         }
@@ -616,7 +624,7 @@ class ConvertOldToDb{
         name: this.name,
         slug: this.slug
       },
-      allowAutoSave: false,
+      allowAutoSave: true,
       projectStructure: "sinapsis_empresas_auto",
       classVersion: "0.0.1",
       saves: 1,

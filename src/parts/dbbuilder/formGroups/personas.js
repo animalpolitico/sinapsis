@@ -120,6 +120,9 @@ export default class DbFormGroupPersonas extends React.Component{
   }
 
   editPerson(guid, person){
+    console.log('GUID', guid, person);
+
+
     var e = person[0].group;
     this.setState({
       personType: e

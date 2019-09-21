@@ -86,12 +86,17 @@ export default class DbBuilderPage extends React.Component{
         var kbsize = s * 0.000125;
         if(kbsize < maxkbsize){
           var ky = 'sinapsis_' + dbf.obj.uid;
-          store.set(ky, f);
-          self.autosavingT = setTimeout(function(){
-            self.setState({
-              isautosaving: false
-            })
-          }, 1000)
+          try{
+            store.set(ky, f);
+            self.autosavingT = setTimeout(function(){
+              self.setState({
+                isautosaving: false
+              })
+            }, 1000)
+          }catch{
+            console.warn('Storage size exceeded');
+          }
+
         }
       }
     });

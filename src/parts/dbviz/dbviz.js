@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
-
+import Tooltip from 'tooltip.js';
 export default class DbViz extends React.Component{
 
   render(){
@@ -64,17 +64,17 @@ class Nodes extends React.Component{
 
 
     var simulation = d3.forceSimulation()
+                       .force("charge", d3.forceManyBody(10))
                        .force("link",
                           d3.forceLink()
                             .id(function(d){
                               return d.id;
                             })
                         )
-                       .force('charge', null)
                        .force('collide', d3.forceCollide(700).strength(0.6).iterations(2))
                        .force('center', d3.forceCenter(width / 2, height / 2))
                        .force("y", d3.forceY(0.01))
-                       .force("x", d3.forceX(0.01));
+                       .force("x", d3.forceX(0.01).x(1.1));
 
    this.simulation = simulation;
    this.nodesContainer = canvas.append('g').attr('class', 'nodes_container');
@@ -94,6 +94,8 @@ class Nodes extends React.Component{
 
    simulation.nodes(nodesData.nodes)
              .on('tick', this.drawNodes)
+
+
    simulation.force('link')
              .links(nodesData.links);
 
@@ -119,6 +121,9 @@ class Nodes extends React.Component{
                    .enter()
                    .append('line')
                    .attr('stroke-width', 8)
+                   .attr('class', 'nodes_link')
+                   .attr('data-from', l => l.source.id)
+                   .attr('data-to', l => l.target.id)
                    .attr('stroke', 'rgba(90, 67, 231, 0.79)');
     this.links = links;
 
@@ -128,8 +133,21 @@ class Nodes extends React.Component{
                           .data(labelsData)
                           .enter(labelsData)
                           .append('g')
-                          .attr('class', 'nodes_label')
+                          .attr('class', 'nodes_label node')
+                          .attr('data-id', d => d.id)
                           .call(this.drag())
+                          .on('mouseenter', function(d){
+                            self.isolateNode(d.id);
+                          })
+                          .on('click', function(d){
+                            d.isclicked = true;
+                            self.isolateNode(d.id)
+                          })
+                          .on('mouseleave', function(d){
+                            self.nodesContainer.selectAll('.viz_tooltip').remove();
+                            self.nodesContainer.selectAll('.nodes_link').attr('stroke', 'rgba(90, 67, 231, 0.79)');
+                            self.nodesContainer.selectAll('.node').attr('opacity', 1)
+                          })
 
     nodesLabels.append('rect')
                .attr('fill', '#222')
@@ -151,6 +169,8 @@ class Nodes extends React.Component{
                       .append('circle')
                       .attr('class', 'node')
                       .attr('data-name', (d) => d.name)
+                      .attr('data-id', d => d.id)
+                      .attr('id', (d, i) => 'node_'+i)
                       .attr('r', function(d){
                         var t = d.type;
                         if(t == "empresa"){
@@ -195,12 +215,12 @@ class Nodes extends React.Component{
                         }
                       })
                       .call(this.drag())
-                      .on('mouseenter', function(d){
+                      .on('mouseover', function(d){
                         self.nodesContainer.selectAll('.viz_tooltip').remove();
                         var g = self.nodesContainer
                                 .append('g')
                                 .attr('class', 'viz_tooltip')
-                                .attr("transform", "translate(" + d.x + "," + (d.y - 18) + ")");
+                                .attr("transform", "translate(" + d.x + "," + (d.y - 150) + ")");
                         g.append('rect')
                          .attr('width', 3500)
                          .attr('height', 180)
@@ -213,13 +233,22 @@ class Nodes extends React.Component{
                          .text(d.name)
                          .attr('text-anchor', 'middle')
                          .style('font-size', 120)
+
+                        self.isolateNode(d.id);
+                      })
+                      .on('click', function(d){
+                        d.isclicked = true;
+                        self.isolateNode(d.id)
                       })
                       .on('mouseleave', function(d){
                         self.nodesContainer.selectAll('.viz_tooltip').remove();
+                        self.nodesContainer.selectAll('.nodes_link').attr('stroke', 'rgba(90, 67, 231, 0.79)');
+                        self.nodesContainer.selectAll('.node').attr('opacity', 1)
                       })
 
     this.nodesLabels = nodesLabels;
     this.nodesCircles = nodesCircles;
+
 
     this.setInitialZoom();
 
@@ -228,6 +257,41 @@ class Nodes extends React.Component{
         loading: false
       })
     }, 5000);
+  }
+
+  isolateNode(id){
+    var self = this;
+
+    this.nodesContainer
+       .selectAll('.nodes_link:not([data-from="'+id+'"]):not([data-to="'+id+'"])')
+       .attr('stroke', 'rgba(90, 67, 231, 0.1)');
+
+    var ls = this.nodesData.links.filter(function(l){
+      return l.target.id == id || l.source.id == id;
+    });
+
+    var nds_ids = [];
+
+    ls.map(function(ld){
+      nds_ids.push(ld.source.id)
+      nds_ids.push(ld.target.id)
+    });
+
+    nds_ids.push(id);
+
+
+    this.nodesContainer
+        .selectAll('.node')
+        .attr('opacity', 0.05)
+        // .style('pointer-events', 'none')
+
+    nds_ids.map(function(id){
+      self.nodesContainer
+          .selectAll('.node[data-id="'+id+'"]')
+          .style('pointer-events', 'all')
+          .attr('opacity', 1)
+    })
+
   }
 
   getEmpresaMinMax(){
@@ -279,7 +343,7 @@ class Nodes extends React.Component{
 
     var box = this.nodesContainer.node().getBBox();
 
-    var zoomIdentity = d3.zoomIdentity.scale(0.25).translate(width / 4, -height / -4);
+    var zoomIdentity = d3.zoomIdentity.translate(width / 2, height / 2).scale(0.02)
     this.nodesContainer.attr('transform', zoomIdentity);
     this.canvas.call(this.zoom.transform, zoomIdentity);
 
