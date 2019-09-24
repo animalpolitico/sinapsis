@@ -65,10 +65,23 @@ export default class DbBuilderPage extends React.Component{
       }
     }
     window.scroll(0,0);
+
+    /* Previene cerrar el navegador */
+    window.addEventListener("beforeunload", (ev) =>
+    {
+        ev.preventDefault();
+        return ev.returnValue = '¿Deseas cerrar la pestaña?';
+    });
   }
 
   componentWillUnmount(){
+    // window.removeEventListener('close', this.preventTabClosing);
     clearInterval(this.autosaveint);
+  }
+
+  preventTabClosing(){
+    alert('Hola');
+    return false;
   }
 
   startAutosave(){
@@ -244,13 +257,6 @@ export default class DbBuilderPage extends React.Component{
           :
             <div>
               <DbBuilderToolbar parent={this} ref={(ref) => this.toolbar = ref}/>
-              {
-                this.state.isautosaving ?
-                <div id="ss_autosave_indicator">
-                  <CircularProgress disableShrink color="primary" size={30}/>
-                </div>
-                : null
-              }
               <div className="ss_dbbuilder">
                 <DbBuilderSidebar />
                 <DbViz />
@@ -630,9 +636,8 @@ class DbEmpresa extends React.Component{
     return(
       <div className={cs.join(' ')} data-slug={e.slug}>
         <div className="db_empresa_container" onClick={() => this.handleClick()}>
-          <div className="db_empresa_container_indicator"></div>
           <div className="db_empresa_container_name">
-            {this.props.index + 1 +'. '} {e.name}
+            <small>{this.props.index + 1 +'. '}</small> {e.name}
           </div>
           <div className="db_empresa_container_info">
 

@@ -176,7 +176,7 @@ export default class DbFactory {
     var fnodes = {};
     for(var key in nodes){
       var n = nodes[key];
-      if(n.fields.length > 2 || n.type == 'empresa'){
+      if(n.fields.length > 2 || n.type == "empresa"){
         fnodes[key] = n;
       }
     }

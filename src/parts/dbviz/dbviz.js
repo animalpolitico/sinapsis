@@ -4,21 +4,160 @@ import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from 'tooltip.js';
+import Paper from '@material-ui/core/Paper';
+import formatMoney from 'format-money';
+var slugify = require('slugify');
 export default class DbViz extends React.Component{
+  state = {
+    showSearch: true
+  }
+  constructor(props){
+    super(props);
+    this.nodesRef = React.createRef();
+  }
 
   render(){
     return(
       <div className="db_viz">
-        <Nodes />
+        <Nodes ref={(ref) => this.nodes = ref}/>
+        <Search nodesMap={this.nodes}/>
       </div>
     )
   }
 }
 
+class Search extends React.Component{
+  state = {
+    results: [],
+    v: '',
+    showResults: true
+  }
+
+  searchResults(v){
+    this.setState({
+      v: v,
+      showResults: true
+    })
+    var f = [];
+
+    if(v){
+      var sv = slugify(v, {lower: true});
+
+      d3.selectAll('.node')
+        .each(function(n){
+          var ns = slugify(n.name, {lower: true});
+          var add = false;
+          if(ns.length > sv.length){
+            add = ns.indexOf(sv) > -1;
+          }else{
+            add = sv.indexOf(ns) > -1;
+          }
+          if(add){
+            f.push(n);
+          }
+        })
+    }
+
+    this.setState({
+      results: f
+    })
+
+  }
+
+
+  handleResultSelect(v){
+    this.setState({
+      v: v,
+      showResults: false
+    })
+  }
+
+  render(){
+    return(
+      <div className="db_search_nodes">
+        <div className="db_search_nodes_input">
+          <input
+            onFocus={() => this.searchResults(this.state.v)}
+            value={this.state.v}
+            placeholder="Busca por término"
+            type="text"
+            onChange={(e) => this.searchResults(e.target.value) }
+            />
+        </div>
+        <div className="db_search_nodes_results">
+          {
+            this.state.showResults ?
+            <SearchResults nodeMap={this.props.nodesMap} results={this.state.results} v={this.state.v} onSelect={(v) => this.handleResultSelect(v)}/>
+            : null
+          }
+        </div>
+      </div>
+    )
+  }
+}
+
+class SearchResults extends React.Component{
+
+  isolateNode(id, n){
+    console.log('id', id);
+    if(this.props.nodeMap){
+      this.props.nodeMap.isolateNode(id);
+      this.props.nodeMap.setInitialZoom();
+      this.props.onSelect(n);
+    }
+  }
+
+  render(){
+    var self = this;
+
+    var r = this.props.results;
+
+    var s = "";
+
+    if(r.length){
+      s = r.length + ' resultado' + (r.length > 1 ? 's' : '') ;
+    }else{
+      s = "Sin resultados";
+    }
+
+
+    return(
+      <div className="db_search_nodes_results_c">
+        {
+          r.length ?
+        <div className="db_search_nodes_results_c_r">
+          {r.map(function(result){
+            return(
+              <div className="ss_search_result" onClick={(e) => self.isolateNode(result.id, result.name)}>
+                <div className="ss_search_result_container">
+                  <div className="ss_search_result_name">
+                    {result.name}
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+        : null}
+
+        {
+          this.props.v.length ?
+          <div className="db_search_nodes_results_c_count">
+            {s}
+          </div>
+          : null
+        }
+      </div>
+    )
+  }
+
+}
+
 class Nodes extends React.Component{
   state = {
     loading: false,
-    isPerfectZoom: true
+    isPerfectZoom: true,
+    coincidencias: 0
   }
   componentDidMount(){
     var self = this;
@@ -124,8 +263,12 @@ class Nodes extends React.Component{
                    .attr('class', 'nodes_link')
                    .attr('data-from', l => l.source.id)
                    .attr('data-to', l => l.target.id)
-                   .attr('stroke', 'rgba(90, 67, 231, 0.79)');
+                   .attr('stroke', 'rgba(90, 67, 231, 1)');
     this.links = links;
+
+    this.setState({
+      coincidencias: data.links.length
+    })
 
 
     var nodesLabels = self.nodesContainer
@@ -137,7 +280,7 @@ class Nodes extends React.Component{
                           .attr('data-id', d => d.id)
                           .call(this.drag())
                           .on('mouseenter', function(d){
-                            self.isolateNode(d.id);
+                            // self.isolateNode(d.id);
                           })
                           .on('click', function(d){
                             d.isclicked = true;
@@ -145,8 +288,8 @@ class Nodes extends React.Component{
                           })
                           .on('mouseleave', function(d){
                             self.nodesContainer.selectAll('.viz_tooltip').remove();
-                            self.nodesContainer.selectAll('.nodes_link').attr('stroke', 'rgba(90, 67, 231, 0.79)');
-                            self.nodesContainer.selectAll('.node').attr('opacity', 1)
+                            // self.nodesContainer.selectAll('.nodes_link').attr('stroke', 'rgba(90, 67, 231, 0.79)');
+                            // self.nodesContainer.selectAll('.node').attr('opacity', 1)
                           })
 
     nodesLabels.append('rect')
@@ -171,6 +314,8 @@ class Nodes extends React.Component{
                       .attr('data-name', (d) => d.name)
                       .attr('data-id', d => d.id)
                       .attr('id', (d, i) => 'node_'+i)
+                      .attr('stroke', '#0a0a0a')
+                      .attr('stroke-width', '4px')
                       .attr('r', function(d){
                         var t = d.type;
                         if(t == "empresa"){
@@ -209,32 +354,24 @@ class Nodes extends React.Component{
                           case "instancia":
                             return "rgb(20, 151, 215)";
                           break;
+                          case "contrato":
+                            return "rgb(247, 107, 47)"
+                          break;
+                          case "address":
+                            return "rgb(227, 104, 218)";
+                          break;
                           default:
                             return "#888888";
                           break;
                         }
                       })
                       .call(this.drag())
-                      .on('mouseover', function(d){
-                        self.nodesContainer.selectAll('.viz_tooltip').remove();
-                        var g = self.nodesContainer
-                                .append('g')
-                                .attr('class', 'viz_tooltip')
-                                .attr("transform", "translate(" + d.x + "," + (d.y - 150) + ")");
-                        g.append('rect')
-                         .attr('width', 3500)
-                         .attr('height', 180)
-                         .attr('x', -1750)
-                         .attr('y', -150)
-                         .attr('fill', "white")
-                         .style('pointer-events', 'none')
-
-                        g.append('text')
-                         .text(d.name)
-                         .attr('text-anchor', 'middle')
-                         .style('font-size', 120)
-
-                        self.isolateNode(d.id);
+                      .on('mouseover', function(d, e){
+                        self.setState({
+                          doi: d,
+                          displayTooltip: true
+                        })
+                        // self.isolateNode(d.id);
                       })
                       .on('click', function(d){
                         d.isclicked = true;
@@ -242,15 +379,25 @@ class Nodes extends React.Component{
                       })
                       .on('mouseleave', function(d){
                         self.nodesContainer.selectAll('.viz_tooltip').remove();
-                        self.nodesContainer.selectAll('.nodes_link').attr('stroke', 'rgba(90, 67, 231, 0.79)');
-                        self.nodesContainer.selectAll('.node').attr('opacity', 1)
+                        self.setState({
+                          doi: null,
+                          displayTooltip: false
+                        })
                       })
 
     this.nodesLabels = nodesLabels;
     this.nodesCircles = nodesCircles;
 
-
     this.setInitialZoom();
+
+    d3.selectAll('.node')
+      .on('dblclick', function(d){
+        d3.event.stopPropagation();
+        d3.select(this).remove();
+      })
+
+
+
 
     setTimeout(function(){
       self.setState({
@@ -260,6 +407,8 @@ class Nodes extends React.Component{
   }
 
   isolateNode(id){
+    this.releaseNode();
+
     var self = this;
 
     this.nodesContainer
@@ -283,7 +432,7 @@ class Nodes extends React.Component{
     this.nodesContainer
         .selectAll('.node')
         .attr('opacity', 0.05)
-        // .style('pointer-events', 'none')
+        .style('pointer-events', 'none')
 
     nds_ids.map(function(id){
       self.nodesContainer
@@ -292,6 +441,18 @@ class Nodes extends React.Component{
           .attr('opacity', 1)
     })
 
+    this.setState({
+      isolatingNode: true
+    })
+  }
+
+  releaseNode(){
+    this.nodesContainer.selectAll('.nodes_link').attr('stroke', 'rgba(90, 67, 231, 0.79)');
+    this.nodesContainer.selectAll('.node').attr('opacity', 1);
+    this.nodesContainer.selectAll('.node').style('pointer-events', 'all');
+    this.setState({
+      isolatingNode: false
+    })
   }
 
   getEmpresaMinMax(){
@@ -389,8 +550,61 @@ class Nodes extends React.Component{
           <Fab size="small" color="primary" disabled={this.state.isPerfectZoom} onClick={() => this.setInitialZoom()}>
             <Icon>center_focus_strong</Icon>
           </Fab>
+          <Fab
+            size="small"
+            color="primary"
+            disabled={!this.state.isolatingNode}
+            onClick={() => this.releaseNode()}
+          >
+            <Icon>scatter_plot</Icon>
+          </Fab>
         </div>
-        <svg id="db_viz_nodes_canvas"></svg>
+        <div className="db_viz_info">
+          <div className="db_viz_info_coincidencias">
+            <strong>{this.state.coincidencias}</strong> coincidencia{this.state.coincidencias === 1 ? '' : 's'}
+          </div>
+        </div>
+
+        <svg id="db_viz_nodes_canvas" ref={(ref) => this.canvasSvg = ref}></svg>
+          {
+            this.state.displayTooltip ?
+            <SSTooltip doi={this.state.doi} canvas={this.canvasSvg} />
+            : null
+          }
+      </div>
+    )
+  }
+}
+
+class SSTooltip extends React.Component{
+  render(){
+    try{
+      var coords = d3.mouse(this.props.canvas);
+    }catch{
+      var coords = [0, 0];
+    }
+
+    var d = this.props.doi;
+
+
+    return(
+      <div
+        className="db_viz_tooltip"
+        style={{left: coords[0], top: coords[1]}}
+      >
+        <div className="db_viz_tooltip_name">
+          {d.name}
+        </div>
+
+        {
+          d.type == "empresa" ?
+          <div className="db_viz_tooltip_monto">
+            Monto neto que recibió la empresa: {formatMoney(d.fields[0].sum)}
+          </div>
+          : null
+        }
+
+
       </div>
     )
   }

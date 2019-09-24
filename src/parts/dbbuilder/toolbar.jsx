@@ -89,12 +89,6 @@ export default class DbBuilderToolbar extends React.Component{
           }
           <div className="ss_db_toolbar_info_td ss_db_ctas">
             <Fab size="small" color="primary" onClick={() => window.dbf.createProjectFile()}>
-              <Icon>info</Icon>
-            </Fab>
-            <Fab size="small" color="primary" onClick={() => window.dbf.createProjectFile()}>
-              <Icon>settings_applications</Icon>
-            </Fab>
-            <Fab size="small" color="primary" onClick={() => window.dbf.createProjectFile()}>
               <Icon>get_app</Icon>
             </Fab>
           </div>

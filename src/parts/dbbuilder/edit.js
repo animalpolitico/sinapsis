@@ -96,7 +96,7 @@ export default class DbEditEmpresa extends React.Component{
         <DbEditEmpresaDbInfo {...this.props} />
         <div className="db_empresa_name">
           <div className="db_empresa_name_t">
-            <Icon style={{color: this.props.db.color}}>home_work</Icon>
+            <Icon style={{color: "white"}}>home_work</Icon>
             <div>
               <input
                 type="text"

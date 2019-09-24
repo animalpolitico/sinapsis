@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/es';
 import formatMoney from 'format-money';
-import estafa from '../static/csvs/estafa-maestra.csv';
+import estafa from '../static/csvs/sat-def.csv';
 import EstafaJson from '../static/jsons/estafa-maestra.json';
 import * as d3 from "d3";
 import { saveAs } from 'file-saver';
@@ -19,7 +19,7 @@ const uuidv4 = require('uuid/v4');
 export default class DevSandbox extends React.Component{
 
   componentDidMount(){
-    var cls = new ConvertOldToDb('Estafa Maestra', estafa);
+    var cls = new ConvertOldToDb('SAT Definitivos', estafa);
     // var d = convertToSinapsisFile(EstafaJson);
 
   }
@@ -90,6 +90,7 @@ class ConvertOldToDb{
     var f = e.fields;
 
     fields.map(function(value, i){
+      value = value.trim();
       if(snps_ka[i] && (i < 11 || (i > 31 && 35 > i ))){
         var slug = slugify(snps_ka[i].name, {lower: true});
         if(snps_ka[i].group){
@@ -178,6 +179,7 @@ class ConvertOldToDb{
         var x = 0;
         for(var key in arr){
           var value = arr[key];
+          value = value.trim();
           var inf = snps_ka[key];
           var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
           var slug = slugify(cuid + '-' + preslug, {lower: true});
@@ -203,7 +205,7 @@ class ConvertOldToDb{
           if(inf.sumWith){
             ff.sumWith = inf.sumhWith;
           }
-          if(value && !inf.bypass){
+          if(value && !inf.bypass && value !== "SIN_DATO"){
             f[slug] = ff;
             x++;
           }
@@ -231,6 +233,7 @@ class ConvertOldToDb{
         var x = 0;
         for(var key in arr){
           var value = arr[key];
+          value = value.trim();
           var inf = snps_ka[key];
           var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
           var slug = slugify(cuid + '-' + preslug, {lower: true});
@@ -256,7 +259,7 @@ class ConvertOldToDb{
           if(inf.sumWith){
             ff.sumWith = inf.sumhWith;
           }
-          if(value && !inf.bypass){
+          if(value && !inf.bypass && value !== "SIN_DATO"){
             f[slug] = ff;
             x++;
           }
@@ -284,6 +287,7 @@ class ConvertOldToDb{
         var x = 0;
         for(var key in arr){
           var value = arr[key];
+          value = value.trim();
           var inf = snps_ka[key];
           var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
           var slug = slugify(cuid + '-' + preslug, {lower: true});
@@ -309,7 +313,7 @@ class ConvertOldToDb{
           if(inf.sumWith){
             ff.sumWith = inf.sumhWith;
           }
-          if(value && !inf.bypass){
+          if(value && !inf.bypass && value !== "SIN_DATO"){
             f[slug] = ff;
             x++;
           }
@@ -339,6 +343,7 @@ class ConvertOldToDb{
         var x = 0;
         for(var key in arr){
           var value = arr[key];
+          value = value.trim();
           var inf = snps_ka[key];
           var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
           var slug = slugify(cuid + '-' + preslug, {lower: true});
@@ -369,7 +374,7 @@ class ConvertOldToDb{
             value = parseFloat(value);
             ff.value = value;
           }
-          if(value && !inf.bypass){
+          if(value && !inf.bypass && value !== "SIN_DATO"){
             f[slug] = ff;
             x++;
           }
@@ -384,6 +389,7 @@ class ConvertOldToDb{
         var x = 0;
         for(var key in arr){
           var value = arr[key];
+          value = value.trim();
           var inf = snps_ka[key];
           var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
           var slug = slugify(cuid + '-' + preslug, {lower: true});
@@ -414,7 +420,7 @@ class ConvertOldToDb{
             value = parseFloat(value);
             ff.value = value;
           }
-          if(value && !inf.bypass){
+          if(value && !inf.bypass && value !== "SIN_DATO"){
             f[slug] = ff;
             x++;
           }
@@ -429,6 +435,7 @@ class ConvertOldToDb{
         var x = 0;
         for(var key in arr){
           var value = arr[key];
+          value = value.trim();
           var inf = snps_ka[key];
           var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
           var slug = slugify(cuid + '-' + preslug, {lower: true});
@@ -459,7 +466,7 @@ class ConvertOldToDb{
             value = parseFloat(value);
             ff.value = value;
           }
-          if(value && !inf.bypass){
+          if(value && !inf.bypass && value !== "SIN_DATO"){
             f[slug] = ff;
             x++;
           }
@@ -486,6 +493,7 @@ class ConvertOldToDb{
         var x = 0;
         for(var key in arr){
           var value = arr[key];
+          value = value.trim();
           var inf = snps_ka[key];
           var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
           var slug = slugify(cuid + '-' + preslug, {lower: true});
@@ -516,7 +524,7 @@ class ConvertOldToDb{
             value = parseFloat(value);
             ff.value = value;
           }
-          if(value && !inf.bypass){
+          if(value && !inf.bypass && value !== "SIN_DATO"){
             f[slug] = ff;
             x++;
           }
@@ -543,6 +551,7 @@ class ConvertOldToDb{
         var x = 0;
         for(var key in arr){
           var value = arr[key];
+          value = value.trim();
           var inf = snps_ka[key];
           var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
           var slug = slugify(cuid + '-' + preslug, {lower: true});
@@ -573,7 +582,7 @@ class ConvertOldToDb{
             value = parseFloat(value);
             ff.value = value;
           }
-          if(value && !inf.bypass){
+          if(value && !inf.bypass && value !== "SIN_DATO"){
             f[slug] = ff;
             x++;
           }
