@@ -4,13 +4,35 @@
   overflow: hidden;
   height: calc(100vh  - 56px);
   margin-top: 56px;
+  position: relative;
   @extend .flex;
   &_sidebar{
-    width: 35%;
+    width: 30%;
     background: $blue;
     margin: 0;
     height: 100%;
     z-index: 10;
+    position: relative;
+
+    &_collapse{
+      width: 27px;
+      height: 27px;
+      background: darken($blue, 10%);
+      position: absolute;
+      right: 0;
+      top: 50%;
+      z-index: 9999;
+      @extend .flex;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      transform: translate(100%, -50%);
+      .material-icons{
+        @extend .cxy;
+        color: #ccc;
+      }
+    }
+
     &_dbs{
       height: 100%;
       position: relative;
@@ -28,4 +50,17 @@
   bottom: 10px;
   right: 10px;
   z-index: 9999;
+}
+body.ss_show_sidebar{
+  .ss_dbbuilder_sidebar{
+    width: 0%;
+    .ss_dbbuilder_sidebar_dbs{
+      display: none;
+    }
+    &_collapse{
+      .material-icons{
+        transform: translate(-50%,-50%) rotate(180deg);
+      }
+    }
+  }
 }

@@ -12,11 +12,28 @@
     background: #222;
     pointer-events: none;
     transform: translate(-50%, -120%);
+    border-top: 2px solid transparent;
+    max-width: 350px;
+    padding-bottom: 0.25rem;
     &_name{
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       color: white;
       box-sizing: border-box;
-      padding: 0.5rem;
+      padding: 0.25rem 0.5rem;
+    }
+    &_type_name{
+      font-size: 0.65rem;
+      color: white;
+      box-sizing: border-box;
+      padding: 0.5rem 0.5rem 0;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    &_links, &_monto{
+      font-size: 0.65rem;
+      color: white;
+      box-sizing: border-box;
+      padding: 0.25rem 0.5rem;
     }
   }
   &_info{
@@ -59,6 +76,10 @@ body.ss_showing_drawer{
   .db_viz{
     flex: auto;
     width: 30%;
-    margin-left: 35%;
+    margin-left: 30%;
+  }
+  .ss_dbbuilder_sidebar_collapse{
+    display: none!important;
+
   }
 }

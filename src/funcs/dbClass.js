@@ -131,7 +131,7 @@ export default class DbFactory {
             empresauid: empresa.uid,
             type: 'empresa',
             sum: self.getEmpresaSum(empresa),
-            matchWith: ['empresa', 'person']
+            matchWith: ['empresa']
           };
           dbfields = [...dbfields, eField];
           var fields = self.getEmpresaMatchableFields(_db.id, empresa.uid);
@@ -146,7 +146,7 @@ export default class DbFactory {
     })
     var nodes = {};
     normalized.map(function(f){
-      var slug = slugify(f.type + '-' + f.value, {lower: true});
+      var slug = slugify(f.type + '-' + f.value, {lower: true, remove: /[*+~.()'"!:@]/g});
       if(f.id){
         slug = f.id;
       }
@@ -156,19 +156,12 @@ export default class DbFactory {
           name: f.value,
           type: f.type,
           fields: [],
-          links: []
         }
         if(f.sum){
           nodes[slug].sum = f.sum;
         }
       }
       nodes[slug].fields.push(f);
-      if(slug !== f.empresauid || true){
-        nodes[slug].links.push({
-          source: slug,
-          target: f.empresauid
-        })
-      }
     })
 
 
@@ -176,29 +169,155 @@ export default class DbFactory {
     var fnodes = {};
     for(var key in nodes){
       var n = nodes[key];
-      if(n.fields.length > 2 || n.type == "empresa"){
+      if(n.type == "empresa"){
+        fnodes[key] = n;
+      }else if(n.fields.length > 1){
         fnodes[key] = n;
       }
     }
-
-
-
     nodes = fnodes;
-
     var finalObj = {
       nodes: [],
       links: []
     };
-
     Object.values(nodes).map(function(e){
-      var links = e.links;
-      finalObj.links = [...finalObj.links, ...links];
-      delete e.links;
       finalObj.nodes = [...finalObj.nodes, e];
     });
-
     return finalObj;
   }
+
+  /**
+  * Construye Analytics de interés
+  *
+  * @param void
+  * @return obj
+  **/
+  buildAnalytics(){
+    var db = this.getDbs();
+    var dbA = Object.values(db);
+    var obj = {
+      count: 0
+    }
+    dbA.map(function(_db){
+      var empresas = _db.empresas;
+          empresas = Object.values(empresas);
+      if(empresas){
+        empresas.map(function(empresa){
+          obj.count = obj.count + 1;
+          var fields = empresa.fields;
+          if(fields){
+            var interestFields = ['rfc', 'folio-mercantil', 'direccion-fiscal', 'telefono', 'sitio-web', 'correo-electronico'];
+            interestFields.map(function(f){
+              if(fields[f] && fields[f].value){
+                if(!obj[f]){
+                  obj[f] = 0;
+                }
+                obj[f] = obj[f] + 1;
+              }
+            })
+
+            var groups = ['representante', 'accionista'];
+            var omitGroup = [];
+            for(var key in fields){
+              var f = fields[key];
+              if(f.group && groups.indexOf(f.group) > -1 && omitGroup.indexOf(f.group) == -1){
+                if(!obj[f.group]){
+                  obj[f.group] = 0;
+                }
+                obj[f.group] = obj[f.group] + 1;
+                omitGroup.push(f.group);
+              }
+            }
+          }
+        })
+      }
+    })
+    return obj;
+  }
+
+  /**
+  * Obtiene la suma de convenios
+  *
+  * @param void
+  * @return int
+  **/
+  getGroupsSum(group, keySlug, montoSlug){
+    var masterFields = [];
+    var db = this.getDbs();
+    var dbA = Object.values(db);
+    dbA.map(function(_db){
+      var dbfields = [];
+      var empresas = _db.empresas;
+          empresas = Object.values(empresas);
+      if(empresas){
+        empresas.map(function(empresa){
+          var fields = empresa.fields;
+              fields = Object.values(fields);
+          var convenioFields = fields.filter(function(f){
+            return f.group == group;
+          })
+          if(convenioFields){
+            var groups = {};
+            convenioFields.map(function(c){
+              var guid = c.guid;
+              if(!groups[guid]){
+                groups[guid] = [];
+              }
+              groups[guid].push(c);
+            })
+            groups = Object.values(groups);
+            masterFields = [...masterFields, ...groups];
+          }
+        })
+      }
+    })
+
+    var k = keySlug;
+    var s = montoSlug;
+
+    var control = {};
+
+    masterFields.map(function(a){
+      /* Busca el número de contrato / convenio */
+      var controlKey = a.find(function(f){
+        return f.slug == k;
+      });
+      var no = '';
+      if(controlKey){
+        no = controlKey.value;
+      }
+
+      no = slugify(no, {lower: true, remove: /[\/\-*+~.()'"!:@]/g});
+
+      /* Busca el monto */
+      var montoKey = a.find(function(f){
+        return f.slug == s;
+      })
+      var m = 0;
+      if(montoKey){
+        m = parseFloat(montoKey.value);
+      }
+      if(isNaN(m)){
+        m = 0;
+      }
+      if(!control[no]){
+        control[no] = m;
+      }
+    })
+
+    var af = Object.values(control);
+
+    var i = 0;
+
+    af.map(function(f){
+      i += f;
+    })
+
+    return i;
+  }
+
+
+
 
   /**
   * Obtiene la suma de empresa
@@ -213,10 +332,63 @@ export default class DbFactory {
     var f = Object.values(empresa.fields);
     var i = 0;
     f.map(function(d){
-      if(d.sumWith){
+      if(d.sumWith && d.sumWith.indexOf('montos_totales') > -1 && d.group !== "transferencia"){
         i += parseFloat(d.value)
       }
     });
+
+    i += this.getEmpresaTransferenciaSum(f);
+
+    if(isNaN(i)){
+      i = 0;
+    }
+
+    return i;
+  }
+
+  /**
+  * Obtiene la suma de las transferencias de la empresa
+  *
+  * @param empresa
+  * @return int
+  **/
+  getEmpresaTransferenciaSum(f){
+    var i = 0;
+    f = f.filter(function(d){
+      return d.group == "transferencia";
+    });
+
+    var ts = {};
+
+    f.map(function(em){
+      if(!ts[em.guid]){
+        ts[em.guid] = [];
+      }
+      ts[em.guid].push(em);
+    })
+
+    for(var key in ts){
+      var _t = ts[key];
+      var monto = 0;
+      var type = false;
+      _t.map(function(_e){
+        var _sst = _e.category;
+        if(_sst == "monto"){
+          monto = parseFloat(_e.value);
+        }
+        if(_e.name == "Tipo de transferencia"){
+          type = _e.value;
+        }
+      })
+
+      if(monto && type){
+        var multi = 1;
+        if(type == "emisor"){
+          multi = -1;
+        }
+        i += (multi * monto);
+      }
+    }
     return i;
   }
 
@@ -660,9 +832,17 @@ export default class DbFactory {
     f = f.filter(function(field){
       return field.group == key;
     })
+
+    if(key == "transferencia"){
+      console.log('f', f);
+    }
+
     var o = {};
     f.map(function(field){
       var guid = field.groupUid;
+      if(!guid){
+        guid = field.guid;
+      }
       if(!o[guid]){
         o[guid] = [];
       }

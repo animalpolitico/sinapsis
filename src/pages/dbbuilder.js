@@ -317,6 +317,11 @@ class DbBuilderSidebar extends React.Component{
     })
   }
 
+  collapseSidebar(){
+    document.body.classList.toggle('ss_show_sidebar');
+    window.dispatchEvent(onDrawerToggle);
+  }
+
   render(){
     var self = this;
     var navCs = ['ss_dbbuilder_sidebar_dbs_nav'];
@@ -326,6 +331,12 @@ class DbBuilderSidebar extends React.Component{
     }
     return(
       <div className="ss_dbbuilder_sidebar">
+        <div className="ss_dbbuilder_sidebar_collapse" onClick={() => this.collapseSidebar()}>
+          <div className="ss_dbbuilder_sidebar_collapse_icon">
+            <Icon>chevron_left</Icon>
+          </div>
+        </div>
+
         <div className="ss_dbbuilder_sidebar_dbs">
             <div className={navCs.join(' ')}>
               {

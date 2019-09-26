@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Chivo:300,300i,400,400i,700,700i,900,900i&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_error, .ss_db_input_select_container_error, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_nodes #db_viz_nodes_controls, #ss_page_home .ss_hb_cols {
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_error, .ss_db_input_select_container_error, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_nodes #db_viz_nodes_controls, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics_container_group_montos, .ss_analytics_container_group_charts_group, #ss_page_home .ss_hb_cols {
   display: flex;
   flex-wrap: nowrap; }
 
@@ -14,7 +14,7 @@
   top: 50%;
   transform: translateY(-50%); }
 
-.cxy, .ss_db_view_empresas .ss_db_ve_c_nocontent_icon .material-icons, .ss_dbbuilder_front .ss_db_choose {
+.cxy, .ss_dbbuilder_sidebar_collapse .material-icons, .ss_db_view_empresas .ss_db_ve_c_nocontent_icon .material-icons, .ss_dbbuilder_front .ss_db_choose, #ss_analytics_trigger_arrow .material-icons {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -26,6 +26,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  overflow: hidden;
   font-family: "Chivo", serif; }
 
 #binder {
@@ -130,13 +131,29 @@ a, a:link, a:visited, a:hover {
   box-sizing: border-box;
   overflow: hidden;
   height: calc(100vh  - 56px);
-  margin-top: 56px; }
+  margin-top: 56px;
+  position: relative; }
   .ss_dbbuilder_sidebar {
-    width: 35%;
+    width: 30%;
     background: #2a2a2a;
     margin: 0;
     height: 100%;
-    z-index: 10; }
+    z-index: 10;
+    position: relative; }
+    .ss_dbbuilder_sidebar_collapse {
+      width: 27px;
+      height: 27px;
+      background: #111111;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      z-index: 9999;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      transform: translate(100%, -50%); }
+      .ss_dbbuilder_sidebar_collapse .material-icons {
+        color: #ccc; }
     .ss_dbbuilder_sidebar_dbs {
       height: 100%;
       position: relative; }
@@ -149,6 +166,13 @@ a, a:link, a:visited, a:hover {
   bottom: 10px;
   right: 10px;
   z-index: 9999; }
+
+body.ss_show_sidebar .ss_dbbuilder_sidebar {
+  width: 0%; }
+  body.ss_show_sidebar .ss_dbbuilder_sidebar .ss_dbbuilder_sidebar_dbs {
+    display: none; }
+  body.ss_show_sidebar .ss_dbbuilder_sidebar_collapse .material-icons {
+    transform: translate(-50%, -50%) rotate(180deg); }
 
 .ss_db_toolbar {
   width: 100%;
@@ -730,12 +754,27 @@ a, a:link, a:visited, a:hover {
     z-index: 99;
     background: #222;
     pointer-events: none;
-    transform: translate(-50%, -120%); }
+    transform: translate(-50%, -120%);
+    border-top: 2px solid transparent;
+    max-width: 350px;
+    padding-bottom: 0.25rem; }
     .db_viz_tooltip_name {
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       color: white;
       box-sizing: border-box;
-      padding: 0.5rem; }
+      padding: 0.25rem 0.5rem; }
+    .db_viz_tooltip_type_name {
+      font-size: 0.65rem;
+      color: white;
+      box-sizing: border-box;
+      padding: 0.5rem 0.5rem 0;
+      text-transform: uppercase;
+      font-weight: 600; }
+    .db_viz_tooltip_links, .db_viz_tooltip_monto {
+      font-size: 0.65rem;
+      color: white;
+      box-sizing: border-box;
+      padding: 0.25rem 0.5rem; }
   .db_viz_info {
     position: absolute;
     bottom: 50px;
@@ -767,7 +806,9 @@ a, a:link, a:visited, a:hover {
 body.ss_showing_drawer .db_viz {
   flex: auto;
   width: 30%;
-  margin-left: 35%; }
+  margin-left: 30%; }
+body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
+  display: none !important; }
 
 .db_search_nodes {
   position: absolute;
@@ -821,6 +862,201 @@ body.ss_showing_drawer .db_viz {
       .db_search_nodes_input input:focus {
         outline: 0;
         background: rgba(255, 255, 255, 0.075); }
+
+.nodes_controls {
+  width: 250px;
+  position: absolute;
+  bottom: 50px;
+  right: 20px;
+  z-index: 9; }
+
+.ss_control_group {
+  background: rgba(34, 34, 34, 0.75);
+  box-sizing: border-box;
+  margin: 1rem 0;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1); }
+  .ss_control_group.ss_control_node_filter {
+    width: 60%;
+    margin-left: 40%; }
+  .ss_control_group .ss_control_group_container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 0.25rem; }
+    .ss_control_group .ss_control_group_container_title {
+      font-size: 0.85rem;
+      color: white;
+      line-height: 1;
+      font-weight: 600;
+      box-sizing: border-box;
+      padding: 0.25rem 0.5rem; }
+    .ss_control_group .ss_control_group_container_switches {
+      width: 100%; }
+      .ss_control_group .ss_control_group_container_switches .ss_ctr_ch {
+        width: 100%;
+        position: relative;
+        box-sizing: border-box;
+        padding: 0.35rem 0.5rem;
+        margin: 0.25rem 0; }
+        .ss_control_group .ss_control_group_container_switches .ss_ctr_ch input {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          z-index: 2;
+          left: 0;
+          opacity: 0;
+          cursor: pointer; }
+        .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds {
+          font-size: 0.65rem;
+          line-height: 1;
+          color: white;
+          font-weight: 600;
+          align-items: center; }
+        .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_td_ball {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          margin-right: 5px; }
+        .ss_control_group .ss_control_group_container_switches .ss_ctr_ch input:not(:checked) ~ .ss_ctr_ch_tds {
+          opacity: 0.2; }
+    .ss_control_group .ss_control_group_container_switch {
+      width: 100%;
+      align-items: center;
+      margin-top: 0.5rem; }
+      .ss_control_group .ss_control_group_container_switch label {
+        display: block;
+        flex: 1;
+        line-height: 1;
+        text-align: center;
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 600; }
+    .ss_control_group .ss_control_group_container_tr {
+      position: relative;
+      box-sizing: border-box; }
+      .ss_control_group .ss_control_group_container_tr input {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        opacity: 0;
+        cursor: pointer; }
+      .ss_control_group .ss_control_group_container_tr_info {
+        font-size: 0.7rem;
+        color: white;
+        font-weight: 600;
+        line-height: 1;
+        margin: 0.25rem 0;
+        box-sizing: border-box;
+        padding: 0.5rem 0.5rem;
+        background: #1f1f1f;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); }
+      .ss_control_group .ss_control_group_container_tr input:checked ~ .ss_control_group_container_tr_info {
+        background: #333366; }
+
+#ss_analytics_trigger {
+  position: absolute;
+  z-index: 999;
+  left: 50%;
+  bottom: 52px;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  border-radius: 50%;
+  transform: translate(-50%, 50%); }
+  #ss_analytics_trigger_arrow {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    top: 0;
+    left: 0; }
+    #ss_analytics_trigger_arrow .material-icons {
+      color: white;
+      line-height: 1;
+      padding-top: 8px;
+      font-size: 2rem; }
+
+.ss_analytics {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #1a1a1a url("../static/texture.png") repeat center center;
+  background-blend-mode: difference;
+  z-index: 9999999; }
+  .ss_analytics_close {
+    position: absolute;
+    right: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    box-sizing: border-box;
+    padding: 0.5rem 0.5rem; }
+    .ss_analytics_close .material-icons {
+      color: white;
+      font-size: 2rem; }
+  .ss_analytics_container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    box-sizing: border-box;
+    padding: 1rem 4rem 6rem;
+    overflow-y: auto; }
+    .ss_analytics_container_group {
+      width: 100%;
+      margin: 3rem 0; }
+      .ss_analytics_container_group_scatter {
+        width: 80%;
+        height: 180px;
+        margin: 0.5rem auto; }
+      .ss_analytics_container_group_h1 {
+        font-size: 2rem;
+        color: white;
+        font-weight: 300;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        position: relative; }
+      .ss_analytics_container_group_montos {
+        width: 100%;
+        justify-content: center; }
+        .ss_analytics_container_group_montos_group {
+          box-sizing: border-box;
+          padding: 0 1.2rem;
+          color: white;
+          text-align: center; }
+          .ss_analytics_container_group_montos_group_m {
+            font-size: 1.7rem;
+            font-weight: 300; }
+          .ss_analytics_container_group_montos_group_l strong {
+            color: #A8FF00; }
+      .ss_analytics_container_group_charts_group {
+        width: 100%;
+        flex-wrap: wrap; }
+        .ss_analytics_container_group_charts_group .ss_analytics_chart_binder {
+          width: 25%;
+          min-width: 100px;
+          box-sizing: border-box;
+          padding: 0.5rem; }
+          .ss_analytics_container_group_charts_group .ss_analytics_chart_binder .ss_analytics_chart {
+            width: 100%; }
+            .ss_analytics_container_group_charts_group .ss_analytics_chart_binder .ss_analytics_chart .recharts-wrapper {
+              margin: 0 auto;
+              display: block; }
+          .ss_analytics_container_group_charts_group .ss_analytics_chart_binder_info {
+            width: 100%;
+            text-align: center;
+            line-height: 1;
+            color: white;
+            margin-top: 0.25rem;
+            box-sizing: border-box;
+            padding: 0 0.5rem; }
+            .ss_analytics_container_group_charts_group .ss_analytics_chart_binder_info strong {
+              color: #a7c5fa; }
+            .ss_analytics_container_group_charts_group .ss_analytics_chart_binder_info span {
+              font-size: 0.8rem; }
 
 #ss_page_home {
   width: 100%;

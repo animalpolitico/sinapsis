@@ -11,7 +11,8 @@ export const snps_ka = {
     name: "Objeto social"
   },
   4: {
-    name: "Fecha de creación"
+    name: "Fecha de creación",
+    matchWith: ['date'],
   },
   5: {
     name: "Capital social mínimo"
@@ -153,7 +154,7 @@ export const snps_ka = {
     group: 'contrato',
     bigGroup: 'contrato',
     category: "emisor",
-    matchWith: ['person', 'empresa', 'instancia']
+    matchWith: ['empresa', 'instancia']
   },
   38: {
     name: "Número de contrato",
@@ -165,12 +166,14 @@ export const snps_ka = {
     name: "Fecha de inicio",
     group: 'contrato',
     bigGroup: 'contrato',
+    matchWith: ['date'],
     type: 'date',
   },
   40: {
     name: "Fecha de término",
     group: 'contrato',
     bigGroup: 'contrato',
+    matchWith: ['date'],
     type: 'date'
   },
   41: {
@@ -226,18 +229,20 @@ export const snps_ka = {
     name: "Número de convenio",
     group: 'convenio',
     bigGroup: 'convenio',
-    matchWith: ['conveio']
+    matchWith: ['convenio']
   },
   56: {
     name: "Fecha de inicio",
     group: 'convenio',
     bigGroup: 'convenio',
+    matchWith: ['date'],
     type: 'date'
   },
   57: {
     name: "Fecha de término",
     group: 'convenio',
     bigGroup: 'convenio',
+    matchWith: ['date'],
     type: 'date'
   },
   58: {
@@ -276,11 +281,13 @@ export const snps_ka = {
     sumWith: ['montos_convenio']
   },
   64: {
-    name: "recursos",
+    name: "¿Quién otorgó los recursos?",
+    realName: 'recursos',
     category: 'emisor',
     group: 'transferencia',
     bigGroup: 'transferencia',
-    matchWith: ['empresa', 'instancia', 'person']
+    matchWith: ['instancia'],
+    type: 'empresa'
   },
   65: {
     name: "Monto de la transferencia",
@@ -290,14 +297,14 @@ export const snps_ka = {
     bigGroup: 'transferencia',
     sumWith: ['montos_transferencia', 'montos_totales']
   },
-  66: {
+  67: {
     name: "recursos",
     category: 'emisor',
     group: 'transferencia',
     bigGroup: 'transferencia',
-    matchWith: ['empresa', 'instancia', 'person']
+    matchWith: ['empresa']
   },
-  67: {
+  68: {
     name: "Monto de la transferencia",
     type: 'currency',
     category: 'monto',
@@ -305,14 +312,14 @@ export const snps_ka = {
     bigGroup: 'transferencia',
     sumWith: ['montos_transferencia', 'montos_totales']
   },
-  68: {
+  69: {
     name: "recursos",
     category: 'receptor',
     group: 'transferencia',
     bigGroup: 'transferencia',
     matchWith: ['empresa', 'instancia', 'person']
   },
-  69: {
+  70: {
     name: "Monto de la transferencia",
     type: 'currency',
     category: 'monto',

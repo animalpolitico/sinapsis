@@ -1,0 +1,115 @@
+.nodes_controls{
+  width: 250px;
+  position: absolute;
+  bottom: 50px;
+  right: 20px;
+  z-index: 9;
+}
+
+.ss_control_group{
+  background: rgba(#222, 0.75);
+  box-sizing: border-box;
+  margin: 1rem 0;
+  box-shadow: 3px 3px 6px rgba(black, 0.1);
+  &.ss_control_node_filter{
+    width: 60%;
+    margin-left: 40%;
+  }
+  .ss_control_group_container{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 0.25rem;
+    &_title{
+      font-size: 0.85rem;
+      color: white;
+      line-height: 1;
+      font-weight: 600;
+      box-sizing: border-box;
+      padding: 0.25rem 0.5rem;
+    }
+    &_switches{
+      width: 100%;
+      .ss_ctr_ch{
+        width: 100%;
+        position: relative;
+        box-sizing: border-box;
+        padding: 0.35rem 0.5rem;
+        margin: 0.25rem 0;
+        input{
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          z-index: 2;
+          left: 0;
+          opacity: 0;
+          cursor: pointer;
+        }
+        &_tds{
+          font-size: 0.65rem;
+          @extend .flex;
+          line-height: 1;
+          color: white;
+          font-weight: 600;
+          align-items: center;
+        }
+        &_td{
+          &_ball{
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+          }
+        }
+
+        input:not(:checked) ~ .ss_ctr_ch_tds{
+          opacity: 0.2;
+        }
+
+      }
+    }
+    &_switch{
+      width: 100%;
+      @extend .flex;
+      align-items: center;
+      margin-top: 0.5rem;
+      label{
+        display: block;
+        flex: 1;
+        line-height: 1;
+        text-align: center;
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 600;
+      }
+    }
+    &_tr{
+      position: relative;
+      box-sizing:border-box;
+      input{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        opacity: 0;
+        cursor: pointer;
+      }
+      &_info{
+        font-size: 0.7rem;
+        color: white;
+        font-weight: 600;
+        line-height: 1;
+        margin: 0.25rem 0;
+        box-sizing: border-box;
+        padding: 0.5rem 0.5rem;
+        background: #1f1f1f;
+        box-shadow: 2px 2px 4px rgba(black, 0.1);
+      }
+      input:checked ~ .ss_control_group_container_tr_info{
+        background: #333366;
+      }
+    }
+  }
+}

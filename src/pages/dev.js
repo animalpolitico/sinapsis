@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/es';
 import formatMoney from 'format-money';
-import estafa from '../static/csvs/sat-def.csv';
+import estafa from '../static/csvs/estafa-maestra.csv';
 import EstafaJson from '../static/jsons/estafa-maestra.json';
 import * as d3 from "d3";
 import { saveAs } from 'file-saver';
@@ -19,7 +19,7 @@ const uuidv4 = require('uuid/v4');
 export default class DevSandbox extends React.Component{
 
   componentDidMount(){
-    var cls = new ConvertOldToDb('SAT Definitivos', estafa);
+    var cls = new ConvertOldToDb('Estafa Maestra', estafa);
     // var d = convertToSinapsisFile(EstafaJson);
 
   }
@@ -427,7 +427,7 @@ class ConvertOldToDb{
         }
     })
 
-    /** Transferencias a empresa **/
+    /** Transferencias de dependencia a instancia **/
     var range = [64, 65];
     var _fields = this.groupByRange(fields, range);
     _fields.map(function(arr, ind){
@@ -437,6 +437,67 @@ class ConvertOldToDb{
           var value = arr[key];
           value = value.trim();
           var inf = snps_ka[key];
+          var preslug = slugify(inf.bigGroup + '-' + (inf.realName ? inf.realName : inf.name), {lower: true});
+          var slug = slugify(cuid + '-' + preslug, {lower: true});
+          var ff = {
+            name: inf.name,
+            slug: preslug,
+            isvalid: true,
+            value: value,
+            group: inf.bigGroup,
+            groupUid: cuid,
+            guid: cuid,
+            empresauid: uid
+          };
+          if(inf.type){
+            ff.type = inf.type;
+          }
+          if(inf.category){
+            ff.category = inf.category;
+          }
+          if(inf.matchWith){
+            ff.matchWith = inf.matchWith;
+          }
+          if(inf.sumWith){
+            ff.sumWith = inf.sumWith;
+          }
+          if(inf.sumWith && value){
+            value = value.replace(/[^0-9.]/g, '');
+            value = parseFloat(value);
+            ff.value = value;
+          }
+          if(value && !inf.bypass && value !== "SIN_DATO"){
+            f[slug] = ff;
+            x++;
+          }
+        }
+        if(x > 0){
+          var slug = slugify(cuid + '-tipo-transferencia' , {lower: true});
+          var ff = {
+            name: "Tipo de transferencia",
+            isvalid: true,
+            value: "receptor",
+            group: "transferencia",
+            bigGroup: "transferencia",
+            groupUid: cuid,
+            guid: cuid,
+            slug: slug,
+          };
+          console.log('TRANSFERENCIA', ff);
+          f[slug] = ff;
+        }
+    })
+
+    /** Transferencia de empresa a esta empresa  **/
+    var range = [67,68];
+    var _fields = this.groupByRange(fields, range);
+    _fields.map(function(arr, ind){
+        var cuid = uuidv4();
+        var x = 0;
+        for(var key in arr){
+          var value = arr[key];
+          value = value.trim();
+          var inf = snps_ka[key];
           var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
           var slug = slugify(cuid + '-' + preslug, {lower: true});
           var ff = {
@@ -486,7 +547,8 @@ class ConvertOldToDb{
         }
     })
 
-    var range = [66,67];
+    /** Transferencia de esta empresa a otras empresas **/
+    var range = [69, 70];
     var _fields = this.groupByRange(fields, range);
     _fields.map(function(arr, ind){
         var cuid = uuidv4();
@@ -526,6 +588,7 @@ class ConvertOldToDb{
           }
           if(value && !inf.bypass && value !== "SIN_DATO"){
             f[slug] = ff;
+            console.log('FF', ff);
             x++;
           }
         }
@@ -535,64 +598,6 @@ class ConvertOldToDb{
             name: "Tipo de transferencia",
             isvalid: true,
             value: "emisor",
-            group: "transferencia",
-            bigGroup: "transferencia",
-            groupUid: cuid,
-            guid: cuid
-          };
-          f[slug] = ff;
-        }
-    })
-
-    var range = [68, 69];
-    var _fields = this.groupByRange(fields, range);
-    _fields.map(function(arr, ind){
-        var cuid = uuidv4();
-        var x = 0;
-        for(var key in arr){
-          var value = arr[key];
-          value = value.trim();
-          var inf = snps_ka[key];
-          var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
-          var slug = slugify(cuid + '-' + preslug, {lower: true});
-          var ff = {
-            name: inf.name,
-            slug: preslug,
-            isvalid: true,
-            value: value,
-            group: inf.bigGroup,
-            groupUid: cuid,
-            guid: cuid,
-            empresauid: uid
-          };
-          if(inf.type){
-            ff.type = inf.type;
-          }
-          if(inf.category){
-            ff.category = inf.category;
-          }
-          if(inf.matchWith){
-            ff.matchWith = inf.matchWith;
-          }
-          if(inf.sumWith){
-            ff.sumWith = inf.sumWith;
-          }
-          if(inf.sumWith && value){
-            value = value.replace(/[^0-9.]/g, '');
-            value = parseFloat(value);
-            ff.value = value;
-          }
-          if(value && !inf.bypass && value !== "SIN_DATO"){
-            f[slug] = ff;
-            x++;
-          }
-        }
-        if(x > 0){
-          var slug = slugify(cuid + '-tipo-transferencia' , {lower: true});
-          var ff = {
-            name: "Tipo de transferencia",
-            isvalid: true,
-            value: "receptor",
             group: "transferencia",
             bigGroup: "transferencia",
             groupUid: cuid,

@@ -3,24 +3,62 @@ import React from 'react';
 export default class TransactionRow extends React.Component{
   buildName(){
     var f = this.props.g;
+    var t = f[0];
     var emisor, monto, receptor = false;
-    f.map(function(e){
-      switch(e.category){
-        case "emisor":
-          emisor = e.value;
-        break;
-        case "monto":
-          monto = e.value;
-        break;
-        case "receptor":
-          receptor = e.value;
-        break;
+    if(t.group !== "transferencia"){
+      console.log('t', t.category);
+      f.map(function(e){
+        switch(e.category){
+          case "emisor":
+            emisor = e.value;
+          break;
+          case "monto":
+            monto = e.value;
+          break;
+          case "receptor":
+            receptor = e.value;
+          break;
+        }
+      })
+      if(this.props.receptorIsEmpresa){
+        receptor = this.props.empresa.name;
       }
-    })
-    if(this.props.receptorIsEmpresa){
-      receptor = this.props.empresa.name;
+    }else{
+      var type = f.find(function(_d){
+        return _d.name == "Tipo de transferencia"
+      });
+
+      if(type){
+        var _t = type.value;
+        if(_t == "receptor"){
+          receptor = this.props.empresa.name;
+          var emisorGroup = f.find(function(_d){
+            return _d.category == "emisor"
+          });
+          if(emisorGroup){
+            emisor = emisorGroup.value;
+          }
+        }else{
+          emisor = this.props.empresa.name;
+          var receptorGroup = f.find(function(_d){
+            return _d.category == "receptor"
+          });
+          if(receptorGroup){
+            receptor = receptorGroup.value;
+          }
+        }
+
+        var montoGroup = f.find(function(_d){
+          return _d.category == "monto"
+        });
+
+        if(montoGroup){
+          monto = montoGroup.value;
+        }
+
+      }
     }
-    // var mainName = receptor && emisor ? emisor + ' -> ' + receptor : this.props.singleName + ' #'+this.props.count;
+
     var o = {
       receptor: receptor,
       emisor: emisor,
