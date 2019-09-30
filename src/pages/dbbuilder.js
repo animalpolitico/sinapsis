@@ -18,6 +18,9 @@ import 'moment/locale/es';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 /** Componentes **/
 import DbFactory from '../funcs/dbClass';
@@ -27,6 +30,7 @@ import DbViz from '../parts/dbviz/dbviz';
 
 /** Bases de datos precargadas **/
 import PreDB_Estafa from '../static/consumable/estafa-maestra.json';
+import PreDB_SATDef from '../static/consumable/sat-definitivos.json';
 
 
 
@@ -39,6 +43,14 @@ window.dbf = dbf;
 
 var store = require('store')
 var onDrawerToggle = new Event('sinapsisDrawerToggle');
+var onBigChanges = new Event('sinapsisBigModified');
+var startLoad = new Event('sinapsisStartLoad');
+var endLoad = new Event('sinapsisEndLoad');
+
+var dbsPre = {
+  'estafa-maestra': PreDB_Estafa,
+  'sat-definitivos': PreDB_SATDef
+}
 
 
 export default class DbBuilderPage extends React.Component{
@@ -265,6 +277,7 @@ export default class DbBuilderPage extends React.Component{
           :
             <div>
               <DbBuilderToolbar parent={this} ref={(ref) => this.toolbar = ref}/>
+              <DbLoader />
               <div className="ss_dbbuilder">
                 <DbBuilderSidebar />
                 <DbViz />
@@ -272,6 +285,45 @@ export default class DbBuilderPage extends React.Component{
             </div>
         }
       </div>
+    )
+  }
+}
+
+class DbLoader extends React.Component{
+  state = {
+    loading: false
+  }
+
+  componentDidMount(){
+    var self = this;
+    window.addEventListener('sinapsisStartLoad', function(){
+      self.setState({
+        loading: true
+      })
+    })
+
+    window.addEventListener('sinapsisEndLoad', function(){
+      self.setState({
+        loading: false
+      })
+    })
+
+  }
+
+  render(){
+    return(
+      <>
+      {
+        this.state.loading ?
+        <div id="ssdb_loader">
+          <div id="ssdb_loader_c">
+            <CircularProgress color="secondary"/>
+          </div>
+        </div>
+        : null
+      }
+
+      </>
     )
   }
 }
@@ -446,6 +498,7 @@ class DbView extends React.Component{
   delete(){
     window.dbf.deleteDb(this.state.db);
     this.props.parent.fetchDbs();
+    window.dispatchEvent(onBigChanges);
     this.setState({
       showDeleteDialog: false
     })
@@ -464,7 +517,7 @@ class DbView extends React.Component{
           this.state.db ?
           <div>
             <div className={nameCs.join(' ')}>
-              <Icon style={{color: this.state.db.color}}>dns</Icon>
+              <Icon style={{color: 'white'}}>dns</Icon>
               <input
                 type="text"
                 value={this.state.db.name}
@@ -671,7 +724,9 @@ class DbEmpresa extends React.Component{
 class DbDbsNavigationNewDb extends React.Component{
   state = {
     openPopper: false,
-    anchor: null
+    anchor: null,
+    openModal: false,
+    selectedDb: null
   }
   togglePopper(e){
     /* OLD
@@ -687,17 +742,55 @@ class DbDbsNavigationNewDb extends React.Component{
       openPopper: false
     })
     this.props.parent.addDB();
+    window.dispatchEvent(onBigChanges);
   }
 
   selectDB(){
     this.setState({
-      openPopper: false
+      openPopper: false,
+      openModal: true
     })
-    var id = PreDB_Estafa.id;
-    window.dbf.obj.dbs[id] = PreDB_Estafa;
-    window.dbf.setModified();
   }
 
+  closeModal(){
+    this.setState({
+      openModal: false,
+      selectedDb: null
+    })
+  }
+
+  handlePreSelect(e){
+    this.setState({
+      selectedDb: e.target.value
+    })
+  }
+
+  addPreDb(){
+    var self = this;
+    var v = this.state.selectedDb;
+    window.dispatchEvent(startLoad);
+    this.setState({
+      openModal: false,
+    })
+
+    setTimeout(function(){
+      if(dbsPre[v]){
+        var db = dbsPre[v];
+        if(!window.dbf.obj.dbs){
+          window.dbf.obj.dbs = {};
+        }
+        window.dbf.obj.dbs[db.id] = db;
+        window.dbf.setModified();
+        window.dispatchEvent(onBigChanges);
+        self.props.parent.fetchDbs();
+      }
+      window.dispatchEvent(endLoad);
+    }, 2000);
+
+
+
+
+  }
 
   render(){
     var id = 'ss_db_popper';
@@ -723,6 +816,25 @@ class DbDbsNavigationNewDb extends React.Component{
           </div>
         </div>
       </Popper>
+      <Dialog open={this.state.openModal} onClose={() => this.closeModal()} className="ss_modal_dbpre">
+        <DialogTitle>Selecciona una base de datos</DialogTitle>
+        <DialogContent>
+          <div className="ss_modal_dbpre_select">
+          <RadioGroup name="predb" value={this.state.selectedDb} onChange={(e) => this.handlePreSelect(e) }>
+              <FormControlLabel value="estafa-maestra" control={<Radio />} label="Estafa Maestra" />
+              <FormControlLabel value="sat-definitivos" control={<Radio />} label="SAT Definitivos" />
+          </RadioGroup>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button color="secondary" onClick={() => this.closeModal()}>
+            Cancelar
+          </Button>
+          <Button color="secondary" disabled={this.state.selectedDb ? false : true} onClick={() => this.addPreDb()}>
+            Agregar al proyecto
+          </Button>
+        </DialogActions>
+      </Dialog>
       </>
     )
   }
@@ -772,7 +884,7 @@ class DbDbsNavigationTd extends React.Component{
         onClick={(e) => this.handleClick(e)}
         >
         <div className="ss_dbbuilder_sidebar_dbs_nav_td_input" title={this.state.name}>
-          <div className="ss_dbtab_circle" style={{backgroundColor: db.color}}></div><span>{this.state.name}</span>
+          <div className="ss_dbtab_circle" style={{backgroundColor: 'white'}}></div><span>{this.state.name}</span>
         </div>
       </div>
     )

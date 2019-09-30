@@ -112,9 +112,10 @@ export default class DbFactory {
   * @param void
   * @return obj
   **/
-  getMatches(){
+  getMatches(onlyinall){
     var self = this;
     var db = this.getDbs();
+    var dbkeys = Object.keys(db);
     var dbA = Object.values(db);
     /* Obtiene todos los campos */
     var normalized = [];
@@ -138,6 +139,7 @@ export default class DbFactory {
           fields.map(function(f){
             f.type = f.matchWith[0];
             f.empresauid = empresa.uid;
+            f.fromdb = _db.id;
             dbfields = [...dbfields, f]
           });
         })
@@ -173,13 +175,18 @@ export default class DbFactory {
         fnodes[key] = n;
       }else{
         var diff = [];
+        var dbsin = [];
         n.fields.map(function(_field){
           var euid = _field.empresauid;
+          if(dbsin.indexOf(_field.fromdb) == -1){
+            dbsin.push(_field.fromdb);
+          }
           if(diff.indexOf(euid) == -1){
             diff.push(euid);
           }
         })
-        if(diff.length > 1){
+        var add = onlyinall ? dbsin.length == dbkeys.length : true;
+        if(diff.length > 1 && add){
           fnodes[key] = n;
         }
       }

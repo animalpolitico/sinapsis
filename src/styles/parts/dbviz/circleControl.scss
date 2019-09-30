@@ -1,19 +1,42 @@
 .nodes_controls{
-  width: 250px;
+  width: 200px;
   position: absolute;
   bottom: 50px;
   right: 20px;
   z-index: 9;
+  &_button{
+    width: 100%;
+    background: #2a2a2a;
+    cursor: pointer;
+    @extend .flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    .material-icons, div{
+      color: white;
+    }
+    .material-icons{
+      font-size: 1rem;
+    }
+    div{
+      font-size: 0.8rem;
+      box-sizing: border-box;
+      padding-left: 0.5rem;
+      font-weight: 600;
+    }
+    &:hover{
+      background: #222;
+    }
+  }
 }
 
 .ss_control_group{
-  background: rgba(#222, 0.75);
+  background: #2a2a2a;
   box-sizing: border-box;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   box-shadow: 3px 3px 6px rgba(black, 0.1);
   &.ss_control_node_filter{
-    width: 60%;
-    margin-left: 40%;
+    width: 100%;
   }
   .ss_control_group_container{
     width: 100%;
@@ -46,7 +69,7 @@
           cursor: pointer;
         }
         &_tds{
-          font-size: 0.65rem;
+          font-size: 0.75rem;
           @extend .flex;
           line-height: 1;
           color: white;
@@ -55,8 +78,8 @@
         }
         &_td{
           &_ball{
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             margin-right: 5px;
           }

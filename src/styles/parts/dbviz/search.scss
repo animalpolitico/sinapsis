@@ -1,12 +1,12 @@
 .db_search_nodes{
-  position: absolute;
-  top: 20px;
-  left: 20px;
+  position: fixed;
+  top: 56px;
+  right: calc(4em + 80px);
   z-index: 99;
   width: 280px;
   &_results{
     width: 100%;
-    background: rgba(white, 0.075);
+    background: #333;
     .db_search_nodes_results_c{
       width: 100%;
       &_r{

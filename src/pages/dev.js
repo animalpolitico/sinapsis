@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/es';
 import formatMoney from 'format-money';
-import estafa from '../static/csvs/estafa-maestra.csv';
+import estafa from '../static/csvs/sat-def.csv';
 import EstafaJson from '../static/jsons/estafa-maestra.json';
 import * as d3 from "d3";
 import { saveAs } from 'file-saver';
@@ -19,7 +19,7 @@ const uuidv4 = require('uuid/v4');
 export default class DevSandbox extends React.Component{
 
   componentDidMount(){
-    var cls = new ConvertOldToDb('Estafa Maestra', estafa);
+    var cls = new ConvertOldToDb('SAT Definitivos', estafa);
     // var d = convertToSinapsisFile(EstafaJson);
 
   }

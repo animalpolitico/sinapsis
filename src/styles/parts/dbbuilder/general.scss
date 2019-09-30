@@ -64,3 +64,26 @@ body.ss_show_sidebar{
     }
   }
 }
+
+.ss_modal_dbpre{
+  .MuiDialog-paper{
+    border-radius: 0;
+    background: #111;
+    .MuiDialogTitle-root, .MuiFormControlLabel-root{
+      color: #f0f0f0;
+    }
+  }
+}
+
+#ssdb_loader{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999999999;
+  background: rgba($blue, 0.8);
+  &_c{
+    @extend .cxy;
+  }
+}

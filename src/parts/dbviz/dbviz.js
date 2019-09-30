@@ -31,6 +31,7 @@ var slugify = require('slugify');
 export default class DbViz extends React.Component{
   state = {
     showSearch: true,
+    showcontrols: false,
     displayAnalytics: false
   }
   constructor(props){
@@ -44,17 +45,28 @@ export default class DbViz extends React.Component{
     })
   }
 
+  toggleControls(){
+    this.setState({
+      showcontrols: !this.state.showcontrols
+    })
+  }
+
   render(){
     return(
+      <>
       <div className="db_viz">
-
         <Nodes ref={(ref) => this.nodes = ref}/>
         <div className="nodes_controls">
-          <SSCategoryToggle nodesMap={this.nodes} />
-          <SSNodeSize nodesMap={this.nodes}/>
+          <div className="nodes_controls_button" onClick={() => this.toggleControls()}>
+            <Icon>{this.state.showcontrols ? 'expand_more' : 'expand_less'}</Icon><div>{this.state.showcontrols ? 'Ocultar' : 'Mostrar'} controles</div>
+          </div>
+          <div style={{display: this.state.showcontrols ? 'block' : 'none'}}>
+            <SSCategoryToggle nodesMap={this.nodes} />
+            <SSNodeSize nodesMap={this.nodes}/>
+            <SSNodeCoincidencias nodesMap={this.nodes} />
+            <SSNodeFilter nodesMap={this.nodes}/>
+          </div>
         </div>
-        <Search nodesMap={this.nodes}/>
-
           <AnalyticsButton onClick={() => this.toggleAnalytics()}/>
           {
             this.state.displayAnalytics ?
@@ -62,6 +74,8 @@ export default class DbViz extends React.Component{
             : null
           }
       </div>
+      <Search nodesMap={this.nodes}/>
+      </>
     )
   }
 }
@@ -378,7 +392,7 @@ class Analytics extends React.Component{
 }
 
 
-class Search extends React.Component{
+export class Search extends React.Component{
   state = {
     results: [],
     v: '',
@@ -508,16 +522,16 @@ class Nodes extends React.Component{
     loading: false,
     isPerfectZoom: true,
     coincidencias: 0,
-    nodeSizeParam: 'monto'
+    nodeSizeParam: 'monto',
+    showall: false,
+    onlyinall: false
   }
   componentDidMount(){
     var self = this;
     self.set();
-    window.addEventListener('sinapsisModified', function(){
-      if(!self.state.loading){
-        // d3.selectAll('#db_viz_nodes_canvas *').remove();
-        self.drawNodes();
-      }
+    window.addEventListener('sinapsisBigModified', function(){
+      d3.selectAll('#db_viz_nodes_canvas *').remove();
+      self.set();
     })
     window.addEventListener('sinapsisDrawerToggle', function(){
       setTimeout(function(){
@@ -543,11 +557,16 @@ class Nodes extends React.Component{
     })
     var self = this;
     var container = this.container;
-    var nodesData = window.dbf.getMatches();
+    var onlyinall = this.state.onlyinall;
+    var nodesData = window.dbf.getMatches(onlyinall);
     this.nodesData = nodesData;
     var _links = this.buildLinks();
     nodesData.links = _links;
     this.nodesData = nodesData;
+
+    var nodesData = this.filterInitNodes();
+    this.nodesData = nodesData;
+
 
     const width = container.offsetWidth,
           height = container.offsetHeight;
@@ -750,6 +769,43 @@ class Nodes extends React.Component{
 
     return x;
 
+  }
+
+  filterInitNodes(){
+    console.log('Filtering', 'hola');
+    var n = this.nodesData.nodes;
+    var l = this.nodesData.links;
+
+    console.log('n', n);
+
+    var uidWithConnections = [];
+
+    l.map(function(_l){
+      var a = _l.source;
+      if(uidWithConnections.indexOf(a) == -1){
+        uidWithConnections.push(a);
+      }
+      var a = _l.target;
+      if(uidWithConnections.indexOf(a) == -1){
+        uidWithConnections.push(a);
+      }
+    })
+
+    /* Muestra sólo con conexiones */
+    /* TODO con state */
+    if(!this.state.showall){
+      console.log('HOLA');
+      n = n.filter(function(_n){
+        return uidWithConnections.indexOf(_n.id) > -1;
+      })
+    }
+
+
+    var nd = {
+      nodes: n,
+      links: l
+    }
+    return nd;
   }
 
   setNodeCircleSize(){
@@ -992,7 +1048,27 @@ class Nodes extends React.Component{
   }
 
 
+  toggleEmpresas(showall){
+    var self = this;
+    this.setState({
+      showall: showall
+    })
+    this.simulation.stop();
+    setTimeout(function(){
+      self.set();
+    }, 100);
+  }
 
+  toggleOnlyAll(onlyinall){
+    var self = this;
+    this.setState({
+      onlyinall: onlyinall
+    })
+    this.simulation.stop();
+    setTimeout(function(){
+      self.set();
+    }, 100);
+  }
 
   drag(){
     var simulation = this.simulation;
@@ -1076,7 +1152,6 @@ class SSNodeSize extends React.Component{
   render(){
     return(
       <div className="ss_control_node_size ss_control_group">
-
         <div className="ss_control_group_container">
           <div className="ss_control_group_container_title">
             Tamaño de círculos
@@ -1087,6 +1162,7 @@ class SSNodeSize extends React.Component{
               checked={this.state.checked}
               onChange={(e) => this.handleChange(e)}
               value="t"
+              size="small"
               inputProps={{ 'aria-label': 'secondary checkbox' }}
             />
             <label>Por coincidencias</label>
@@ -1097,6 +1173,84 @@ class SSNodeSize extends React.Component{
   }
 }
 
+class SSNodeFilter extends React.Component{
+  state = {
+    type: 'monto',
+    checked: false
+  }
+
+  handleChange(e){
+    var t = this.state.checked;
+    var nt = !t;
+    this.setState({
+      checked: nt
+    })
+
+    this.props.nodesMap.toggleEmpresas(nt);
+  }
+
+  render(){
+    return(
+      <div className="ss_control_node_size ss_control_group">
+        <div className="ss_control_group_container">
+          <div className="ss_control_group_container_title">
+            Mostrar empresas
+          </div>
+          <div className="ss_control_group_container_switch">
+            <label>Solo con coincidencias</label>
+            <Switch
+              checked={this.state.checked}
+              onChange={(e) => this.handleChange(e)}
+              value="t"
+              size="small"
+              inputProps={{ 'aria-label': 'secondary checkbox' }}
+            />
+            <label>Todas</label>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+class SSNodeCoincidencias extends React.Component{
+  state = {
+    type: 'monto',
+    checked: false
+  }
+
+  handleChange(e){
+    var t = this.state.checked;
+    var nt = !t;
+    this.setState({
+      checked: nt
+    })
+    this.props.nodesMap.toggleOnlyAll(nt);
+  }
+
+  render(){
+    return(
+      <div className="ss_control_node_size ss_control_group">
+        <div className="ss_control_group_container">
+          <div className="ss_control_group_container_title">
+            Mostrar coincidencias
+          </div>
+          <div className="ss_control_group_container_switch">
+            <label>Todas</label>
+            <Switch
+              checked={this.state.checked}
+              onChange={(e) => this.handleChange(e)}
+              value="t"
+              size="small"
+              inputProps={{ 'aria-label': 'secondary checkbox' }}
+            />
+          <label>Solo entre distintas bases</label>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
 class SSCategoryToggle extends React.Component{
   state = {
     vals: [
