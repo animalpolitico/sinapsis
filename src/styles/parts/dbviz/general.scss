@@ -40,7 +40,7 @@
     position: absolute;
     bottom: 50px;
     box-sizing: border-box;
-    padding: 0.5rem 1.2rem;
+    padding: 0.5rem 2.5rem;
     left: 0;
     z-index: 9;
     font-size: 0.9rem;
@@ -81,5 +81,89 @@ body.ss_showing_drawer{
   .ss_dbbuilder_sidebar_collapse{
     display: none!important;
 
+  }
+}
+
+.ss_doi_window{
+  width: 280px;
+  margin-bottom: 1rem;
+  background: #111;
+  box-shadow: 2px 2px 4px rgba(black, 0.1);
+  &_type{
+    font-weight: 600;
+    border-bottom: 2px solid;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+  }
+  &_name{
+    font-weight: 400;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-bottom: 2px solid rgba(white, 0.1);
+    &:hover{
+      white-space: normal;
+    }
+  }
+  &_fields_info{
+    font-weight: 600;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    border-top: 2px solid rgba(white, 0.1);
+  }
+
+  &_fields{
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    &_field{
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      &:hover{
+        background: rgba(white, 0.1);
+      }
+      &:not(:last-child){
+        border-bottom: 1px solid rgba(white, 0.1);
+      }
+      &_group{
+        width: 100%;
+        text-transform: uppercase;
+        color: rgb(242, 216, 138);
+        font-weight: 600;
+        font-size: 0.8em;
+      }
+      &_dbinfo{
+        width: 100%;
+        > div{
+          @extend .flex;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          align-items: center;
+          overflow: hidden;
+          box-sizing: border-box;
+          padding: 0.15rem 0;
+          .material-icons{
+            font-size: 1em;
+            line-height: 1em;
+            margin-right: 0.25em;
+            color: rgb(141, 177, 247);
+          }
+        }
+      }
+      &_name{
+        font-size: 1.2em;
+        margin: 0.25rem 0;
+      }
+    }
   }
 }

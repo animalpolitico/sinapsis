@@ -87,6 +87,7 @@ export default class DbBuilderPage extends React.Component{
     }
     window.scroll(0,0);
 
+
     /* Previene cerrar el navegador */
     window.addEventListener("beforeunload", (ev) =>
     {
@@ -336,9 +337,25 @@ class DbBuilderSidebar extends React.Component{
     db: null
   }
   componentDidMount(){
+    var self = this;
     this.fetchDbs();
     this.refs = {};
 
+
+    /** Escucha si se necesita abrir una empresa **/
+    window.addEventListener('sinapsisOpenEmpresa', function(e){
+      var data = e.detail;
+      var euid = data.euid;
+      var dbid = data.dbid;
+      self.selectDb(dbid);
+      self.refs[dbid].handleClick();
+      setTimeout(function(){
+        var e = window.dbf.getEmpresa(dbid, euid);
+        self.dbview.empresalist.selectEmpresa(e);
+        var ev = new Event('sinapsisEndLoad');
+        window.dispatchEvent(ev);
+      }, 500);
+    })
 
   }
 
@@ -410,7 +427,7 @@ class DbBuilderSidebar extends React.Component{
             <div className="ss_dbbuilder_sidebar_dbs_view">
               {
                 this.state.db ?
-                <DbView db={this.state.db} navRef={this.refs[this.state.db.id]} parent={self}/>
+                <DbView ref={(ref) => this.dbview = ref} db={this.state.db} navRef={this.refs[this.state.db.id]} parent={self}/>
                 : null
               }
             </div>

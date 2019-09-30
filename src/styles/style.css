@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Chivo:300,300i,400,400i,700,700i,900,900i&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_error, .ss_db_input_select_container_error, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_nodes #db_viz_nodes_controls, .nodes_controls_button, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics_container_group_montos, .ss_analytics_container_group_charts_group, #ss_page_home .ss_hb_cols {
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_error, .ss_db_input_select_container_error, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_nodes #db_viz_nodes_controls, .ss_doi_window_fields_field_dbinfo > div, .nodes_controls_button, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics_container_group_montos, .ss_analytics_container_group_charts_group, #ss_page_home .ss_hb_cols {
   display: flex;
   flex-wrap: nowrap; }
 
@@ -844,7 +844,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
     position: absolute;
     bottom: 50px;
     box-sizing: border-box;
-    padding: 0.5rem 1.2rem;
+    padding: 0.5rem 2.5rem;
     left: 0;
     z-index: 9;
     font-size: 0.9rem;
@@ -874,6 +874,74 @@ body.ss_showing_drawer .db_viz {
   margin-left: 30%; }
 body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
   display: none !important; }
+
+.ss_doi_window {
+  width: 280px;
+  margin-bottom: 1rem;
+  background: #111;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); }
+  .ss_doi_window_type {
+    font-weight: 600;
+    border-bottom: 2px solid;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem; }
+  .ss_doi_window_name {
+    font-weight: 400;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1); }
+    .ss_doi_window_name:hover {
+      white-space: normal; }
+  .ss_doi_window_fields_info {
+    font-weight: 600;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.1); }
+  .ss_doi_window_fields {
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto; }
+    .ss_doi_window_fields_field {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.8rem;
+      cursor: pointer; }
+      .ss_doi_window_fields_field:hover {
+        background: rgba(255, 255, 255, 0.1); }
+      .ss_doi_window_fields_field:not(:last-child) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+      .ss_doi_window_fields_field_group {
+        width: 100%;
+        text-transform: uppercase;
+        color: #f2d88a;
+        font-weight: 600;
+        font-size: 0.8em; }
+      .ss_doi_window_fields_field_dbinfo {
+        width: 100%; }
+        .ss_doi_window_fields_field_dbinfo > div {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          align-items: center;
+          overflow: hidden;
+          box-sizing: border-box;
+          padding: 0.15rem 0; }
+          .ss_doi_window_fields_field_dbinfo > div .material-icons {
+            font-size: 1em;
+            line-height: 1em;
+            margin-right: 0.25em;
+            color: #8db1f7; }
+      .ss_doi_window_fields_field_name {
+        font-size: 1.2em;
+        margin: 0.25rem 0; }
 
 .db_search_nodes {
   position: fixed;

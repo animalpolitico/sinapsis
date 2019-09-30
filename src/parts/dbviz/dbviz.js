@@ -607,10 +607,8 @@ class Nodes extends React.Component{
 
 
 
-
    simulation.nodes(nodesData.nodes)
              .on('tick', this.drawNodes)
-
 
    simulation.force('link')
              .links(nodesData.links);
@@ -940,8 +938,19 @@ class Nodes extends React.Component{
           .attr('opacity', 1)
     })
 
+    var doi = null;
+    doi = this.nodesData.nodes.filter(function(d){
+      return d.id == id;
+    })
+
+    if(doi){
+      doi = doi[0];
+    }
+
+
     this.setState({
-      isolatingNode: true
+      isolatingNode: true,
+      isoDoi: doi
     })
   }
 
@@ -1116,6 +1125,11 @@ class Nodes extends React.Component{
           </Fab>
         </div>
         <div className="db_viz_info">
+          {
+            this.state.isolatingNode  ?
+            <SSDoi doi={this.state.isoDoi} canvas={this.canvasSvg} />
+          : null
+          }
           <div className="db_viz_info_coincidencias">
             <strong>{this.numberWithCommas(this.state.coincidencias)}</strong> coincidencia{this.state.coincidencias === 1 ? '' : 's'}
           </div>
@@ -1251,6 +1265,7 @@ class SSNodeCoincidencias extends React.Component{
     )
   }
 }
+
 class SSCategoryToggle extends React.Component{
   state = {
     vals: [
@@ -1332,6 +1347,80 @@ class SSCategoryToggle extends React.Component{
   }
 }
 
+class SSDoi extends React.Component{
+  render(){
+    var d = this.props.doi;
+    var tc = getTypeColor(d.type);
+    var fields = d.fields;
+    return(
+      <div className="ss_doi_window">
+        <div className="ss_doi_window_type" style={{color: tc, borderColor: tc}}>
+          {getTypeName(d.type)}
+        </div>
+        <div className="ss_doi_window_name">
+          {d.name}
+        </div>
+        <div className="ss_doi_window_fields">
+          {
+            fields.map(function(field){
+              return <SSDoiField field={field} />
+            })
+          }
+        </div>
+        <div className="ss_doi_window_fields_info">
+          Encontrado en {d.fields.length} {d.fields.length > 1 ? 'campos' : 'campo'}
+        </div>
+      </div>
+    )
+  }
+}
+
+class SSDoiField extends React.Component{
+
+  onClick(){
+    var euid = this.props.field.empresauid;
+    var dbid = this.props.field.fromdb;
+    if(euid && dbid){
+      var data = {
+        euid: euid,
+        dbid: dbid
+      }
+      var event = new CustomEvent('sinapsisOpenEmpresa', { detail: data});
+      var ev = new Event('sinapsisStartLoad');
+      window.dispatchEvent(event);
+      window.dispatchEvent(ev);
+    }
+  }
+
+  render(){
+    return(
+      <div className="ss_doi_window_fields_field" onClick={() => this.onClick()}>
+        {
+          this.props.field.group ?
+          <div className="ss_doi_window_fields_field_group">
+            {this.props.field.group}
+          </div>
+          : null
+        }
+
+        <div className="ss_doi_window_fields_field_name">
+          {this.props.field.name}
+        </div>
+
+        {
+          this.props.field.empresauid && this.props.field.fromdb ?
+          <div className="ss_doi_window_fields_field_dbinfo">
+           <div>{window.dbf.getEmpresa(this.props.field.fromdb, this.props.field.empresauid).name}</div>
+           <div><Icon>dns</Icon><div>{window.dbf.getDb(this.props.field.fromdb).name}</div> </div>
+          </div>
+          : null
+        }
+
+      </div>
+    )
+  }
+}
+
 class SSTooltip extends React.Component{
   render(){
     try{
@@ -1341,6 +1430,8 @@ class SSTooltip extends React.Component{
     }
 
     var d = this.props.doi;
+
+
     var node = d3.select('.node[data-id="'+d.id+'"]');
     return(
       <div
