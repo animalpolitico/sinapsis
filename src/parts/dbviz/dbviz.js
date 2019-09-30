@@ -161,11 +161,20 @@ class Analytics extends React.Component{
     var i = 0;
     d3.selectAll('.node_circle')
       .each(function(n){
-        var s = n.sum;
-        if(s && !isNaN(s)){
-          i += parseFloat(s);
+        if(n.type == "empresa"){
+          if(n.fields.length > 0){
+            var f = n.fields[0];
+            var euid = f.empresauid;
+            var dbuid = f.fromdb;
+            var fields = window.dbf.getEmpresaFields(dbuid, euid);
+            var t = window.dbf.getEmpresaTransferenciaSum(fields);
+            if(t > 0){
+              i += t;
+            }
+          }
         }
       })
+    console.log('t', i);
     return i;
   }
 
@@ -441,7 +450,6 @@ class Search extends React.Component{
 
 class SearchResults extends React.Component{
   isolateNode(id, n){
-    console.log('id', id);
     if(this.props.nodeMap){
       this.props.nodeMap.isolateNode(id);
       this.props.nodeMap.setInitialZoom();

@@ -171,10 +171,21 @@ export default class DbFactory {
       var n = nodes[key];
       if(n.type == "empresa"){
         fnodes[key] = n;
-      }else if(n.fields.length > 1){
-        fnodes[key] = n;
+      }else{
+        var diff = [];
+        n.fields.map(function(_field){
+          var euid = _field.empresauid;
+          if(diff.indexOf(euid) == -1){
+            diff.push(euid);
+          }
+        })
+        if(diff.length > 1){
+          fnodes[key] = n;
+        }
       }
     }
+
+
     nodes = fnodes;
     var finalObj = {
       nodes: [],
@@ -198,6 +209,8 @@ export default class DbFactory {
     var obj = {
       count: 0
     }
+    var controlTable = {};
+
     dbA.map(function(_db){
       var empresas = _db.empresas;
           empresas = Object.values(empresas);
@@ -211,7 +224,9 @@ export default class DbFactory {
               if(fields[f] && fields[f].value){
                 if(!obj[f]){
                   obj[f] = 0;
+                  controlTable[f] = [];
                 }
+                controlTable[f].push(fields[f].value);
                 obj[f] = obj[f] + 1;
               }
             })

@@ -54,6 +54,9 @@
       color: white;
       white-space: nowrap;
       min-width: 30px;
+      &.ss_db_newdb_active{
+        background: rgba(white, 0.075);
+      }
       span{
         font-size: 0.9rem;
         font-weight: 600;
@@ -67,6 +70,45 @@
     .ss_db_newdb{
       .ss_db_nav_s{
         display: none;
+      }
+    }
+  }
+}
+#ss_db_popper{
+  z-index: 9999;
+  .ss_popper_container{
+    width: 250px;
+    background: #222;
+    box-shadow: 3px 3px 5px rgba(black, 0.1);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    overflow: hidden;
+    &_button{
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.75rem 0.5rem;
+      @extend .flex;
+      align-items: center;
+      color: white;
+      font-family: $f;
+      line-height: 1;
+      cursor: pointer;
+      &:not(:last-child){
+        border-bottom: 1px solid rgba(white, 0.075);
+      }
+      &:hover{
+        background: rgba(white, 0.075);
+      }
+      .material-icons{
+        font-size: 16px;
+      }
+      div{
+        flex: 1;
+        line-height: 1;
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding-left: 0.5rem;
+        box-sizing: border-box;
       }
     }
   }

@@ -15,6 +15,8 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import moment from 'moment';
 import 'moment/locale/es';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 /** Componentes **/
@@ -22,6 +24,12 @@ import DbFactory from '../funcs/dbClass';
 import DbBuilderToolbar from '../parts/dbbuilder/toolbar';
 import DbEditEmpresa from '../parts/dbbuilder/edit';
 import DbViz from '../parts/dbviz/dbviz';
+
+/** Bases de datos precargadas **/
+import PreDB_Estafa from '../static/consumable/estafa-maestra.json';
+
+
+
 
 import buildLink from "../funcs/buildlink";
 
@@ -661,11 +669,61 @@ class DbEmpresa extends React.Component{
 }
 
 class DbDbsNavigationNewDb extends React.Component{
+  state = {
+    openPopper: false,
+    anchor: null
+  }
+  togglePopper(e){
+    /* OLD
+    */
+    this.setState({
+      openPopper: !this.state.openPopper,
+      anchor: e.currentTarget
+    })
+    console.log('t', this.state);
+  }
+  newDB(){
+    this.setState({
+      openPopper: false
+    })
+    this.props.parent.addDB();
+  }
+
+  selectDB(){
+    this.setState({
+      openPopper: false
+    })
+    var id = PreDB_Estafa.id;
+    window.dbf.obj.dbs[id] = PreDB_Estafa;
+    window.dbf.setModified();
+  }
+
+
   render(){
+    var id = 'ss_db_popper';
+    var cs = ["ss_dbbuilder_sidebar_dbs_nav_td", "ss_db_newdb"];
+    if(this.state.openPopper){
+      cs.push('ss_db_newdb_active');
+    }
     return(
-      <div className="ss_dbbuilder_sidebar_dbs_nav_td ss_db_newdb" onClick={() => this.props.parent.addDB()}>
+      <>
+      <div aria-describedby={id} className={cs.join(' ')} onClick={(e) => this.togglePopper(e)}>
         <Icon>add</Icon><span className="ss_db_nav_s">Nueva base de datos</span>
       </div>
+      <Popper id={id} open={this.state.openPopper} anchorEl={this.state.anchor}>
+        <div className="ss_popper_container">
+          <div className="ss_popper_container_button" onClick={() => this.newDB()}>
+            <Icon>add</Icon><div>Desde cero</div>
+          </div>
+          <div className="ss_popper_container_button"  onClick={() => this.selectDB()}>
+            <Icon>dns</Icon><div>Seleccionar precargada</div>
+          </div>
+          <div className="ss_popper_container_button">
+            <Icon>table_chart</Icon><div>Desde plantilla</div>
+          </div>
+        </div>
+      </Popper>
+      </>
     )
   }
 }

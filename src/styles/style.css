@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Chivo:300,300i,400,400i,700,700i,900,900i&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_error, .ss_db_input_select_container_error, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_nodes #db_viz_nodes_controls, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics_container_group_montos, .ss_analytics_container_group_charts_group, #ss_page_home .ss_hb_cols {
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_error, .ss_db_input_select_container_error, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_nodes #db_viz_nodes_controls, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics_container_group_montos, .ss_analytics_container_group_charts_group, #ss_page_home .ss_hb_cols {
   display: flex;
   flex-wrap: nowrap; }
 
@@ -293,6 +293,8 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       color: white;
       white-space: nowrap;
       min-width: 30px; }
+      .ss_dbbuilder_sidebar_dbs_nav_td.ss_db_newdb.ss_db_newdb_active {
+        background: rgba(255, 255, 255, 0.075); }
       .ss_dbbuilder_sidebar_dbs_nav_td.ss_db_newdb span {
         font-size: 0.9rem;
         font-weight: 600; }
@@ -300,6 +302,38 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
           margin-left: 5px; }
   .ss_dbbuilder_sidebar_dbs_nav.ss_overflow .ss_db_newdb .ss_db_nav_s {
     display: none; }
+
+#ss_db_popper {
+  z-index: 9999; }
+  #ss_db_popper .ss_popper_container {
+    width: 250px;
+    background: #222;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    overflow: hidden; }
+    #ss_db_popper .ss_popper_container_button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.75rem 0.5rem;
+      align-items: center;
+      color: white;
+      font-family: "Chivo", serif;
+      line-height: 1;
+      cursor: pointer; }
+      #ss_db_popper .ss_popper_container_button:not(:last-child) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.075); }
+      #ss_db_popper .ss_popper_container_button:hover {
+        background: rgba(255, 255, 255, 0.075); }
+      #ss_db_popper .ss_popper_container_button .material-icons {
+        font-size: 16px; }
+      #ss_db_popper .ss_popper_container_button div {
+        flex: 1;
+        line-height: 1;
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding-left: 0.5rem;
+        box-sizing: border-box; }
 
 .ss_db_view {
   width: 100%; }

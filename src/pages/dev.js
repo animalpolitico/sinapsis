@@ -629,35 +629,35 @@ class ConvertOldToDb{
 
   save(){
 
-    var dbs = {};
-        dbs[this.uid] = this.obj;
+    // var dbs = {};
+    //     dbs[this.uid] = this.obj;
+    //
+    // var project = {
+    //   uid: uuidv4(),
+    //   info: {
+    //     name: this.name,
+    //     slug: this.slug
+    //   },
+    //   allowAutoSave: true,
+    //   projectStructure: "sinapsis_empresas_auto",
+    //   classVersion: "0.0.1",
+    //   saves: 1,
+    //   modified: moment.now(),
+    //   version: 1,
+    //   created: moment.now(),
+    //   dbs: dbs,
+    //   savedAt: moment.now()
+    // };
 
-    var project = {
-      uid: uuidv4(),
-      info: {
-        name: this.name,
-        slug: this.slug
-      },
-      allowAutoSave: true,
-      projectStructure: "sinapsis_empresas_auto",
-      classVersion: "0.0.1",
-      saves: 1,
-      modified: moment.now(),
-      version: 1,
-      created: moment.now(),
-      dbs: dbs,
-      savedAt: moment.now()
-    };
 
-
-    var j = JSON.stringify(project);
-    var content = btoa(encodeURI(j));
-    // var content = j;
+    // var j = JSON.stringify(project);
+    // var content = btoa(encodeURI(j));
+    var content = JSON.stringify(this.obj);
 
 
     var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-    saveAs(blob, this.slug + ".sinapsis");
-    // saveAs(blob, this.slug + ".json");
+    // saveAs(blob, this.slug + ".sinapsis");
+    saveAs(blob, this.slug + ".json");
   }
 
   cleanEmpresas(){
