@@ -188,7 +188,7 @@ class Analytics extends React.Component{
           }
         }
       })
-    console.log('t', i);
+    // console.log('t', i);
     return i;
   }
 
@@ -266,7 +266,7 @@ class Analytics extends React.Component{
       };
       o.push(_o);
     })
-    console.log('o', o);
+    // console.log('o', o);
     return o;
   }
 
@@ -772,11 +772,11 @@ class Nodes extends React.Component{
   }
 
   filterInitNodes(){
-    console.log('Filtering', 'hola');
+    // console.log('Filtering', 'hola');
     var n = this.nodesData.nodes;
     var l = this.nodesData.links;
 
-    console.log('n', n);
+    // console.log('n', n);
 
     var uidWithConnections = [];
 
@@ -794,7 +794,7 @@ class Nodes extends React.Component{
     /* Muestra sólo con conexiones */
     /* TODO con state */
     if(!this.state.showall){
-      console.log('HOLA');
+      // console.log('HOLA');
       n = n.filter(function(_n){
         return uidWithConnections.indexOf(_n.id) > -1;
       })
@@ -1329,12 +1329,7 @@ class SSCategoryToggle extends React.Component{
         </div>
       </div>
     )
-
-
   }
-
-
-
 }
 
 class SSTooltip extends React.Component{

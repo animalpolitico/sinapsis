@@ -32,6 +32,7 @@ import DbViz from '../parts/dbviz/dbviz';
 import PreDB_Estafa from '../static/consumable/estafa-maestra.json';
 import PreDB_SATDef from '../static/consumable/sat-definitivos.json';
 
+import oldToNew from '../funcs/oldSinapsisToNew';
 
 
 
@@ -423,7 +424,8 @@ class DbView extends React.Component{
   state = {
     showdialog: false,
     dialogValue: '',
-    showDeleteDialog: false
+    showDeleteDialog: false,
+    view: true
   }
   componentDidMount(){
     this.set();
@@ -504,6 +506,19 @@ class DbView extends React.Component{
     })
   }
 
+  toggleView(){
+    var n = !this.state.view;
+    this.setState({
+      view: n
+    })
+
+    this.props.navRef.setState({
+      showing: n
+    })
+
+    window.dbf.toggleDb(this.state.db.id, n);
+  }
+
   render(){
     var dbf = window.dbf;
     var nameCs = ['ss_db_view_name'];
@@ -523,8 +538,11 @@ class DbView extends React.Component{
                 value={this.state.db.name}
                 onChange={(e) => this.handleNameChange(e)}
               />
-            <IconButton size="small" onClick={() => this.intentDelete()}>
-                <Icon>delete</Icon>
+            <IconButton size="small" onClick={() => this.toggleView()}>
+                  <Icon>{this.state.view ? "visibility_off" : "visibility"}</Icon>
+              </IconButton>
+              <IconButton size="small" onClick={() => this.intentDelete()}>
+                  <Icon>delete</Icon>
               </IconButton>
             </div>
 
@@ -771,6 +789,7 @@ class DbDbsNavigationNewDb extends React.Component{
     window.dispatchEvent(startLoad);
     this.setState({
       openModal: false,
+      selectedDb: null
     })
 
     setTimeout(function(){
@@ -786,10 +805,43 @@ class DbDbsNavigationNewDb extends React.Component{
       }
       window.dispatchEvent(endLoad);
     }, 2000);
+  }
 
-
-
-
+  loadFile(e){
+    var self = this;
+    var em = document.getElementById('ss_file_input_from_db');
+    var f = em.files;
+    window.dispatchEvent(startLoad);
+    this.setState({
+      openModal: false,
+      openPopper: false,
+    })
+    if(f[0]){
+      var file = f[0];
+      var name = file.name;
+      var reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.onload = function(ev){
+        var t =  ev.target.result;
+        var ont = new oldToNew(name, t);
+        var db = ont.save();
+        if(!window.dbf.obj.dbs){
+          window.dbf.obj.dbs = {};
+        }
+        window.dbf.obj.dbs[db.id] = db;
+        window.dbf.setModified();
+        window.dispatchEvent(onBigChanges);
+        self.props.parent.fetchDbs();
+        window.dispatchEvent(endLoad);
+        // var obj = window.dbf.setFile(t);
+        // var url = buildLink('/construir/' + obj.uid);
+        // self.props.history.push(url);
+        // self.setState({
+        //   control: 'fromfile',
+        //   showcontrol: false
+        // })
+      }
+    }
   }
 
   render(){
@@ -811,7 +863,13 @@ class DbDbsNavigationNewDb extends React.Component{
           <div className="ss_popper_container_button"  onClick={() => this.selectDB()}>
             <Icon>dns</Icon><div>Seleccionar precargada</div>
           </div>
-          <div className="ss_popper_container_button">
+          <div className="ss_popper_container_button ss_poppper_container_button_input">
+            <input
+              type="file"
+              accept=".csv"
+              id="ss_file_input_from_db"
+              onChange={(e) => this.loadFile(e)}
+            />
             <Icon>table_chart</Icon><div>Desde plantilla</div>
           </div>
         </div>
@@ -843,6 +901,7 @@ class DbDbsNavigationNewDb extends React.Component{
 class DbDbsNavigationTd extends React.Component{
   state = {
     name: '',
+    showing: true,
     isblurred: true
   }
   componentDidMount(){
@@ -877,10 +936,14 @@ class DbDbsNavigationTd extends React.Component{
 
   render(){
     var db = this.props.db;
+    var cs = ["ss_dbbuilder_sidebar_dbs_nav_td"];
+    if(!this.state.showing){
+      cs.push('ss_inactive');
+    }
     return (
       <div
         id={'ss_nav_'+db.id}
-        className="ss_dbbuilder_sidebar_dbs_nav_td"
+        className={cs.join(' ')}
         onClick={(e) => this.handleClick(e)}
         >
         <div className="ss_dbbuilder_sidebar_dbs_nav_td_input" title={this.state.name}>

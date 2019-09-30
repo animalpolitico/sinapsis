@@ -28,6 +28,7 @@ export default class DbFactory {
     this.saves = 0;
     this.manualSaves = 0;
     this.originalData = [];
+    this.omitDbs = [];
   }
 
   /**
@@ -107,6 +108,28 @@ export default class DbFactory {
   }
 
   /**
+  * Oculta la base de datos
+  *
+  * @param dbid
+  * @param toggle
+  **/
+  toggleDb(dbid, show){
+    var hide = !show;
+    var c = this.omitDbs;
+    var isin = c.indexOf(dbid) > -1;
+    if(hide && !isin){
+      c.push(dbid);
+    }
+
+    if(!hide && isin){
+      c.splice(c.indexOf(dbid), 1);
+    }
+
+    this.omitDbs = c;
+
+  }
+
+  /**
   * Crea los cruces
   *
   * @param void
@@ -115,6 +138,17 @@ export default class DbFactory {
   getMatches(onlyinall){
     var self = this;
     var db = this.getDbs();
+    var filterDb = {};
+    var omitDbs = this.omitDbs;
+
+    for(key in db){
+      if(omitDbs.indexOf(key) == -1){
+        filterDb[key] = db[key];
+      }
+    }
+
+    db = filterDb;
+
     var dbkeys = Object.keys(db);
     var dbA = Object.values(db);
     /* Obtiene todos los campos */
@@ -856,7 +890,7 @@ export default class DbFactory {
     })
 
     if(key == "transferencia"){
-      console.log('f', f);
+      // console.log('f', f);
     }
 
     var o = {};

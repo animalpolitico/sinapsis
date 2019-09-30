@@ -68,7 +68,7 @@ export default class DbFormGroupContrato extends React.Component{
     var fs = this.state.fields;
     var dbuid = this.props.parent.props.db.id;
     var euid = this.props.empresa.uid;
-    console.log('Adding', fs);
+    // console.log('Adding', fs);
 
     window.dbf.addFieldsFromGuid(dbuid, euid, this.state.guid, fs);
     this.close();

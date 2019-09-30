@@ -119,7 +119,7 @@ export default class DbFormGroupTransferencias extends React.Component{
     var dbuid = this.props.parent.props.db.id;
     var euid = this.props.empresa.uid;
     var gr = window.dbf.getEmpresaGroupsByGroup(dbuid, euid, 'transferencia');
-    console.log('GR-T', gr);
+    // console.log('GR-T', gr);
     return gr;
   }
 

@@ -1,13 +1,9 @@
-import React from 'react';
 import moment from 'moment';
 import 'moment/locale/es';
 import formatMoney from 'format-money';
-import estafa from '../static/csvs/sat-def.csv';
-import EstafaJson from '../static/jsons/estafa-maestra.json';
 import * as d3 from "d3";
-import { saveAs } from 'file-saver';
 import { snps_ka } from '../vars/compatibilityArray';
-import { convertToSinapsisFile } from '../funcs/covertToSinapsis';
+import { saveAs } from 'file-saver';
 moment.locale('es');
 var ntol = require('number-to-letter');
 var slugify = require('slugify');
@@ -16,27 +12,8 @@ const csvjson =require('csvtojson')
 const uuidv4 = require('uuid/v4');
 
 
-export default class DevSandbox extends React.Component{
 
-  componentDidMount(){
-    var cls = new ConvertOldToDb('SAT Definitivos', estafa);
-    // var d = convertToSinapsisFile(EstafaJson);
-
-  }
-
-  render(){
-    return(
-      <div>
-        Hola
-      </div>
-    )
-  }
-}
-
-
-
-
-class ConvertOldToDb{
+export default class ConvertOldToDb{
   constructor(name, file){
     this.name = name;
     this.file = file;
@@ -46,7 +23,7 @@ class ConvertOldToDb{
   }
 
   async get(){
-    var c = await d3.csv(this.file);
+    var c = d3.csvParse(this.file);
     var a = Object.values(c);
     a.pop();
     this.array = a;
@@ -57,7 +34,7 @@ class ConvertOldToDb{
     this.setInitialObject();
     this.cleanEmpresas();
     this.setEmpresas();
-    this.save();
+    // this.save();
   }
 
   setEmpresas(){
@@ -65,7 +42,6 @@ class ConvertOldToDb{
     this.empresas.map(function(empresa){
       self.setEmpresa(empresa);
     })
-    // console.log('t', this.obj);
   }
 
   setEmpresa(fields){
@@ -652,12 +628,12 @@ class ConvertOldToDb{
 
     // var j = JSON.stringify(project);
     // var content = btoa(encodeURI(j));
-    var content = JSON.stringify(this.obj);
+    var content = this.obj;
+    return content;
 
-
-    var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-    // saveAs(blob, this.slug + ".sinapsis");
-    saveAs(blob, this.slug + ".json");
+    // // var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+    // // saveAs(blob, this.slug + ".sinapsis");
+    // saveAs(blob, this.slug + ".json");
   }
 
   cleanEmpresas(){

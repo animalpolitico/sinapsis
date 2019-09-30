@@ -6,7 +6,7 @@ export default class TransactionRow extends React.Component{
     var t = f[0];
     var emisor, monto, receptor = false;
     if(t.group !== "transferencia"){
-      console.log('t', t.category);
+      // console.log('t', t.category);
       f.map(function(e){
         switch(e.category){
           case "emisor":

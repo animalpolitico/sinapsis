@@ -3,6 +3,6 @@ export function convertToSinapsisFile(file){
   var s = JSON.stringify(file);
   var j = btoa(encodeURI(s));
 
-  console.log('j', j);
+  // console.log('j', j);
 
 }
