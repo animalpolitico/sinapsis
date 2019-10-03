@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/es';
 import formatMoney from 'format-money';
-import estafa from '../static/csvs/sat-def.csv';
+import estafa from '../static/csvs/estafa-maestra.csv';
 import EstafaJson from '../static/jsons/estafa-maestra.json';
 import * as d3 from "d3";
 import { saveAs } from 'file-saver';
@@ -19,7 +19,7 @@ const uuidv4 = require('uuid/v4');
 export default class DevSandbox extends React.Component{
 
   componentDidMount(){
-    var cls = new ConvertOldToDb('SAT Definitivos', estafa);
+    var cls = new ConvertOldToDb('Estafa Maestra', estafa);
     // var d = convertToSinapsisFile(EstafaJson);
 
   }
@@ -606,6 +606,37 @@ class ConvertOldToDb{
           f[slug] = ff;
         }
     })
+
+    /** Otros **/
+    var otrosRange = [72, 81];
+    for(var i = otrosRange[0]; i <= otrosRange[1]; i++){
+      var sn = snps_ka[i];
+      var _fields = this.groupByRange(fields, [i, i]);
+      _fields.map(function(_f){
+        var em = Object.values(_f)[0];
+        if(em){
+          var t = sn.category;
+          var n = sn.name;
+
+          var guid = uuidv4();
+          var preslug = slugify('otros ' + n, {lower: true});
+          var slug = guid + '-' + preslug;
+
+          var obj = {
+            name: n,
+            slug: preslug,
+            isvalid: true,
+            value: em,
+            matchWith: [t],
+            group: "otros",
+            guid: guid,
+            groupUid: guid,
+            empresauid: uid
+          }
+          f[slug] = obj;
+        }
+      })
+    }
 
   }
 

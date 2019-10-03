@@ -126,6 +126,9 @@ export default class DbFactory {
     }
 
     this.omitDbs = c;
+    this.refresh();
+
+    this.obj.dbs[dbid]['hide'] = hide;
 
   }
 
@@ -182,7 +185,8 @@ export default class DbFactory {
     })
     var nodes = {};
     normalized.map(function(f){
-      var slug = slugify(f.type + '-' + f.value, {lower: true, remove: /[*+~.()'"!:@]/g});
+      var v = f.value.replace(/[.\s]/g, '');
+      var slug = slugify(f.type + '-' + v, {lower: true, remove: /[*+~.()'"!:@]/g});
       if(f.id){
         slug = f.id;
       }
@@ -206,6 +210,8 @@ export default class DbFactory {
     for(var key in nodes){
       var n = nodes[key];
       if(n.type == "empresa"){
+        if(onlyinall){
+        }
         fnodes[key] = n;
       }else{
         var diff = [];
@@ -394,6 +400,7 @@ export default class DbFactory {
     });
 
     i += this.getEmpresaTransferenciaSum(f);
+    i += this.getEmpresaOtrosSum(f);
 
     if(isNaN(i)){
       i = 0;
@@ -445,6 +452,31 @@ export default class DbFactory {
         i += (multi * monto);
       }
     }
+    return i;
+  }
+
+  /**
+  * Obtiene la suma de otros
+  *
+  * @param empresa
+  * @return int
+  **/
+  getEmpresaOtrosSum(f){
+    var i = 0;
+    f = f.filter(function(d){
+      return d.group == "otros" && (d.category == "monto_recibido" || d.category == "monto_otorgado");
+    });
+    var ts = {};
+    f.map(function(em){
+      var mult = em.category == "monto_recibido" ? 1 : -1;
+      var v = em.value;
+          v = parseFloat(v);
+      if(isNaN(v)){
+        v = 0;
+      }
+      i += v * mult;
+    })
+
     return i;
   }
 
@@ -631,6 +663,7 @@ export default class DbFactory {
     }
     dbs[uid] = o;
     this.setModified();
+    this.refresh();
     this.obj.dbs = dbs;
     return uid;
   }
@@ -668,6 +701,7 @@ export default class DbFactory {
     };
     db.empresas[empresa.uid] = empresa;
     this.editDb(db.id, db);
+    this.refresh();
     return [db, empresa];
   }
 
@@ -691,6 +725,7 @@ export default class DbFactory {
   deleteDb(db){
     var uid = db.id;
     delete this.obj.dbs[uid];
+    this.refresh();
     this.setModified();
   }
 
@@ -703,6 +738,7 @@ export default class DbFactory {
   **/
   deleteEmpresa(db, uid){
     delete this.obj.dbs[db.id].empresas[uid];
+    this.refresh();
     this.setModified();
   }
 
@@ -719,6 +755,7 @@ export default class DbFactory {
     e.fields = fields;
     this.obj.dbs[dbuid].empresas[euid] = e;
     this.obj.dbs[dbuid].modified = moment.now();
+    this.refresh();
     this.setModified();
     return e;
   }
@@ -744,7 +781,19 @@ export default class DbFactory {
     }
     this.obj.dbs[dbuid].empresas[euid].fields = dbfields;
     this.obj.dbs[dbuid].modified = moment.now();
+    this.refresh();
     this.setModified();
+  }
+
+  /**
+  * Actualiza el mapa de nodos
+  *
+  * @param void
+  * @return void
+  **/
+  refresh(){
+    var ev = new Event('sinapsisBigModified');
+    window.dispatchEvent(ev);
   }
 
 

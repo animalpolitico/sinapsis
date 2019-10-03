@@ -21,6 +21,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import * as d3 from "d3";
 
 /** Componentes **/
 import DbFactory from '../funcs/dbClass';
@@ -33,7 +34,8 @@ import PreDB_Estafa from '../static/consumable/estafa-maestra.json';
 import PreDB_SATDef from '../static/consumable/sat-definitivos.json';
 
 import oldToNew from '../funcs/oldSinapsisToNew';
-
+import {predbs} from '../vars/rel';
+import Flag from "react-flags";
 
 
 import buildLink from "../funcs/buildlink";
@@ -89,11 +91,12 @@ export default class DbBuilderPage extends React.Component{
 
 
     /* Previene cerrar el navegador */
-    window.addEventListener("beforeunload", (ev) =>
-    {
+    window.addEventListener("beforeunload", (ev) => {
         ev.preventDefault();
         return ev.returnValue = '¿Deseas cerrar la pestaña?';
     });
+
+
   }
 
   componentWillUnmount(){
@@ -170,6 +173,7 @@ export default class DbBuilderPage extends React.Component{
         })
       }
     }
+
   }
 
   intentToRecover(){
@@ -324,7 +328,6 @@ class DbLoader extends React.Component{
         </div>
         : null
       }
-
       </>
     )
   }
@@ -368,12 +371,26 @@ class DbBuilderSidebar extends React.Component{
     }
   }
   fetchDbs(){
+    var self = this;
     var dbf = window.dbf;
+    var dbs = dbf.getDbs();
     this.setState({
       uid: dbf.obj.uid,
-      dbs: dbf.getDbs(),
+      dbs: dbs,
       db: false
     })
+
+    console.log('fetchingdbs');
+
+    var dbsa = Object.values(dbs);
+    if(dbsa.length){
+      var ldb = dbsa[dbsa.length - 1];
+      console.log('ldb', ldb);
+      setTimeout(function(){
+        self.refs[ldb.id].handleClick();
+      }, 50);
+    }
+
   }
 
   addDB(){
@@ -381,9 +398,6 @@ class DbBuilderSidebar extends React.Component{
     var dbf = window.dbf;
     var dbId = dbf.addDb();
     this.fetchDbs();
-    setTimeout(function(){
-      self.refs[dbId].handleClick();
-    }, 10);
   }
 
   selectDb(uid){
@@ -419,7 +433,7 @@ class DbBuilderSidebar extends React.Component{
             <div className={navCs.join(' ')}>
               {
                 dbsA.map(function(db, k){
-                  return <DbDbsNavigationTd ref={(ref) => self.refs[db.id] = ref} parent={self} key={k} index={k} db={db} />
+                  return <DbDbsNavigationTd ref={(ref) => self.refs[db.id] = ref} parent={self} index={k} db={db} />
                 })
               }
               <DbDbsNavigationNewDb parent={this}/>
@@ -450,6 +464,9 @@ class DbView extends React.Component{
 
   componentDidUpdate(p, n){
     if(p.db.id !== this.props.db.id){
+      this.setState({
+        view: !this.props.db.hide
+      })
       this.set();
     }
   }
@@ -549,7 +566,6 @@ class DbView extends React.Component{
           this.state.db ?
           <div>
             <div className={nameCs.join(' ')}>
-              <Icon style={{color: 'white'}}>dns</Icon>
               <input
                 type="text"
                 value={this.state.db.name}
@@ -794,34 +810,37 @@ class DbDbsNavigationNewDb extends React.Component{
     })
   }
 
-  handlePreSelect(e){
+  selectPreDB(path, name){
+    console.log('PATH', path, name);
     this.setState({
-      selectedDb: e.target.value
+      selectedDb: path,
+      selectedName: name
     })
   }
 
-  addPreDb(){
+  async addPreDb(){
     var self = this;
     var v = this.state.selectedDb;
+    var n = this.state.selectedName;
     window.dispatchEvent(startLoad);
     this.setState({
       openModal: false,
-      selectedDb: null
+      selectedDb: null,
+      selectedName: null
     })
+    var c = await d3.csv(v);
+    var ont = new oldToNew(n, c, true);
+    var db = ont.save();
+    if(!window.dbf.obj.dbs){
+      window.dbf.obj.dbs = {};
+    }
+    window.dbf.obj.dbs[db.id] = db;
+    window.dbf.setModified();
+    window.dispatchEvent(onBigChanges);
+    self.props.parent.fetchDbs();
+    window.dispatchEvent(endLoad);
 
-    setTimeout(function(){
-      if(dbsPre[v]){
-        var db = dbsPre[v];
-        if(!window.dbf.obj.dbs){
-          window.dbf.obj.dbs = {};
-        }
-        window.dbf.obj.dbs[db.id] = db;
-        window.dbf.setModified();
-        window.dispatchEvent(onBigChanges);
-        self.props.parent.fetchDbs();
-      }
-      window.dispatchEvent(endLoad);
-    }, 2000);
+
   }
 
   loadFile(e){
@@ -850,18 +869,12 @@ class DbDbsNavigationNewDb extends React.Component{
         window.dispatchEvent(onBigChanges);
         self.props.parent.fetchDbs();
         window.dispatchEvent(endLoad);
-        // var obj = window.dbf.setFile(t);
-        // var url = buildLink('/construir/' + obj.uid);
-        // self.props.history.push(url);
-        // self.setState({
-        //   control: 'fromfile',
-        //   showcontrol: false
-        // })
       }
     }
   }
 
   render(){
+    var self = this;
     var id = 'ss_db_popper';
     var cs = ["ss_dbbuilder_sidebar_dbs_nav_td", "ss_db_newdb"];
     if(this.state.openPopper){
@@ -873,12 +886,13 @@ class DbDbsNavigationNewDb extends React.Component{
         <Icon>add</Icon><span className="ss_db_nav_s">Nueva base de datos</span>
       </div>
       <Popper id={id} open={this.state.openPopper} anchorEl={this.state.anchor}>
+        <ClickAwayListener onClickAway={() => this.setState({openPopper: false})}>
         <div className="ss_popper_container">
           <div className="ss_popper_container_button" onClick={() => this.newDB()}>
-            <Icon>add</Icon><div>Desde cero</div>
+            <div>Nueva</div>
           </div>
           <div className="ss_popper_container_button"  onClick={() => this.selectDB()}>
-            <Icon>dns</Icon><div>Seleccionar precargada</div>
+            <div>Seleccionar precargada</div>
           </div>
           <div className="ss_popper_container_button ss_poppper_container_button_input">
             <input
@@ -887,18 +901,20 @@ class DbDbsNavigationNewDb extends React.Component{
               id="ss_file_input_from_db"
               onChange={(e) => this.loadFile(e)}
             />
-            <Icon>table_chart</Icon><div>Desde plantilla</div>
+            <div>Desde plantilla</div>
           </div>
         </div>
+      </ClickAwayListener>
       </Popper>
       <Dialog open={this.state.openModal} onClose={() => this.closeModal()} className="ss_modal_dbpre">
         <DialogTitle>Selecciona una base de datos</DialogTitle>
         <DialogContent>
           <div className="ss_modal_dbpre_select">
-          <RadioGroup name="predb" value={this.state.selectedDb} onChange={(e) => this.handlePreSelect(e) }>
-              <FormControlLabel value="estafa-maestra" control={<Radio />} label="Estafa Maestra" />
-              <FormControlLabel value="sat-definitivos" control={<Radio />} label="SAT Definitivos" />
-          </RadioGroup>
+          {
+            predbs.map(function(predb){
+              return <PreDb parent={self} p={predb} />
+            })
+          }
           </div>
         </DialogContent>
         <DialogActions>
@@ -911,6 +927,60 @@ class DbDbsNavigationNewDb extends React.Component{
         </DialogActions>
       </Dialog>
       </>
+    )
+  }
+}
+
+class PreDb extends React.Component{
+  render(){
+    var p = this.props.p;
+    var m = p.size;
+
+    var ts = '< 10 segundos';
+    if(m > 2){
+      if(m < 10){
+        ts = '< 1 minuto';
+      }else{
+        var mm = Math.ceil(m / 10);
+        ts = mm + ' minuto' + (mm > 1 ? 's' : '');
+      }
+    }
+
+    var showAlert = m > 10;
+
+    return(
+      <div className="ss_predb_select">
+        <input type="radio" name="predb_input" onChange={(e) => this.props.parent.selectPreDB(p.file, p.name)}/>
+        <div className="ss_predb_select_info">
+        <div className="ss_predb_select_name">
+          {p.name}
+        </div>
+        <div className="ss_predb_select_author">
+          De <strong>{p.author}</strong>
+        </div>
+
+        <div className="ss_predb_select_country">
+          <Flag
+            name={p.country}
+            format="svg"
+            pngSize={64}
+            basePath="/img/flags"
+          />
+          <span>{p.countryLabel}</span>
+        </div>
+        <div className="ss_predb_select_maxtime">
+          Tiempo aproximado de carga: <strong>{ts}</strong>
+        </div>
+        {
+          showAlert ?
+          <div className="ss_predb_select_alert">
+            <Icon>warning</Icon>
+            <label>Esta base de datos es muy grande, podrás notar algunos problemas de procesamiento.</label>
+          </div>
+          : null
+        }
+        </div>
+      </div>
     )
   }
 }

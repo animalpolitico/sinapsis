@@ -327,4 +327,52 @@ export const snps_ka = {
     bigGroup: 'transferencia',
     sumWith: ['montos_transferencia', 'montos_totales']
   },
+  72: {
+    name: "Nombre de la empresa",
+    category: 'empresa',
+  },
+  73: {
+    name: "Nombre de persona",
+    category: 'person',
+  },
+  74: {
+    name: "Dirección",
+    category: 'address',
+  },
+  75: {
+    name: "RFC",
+    category: 'rfc',
+  },
+  76: {
+    name: "Fecha",
+    category: 'date',
+  },
+  77: {
+    name: "Correo electrónico",
+    category: 'email',
+  },
+  78: {
+    name: "Sitio web",
+    category: 'website',
+  },
+  79: {
+    name: "Teléfono",
+    category: 'phone',
+  },
+  80: {
+    name: "Número de contrato o convenio",
+    category: 'convenio',
+  },
+  81: {
+    name: "Dependencia / Instancia",
+    category: 'instancia',
+  },
+  82: {
+    name: "Monto recibido",
+    category: 'monto_recibido',
+  },
+  83: {
+    name: "Monto otorgado",
+    category: 'monto_otorgado',
+  },
 }

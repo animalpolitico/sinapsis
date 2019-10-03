@@ -16,6 +16,7 @@ import DbFormGroupPersonas from './formGroups/personas';
 import DbFormGroupContrato from './formGroups/contrato';
 import DbFormGroupConvenio from './formGroups/convenio';
 import DbFormGroupTransferencias from './formGroups/transferencias';
+import DbFormGroupOtros from './formGroups/otros';
 
 var slugify = require('slugify');
 const uuidv4 = require('uuid/v4');
@@ -96,7 +97,6 @@ export default class DbEditEmpresa extends React.Component{
         <DbEditEmpresaDbInfo {...this.props} />
         <div className="db_empresa_name">
           <div className="db_empresa_name_t">
-            <Icon style={{color: "white"}}>home_work</Icon>
             <div>
               <input
                 type="text"
@@ -120,7 +120,7 @@ export default class DbEditEmpresa extends React.Component{
             : null
           }
           <div className="db_empresa_name_trash" onClick={() => this.intentDelete()}>
-            <Icon>delete_outline</Icon>
+            <Icon>delete</Icon>
           </div>
           <Dialog open={this.state.showDeleteDialog} onClose={() => this.setState({ showDeleteDialog: false})}>
             <DialogTitle>¿Estás segurx?</DialogTitle>
@@ -147,6 +147,7 @@ export default class DbEditEmpresa extends React.Component{
           <DbFormGroupContrato empresa={this.props.empresa} parent={this} />
           <DbFormGroupConvenio empresa={this.props.empresa} parent={this} />
           <DbFormGroupTransferencias empresa={this.props.empresa} parent={this} />
+          <DbFormGroupOtros empresa={this.props.empresa} parent={this} />
         </div>
       </div>
     )
@@ -252,7 +253,7 @@ class DbEditEmpresaDbInfo extends React.Component{
   render(){
     return(
       <div className="db_empresa_edit_container_dbinfo">
-        <Icon style={{color: this.props.db.color}}>dns</Icon><span className="ss_dbe_dbname">{this.props.db.name}</span>
+        <span className="ss_dbe_dbname">{this.props.db.name}</span>
       </div>
     )
   }

@@ -70,7 +70,7 @@ export default class DbInput extends React.Component{
   }
 
   validateFromRgx(rgx){
-    var v = this.state.value;
+    var v = this.state.value.toLowerCase();
     var match = v.match(rgx);
     return match ? true : false;
   }
@@ -208,19 +208,26 @@ export default class DbInput extends React.Component{
 
     cs = [...cs, 'ss_on_error_' + this.props.errorType];
 
+    var ics = [];
+    if(this.state.value){
+      ics.push('ss_with_value');
+    }
 
     return(
       <div className={cs.join(' ')}>
         <div className="ss_db_input_container">
           <div className="ss_db_input_container_input">
             <input
+              className={ics.join(' ')}
               type="text"
-              placeholder={this.getName()}
               value={this.state.value}
               onChange={(e) => this.setValue(e.target.value)}
               onFocus={() => this.handleFocus()}
               onBlur={() => this.handleBlur()}
             />
+            <div className="ss_db_input_container_label">
+              {this.getName()}
+            </div>
           </div>
           {
             !this.state.isvalid && this.props.errorLegend ?
@@ -229,9 +236,7 @@ export default class DbInput extends React.Component{
             </div>
             : null
           }
-          <div className="ss_db_input_container_label" style={{display: 'none'}}>
-            {this.getName()}
-          </div>
+
         </div>
       </div>
     )

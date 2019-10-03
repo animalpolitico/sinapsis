@@ -1,5 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Chivo:300,300i,400,400i,700,700i,900,900i&display=swap');
+@import url("https://use.typekit.net/nhy0plw.css");
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+html,body{
+  font-family: $f;
+}
 #wrapper{
   width: 100%;
   height: 100%;
@@ -7,7 +10,6 @@
   top: 0;
   left: 0;
   overflow: hidden;
-  font-family: $f;
 }
 #binder{
   width: 100%;
@@ -19,7 +21,7 @@
   width: 100%;
   box-sizing: border-box;
   position: relative;
-  min-height: 90vh;
+  min-height: 100vh;
   &_container{
     width: 90%;
     margin: 2rem auto;

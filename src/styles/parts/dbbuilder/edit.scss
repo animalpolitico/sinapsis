@@ -286,6 +286,28 @@
     &_input{
       width: 100%;
       order: 2;
+      position: relative;
+      margin-top: 0.75rem;
+      .ss_db_input_container_label{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: black;
+        z-index: 2;
+        @extend .flex;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0.5rem;
+        color: #999;
+        line-height: 1;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        transition: transform 0.35s ease;
+        pointer-events: none;
+      }
       input{
         width: 100%;
         display: block;
@@ -296,8 +318,16 @@
         font-family: $f;
         background: white;
         border: 2px solid white;
-        &:focus{
+        &:focus, &.ss_with_value{
           outline: 0;
+          ~ .ss_db_input_container_label{
+            height: auto;
+            padding: 0.25rem 0;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transform: translateY(-100%);
+          }
         }
       }
     }

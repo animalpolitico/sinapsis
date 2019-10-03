@@ -65,6 +65,24 @@ body.ss_show_sidebar{
   }
 }
 
+// .MuiDialog-paper, .MuiPaper-rounded{
+//   border-radius: 0!important;
+//   background: #111!important;
+//   color: white!important;
+//   .MuiTypography-root{
+//     color: white!important;
+//   }
+//   .MuiDialogTitle-root, .MuiFormControlLabel-root{
+//     color: #f0f0f0!important;
+//   }
+//
+// }
+// .MuiDialogActions-root{
+//   .MuiButton-label{
+//     color: white!important;
+//   }
+// }
+
 .ss_modal_dbpre{
   .MuiDialog-paper{
     border-radius: 0;
@@ -73,6 +91,93 @@ body.ss_show_sidebar{
       color: #f0f0f0;
     }
   }
+  .ss_predb{
+    &_select{
+      width: 100%;
+      position: relative;
+      margin: 0.5rem 0;
+      cursor: pointer;
+      &:hover{
+        .ss_predb_select_info{
+          background: rgba(white, 0.05);
+        }
+      }
+      input{
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        opacity: 0;
+        &:checked{
+          & ~ .ss_predb_select_info{
+            background: rgba(white, 0.1);
+          }
+        }
+      }
+      &_info{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.7rem 0.5rem;
+        color: white;
+        border-bottom: 2px solid #0072ff;
+        position: relative;
+
+      }
+      &_name{
+        width: 100%;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+      &_author{
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        margin-top: 0.25rem;
+      }
+      &_country{
+        @extend .flex;
+        align-items: center;
+        margin-top: 0.25rem;
+        img{
+          width: 15px;
+          line-height: 1;
+          height: 0%!important;
+        }
+        span{
+          font-size: 0.7rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          display: block;
+          box-sizing: border-box;
+          padding-left: 0.25rem;
+          transform: translateY(0.1rem);
+        }
+      }
+      &_maxtime{
+        color: #f4f4f4;
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+      }
+      &_alert{
+        margin-top: 0.25rem;
+        color: yellow;
+        @extend .flex;
+        font-size: 0.8rem;
+        align-items: center;
+        .material-icons{
+          font-size: 0.8rem;
+        }
+        label{
+          box-sizing: border-box;
+          padding-left: 0.25rem;
+        }
+      }
+    }
+  }
+
+
 }
 
 #ssdb_loader{

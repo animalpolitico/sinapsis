@@ -53,3 +53,16 @@
     }
   }
 }
+
+#ss_fab_release{
+  animation: ss_glow 1s linear infinite alternate;
+}
+
+@keyframes ss_glow{
+  from{
+    box-shadow: 0 0 2px #0072FF;
+  }
+  to{
+    box-shadow: 0 0 10px #0072FF;
+  }
+}

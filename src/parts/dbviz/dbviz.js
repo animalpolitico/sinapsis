@@ -25,13 +25,15 @@ import {
   ResponsiveContainer
 } from 'recharts';
 var slugify = require('slugify');
+var startLoad = new Event('sinapsisStartLoad');
+var endLoad = new Event('sinapsisEndLoad');
 
 
 
 export default class DbViz extends React.Component{
   state = {
     showSearch: true,
-    showcontrols: false,
+    showcontrols: true,
     displayAnalytics: false
   }
   constructor(props){
@@ -97,6 +99,9 @@ function getTypeColor(t){
     case "person":
       return "#FF0054";
     break;
+    case "titular":
+      return "#FF0054";
+    break;
     case "email":
       return "#A8FF00";
     break;
@@ -104,7 +109,7 @@ function getTypeColor(t){
       return "#02FC8F";
     break;
     case "instancia":
-      return "#169597";
+      return "#555";
     break;
     case "contrato":
       return "#885BFA"
@@ -143,6 +148,9 @@ function getTypeName(t){
     break;
     case "instancia":
       return "Instancia / Dependencia";
+    break;
+    case "titular":
+      return "Titular de instancia";
     break;
     case "contrato":
       return "Convenio / Contrato";
@@ -418,7 +426,7 @@ export class Search extends React.Component{
           }else{
             add = sv.indexOf(ns) > -1;
           }
-          if(add){
+          if(add && ns.length > 1){
             f.push(n);
           }
         })
@@ -519,12 +527,14 @@ class SearchResults extends React.Component{
 
 class Nodes extends React.Component{
   state = {
+    hasloaded: false,
     loading: false,
     isPerfectZoom: true,
     coincidencias: 0,
     nodeSizeParam: 'monto',
     showall: false,
-    onlyinall: false
+    onlyinall: false,
+    displayDoi: true
   }
   componentDidMount(){
     var self = this;
@@ -543,14 +553,20 @@ class Nodes extends React.Component{
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   resize(){
-    var container = this.container;
-    const width = container.offsetWidth,
-          height = container.offsetHeight;
-    this.canvas.attr('width', width)
-               .attr('height', height);
-    this.setInitialZoom();
+    try{
+      var container = this.container;
+      const width = container.offsetWidth,
+            height = container.offsetHeight;
+      this.canvas.attr('width', width)
+                 .attr('height', height);
+      this.setInitialZoom();
+    }catch(ex){
+
+    }
+
   }
   set(){
+    window.dispatchEvent(startLoad);
     d3.selectAll('#db_viz_nodes_canvas *').remove();
     this.setState({
       loading: true
@@ -576,6 +592,13 @@ class Nodes extends React.Component{
     this.canvas = canvas;
 
 
+  var bgs = canvas.append('rect')
+          .attr('class', 'nodes_container_bg')
+          .attr('width', width)
+          .attr('height', height)
+          .attr('fill', 'transparent')
+
+
     var simulation = d3.forceSimulation()
                        .force("charge", d3.forceManyBody(10))
                        .force("link",
@@ -591,6 +614,10 @@ class Nodes extends React.Component{
 
    this.simulation = simulation;
    this.nodesContainer = canvas.append('g').attr('class', 'nodes_container');
+
+
+
+
 
    var zoom = d3.zoom()
                 .extent([[0, 0], [width, height]])
@@ -609,6 +636,10 @@ class Nodes extends React.Component{
 
    simulation.nodes(nodesData.nodes)
              .on('tick', this.drawNodes)
+             .on('end', function(){
+             })
+
+
 
    simulation.force('link')
              .links(nodesData.links);
@@ -628,19 +659,37 @@ class Nodes extends React.Component{
       }
     })
 
+    var lMin = 8;
+    var lMax = 50;
+
+    var lRange=[0, 1700];
+
+    var lMaxSize = Math.min(lRange[1], data.links.length);
+
+    var lPct = Math.abs(1 - (lMaxSize / lRange[1]));
+    console.log('lpct', lPct);
+
+    var lSize = (lMax * lPct) + lMin;
+
+    console.log('LSIZE', lSize);
+
+
     var links = self.nodesContainer
                    .selectAll('line')
                    .data(data.links)
                    .enter()
                    .append('line')
-                   .attr('stroke-width', 7)
+                   .attr('stroke-width', lSize)
                    .attr('class', 'nodes_link')
                    .attr('data-from', l => l.source.id)
                    .attr('data-to', l => l.target.id)
                    .attr('stroke', 'rgba(90, 67, 231, 0.8)');
     this.links = links;
 
-
+    bgs.on('click', function(){
+            self.releaseNode();
+            self.simulation.stop();
+          })
 
     this.getCoincidenciasSize();
 
@@ -654,18 +703,47 @@ class Nodes extends React.Component{
                           .attr('data-id', d => d.id)
                           .call(this.drag())
 
-    nodesLabels.append('rect')
-               .attr('fill', '#222')
-               .attr('width', 2000)
-               .attr('height', 260)
-               .attr('x', -1000)
-               .attr('y', -210)
+    var rects = nodesLabels
+                 .append('rect')
+                 .attr('fill', function(d){
+                   return getTypeColor(d.type)
+                 })
 
     nodesLabels.append('text')
                .text((d) => d.name.toUpperCase())
                .attr('fill', 'white')
-               .attr('font-size', 240)
+               .attr('font-size', 400)
                .attr('text-anchor', 'middle')
+
+    var nodesPaddingLeft = 60;
+    var nodesPaddingTop = 35;
+
+    nodesLabels.each(function(d){
+      var g = d3.select(this);
+
+      var bb = null;
+      var t = g.selectAll('text')
+                .each(function(){
+                  bb = this.getBBox();
+                })
+
+      if(bb){
+        var w = bb.width;
+        var h = bb.height;
+
+        var ww = w + (nodesPaddingLeft * 2);
+        var hh = h + (nodesPaddingTop * 2);
+
+        g.selectAll('rect')
+         .attr('width', ww)
+         .attr('height', hh)
+         .attr('x', -ww / 2)
+         .attr('y', -h + nodesPaddingTop)
+
+
+      }
+
+    })
 
     var nodesCircles = self.nodesContainer
                       .selectAll('circle')
@@ -734,6 +812,7 @@ class Nodes extends React.Component{
 
       this.setNodeCircleSize();
 
+    window.dispatchEvent(endLoad);
 
     setTimeout(function(){
       self.setState({
@@ -774,7 +853,11 @@ class Nodes extends React.Component{
     var n = this.nodesData.nodes;
     var l = this.nodesData.links;
 
-    // console.log('n', n);
+
+    if(this.state.onlyinall){
+      
+    }
+
 
     var uidWithConnections = [];
 
@@ -790,7 +873,6 @@ class Nodes extends React.Component{
     })
 
     /* Muestra sólo con conexiones */
-    /* TODO con state */
     if(!this.state.showall){
       // console.log('HOLA');
       n = n.filter(function(_n){
@@ -808,7 +890,7 @@ class Nodes extends React.Component{
 
   setNodeCircleSize(){
     var min = 80;
-    var max = 700;
+    var max = 1250;
     var param = this.state.nodeSizeParam;
     if(param == "monto"){
       var empresaMinMax = this.getEmpresaMinMax();
@@ -1109,25 +1191,36 @@ class Nodes extends React.Component{
     return(
       <div className="db_viz_nodes" ref={(ref) => this.container = ref}>
         <div id="db_viz_nodes_controls">
-          <Fab size="small" color="primary" onClick={() => this.set()}>
+          <Fab title="Refrescar" alt="Refrescar" size="small" color="primary" onClick={() => this.set()}>
             <Icon>autorenew</Icon>
           </Fab>
-          <Fab size="small" color="primary" disabled={this.state.isPerfectZoom} onClick={() => this.setInitialZoom()}>
-            <Icon>center_focus_strong</Icon>
-          </Fab>
-          <Fab
-            size="small"
-            color="primary"
-            disabled={!this.state.isolatingNode}
-            onClick={() => this.releaseNode()}
-          >
-            <Icon>scatter_plot</Icon>
-          </Fab>
+          {
+            !this.state.isPerfectZoom ?
+            <Fab title="Centrar" alt="Centrar" size="small" color="primary" disabled={this.state.isPerfectZoom} onClick={() => this.setInitialZoom()}>
+              <Icon>center_focus_strong</Icon>
+            </Fab>
+            : null
+          }
+          {
+            this.state.isolatingNode ?
+            <Fab
+              title="Mostrar todos los nodos"
+              size="small"
+              id="ss_fab_release"
+              color="primary"
+              disabled={!this.state.isolatingNode}
+              onClick={() => this.releaseNode()}
+            >
+              <Icon>scatter_plot</Icon>
+            </Fab>
+            : null
+          }
+
         </div>
         <div className="db_viz_info">
           {
             this.state.isolatingNode  ?
-            <SSDoi doi={this.state.isoDoi} canvas={this.canvasSvg} />
+            <SSDoi doi={this.state.isoDoi} canvas={this.canvasSvg} display={this.displayDoi} onToggle={() => this.setState({displayDoi: !this.state.displayDoi})}/>
           : null
           }
           <div className="db_viz_info_coincidencias">
@@ -1455,6 +1548,10 @@ class SSTooltip extends React.Component{
           </div>
           : null
         }
+
+        <div className="db_viz_tooltip_monto">
+          Da click en el círculo para más información
+        </div>
 
 
       </div>

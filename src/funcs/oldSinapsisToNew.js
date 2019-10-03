@@ -14,16 +14,21 @@ const uuidv4 = require('uuid/v4');
 
 
 export default class ConvertOldToDb{
-  constructor(name, file){
+  constructor(name, file, alreadyConverted){
     this.name = name;
     this.file = file;
+    this.alreadyConverted = alreadyConverted ? true : false;
     this.uid = uuidv4();
     this.slug = slugify(this.name, {lower: true});
     this.get();
   }
 
   async get(){
-    var c = d3.csvParse(this.file);
+    if(!this.alreadyConverted){
+      var c = d3.csvParse(this.file);
+    }else{
+      var c = this.file;
+    }
     var a = Object.values(c);
     a.pop();
     this.array = a;
@@ -42,12 +47,61 @@ export default class ConvertOldToDb{
     this.empresas.map(function(empresa){
       self.setEmpresa(empresa);
     })
+    this.filterFields();
+  }
+
+  filterFields(){
+    var es = this.obj.empresas;
+    var empresasSlug = [];
+    for(var key in es){
+      var empresa = es[key];
+      var slug = empresa.slug;
+      console.log('slug', slug);
+      empresasSlug.push(slug);
+    }
+    /* Campos */
+    for(var key in es){
+      var empresa = es[key];
+      var fields = Object.values(empresa.fields);
+
+      /* Contratos solo */
+      var contratoFields = fields.filter(function(f){
+        return f.group == "contrato";
+      })
+      /* Si existe la empresa deja el match with como empresa, si no como dependencia */
+      contratoFields.map(function(f){
+        if(f.slug == "contrato-quien-otorga-los-recursos"){
+          var entidad = f.value;
+          var _slug = entidad.replace(/[.\s]/g, '');
+              _slug = slugify(_slug, {remove: /[*,+~.()'"!:@]/g, lower: true});
+          if(empresasSlug.indexOf(_slug) > -1){
+            var m = null;
+          }else{
+            var m = "instancia";
+          }
+          f.type = m;
+          f.matchWith = [m];
+        }
+      })
+
+      /* Solo nombres de empresas con transferencias receptor */
+      var transferenciaFields = fields.filter(function(f){
+        return f.group == "transferencia"  && f.name == "recursos";
+      })
+
+
+      transferenciaFields.map(function(f){
+        f.matchWith = null;
+        f.type = null;
+      })
+    }
   }
 
   setEmpresa(fields){
     var n = fields[0];
     var uid = uuidv4();
-    var s = slugify(n, {lower: true});
+    var s = n.replace(/[.\s]/g, '');
+        s = slugify(s, {remove: /[*+,~.()'"!:@]/g, lower: true});
 
     var obj = {
       name: n,
@@ -59,6 +113,7 @@ export default class ConvertOldToDb{
     this.obj.empresas[uid] = obj;
 
     this.setEmpresaFields(fields, uid);
+
   }
 
   setEmpresaFields(fields, uid){
@@ -474,7 +529,8 @@ export default class ConvertOldToDb{
           var value = arr[key];
           value = value.trim();
           var inf = snps_ka[key];
-          var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
+          var inn = inf.name.replace(/[.\s]/g, '');
+          var preslug = slugify(inf.bigGroup + '-' + inn, {lower: true});
           var slug = slugify(cuid + '-' + preslug, {lower: true});
           var ff = {
             name: inf.name,
@@ -514,6 +570,7 @@ export default class ConvertOldToDb{
             name: "Tipo de transferencia",
             isvalid: true,
             value: "receptor",
+            aka: "¿Quién recibe la transferencia?",
             group: "transferencia",
             bigGroup: "transferencia",
             groupUid: cuid,
@@ -533,7 +590,8 @@ export default class ConvertOldToDb{
           var value = arr[key];
           value = value.trim();
           var inf = snps_ka[key];
-          var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
+          var inn = inf.name.replace(/[.\s]/g, '');
+          var preslug = slugify(inf.bigGroup + '-' + inn, {lower: true});
           var slug = slugify(cuid + '-' + preslug, {lower: true});
           var ff = {
             name: inf.name,
@@ -564,7 +622,6 @@ export default class ConvertOldToDb{
           }
           if(value && !inf.bypass && value !== "SIN_DATO"){
             f[slug] = ff;
-            // console.log('FF', ff);
             x++;
           }
         }
@@ -583,6 +640,60 @@ export default class ConvertOldToDb{
         }
     })
 
+    /** Otros **/
+    var otrosRange = [72, 83];
+    for(var i = otrosRange[0]; i <= otrosRange[1]; i++){
+      var sn = snps_ka[i];
+      try{
+        var _fields = this.groupByRange(fields, [i, i]);
+      }catch(ex){
+        var _fields = [];
+      }
+      _fields.map(function(_f){
+        var em = Object.values(_f)[0];
+        if(em){
+          var t = sn.category;
+          var n = sn.name;
+
+          var guid = uuidv4();
+          var preslug = slugify('otros ' + n, {lower: true});
+          var slug = guid + '-' + preslug;
+          var matchWith = [t];
+          var type = t;
+          if(t.indexOf('monto') > -1){
+            em = em.replace(',', '');
+            em = parseFloat(em);
+            if(isNaN(em)){
+              em = 0;
+            }
+            type = 'monto';
+            matchWith = false;
+          }
+
+          if(t == "empresa"){
+            matchWith = false;
+          }
+
+          var obj = {
+            name: n,
+            slug: preslug,
+            isvalid: true,
+            value: em,
+            matchWith: matchWith,
+            group: "otros",
+            guid: guid,
+            type: type,
+            category: t,
+            groupUid: guid,
+            empresauid: uid
+          }
+
+          f[slug] = obj;
+        }
+      })
+    }
+
+
   }
 
   groupByRange(fields, range){
@@ -596,7 +707,7 @@ export default class ConvertOldToDb{
         if(!ia[y]){
           ia[y] = {};
         }
-        ia[y][i] = v;
+        ia[y][i] = v.replace(/^\s+|\s+$/g, '');
       }
     }
     return Object.values(ia);
