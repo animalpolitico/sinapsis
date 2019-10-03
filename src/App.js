@@ -37,7 +37,6 @@ export default class App extends React.Component{
       <ThemeProvider theme={theme}>
         <Router>
           <div id="wrapper">
-          <Header />
             <div id="binder">
               <Switch>
                 <Route path={buildLink("/")} exact component={Index} />

@@ -10,6 +10,16 @@ export const predbs = [
     file: require('../static/csvs/estafa-maestra.csv')
   },
   {
+    name: 'Empresas Fantasma de Veracruz',
+    country: 'MEX',
+    countryLabel: 'México',
+    author: 'Animal Político',
+    size: 1,
+    slug: 'estafa-maestra',
+    last: '2019-10-01',
+    file: require('../static/csvs/empresas-fantasma-ver.csv')
+  },
+  {
     name: 'Privilegios Fiscales (Condonaciones 2007-2015)',
     country: 'MEX',
     countryLabel: 'México',

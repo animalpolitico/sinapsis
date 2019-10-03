@@ -220,34 +220,48 @@ export default class DbBuilderPage extends React.Component{
             <div>
               <div className="ss_dbbuilder_front">
                 <div className="ss_db_choose">
+                  <div className="ss_db_choose_td">
+                    <div className="ss_db_choose_td_c" style={{backgroundImage: "url('"+  require('../static/ty-estafa.png') +"')"}}>
+                      <div className="ss_db_choose_td_c_d">
+                        <div className="ss_db_choose_td_c_l"></div>
+                        <div className="ss_db_choose_td_c_c"></div>
+                      </div>
+                      <div className="ss_db_choose_td_label">
+                        Explorar<br/>
+                        la estafa <br />
+                        maestra
+                      </div>
+                      <Icon>visibility</Icon>
+                    </div>
+                  </div>
+                  <div className="ss_db_choose_td">
+                    <div className="ss_db_choose_td_c" style={{backgroundImage: "url('"+  require('../static/ty-cargar.png') +"')"}}>
+                      <div className="ss_db_choose_td_c_d">
+                        <div className="ss_db_choose_td_c_l"></div>
+                        <div className="ss_db_choose_td_c_c"></div>
+                      </div>
+                      <input
+                        type="file"
+                        accept=".sinapsis,.csv"
+                        id="ss_file_input"
+                        onChange={(e) => this.loadFile(e)}
+                      />
+                      <div className="ss_db_choose_td_label">
+                        Cargar proyecto
+                      </div>
+                      <Icon>arrow_drop_up</Icon>
+                    </div>
+                  </div>
                   <div className="ss_db_choose_td" onClick={() => this.startNewProject()}>
-                    <Icon>add</Icon>
-                    <div className="ss_db_choose_td_label">
-                      Nuevo proyecto<br/><span>Comienza un proyecto desde cero</span>
-                    </div>
-                  </div>
-                  <div className="ss_db_choose_td">
-                    <input
-                      type="file"
-                      accept=".sinapsis"
-                      id="ss_file_input"
-                      onChange={(e) => this.loadFile(e)}
-                    />
-                    <Icon>publish</Icon>
-                    <div className="ss_db_choose_td_label">
-                      Cargar proyecto<br/><span>Sube tu archivo .sinapsis</span>
-                    </div>
-                  </div>
-                  <div className="ss_db_choose_td" onClick={() => this.intentToRecover()}>
-                    <Icon>restore</Icon>
-                    <div className="ss_db_choose_td_label">
-                      Recuperar proyecto<br/><span>Desde la memoria de tu navegador.</span>
-                    </div>
-                  </div>
-                  <div className="ss_db_choose_td">
-                    <Icon>play_arrow</Icon>
-                    <div className="ss_db_choose_td_label">
-                      Iniciar demo<br/><span>Utiliza la base de datos de La Estafa Maestra</span>
+                    <div className="ss_db_choose_td_c"   style={{backgroundImage: "url('"+  require('../static/ty-new.png') +"')"}}>
+                      <div className="ss_db_choose_td_c_d">
+                        <div className="ss_db_choose_td_c_l"></div>
+                        <div className="ss_db_choose_td_c_c"></div>
+                      </div>
+                      <Icon>add</Icon>
+                      <div className="ss_db_choose_td_label">
+                        Nuevo proyecto
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -960,12 +974,6 @@ class PreDb extends React.Component{
         </div>
 
         <div className="ss_predb_select_country">
-          <Flag
-            name={p.country}
-            format="svg"
-            pngSize={64}
-            basePath="/img/flags"
-          />
           <span>{p.countryLabel}</span>
         </div>
         <div className="ss_predb_select_maxtime">
