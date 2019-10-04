@@ -255,8 +255,8 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
 .ss_db_toolbar {
   width: 100%;
   position: fixed;
-  top: 50px;
-  z-index: 99; }
+  z-index: 99;
+  top: 0; }
   .ss_db_toolbar_info {
     width: 100%;
     box-sizing: border-box;
@@ -970,8 +970,8 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   height: 100%;
   z-index: 9;
   right: 0;
-  position: relative;
-  overflow-y: auto; }
+  overflow: hidden;
+  position: relative; }
   .db_viz_tooltip {
     position: absolute;
     z-index: 99;
@@ -1000,7 +1000,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       padding: 0.25rem 0.5rem; }
   .db_viz_info {
     position: absolute;
-    bottom: 50px;
+    bottom: 0;
     box-sizing: border-box;
     padding: 0.5rem 2.5rem;
     left: 0;
@@ -1103,7 +1103,7 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
 
 .db_search_nodes {
   position: fixed;
-  top: 56px;
+  top: 6px;
   right: calc(4em + 80px);
   z-index: 99;
   width: 280px; }
@@ -1157,7 +1157,7 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
 .nodes_controls {
   width: 200px;
   position: absolute;
-  bottom: 50px;
+  bottom: 0;
   right: 20px;
   z-index: 9; }
   .nodes_controls_button {
@@ -1268,7 +1268,7 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
   position: absolute;
   z-index: 999;
   left: 50%;
-  bottom: 52px;
+  bottom: 0;
   width: 80px;
   height: 80px;
   background: rgba(255, 255, 255, 0.1);

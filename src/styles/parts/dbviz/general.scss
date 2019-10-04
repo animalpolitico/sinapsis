@@ -4,8 +4,8 @@
   height: 100%;
   z-index: 9;
   right: 0;
+  overflow: hidden;
   position: relative;
-  overflow-y: auto;
   &_tooltip{
     position: absolute;
     z-index: 99;
@@ -38,7 +38,7 @@
   }
   &_info{
     position: absolute;
-    bottom: 50px;
+    bottom: 0;
     box-sizing: border-box;
     padding: 0.5rem 2.5rem;
     left: 0;

@@ -105,7 +105,6 @@ export default class DbBuilderPage extends React.Component{
   }
 
   preventTabClosing(){
-    alert('Hola');
     return false;
   }
 
@@ -134,7 +133,6 @@ export default class DbBuilderPage extends React.Component{
           }catch{
             console.warn('Storage size exceeded');
           }
-
         }
       }
     });
@@ -249,7 +247,7 @@ export default class DbBuilderPage extends React.Component{
                       <div className="ss_db_choose_td_label">
                         Cargar proyecto
                       </div>
-                      <Icon>arrow_drop_up</Icon>
+                      <Icon>merge_type</Icon>
                     </div>
                   </div>
                   <div className="ss_db_choose_td" onClick={() => this.startNewProject()}>

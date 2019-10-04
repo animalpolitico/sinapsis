@@ -1,8 +1,8 @@
 .ss_db_toolbar{
   width: 100%;
   position: fixed;
-  top: $menuh;
   z-index: 99;
+  top: 0;
   &_info{
     width: 100%;
     box-sizing: border-box;

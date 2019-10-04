@@ -600,14 +600,14 @@ class Nodes extends React.Component{
 
 
     var simulation = d3.forceSimulation()
-                       .force("charge", d3.forceManyBody(10))
+                       .force("charge", d3.forceManyBody(0.5))
                        .force("link",
                           d3.forceLink()
                             .id(function(d){
                               return d.id;
                             })
                         )
-                       .force('collide', d3.forceCollide(700).strength(0.6).iterations(2))
+                       .force('collide', d3.forceCollide(700).strength(0.2))
                        .force('center', d3.forceCenter(width / 2, height / 2))
                        .force("y", d3.forceY(0.01))
                        .force("x", d3.forceX(0.01).x(1.1));
@@ -712,7 +712,7 @@ class Nodes extends React.Component{
     nodesLabels.append('text')
                .text((d) => d.name.toUpperCase())
                .attr('fill', 'white')
-               .attr('font-size', 400)
+               .attr('font-size', 300)
                .attr('text-anchor', 'middle')
 
     var nodesPaddingLeft = 60;
@@ -855,7 +855,7 @@ class Nodes extends React.Component{
 
 
     if(this.state.onlyinall){
-      
+
     }
 
 
@@ -890,7 +890,7 @@ class Nodes extends React.Component{
 
   setNodeCircleSize(){
     var min = 80;
-    var max = 1250;
+    var max = this.nodesData.nodes.length > 500 ? 1250 : 600;
     var param = this.state.nodeSizeParam;
     if(param == "monto"){
       var empresaMinMax = this.getEmpresaMinMax();
