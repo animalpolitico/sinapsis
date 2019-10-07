@@ -1,6 +1,6 @@
 @import url("https://use.typekit.net/nhy0plw.css");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_modal_dbpre .ss_predb_select_country, .ss_modal_dbpre .ss_predb_select_alert, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, #ss_popper_lang .ss_popper_container_button, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_input .ss_db_input_container_label, .ss_db_input_select_container_input .ss_db_input_container_label, .ss_db_input_container_error, .ss_db_input_select_container_error, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_nodes #db_viz_nodes_controls, .ss_doi_window_fields_field_dbinfo > div, .nodes_controls_button, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics_container_group_montos, .ss_analytics_container_group_charts_group, #ss_page_home .ss_hb_cols {
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_modal_dbpre .ss_predb_select_country, .ss_modal_dbpre .ss_predb_select_alert, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, #ss_popper_lang .ss_popper_container_button, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_input .ss_db_input_container_label, .ss_db_input_select_container_input .ss_db_input_container_label, .ss_db_input_container_error, .ss_db_input_select_container_error, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_nodes #db_viz_nodes_controls, .ss_doi_window_fields_field_dbinfo > div, .ss_doi_window .ss_doi_window_controls, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels, .nodes_controls_button, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics_container_group_montos, .ss_analytics_container_group_charts_group, #ss_page_home .ss_hb_cols {
   display: flex;
   flex-wrap: nowrap; }
 
@@ -1122,15 +1122,34 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
     height: 100%;
     position: relative;
     background: #0a0a0a; }
+    .db_viz_nodes .db_viz_glow_indicator {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-sizing: border-box;
+      z-index: 1; }
+      .db_viz_nodes .db_viz_glow_indicator.ss_active {
+        animation: loader_glow 1s ease-in; }
+@keyframes loader_glow {
+  from {
+    box-shadow: inset 0 0 600px rgba(51, 114, 255, 0.1); }
+  to {
+    box-shadow: inset 0 0 0 rgba(51, 114, 255, 0); } }
     .db_viz_nodes #db_viz_nodes_controls {
       position: absolute;
       top: 0;
       left: 0;
       box-sizing: border-box;
       padding: 0.5rem 1rem;
+      z-index: 3;
       flex-direction: column; }
       .db_viz_nodes #db_viz_nodes_controls button {
         margin: 0.5rem 0; }
+    .db_viz_nodes svg {
+      position: relative;
+      z-index: 2; }
     .db_viz_nodes .node, .db_viz_nodes .nodes_label {
       cursor: grab; }
       .db_viz_nodes .node:active, .db_viz_nodes .nodes_label:active {
@@ -1151,6 +1170,7 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
   .ss_doi_window_type {
     font-weight: 600;
     border-bottom: 2px solid;
+    border-top: 2px solid;
     width: 100%;
     box-sizing: border-box;
     padding: 0.5rem; }
@@ -1210,6 +1230,51 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
       .ss_doi_window_fields_field_name {
         font-size: 1.2em;
         margin: 0.25rem 0; }
+  .ss_doi_window .ss_doi_window_controls {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.15rem 0.5rem;
+    background: #111;
+    align-items: center; }
+    .ss_doi_window .ss_doi_window_controls_td {
+      height: 0%; }
+      .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level {
+        flex: 1;
+        align-items: center;
+        font-size: 0.9rem; }
+        .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level strong {
+          margin-left: 0.5rem; }
+        .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels {
+          margin-left: 0.5rem; }
+          .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels .material-icons {
+            font-size: 1rem;
+            display: block;
+            padding: 0.25rem 0.15rem;
+            cursor: pointer; }
+            .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels .material-icons[disabled] {
+              opacity: 0.2;
+              pointer-events: none; }
+            .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels .material-icons:hover {
+              color: #3372ff; }
+      .ss_doi_window .ss_doi_window_controls_td_min {
+        cursor: pointer; }
+        .ss_doi_window .ss_doi_window_controls_td_min .material-icons {
+          font-size: 0.95rem;
+          line-height: 0.95rem; }
+        .ss_doi_window .ss_doi_window_controls_td_min:hover {
+          opacity: 0.75; }
+  .ss_doi_window.ss_minimized .ss_doi_window_type {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    border-width: 1px;
+    display: none; }
+  .ss_doi_window.ss_minimized .ss_doi_window_name {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    white-space: normal;
+    line-height: 1.1;
+    border-bottom: none; }
 
 .db_search_nodes {
   position: fixed;

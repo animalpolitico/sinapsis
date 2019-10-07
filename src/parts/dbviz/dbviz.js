@@ -6,6 +6,7 @@ import Fab from '@material-ui/core/Fab';
 import Tooltip from 'tooltip.js';
 import Paper from '@material-ui/core/Paper';
 import formatMoney from 'format-money';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Switch from '@material-ui/core/Switch';
 import CountTo from 'react-count-to';
 import { _t } from '../../vars/countriesDict';
@@ -470,7 +471,7 @@ export class Search extends React.Component{
         <div className="db_search_nodes_results">
           {
             this.state.showResults ?
-            <SearchResults nodeMap={this.props.nodesMap} results={this.state.results} v={this.state.v} onSelect={(v) => this.handleResultSelect(v)}/>
+              <SearchResults nodeMap={this.props.nodesMap} results={this.state.results} v={this.state.v} onSelect={(v) => this.handleResultSelect(v)}/>
             : null
           }
         </div>
@@ -544,7 +545,9 @@ class Nodes extends React.Component{
     showall: false,
     onlyinall: false,
     displayDoi: true,
-    initLoaded: false
+    minimizeDoi: false,
+    initLoaded: false,
+    level: 0
   }
   componentDidMount(){
     var self = this;
@@ -558,10 +561,22 @@ class Nodes extends React.Component{
         self.resize();
       }, 300);
     })
+
+    window.addEventListener('ss_lazy_indicator', function(){
+      var cs = document.getElementsByClassName('db_viz_glow_indicator')[0];
+      cs.classList.remove('ss_active');
+      cs.classList.add('ss_active');
+      setTimeout(function(){
+        cs.classList.remove('ss_active');
+      }, 1000);
+    })
+
   }
+
   numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+
   resize(){
     try{
       var container = this.container;
@@ -583,7 +598,8 @@ class Nodes extends React.Component{
       }
       d3.selectAll('#db_viz_nodes_canvas *').remove();
       this.setState({
-        loading: true
+        loading: true,
+        isolatingNode: null
       })
       var self = this;
       var container = this.container;
@@ -682,11 +698,9 @@ class Nodes extends React.Component{
       var lMaxSize = Math.min(lRange[1], data.links.length);
 
       var lPct = Math.abs(1 - (lMaxSize / lRange[1]));
-      console.log('lpct', lPct);
 
       var lSize = (lMax * lPct) + lMin;
 
-      console.log('LSIZE', lSize);
 
 
       var links = self.nodesContainer
@@ -706,8 +720,11 @@ class Nodes extends React.Component{
               self.simulation.stop();
             })
 
-      this.getCoincidenciasSize();
+      var firstC = this.getCoincidenciasSize();
 
+      this.setState({
+        firstCoincidencias: firstC
+      })
 
       var nodesLabels = self.nodesContainer
                             .selectAll('.nodes_label')
@@ -834,7 +851,7 @@ class Nodes extends React.Component{
           initLoaded: true
         })
         window.dispatchEvent(endLoad);
-      }, 2500);
+      }, 1000);
     }catch(ex){
 
     }
@@ -852,9 +869,14 @@ class Nodes extends React.Component{
 
   getCoincidenciasSize(){
     var x = 0;
+    var isisolating = this.state.isolatingNode;
     d3.selectAll('.nodes_link')
       .each(function(l){
-        if(!l.blockShow){
+        if(isisolating){
+          if(l.selected){
+            x++;
+          }
+        }else{
           x++;
         }
       })
@@ -888,7 +910,6 @@ class Nodes extends React.Component{
 
     /* Muestra sólo con conexiones */
     if(!this.state.showall){
-      // console.log('HOLA');
       n = n.filter(function(_n){
         return uidWithConnections.indexOf(_n.id) > -1;
       })
@@ -987,10 +1008,6 @@ class Nodes extends React.Component{
       }
     })
 
-
-
-
-
     return links;
   }
 
@@ -1003,59 +1020,121 @@ class Nodes extends React.Component{
 
   isolateNode(id){
     this.releaseNode();
+    var self = this;
+    d3.selectAll('.node').attr('opacity', 0.05);
+    d3.selectAll('.nodes_link')
+      .attr('stroke', 'rgba(90, 67, 231, 0.1)')
+      .each(d => d.selected = false)
+    var doi = null;
+    var dois = d3.selectAll('.node')
+      .filter(d => d.id == id)
+      .attr('opacity', function(d){
+        if(d.id == id){
+          doi = d;
+          d.doi = true;
+          d.level = 0;
+          return 1;
+        }else{
+          return 0.05;
+        }
+      })
+    if(doi){
+      this.setState({
+        isolatingNode: true,
+        isoDoi: doi
+      })
+      setTimeout(function(){
+        self.setNodeLinksLevel();
+      }, 10)
+    }
+  }
+
+  getNodeLinks(id){
+    var ls = d3.selectAll('.nodes_link')
+            .filter(function(d){
+              return d.source.id == id || d.target.id == id;
+            })
+    return ls;
+  }
+
+  setNodeLinksLevel(){
 
     var self = this;
-
-    this.nodesContainer
-       .selectAll('.nodes_link:not([data-from="'+id+'"]):not([data-to="'+id+'"])')
-       .attr('stroke', 'rgba(90, 67, 231, 0.1)');
-
-    var ls = this.nodesData.links.filter(function(l){
-      return l.target.id == id || l.source.id == id;
-    });
-
-    var nds_ids = [];
-
-    ls.map(function(ld){
-      nds_ids.push(ld.source.id)
-      nds_ids.push(ld.target.id)
-    });
-
-    nds_ids.push(id);
-
-
-    this.nodesContainer
-        .selectAll('.node')
-        .attr('opacity', 0.05)
-
-    nds_ids.map(function(id){
-      self.nodesContainer
-          .selectAll('.node[data-id="'+id+'"]')
-          .attr('opacity', 1)
-    })
-
-    var doi = null;
-    doi = this.nodesData.nodes.filter(function(d){
-      return d.id == id;
-    })
-
-    if(doi){
-      doi = doi[0];
-    }
-
+    var level = this.state.level;
 
     this.setState({
-      isolatingNode: true,
-      isoDoi: doi
+      maxlevel: 1000000
     })
+
+    d3.selectAll('.nodes_link')
+      .attr('stroke', 'rgba(90, 67, 231, 0.1)')
+      .each(d => d.selected = false)
+
+    d3.selectAll('.node')
+      .filter(d => d && (d.id !== this.state.isoDoi.id))
+      .attr('opacity', 0.05)
+      .each(d => d.level = false)
+
+    for(var i = -1; i < level; i++){
+      var cnds = [];
+      var nds = d3.selectAll('.node')
+                  .filter(d => d.level === i)
+                  .each(function(d){
+                    var id = d.id;
+                    var links = self.getNodeLinks(id);
+                    cnds = [...cnds, ...links.nodes()]
+                  })
+
+      var nextNodes = [];
+
+      d3.selectAll(cnds)
+        .attr('stroke', 'rgba(90, 67, 231, 0.79)')
+        .each(function(d){
+          d.selected = true;
+          var aid = d.source.id;
+          if(nextNodes.indexOf(aid) == -1){
+            nextNodes.push(aid);
+          }
+          var aid = d.target.id;
+          if(nextNodes.indexOf(aid) == -1){
+            nextNodes.push(aid);
+          }
+        })
+
+      d3.selectAll('.node')
+        .filter(d => nextNodes.indexOf(d.id) > -1)
+        .each(d => d.level = !(d.level === false) ? d.level : i + 1)
+        .attr('opacity', 1)
+    }
+
+    var c = this.getCoincidenciasSize();
+
+    if(c === this.state.firstCoincidencias){
+      this.setState({
+        maxlevel: level
+      })
+    }
+
+    var ev = new Event('ss_lazy_indicator');
+    window.dispatchEvent(ev);
+
   }
 
   releaseNode(){
     this.nodesContainer.selectAll('.nodes_link').attr('stroke', 'rgba(90, 67, 231, 0.79)');
-    this.nodesContainer.selectAll('.node').attr('opacity', d => !d.blockShow ? 1 : 0);
+    this.nodesContainer
+        .selectAll('.node')
+        .attr('opacity', d => !d.blockShow ? 1 : 0)
+        .each(function(d){
+          d.doi = false;
+          d.level = null;
+        })
     this.setState({
-      isolatingNode: false
+      isolatingNode: false,
+      level: 0
     })
+
+    this.getCoincidenciasSize();
   }
 
   getEmpresaMinMax(){
@@ -1152,7 +1231,6 @@ class Nodes extends React.Component{
     this.getCoincidenciasSize();
   }
 
-
   toggleEmpresas(showall){
     var self = this;
     this.setState({
@@ -1192,6 +1270,12 @@ class Nodes extends React.Component{
      function dragended(d) {
        if (!d3.event.active) simulation.alphaTarget(0.1).restart();
        d.fixed = true;
+
+       var ev = new Event('ss_lazy_indicator');
+       window.dispatchEvent(ev);
+
+
+
        simulation.stop();
      }
 
@@ -1199,6 +1283,33 @@ class Nodes extends React.Component{
              .on("start", dragstarted)
              .on("drag", dragged)
              .on("end", dragended);
+  }
+
+  toggleMinimizeDoi(){
+    this.setState({
+      minimizeDoi: !this.state.minimizeDoi
+    })
+  }
+
+  addLevel(qty){
+    var self = this;
+    if(!qty){
+      qty = 1;
+    }
+    var c = this.state.level;
+        c += qty;
+        c = Math.max(0, c);
+
+    this.setState({
+      level: c
+    })
+
+
+
+    setTimeout(function(){
+      self.setNodeLinksLevel();
+    }, 100);
+
   }
 
   render(){
@@ -1234,7 +1345,7 @@ class Nodes extends React.Component{
         <div className="db_viz_info">
           {
             this.state.isolatingNode  ?
-            <SSDoi doi={this.state.isoDoi} canvas={this.canvasSvg} display={this.displayDoi} onToggle={() => this.setState({displayDoi: !this.state.displayDoi})}/>
+            <SSDoi maxlevel={this.state.maxlevel} level={this.state.level} parent={this} isMinimized={this.state.minimizeDoi} doi={this.state.isoDoi} canvas={this.canvasSvg} display={this.displayDoi} onToggle={() => this.setState({displayDoi: !this.state.displayDoi})}/>
           : null
           }
           <div className="db_viz_info_coincidencias">
@@ -1248,6 +1359,8 @@ class Nodes extends React.Component{
             <SSTooltip doi={this.state.doi} canvas={this.canvasSvg} />
             : null
           }
+
+        <div className="db_viz_glow_indicator"></div>
       </div>
     )
   }
@@ -1471,24 +1584,50 @@ class SSDoi extends React.Component{
     var d = this.props.doi;
     var tc = getTypeColor(d.type);
     var fields = d.fields;
+    var ism = this.props.isMinimized;
+    var cs = ["ss_doi_window"];
+    if(ism){
+      cs.push('ss_minimized');
+    }
     return(
-      <div className="ss_doi_window">
+      <div className={cs.join(' ')}>
+        <div className="ss_doi_window_controls">
+          <div className="ss_doi_window_controls_td ss_doi_window_controls_td_level">
+            Nivel <strong>{this.props.level}</strong>
+            <div className="ss_doi_levels">
+              <Icon disabled={this.props.level == this.props.maxlevel} onClick={() => this.props.parent.addLevel(1)}>add</Icon>
+              <Icon disabled={this.props.level == 0} onClick={() => this.props.parent.addLevel(-1)}>remove</Icon>
+            </div>
+          </div>
+          <div className="ss_doi_window_controls_td" onClick={() => this.props.parent.toggleMinimizeDoi()}>
+            <div className="ss_doi_window_controls_td_min">
+              <Icon>{ism ? 'call_made' : 'call_received'}</Icon>
+            </div>
+          </div>
+        </div>
         <div className="ss_doi_window_type" style={{color: tc, borderColor: tc}}>
           {getTypeName(d.type)}
         </div>
-        <div className="ss_doi_window_name">
+        <div className="ss_doi_window_name" style={{color: ism ? tc : 'inherit'}}>
           {d.name}
         </div>
-        <div className="ss_doi_window_fields">
-          {
-            fields.map(function(field){
-              return <SSDoiField field={field} />
-            })
-          }
-        </div>
-        <div className="ss_doi_window_fields_info">
-          Encontrado en {d.fields.length} {d.fields.length > 1 ? 'campos' : 'campo'}
-        </div>
+        {
+          !ism ?
+          <>
+          <div className="ss_doi_window_fields">
+            {
+              fields.map(function(field){
+                return <SSDoiField field={field} />
+              })
+            }
+          </div>
+          <div className="ss_doi_window_fields_info">
+            Encontrado en {d.fields.length} {d.fields.length > 1 ? 'campos' : 'campo'}
+          </div>
+          </>
+        : null
+        }
+
       </div>
     )
   }

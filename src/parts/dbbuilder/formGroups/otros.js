@@ -192,6 +192,7 @@ export default class DbFormGroupOtros extends React.Component{
                   <option value="monto_recibido">Monto recibido</option>
                   <option value="monto_otorgado">Monto otorgado</option>
                   <option value="titular">Titular de instancia</option>
+                  <option value="cfdi">CFDI</option>
                 </select>
               </div>
               : null

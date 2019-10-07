@@ -79,8 +79,8 @@ export default class DbBuilderPage extends React.Component{
   }
 
   set(){
+    var self = this;
     var uid = this.props.match.params.dbid;
-    console.log('UID', uid);
     if(uid){
       this.setState({
         uid: uid,
@@ -101,8 +101,16 @@ export default class DbBuilderPage extends React.Component{
           showrecoveroptions: false
         })
       }else{
-        var url = buildLink('/construir');
-        this.props.history.push(url);
+        console.log('UID', uid);
+        if(uid !== 'estafa-maestra'){
+          var url = buildLink('/construir');
+          this.props.history.push(url);
+        }else{
+          var hasE = window.dbf.obj.dbs && Object.values(window.dbf.obj.dbs).length > 0;
+          if(!hasE){
+            self.loadEstafa(true);
+          }
+        }
       }
     }else{
       this.setState({
@@ -165,6 +173,31 @@ export default class DbBuilderPage extends React.Component{
         }
       }
     });
+  }
+
+  async loadEstafa(f){
+    window.dispatchEvent(startLoad);
+    var e = require('../static/csvs/estafa-maestra.csv');
+    var c = await d3.csv(e);
+    var n = new oldToNew('Estafa Maestra', c, true);
+    var j = n.save();
+
+    window.dbf.obj.info.name = 'Estafa Maestra';
+    window.dbf.obj.info.slug = 'estafa-maestra';
+    window.dbf.obj.dbs = {};
+    window.dbf.obj.dbs[j.id] = j;
+
+    this.props.history.push(buildLink('/construir/estafa-maestra'));
+
+    this.setState({
+      showcontrol: false
+    })
+
+    if(f){
+      this.sidebar.fetchDbs();
+      this.viz.nodes.set();
+    }
+
   }
 
   startNewProject(){
@@ -249,8 +282,8 @@ export default class DbBuilderPage extends React.Component{
             <div>
               <DbBuilderToolbar parent={this} ref={(ref) => this.toolbar = ref}/>
               <div className="ss_dbbuilder">
-                <DbBuilderSidebar />
-                <DbViz />
+                <DbBuilderSidebar ref={(ref) => this.sidebar = ref}/>
+                <DbViz ref={(ref) => this.viz = ref}/>
               </div>
             </div>
         }
@@ -276,13 +309,14 @@ class DbInicio extends React.Component{
     }else{
       s = so;
     }
-    console.log('s', s);
     var l = s ? s : def;
     store.set('sinapsis_lang', l);
     this.setState({
       lang: l
     })
   }
+
+
 
   render(){
     var self = this;
@@ -314,7 +348,11 @@ class DbInicio extends React.Component{
             </div>
 
             <div className="ss_db_choose_td">
-              <div className="ss_db_choose_td_c" style={{backgroundImage: "url('"+  require('../static/ty-estafa.png') +"')"}}>
+              <div
+                onClick={() => this.props.parent.loadEstafa()}
+                className="ss_db_choose_td_c"
+                style={{backgroundImage: "url('"+  require('../static/ty-estafa.png') +"')"}}
+              >
                 <div className="ss_db_choose_td_c_d">
                   <div className="ss_db_choose_td_c_l"></div>
                   <div className="ss_db_choose_td_c_c"></div>
@@ -449,15 +487,17 @@ class DbBuilderSidebar extends React.Component{
       db: false
     })
 
-    console.log('fetchingdbs');
 
     var dbsa = Object.values(dbs);
     if(dbsa.length){
       var ldb = dbsa[dbsa.length - 1];
-      console.log('ldb', ldb);
       setTimeout(function(){
-        self.refs[ldb.id].handleClick();
-      }, 50);
+        try{
+          self.refs[ldb.id].handleClick();
+        }catch(ex){
+
+        }
+      }, 150);
     }
 
   }
@@ -656,10 +696,10 @@ class DbView extends React.Component{
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button color="primary" onClick={() => this.setState({ showDeleteDialog: false})}>
+                <Button color="secondary" onClick={() => this.setState({ showDeleteDialog: false})}>
                   Cancelar
                 </Button>
-                <Button color="primary" onClick={() => this.delete()}>
+                <Button color="secondary" onClick={() => this.delete()}>
                   Continuar
                 </Button>
               </DialogActions>

@@ -136,10 +136,10 @@ export default class DbEditEmpresa extends React.Component{
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button color="primary" onClick={() => this.setState({ showDeleteDialog: false})}>
+              <Button color="secondary" onClick={() => this.setState({ showDeleteDialog: false})}>
                 Cancelar
               </Button>
-              <Button color="primary" onClick={() => this.delete()}>
+              <Button color="secondary" onClick={() => this.delete()}>
                 Continuar
               </Button>
             </DialogActions>

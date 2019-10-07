@@ -56,7 +56,6 @@ export default class ConvertOldToDb{
     for(var key in es){
       var empresa = es[key];
       var slug = empresa.slug;
-      console.log('slug', slug);
       empresasSlug.push(slug);
     }
     /* Campos */
