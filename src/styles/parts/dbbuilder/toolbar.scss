@@ -6,7 +6,7 @@
   &_info{
     width: 100%;
     box-sizing: border-box;
-    padding: 0.5rem 4rem;
+    padding: 0.5rem 2rem;
     background: darken($blue, 5%);
     @extend .flex;
     align-items: center;
@@ -22,6 +22,14 @@
         align-items: center;
         box-sizing: border-box;
         padding-right: 1rem;
+        .ss_db_ctas_custom_lang{
+          img{
+            width: 30px;
+            display: block;
+            cursor: pointer;
+            margin-left: 0.75rem;
+          }
+        }
         .MuiButtonBase-root{
           margin-left: 1rem;
           &#ss_file_input_btn{

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@material-ui/core/Icon';
-
+import { _t } from '../../vars/countriesDict';
 var slugify = require('slugify');
 const uuidv4 = require('uuid/v4');
 
@@ -226,7 +226,7 @@ export default class DbInput extends React.Component{
               onBlur={() => this.handleBlur()}
             />
             <div className="ss_db_input_container_label">
-              {this.getName()}
+              {_t(this.getName())}
             </div>
           </div>
           {

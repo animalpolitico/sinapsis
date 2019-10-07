@@ -1,13 +1,83 @@
 .ss_dbbuilder_front{
   width: 100%;
   height: 100vh;
+  min-height: 750px;
+  overflow-y: auto;
   background: $blue url('../static/texturefull.png') no-repeat center center;
   background-size: cover;
   position: relative;
   .ss_db_choose{
-    width: 900px;
+    width: 850px;
     @extend .cxy;
     @extend .flex;
+    flex-wrap: wrap;
+    &_decorator{
+      width: 350px;
+      margin: 0 auto 2.5rem;
+      &_logo{
+        width: 75%;
+        margin: 0 auto 0.5rem;
+        img{
+          width: 100%;
+        }
+      }
+      &_slogan{
+        font-size: 1rem;
+        text-transform: uppercase;
+        line-height: 1.1;
+        text-align: center;
+        color: #f6f6f6;
+        position: relative;
+        span{
+          display: inline-block;
+          width: 0.7rem;
+          height: 2px;
+          background: $main;
+          transform: translate(0.1rem, -0.3rem) rotate(-45deg) ;
+        }
+      }
+    }
+    &_lang{
+      width: 100%;
+      @extend .flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+      &_label{
+        color: rgba(#f6f6f6, 0.8);
+        font-size: 0.9rem;
+      }
+      &_select{
+        width: 200px;
+        select{
+          display: block;
+          width: 100%;
+          appearance: textfield;
+          padding: 0.5rem 0.75rem;
+          box-sizing: border-box;
+          text-align: center;
+          background: $main;
+          border: 0;
+          cursor: pointer;
+          border-radius: 0;
+          text-transform: uppercase;
+          font-weight: 600;
+          font-size: 0.8rem;
+          color: white;
+          margin-top: 0.5rem;
+          position: relative;
+          &:focus{
+            outline: 0;
+            box-shadow: 0 0 4px rgba($main, 0.8);
+          }
+          option{
+            text-align: center;
+            appearance: textfield;
+          }
+        }
+      }
+    }
     &_td{
       flex: 1;
       box-sizing: border-box;

@@ -34,8 +34,9 @@ import PreDB_Estafa from '../static/consumable/estafa-maestra.json';
 import PreDB_SATDef from '../static/consumable/sat-definitivos.json';
 
 import oldToNew from '../funcs/oldSinapsisToNew';
-import {predbs} from '../vars/rel';
+import { predbs } from '../vars/rel';
 import Flag from "react-flags";
+import { countries, getLang } from "../vars/countriesDict";
 
 
 import buildLink from "../funcs/buildlink";
@@ -62,13 +63,30 @@ export default class DbBuilderPage extends React.Component{
     showcontrol: true,
     recoveroptions: [],
     showrecoveroptions: false,
-    isautosaving: false
+    isautosaving: false,
+    uid: null
   }
 
   componentDidMount(){
     this.startAutosave();
+    this.set();
+    window.scroll(0,0);
+    /* Previene cerrar el navegador */
+    window.addEventListener("beforeunload", (ev) => {
+        ev.preventDefault();
+        return ev.returnValue = '¿Deseas cerrar la pestaña?';
+    });
+  }
+
+  set(){
     var uid = this.props.match.params.dbid;
+    console.log('UID', uid);
     if(uid){
+      this.setState({
+        uid: uid,
+        showcontrol: false
+      })
+      document.body.classList.add('ss_platform');
       var obj = store.get('sinapsis_'+uid);
       if(obj){
         var obj_j = JSON.parse(obj);
@@ -86,18 +104,29 @@ export default class DbBuilderPage extends React.Component{
         var url = buildLink('/construir');
         this.props.history.push(url);
       }
+    }else{
+      this.setState({
+        uid: this.props.match.params.dbid,
+        showcontrol: true
+      })
+
+      document.body.classList.remove('ss_platform');
+
     }
-    window.scroll(0,0);
-
-
-    /* Previene cerrar el navegador */
-    window.addEventListener("beforeunload", (ev) => {
-        ev.preventDefault();
-        return ev.returnValue = '¿Deseas cerrar la pestaña?';
-    });
-
-
   }
+
+  componentDidUpdate(){
+    if(this.props.match.params.dbid !== this.state.uid){
+      var s = true;
+      if(!this.props.match.params.dbid){
+        s = window.confirm('¿Deseas regresar? Es posible que los cambios que implementaste no se puedan guardar.');
+      }
+      if(s){
+        this.set();
+      }
+    }
+  }
+
 
   componentWillUnmount(){
     // window.removeEventListener('close', this.preventTabClosing);
@@ -142,7 +171,6 @@ export default class DbBuilderPage extends React.Component{
     var obj = window.dbf.set();
     var url = buildLink('/construir/' + obj.uid);
     this.props.history.push(url);
-
     this.setState({
       control: 'newproject',
       showcontrol: false
@@ -213,95 +241,124 @@ export default class DbBuilderPage extends React.Component{
     var self = this;
     return(
       <div className="ss_page">
+        <DbLoader />
         {
           this.state.showcontrol ?
-            <div>
-              <div className="ss_dbbuilder_front">
-                <div className="ss_db_choose">
-                  <div className="ss_db_choose_td">
-                    <div className="ss_db_choose_td_c" style={{backgroundImage: "url('"+  require('../static/ty-estafa.png') +"')"}}>
-                      <div className="ss_db_choose_td_c_d">
-                        <div className="ss_db_choose_td_c_l"></div>
-                        <div className="ss_db_choose_td_c_c"></div>
-                      </div>
-                      <div className="ss_db_choose_td_label">
-                        Explorar<br/>
-                        la estafa <br />
-                        maestra
-                      </div>
-                      <Icon>visibility</Icon>
-                    </div>
-                  </div>
-                  <div className="ss_db_choose_td">
-                    <div className="ss_db_choose_td_c" style={{backgroundImage: "url('"+  require('../static/ty-cargar.png') +"')"}}>
-                      <div className="ss_db_choose_td_c_d">
-                        <div className="ss_db_choose_td_c_l"></div>
-                        <div className="ss_db_choose_td_c_c"></div>
-                      </div>
-                      <input
-                        type="file"
-                        accept=".sinapsis,.csv"
-                        id="ss_file_input"
-                        onChange={(e) => this.loadFile(e)}
-                      />
-                      <div className="ss_db_choose_td_label">
-                        Cargar proyecto
-                      </div>
-                      <Icon>merge_type</Icon>
-                    </div>
-                  </div>
-                  <div className="ss_db_choose_td" onClick={() => this.startNewProject()}>
-                    <div className="ss_db_choose_td_c"   style={{backgroundImage: "url('"+  require('../static/ty-new.png') +"')"}}>
-                      <div className="ss_db_choose_td_c_d">
-                        <div className="ss_db_choose_td_c_l"></div>
-                        <div className="ss_db_choose_td_c_c"></div>
-                      </div>
-                      <Icon>add</Icon>
-                      <div className="ss_db_choose_td_label">
-                        Nuevo proyecto
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <Dialog
-                  disableBackdropClick
-                  disableEscapeKeyDown
-                  maxWidth="xs"
-                  open={this.state.showrecoveroptions}
-                >
-                  <DialogTitle id="confirmation-dialog-title">Selecciona un proyecto</DialogTitle>
-                  <DialogContent dividers>
-                    <RadioGroup
-                      onChange={(e) => self.setState({ selectedToRecover: e.target.value})}
-                    >
-                    {
-                      this.state.recoveroptions.map(option => (
-                        <FormControlLabel value={option.uid} key={option.uid} control={<Radio />} label={option.info.name} />
-                      ))
-                    }
-                    </RadioGroup>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={() => this.setState({showrecoveroptions: false})} color="primary">
-                      Cancelar
-                    </Button>
-                    <Button disabled={this.state.selectedToRecover ? false : true} onClick={() => this.selectRecoveredProject()} color="primary">
-                      Seleccionar
-                    </Button>
-                  </DialogActions>
-                </Dialog>
-            </div>
+            <DbInicio parent={this}/>
           :
             <div>
               <DbBuilderToolbar parent={this} ref={(ref) => this.toolbar = ref}/>
-              <DbLoader />
               <div className="ss_dbbuilder">
                 <DbBuilderSidebar />
                 <DbViz />
               </div>
             </div>
         }
+      </div>
+    )
+  }
+}
+
+class DbInicio extends React.Component{
+
+  state = {
+    lang: 'MEX'
+  }
+
+  componentDidMount(){
+    this.setLang();
+  }
+
+  setLang(so){
+    var def = "MEX";
+    if(!so){
+      var s = store.get('sinapsis_lang');
+    }else{
+      s = so;
+    }
+    console.log('s', s);
+    var l = s ? s : def;
+    store.set('sinapsis_lang', l);
+    this.setState({
+      lang: l
+    })
+  }
+
+  render(){
+    var self = this;
+    return (
+      <div>
+        <div className="ss_dbbuilder_front">
+          <div className="ss_db_choose">
+            <div className="ss_db_choose_decorator">
+              <div className="ss_db_choose_decorator_logo">
+                <img src={require('../static/logo.png')} />
+              </div>
+              <div className="ss_db_choose_decorator_slogan">
+                <span></span> Herramienta para descubrir<br /><strong>conexiones entre empresas</strong>
+              </div>
+            </div>
+            <div className="ss_db_choose_lang">
+              <div className="ss_db_choose_lang_label">Selecciona tu país</div>
+              <div className="ss_db_choose_lang_select">
+                <select onChange={(e) => self.setLang(e.target.value)}>
+                  {
+                    countries.map(function(c){
+                      return(
+                        <option value={c.code} selected={self.state.lang == c.code}>{c.name}</option>
+                      )
+                    })
+                  }
+                </select>
+              </div>
+            </div>
+
+            <div className="ss_db_choose_td">
+              <div className="ss_db_choose_td_c" style={{backgroundImage: "url('"+  require('../static/ty-estafa.png') +"')"}}>
+                <div className="ss_db_choose_td_c_d">
+                  <div className="ss_db_choose_td_c_l"></div>
+                  <div className="ss_db_choose_td_c_c"></div>
+                </div>
+                <div className="ss_db_choose_td_label">
+                  Explorar<br/>
+                  la estafa <br />
+                  maestra
+                </div>
+                <Icon>visibility</Icon>
+              </div>
+            </div>
+            <div className="ss_db_choose_td">
+              <div className="ss_db_choose_td_c" style={{backgroundImage: "url('"+  require('../static/ty-cargar.png') +"')"}}>
+                <div className="ss_db_choose_td_c_d">
+                  <div className="ss_db_choose_td_c_l"></div>
+                  <div className="ss_db_choose_td_c_c"></div>
+                </div>
+                <input
+                  type="file"
+                  accept=".sinapsis,.csv"
+                  id="ss_file_input"
+                  onChange={(e) => this.props.parent.loadFile(e)}
+                />
+                <div className="ss_db_choose_td_label">
+                  Cargar proyecto
+                </div>
+                <Icon>merge_type</Icon>
+              </div>
+            </div>
+            <div className="ss_db_choose_td" onClick={() => this.props.parent.startNewProject()}>
+              <div className="ss_db_choose_td_c"   style={{backgroundImage: "url('"+  require('../static/ty-new.png') +"')"}}>
+                <div className="ss_db_choose_td_c_d">
+                  <div className="ss_db_choose_td_c_l"></div>
+                  <div className="ss_db_choose_td_c_c"></div>
+                </div>
+                <Icon>add</Icon>
+                <div className="ss_db_choose_td_label">
+                  Nuevo proyecto
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
@@ -629,14 +686,15 @@ class DbView extends React.Component{
               autoFocus
               label="Razón social de la empresa"
               fullWidth
+              color="secondary"
               onChange={(e) => this.setState({dialogValue: e.target.value})}
             />
           </DialogContent>
           <DialogActions>
-            <Button color="primary" onClick={() => this.handleDialogClose()}>
+            <Button color="secondary" onClick={() => this.handleDialogClose()}>
               Cerrar
             </Button>
-            <Button color="primary" disabled={!canAdd} onClick={() => this.addEmpresa()}>
+            <Button color="secondary" disabled={!canAdd} onClick={() => this.addEmpresa()}>
               Agregar
             </Button>
           </DialogActions>
@@ -798,7 +856,6 @@ class DbDbsNavigationNewDb extends React.Component{
       openPopper: !this.state.openPopper,
       anchor: e.currentTarget
     })
-    console.log('t', this.state);
   }
   newDB(){
     this.setState({
@@ -924,7 +981,15 @@ class DbDbsNavigationNewDb extends React.Component{
           <div className="ss_modal_dbpre_select">
           {
             predbs.map(function(predb){
-              return <PreDb parent={self} p={predb} />
+              var ok = true;
+              if(predb.onlyIn){
+                var ok = predb.onlyIn.indexOf(getLang()) > -1;
+              }
+              if(ok){
+                return <PreDb parent={self} p={predb} />
+              }else{
+                return null;
+              }
             })
           }
           </div>
@@ -972,6 +1037,11 @@ class PreDb extends React.Component{
         </div>
 
         <div className="ss_predb_select_country">
+          <Flag
+            name={p.country}
+            format="svg"
+            basePath={buildLink('/img/flags')}
+          />
           <span>{p.countryLabel}</span>
         </div>
         <div className="ss_predb_select_maxtime">

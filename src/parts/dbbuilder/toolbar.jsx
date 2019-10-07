@@ -5,6 +5,12 @@ import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import 'moment/locale/es';
+import Flag from "react-flags";
+import { countries } from "../../vars/countriesDict";
+import buildLink from "../../funcs/buildlink";
+import Popper from '@material-ui/core/Popper';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+var store = require('store')
 moment.locale('es');
 
 export default class DbBuilderToolbar extends React.Component{
@@ -12,10 +18,16 @@ export default class DbBuilderToolbar extends React.Component{
     isloading: false,
     modified: false,
     modifiedString: '',
-    objSizeString: ''
+    objSizeString: '',
+    lang: 'MEX',
+    openPopper: false
   }
   componentDidMount(){
     this.setCronned();
+    var l = this.getLang();
+    this.setState({
+      lang: l
+    })
     var n = window.dbf.obj.info.name;
     this.toolbarname.handleChange(n);
   }
@@ -37,6 +49,12 @@ export default class DbBuilderToolbar extends React.Component{
       var mm = m.fromNow();
       modifiedCronned(mm);
     }, 1000 * 2);
+  }
+
+  getLang(){
+    var def = "MEX";
+    var s = store.get('sinapsis_lang');
+    return s ? s : def;
   }
 
   loadFile(e){
@@ -68,7 +86,26 @@ export default class DbBuilderToolbar extends React.Component{
 
   }
 
+  intentLangChange(e){
+    console.log('Intent handleClick');
+    this.setState({
+      openPopper: !this.state.openPopper,
+      anchor: e.currentTarget
+    })
+  }
+
+  setLang(code){
+    this.setState({
+      lang: code,
+      openPopper: false
+    })
+    store.set('sinapsis_lang', code);
+    var ev = new Event('sinapsis_lang_change');
+    window.dispatchEvent(ev);
+  }
+
   render(){
+    var self = this;
     return(
       <div className="ss_db_toolbar">
         <div className="ss_db_toolbar_info">
@@ -91,6 +128,39 @@ export default class DbBuilderToolbar extends React.Component{
             <Fab size="small" color="primary" onClick={() => window.dbf.createProjectFile()}>
               <Icon>get_app</Icon>
             </Fab>
+            <div className="ss_db_ctas_custom ss_db_ctas_custom_lang">
+              <div onClick={(e) => this.intentLangChange(e)}>
+                <Flag
+                  name={this.state.lang}
+                  format="svg"
+                  basePath={buildLink('/img/flags')}
+                />
+              <Popper id="ss_popper_lang" open={this.state.openPopper} anchorEl={this.state.anchor}>
+                  <ClickAwayListener onClickAway={() => this.setState({openPopper: false})}>
+                  <div className="ss_popper_container">
+                    {
+                      countries.map(function(m){
+                        var cs = ["ss_popper_container_button"];
+                        if(self.state.lang == m.code){
+                          cs.push('ss_btn_active');
+                        }
+                        return(
+                          <div className={cs.join(' ')} onClick={() => self.setLang(m.code)}>
+                            <Flag
+                              name={m.code}
+                              format="svg"
+                              basePath={buildLink('/img/flags')}
+                            />
+                            <div>{m.name}</div>
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                </ClickAwayListener>
+              </Popper>
+              </div>
+            </div>
           </div>
         </div>
         {
@@ -110,6 +180,10 @@ class DbBuilderToolbarName extends React.Component{
     error: false,
     project_name: 'Proyecto increíble'
   }
+
+  componentDidMount(){
+  }
+
 
   handleChange(e){
     var v = e;

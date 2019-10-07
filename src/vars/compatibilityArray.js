@@ -133,7 +133,7 @@ export const snps_ka = {
   },
   32: {
     name: "Nombre del notario",
-    matchWith: ['notario', 'person'],
+    matchWith: ['person'],
     type: 'notario',
     group: 'Notaría'
   },

@@ -10,6 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import DbInput from '../inputs';
+import { _t } from '../../../vars/countriesDict';
 
 const uuidv4 = require('uuid/v4');
 var slugify = require('slugify');
@@ -179,7 +180,7 @@ export default class DbFormGroupPersonas extends React.Component{
               persons.map(function(g){
                 return(
                   <div className="db_empresa_subgroup">
-                    <div className="db_empresa_subgroup_title">{g.name}</div>
+                    <div className="db_empresa_subgroup_title">{_t(g.name)}</div>
                     <div className="db_empresa_subgroup_content db_empresa_container_group_form_innerlist">
                       {
                         g.fields.length ?
@@ -212,10 +213,10 @@ export default class DbFormGroupPersonas extends React.Component{
                 <select onChange={(e) => this.onSelectPersonType(e)}>
                   <option value="-" selected disabled>Selecciona un tipo de persona</option>
                   <option value="representante">Representante Legal</option>
-                  <option value="accionista">Accionista</option>
-                  <option value="administrador">Administrador</option>
-                  <option value="comisario">Comisaria/o</option>
-                  <option value="consejero">Conesjera/o</option>
+                  <option value="accionista">{_t("Accionista")}</option>
+                  <option value="administrador">{_t("Administrador")}</option>
+                  <option value="comisario">{_t("Comisaria/o")}</option>
+                  <option value="consejero">{_t("Conesjera/o")}</option>
                 </select>
               </div>
               : null

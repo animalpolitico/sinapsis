@@ -19,11 +19,12 @@ import NotFound from './pages/404';
 
 const theme = createMuiTheme({
     palette: {
+      type: 'dark',
       primary: {
         main: '#2a2a2a'
       },
       secondary: {
-        main: '#f0f0f0'
+        main: '#3372ff'
       }
     },
 });

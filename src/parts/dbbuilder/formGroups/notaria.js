@@ -10,6 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import DbInput from '../inputs';
+import { _t } from '../../../vars/countriesDict';
 
 export default class DbFormGroupNotaria extends React.Component{
   render(){
@@ -18,7 +19,7 @@ export default class DbFormGroupNotaria extends React.Component{
         <ExpansionPanelSummary expandIcon={<Icon>expand_more</Icon>}>
           <div className="dbef_n">
             <div className="dbef_n_n">
-              Notaría
+              {_t("Notaría")}
             </div>
           </div>
         </ExpansionPanelSummary>

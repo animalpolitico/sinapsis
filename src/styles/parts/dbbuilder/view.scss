@@ -149,8 +149,7 @@
     }
     &.ss_active{
       .db_empresa_container{
-        background:rgb(128, 35, 96);
-        transform: translateX(10px);
+        background: $main;
       }
     }
     &.ss_new{

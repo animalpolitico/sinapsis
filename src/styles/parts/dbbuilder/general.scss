@@ -65,14 +65,16 @@ body.ss_show_sidebar{
   }
 }
 
-.ss_modal_dbpre{
-  .MuiDialog-paper{
-    border-radius: 0;
-    background: #111;
-    .MuiDialogTitle-root, .MuiFormControlLabel-root{
-      color: #f0f0f0;
-    }
+.MuiDialog-paper{
+  border-radius: 0!important;
+  background: #111!important;
+  .MuiDialogTitle-root, .MuiFormControlLabel-root{
+    color: #f0f0f0!important;
   }
+}
+
+.ss_modal_dbpre{
+
   .ss_predb{
     &_select{
       width: 100%;

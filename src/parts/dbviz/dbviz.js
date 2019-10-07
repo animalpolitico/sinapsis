@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import formatMoney from 'format-money';
 import Switch from '@material-ui/core/Switch';
 import CountTo from 'react-count-to';
+import { _t } from '../../vars/countriesDict';
 import {
   PieChart,
   Pie,
@@ -114,6 +115,9 @@ function getTypeColor(t){
     case "contrato":
       return "#885BFA"
     break;
+    case "no_notaria":
+      return "rgb(182, 51, 194)";
+    break;
     case "address":
       return "#FFFF99";
     break;
@@ -124,44 +128,49 @@ function getTypeColor(t){
 }
 
 function getTypeName(t){
+  var o = false;
   switch(t){
     case "empresa":
-      return "Empresa";
+       o = "Empresa";
     break;
     case "rfc":
-      return "RFC";
+      o =  "RFC";
     break;
     case "website":
-      return "Sitio web";
+      o =  "Sitio web";
     break;
     case "person":
-      return "Persona";
+      o =  "Persona";
     break;
     case "date":
-      return "Fecha";
+      o =  "Fecha";
     break;
     case "email":
-      return "Correo electrónico";
+      o = "Correo electrónico";
     break;
     case "convenio":
-      return "Convenio / Contrato";
+      o =  "Convenio / Contrato";
     break;
     case "instancia":
-      return "Instancia / Dependencia";
+      o =  "Instancia / Dependencia";
     break;
     case "titular":
-      return "Titular de instancia";
+      o =  "Titular de instancia";
+    break;
+    case "no_notaria":
+      o =  "No. notaría";
     break;
     case "contrato":
-      return "Convenio / Contrato";
+      o =  "Convenio / Contrato";
     break;
     case "address":
-      return "Dirección";
+      o = "Dirección";
     break;
     default:
-      return false;
+      o = false;
     break;
   }
+  return _t(o);
 }
 
 
@@ -534,7 +543,8 @@ class Nodes extends React.Component{
     nodeSizeParam: 'monto',
     showall: false,
     onlyinall: false,
-    displayDoi: true
+    displayDoi: true,
+    initLoaded: false
   }
   componentDidMount(){
     var self = this;
@@ -565,260 +575,269 @@ class Nodes extends React.Component{
     }
 
   }
-  set(){
-    window.dispatchEvent(startLoad);
-    d3.selectAll('#db_viz_nodes_canvas *').remove();
-    this.setState({
-      loading: true
-    })
-    var self = this;
-    var container = this.container;
-    var onlyinall = this.state.onlyinall;
-    var nodesData = window.dbf.getMatches(onlyinall);
-    this.nodesData = nodesData;
-    var _links = this.buildLinks();
-    nodesData.links = _links;
-    this.nodesData = nodesData;
 
-    var nodesData = this.filterInitNodes();
-    this.nodesData = nodesData;
+  async set(){
+    try{
+      if(this.state.initLoaded){
+        window.dispatchEvent(startLoad);
+      }
+      d3.selectAll('#db_viz_nodes_canvas *').remove();
+      this.setState({
+        loading: true
+      })
+      var self = this;
+      var container = this.container;
+      var onlyinall = this.state.onlyinall;
+      var nodesData = window.dbf.getMatches(onlyinall);
+      this.nodesData = nodesData;
+      var _links = this.buildLinks();
+      nodesData.links = _links;
+      this.nodesData = nodesData;
 
-
-    const width = container.offsetWidth,
-          height = container.offsetHeight;
-    var canvas = d3.select("#db_viz_nodes_canvas")
-                   .attr('width', width)
-                   .attr('height', height);
-    this.canvas = canvas;
+      var nodesData = this.filterInitNodes();
+      this.nodesData = nodesData;
 
 
-  var bgs = canvas.append('rect')
-          .attr('class', 'nodes_container_bg')
-          .attr('width', width)
-          .attr('height', height)
-          .attr('fill', 'transparent')
+      const width = container.offsetWidth,
+            height = container.offsetHeight;
+      var canvas = d3.select("#db_viz_nodes_canvas")
+                     .attr('width', width)
+                     .attr('height', height);
+      this.canvas = canvas;
 
 
-    var simulation = d3.forceSimulation()
-                       .force("charge", d3.forceManyBody(0.5))
-                       .force("link",
-                          d3.forceLink()
-                            .id(function(d){
-                              return d.id;
-                            })
-                        )
-                       .force('collide', d3.forceCollide(700).strength(0.2))
-                       .force('center', d3.forceCenter(width / 2, height / 2))
-                       .force("y", d3.forceY(0.01))
-                       .force("x", d3.forceX(0.01).x(1.1));
-
-   this.simulation = simulation;
-   this.nodesContainer = canvas.append('g').attr('class', 'nodes_container');
+    var bgs = canvas.append('rect')
+            .attr('class', 'nodes_container_bg')
+            .attr('width', width)
+            .attr('height', height)
+            .attr('fill', 'transparent')
 
 
+      var simulation = d3.forceSimulation()
+                         .force("charge", d3.forceManyBody(0.5))
+                         .force("link",
+                            d3.forceLink()
+                              .id(function(d){
+                                return d.id;
+                              })
+                          )
+                         .force('collide', d3.forceCollide(700).strength(0.2))
+                         .force('center', d3.forceCenter(width / 2, height / 2))
+                         .force("y", d3.forceY(0.01))
+                         .force("x", d3.forceX(0.01).x(1.1));
+
+     this.simulation = simulation;
+     this.nodesContainer = canvas.append('g').attr('class', 'nodes_container');
 
 
 
-   var zoom = d3.zoom()
-                .extent([[0, 0], [width, height]])
-                .scaleExtent([-3, 8])
-                .on("zoom", function(z){
-                   var d = d3.event.transform;
-                   self.setState({
-                     isPerfectZoom: false
+
+
+     var zoom = d3.zoom()
+                  .extent([[0, 0], [width, height]])
+                  .scaleExtent([-3, 8])
+                  .on("zoom", function(z){
+                     var d = d3.event.transform;
+                     self.setState({
+                       isPerfectZoom: false
+                     })
+                     canvas.select('.nodes_container').attr('transform', d);
+                   });
+     this.zoom = zoom;
+     canvas.call(zoom)
+
+
+
+     simulation.nodes(nodesData.nodes)
+               .on('tick', this.drawNodes)
+               .on('end', function(){
+
+               })
+
+
+
+     simulation.force('link')
+               .links(nodesData.links);
+
+
+      var data = this.nodesData;
+      var circlesData = [];
+      var labelsData = [];
+
+      data.nodes.map(function(d){
+        var t = d.type;
+        var labelTypes = ['dependencia', 'instancia', 'titular'];
+        if(labelTypes.indexOf(t) > -1){
+          labelsData.push(d);
+        }else{
+          circlesData.push(d);
+        }
+      })
+
+      var lMin = 8;
+      var lMax = 50;
+
+      var lRange=[0, 1700];
+
+      var lMaxSize = Math.min(lRange[1], data.links.length);
+
+      var lPct = Math.abs(1 - (lMaxSize / lRange[1]));
+      console.log('lpct', lPct);
+
+      var lSize = (lMax * lPct) + lMin;
+
+      console.log('LSIZE', lSize);
+
+
+      var links = self.nodesContainer
+                     .selectAll('line')
+                     .data(data.links)
+                     .enter()
+                     .append('line')
+                     .attr('stroke-width', lSize)
+                     .attr('class', 'nodes_link')
+                     .attr('data-from', l => l.source.id)
+                     .attr('data-to', l => l.target.id)
+                     .attr('stroke', 'rgba(90, 67, 231, 0.8)');
+      this.links = links;
+
+      bgs.on('click', function(){
+              self.releaseNode();
+              self.simulation.stop();
+            })
+
+      this.getCoincidenciasSize();
+
+
+      var nodesLabels = self.nodesContainer
+                            .selectAll('.nodes_label')
+                            .data(labelsData)
+                            .enter(labelsData)
+                            .append('g')
+                            .attr('class', 'nodes_label node')
+                            .attr('data-id', d => d.id)
+                            .call(this.drag())
+
+      var rects = nodesLabels
+                   .append('rect')
+                   .attr('fill', function(d){
+                     return getTypeColor(d.type)
                    })
-                   canvas.select('.nodes_container').attr('transform', d);
-                 });
-   this.zoom = zoom;
-   canvas.call(zoom)
+
+      nodesLabels.append('text')
+                 .text((d) => d.name.toUpperCase())
+                 .attr('fill', 'white')
+                 .attr('font-size', 300)
+                 .attr('text-anchor', 'middle')
+
+      var nodesPaddingLeft = 60;
+      var nodesPaddingTop = 35;
+
+      nodesLabels.each(function(d){
+        var g = d3.select(this);
+
+        var bb = null;
+        var t = g.selectAll('text')
+                  .each(function(){
+                    bb = this.getBBox();
+                  })
+
+        if(bb){
+          var w = bb.width;
+          var h = bb.height;
+
+          var ww = w + (nodesPaddingLeft * 2);
+          var hh = h + (nodesPaddingTop * 2);
+
+          g.selectAll('rect')
+           .attr('width', ww)
+           .attr('height', hh)
+           .attr('x', -ww / 2)
+           .attr('y', -h + nodesPaddingTop)
 
 
-
-   simulation.nodes(nodesData.nodes)
-             .on('tick', this.drawNodes)
-             .on('end', function(){
-             })
-
-
-
-   simulation.force('link')
-             .links(nodesData.links);
-
-
-    var data = this.nodesData;
-    var circlesData = [];
-    var labelsData = [];
-
-    data.nodes.map(function(d){
-      var t = d.type;
-      var labelTypes = ['dependencia', 'instancia', 'titular'];
-      if(labelTypes.indexOf(t) > -1){
-        labelsData.push(d);
-      }else{
-        circlesData.push(d);
-      }
-    })
-
-    var lMin = 8;
-    var lMax = 50;
-
-    var lRange=[0, 1700];
-
-    var lMaxSize = Math.min(lRange[1], data.links.length);
-
-    var lPct = Math.abs(1 - (lMaxSize / lRange[1]));
-    console.log('lpct', lPct);
-
-    var lSize = (lMax * lPct) + lMin;
-
-    console.log('LSIZE', lSize);
-
-
-    var links = self.nodesContainer
-                   .selectAll('line')
-                   .data(data.links)
-                   .enter()
-                   .append('line')
-                   .attr('stroke-width', lSize)
-                   .attr('class', 'nodes_link')
-                   .attr('data-from', l => l.source.id)
-                   .attr('data-to', l => l.target.id)
-                   .attr('stroke', 'rgba(90, 67, 231, 0.8)');
-    this.links = links;
-
-    bgs.on('click', function(){
-            self.releaseNode();
-            self.simulation.stop();
-          })
-
-    this.getCoincidenciasSize();
-
-
-    var nodesLabels = self.nodesContainer
-                          .selectAll('.nodes_label')
-                          .data(labelsData)
-                          .enter(labelsData)
-                          .append('g')
-                          .attr('class', 'nodes_label node')
-                          .attr('data-id', d => d.id)
-                          .call(this.drag())
-
-    var rects = nodesLabels
-                 .append('rect')
-                 .attr('fill', function(d){
-                   return getTypeColor(d.type)
-                 })
-
-    nodesLabels.append('text')
-               .text((d) => d.name.toUpperCase())
-               .attr('fill', 'white')
-               .attr('font-size', 300)
-               .attr('text-anchor', 'middle')
-
-    var nodesPaddingLeft = 60;
-    var nodesPaddingTop = 35;
-
-    nodesLabels.each(function(d){
-      var g = d3.select(this);
-
-      var bb = null;
-      var t = g.selectAll('text')
-                .each(function(){
-                  bb = this.getBBox();
-                })
-
-      if(bb){
-        var w = bb.width;
-        var h = bb.height;
-
-        var ww = w + (nodesPaddingLeft * 2);
-        var hh = h + (nodesPaddingTop * 2);
-
-        g.selectAll('rect')
-         .attr('width', ww)
-         .attr('height', hh)
-         .attr('x', -ww / 2)
-         .attr('y', -h + nodesPaddingTop)
-
-
-      }
-
-    })
-
-    var nodesCircles = self.nodesContainer
-                      .selectAll('circle')
-                      .data(circlesData)
-                      .enter()
-                      .append('circle')
-                      .attr('class', 'node node_circle')
-                      .attr('data-name', (d) => d.name)
-                      .attr('data-id', d => d.id)
-                      .attr('data-type', d => d.type)
-                      .attr('data-sum', function(d){
-                        var t = d.type;
-                        if(t == "empresa"){
-                          var s = d.sum ? d.sum : 0;
-                          return s;
-                        }else{
-                          return "notvalid";
-                        }
-                      })
-                      .attr('id', (d, i) => 'node_'+i)
-                      .attr('stroke', '#0a0a0a')
-                      .attr('stroke-width', '4px')
-                      .attr('data-type', (d) => d.type)
-                      .attr('fill', function(d){
-                        var t = d.type;
-                        return getTypeColor(t);
-                      })
-                      .call(this.drag())
-
-
-
-    this.nodesLabels = nodesLabels;
-    this.nodesCircles = nodesCircles;
-
-    this.setInitialZoom();
-
-    d3.selectAll('.node')
-      .attr('data-coincidencias', function(d){
-        var c = self.getCoincidenciasById(d.id);
-        d.coincidencias = c;
-        return c;
-      })
-      .on('dblclick', function(d){
-        self.releaseNode();
-      })
-      .on('mouseover', function(d, e){
-        if(!d.blockShow){
-          self.setState({
-            doi: d,
-            displayTooltip: true
-          })
         }
 
       })
-      .on('click', function(d){
-        d.isclicked = true;
-        self.isolateNode(d.id)
-      })
-      .on('mouseleave', function(d){
-        self.nodesContainer.selectAll('.viz_tooltip').remove();
-        self.setState({
-          doi: null,
-          displayTooltip: false
+
+      var nodesCircles = self.nodesContainer
+                        .selectAll('circle')
+                        .data(circlesData)
+                        .enter()
+                        .append('circle')
+                        .attr('class', 'node node_circle')
+                        .attr('data-name', (d) => d.name)
+                        .attr('data-id', d => d.id)
+                        .attr('data-type', d => d.type)
+                        .attr('data-sum', function(d){
+                          var t = d.type;
+                          if(t == "empresa"){
+                            var s = d.sum ? d.sum : 0;
+                            return s;
+                          }else{
+                            return "notvalid";
+                          }
+                        })
+                        .attr('id', (d, i) => 'node_'+i)
+                        .attr('stroke', '#0a0a0a')
+                        .attr('stroke-width', '4px')
+                        .attr('data-type', (d) => d.type)
+                        .attr('fill', function(d){
+                          var t = d.type;
+                          return getTypeColor(t);
+                        })
+                        .call(this.drag())
+
+
+
+      this.nodesLabels = nodesLabels;
+      this.nodesCircles = nodesCircles;
+
+      this.setInitialZoom();
+
+      d3.selectAll('.node')
+        .attr('data-coincidencias', function(d){
+          var c = self.getCoincidenciasById(d.id);
+          d.coincidencias = c;
+          return c;
         })
-      })
+        .on('dblclick', function(d){
+          self.releaseNode();
+        })
+        .on('mouseover', function(d, e){
+          if(!d.blockShow){
+            self.setState({
+              doi: d,
+              displayTooltip: true
+            })
+          }
 
-      this.setNodeCircleSize();
+        })
+        .on('click', function(d){
+          d.isclicked = true;
+          self.isolateNode(d.id)
+        })
+        .on('mouseleave', function(d){
+          self.nodesContainer.selectAll('.viz_tooltip').remove();
+          self.setState({
+            doi: null,
+            displayTooltip: false
+          })
+        })
 
-    window.dispatchEvent(endLoad);
+        this.setNodeCircleSize();
 
-    setTimeout(function(){
-      self.setState({
-        loading: false
-      })
-    }, 5000);
+
+      setTimeout(function(){
+        self.setState({
+          loading: false,
+          initLoaded: true
+        })
+        window.dispatchEvent(endLoad);
+      }, 2500);
+    }catch(ex){
+
+    }
   }
 
   changeCircleSize(type){
@@ -849,14 +868,9 @@ class Nodes extends React.Component{
   }
 
   filterInitNodes(){
-    // console.log('Filtering', 'hola');
     var n = this.nodesData.nodes;
     var l = this.nodesData.links;
 
-
-    if(this.state.onlyinall){
-
-    }
 
 
     var uidWithConnections = [];
@@ -1288,11 +1302,12 @@ class SSNodeFilter extends React.Component{
 
   handleChange(e){
     var t = this.state.checked;
+
     var nt = !t;
     this.setState({
       checked: nt
     })
-
+    window.dispatchEvent(startLoad);
     this.props.nodesMap.toggleEmpresas(nt);
   }
 
@@ -1369,8 +1384,18 @@ class SSCategoryToggle extends React.Component{
       "email",
       "instancia",
       "contrato",
-      "address"
+      "address",
+      "no_notaria"
     ]
+  }
+
+  componentDidMount(){
+    var self = this;
+    window.addEventListener('sinapsis_lang_change', function(){
+      self.setState({
+        s: ''
+      })
+    })
   }
 
 
@@ -1402,7 +1427,8 @@ class SSCategoryToggle extends React.Component{
       "email",
       "instancia",
       "contrato",
-      "address"
+      "address",
+      "no_notaria"
     ];
     return(
       <div className="ss_control_node_filter ss_control_group">

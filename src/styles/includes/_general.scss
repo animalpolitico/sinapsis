@@ -9,7 +9,11 @@ html,body{
   position: absolute;
   top: 0;
   left: 0;
-  overflow: hidden;
+}
+body.ss_platform{
+  #wrapper{
+    overflow: hidden;
+  }
 }
 #binder{
   width: 100%;

@@ -27,7 +27,13 @@ export default class DbEditEmpresa extends React.Component{
     empresaErrors: {},
   }
   componentDidMount(){
+    var self = this;
     this.searchErrors();
+    window.addEventListener('sinapsis_lang_change', function(){
+      self.setState({
+        s: ''
+      })
+    })
   }
   componentDidUpdate(op, os){
     if(this.props.empresa.uid !== op.empresa.uid){
@@ -141,8 +147,8 @@ export default class DbEditEmpresa extends React.Component{
         </div>
         <div className="db_empresa_container_form">
           <DbFormGroupInfoGeneral empresa={this.props.empresa} parent={this} ref={(ref) => this.infoGeneral = ref}>
-            <DbFormGroupNotaria empresa={this.props.empresa} parent={this} />
             <DbFormGroupPersonas empresa={this.props.empresa} parent={this} />
+            <DbFormGroupNotaria empresa={this.props.empresa} parent={this} />
           </DbFormGroupInfoGeneral>
           <DbFormGroupContrato empresa={this.props.empresa} parent={this} />
           <DbFormGroupConvenio empresa={this.props.empresa} parent={this} />
