@@ -160,7 +160,7 @@ export const snps_ka = {
     name: "Número de contrato",
     group: 'contrato',
     bigGroup: 'contrato',
-    matchWith: ['contrato']
+    matchWith: ['convenio']
   },
   39: {
     name: "Fecha de inicio",

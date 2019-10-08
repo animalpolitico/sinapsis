@@ -113,23 +113,17 @@ export default class DbFactory {
   * @param dbid
   * @param toggle
   **/
-  toggleDb(dbid, show){
-    var hide = !show;
-    var c = this.omitDbs;
-    var isin = c.indexOf(dbid) > -1;
-    if(hide && !isin){
-      c.push(dbid);
-    }
-
-    if(!hide && isin){
-      c.splice(c.indexOf(dbid), 1);
-    }
-
-    this.omitDbs = c;
+  hideDbs(dbs){
+    var self = this;
+    this.omitDbs = dbs;
+    var c = dbs;
     this.refresh();
-
-    this.obj.dbs[dbid]['hide'] = hide;
-
+    for(var key in this.obj.dbs){
+      this.obj.dbs[key]['hide'] = false;
+    }
+    dbs.map(function(dbid){
+      self.obj.dbs[dbid]['hide'] = true;
+    })
   }
 
   /**
@@ -139,10 +133,12 @@ export default class DbFactory {
   * @return obj
   **/
   getMatches(onlyinall){
+    console.log('ONLY IN ALL', onlyinall);
     var self = this;
     var db = this.getDbs();
     var filterDb = {};
     var omitDbs = this.omitDbs;
+    var categories = this.categories;
 
     for(key in db){
       if(omitDbs.indexOf(key) == -1){
@@ -177,7 +173,9 @@ export default class DbFactory {
             f.type = f.matchWith[0];
             f.empresauid = empresa.uid;
             f.fromdb = _db.id;
-            dbfields = [...dbfields, f]
+            if((categories && categories.indexOf(f.type) > -1) || !categories){
+              dbfields = [...dbfields, f]
+            }
           });
         })
         normalized = [...normalized, ...dbfields];
@@ -225,7 +223,18 @@ export default class DbFactory {
             diff.push(euid);
           }
         })
-        var add = onlyinall ? dbsin.length == dbkeys.length : true;
+
+        var _add = false;
+        if(onlyinall == "all"){
+          _add = true;
+        }else if(onlyinall == "onlyinall"){
+          _add = dbsin.length == dbkeys.length;
+        }else if(onlyinall == "twoormore"){
+          _add = dbsin.length > 1;
+        }else{
+          _add = true;
+        }
+        var add = _add;
         if(diff.length > 1 && add){
           fnodes[key] = n;
         }

@@ -74,12 +74,13 @@ export default class ConvertOldToDb{
           var _slug = entidad.replace(/[.\s]/g, '');
               _slug = slugify(_slug, {remove: /[*,+~.()'"!:@]/g, lower: true});
           if(empresasSlug.indexOf(_slug) > -1){
-            var m = null;
+            var m = false;
           }else{
-            var m = "instancia";
+            var m = ["instancia"];
           }
-          f.type = m;
-          f.matchWith = [m];
+
+          f.type = m ? m[0] : null;
+          f.matchWith = m;
         }
       })
 

@@ -102,6 +102,9 @@ export default class DbBuilderToolbar extends React.Component{
     store.set('sinapsis_lang', code);
     var ev = new Event('sinapsis_lang_change');
     window.dispatchEvent(ev);
+
+    var ev = new Event('ss_lazy_indicator');
+    window.dispatchEvent(ev);
   }
 
   render(){

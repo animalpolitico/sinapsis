@@ -31,8 +31,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: #1a1a1a url('../static/texture.png') repeat center center;
-  background-blend-mode: difference;
+  background: #1a1a1a;
   z-index: 9999999;
   &_close{
     position: absolute;

@@ -680,11 +680,8 @@ class DbView extends React.Component{
                 value={this.state.db.name}
                 onChange={(e) => this.handleNameChange(e)}
               />
-            <IconButton size="small" onClick={() => this.toggleView()}>
-                  <Icon>{this.state.view ? "visibility_off" : "visibility"}</Icon>
-              </IconButton>
               <IconButton size="small" onClick={() => this.intentDelete()}>
-                  <Icon>delete</Icon>
+                <Icon>delete</Icon>
               </IconButton>
             </div>
 

@@ -1,5 +1,5 @@
 .nodes_controls{
-  width: 200px;
+  width: 220px;
   position: absolute;
   bottom: 0;
   right: 20px;
@@ -34,7 +34,6 @@
   background: #2a2a2a;
   box-sizing: border-box;
   margin: 0.5rem 0;
-  box-shadow: 3px 3px 6px rgba(black, 0.1);
   &.ss_control_node_filter{
     width: 100%;
   }
@@ -49,6 +48,135 @@
       font-weight: 600;
       box-sizing: border-box;
       padding: 0.25rem 0.5rem;
+    }
+    &_extracontrols{
+      padding-bottom: 0.75rem;
+      .ss_control_extra{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.15rem 0.75rem;
+        &_warning{
+          @extend .flex;
+          align-items: center;
+          color: yellow;
+          margin-top: 0.4rem;
+          line-height: 1.1;
+          *, &{
+            font-size: 0.6rem;
+            font-weight: 600;
+          }
+          .material-icons{
+            margin-right: 0.3rem;
+          }
+        }
+        label{
+          font-size: 0.7rem;
+          font-weight: 600;
+          color: white;
+        }
+        select{
+          appearance: none;
+          display: block;
+          width: 90%;
+          box-sizing: border-box;
+          padding: 0.25rem;
+          background-color: #444;
+          font-size: 0.7rem;
+          font-weight: 600;
+          border: 0;
+          margin-top: 0.15rem;
+          border-radius: 0;
+          color: white;
+          cursor: pointer!important;
+          &:focus{
+            outline: 0;
+          }
+        }
+      }
+    }
+    &_dbs{
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.15rem 0.75rem 0.25rem;
+      max-height: 150px;
+      overflow: hidden;
+      overflow-y: auto;
+      .ss_db{
+        width: 100%;
+        @extend .flex;
+        background: rgba(white, 0.1);
+        box-sizing: border-box;
+        padding: 0.25rem;
+        flex-wrap: nowrap;
+        align-items: center;
+        margin: 0.25rem 0;
+        &_toggle{
+          height: 0%;
+          padding: 0.25rem;
+          cursor: pointer;
+          &:hover{
+            opacity: 0.8;
+          }
+          .material-icons{
+            color: white;
+            font-size: 1rem;
+          }
+        }
+        &_info{
+          flex: 1;
+          height: 0%;
+          max-width: 85%;
+          &_name{
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 100%;
+            text-overflow: ellipsis;
+            color: white;
+          }
+          &_empresas{
+            font-size: 0.6rem;
+            color: white;
+            strong{
+              &::before{
+                content: '/';
+                color: $main;
+                margin-right: 5px;
+              }
+            }
+          }
+        }
+        &.ss_db_hidden{
+          .ss_db_info{
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+    &_btns{
+      width: 100%;
+      @extend .flex;
+      box-sizing: border-box;
+      padding: 0.25rem 0.5rem 0.15rem;
+      font-size: 0.65rem;
+      &_btn{
+        box-sizing: border-box;
+        padding: 0.25rem 0.35rem;
+        background: #333;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: white;
+        margin-right: 0.35rem;
+        cursor: pointer;
+        &:hover{
+          background-color: $main;
+        }
+        &[disabled]{
+          opacity: 0.25;
+          pointer-events: none;
+        }
+      }
     }
     &_switches{
       width: 100%;

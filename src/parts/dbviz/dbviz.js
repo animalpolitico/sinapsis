@@ -67,8 +67,7 @@ export default class DbViz extends React.Component{
           <div style={{display: this.state.showcontrols ? 'block' : 'none'}}>
             <SSCategoryToggle nodesMap={this.nodes} />
             <SSNodeSize nodesMap={this.nodes}/>
-            <SSNodeCoincidencias nodesMap={this.nodes} />
-            <SSNodeFilter nodesMap={this.nodes}/>
+            <SSDBControl nodesMap={this.nodes} />
           </div>
         </div>
           <AnalyticsButton onClick={() => this.toggleAnalytics()}/>
@@ -84,22 +83,138 @@ export default class DbViz extends React.Component{
   }
 }
 
+class SSDBControl extends React.Component{
+  state = {
+    hiddenDbs: []
+  }
+  toggleDb(dbid){
+    var s = this.state.hiddenDbs;
+    if(s.indexOf(dbid) == -1){
+      s.push(dbid);
+    }else{
+      s.splice(s.indexOf(dbid), 1);
+    }
+    this.setState({
+      hiddenDbs: s
+    })
+    window.dbf.hideDbs(s);
+    var ev = new Event('ss_lazy_indicator');
+    window.dispatchEvent(ev);
+  }
+
+  getVisibleDbs(){
+    var self = this;
+    var dbs = window.dbf.getDbs();
+        dbs = Object.values(dbs);
+    return dbs.filter(db => self.state.hiddenDbs.indexOf(db.id) == -1);
+  }
+
+  handleMostrarEmpresas(v){
+    var showall = v == "all";
+    window.dispatchEvent(startLoad);
+    this.props.nodesMap.toggleEmpresas(showall);
+  }
+
+  handleMostrarCoincidencias(type){
+    window.dispatchEvent(startLoad);
+    this.props.nodesMap.toggleOnlyAll(type);
+  }
+
+  render(){
+    var self = this;
+    var dbs = window.dbf.getDbs();
+        dbs = Object.values(dbs);
+
+    var visible = this.getVisibleDbs();
+    var totalPotentialEmpresas = 0;
+    visible.map(function(_db){
+      totalPotentialEmpresas += Object.values(_db.empresas).length;
+    })
+    console.log('potential', totalPotentialEmpresas);
+
+    return(
+      <div className="ss_control_node_filter ss_control_group">
+        <div className="ss_control_group_container">
+          <div className="ss_control_group_container_title">
+            Bases de datos
+          </div>
+        </div>
+        <div className="ss_control_group_container_dbs">
+          {dbs.map(function(db){
+            var esize = Object.values(db.empresas).length
+            var ish = self.state.hiddenDbs.indexOf(db.id) > -1;
+            var cs = ["ss_db"];
+            if(ish){
+              cs.push("ss_db_hidden");
+            }
+            return(
+              <div className={cs.join(' ')}>
+                <div className="ss_db_info">
+                  <div className="ss_db_info_name">
+                    {db.name}
+                  </div>
+                  <div className="ss_db_info_empresas">
+                    <strong>{esize}</strong> empresas
+                  </div>
+                </div>
+                <div className="ss_db_toggle" onClick={() => self.toggleDb(db.id)}>
+                  <Icon>{!ish ? "visibility" : "visibility_off"}</Icon>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+        <div className="ss_control_group_container_extracontrols">
+          {
+            visible.length > 1 ?
+            <div className="ss_control_extra">
+              <label>Mostrar coincidencias</label>
+              <select onChange={(e) => this.handleMostrarCoincidencias(e.target.value)}>
+                <option value="all">Todas</option>
+                <option value="onlyinall">Solo entre todas las distintas bases</option>
+                <option value="twoormore">Solo entre bases distintas</option>
+              </select>
+            </div>
+            : null
+          }
+
+          <div className="ss_control_extra">
+            <label>Mostrar empresas</label>
+            <select onChange={(e) => this.handleMostrarEmpresas(e.target.value)}>
+              <option value="default">Solo con coincidencias</option>
+              <option value="all">Todas</option>
+            </select>
+            {
+              totalPotentialEmpresas > 900 ?
+              <div className="ss_control_extra_warning">
+                <Icon>warning</Icon><div>Tu proyecto tiene muchas empresas, ten cuidado al seleccionar "Todas".</div>
+              </div>
+              : null
+            }
+
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
 function getTypeColor(t){
   switch(t){
     case "empresa":
-      return "#DBDBDB";
+      return "#F6F6F6";
     break;
     case "rfc":
-      return "#FF000A";
-    break;
-    case "date":
-      return "#FF00A8";
-    break;
-    case "website":
       return "#FFFF00";
     break;
+    case "date":
+      return "#885BFA";
+    break;
+    case "website":
+    return "#866129";
+    break;
     case "person":
-      return "#FF0054";
+      return "#FF00A8";
     break;
     case "titular":
       return "#FF0054";
@@ -108,19 +223,22 @@ function getTypeColor(t){
       return "#A8FF00";
     break;
     case "convenio":
-      return "#02FC8F";
+      return "#ff9900";
     break;
     case "instancia":
-      return "#555";
+      return "#474747";
     break;
     case "contrato":
       return "#885BFA"
     break;
     case "no_notaria":
-      return "rgb(182, 51, 194)";
+    return "#00FFFF";
     break;
     case "address":
-      return "#FFFF99";
+      return "#fb5d5d";
+    break;
+    case "phone":
+      return "rgb(53, 138, 125)";
     break;
     default:
       return "#888888";
@@ -166,6 +284,9 @@ function getTypeName(t){
     break;
     case "address":
       o = "Dirección";
+    break;
+    case "phone":
+      o = "Teléfono";
     break;
     default:
       o = false;
@@ -543,7 +664,7 @@ class Nodes extends React.Component{
     coincidencias: 0,
     nodeSizeParam: 'monto',
     showall: false,
-    onlyinall: false,
+    onlyinall: "all",
     displayDoi: true,
     minimizeDoi: false,
     initLoaded: false,
@@ -712,7 +833,7 @@ class Nodes extends React.Component{
                      .attr('class', 'nodes_link')
                      .attr('data-from', l => l.source.id)
                      .attr('data-to', l => l.target.id)
-                     .attr('stroke', 'rgba(90, 67, 231, 0.8)');
+                     .attr('stroke', 'rgba(0, 114, 255, 0.3)')
       this.links = links;
 
       bgs.on('click', function(){
@@ -744,7 +865,7 @@ class Nodes extends React.Component{
       nodesLabels.append('text')
                  .text((d) => d.name.toUpperCase())
                  .attr('fill', 'white')
-                 .attr('font-size', 300)
+                 .attr('font-size', 250)
                  .attr('text-anchor', 'middle')
 
       var nodesPaddingLeft = 60;
@@ -844,13 +965,12 @@ class Nodes extends React.Component{
 
         this.setNodeCircleSize();
 
-
+      window.dispatchEvent(endLoad);
       setTimeout(function(){
         self.setState({
           loading: false,
           initLoaded: true
         })
-        window.dispatchEvent(endLoad);
       }, 1000);
     }catch(ex){
 
@@ -1023,7 +1143,7 @@ class Nodes extends React.Component{
     var self = this;
     d3.selectAll('.node').attr('opacity', 0.05);
     d3.selectAll('.nodes_link')
-      .attr('stroke', 'rgba(90, 67, 231, 0.1)')
+      .attr('stroke', 'rgba(0, 114, 255, 0.05)')
       .each(d => d.selected = false)
     var doi = null;
     var dois = d3.selectAll('.node')
@@ -1067,12 +1187,12 @@ class Nodes extends React.Component{
     })
 
     d3.selectAll('.nodes_link')
-      .attr('stroke', 'rgba(90, 67, 231, 0.1)')
+      .attr('stroke', 'rgba(0, 114, 255, 0.05)')
       .each(d => d.selected = false)
 
     d3.selectAll('.node')
       .filter(d => d && (d.id !== this.state.isoDoi.id))
-      .attr('opacity', 0.05)
+      .attr('stroke', 'rgba(0, 114, 255, 0.3)')
       .each(d => d.level = false)
 
     for(var i = -1; i < level; i++){
@@ -1088,7 +1208,7 @@ class Nodes extends React.Component{
       var nextNodes = [];
 
       d3.selectAll(cnds)
-        .attr('stroke', 'rgba(90, 67, 231, 0.79)')
+        .attr('stroke', 'rgba(0, 114, 255, 0.3)')
         .each(function(d){
           d.selected = true;
           var aid = d.source.id;
@@ -1121,7 +1241,7 @@ class Nodes extends React.Component{
   }
 
   releaseNode(){
-    this.nodesContainer.selectAll('.nodes_link').attr('stroke', 'rgba(90, 67, 231, 0.79)');
+    this.nodesContainer.selectAll('.nodes_link').attr('stroke', 'rgba(0, 114, 255, 0.3)');
     this.nodesContainer
         .selectAll('.node')
         .attr('opacity', d => !d.blockShow ? 1 : 0)
@@ -1201,34 +1321,9 @@ class Nodes extends React.Component{
       vals.push('empresa');
     }
 
-    var ids = [];
+    window.dbf.categories = vals;
+    this.set();
 
-    d3.selectAll('.node')
-      .each(function(d){
-        var t = d.type;
-        if(vals.indexOf(t) == -1){
-          d.blockShow = true;
-          d3.select(this).attr('opacity', 0);
-          ids.push(d.id);
-        }else{
-          d3.select(this).attr('opacity', 1);
-          d.blockShow = false;
-        }
-      })
-
-    d3.selectAll('.nodes_link')
-      .each(function(l){
-        if(ids.indexOf(l.target.id) > -1 || ids.indexOf(l.source.id) > -1){
-          l.blockShow = true;
-          d3.select(this).attr('opacity', 0);
-        }else{
-          l.blockShow = false;
-          d3.select(this).attr('opacity', 1);
-        }
-      })
-
-    this.setNodeCircleSize();
-    this.getCoincidenciasSize();
   }
 
   toggleEmpresas(showall){
@@ -1326,21 +1421,6 @@ class Nodes extends React.Component{
             </Fab>
             : null
           }
-          {
-            this.state.isolatingNode ?
-            <Fab
-              title="Mostrar todos los nodos"
-              size="small"
-              id="ss_fab_release"
-              color="primary"
-              disabled={!this.state.isolatingNode}
-              onClick={() => this.releaseNode()}
-            >
-              <Icon>scatter_plot</Icon>
-            </Fab>
-            : null
-          }
-
         </div>
         <div className="db_viz_info">
           {
@@ -1495,10 +1575,12 @@ class SSCategoryToggle extends React.Component{
       "person",
       "date",
       "email",
+      "phone",
       "instancia",
-      "contrato",
+      "convenio",
       "address",
-      "no_notaria"
+      "no_notaria",
+      'empresa'
     ]
   }
 
@@ -1522,32 +1604,69 @@ class SSCategoryToggle extends React.Component{
     if(!ischecked && exists){
       vals.splice(vals.indexOf(v), 1);
     }
+    this.props.nodesMap.filterCategory(vals);
+    this.setState({
+      vals: vals
+    })
+  }
+
+  majorChange(type){
+    if(type == 'all'){
+      var vals = [
+        "rfc",
+        "website",
+        "person",
+        "date",
+        "email",
+        "phone",
+        "instancia",
+        "convenio",
+        "address",
+        "no_notaria",
+        'empresa'
+      ];
+    }else{
+      var vals = ['empresa'];
+    }
 
     this.props.nodesMap.filterCategory(vals);
+
+    var ev = new Event('ss_lazy_indicator');
+    window.dispatchEvent(ev);
 
     this.setState({
       vals: vals
     })
+
   }
 
   render(){
     var self = this;
     var types = [
       "rfc",
-      "website",
       "person",
       "date",
-      "email",
       "instancia",
-      "contrato",
+      "convenio",
       "address",
-      "no_notaria"
+      "email",
+      "phone",
+      "no_notaria",
+      "website",
     ];
     return(
       <div className="ss_control_node_filter ss_control_group">
         <div className="ss_control_group_container">
           <div className="ss_control_group_container_title">
-            Filtrar
+            Mostrar
+          </div>
+          <div className="ss_control_group_container_btns">
+            <div onClick={() => this.majorChange('all')} disabled={types.length == (this.state.vals.length - 1)} className="ss_control_group_container_btns_btn">
+              Todos
+            </div>
+            <div onClick={() => this.majorChange('none')} disabled={this.state.vals.length === 1} className="ss_control_group_container_btns_btn">
+              Ninguno
+            </div>
           </div>
           <div className="ss_control_group_container_switches">
             {
@@ -1589,6 +1708,9 @@ class SSDoi extends React.Component{
     if(ism){
       cs.push('ss_minimized');
     }
+    if(d.type == 'instancia'){
+      tc = "rgb(189, 189, 189)";
+    }
     return(
       <div className={cs.join(' ')}>
         <div className="ss_doi_window_controls">
@@ -1602,6 +1724,11 @@ class SSDoi extends React.Component{
           <div className="ss_doi_window_controls_td" onClick={() => this.props.parent.toggleMinimizeDoi()}>
             <div className="ss_doi_window_controls_td_min">
               <Icon>{ism ? 'call_made' : 'call_received'}</Icon>
+            </div>
+          </div>
+          <div className="ss_doi_window_controls_td" onClick={() => this.props.parent.releaseNode()}>
+            <div className="ss_doi_window_controls_td_min">
+              <Icon>close</Icon>
             </div>
           </div>
         </div>
@@ -1688,15 +1815,17 @@ class SSTooltip extends React.Component{
     }
 
     var d = this.props.doi;
-
-
     var node = d3.select('.node[data-id="'+d.id+'"]');
+    var color = getTypeColor(d.type);
+    if(d.type == 'instancia'){
+      color = "rgb(189, 189, 189)";
+    }
     return(
       <div
         className="db_viz_tooltip"
-        style={{left: coords[0], top: coords[1], borderColor: getTypeColor(d.type) }}
+        style={{left: coords[0], top: coords[1], borderColor: color }}
       >
-        <div className="db_viz_tooltip_type_name" style={{color: getTypeColor(d.type)}}>
+        <div className="db_viz_tooltip_type_name" style={{color: color}}>
           {getTypeName(d.type)}
         </div>
         <div className="db_viz_tooltip_name">
