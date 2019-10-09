@@ -64,7 +64,7 @@ export default class DbViz extends React.Component{
           <div className="nodes_controls_button" onClick={() => this.toggleControls()}>
             <Icon>{this.state.showcontrols ? 'expand_more' : 'expand_less'}</Icon><div>{this.state.showcontrols ? 'Ocultar' : 'Mostrar'} controles</div>
           </div>
-          <div style={{display: this.state.showcontrols ? 'block' : 'none'}}>
+          <div className="nodes_controls_container" style={{display: this.state.showcontrols ? 'block' : 'none'}}>
             <SSCategoryToggle nodesMap={this.nodes} />
             <SSNodeSize nodesMap={this.nodes}/>
             <SSDBControl nodesMap={this.nodes} />
@@ -97,6 +97,7 @@ class SSDBControl extends React.Component{
     this.setState({
       hiddenDbs: s
     })
+    window.dispatchEvent(startLoad);
     window.dbf.hideDbs(s);
     var ev = new Event('ss_lazy_indicator');
     window.dispatchEvent(ev);
@@ -128,9 +129,10 @@ class SSDBControl extends React.Component{
     var visible = this.getVisibleDbs();
     var totalPotentialEmpresas = 0;
     visible.map(function(_db){
-      totalPotentialEmpresas += Object.values(_db.empresas).length;
+      if(_db.empresas){
+        totalPotentialEmpresas += Object.values(_db.empresas).length;
+      }
     })
-    console.log('potential', totalPotentialEmpresas);
 
     return(
       <div className="ss_control_node_filter ss_control_group">
@@ -141,7 +143,11 @@ class SSDBControl extends React.Component{
         </div>
         <div className="ss_control_group_container_dbs">
           {dbs.map(function(db){
-            var esize = Object.values(db.empresas).length
+            if(db.empresas){
+              var esize = Object.values(db.empresas).length
+            }else{
+              var esize = 0;
+            }
             var ish = self.state.hiddenDbs.indexOf(db.id) > -1;
             var cs = ["ss_db"];
             if(ish){
@@ -1569,6 +1575,7 @@ class SSNodeCoincidencias extends React.Component{
 
 class SSCategoryToggle extends React.Component{
   state = {
+    showing: true,
     vals: [
       "rfc",
       "website",
@@ -1657,9 +1664,12 @@ class SSCategoryToggle extends React.Component{
     return(
       <div className="ss_control_node_filter ss_control_group">
         <div className="ss_control_group_container">
-          <div className="ss_control_group_container_title">
-            Mostrar
+          <div className="ss_control_group_container_title" style={{cursor: "pointer"}} onClick={() => this.setState({showing: !this.state.showing})}>
+            <div>Mostrar</div><Icon>{this.state.showing ? "expand_more" : "expand_less"}</Icon>
           </div>
+          {
+            this.state.showing ?
+          <>
           <div className="ss_control_group_container_btns">
             <div onClick={() => this.majorChange('all')} disabled={types.length == (this.state.vals.length - 1)} className="ss_control_group_container_btns_btn">
               Todos
@@ -1692,6 +1702,9 @@ class SSCategoryToggle extends React.Component{
               })
             }
           </div>
+          </>
+            : null
+          }
         </div>
       </div>
     )

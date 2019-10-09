@@ -13,7 +13,7 @@
     input{
       flex: 1;
       display: block;
-      padding: 0.5rem 0.75rem;
+      padding: 0.25rem 0.5rem;
       box-sizing: border-box;
       border: 0;
       font-size: 1.3rem;
@@ -21,14 +21,13 @@
       font-weight: 600;
       color: white;
       background: none;
-      border-radius: 1.5rem;
+      border-radius: 1.25rem;
       border: 2px solid transparent;
       &:focus{
         outline: 0;
         background: white;
         color: $blue;
         border-color: white;
-        box-shadow: 2px 2px 4px rgba(black, 0.1);
       }
     }
     &.ss_error{
@@ -42,26 +41,29 @@
 
   &_empresas{
     width: 100%;
-    border-top: 2px solid beige;
+    border-top: 2px solid #f6f6f6;
     box-sizing: border-box;
-    padding: 1rem;
+    padding: 0.75rem 1rem 1rem;
     max-height: 100%;
     @extend .flex;
     flex-direction: column;
     &_title{
       color: white;
-      font-weight: 400;
+      font-weight: 600;
       @extend .flex;
       align-items: center;
       padding-bottom: 0.5rem;
+      padding-left: 0.5rem;
       &_btn{
         display: inline-block;
-        background: $yellow;
-        margin-left: 5px;
+        background: #444;
+        margin-left: 10px;
         padding: 0.12rem 0.5rem;
         font-size: 0.9rem;
         cursor: pointer;
-        border-radius: 0.8rem;
+        &:hover{
+          background: $main;
+        }
       }
     }
     .ss_db_ve_c{
@@ -85,7 +87,7 @@
           height: 100px;
           position: relative;
           border-radius: 50%;
-          background: rgb(231, 53, 36);
+          background: $main;
           .material-icons{
             display: block;
             @extend .cxy;
@@ -113,23 +115,26 @@
   }
   .ss_db_ve_c_empresas_list{
     width: 100%;
-    margin: 1rem 0 8rem;
+    margin: 1rem 0 3rem;
   }
   .db_empresa{
     width: 100%;
     margin: 0.5rem 0;
+    &:first-child{
+      margin-top: 0;
+    }
     &_container{
-      width: calc(100% - 10px);
+      width: 100%;
       box-sizing: border-box;
       position: relative;
-      padding: 0.5rem;
-      background: darken($blue, 7%);
+      padding: 0.45rem 0.35rem 0.3rem;
       cursor: pointer;
       @extend .flex;
       align-items: center;
       transition: all 0.15s ease;
+      border-bottom: 1px dotted rgba(white, 0.1);
       &:hover{
-        background: rgb(41, 54, 99);
+        background: darken($main, 15%);
       }
       &_indicator{
         width: 5px;

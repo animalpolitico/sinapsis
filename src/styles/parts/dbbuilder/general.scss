@@ -15,9 +15,8 @@
     position: relative;
 
     &_collapse{
-      width: 27px;
-      height: 27px;
-      background: darken($blue, 10%);
+      width: 25px;
+      height: 25px;
       position: absolute;
       right: 0;
       top: 50%;
@@ -26,6 +25,7 @@
       cursor: pointer;
       justify-content: center;
       align-items: center;
+      background: #333;
       transform: translate(100%, -50%);
       .material-icons{
         @extend .cxy;

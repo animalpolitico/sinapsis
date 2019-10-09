@@ -1,6 +1,6 @@
 @import url("https://use.typekit.net/nhy0plw.css");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_modal_dbpre .ss_predb_select_country, .ss_modal_dbpre .ss_predb_select_alert, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, #ss_popper_lang .ss_popper_container_button, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_input .ss_db_input_container_label, .ss_db_input_select_container_input .ss_db_input_container_label, .ss_db_input_container_error, .ss_db_input_select_container_error, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_nodes #db_viz_nodes_controls, .ss_doi_window_fields_field_dbinfo > div, .ss_doi_window .ss_doi_window_controls, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels, .nodes_controls_button, .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning, .ss_control_group .ss_control_group_container_dbs .ss_db, .ss_control_group .ss_control_group_container_btns, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics_container_group_montos, .ss_analytics_container_group_charts_group, #ss_page_home .ss_hb_cols {
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_modal_dbpre .ss_predb_select_country, .ss_modal_dbpre .ss_predb_select_alert, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_db_toolbar_info_td .ss_db_builder_project_name, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, #ss_popper_lang .ss_popper_container_button, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_input .ss_db_input_container_label, .ss_db_input_select_container_input .ss_db_input_container_label, .ss_db_input_container_error, .ss_db_input_select_container_error, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_nodes #db_viz_nodes_controls, .ss_doi_window_fields_field_dbinfo > div, .ss_doi_window .ss_doi_window_controls, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels, .nodes_controls_button, .ss_control_group .ss_control_group_container_title, .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning, .ss_control_group .ss_control_group_container_dbs .ss_db, .ss_control_group .ss_control_group_container_btns, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics_container_group_montos, .ss_analytics_container_group_charts_group, #ss_page_home .ss_hb_cols {
   display: flex;
   flex-wrap: nowrap; }
 
@@ -9,7 +9,7 @@
   left: 50%;
   transform: translateX(-50%); }
 
-.cy {
+.cy, .ss_db_toolbar_info_td .ss_db_builder_project_name_goback .material-icons {
   position: absolute;
   top: 50%;
   transform: translateY(-50%); }
@@ -144,9 +144,8 @@ a, a:link, a:visited, a:hover {
     z-index: 10;
     position: relative; }
     .ss_dbbuilder_sidebar_collapse {
-      width: 27px;
-      height: 27px;
-      background: #111111;
+      width: 25px;
+      height: 25px;
       position: absolute;
       right: 0;
       top: 50%;
@@ -154,6 +153,7 @@ a, a:link, a:visited, a:hover {
       cursor: pointer;
       justify-content: center;
       align-items: center;
+      background: #333;
       transform: translate(100%, -50%); }
       .ss_dbbuilder_sidebar_collapse .material-icons {
         color: #ccc; }
@@ -294,7 +294,20 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
             cursor: pointer;
             opacity: 0; }
     .ss_db_toolbar_info_td .ss_db_builder_project_name {
-      position: relative; }
+      position: relative;
+      align-items: center; }
+      .ss_db_toolbar_info_td .ss_db_builder_project_name_goback {
+        color: white;
+        cursor: pointer;
+        margin-right: 1rem;
+        height: 0%;
+        position: relative;
+        background: blue;
+        width: 30px; }
+      .ss_db_toolbar_info_td .ss_db_builder_project_name_placeholder {
+        color: #ccc;
+        margin-right: 1rem;
+        font-weight: 600; }
       .ss_db_toolbar_info_td .ss_db_builder_project_name_icon {
         height: 100%;
         position: absolute;
@@ -344,8 +357,8 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
     overflow: hidden;
     justify-content: center;
     align-items: center;
-    padding: 12px 5px;
-    border-bottom: 2px solid #3372ff;
+    padding: 0.5rem 5px;
+    border-bottom: 2px solid white;
     flex: 1;
     position: relative; }
     .ss_dbbuilder_sidebar_dbs_nav_td:first-child {
@@ -377,7 +390,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
         text-overflow: ellipsis; }
     .ss_dbbuilder_sidebar_dbs_nav_td.ss_active {
       min-width: 100px;
-      border-color: #f0efd1;
+      border-color: #3372ff;
       background-color: #444444; }
     .ss_dbbuilder_sidebar_dbs_nav_td:hover {
       background-color: #373737; }
@@ -443,11 +456,9 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
 #ss_db_popper {
   z-index: 9999; }
   #ss_db_popper .ss_popper_container {
-    width: 250px;
-    background: #222;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    width: 215px;
+    background: #2c2c2c;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
     overflow: hidden; }
     #ss_db_popper .ss_popper_container_button {
       width: 100%;
@@ -495,7 +506,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
     .ss_db_view_name input {
       flex: 1;
       display: block;
-      padding: 0.5rem 0.75rem;
+      padding: 0.25rem 0.5rem;
       box-sizing: border-box;
       border: 0;
       font-size: 1.3rem;
@@ -503,38 +514,39 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       font-weight: 600;
       color: white;
       background: none;
-      border-radius: 1.5rem;
+      border-radius: 1.25rem;
       border: 2px solid transparent; }
       .ss_db_view_name input:focus {
         outline: 0;
         background: white;
         color: #2a2a2a;
-        border-color: white;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); }
+        border-color: white; }
     .ss_db_view_name.ss_error input {
       background: transparent;
       color: red;
       border-color: red; }
   .ss_db_view_empresas {
     width: 100%;
-    border-top: 2px solid beige;
+    border-top: 2px solid #f6f6f6;
     box-sizing: border-box;
-    padding: 1rem;
+    padding: 0.75rem 1rem 1rem;
     max-height: 100%;
     flex-direction: column; }
     .ss_db_view_empresas_title {
       color: white;
-      font-weight: 400;
+      font-weight: 600;
       align-items: center;
-      padding-bottom: 0.5rem; }
+      padding-bottom: 0.5rem;
+      padding-left: 0.5rem; }
       .ss_db_view_empresas_title_btn {
         display: inline-block;
-        background: #3372ff;
-        margin-left: 5px;
+        background: #444;
+        margin-left: 10px;
         padding: 0.12rem 0.5rem;
         font-size: 0.9rem;
-        cursor: pointer;
-        border-radius: 0.8rem; }
+        cursor: pointer; }
+        .ss_db_view_empresas_title_btn:hover {
+          background: #3372ff; }
     .ss_db_view_empresas .ss_db_ve_c {
       width: 100%;
       flex: 1;
@@ -555,7 +567,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
           height: 100px;
           position: relative;
           border-radius: 50%;
-          background: #e73524; }
+          background: #3372ff; }
           .ss_db_view_empresas .ss_db_ve_c_nocontent_icon .material-icons {
             display: block;
             font-size: 3rem;
@@ -573,21 +585,23 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
               color: white; }
   .ss_db_view .ss_db_ve_c_empresas_list {
     width: 100%;
-    margin: 1rem 0 8rem; }
+    margin: 1rem 0 3rem; }
   .ss_db_view .db_empresa {
     width: 100%;
     margin: 0.5rem 0; }
+    .ss_db_view .db_empresa:first-child {
+      margin-top: 0; }
     .ss_db_view .db_empresa_container {
-      width: calc(100% - 10px);
+      width: 100%;
       box-sizing: border-box;
       position: relative;
-      padding: 0.5rem;
-      background: #181818;
+      padding: 0.45rem 0.35rem 0.3rem;
       cursor: pointer;
       align-items: center;
-      transition: all 0.15s ease; }
+      transition: all 0.15s ease;
+      border-bottom: 1px dotted rgba(255, 255, 255, 0.1); }
       .ss_db_view .db_empresa_container:hover {
-        background: #293663; }
+        background: #0047e6; }
       .ss_db_view .db_empresa_container_indicator {
         width: 5px;
         height: 5px;
@@ -665,7 +679,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
         .db_empresa_edit_container .db_empresa_name_t div {
           flex: 1; }
           .db_empresa_edit_container .db_empresa_name_t div input {
-            font-size: 1.6rem;
+            font-size: 1.2rem;
             font-family: benton-sans, serif;
             font-weight: 300;
             color: white;
@@ -1163,27 +1177,28 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
   display: none !important; }
 
 .ss_doi_window {
-  width: 280px;
+  width: 250px;
   margin-bottom: 1rem;
-  background: #111;
+  background: #1f1f1f;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); }
   .ss_doi_window_type {
     font-weight: 600;
-    border-bottom: 2px solid;
-    border-top: 2px solid;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
     width: 100%;
     box-sizing: border-box;
-    padding: 0.5rem; }
+    padding: 0.25rem 0.5rem; }
   .ss_doi_window_name {
     font-weight: 400;
     width: 100%;
     box-sizing: border-box;
     padding: 0.5rem;
     font-size: 1.1rem;
+    line-height: 1;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1); }
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     .ss_doi_window_name:hover {
       white-space: normal; }
   .ss_doi_window_fields_info {
@@ -1210,7 +1225,7 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
       .ss_doi_window_fields_field_group {
         width: 100%;
         text-transform: uppercase;
-        color: #f2d88a;
+        color: #ddd;
         font-weight: 600;
         font-size: 0.8em; }
       .ss_doi_window_fields_field_dbinfo {
@@ -1221,12 +1236,12 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
           align-items: center;
           overflow: hidden;
           box-sizing: border-box;
-          padding: 0.15rem 0; }
+          padding: 0.05rem 0; }
           .ss_doi_window_fields_field_dbinfo > div .material-icons {
             font-size: 1em;
             line-height: 1em;
             margin-right: 0.25em;
-            color: #8db1f7; }
+            color: #bbb; }
       .ss_doi_window_fields_field_name {
         font-size: 1.2em;
         margin: 0.25rem 0; }
@@ -1234,7 +1249,6 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
     width: 100%;
     box-sizing: border-box;
     padding: 0.15rem 0.5rem;
-    background: #111;
     align-items: center; }
     .ss_doi_window .ss_doi_window_controls_td {
       height: 0%; }
@@ -1333,9 +1347,14 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
 .nodes_controls {
   width: 220px;
   position: absolute;
-  bottom: 0;
+  bottom: 0.5rem;
   right: 20px;
-  z-index: 9; }
+  z-index: 9;
+  max-height: 100%; }
+  .nodes_controls_container {
+    max-height: 690px;
+    overflow: hidden;
+    overflow-y: auto; }
   .nodes_controls_button {
     width: 100%;
     background: #2a2a2a;
@@ -1353,12 +1372,14 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
       padding-left: 0.5rem;
       font-weight: 600; }
     .nodes_controls_button:hover {
-      background: #222; }
+      background: #333; }
 
 .ss_control_group {
   background: #2a2a2a;
   box-sizing: border-box;
   margin: 0.5rem 0; }
+  .ss_control_group:last-child {
+    margin-bottom: 0; }
   .ss_control_group.ss_control_node_filter {
     width: 100%; }
   .ss_control_group .ss_control_group_container {
@@ -1371,7 +1392,17 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
       line-height: 1;
       font-weight: 600;
       box-sizing: border-box;
-      padding: 0.25rem 0.5rem; }
+      padding: 0.25rem 0.5rem;
+      align-items: center; }
+      .ss_control_group .ss_control_group_container_title div {
+        flex: 1; }
+      .ss_control_group .ss_control_group_container_title .material-icons {
+        font-size: 0.9rem;
+        cursor: pointer;
+        box-sizing: border-box;
+        display: block; }
+        .ss_control_group .ss_control_group_container_title .material-icons:hover {
+          opacity: 0.8; }
     .ss_control_group .ss_control_group_container_extracontrols {
       padding-bottom: 0.75rem; }
       .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra {

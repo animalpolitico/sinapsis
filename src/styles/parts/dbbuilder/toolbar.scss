@@ -49,6 +49,25 @@
       }
       .ss_db_builder_project_name{
         position: relative;
+        @extend .flex;
+        align-items: center;
+        &_goback{
+          color: white;
+          cursor: pointer;
+          margin-right: 1rem;
+          height: 0%;
+          position: relative;
+          background: blue;
+          width: 30px;
+          .material-icons{
+            @extend .cy;
+          }
+        }
+        &_placeholder{
+          color: #ccc;
+          margin-right: 1rem;
+          font-weight: 600;
+        }
         &_icon{
           height: 100%;
           position: absolute;

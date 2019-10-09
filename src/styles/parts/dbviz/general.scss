@@ -110,17 +110,17 @@ body.ss_showing_drawer{
 }
 
 .ss_doi_window{
-  width: 280px;
+  width: 250px;
   margin-bottom: 1rem;
-  background: #111;
+  background: #1f1f1f;
   box-shadow: 2px 2px 4px rgba(black, 0.1);
   &_type{
     font-weight: 600;
-    border-bottom: 2px solid;
-    border-top: 2px solid;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
     width: 100%;
     box-sizing: border-box;
-    padding: 0.5rem;
+    padding: 0.25rem 0.5rem;
   }
   &_name{
     font-weight: 400;
@@ -128,10 +128,11 @@ body.ss_showing_drawer{
     box-sizing: border-box;
     padding: 0.5rem;
     font-size: 1.1rem;
+    line-height: 1;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    border-bottom: 2px solid rgba(white, 0.1);
+    border-bottom: 1px solid rgba(white, 0.1);
     &:hover{
       white-space: normal;
     }
@@ -164,7 +165,7 @@ body.ss_showing_drawer{
       &_group{
         width: 100%;
         text-transform: uppercase;
-        color: rgb(242, 216, 138);
+        color: #ddd;
         font-weight: 600;
         font-size: 0.8em;
       }
@@ -177,12 +178,12 @@ body.ss_showing_drawer{
           align-items: center;
           overflow: hidden;
           box-sizing: border-box;
-          padding: 0.15rem 0;
+          padding: 0.05rem 0;
           .material-icons{
             font-size: 1em;
             line-height: 1em;
             margin-right: 0.25em;
-            color: rgb(141, 177, 247);
+            color: #bbb;
           }
         }
       }
@@ -197,7 +198,6 @@ body.ss_showing_drawer{
     width: 100%;
     box-sizing: border-box;
     padding: 0.15rem 0.5rem;
-    background: #111;
     @extend .flex;
     align-items: center;
     &_td{

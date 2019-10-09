@@ -107,6 +107,10 @@ export default class DbBuilderToolbar extends React.Component{
     window.dispatchEvent(ev);
   }
 
+  goBack(){
+    this.props.parent.goBack();
+  }
+
   render(){
     var self = this;
     return(
@@ -206,6 +210,10 @@ class DbBuilderToolbarName extends React.Component{
     })
   }
 
+  goBack(){
+    this.props.parent.goBack();
+  }
+
   render(){
     var cs = ["ss_db_builder_project_name"];
     if(this.state.focused){
@@ -216,6 +224,12 @@ class DbBuilderToolbarName extends React.Component{
     }
     return(
       <div className={cs.join(' ')}>
+        <div className="ss_db_builder_project_name_goback" onClick={() => this.goBack()}>
+          <Icon>keyboard_backspace</Icon>
+        </div>
+        <div className="ss_db_builder_project_name_placeholder">
+          Proyecto
+        </div>
         <input
           type="text"
           placeholder="Nombre del proyecto"

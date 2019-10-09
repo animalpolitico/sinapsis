@@ -12,8 +12,8 @@
     @extend .flex;
     justify-content:center;
     align-items: center;
-    padding: 12px 5px;
-    border-bottom: 2px solid $yellow;
+    padding: 0.5rem 5px;
+    border-bottom: 2px solid white;
     flex: 1;
     position: relative;
     &:first-child{
@@ -53,7 +53,7 @@
     }
     &.ss_active{
       min-width: 100px;
-      border-color: rgb(240, 239, 209);
+      border-color: $main;
       background-color: lighten($blue, 10%);
     }
     &:hover{
@@ -140,11 +140,9 @@
 #ss_db_popper{
   z-index: 9999;
   .ss_popper_container{
-    width: 250px;
-    background: #222;
-    box-shadow: 3px 3px 6px rgba(black, 0.5);
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    width: 215px;
+    background: #2c2c2c;
+    box-shadow: 3px 3px 6px rgba(black, 0.3);
     overflow: hidden;
     &_button{
       width: 100%;

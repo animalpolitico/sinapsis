@@ -40,6 +40,7 @@ import { countries, getLang } from "../vars/countriesDict";
 
 
 import buildLink from "../funcs/buildlink";
+import {Helmet} from "react-helmet";
 
 var dbf = new DbFactory();
 var dbf_obj = dbf.set();
@@ -235,6 +236,10 @@ export default class DbBuilderPage extends React.Component{
 
   }
 
+  goBack(){
+    this.props.history.push(buildLink('/construir'));
+  }
+
   intentToRecover(){
     var possibleDbs = [];
     store.each(function(value, key){
@@ -272,8 +277,15 @@ export default class DbBuilderPage extends React.Component{
 
   render(){
     var self = this;
+    var title = "Construir";
+    if(!this.state.showcontrol){
+      var title = "Proyecto: " + window.dbf.obj.info.name;
+    }
     return(
       <div className="ss_page">
+        <Helmet>
+          <title>{title + ' >> Sinapsis'}</title>
+        </Helmet>
         <DbLoader />
         {
           this.state.showcontrol ?

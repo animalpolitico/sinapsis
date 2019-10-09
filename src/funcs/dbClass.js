@@ -41,7 +41,7 @@ export default class DbFactory {
     this.obj = {
       uid: this.createUid(),
       info: {
-        name: 'Proyecto sin nombre',
+        name: 'Sin nombre',
         slug: 'proyecto-sin-nombre'
       },
       allowAutoSave: true,
