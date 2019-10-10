@@ -23,6 +23,9 @@ export default class TransactionRow extends React.Component{
       if(this.props.receptorIsEmpresa){
         receptor = this.props.empresa.name;
       }
+      if(t.group == "contrato"){
+        receptor = false;
+      }
     }else{
       var type = f.find(function(_d){
         return _d.name == "Tipo de transferencia"
@@ -55,7 +58,6 @@ export default class TransactionRow extends React.Component{
         if(montoGroup){
           monto = montoGroup.value;
         }
-
       }
     }
 
@@ -63,7 +65,7 @@ export default class TransactionRow extends React.Component{
       receptor: receptor,
       emisor: emisor,
       monto: monto,
-      showT: receptor && emisor
+      showT: emisor ? true : false
     };
     return o;
   }
@@ -85,12 +87,19 @@ export default class TransactionRow extends React.Component{
                 <div className="ss_transaction_row_n_d_t">
                   {n.emisor}
                 </div>
-                <div className="ss_transaction_row_n_d_a">
-                  →
-                </div>
-                <div className="ss_transaction_row_n_d_t">
-                  {n.receptor}
-                </div>
+                {
+                  n.receptor ?
+                  <>
+                  <div className="ss_transaction_row_n_d_a">
+                    →
+                  </div>
+                  <div className="ss_transaction_row_n_d_t">
+                    {n.receptor}
+                  </div>
+                  </>
+                : null
+                }
+
               </div>
               :
               <div className="ss_transaction_row_n_full">

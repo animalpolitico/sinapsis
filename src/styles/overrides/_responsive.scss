@@ -1,0 +1,14 @@
+@media (max-width: $ss){
+  .ss_db_toolbar_info_td.ss_db_lastmodified, .ss_db_builder_project_name_placeholder{
+    display: none;
+  }
+  .ss_doi_window{
+    transform: scale(0.8) translate(-15%, 20%);
+  }
+  .nodes_controls{
+    width: 180px;
+  }
+  .ss_dbbuilder_sidebar{
+    min-width: 350px;
+  }
+}

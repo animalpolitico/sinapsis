@@ -255,6 +255,16 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   z-index: 999999999;
   background: rgba(42, 42, 42, 0.8); }
 
+#ss_borrar_input {
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  padding: 0.25rem;
+  font-size: 1rem;
+  font-weight: 600; }
+  #ss_borrar_input:focus {
+    outline: 0; }
+
 .ss_db_toolbar {
   width: 100%;
   position: fixed;
@@ -1304,19 +1314,24 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
       width: 100%; }
       .db_search_nodes_results .db_search_nodes_results_c_r {
         width: 100%;
-        max-height: 300px;
+        max-height: 400px;
         overflow-y: auto; }
         .db_search_nodes_results .db_search_nodes_results_c_r .ss_search_result {
           width: 100%;
           box-sizing: border-box;
-          padding: 0.75rem 0.75rem;
+          padding: 0.5rem 0.5rem;
           line-height: 1.1;
           font-size: 0.8rem;
           color: white;
           cursor: pointer;
           border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-          .db_search_nodes_results .db_search_nodes_results_c_r .ss_search_result:hover {
-            background: rgba(0, 0, 0, 0.05); }
+          .db_search_nodes_results .db_search_nodes_results_c_r .ss_search_result_type {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.5rem;
+            margin-bottom: 0.25rem; }
+          .db_search_nodes_results .db_search_nodes_results_c_r .ss_search_result:hover, .db_search_nodes_results .db_search_nodes_results_c_r .ss_search_result.ss_selected {
+            background: rgba(0, 0, 0, 0.2); }
       .db_search_nodes_results .db_search_nodes_results_c_count {
         width: 100%;
         box-sizing: border-box;
@@ -1453,7 +1468,8 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
         padding: 0.25rem;
         flex-wrap: nowrap;
         align-items: center;
-        margin: 0.25rem 0; }
+        margin: 0.25rem 0;
+        cursor: pointer; }
         .ss_control_group .ss_control_group_container_dbs .ss_db_toggle {
           height: 0%;
           padding: 0.25rem;
@@ -1702,5 +1718,18 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
 .MuiButton-root {
   border-radius: 0 !important;
   box-shadow: none !important; }
+
+@media (max-width: 1040px) {
+  .ss_db_toolbar_info_td.ss_db_lastmodified, .ss_db_builder_project_name_placeholder {
+    display: none; }
+
+  .ss_doi_window {
+    transform: scale(0.8) translate(-15%, 20%); }
+
+  .nodes_controls {
+    width: 180px; }
+
+  .ss_dbbuilder_sidebar {
+    min-width: 350px; } }
 
 /*# sourceMappingURL=style.css.map */

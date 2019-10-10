@@ -154,7 +154,7 @@ class SSDBControl extends React.Component{
               cs.push("ss_db_hidden");
             }
             return(
-              <div className={cs.join(' ')}>
+              <div className={cs.join(' ')}  onClick={() => self.toggleDb(db.id)}>
                 <div className="ss_db_info">
                   <div className="ss_db_info_name">
                     {db.name}
@@ -163,7 +163,7 @@ class SSDBControl extends React.Component{
                     <strong>{esize}</strong> empresas
                   </div>
                 </div>
-                <div className="ss_db_toggle" onClick={() => self.toggleDb(db.id)}>
+                <div className="ss_db_toggle">
                   <Icon>{!ish ? "visibility" : "visibility_off"}</Icon>
                 </div>
               </div>
@@ -584,6 +584,7 @@ export class Search extends React.Component{
   }
 
   render(){
+    var r = Math.random() * 10000000;
     return(
       <div className="db_search_nodes">
         <div className="db_search_nodes_input">
@@ -598,7 +599,7 @@ export class Search extends React.Component{
         <div className="db_search_nodes_results">
           {
             this.state.showResults ?
-              <SearchResults nodeMap={this.props.nodesMap} results={this.state.results} v={this.state.v} onSelect={(v) => this.handleResultSelect(v)}/>
+              <SearchResults r={r} nodeMap={this.props.nodesMap} results={this.state.results} v={this.state.v} onSelect={(v) => this.handleResultSelect(v)}/>
             : null
           }
         </div>
@@ -608,6 +609,55 @@ export class Search extends React.Component{
 }
 
 class SearchResults extends React.Component{
+  state = {
+    selectedIndex: 0
+  }
+
+  componentDidMount(){
+    this.set();
+    window.addEventListener('keydown', this.handleKeyDown.bind(this));
+  }
+
+  set(){
+    this.setState({
+      selectedIndex: 0
+    })
+    this.results = [];
+  }
+
+  componentDidUpdate(pp){
+    if(pp.r !== this.props.r){
+      this.set();
+    }
+  }
+
+  handleKeyDown(e){
+    var w = e.which;
+    /** Up or down **/
+    if(w == 38 || w == 40){
+      var c = this.state.selectedIndex;
+      var r = this.props.results;
+      var max = r.length;
+      var i = w == 38 ? -1 : 1;
+          c += i;
+          c = Math.max(0, c);
+          c = Math.min(max, c);
+      this.setState({
+        selectedIndex: c
+      })
+    }
+
+    if(w == 13){
+      var r = this.props.results;
+      var em = r[this.state.selectedIndex - 1];
+      if(em){
+        this.isolateNode(em.id, em.name);
+      }
+    }
+
+
+  }
+
   isolateNode(id, n){
     if(this.props.nodeMap){
       this.props.nodeMap.isolateNode(id);
@@ -618,7 +668,6 @@ class SearchResults extends React.Component{
 
   render(){
     var self = this;
-
     var r = this.props.results;
 
     var s = "";
@@ -635,10 +684,17 @@ class SearchResults extends React.Component{
         {
           r.length ?
         <div className="db_search_nodes_results_c_r">
-          {r.map(function(result){
+          {r.map(function(result, i){
+            var cs = ['ss_search_result'];
+            if((i + 1) == self.state.selectedIndex){
+              cs.push('ss_selected');
+            }
             return(
-              <div className="ss_search_result" onClick={(e) => self.isolateNode(result.id, result.name)}>
+              <div className={cs.join(' ')} onClick={(e) => self.isolateNode(result.id, result.name)}>
                 <div className="ss_search_result_container">
+                  <div className="ss_search_result_type" style={{color: getTypeColor(result.type)}}>
+                    {getTypeName(result.type)}
+                  </div>
                   <div className="ss_search_result_name">
                     {result.name}
                   </div>
@@ -696,6 +752,11 @@ class Nodes extends React.Component{
       setTimeout(function(){
         cs.classList.remove('ss_active');
       }, 1000);
+    })
+
+    window.addEventListener('ss_isolate_node', function(e){
+      var id = e.detail;
+      self.isolateNode(id);
     })
 
   }
@@ -757,14 +818,16 @@ class Nodes extends React.Component{
 
 
       var simulation = d3.forceSimulation()
-                         .force("charge", d3.forceManyBody(0.5))
+                         // .alphaTarget(0.01)
+                         .alpha(0.5)
+                         .force("charge", d3.forceManyBody(1))
                          .force("link",
                             d3.forceLink()
                               .id(function(d){
                                 return d.id;
                               })
                           )
-                         .force('collide', d3.forceCollide(700).strength(0.2))
+                         .force('collide', d3.forceCollide(1000).strength(0.2))
                          .force('center', d3.forceCenter(width / 2, height / 2))
                          .force("y", d3.forceY(0.01))
                          .force("x", d3.forceX(0.01).x(1.1));
@@ -1051,7 +1114,7 @@ class Nodes extends React.Component{
 
   setNodeCircleSize(){
     var min = 80;
-    var max = this.nodesData.nodes.length > 500 ? 1250 : 600;
+    var max = this.nodesData.nodes.length > 100 ? 1250 : 600;
     var param = this.state.nodeSizeParam;
     if(param == "monto"){
       var empresaMinMax = this.getEmpresaMinMax();
@@ -1198,7 +1261,7 @@ class Nodes extends React.Component{
 
     d3.selectAll('.node')
       .filter(d => d && (d.id !== this.state.isoDoi.id))
-      .attr('stroke', 'rgba(0, 114, 255, 0.3)')
+      .attr('opacity', 0.05)
       .each(d => d.level = false)
 
     for(var i = -1; i < level; i++){
@@ -1358,7 +1421,7 @@ class Nodes extends React.Component{
     var simulation = this.simulation;
     var self = this;
     function dragstarted(d) {
-       if (!d3.event.active) simulation.alphaTarget(0.1).restart();
+       if (!d3.event.active) simulation.alphaTarget(0.05).restart();
        d.fx = d.x;
        d.fy = d.y;
      }
@@ -1369,7 +1432,7 @@ class Nodes extends React.Component{
      }
 
      function dragended(d) {
-       if (!d3.event.active) simulation.alphaTarget(0.1).restart();
+       if (!d3.event.active) simulation.alphaTarget(0.05).restart();
        d.fixed = true;
 
        var ev = new Event('ss_lazy_indicator');
@@ -1749,7 +1812,7 @@ class SSDoi extends React.Component{
           {getTypeName(d.type)}
         </div>
         <div className="ss_doi_window_name" style={{color: ism ? tc : 'inherit'}}>
-          {d.name}
+          {d.name ? d.name : '(Sin información)'}
         </div>
         {
           !ism ?
@@ -1802,7 +1865,7 @@ class SSDoiField extends React.Component{
         }
 
         <div className="ss_doi_window_fields_field_name">
-          {this.props.field.name}
+          {this.props.field.name ? this.props.field.name : '(Sin información)'}
         </div>
 
         {
@@ -1842,7 +1905,7 @@ class SSTooltip extends React.Component{
           {getTypeName(d.type)}
         </div>
         <div className="db_viz_tooltip_name">
-          {d.name}
+          {d.name ? d.name : '(Sin información)'}
         </div>
         <div className="db_viz_tooltip_links">
           Cantidad de coincidencias: {node.attr('data-coincidencias')}
@@ -1857,7 +1920,7 @@ class SSTooltip extends React.Component{
         }
 
         <div className="db_viz_tooltip_monto">
-          Da click en el círculo para más información
+          Da clic en el círculo para más información
         </div>
 
 

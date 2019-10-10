@@ -51,6 +51,7 @@ var onDrawerToggle = new Event('sinapsisDrawerToggle');
 var onBigChanges = new Event('sinapsisBigModified');
 var startLoad = new Event('sinapsisStartLoad');
 var endLoad = new Event('sinapsisEndLoad');
+var slugify = require('slugify');
 
 var dbsPre = {
   'estafa-maestra': PreDB_Estafa,
@@ -212,6 +213,7 @@ export default class DbBuilderPage extends React.Component{
   }
 
   loadFile(e){
+    window.dispatchEvent(startLoad);
     this.setState({
       isloading: true
     })
@@ -231,6 +233,8 @@ export default class DbBuilderPage extends React.Component{
           control: 'fromfile',
           showcontrol: false
         })
+        self.sidebar.fetchDbs();
+        window.dispatchEvent(onBigChanges);
       }
     }
 
@@ -489,6 +493,7 @@ class DbBuilderSidebar extends React.Component{
       this.fetchDbs();
     }
   }
+
   fetchDbs(){
     var self = this;
     var dbf = window.dbf;
@@ -498,8 +503,6 @@ class DbBuilderSidebar extends React.Component{
       dbs: dbs,
       db: false
     })
-
-
     var dbsa = Object.values(dbs);
     if(dbsa.length){
       var ldb = dbsa[dbsa.length - 1];
@@ -577,7 +580,8 @@ class DbView extends React.Component{
     showdialog: false,
     dialogValue: '',
     showDeleteDialog: false,
-    view: true
+    view: true,
+    borrar: ''
   }
   componentDidMount(){
     this.set();
@@ -659,6 +663,7 @@ class DbView extends React.Component{
     this.setState({
       showDeleteDialog: false
     })
+    this.empresalist.closeDrawer();
   }
 
   toggleView(){
@@ -701,15 +706,17 @@ class DbView extends React.Component{
               <DialogTitle>¿Estás segurx?</DialogTitle>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                  Se borraran todos los datos que hayas insertado.
+                  Se borraran todos los datos que hayas insertado.<br/><br/>
+                  Escribe la palabra "BORRAR" para continuar.
                 </DialogContentText>
+                <input type="text" autoFocus id="ss_borrar_input" onChange={(e) => this.setState({borrar: e.target.value})}/>
               </DialogContent>
               <DialogActions>
                 <Button color="secondary" onClick={() => this.setState({ showDeleteDialog: false})}>
                   Cancelar
                 </Button>
-                <Button color="secondary" onClick={() => this.delete()}>
-                  Continuar
+                <Button disabled={slugify(this.state.borrar, {lower: true}) !== "borrar"} color="secondary" onClick={() => this.delete()}>
+                  Borrar definitivamente
                 </Button>
               </DialogActions>
             </Dialog>
@@ -769,7 +776,12 @@ class DbEmpresasList extends React.Component{
     }
   }
 
-  selectEmpresa(em){
+  componentDidMount(){
+
+
+  }
+
+  selectEmpresa(em, isolateNode){
     this.setState({
       showedit: true,
       empresa: em
@@ -777,6 +789,26 @@ class DbEmpresasList extends React.Component{
     window.dispatchEvent(onDrawerToggle);
     document.body.classList.add('ss_showing_drawer');
     window.dbf.obj.selectedEmpresa = em.uid;
+    if(isolateNode){
+      var dbid = this.props.db.id;
+      var name = em.name;
+      var slug = slugify(name, {lower: true});
+      var sn = false;
+      var pn = d3.selectAll('.node')
+                  .filter(d => d.type == "empresa" && d.fields[0].fromdb == dbid)
+                  .filter(function(d){
+                    var s = slugify(d.name, {lower: true})
+                    return s == slug;
+                  })
+                  .each(function(d){
+                    sn = d.id;
+                  })
+      if(sn){
+        var ev = new CustomEvent('ss_isolate_node', {'detail': sn});
+        window.dispatchEvent(ev);
+      }
+
+    }
   }
 
   closeDrawer(){
@@ -857,7 +889,7 @@ class DbEmpresa extends React.Component{
 
   handleClick(){
     window.scroll(0, 0);
-    this.props.parent.selectEmpresa(this.props.empresa);
+    this.props.parent.selectEmpresa(this.props.empresa, true);
   }
 
   render(){
@@ -991,6 +1023,42 @@ class DbDbsNavigationNewDb extends React.Component{
     }
   }
 
+  loadSinapsis(e){
+    var self = this;
+    var em = document.getElementById('ss_file_input_from_sinapis');
+    var f = em.files;
+    window.dispatchEvent(startLoad);
+    this.setState({
+      openModal: false,
+      openPopper: false,
+    })
+    if(f[0]){
+      var file = f[0];
+      var name = file.name;
+      var reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.onload = function(ev){
+        var t =  ev.target.result;
+        if(!window.dbf.obj.dbs){
+          window.dbf.obj.dbs = {};
+        }
+        var obj = JSON.parse(decodeURI(atob(t)));
+        if(obj.dbs){
+          var dbs = Object.values(obj.dbs);
+          dbs.map(function(_d){
+            window.dbf.obj.dbs[_d.id] = _d;
+          })
+          window.dbf.setModified();
+          window.dispatchEvent(onBigChanges);
+          self.props.parent.fetchDbs();
+          window.dispatchEvent(endLoad);
+        }
+
+
+      }
+    }
+  }
+
   render(){
     var self = this;
     var id = 'ss_db_popper';
@@ -1019,7 +1087,16 @@ class DbDbsNavigationNewDb extends React.Component{
               id="ss_file_input_from_db"
               onChange={(e) => this.loadFile(e)}
             />
-            <div>Desde plantilla</div>
+            <div>Desde plantilla (.csv)</div>
+          </div>
+          <div className="ss_popper_container_button ss_poppper_container_button_input">
+            <input
+              type="file"
+              accept=".sinapsis"
+              id="ss_file_input_from_sinapis"
+              onChange={(e) => this.loadSinapsis(e)}
+            />
+          <div>Desde archivo (.sinapsis)</div>
           </div>
         </div>
       </ClickAwayListener>

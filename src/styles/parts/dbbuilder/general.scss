@@ -176,3 +176,15 @@ body.ss_show_sidebar{
     @extend .cxy;
   }
 }
+
+#ss_borrar_input{
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  padding: 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  &:focus{
+    outline: 0;
+  }
+}
