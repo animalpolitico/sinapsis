@@ -133,7 +133,6 @@ export default class DbFactory {
   * @return obj
   **/
   getMatches(onlyinall){
-    console.log('ONLY IN ALL', onlyinall);
     var self = this;
     var db = this.getDbs();
     var filterDb = {};
@@ -184,7 +183,7 @@ export default class DbFactory {
     var nodes = {};
     normalized.map(function(f){
       var v = f.value.replace(/[.\s]/g, '');
-      var slug = slugify(f.type + '-' + v, {lower: true, remove: /[*+~.()'"!:@]/g});
+      var slug = slugify(f.type + '-' + v, {lower: true, remove: /[*,\/+~.()'"!:@]/g});
       if(f.id){
         slug = f.id;
       }

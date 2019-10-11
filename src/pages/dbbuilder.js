@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
@@ -343,7 +344,9 @@ class DbInicio extends React.Component{
           <div className="ss_db_choose">
             <div className="ss_db_choose_decorator">
               <div className="ss_db_choose_decorator_logo">
-                <img src={require('../static/logo.png')} />
+                <Link to={buildLink('/')}>
+                  <img src={require('../static/logo.png')} />
+                </Link>
               </div>
               <div className="ss_db_choose_decorator_slogan">
                 <span></span> Herramienta para descubrir<br /><strong>conexiones entre empresas</strong>

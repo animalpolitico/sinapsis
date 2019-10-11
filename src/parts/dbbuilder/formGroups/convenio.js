@@ -168,7 +168,7 @@ export default class DbFormGroupConvenio extends React.Component{
 
         {/* Modal */}
         <Dialog open={this.state.open} onClose={() => this.close()} className="ss_modal_edit">
-          <DialogTitle>{addL} contrato</DialogTitle>
+          <DialogTitle>{addL} convenio</DialogTitle>
           <DialogContent>
             <div className="db_empresa_container_group_form">
                   <>

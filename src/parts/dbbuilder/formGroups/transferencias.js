@@ -198,7 +198,6 @@ export default class DbFormGroupTransferencias extends React.Component{
                 <>
                   <DbInput
                     onChange={(slug, obj) => this.insertField(slug, obj)}
-                    matchWith={['empresa', 'instancia', 'person']}
                     name="recursos"
                     aka="¿A quién otorgó los recursos?"
                     type="text"
