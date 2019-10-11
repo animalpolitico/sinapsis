@@ -255,17 +255,28 @@ class OtrosRow extends React.Component{
     return s;
   }
 
+  delete(){
+    var g = this.props.p;
+    var t = g[0];
+    var euid = t.empresauid;
+    var dbid = t.fromdb;
+    var guid = t.groupUid;
+
+    window.dbf.deleteGroup(guid, euid, dbid);
+  }
+
+
   render(){
     var n = this.getName();
     return(
-      <div className="ss_transaction_row" onClick={() => this.edit()}>
-        <div className="ss_transaction_row_c">
+      <div className="ss_transaction_row" >
+        <div className="ss_transaction_row_c" onClick={() => this.edit()}>
           <div className="ss_transaction_row_n">
             {n}
           </div>
-          <div className="ss_transaction_row_n_c">
-            <span>Editar</span>
-          </div>
+        </div>
+        <div className="ss_transaction_row_d" onClick={() => this.delete()}>
+          <Icon size="small">delete</Icon>
         </div>
       </div>
     )

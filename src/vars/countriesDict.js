@@ -4,67 +4,80 @@ var store = require('store')
 export const countries = [
   {
     name: 'México',
-    code: 'MEX'
+    code: 'MEX',
+    coords: [-102.552784, 23.634501]
   },
   {
     name: 'Paraguay',
     code: 'PRY',
-    translatedBy: ['Maricarmen Sequera', 'TEDIC NGO']
+    translatedBy: ['Maricarmen Sequera', 'TEDIC NGO'],
+    coords: [-58.443832, -23.442503]
   },
   {
     name: 'República Dominicana',
     code: 'DOM',
-    translatedBy: ['Daniel Harel']
+    translatedBy: ['Daniel Harel'],
+    coords: [-70.162651, 18.735693]
   },
   {
     name: 'Bolivia',
     code: 'BOL',
-    translatedBy: ['Raisa Valda Ampuero', 'Warmi.Red']
+    translatedBy: ['Raisa Valda Ampuero', 'Warmi.Red'],
+    coords: [-63.588653, -16.290154]
   },
   {
     name: 'Costa Rica',
     code: 'CRI',
-    translatedBy: ['Ana Sofía Ruiz', 'Iniciativa Latinoamericana por los Datos Abiertos (ILDA)']
+    translatedBy: ['Ana Sofía Ruiz', 'Iniciativa Latinoamericana por los Datos Abiertos (ILDA)'],
+    coords: [-83.753428, 9.748917]
   },
   {
     name: 'Perú',
     code: 'PER',
-    translatedBy: ['Gabriela Flores Ch.', 'Asociación civil Japiqay, Memoria y Ciudadanía']
+    translatedBy: ['Gabriela Flores Ch.', 'Asociación civil Japiqay, Memoria y Ciudadanía'],
+    coords: [-75.015152, -9.189967]
   },
   {
     name: 'Panamá',
     code: 'PAN',
-    translatedBy: ['Lia Hernández', 'IPANDETEC']
+    translatedBy: ['Lia Hernández', 'IPANDETEC'],
+    coords: [-80.782127, 8.537981]
   },
   {
     name: 'Venezuela',
     code: 'VEN',
-    translatedBy: ['Yuleina Carmona']
+    translatedBy: ['Yuleina Carmona'],
+    coords: [-66.58973, 6.42375]
   },
   {
     name: 'Guatemala',
     code: 'GTM',
-    translatedBy: ['Suchit Chávez', 'Plaza Pública']
+    translatedBy: ['Suchit Chávez', 'Plaza Pública'],
+    coords: [-90.230759, 15.783471]
   },
   {
     name: 'Honduras',
     code: 'HND',
-    translatedBy: ['Felisa Franco', 'Secretaría de Finanzas']
+    translatedBy: ['Felisa Franco', 'Secretaría de Finanzas'],
+    coords: [-86.241905, 15.199999]
   },
   {
     name: 'Ecuador',
     code: 'ECU',
-    translatedBy: ['Camilo Burneo']
+    translatedBy: ['Camilo Burneo'],
+    coords: [-78.183406, 	-1.831239]
   },
   {
     name: 'Argentina',
     code: 'ARG',
-    translatedBy: ['Nicolás']
+    translatedBy: ['Nicolás'],
+    coords: [-63.616672, -38.416097]
   },
   {
     name: 'Colombia',
     code: 'COL',
-    translatedBy: ['Juliana Galvis', 'Datasketch']
+    translatedBy: ['Juliana Galvis', 'Datasketch'],
+    coords: [-74.297333, 4.570868]
   }
 ];
 
@@ -243,7 +256,6 @@ const dict = {
   },
 }
 
-
 export function _t(word){
   if(!word){
     return word;
@@ -255,6 +267,17 @@ export function _t(word){
     o = dict[w][country];
   }
   return o;
+}
+
+export function getCoords(){
+  var country = getLang();
+  var def = [-102.552784, 23.634501];
+  var t = countries.filter(f => f.code == country);
+  if(t.length && t[0].coords){
+    return t[0].coords;
+  }else{
+    return def;
+  }
 }
 
 export function getLang(){

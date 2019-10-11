@@ -1,0 +1,74 @@
+#ss_map{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #1a1a1a;
+  z-index: 9999999;
+  .ss_map_tooltip{
+    width: 180px;
+    background: #333;
+    transform: translateY(-30px);
+    box-sizing: border-box;
+    padding: 0.5rem;
+    line-height: 1.1;
+    &_type{
+      font-weight: 600;
+      color: white;
+      font-size: 0.8rem;
+    }
+    &_name{
+      font-size: 0.9rem;
+      font-weight: 300;
+      margin: 0.5rem 0;
+      color: #f6f6f6;
+    }
+    &_ename{
+      font-weight: 800;
+      color: white;
+      font-size: 0.8rem;
+      &::before{
+        content: '/';
+        color: $main;
+        display: inline-block;
+        margin-right: 0.25rem;
+      }
+    }
+  }
+  .mapboxgl-popup-content{
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+  }
+  .mapboxgl-popup-tip{
+    display: none;
+  }
+  .ss_map_close{
+    position: absolute;
+    right: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    box-sizing: border-box;
+    padding: 0.5rem 0.5rem;
+    .material-icons{
+      color: white;
+      font-size: 2rem;
+    }
+  }
+  .mapboxgl-map{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .ss_map_marker{
+    width: 25px;
+    height: 25px;
+    background: rgba($main, 0.9);
+    box-shadow: 0 0 10px rgba($main, 0.8);
+    border-radius: 50%;
+  }
+}

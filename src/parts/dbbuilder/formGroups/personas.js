@@ -178,9 +178,15 @@ export default class DbFormGroupPersonas extends React.Component{
           <div className="db_empresa_container_group_form">
             {
               persons.map(function(g){
+                var cs = ['db_empresa_subgroup'];
+                if(!g.fields.length){
+                  cs.push('ss_empty');
+                }
                 return(
-                  <div className="db_empresa_subgroup">
-                    <div className="db_empresa_subgroup_title">{_t(g.name)}</div>
+                  <div className={cs.join(' ')}>
+                    <div className="db_empresa_subgroup_title">
+                      {_t(g.name)}
+                    </div>
                     <div className="db_empresa_subgroup_content db_empresa_container_group_form_innerlist">
                       {
                         g.fields.length ?
@@ -188,9 +194,7 @@ export default class DbFormGroupPersonas extends React.Component{
                             return <PersonRow p={p} i={i} parent={self} onClick={(g) => self.editPerson(g, p)}/>
                           })
                         :
-                        <div className="db_empresa_subgroup_content_empty">
-                          Sin personas
-                        </div>
+                        null
                       }
                     </div>
                   </div>
@@ -296,7 +300,7 @@ class PersonRow extends React.Component{
   edit(){
     try{
       var t = this.props.p[0];
-      var guid = t.guid;
+      var guid = t.guid || t.groupUid;
       this.props.onClick(guid);
     }catch{
       console.warn('Sin elementos');
@@ -325,17 +329,27 @@ class PersonRow extends React.Component{
     return n;
   }
 
+
+  delete(){
+    var g = this.props.p;
+    var t = g[0];
+    var euid = t.empresauid;
+    var dbid = t.fromdb;
+    var guid = t.groupUid;
+    window.dbf.deleteGroup(guid, euid, dbid);
+  }
+
   render(){
     var n = this.getName();
     return(
-      <div className="ss_transaction_row" onClick={() => this.edit()}>
-        <div className="ss_transaction_row_c">
+      <div className="ss_transaction_row">
+        <div className="ss_transaction_row_c"  onClick={() => this.edit()}>
           <div className="ss_transaction_row_n">
             {n}
           </div>
-          <div className="ss_transaction_row_n_c">
-            <span>Editar</span>
-          </div>
+        </div>
+        <div className="ss_transaction_row_d" onClick={() => this.delete()}>
+          <Icon size="small">delete</Icon>
         </div>
       </div>
     )

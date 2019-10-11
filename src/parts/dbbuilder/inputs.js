@@ -2,12 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@material-ui/core/Icon';
 import { _t } from '../../vars/countriesDict';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import {
+  geocodeByAddress,
+  geocodeByPlaceId,
+  getLatLng,
+} from 'react-places-autocomplete';
+
 var slugify = require('slugify');
 const uuidv4 = require('uuid/v4');
 
 export default class DbInput extends React.Component{
   state = {
-    haschanged: false
+    haschanged: false,
+    autoCompleteLoading: false,
+    isfocus: false,
+    autocompleteData: []
   }
   componentDidMount(){
     this.setInitialValue();
@@ -51,8 +61,45 @@ export default class DbInput extends React.Component{
     })
     setTimeout(function(){
       self.validate();
+      self.setAutoComplete();
     }, 70);
   }
+
+  setAutoComplete(){
+    if(this.props.matchWith && this.props.matchWith.indexOf('address') > -1){
+      this.setAutoCompleteAddress();
+    }
+  }
+
+  async setAutoCompleteAddress(){
+    if(this.autoCompleteLoading){
+      return;
+    }
+    this.setState({
+      autoCompleteLoading: true,
+    })
+    var a = this.state.value;
+    if(a && a.length > 2){
+      var geocode = await geocodeByAddress(a);
+      var r = [];
+      if(geocode.length){
+        console.log('geocode', geocode);
+        geocode.map(function(e){
+          var em = {
+            label: e.formatted_address,
+            type: 'autocompleted_address',
+            additionalData: e
+          }
+          r.push(em)
+        })
+      }
+      this.setState({
+        autocompleteData: r,
+        autoCompleteLoading: false
+      })
+    }
+  }
+
 
   setValueFromGuid(guid){
     var s  = this.getFieldSlug();
@@ -66,7 +113,9 @@ export default class DbInput extends React.Component{
   }
 
   handleFocus(){
-
+    this.setState({
+      isfocus: true
+    })
   }
 
   validateFromRgx(rgx){
@@ -122,6 +171,11 @@ export default class DbInput extends React.Component{
   }
 
   handleBlur(){
+    if(!this.state.hoveringAutocomplete){
+      this.setState({
+        isfocus: false
+      })
+    }
     if(this.state.haschanged){
       this.saveLocalChanges();
     }
@@ -145,7 +199,7 @@ export default class DbInput extends React.Component{
     return v;
   }
 
-  saveLocalChanges(){
+  async saveLocalChanges(){
     var slug = this.getFieldSlug();
     var obj = {
       name: this.getName(),
@@ -178,8 +232,24 @@ export default class DbInput extends React.Component{
     if(this.props.groupUid){
       obj.groupUid = this.props.groupUid;
     }
+    var forceMap = false;
+    if(this.state.autocompleted_address){
+      var ad = this.state.autocompleted_address;
+          ad = ad.additionalData;
+      var latlng = await getLatLng(ad);
+      if(latlng){
+        obj.latlng = latlng;
+      }
+      forceMap = true;
+    }
+
+
     if(this.props.onChange){
       this.props.onChange(slug, obj);
+      if(forceMap){
+        var ev = new Event('ss_reload_map');
+        window.dispatchEvent(ev);
+      }
     }
   }
 
@@ -193,6 +263,27 @@ export default class DbInput extends React.Component{
     }else{
       return this.props.name;
     }
+  }
+
+  handleAutoSelectData(d){
+    var self = this;
+    this.setState({
+      isfocus: false
+    })
+    var label = d.label;
+    this.setValue(label);
+    console.log('D', d);
+
+    if(d.type == "autocompleted_address"){
+      this.setState({
+        autocompleted_address: d
+      })
+    }
+
+    setTimeout(function(){
+      self.saveLocalChanges();
+    }, 50)
+
   }
 
   render(){
@@ -228,6 +319,20 @@ export default class DbInput extends React.Component{
             <div className="ss_db_input_container_label">
               {_t(this.getName())}
             </div>
+            {
+              this.state.isfocus && this.state.value.length > 0 && this.state.autocompleteData.length > 0 ?
+              <div
+                onMouseEnter={(e) => this.setState({hoveringAutocomplete: true})}
+                onMouseLeave={() => this.setState({hoveringAutocomplete: false})}
+              >
+              <InputAutocomplete
+                data={this.state.autocompleteData}
+                onSelect={(d) => this.handleAutoSelectData(d)}
+                isLoading={this.state.autoCompleteLoading}
+              />
+            </div>
+            : null
+            }
           </div>
           {
             !this.state.isvalid && this.props.errorLegend ?
@@ -254,4 +359,42 @@ DbInput.defaultProps = {
   format: [],
   errorType: 'error',
   errorLegend: 'Error de formato'
+}
+
+
+class InputAutocomplete extends React.Component{
+  render(){
+    var d = this.props.data;
+    var self = this;
+    return(
+      <div className="ss_input_autocomplete">
+        <div className="ss_input_autocomplete_loader">
+        {
+          this.props.isLoading ?
+            <LinearProgress color="secondary"/>
+          : null
+        }
+        </div>
+        <div className="ss_input_autocomplete_results">
+          {d.map(function(_d){
+            return <InputAutocompleteRow d={_d} onSelect={(d) => self.props.onSelect(d)}/>
+          })}
+        </div>
+      </div>
+    )
+  }
+}
+
+class InputAutocompleteRow extends React.Component{
+  select(d){
+    this.props.onSelect(d);
+  }
+  render(){
+    var d = this.props.d;
+    return(
+      <div className="ss_input_autocomplete_row" onClick={() => this.select(d)}>
+        {d.label}
+      </div>
+    )
+  }
 }

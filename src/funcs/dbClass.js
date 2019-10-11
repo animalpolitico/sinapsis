@@ -307,6 +307,34 @@ export default class DbFactory {
   }
 
   /**
+  * Obtiene todas las direcciones con latitud y longitud
+  *
+  * @param void
+  * @return array
+  **/
+  getLatLngAddress(){
+    var o = [];
+    var db = this.getDbs();
+    var dbA = Object.values(db);
+    dbA.map(function(_db){
+      var dbfields = [];
+      var empresas = _db.empresas;
+          empresas = Object.values(empresas);
+      if(empresas){
+        empresas.map(function(empresa){
+          var fields = empresa.fields;
+              fields = Object.values(fields);
+          var withLatLng = fields.filter(f => f.latlng ? true : false);
+          withLatLng.map(function(d){
+            o.push(d);
+          })
+        })
+      }
+    })
+    return o;
+  }
+
+  /**
   * Obtiene la suma de convenios
   *
   * @param void
@@ -752,6 +780,28 @@ export default class DbFactory {
   }
 
   /**
+  * Elimina un grupo de campos
+  *
+  * @param guid, euid, db
+  **/
+  deleteGroup(guid, euid, dbid){
+    var ev = new Event('sinapsisStartLoad');
+    window.dispatchEvent(ev);
+
+    var f = this.getEmpresaFields(dbid, euid);
+    var topreserve = f.filter(function(a){
+      return a.groupUid !== guid
+    });
+    var ff = {};
+    topreserve.map(function(d){
+      ff[d.slug] = d;
+    })
+    this.obj.dbs[dbid].empresas[euid].fields = ff;
+    this.refresh();
+    this.setModified();
+  }
+
+  /**
   * Añade campos a una empresa
   *
   * @param dbuid
@@ -803,6 +853,10 @@ export default class DbFactory {
   refresh(){
     var ev = new Event('sinapsisBigModified');
     window.dispatchEvent(ev);
+
+    var ev = new Event('ss_reload_map');
+    window.dispatchEvent(ev);
+
   }
 
 
@@ -1009,4 +1063,48 @@ export default class DbFactory {
     var o = formatMoney(f);
     return o;
   }
+
+
+  /**
+  * Formatea un número con comas
+  *
+  * @param float
+  * @return string
+  **/
+  numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+
+  /**
+  * Determina si una empresa ya existe en la DB
+  *
+  * @param string
+  * @return string | false
+  **/
+  empresaExists(v, db){
+    var vs = v.replace(/[.\s]/g, '');
+        vs = slugify(vs, {lower: true, remove: /[*+~.,()'"!:@]/g});
+    var empresas = {};
+
+    var e = db.empresas;
+    if(e){
+      e = Object.values(e);
+      e.map(function(emp){
+        var semp = emp.name.replace(/[.\s]/g, '');
+            semp = slugify(semp, {lower: true, remove: /[*+~.,()'"!:@]/g});
+        empresas[semp] = emp.uid;
+      })
+      if(Object.keys(empresas).indexOf(vs) > -1){
+        return empresas[vs];
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
+
+
+
 }

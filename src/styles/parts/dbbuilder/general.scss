@@ -2,8 +2,8 @@
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  height: calc(100vh  - 56px);
-  margin-top: 56px;
+  height: calc(100vh  - 50px);
+  margin-top: 50px;
   position: relative;
   @extend .flex;
   &_sidebar{

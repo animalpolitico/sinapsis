@@ -128,13 +128,13 @@
           @extend .flex;
           align-items: center;
           .dbef_n_n_badge{
-            font-size: 0.65rem;
+            font-size: 0.5rem;
             margin-left: 0.5rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1.15rem;
-            background-color: beige;
+            padding: 0.2rem 0.5rem 0.1rem;
+            border-radius: 1rem;
+            background-color: $main;
             font-weight: 600;
-            color: $blue;
+            color: white;
           }
         }
         &_ctas{
@@ -144,13 +144,12 @@
           padding-right: 1rem;
           &_c{
             font-size: 0.8rem;
-            background: $yellow;
+            background: #444;
             padding: 0.25rem 0.35rem;
-            border-radius: 1.15rem;
             cursor: pointer;
             transition: all 0.25s ease;
             &:hover{
-              background: darken($yellow, 10%);
+              background: darken($main, 10%);
             }
           }
         }
@@ -177,6 +176,7 @@
     }
   }
 }
+
 .db_empresa_container_group_form{
   width: 100%;
   @extend .flex;
@@ -190,8 +190,26 @@
       color: white;
       font-weight: 500;
       box-sizing: border-box;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid rgba(white, 0.2);
+      padding-bottom: 0.25rem;
+      font-size: 0.9rem;
+      &::before{
+        content: '/';
+        color: $main;
+        display: inline-block;
+        font-size: 0.8em;
+        margin-right: 0.25rem;
+      }
+    }
+    &.ss_empty{
+      .db_empresa_subgroup_title{
+        &::after{
+          content: '(vacío)';
+          display: inline-block;
+          margin-left: 0.5rem;
+          font-size: 0.8rem;
+          opacity: 0.8;
+        }
+      }
     }
     &_content{
       &_empty{
@@ -206,25 +224,52 @@
     width: 100%;
     box-sizing: border-box;
     .ss_transaction_row{
-      cursor: pointer;
       box-sizing: border-box;
-      padding: 0.75rem 0.75rem;
-      margin: 0.75rem 0;
-      background: darken($blue, 5%);
+      margin: 0.25rem 0;
+      border-bottom: 1px dotted rgba(white, 0.1);
+      @extend .flex;
+      align-items: center;
+      &_d{
+        box-sizing: border-box;
+        padding: 0.25rem;
+        cursor: pointer;
+        max-height: 1.25rem;
+
+        .material-icons{
+          font-size: 0.9rem;
+          line-height: 1;
+        }
+        &:hover{
+          .material-icons{
+            color: red;
+          }
+        }
+      }
       &_c{
+        cursor: pointer;
         @extend .flex;
+        flex: 1;
         color: white;
         align-items: center;
+        box-sizing: border-box;
+        padding: 0.5rem 0.25rem 0.5rem;
+        overflow: hidden;
+        &:hover{
+          opacity: 0.8;
+        }
         .ss_transaction_row_n{
           margin-right: 1rem;
           font-weight: 300;
           @extend .flex;
           align-items: center;
-          font-size: 0.9rem;
-          max-width: 85%;
+          font-size: 0.8rem;
+          max-width: 65%;
+          overflow: hidden;
+          line-height: 1.1;
           &_d{
             @extend .flex;
             align-items: center;
+            line-height: 1;
             &_a{
               width: 30px;
               text-align: center;
@@ -263,11 +308,53 @@
     }
   }
 }
+.ss_input_autocomplete{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: #222;
+  transform: translateY(100%);
+  z-index: 99;
+  box-shadow: 0 0 4px rgba(black, 0.1);
+  padding-bottom: 7px;
+  &_loader{
+    min-height: 7px;
+  }
+  .ss_input_autocomplete_results{
+    width: 100%;
+    max-height: 250px;
+    overflow-y: auto;
+  }
+  .ss_input_autocomplete_row{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    line-height: 1.1;
+    font-size: 0.8rem;
+    position: relative;
+    cursor: pointer;
+    &:hover{
+      background: rgba(white, 0.1);
+    }
+    &::after{
+      content: '';
+      display: block;
+      width: 50%;
+      height: 1px;
+      background: rgba(white, 0.5);
+      position: absolute;
+      left: 0.5rem;
+      bottom: 0;
+    }
+
+  }
+}
 .ss_db_input, .ss_db_input_select{
   box-sizing: border-box;
   padding: 0.4rem 0.5rem;
   flex: 1;
   min-width: 50%;
+  position: relative;
   &.ss_large, &.ss_db_input_select{
     min-width: 100%;
   }

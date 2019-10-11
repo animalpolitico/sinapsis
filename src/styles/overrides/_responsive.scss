@@ -11,4 +11,9 @@
   .ss_dbbuilder_sidebar{
     min-width: 350px;
   }
+  body.ss_showing_drawer{
+    .project_buttons{
+      display: none;
+    }
+  }
 }

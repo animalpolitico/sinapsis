@@ -197,6 +197,7 @@ export default class DbBuilderPage extends React.Component{
 
     if(f){
       this.sidebar.fetchDbs();
+      this.toolbar.forceName();
       this.viz.nodes.set();
     }
 
@@ -578,6 +579,7 @@ class DbBuilderSidebar extends React.Component{
 class DbView extends React.Component{
   state = {
     showdialog: false,
+    showEmpresaAlert: false,
     dialogValue: '',
     showDeleteDialog: false,
     view: true,
@@ -642,12 +644,24 @@ class DbView extends React.Component{
 
   addEmpresa(){
     var v = this.state.dialogValue;
+    /** Revisa si la empresa existe en la base de datos **/
+    var exists = window.dbf.empresaExists(v, this.state.db)
+
     this.handleDialogClose();
-    var data = window.dbf.addEmpresaToDb(this.state.db, v);
-    this.empresalist.selectEmpresa(data[1])
-    this.setState({
-      db: data[0]
-    })
+    if(exists){
+      this.setState({
+        showEmpresaAlert: true,
+        duplicateEmpresa: exists
+      })
+    }else{
+      var data = window.dbf.addEmpresaToDb(this.state.db, v);
+      this.empresalist.selectEmpresa(data[1])
+      this.setState({
+        db: data[0]
+      })
+    }
+
+
   }
 
   intentDelete(){
@@ -677,6 +691,16 @@ class DbView extends React.Component{
     })
 
     window.dbf.toggleDb(this.state.db.id, n);
+  }
+
+  openDuplicate(){
+    var e = this.state.duplicateEmpresa;
+    var em = window.dbf.getEmpresa(this.state.db.id, e);
+
+    this.empresalist.selectEmpresa(em, true);
+    this.setState({
+      showEmpresaAlert: false
+    })
   }
 
   render(){
@@ -717,6 +741,23 @@ class DbView extends React.Component{
                 </Button>
                 <Button disabled={slugify(this.state.borrar, {lower: true}) !== "borrar"} color="secondary" onClick={() => this.delete()}>
                   Borrar definitivamente
+                </Button>
+              </DialogActions>
+            </Dialog>
+
+            <Dialog open={this.state.showEmpresaAlert} onClose={() => this.setState({ showDeleteDialog: false})}>
+              <DialogTitle>Empresa duplicada</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  Esta empresa ya existe en esta base de datos.
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button color="secondary" onClick={() => this.setState({ showEmpresaAlert: false})}>
+                  Cancelar
+                </Button>
+                <Button color="secondary" onClick={() => this.openDuplicate()}>
+                  Abrir empresa
                 </Button>
               </DialogActions>
             </Dialog>

@@ -9,31 +9,59 @@
   &_tooltip{
     position: absolute;
     z-index: 99;
-    background: #333;
+    background: #303030;
     pointer-events: none;
     transform: translate(-50%, -120%);
-    border-top: 2px solid transparent;
-    max-width: 350px;
+    max-width: 300px;
+    min-width: 200px;
     padding-bottom: 0.25rem;
+    color: #F6F6F6;
     &_name{
-      font-size: 0.85rem;
-      color: white;
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.1;
       box-sizing: border-box;
-      padding: 0.25rem 0.5rem;
+      padding: 0.75rem 0.5rem 0.5rem;
+      position: relative;
+      margin-bottom: 0.5rem;
+      &::after{
+        content: '';
+        display: block;
+        width: 75%;
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        left: 0.5rem;
+        background: rgba(white, 0.1);
+      }
     }
     &_type_name{
-      font-size: 0.65rem;
-      color: white;
+      font-size: 0.7rem;
+      color: #111;
       box-sizing: border-box;
-      padding: 0.5rem 0.5rem 0;
+      padding: 0.25rem 0.5rem 0.25rem;
       text-transform: uppercase;
       font-weight: 600;
     }
     &_links, &_monto{
       font-size: 0.65rem;
-      color: white;
       box-sizing: border-box;
-      padding: 0.25rem 0.5rem;
+      padding: 0.15rem 0.5rem;
+      &::before{
+        content: '/';
+        display: inline-block;
+        margin-right: 0.15rem;
+        color: $main;
+        font-weight: 800;
+      }
+    }
+    &_click{
+      font-size: 0.6rem;
+      font-weight: 600;
+      box-sizing: border-box;
+      padding: 0.25rem 0.5rem 0.15rem;
+      margin-top: 0.15rem;
+      color: #eee;
     }
   }
   &_info{
@@ -112,27 +140,39 @@ body.ss_showing_drawer{
 .ss_doi_window{
   width: 250px;
   margin-bottom: 1rem;
-  background: #1f1f1f;
-  box-shadow: 2px 2px 4px rgba(black, 0.1);
+  background: #1c1c1c;
   &_type{
     font-weight: 600;
-    border-bottom: 1px solid;
-    border-top: 1px solid;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: black;
+    text-transform: uppercase;
     width: 100%;
     box-sizing: border-box;
     padding: 0.25rem 0.5rem;
   }
   &_name{
-    font-weight: 400;
+    font-weight: 300;
     width: 100%;
     box-sizing: border-box;
-    padding: 0.5rem;
+    padding: 0.75rem 0.5rem;
     font-size: 1.1rem;
     line-height: 1;
+    color: black;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    border-bottom: 1px solid rgba(white, 0.1);
+    position: relative;
+    &::after{
+      content: '';
+      display: block;
+      width: 50%;
+      height: 1px;
+      background: rgba(white, 0.25);
+      position: absolute;
+      bottom: 0;
+      left: 0.5rem;
+    }
     &:hover{
       white-space: normal;
     }
@@ -153,32 +193,50 @@ body.ss_showing_drawer{
     &_field{
       width: 100%;
       box-sizing: border-box;
-      padding: 0.25rem 0.5rem;
+      padding: 0.3rem 0.5rem;
       font-size: 0.8rem;
+      position: relative;
       cursor: pointer;
       &:hover{
-        background: rgba(white, 0.1);
+        background: rgba(white, 0.05);
       }
       &:not(:last-child){
-        border-bottom: 1px solid rgba(white, 0.1);
+        &::after{
+          content: '';
+          display: block;
+          width: 50%;
+          height: 1px;
+          background: rgba(white, 0.1);
+          position: absolute;
+          bottom: 0;
+          left: 0.5rem;
+        }
       }
       &_group{
         width: 100%;
         text-transform: uppercase;
-        color: #ddd;
+        color: #eee;
         font-weight: 600;
-        font-size: 0.8em;
+        font-size: 0.7em;
+        &::before{
+          content: '/';
+          color: $main;
+          display: inline-block;
+          margin-right: 0.25rem;
+        }
       }
       &_dbinfo{
         width: 100%;
         > div{
           @extend .flex;
           white-space: nowrap;
+          width: 100%;
+          overflow: hidden;
           text-overflow: ellipsis;
           align-items: center;
-          overflow: hidden;
           box-sizing: border-box;
           padding: 0.05rem 0;
+          font-size: 0.9em;
           .material-icons{
             font-size: 1em;
             line-height: 1em;
@@ -190,6 +248,7 @@ body.ss_showing_drawer{
       &_name{
         font-size: 1.2em;
         margin: 0.25rem 0;
+        line-height: 1;
       }
     }
 
@@ -256,6 +315,9 @@ body.ss_showing_drawer{
       white-space: normal;
       line-height: 1.1;
       border-bottom: none;
+      &::after{
+        display: none;
+      }
     }
   }
 }

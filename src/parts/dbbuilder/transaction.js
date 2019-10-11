@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from '@material-ui/core/Icon';
 
 export default class TransactionRow extends React.Component{
   buildName(){
@@ -71,15 +72,26 @@ export default class TransactionRow extends React.Component{
   }
 
   edit(){
-    var uid = this.props.g[0].groupUid;
+    var uid = this.props.g[0].groupUid || this.props.g[0].guid ;
+    console.log('UID', uid);
     this.props.onClick(uid);
+  }
+
+  delete(){
+    var g = this.props.g;
+    var t = g[0];
+    var euid = t.empresauid;
+    var dbid = t.fromdb;
+    var guid = t.groupUid;
+
+    window.dbf.deleteGroup(guid, euid, dbid);
   }
 
   render(){
     var n = this.buildName();
     return(
-      <div className="ss_transaction_row" onClick={() => this.edit()}>
-        <div className="ss_transaction_row_c">
+      <div className="ss_transaction_row">
+        <div className="ss_transaction_row_c" onClick={() => this.edit()}>
           <div className="ss_transaction_row_n">
             {
               n.showT ?
@@ -106,14 +118,15 @@ export default class TransactionRow extends React.Component{
                 {this.props.singleName + ' #' + this.props.count}
               </div>
             }
-
-
           </div>
           <div className="ss_transaction_row_d">
             {
               n.monto ? window.dbf.fm(n.monto) : null
             }
           </div>
+        </div>
+        <div className="ss_transaction_row_d" onClick={() => this.delete()}>
+          <Icon size="small">delete</Icon>
         </div>
       </div>
     )

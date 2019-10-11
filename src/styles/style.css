@@ -1,10 +1,11 @@
+@charset "UTF-8";
 @import url("https://use.typekit.net/nhy0plw.css");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_modal_dbpre .ss_predb_select_country, .ss_modal_dbpre .ss_predb_select_alert, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_db_toolbar_info_td .ss_db_builder_project_name, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, #ss_popper_lang .ss_popper_container_button, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_input .ss_db_input_container_label, .ss_db_input_select_container_input .ss_db_input_container_label, .ss_db_input_container_error, .ss_db_input_select_container_error, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_nodes #db_viz_nodes_controls, .ss_doi_window_fields_field_dbinfo > div, .ss_doi_window .ss_doi_window_controls, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels, .nodes_controls_button, .ss_control_group .ss_control_group_container_title, .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning, .ss_control_group .ss_control_group_container_dbs .ss_db, .ss_control_group .ss_control_group_container_btns, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics_container_group_montos, .ss_analytics_container_group_charts_group, #ss_page_home .ss_hb_cols {
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_modal_dbpre .ss_predb_select_country, .ss_modal_dbpre .ss_predb_select_alert, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_db_toolbar_info_td .ss_db_builder_project_name, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, #ss_popper_lang .ss_popper_container_button, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_input .ss_db_input_container_label, .ss_db_input_select_container_input .ss_db_input_container_label, .ss_db_input_container_error, .ss_db_input_select_container_error, .project_buttons, .project_buttons_button, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_nodes #db_viz_nodes_controls, .ss_doi_window_fields_field_dbinfo > div, .ss_doi_window .ss_doi_window_controls, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels, .nodes_controls_button, .ss_control_group .ss_control_group_container_title, .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning, .ss_control_group .ss_control_group_container_dbs .ss_db, .ss_control_group .ss_control_group_container_btns, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics_container_group_montos, .ss_analytics_container_group_charts_group {
   display: flex;
   flex-wrap: nowrap; }
 
-.cx {
+.cx, .project_buttons {
   position: absolute;
   left: 50%;
   transform: translateX(-50%); }
@@ -14,7 +15,7 @@
   top: 50%;
   transform: translateY(-50%); }
 
-.cxy, .ss_dbbuilder_sidebar_collapse .material-icons, #ssdb_loader_c, .ss_db_view_empresas .ss_db_ve_c_nocontent_icon .material-icons, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_td .material-icons, #ss_analytics_trigger_arrow .material-icons {
+.cxy, .ss_dbbuilder_sidebar_collapse .material-icons, #ssdb_loader_c, .ss_db_view_empresas .ss_db_ve_c_nocontent_icon .material-icons, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_td .material-icons, #ss_analytics_trigger_arrow .material-icons, #ap_logo_container img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -133,8 +134,8 @@ a, a:link, a:visited, a:hover {
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  height: calc(100vh  - 56px);
-  margin-top: 56px;
+  height: calc(100vh  - 50px);
+  margin-top: 50px;
   position: relative; }
   .ss_dbbuilder_sidebar {
     width: 30%;
@@ -730,22 +731,21 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
         font-weight: 600;
         align-items: center; }
         .db_empresa_edit .db_empresa_container_form .dbef_n_n .dbef_n_n_badge {
-          font-size: 0.65rem;
+          font-size: 0.5rem;
           margin-left: 0.5rem;
-          padding: 0.25rem 0.75rem;
-          border-radius: 1.15rem;
-          background-color: beige;
+          padding: 0.2rem 0.5rem 0.1rem;
+          border-radius: 1rem;
+          background-color: #3372ff;
           font-weight: 600;
-          color: #2a2a2a; }
+          color: white; }
       .db_empresa_edit .db_empresa_container_form .dbef_n_ctas {
         flex: 1;
         justify-content: flex-end;
         padding-right: 1rem; }
         .db_empresa_edit .db_empresa_container_form .dbef_n_ctas_c {
           font-size: 0.8rem;
-          background: #3372ff;
+          background: #444;
           padding: 0.25rem 0.35rem;
-          border-radius: 1.15rem;
           cursor: pointer;
           transition: all 0.25s ease; }
           .db_empresa_edit .db_empresa_container_form .dbef_n_ctas_c:hover {
@@ -776,8 +776,20 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       color: white;
       font-weight: 500;
       box-sizing: border-box;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.2); }
+      padding-bottom: 0.25rem;
+      font-size: 0.9rem; }
+      .db_empresa_container_group_form .db_empresa_subgroup_title::before {
+        content: '/';
+        color: #3372ff;
+        display: inline-block;
+        font-size: 0.8em;
+        margin-right: 0.25rem; }
+    .db_empresa_container_group_form .db_empresa_subgroup.ss_empty .db_empresa_subgroup_title::after {
+      content: '(vacío)';
+      display: inline-block;
+      margin-left: 0.5rem;
+      font-size: 0.8rem;
+      opacity: 0.8; }
     .db_empresa_container_group_form .db_empresa_subgroup_content_empty {
       font-size: 0.9rem;
       color: white;
@@ -787,22 +799,41 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
     width: 100%;
     box-sizing: border-box; }
     .db_empresa_container_group_form_innerlist .ss_transaction_row {
-      cursor: pointer;
       box-sizing: border-box;
-      padding: 0.75rem 0.75rem;
-      margin: 0.75rem 0;
-      background: #1d1d1d; }
+      margin: 0.25rem 0;
+      border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
+      align-items: center; }
+      .db_empresa_container_group_form_innerlist .ss_transaction_row_d {
+        box-sizing: border-box;
+        padding: 0.25rem;
+        cursor: pointer;
+        max-height: 1.25rem; }
+        .db_empresa_container_group_form_innerlist .ss_transaction_row_d .material-icons {
+          font-size: 0.9rem;
+          line-height: 1; }
+        .db_empresa_container_group_form_innerlist .ss_transaction_row_d:hover .material-icons {
+          color: red; }
       .db_empresa_container_group_form_innerlist .ss_transaction_row_c {
+        cursor: pointer;
+        flex: 1;
         color: white;
-        align-items: center; }
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0.5rem 0.25rem 0.5rem;
+        overflow: hidden; }
+        .db_empresa_container_group_form_innerlist .ss_transaction_row_c:hover {
+          opacity: 0.8; }
         .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n {
           margin-right: 1rem;
           font-weight: 300;
           align-items: center;
-          font-size: 0.9rem;
-          max-width: 85%; }
+          font-size: 0.8rem;
+          max-width: 65%;
+          overflow: hidden;
+          line-height: 1.1; }
           .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d {
-            align-items: center; }
+            align-items: center;
+            line-height: 1; }
             .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d_a {
               width: 30px;
               text-align: center; }
@@ -830,11 +861,47 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
           text-align: right;
           color: #f0f0f0; }
 
+.ss_input_autocomplete {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: #222;
+  transform: translateY(100%);
+  z-index: 99;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  padding-bottom: 7px; }
+  .ss_input_autocomplete_loader {
+    min-height: 7px; }
+  .ss_input_autocomplete .ss_input_autocomplete_results {
+    width: 100%;
+    max-height: 250px;
+    overflow-y: auto; }
+  .ss_input_autocomplete .ss_input_autocomplete_row {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    line-height: 1.1;
+    font-size: 0.8rem;
+    position: relative;
+    cursor: pointer; }
+    .ss_input_autocomplete .ss_input_autocomplete_row:hover {
+      background: rgba(255, 255, 255, 0.1); }
+    .ss_input_autocomplete .ss_input_autocomplete_row::after {
+      content: '';
+      display: block;
+      width: 50%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.5);
+      position: absolute;
+      left: 0.5rem;
+      bottom: 0; }
+
 .ss_db_input, .ss_db_input_select {
   box-sizing: border-box;
   padding: 0.4rem 0.5rem;
   flex: 1;
-  min-width: 50%; }
+  min-width: 50%;
+  position: relative; }
   .ss_db_input.ss_large, .ss_db_input.ss_db_input_select, .ss_db_input_select.ss_large, .ss_db_input_select.ss_db_input_select {
     min-width: 100%; }
   .ss_db_input select, .ss_db_input_select select {
@@ -925,6 +992,37 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   min-width: 600px;
   font-family: benton-sans, serif;
   border-radius: 0; }
+
+.project_buttons {
+  bottom: 0;
+  z-index: 99;
+  transform: translateX(calc(-50% - 2rem)); }
+  .project_buttons_button {
+    background: #2c2c2c;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0.5rem 0.75rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); }
+    .project_buttons_button:hover {
+      background: #333; }
+    .project_buttons_button .material-icons {
+      color: #3372ff;
+      font-size: 1rem;
+      margin-right: 0.5rem; }
+    .project_buttons_button div {
+      color: white;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 0.85rem; }
+
+body.ss_showing_drawer .project_buttons_button {
+  margin: 0; }
+  body.ss_showing_drawer .project_buttons_button div {
+    display: none; }
+  body.ss_showing_drawer .project_buttons_button .material-icons {
+    margin-right: 0; }
 
 .ss_dbbuilder_front {
   width: 100%;
@@ -1109,29 +1207,54 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   .db_viz_tooltip {
     position: absolute;
     z-index: 99;
-    background: #333;
+    background: #303030;
     pointer-events: none;
     transform: translate(-50%, -120%);
-    border-top: 2px solid transparent;
-    max-width: 350px;
-    padding-bottom: 0.25rem; }
+    max-width: 300px;
+    min-width: 200px;
+    padding-bottom: 0.25rem;
+    color: #F6F6F6; }
     .db_viz_tooltip_name {
-      font-size: 0.85rem;
-      color: white;
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.1;
       box-sizing: border-box;
-      padding: 0.25rem 0.5rem; }
+      padding: 0.75rem 0.5rem 0.5rem;
+      position: relative;
+      margin-bottom: 0.5rem; }
+      .db_viz_tooltip_name::after {
+        content: '';
+        display: block;
+        width: 75%;
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        left: 0.5rem;
+        background: rgba(255, 255, 255, 0.1); }
     .db_viz_tooltip_type_name {
-      font-size: 0.65rem;
-      color: white;
+      font-size: 0.7rem;
+      color: #111;
       box-sizing: border-box;
-      padding: 0.5rem 0.5rem 0;
+      padding: 0.25rem 0.5rem 0.25rem;
       text-transform: uppercase;
       font-weight: 600; }
     .db_viz_tooltip_links, .db_viz_tooltip_monto {
       font-size: 0.65rem;
-      color: white;
       box-sizing: border-box;
-      padding: 0.25rem 0.5rem; }
+      padding: 0.15rem 0.5rem; }
+      .db_viz_tooltip_links::before, .db_viz_tooltip_monto::before {
+        content: '/';
+        display: inline-block;
+        margin-right: 0.15rem;
+        color: #3372ff;
+        font-weight: 800; }
+    .db_viz_tooltip_click {
+      font-size: 0.6rem;
+      font-weight: 600;
+      box-sizing: border-box;
+      padding: 0.25rem 0.5rem 0.15rem;
+      margin-top: 0.15rem;
+      color: #eee; }
   .db_viz_info {
     position: absolute;
     bottom: 0;
@@ -1189,26 +1312,37 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
 .ss_doi_window {
   width: 250px;
   margin-bottom: 1rem;
-  background: #1f1f1f;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); }
+  background: #1c1c1c; }
   .ss_doi_window_type {
     font-weight: 600;
-    border-bottom: 1px solid;
-    border-top: 1px solid;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: black;
+    text-transform: uppercase;
     width: 100%;
     box-sizing: border-box;
     padding: 0.25rem 0.5rem; }
   .ss_doi_window_name {
-    font-weight: 400;
+    font-weight: 300;
     width: 100%;
     box-sizing: border-box;
-    padding: 0.5rem;
+    padding: 0.75rem 0.5rem;
     font-size: 1.1rem;
     line-height: 1;
+    color: black;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    position: relative; }
+    .ss_doi_window_name::after {
+      content: '';
+      display: block;
+      width: 50%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.25);
+      position: absolute;
+      bottom: 0;
+      left: 0.5rem; }
     .ss_doi_window_name:hover {
       white-space: normal; }
   .ss_doi_window_fields_info {
@@ -1225,28 +1359,43 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
     .ss_doi_window_fields_field {
       width: 100%;
       box-sizing: border-box;
-      padding: 0.25rem 0.5rem;
+      padding: 0.3rem 0.5rem;
       font-size: 0.8rem;
+      position: relative;
       cursor: pointer; }
       .ss_doi_window_fields_field:hover {
-        background: rgba(255, 255, 255, 0.1); }
-      .ss_doi_window_fields_field:not(:last-child) {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        background: rgba(255, 255, 255, 0.05); }
+      .ss_doi_window_fields_field:not(:last-child)::after {
+        content: '';
+        display: block;
+        width: 50%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+        position: absolute;
+        bottom: 0;
+        left: 0.5rem; }
       .ss_doi_window_fields_field_group {
         width: 100%;
         text-transform: uppercase;
-        color: #ddd;
+        color: #eee;
         font-weight: 600;
-        font-size: 0.8em; }
+        font-size: 0.7em; }
+        .ss_doi_window_fields_field_group::before {
+          content: '/';
+          color: #3372ff;
+          display: inline-block;
+          margin-right: 0.25rem; }
       .ss_doi_window_fields_field_dbinfo {
         width: 100%; }
         .ss_doi_window_fields_field_dbinfo > div {
           white-space: nowrap;
+          width: 100%;
+          overflow: hidden;
           text-overflow: ellipsis;
           align-items: center;
-          overflow: hidden;
           box-sizing: border-box;
-          padding: 0.05rem 0; }
+          padding: 0.05rem 0;
+          font-size: 0.9em; }
           .ss_doi_window_fields_field_dbinfo > div .material-icons {
             font-size: 1em;
             line-height: 1em;
@@ -1254,7 +1403,8 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
             color: #bbb; }
       .ss_doi_window_fields_field_name {
         font-size: 1.2em;
-        margin: 0.25rem 0; }
+        margin: 0.25rem 0;
+        line-height: 1; }
   .ss_doi_window .ss_doi_window_controls {
     width: 100%;
     box-sizing: border-box;
@@ -1300,11 +1450,13 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
     white-space: normal;
     line-height: 1.1;
     border-bottom: none; }
+    .ss_doi_window.ss_minimized .ss_doi_window_name::after {
+      display: none; }
 
 .db_search_nodes {
   position: fixed;
   top: 6px;
-  right: calc(4em + 80px);
+  right: calc(4em + 150px);
   z-index: 99;
   width: 280px; }
   .db_search_nodes_results {
@@ -1348,7 +1500,7 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
       display: block;
       border: 0;
       background: rgba(255, 255, 255, 0.05);
-      padding: 0.7rem;
+      padding: 0.5rem;
       box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2);
       color: white;
       font-family: benton-sans, serif;
@@ -1362,7 +1514,7 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
 .nodes_controls {
   width: 220px;
   position: absolute;
-  bottom: 0.5rem;
+  bottom: 0;
   right: 20px;
   z-index: 9;
   max-height: 100%; }
@@ -1687,37 +1839,111 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
             .ss_analytics_container_group_charts_group .ss_analytics_chart_binder_info span {
               font-size: 0.8rem; }
 
-#ss_page_home {
+#ss_map {
   width: 100%;
-  box-sizing: border-box;
-  padding: 4rem 4rem;
-  margin: 0 auto; }
-  #ss_page_home .ss_hb_cols {
-    width: 100%; }
-    #ss_page_home .ss_hb_cols .ss_hb_col {
-      flex: 1; }
-      #ss_page_home .ss_hb_cols .ss_hb_col #ss_hb_ctas {
-        margin-top: 2rem;
-        transition: all 0.5s ease;
-        opacity: 0; }
-        #ss_page_home .ss_hb_cols .ss_hb_col #ss_hb_ctas.ss_hb_finished {
-          opacity: 1; }
-        #ss_page_home .ss_hb_cols .ss_hb_col #ss_hb_ctas .MuiButton-root {
-          margin-right: 1rem; }
-      #ss_page_home .ss_hb_cols .ss_hb_col #ss_home_brain_text .ss_hb_tt {
-        font-size: 3.5rem;
-        text-transform: uppercase; }
-        #ss_page_home .ss_hb_cols .ss_hb_col #ss_home_brain_text .ss_hb_tt div {
-          margin-bottom: 0.5rem;
-          background: #3372ff;
-          color: #222;
-          display: inline-block;
-          box-sizing: border-box;
-          padding: 0.3rem 0.5rem; }
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #1a1a1a;
+  z-index: 9999999; }
+  #ss_map .ss_map_tooltip {
+    width: 180px;
+    background: #333;
+    transform: translateY(-30px);
+    box-sizing: border-box;
+    padding: 0.5rem;
+    line-height: 1.1; }
+    #ss_map .ss_map_tooltip_type {
+      font-weight: 600;
+      color: white;
+      font-size: 0.8rem; }
+    #ss_map .ss_map_tooltip_name {
+      font-size: 0.9rem;
+      font-weight: 300;
+      margin: 0.5rem 0;
+      color: #f6f6f6; }
+    #ss_map .ss_map_tooltip_ename {
+      font-weight: 800;
+      color: white;
+      font-size: 0.8rem; }
+      #ss_map .ss_map_tooltip_ename::before {
+        content: '/';
+        color: #3372ff;
+        display: inline-block;
+        margin-right: 0.25rem; }
+  #ss_map .mapboxgl-popup-content {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0; }
+  #ss_map .mapboxgl-popup-tip {
+    display: none; }
+  #ss_map .ss_map_close {
+    position: absolute;
+    right: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    box-sizing: border-box;
+    padding: 0.5rem 0.5rem; }
+    #ss_map .ss_map_close .material-icons {
+      color: white;
+      font-size: 2rem; }
+  #ss_map .mapboxgl-map {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0; }
+  #ss_map .ss_map_marker {
+    width: 25px;
+    height: 25px;
+    background: rgba(51, 114, 255, 0.9);
+    box-shadow: 0 0 10px rgba(51, 114, 255, 0.8);
+    border-radius: 50%; }
+
+#ss_sinapsis_home {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background: #2a2a2a;
+  min-height: 100vh; }
+  #ss_sinapsis_home .ss_h_s {
+    width: 100%;
+    position: relative; }
+
+#ss_h_landing {
+  height: 100vh; }
+
+#ap_logo {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  background: blue;
+  position: relative; }
+  #ap_logo_container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0; }
+    #ap_logo_container img {
+      width: 20px;
+      z-index: 2; }
+    #ap_logo_container svg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block; }
 
 .MuiButton-root {
   border-radius: 0 !important;
   box-shadow: none !important; }
+
+.MuiDialogContent-root {
+  overflow: initial !important; }
 
 @media (max-width: 1040px) {
   .ss_db_toolbar_info_td.ss_db_lastmodified, .ss_db_builder_project_name_placeholder {
@@ -1730,6 +1956,9 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
     width: 180px; }
 
   .ss_dbbuilder_sidebar {
-    min-width: 350px; } }
+    min-width: 350px; }
+
+  body.ss_showing_drawer .project_buttons {
+    display: none; } }
 
 /*# sourceMappingURL=style.css.map */

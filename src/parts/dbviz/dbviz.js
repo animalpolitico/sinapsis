@@ -9,6 +9,7 @@ import formatMoney from 'format-money';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Switch from '@material-ui/core/Switch';
 import CountTo from 'react-count-to';
+import Map from './map';
 import { _t } from '../../vars/countriesDict';
 import {
   PieChart,
@@ -36,7 +37,8 @@ export default class DbViz extends React.Component{
   state = {
     showSearch: true,
     showcontrols: true,
-    displayAnalytics: false
+    displayAnalytics: false,
+    displayMap: false
   }
   constructor(props){
     super(props);
@@ -46,6 +48,12 @@ export default class DbViz extends React.Component{
   toggleAnalytics(){
     this.setState({
       displayAnalytics: !this.state.displayAnalytics
+    })
+  }
+
+  toggleMap(){
+    this.setState({
+      displayMap: !this.state.displayMap
     })
   }
 
@@ -70,10 +78,24 @@ export default class DbViz extends React.Component{
             <SSDBControl nodesMap={this.nodes} />
           </div>
         </div>
-          <AnalyticsButton onClick={() => this.toggleAnalytics()}/>
+        <div className="project_buttons">
+          <div className="project_buttons_button" onClick={() => this.toggleAnalytics()}>
+            <Icon>bar_chart</Icon>
+            <div>Ver resumen</div>
+          </div>
+          <div className="project_buttons_button" onClick={() => this.toggleMap()}>
+            <Icon>map</Icon>
+            <div>Ver mapa</div>
+          </div>
+        </div>
           {
             this.state.displayAnalytics ?
             <Analytics onClose={() => this.toggleAnalytics()} coincidencias={this.nodes.state.coincidencias}/>
+            : null
+          }
+          {
+            this.state.displayMap ?
+            <Map onClose={() => this.toggleMap()}/>
             : null
           }
       </div>
@@ -451,32 +473,13 @@ class Analytics extends React.Component{
         <div className="ss_analytics_close" onClick={() => this.props.onClose()}><Icon>close</Icon></div>
         <div className="ss_analytics_container">
           <div className="ss_analytics_container_group">
-            <div className="ss_analytics_container_group_h1"><strong>{buildAnalytics.count}</strong> empresas con <strong>{this.props.coincidencias}</strong> coincidencias</div>
-            <div className="ss_analytics_container_group_charts_group">
-              {
-                firstChartsGroup.map(function(data){
-                  return(
-                    <div className="ss_analytics_chart_binder">
-                      <div className="ss_analytics_chart">
-                        <PieChart width={100} height={100}>
-                          <Pie dataKey="value" isAnimationActive={true} data={data.chartData} innerRadius={20} fill="#8884d8">
-                            {
-                              data.chartData.map((entry, index) => <Cell key={`cell-${index}`} strokeWidth={0} fill={!index ? '#025AFA' : '#333'} />)
-                            }
-                          </Pie>
-                        </PieChart>
-                      </div>
-                      <div className="ss_analytics_chart_binder_info">
-                        El <strong>{data.pct}%</strong> sí tiene <strong>{data.name}</strong>
-                       <br/>
-                       <span>({data.val} de {buildAnalytics.count})</span>
-                      </div>
-                    </div>
-                  )
-                })
-              }
+            <div className="ss_analytics_container_group_h1">
+              <strong>{window.dbf.numberWithCommas(buildAnalytics.count)}</strong>
+                &nbsp;empresas con <strong>{window.dbf.numberWithCommas(this.props.coincidencias)}</strong>
+                &nbsp;coincidencias
             </div>
           </div>
+
           <div className="ss_analytics_container_group">
             <div className="ss_analytics_container_group_h1">Montos</div>
             <div className="ss_analytics_container_group_montos">
@@ -507,29 +510,40 @@ class Analytics extends React.Component{
             </div>
           </div>
           <div className="ss_analytics_container_group">
-            <div className="ss_analytics_container_group_h1">Mayores montos</div>
+            <div className="ss_analytics_container_group_h1">Los 10 mayores montos</div>
             <div className="ss_analytics_container_group_scatter">
-              <ResponsiveContainer>
-                <BarChart
-                  data={scatterData}
-                >
-                  <XAxis dataKey="name"  hide={true}/>
-                  <YAxis name="Monto" tickFormatter={function(e){
-                      return '$' + self.kFormatter(e);
-                    }}/>
-                  <ChartTooltip
-                    formatter={function(value, name, props){
-                      return [
-                        formatMoney(value),
-                        name
-                      ]
-                    }}
-                  />
-                <Bar dataKey="value" name="Monto neto recibido" fill="#5a53e3" />
-                </BarChart>
-              </ResponsiveContainer>
+
             </div>
-        </div>
+          </div>
+          <div className="ss_analytics_container_group">
+            <div className="ss_analytics_container_group_h1">
+                Información del llenado de las bases
+            </div>
+            <div className="ss_analytics_container_group_charts_group">
+              {
+                firstChartsGroup.map(function(data){
+                  return(
+                    <div className="ss_analytics_chart_binder">
+                      <div className="ss_analytics_chart">
+                        <PieChart width={100} height={100}>
+                          <Pie dataKey="value" isAnimationActive={true} data={data.chartData} innerRadius={20} fill="#8884d8">
+                            {
+                              data.chartData.map((entry, index) => <Cell key={`cell-${index}`} strokeWidth={0} fill={!index ? '#025AFA' : '#333'} />)
+                            }
+                          </Pie>
+                        </PieChart>
+                      </div>
+                      <div className="ss_analytics_chart_binder_info">
+                        El <strong>{data.pct}%</strong> no tiene <strong>{data.name}</strong>
+                       <br/>
+                       <span>({data.val} de {buildAnalytics.count})</span>
+                      </div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -762,7 +776,7 @@ class Nodes extends React.Component{
   }
 
   numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return window.dbf.numberWithCommas(x);
   }
 
   resize(){
@@ -818,8 +832,6 @@ class Nodes extends React.Component{
 
 
       var simulation = d3.forceSimulation()
-                         // .alphaTarget(0.01)
-                         .alpha(0.5)
                          .force("charge", d3.forceManyBody(1))
                          .force("link",
                             d3.forceLink()
@@ -902,7 +914,7 @@ class Nodes extends React.Component{
                      .attr('class', 'nodes_link')
                      .attr('data-from', l => l.source.id)
                      .attr('data-to', l => l.target.id)
-                     .attr('stroke', 'rgba(0, 114, 255, 0.3)')
+                     .attr('stroke', 'rgba(0, 114, 255, 0.4)')
       this.links = links;
 
       bgs.on('click', function(){
@@ -934,7 +946,7 @@ class Nodes extends React.Component{
       nodesLabels.append('text')
                  .text((d) => d.name.toUpperCase())
                  .attr('fill', 'white')
-                 .attr('font-size', 250)
+                 .attr('font-size', 300)
                  .attr('text-anchor', 'middle')
 
       var nodesPaddingLeft = 60;
@@ -1113,7 +1125,7 @@ class Nodes extends React.Component{
   }
 
   setNodeCircleSize(){
-    var min = 80;
+    var min = 100;
     var max = this.nodesData.nodes.length > 100 ? 1250 : 600;
     var param = this.state.nodeSizeParam;
     if(param == "monto"){
@@ -1277,7 +1289,7 @@ class Nodes extends React.Component{
       var nextNodes = [];
 
       d3.selectAll(cnds)
-        .attr('stroke', 'rgba(0, 114, 255, 0.3)')
+        .attr('stroke', 'rgba(0, 114, 255, 0.4)')
         .each(function(d){
           d.selected = true;
           var aid = d.source.id;
@@ -1310,7 +1322,7 @@ class Nodes extends React.Component{
   }
 
   releaseNode(){
-    this.nodesContainer.selectAll('.nodes_link').attr('stroke', 'rgba(0, 114, 255, 0.3)');
+    this.nodesContainer.selectAll('.nodes_link').attr('stroke', 'rgba(0, 114, 255, 0.4)');
     this.nodesContainer
         .selectAll('.node')
         .attr('opacity', d => !d.blockShow ? 1 : 0)
@@ -1808,7 +1820,7 @@ class SSDoi extends React.Component{
             </div>
           </div>
         </div>
-        <div className="ss_doi_window_type" style={{color: tc, borderColor: tc}}>
+        <div className="ss_doi_window_type" style={{boxShadow: '0 0 6px -1px ' + tc , backgroundColor: tc}}>
           {getTypeName(d.type)}
         </div>
         <div className="ss_doi_window_name" style={{color: ism ? tc : 'inherit'}}>
@@ -1865,13 +1877,13 @@ class SSDoiField extends React.Component{
         }
 
         <div className="ss_doi_window_fields_field_name">
-          {this.props.field.name ? this.props.field.name : '(Sin información)'}
+          {this.props.field.name}
         </div>
 
         {
           this.props.field.empresauid && this.props.field.fromdb ?
           <div className="ss_doi_window_fields_field_dbinfo">
-           <div>{window.dbf.getEmpresa(this.props.field.fromdb, this.props.field.empresauid).name}</div>
+           <div>{window.dbf.getEmpresa(this.props.field.fromdb, this.props.field.empresauid).name ? window.dbf.getEmpresa(this.props.field.fromdb, this.props.field.empresauid).name : '(Sin información)' }</div>
            <div><Icon>dns</Icon><div>{window.dbf.getDb(this.props.field.fromdb).name}</div> </div>
           </div>
           : null
@@ -1899,27 +1911,27 @@ class SSTooltip extends React.Component{
     return(
       <div
         className="db_viz_tooltip"
-        style={{left: coords[0], top: coords[1], borderColor: color }}
+        style={{left: coords[0], top: coords[1]}}
       >
-        <div className="db_viz_tooltip_type_name" style={{color: color}}>
+        <div className="db_viz_tooltip_type_name" style={{backgroundColor: color, boxShadow: '0 0 8px -1px ' + color}}>
           {getTypeName(d.type)}
         </div>
         <div className="db_viz_tooltip_name">
           {d.name ? d.name : '(Sin información)'}
         </div>
         <div className="db_viz_tooltip_links">
-          Cantidad de coincidencias: {node.attr('data-coincidencias')}
+          Cantidad de coincidencias: <strong>{node.attr('data-coincidencias')}</strong>
         </div>
 
         {
           d.type == "empresa" ?
           <div className="db_viz_tooltip_monto">
-            Monto neto que recibió la empresa: {formatMoney(d.fields[0].sum)}
+            Monto neto que recibió la empresa: <strong>{formatMoney(d.fields[0].sum)}</strong>
           </div>
           : null
         }
 
-        <div className="db_viz_tooltip_monto">
+        <div className="db_viz_tooltip_click">
           Da clic en el círculo para más información
         </div>
 

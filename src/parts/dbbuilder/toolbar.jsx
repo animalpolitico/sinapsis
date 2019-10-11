@@ -111,6 +111,10 @@ export default class DbBuilderToolbar extends React.Component{
     this.props.parent.goBack();
   }
 
+  forceName(){
+    this.toolbarname.forceName();
+  }
+
   render(){
     var self = this;
     return(
@@ -132,8 +136,9 @@ export default class DbBuilderToolbar extends React.Component{
             : null
           }
           <div className="ss_db_toolbar_info_td ss_db_ctas">
-            <Fab size="small" color="primary" onClick={() => window.dbf.createProjectFile()}>
+            <Fab size="small" variant="extended" color="secondary" onClick={() => window.dbf.createProjectFile()}>
               <Icon>get_app</Icon>
+              Guardar
             </Fab>
             <div className="ss_db_ctas_custom ss_db_ctas_custom_lang">
               <div onClick={(e) => this.intentLangChange(e)}>
@@ -191,6 +196,9 @@ class DbBuilderToolbarName extends React.Component{
   componentDidMount(){
   }
 
+  forceName(){
+    this.handleChange(window.dbf.obj.info.name);
+  }
 
   handleChange(e){
     var v = e;

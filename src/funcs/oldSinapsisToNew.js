@@ -102,7 +102,6 @@ export default class ConvertOldToDb{
     var uid = uuidv4();
     var s = n.replace(/[.\s]/g, '');
         s = slugify(s, {remove: /[*+,~.()'"!:@]/g, lower: true});
-
     var obj = {
       name: n,
       slug: s,
@@ -117,6 +116,7 @@ export default class ConvertOldToDb{
   }
 
   setEmpresaFields(fields, uid){
+    var dbid = this.uid;
     var e = this.obj.empresas[uid];
     var f = e.fields;
 
@@ -477,6 +477,7 @@ export default class ConvertOldToDb{
             value: value,
             group: inf.bigGroup,
             groupUid: cuid,
+            fromdb: dbid,
             guid: cuid,
             empresauid: uid
           };
@@ -512,6 +513,7 @@ export default class ConvertOldToDb{
             bigGroup: "transferencia",
             groupUid: cuid,
             guid: cuid,
+            fromdb: dbid,
             slug: slug,
           };
           // console.log('TRANSFERENCIA', ff);
@@ -536,6 +538,7 @@ export default class ConvertOldToDb{
             name: inf.name,
             slug: preslug,
             isvalid: true,
+            fromdb: dbid,
             value: value,
             group: inf.bigGroup,
             groupUid: cuid,
@@ -573,6 +576,7 @@ export default class ConvertOldToDb{
             aka: "¿Quién recibe la transferencia?",
             group: "transferencia",
             bigGroup: "transferencia",
+            fromdb: dbid,
             groupUid: cuid,
             guid: cuid
           };
@@ -598,6 +602,7 @@ export default class ConvertOldToDb{
             slug: preslug,
             isvalid: true,
             value: value,
+            fromdb: dbid,
             group: inf.bigGroup,
             groupUid: cuid,
             guid: cuid,
@@ -632,6 +637,7 @@ export default class ConvertOldToDb{
             isvalid: true,
             value: "emisor",
             group: "transferencia",
+            fromdb: dbid,
             bigGroup: "transferencia",
             groupUid: cuid,
             guid: cuid
@@ -682,6 +688,7 @@ export default class ConvertOldToDb{
             matchWith: matchWith,
             group: "otros",
             guid: guid,
+            fromdb: dbid,
             type: type,
             category: t,
             groupUid: guid,
