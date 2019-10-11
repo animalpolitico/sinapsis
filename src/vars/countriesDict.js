@@ -5,77 +5,103 @@ export const countries = [
   {
     name: 'México',
     code: 'MEX',
+    iso: 'MX',
+    img: require('../static/flags/mexico.svg'),
     coords: [-102.552784, 23.634501]
   },
   {
     name: 'Paraguay',
     code: 'PRY',
+    iso: 'PY',
     translatedBy: ['Maricarmen Sequera', 'TEDIC NGO'],
+    img: require('../static/flags/paraguay.svg'),
     coords: [-58.443832, -23.442503]
   },
   {
     name: 'República Dominicana',
     code: 'DOM',
+    iso: 'DO',
     translatedBy: ['Daniel Harel'],
+    img: require('../static/flags/dominican-republic.svg'),
     coords: [-70.162651, 18.735693]
   },
   {
     name: 'Bolivia',
     code: 'BOL',
+    iso: 'BO',
     translatedBy: ['Raisa Valda Ampuero', 'Warmi.Red'],
+    img: require('../static/flags/bolivia.svg'),
     coords: [-63.588653, -16.290154]
   },
   {
     name: 'Costa Rica',
     code: 'CRI',
+    iso: 'CR',
+    img: require('../static/flags/costa-rica.svg'),
     translatedBy: ['Ana Sofía Ruiz', 'Iniciativa Latinoamericana por los Datos Abiertos (ILDA)'],
     coords: [-83.753428, 9.748917]
   },
   {
     name: 'Perú',
     code: 'PER',
+    iso: 'PE',
+    img: require('../static/flags/peru.svg'),
     translatedBy: ['Gabriela Flores Ch.', 'Asociación civil Japiqay, Memoria y Ciudadanía'],
     coords: [-75.015152, -9.189967]
   },
   {
     name: 'Panamá',
     code: 'PAN',
+    iso: 'PA',
+    img: require('../static/flags/panama.svg'),
     translatedBy: ['Lia Hernández', 'IPANDETEC'],
     coords: [-80.782127, 8.537981]
   },
   {
     name: 'Venezuela',
     code: 'VEN',
+    iso: 'VE',
+    img: require('../static/flags/venezuela.svg'),
     translatedBy: ['Yuleina Carmona'],
     coords: [-66.58973, 6.42375]
   },
   {
     name: 'Guatemala',
     code: 'GTM',
+    iso: 'GT',
+    img: require('../static/flags/guatemala.svg'),
     translatedBy: ['Suchit Chávez', 'Plaza Pública'],
     coords: [-90.230759, 15.783471]
   },
   {
     name: 'Honduras',
     code: 'HND',
+    iso: 'HN',
+    img: require('../static/flags/honduras.svg'),
     translatedBy: ['Felisa Franco', 'Secretaría de Finanzas'],
     coords: [-86.241905, 15.199999]
   },
   {
     name: 'Ecuador',
     code: 'ECU',
+    iso: 'EC',
+    img: require('../static/flags/ecuador.svg'),
     translatedBy: ['Camilo Burneo'],
     coords: [-78.183406, 	-1.831239]
   },
   {
     name: 'Argentina',
     code: 'ARG',
+    iso: 'AR',
     translatedBy: ['Nicolás'],
+    img: require('../static/flags/argentina.svg'),
     coords: [-63.616672, -38.416097]
   },
   {
     name: 'Colombia',
     code: 'COL',
+    iso: 'CO',
+    img: require('../static/flags/colombia.svg'),
     translatedBy: ['Juliana Galvis', 'Datasketch'],
     coords: [-74.297333, 4.570868]
   }
@@ -280,6 +306,28 @@ export function getCoords(){
   }
 }
 
+export function getISO(){
+  var country = getLang();
+  var t = countries.filter(f => f.code == country);
+  if(t.length && t[0].coords){
+    return t[0].iso;
+  }else{
+    return false;
+  }
+}
+
+export function getFlag(){
+  var country = getLang();
+  var t = countries.filter(f => f.code == country);
+  if(t.length && t[0].coords){
+    return t[0].img;
+  }else{
+    return "";
+  }
+}
+
+
+
 export function getLang(){
   var country = store.get('sinapsis_lang');
   if(!country){
@@ -287,3 +335,8 @@ export function getLang(){
   }
   return country;
 }
+
+export function isMexico(){
+  return getLang() == "MEX";
+}
+window.ismexico = isMexico();

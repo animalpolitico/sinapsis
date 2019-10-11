@@ -1,6 +1,7 @@
 import moment from 'moment';
 import 'moment/locale/es';
 import { saveAs } from 'file-saver';
+import { getISO } from '../vars/countriesDict';
 import formatMoney from 'format-money';
 moment.locale('es');
 var ntol = require('number-to-letter');
@@ -29,6 +30,7 @@ export default class DbFactory {
     this.manualSaves = 0;
     this.originalData = [];
     this.omitDbs = [];
+    this.geocoder = new window.google.maps.Geocoder();
   }
 
   /**
@@ -332,6 +334,73 @@ export default class DbFactory {
     })
     return o;
   }
+
+  /**
+  * Obtiene todas los campos de un tipo
+  *
+  * @param void
+  * @return array
+  **/
+  getByType(t){
+    var o = [];
+    var db = this.getDbs();
+    var dbA = Object.values(db);
+    dbA.map(function(_db){
+      var dbfields = [];
+      var empresas = _db.empresas;
+          empresas = Object.values(empresas);
+      if(empresas){
+        empresas.map(function(empresa){
+          var fields = empresa.fields;
+              fields = Object.values(fields);
+          var withType = fields.filter(f => f.type == t);
+          withType.map(function(d){
+            o.push(d);
+          })
+        })
+      }
+    })
+    return o;
+  }
+
+  /**
+  * Obtiene todas los campos de un tipo que coincidan con una búsqueda
+  *
+  * @param void
+  * @return array
+  **/
+  searchByType(v, t){
+    var all = this.getByType(t);
+    var o = [];
+    var control = [];
+    if(!v){
+      return o;
+    }
+    var sv = v.replace(/[.\s]/g, '');
+        sv = slugify(sv, {lower: true, remove: /[*+~.,()'"!:@]/g});
+    all.map(function(d){
+      if(d.value){
+        var vs = d.value.replace(/[.\s]/g, '');
+            vs = slugify(vs, {lower: true, remove: /[*+~.,()'"!:@]/g});
+        var add = false;
+        if(sv.length > vs.length){
+          if(sv.indexOf(vs) > -1){
+            add = true;
+          }
+        }else{
+          if(vs.indexOf(sv) > -1){
+            add = true;
+          }
+        }
+        if(add && control.indexOf(vs) == -1){
+          control.push(vs);
+          o.push(d);
+        }
+      }
+    })
+    return o;
+  }
+
 
   /**
   * Obtiene la suma de convenios
@@ -1104,6 +1173,37 @@ export default class DbFactory {
     }
   }
 
+
+  /**
+  * Geocodificia una dirección
+  *
+  * @param address
+  * @return Promise <array>
+  **/
+  geocode(a){
+    var self = this;
+    var iso = getISO();
+    console.log('ISO', iso);
+    var o = [];
+    if(!a){
+      return o;
+    }
+    return new Promise((resolve, reject) => {
+      self.geocoder.geocode(
+        {
+          address: a,
+          componentRestrictions: {
+            country: iso,
+          }
+        }
+      ,function(results, status){
+        if (status !== window.google.maps.GeocoderStatus.OK) {
+          reject(status);
+        }
+        resolve(results);
+      })
+    })
+  }
 
 
 }

@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from '@material-ui/core/Icon';
 import { _t } from '../../vars/countriesDict';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import {
-  geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng,
-} from 'react-places-autocomplete';
+import { getLatLng } from 'react-places-autocomplete';
 
 var slugify = require('slugify');
 const uuidv4 = require('uuid/v4');
@@ -17,10 +13,12 @@ export default class DbInput extends React.Component{
     haschanged: false,
     autoCompleteLoading: false,
     isfocus: false,
-    autocompleteData: []
+    autocompleteData: [],
+    hasloaded: false
   }
   componentDidMount(){
     this.setInitialValue();
+
   }
   setInitialValue(){
     var em = this.props.empresa;
@@ -61,37 +59,68 @@ export default class DbInput extends React.Component{
     })
     setTimeout(function(){
       self.validate();
-      self.setAutoComplete();
+      if(self.state.hasloaded){
+        self.setAutoComplete();
+      }
+      self.setState({
+        hasloaded: true
+      })
     }, 70);
   }
 
   setAutoComplete(){
     if(this.props.matchWith && this.props.matchWith.indexOf('address') > -1){
       this.setAutoCompleteAddress();
+    }else if(this.props.matchWith){
+      this.setAutoCompleteStandard(this.props.matchWith[0]);
     }
   }
 
-  async setAutoCompleteAddress(){
-    if(this.autoCompleteLoading){
-      return;
-    }
+  setAutoCompleteStandard(type){
     this.setState({
       autoCompleteLoading: true,
     })
+    var r = [];
+    var all = window.dbf.searchByType(this.state.value, type);
+    all.map(function(d){
+      var em = {
+        label: d.value,
+        type: 'autocompleted',
+        additionalData: d
+      }
+      r.push(em);
+    })
+    console.log('r', r);
+    this.setState({
+      autocompleteData: r,
+      autoCompleteLoading: false
+    })
+  }
+
+  async setAutoCompleteAddress(){
+    if(this.state.autoCompleteLoading){
+      console.log('wait');
+      return;
+    }
     var a = this.state.value;
     if(a && a.length > 2){
-      var geocode = await geocodeByAddress(a);
+      this.setState({
+        autoCompleteLoading: true,
+      })
       var r = [];
-      if(geocode.length){
-        console.log('geocode', geocode);
-        geocode.map(function(e){
-          var em = {
-            label: e.formatted_address,
-            type: 'autocompleted_address',
-            additionalData: e
-          }
-          r.push(em)
-        })
+      try{
+        var geocode = await window.dbf.geocode(a);
+        if(geocode.length){
+          geocode.map(function(e){
+            var em = {
+              label: e.formatted_address,
+              type: 'autocompleted_address',
+              additionalData: e
+            }
+            r.push(em)
+          })
+        }
+      }catch(err){
       }
       this.setState({
         autocompleteData: r,
@@ -173,7 +202,8 @@ export default class DbInput extends React.Component{
   handleBlur(){
     if(!this.state.hoveringAutocomplete){
       this.setState({
-        isfocus: false
+        isfocus: false,
+        autoCompleteLoading: false,
       })
     }
     if(this.state.haschanged){

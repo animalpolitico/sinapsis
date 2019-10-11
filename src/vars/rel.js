@@ -7,6 +7,7 @@ export const predbs = [
     size: 2,
     slug: 'estafa-maestra',
     last: '2019-10-01',
+    flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/estafa-maestra.csv')
   },
   {
@@ -17,10 +18,11 @@ export const predbs = [
     size: 1,
     slug: 'estafa-maestra',
     last: '2019-10-01',
+    flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/empresas-fantasma-ver.csv')
   },
   {
-    name: 'Privilegios Fiscales (Condonaciones 2007-2015)',
+    name: 'Privilegios Fiscales (2007-2015)',
     country: 'MEX',
     countryLabel: 'México',
     author: 'Fundar',
@@ -28,6 +30,7 @@ export const predbs = [
     size: 4,
     slug: 'estafa-maestra',
     last: '2019-10-01',
+    flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/pf-7-15.csv')
   },
   {
@@ -40,6 +43,7 @@ export const predbs = [
     size: 5,
     slug: 'sat-definitivos',
     last: '2019-09-30',
+    flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/sat-def.csv')
   },
   {
@@ -52,6 +56,7 @@ export const predbs = [
     size: 3,
     slug: 'sat-definitivos',
     last: '2019-09-30',
+    flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/sat-pre.csv')
   }
 ]

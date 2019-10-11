@@ -8,9 +8,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 import DbInput from '../inputs';
-
+import Tooltip from '@material-ui/core/Tooltip';
+import { isMexico } from '../../../vars/countriesDict';
 export default class DbFormGroupInfoGeneral extends React.Component{
   state = {
     open: true
@@ -25,6 +27,19 @@ export default class DbFormGroupInfoGeneral extends React.Component{
           <div className="dbef_n">
             <div className="dbef_n_n">
               Información general
+              {
+                isMexico() ?
+                <div className="dbef_n_tooltip">
+                  <Tooltip
+                    title="Puedes conseguir esta información desde SIGER. Da clic para visitar el sitio"
+                  >
+                    <a href="https://rpc.economia.gob.mx/" target="_blank">
+                      <Icon size="small">help</Icon>
+                    </a>
+                  </Tooltip>
+                </div>
+                : null
+              }
             </div>
             <div className="dbef_n_ctas">
               {
@@ -56,6 +71,7 @@ export default class DbFormGroupInfoGeneral extends React.Component{
               errorLegend="Ya insertaste este folio mercantil"
               empresa={this.props.empresa}
             />
+
             <DbInput
               onChange={(slug, obj) => this.props.parent.insertField(slug, obj)}
               name="Objeto social"
@@ -65,8 +81,15 @@ export default class DbFormGroupInfoGeneral extends React.Component{
             />
             <DbInput
               onChange={(slug, obj) => this.props.parent.insertField(slug, obj)}
+              name="Número de empleados"
+              type="text"
+              empresa={this.props.empresa}
+            />
+            <DbInput
+              onChange={(slug, obj) => this.props.parent.insertField(slug, obj)}
               name="Fecha de creación"
               type="date"
+              matchWith={['date']}
               empresa={this.props.empresa}
             />
             <DbInput

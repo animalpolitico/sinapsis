@@ -254,7 +254,7 @@ function getTypeColor(t){
       return "#ff9900";
     break;
     case "instancia":
-      return "#474747";
+      return "#222";
     break;
     case "contrato":
       return "#885BFA"
@@ -324,18 +324,6 @@ function getTypeName(t){
 }
 
 
-class AnalyticsButton extends React.Component{
-  render(){
-    return(
-      <div id="ss_analytics_trigger" onClick={() => this.props.onClick()}>
-        <div id="ss_analytics_trigger_arrow">
-          <Icon>bar_chart</Icon>
-        </div>
-      </div>
-    )
-  }
-}
-
 class Analytics extends React.Component{
 
   sumTransferencias(){
@@ -382,6 +370,13 @@ class Analytics extends React.Component{
       data.chartData = [];
       data.val = a[key];
 
+      /* Área negativa */
+      var pos = {
+        name: name,
+        value: c - data.val
+      };
+      data.chartData.push(pos);
+
       /* Área positiva */
       var pos = {
         name: name,
@@ -389,15 +384,7 @@ class Analytics extends React.Component{
       };
       data.chartData.push(pos);
 
-      /* Área negativa */
-      var pos = {
-        name: name,
-        value: c - data.val
-      };
-
-      data.pct = Math.round((data.val / c) * 100);
-
-      data.chartData.push(pos);
+      data.pct = Math.round(((c - data.val) / c) * 100);
       o.push(data);
     }
     return o;
@@ -421,7 +408,7 @@ class Analytics extends React.Component{
       return 0;
     })
 
-    data = data.slice(0, 7);
+    data = data.slice(0, 10);
 
     var o = [];
 
@@ -433,7 +420,7 @@ class Analytics extends React.Component{
       };
       o.push(_o);
     })
-    // console.log('o', o);
+    console.log('o', o);
     return o;
   }
 
@@ -466,7 +453,6 @@ class Analytics extends React.Component{
     var firstChartsGroup = this.buildFirstGraphs(buildAnalytics);
     var scatterData = this.getScatterData();
 
-    var scatterDomain = [0, scatterData[0].value];
 
     return(
       <div className="ss_analytics">
@@ -536,7 +522,7 @@ class Analytics extends React.Component{
                       <div className="ss_analytics_chart_binder_info">
                         El <strong>{data.pct}%</strong> no tiene <strong>{data.name}</strong>
                        <br/>
-                       <span>({data.val} de {buildAnalytics.count})</span>
+                       <span>({buildAnalytics.count - data.val} de {buildAnalytics.count})</span>
                       </div>
                     </div>
                   )
@@ -600,24 +586,26 @@ export class Search extends React.Component{
   render(){
     var r = Math.random() * 10000000;
     return(
-      <div className="db_search_nodes">
-        <div className="db_search_nodes_input">
-          <input
-            onFocus={() => this.searchResults(this.state.v)}
-            value={this.state.v}
-            placeholder="Busca por término"
-            type="text"
-            onChange={(e) => this.searchResults(e.target.value) }
-            />
+      <ClickAwayListener onClickAway={() => this.setState({showResults: false})}>
+        <div className="db_search_nodes">
+          <div className="db_search_nodes_input">
+            <input
+              onFocus={() => this.searchResults(this.state.v)}
+              value={this.state.v}
+              placeholder="Busca por término"
+              type="text"
+              onChange={(e) => this.searchResults(e.target.value) }
+              />
+          </div>
+          <div className="db_search_nodes_results">
+            {
+              this.state.showResults ?
+                <SearchResults r={r} nodeMap={this.props.nodesMap} results={this.state.results} v={this.state.v} onSelect={(v) => this.handleResultSelect(v)}/>
+              : null
+            }
+          </div>
         </div>
-        <div className="db_search_nodes_results">
-          {
-            this.state.showResults ?
-              <SearchResults r={r} nodeMap={this.props.nodesMap} results={this.state.results} v={this.state.v} onSelect={(v) => this.handleResultSelect(v)}/>
-            : null
-          }
-        </div>
-      </div>
+      </ClickAwayListener>
     )
   }
 }
@@ -773,6 +761,16 @@ class Nodes extends React.Component{
       self.isolateNode(id);
     })
 
+    window.addEventListener('keydown', function(e){
+      var w = e.which;
+      if(w == 27){
+        self.releaseNode();
+      }
+      if((w == 187 || w == 189) && self.state.isolatingNode){
+        self.addLevel(w == 187 ? 1 : -1);
+      }
+    })
+
   }
 
   numberWithCommas(x) {
@@ -885,7 +883,16 @@ class Nodes extends React.Component{
       data.nodes.map(function(d){
         var t = d.type;
         var labelTypes = ['dependencia', 'instancia', 'titular'];
-        if(labelTypes.indexOf(t) > -1){
+        var istitular = false;
+        if(d.fields && d.fields.length && d.type == "person"){
+            d.fields.map(function(_d){
+              if(_d.matchWith.indexOf('titular') > -1){
+                istitular = true;
+                d.istitular = true;
+              }
+            })
+        }
+        if(labelTypes.indexOf(t) > -1 || istitular){
           labelsData.push(d);
         }else{
           circlesData.push(d);
@@ -940,8 +947,22 @@ class Nodes extends React.Component{
       var rects = nodesLabels
                    .append('rect')
                    .attr('fill', function(d){
-                     return getTypeColor(d.type)
+                     var c = getTypeColor(d.type);
+                     if(d.type == "instancia"){
+                       var counts = {r: 0, e: 0};
+                       d.fields.map(function(_f){
+                         var k = _f.category == "receptor" ? "r" : "e";
+                         counts[k] = counts[k] + 1;
+                       })
+                       if(counts.r > counts.e){
+                         /* Diferencia de emisor/receptor */
+                         d.isreceptor = true;
+                       }
+                     }
+                     return c;
                    })
+                   .attr('stroke-width', 24)
+                   .attr('stroke', d => d.type == "instancia" ? d.isreceptor ? "#FF0054" : "#3372ff" : null)
 
       nodesLabels.append('text')
                  .text((d) => d.name.toUpperCase())
@@ -949,7 +970,7 @@ class Nodes extends React.Component{
                  .attr('font-size', 300)
                  .attr('text-anchor', 'middle')
 
-      var nodesPaddingLeft = 60;
+      var nodesPaddingLeft = 80;
       var nodesPaddingTop = 35;
 
       nodesLabels.each(function(d){
@@ -1757,7 +1778,7 @@ class SSCategoryToggle extends React.Component{
             {
               types.map(function(m){
                 return(
-                  <div className="ss_ctr_ch">
+                  <div className="ss_ctr_ch" data-type={m}>
                     <input
                       checked={self.state.vals.indexOf(m) > -1}
                       onChange={(e) => self.handleChange(e, e.target.value)}
@@ -1767,7 +1788,10 @@ class SSCategoryToggle extends React.Component{
                     />
                     <div className="ss_ctr_ch_tds">
                       <div className="ss_ctr_ch_td">
-                        <div className="ss_ctr_ch_td_ball" style={{backgroundColor: getTypeColor(m)}}></div>
+                        <div className="ss_ctr_ch_td_ball" style={{backgroundColor: getTypeColor(m)}}>
+                          <div className="ss_ctr_ch_td_ball_helper" style={{backgroundColor: getTypeColor(m)}}>
+                          </div>
+                        </div>
                       </div>
                       <div className="ss_ctr_ch_td">{getTypeName(m)}</div>
                     </div>
@@ -1796,8 +1820,12 @@ class SSDoi extends React.Component{
     if(ism){
       cs.push('ss_minimized');
     }
+    var textColor = "#222";
     if(d.type == 'instancia'){
-      tc = "rgb(189, 189, 189)";
+      textColor = d.isreceptor ? "#FF0054" : "#3372ff";
+    }
+    if(d.type == "date" || d.type == "person"){
+      textColor = "#F6F6F6";
     }
     return(
       <div className={cs.join(' ')}>
@@ -1820,7 +1848,7 @@ class SSDoi extends React.Component{
             </div>
           </div>
         </div>
-        <div className="ss_doi_window_type" style={{boxShadow: '0 0 6px -1px ' + tc , backgroundColor: tc}}>
+        <div className="ss_doi_window_type" style={{color: textColor, boxShadow: '0 0 6px -1px ' + tc , backgroundColor: tc}}>
           {getTypeName(d.type)}
         </div>
         <div className="ss_doi_window_name" style={{color: ism ? tc : 'inherit'}}>
@@ -1905,15 +1933,19 @@ class SSTooltip extends React.Component{
     var d = this.props.doi;
     var node = d3.select('.node[data-id="'+d.id+'"]');
     var color = getTypeColor(d.type);
+    var textColor = "#222";
     if(d.type == 'instancia'){
-      color = "rgb(189, 189, 189)";
+      textColor = d.isreceptor ? "#FF0054" : "#3372ff";
+    }
+    if(d.type == "date" || d.type == "person"){
+      textColor = "#F6F6F6";
     }
     return(
       <div
         className="db_viz_tooltip"
         style={{left: coords[0], top: coords[1]}}
       >
-        <div className="db_viz_tooltip_type_name" style={{backgroundColor: color, boxShadow: '0 0 8px -1px ' + color}}>
+        <div className="db_viz_tooltip_type_name" style={{color: textColor, backgroundColor: color, boxShadow: '0 0 8px -1px ' + color}}>
           {getTypeName(d.type)}
         </div>
         <div className="db_viz_tooltip_name">

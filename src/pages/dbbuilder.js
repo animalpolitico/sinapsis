@@ -1207,11 +1207,7 @@ class PreDb extends React.Component{
         </div>
 
         <div className="ss_predb_select_country">
-          <Flag
-            name={p.country}
-            format="svg"
-            basePath={buildLink('/img/flags')}
-          />
+          <img src={p.flag} />
           <span>{p.countryLabel}</span>
         </div>
         <div className="ss_predb_select_maxtime">

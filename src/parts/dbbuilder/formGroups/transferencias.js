@@ -11,6 +11,8 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import DbInput from '../inputs';
 import TransactionRow from '../transaction';
+import Tooltip from '@material-ui/core/Tooltip';
+import { isMexico } from '../../../vars/countriesDict';
 
 const uuidv4 = require('uuid/v4');
 var slugify = require('slugify');
@@ -141,6 +143,19 @@ export default class DbFormGroupTransferencias extends React.Component{
           <div className="dbef_n">
             <div className="dbef_n_n">
               Transferencias <span className="dbef_n_n_badge">{transferencias.length}</span>
+              {
+                isMexico() ?
+                <div className="dbef_n_tooltip">
+                  <Tooltip
+                    title="Puedes conseguir esta información desde la ASF. Da clic para visitar el sitio"
+                  >
+                    <a href="https://www.asf.gob.mx/Default/Index" target="_blank">
+                      <Icon size="small">help</Icon>
+                    </a>
+                  </Tooltip>
+                </div>
+                : null
+              }
             </div>
             <div className="dbef_n_ctas">
               <div className="dbef_n_ctas_c" onClick={() => this.open()}>Añadir</div>
@@ -256,7 +271,7 @@ export default class DbFormGroupTransferencias extends React.Component{
             <Button color="secondary" onClick={() => this.close()}>
               Cancelar
             </Button>
-            <Button disabled={!this.state.modalChanged} color="secondary" onClick={() => this.add()}>
+            <Button  color="secondary" onClick={() => this.add()}>
               {addL}
             </Button>
           </DialogActions>

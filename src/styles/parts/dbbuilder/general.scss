@@ -74,12 +74,10 @@ body.ss_show_sidebar{
 }
 
 .ss_modal_dbpre{
-
   .ss_predb{
     &_select{
       width: 100%;
       position: relative;
-      margin: 0.5rem 0;
       cursor: pointer;
       &:hover{
         .ss_predb_select_info{
@@ -104,44 +102,59 @@ body.ss_show_sidebar{
       &_info{
         width: 100%;
         box-sizing: border-box;
-        padding: 0.7rem 0.5rem;
+        padding: 0.4rem 0.5rem 0.6rem;
         color: white;
-        border-bottom: 2px solid #0072ff;
         position: relative;
-
+        &::after{
+          content: '';
+          display: block;
+          width: 60%;
+          height: 2px;
+          background: rgba(white, 0.1);
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
       }
       &_name{
         width: 100%;
         font-size: 1.1rem;
-        font-weight: 600;
+        font-weight: 400;
       }
       &_author{
-        font-size: 0.7rem;
+        font-size: 0.6rem;
         text-transform: uppercase;
-        margin-top: 0.25rem;
+        margin-top: 0.15rem;
+        &::before{
+          content: '/';
+          display: inline-block;
+          margin-right: 0.15rem;
+          color: $main;
+          font-weight: bolder;
+        }
       }
       &_country{
         @extend .flex;
         align-items: center;
-        margin-top: 0.25rem;
+        margin-top: 0.2rem;
         img{
-          width: 15px;
+          width: 10px;
           line-height: 1;
           height: 0%!important;
         }
         span{
-          font-size: 0.7rem;
+          font-size: 0.6rem;
           font-weight: 600;
           text-transform: uppercase;
           display: block;
           box-sizing: border-box;
           padding-left: 0.25rem;
-          transform: translateY(0.1rem);
+          transform: translateY(0);
         }
       }
       &_maxtime{
-        color: #f4f4f4;
-        font-size: 0.8rem;
+        color: #ccc;
+        font-size: 0.7rem;
         margin-top: 0.5rem;
       }
       &_alert{

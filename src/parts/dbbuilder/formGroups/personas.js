@@ -286,7 +286,7 @@ export default class DbFormGroupPersonas extends React.Component{
             <Button color="secondary" onClick={() => this.close()}>
               Cancelar
             </Button>
-            <Button disabled={!this.state.modalChanged} color="secondary" onClick={() => this.add()}>
+            <Button  color="secondary" onClick={() => this.add()}>
               {addL}
             </Button>
           </DialogActions>

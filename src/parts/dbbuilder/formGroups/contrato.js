@@ -11,6 +11,8 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import DbInput from '../inputs';
 import TransactionRow from '../transaction';
+import Tooltip from '@material-ui/core/Tooltip';
+import { isMexico } from '../../../vars/countriesDict';
 const uuidv4 = require('uuid/v4');
 var slugify = require('slugify');
 
@@ -132,6 +134,19 @@ export default class DbFormGroupContrato extends React.Component{
           <div className="dbef_n">
             <div className="dbef_n_n">
               Contratos <span className="dbef_n_n_badge">{contratos.length}</span>
+              {
+                isMexico() ?
+                <div className="dbef_n_tooltip">
+                  <Tooltip
+                    title="Puedes conseguir esta información desde CompraNet. Da clic para visitar el sitio"
+                  >
+                    <a href="https://compranet.hacienda.gob.mx/web/login.html" target="_blank">
+                      <Icon size="small">help</Icon>
+                    </a>
+                  </Tooltip>
+                </div>
+                : null
+              }
             </div>
             <div className="dbef_n_ctas">
               <div className="dbef_n_ctas_c" onClick={() => this.open()}>Añadir</div>
@@ -176,7 +191,7 @@ export default class DbFormGroupContrato extends React.Component{
                   <>
                     <DbInput
                       onChange={(slug, obj) => this.insertField(slug, obj)}
-                      matchWith={['person', 'empresa', 'instancia']}
+                      matchWith={['empresa', 'instancia']}
                       name="¿Quién otorga los recursos?"
                       type="text"
                       category="emisor"
@@ -188,7 +203,7 @@ export default class DbFormGroupContrato extends React.Component{
                     <DbInput
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       name="Número de contrato"
-                      matchWith={['contrato']}
+                      matchWith={['convenio']}
                       type="text"
                       group="contrato"
                       empresa={this.props.empresa}
@@ -199,6 +214,7 @@ export default class DbFormGroupContrato extends React.Component{
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       name="Fecha de inicio"
                       type="date"
+                      matchWith={['date']}
                       group="contrato"
                       empresa={this.props.empresa}
                       db={this.props.parent.props.db}
@@ -208,6 +224,7 @@ export default class DbFormGroupContrato extends React.Component{
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       name="Fecha de término"
                       type="text"
+                      matchWith={['date']}
                       group="contrato"
                       empresa={this.props.empresa}
                       db={this.props.parent.props.db}
@@ -269,7 +286,7 @@ export default class DbFormGroupContrato extends React.Component{
             <Button color="secondary" onClick={() => this.close()}>
               Cancelar
             </Button>
-            <Button disabled={!this.state.modalChanged} color="secondary" onClick={() => this.add()}>
+            <Button color="secondary" onClick={() => this.add()}>
               {addL}
             </Button>
           </DialogActions>

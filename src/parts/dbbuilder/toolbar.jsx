@@ -5,8 +5,7 @@ import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import 'moment/locale/es';
-import Flag from "react-flags";
-import { countries } from "../../vars/countriesDict";
+import { countries, getFlag } from "../../vars/countriesDict";
 import buildLink from "../../funcs/buildlink";
 import Popper from '@material-ui/core/Popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -142,11 +141,7 @@ export default class DbBuilderToolbar extends React.Component{
             </Fab>
             <div className="ss_db_ctas_custom ss_db_ctas_custom_lang">
               <div onClick={(e) => this.intentLangChange(e)}>
-                <Flag
-                  name={this.state.lang}
-                  format="svg"
-                  basePath={buildLink('/img/flags')}
-                />
+                <img src={getFlag()} />
               <Popper id="ss_popper_lang" open={this.state.openPopper} anchorEl={this.state.anchor}>
                   <ClickAwayListener onClickAway={() => this.setState({openPopper: false})}>
                   <div className="ss_popper_container">
@@ -158,11 +153,7 @@ export default class DbBuilderToolbar extends React.Component{
                         }
                         return(
                           <div className={cs.join(' ')} onClick={() => self.setLang(m.code)}>
-                            <Flag
-                              name={m.code}
-                              format="svg"
-                              basePath={buildLink('/img/flags')}
-                            />
+                            <img src={m.img} />
                             <div>{m.name}</div>
                           </div>
                         )

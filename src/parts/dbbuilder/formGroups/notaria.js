@@ -27,7 +27,7 @@ export default class DbFormGroupNotaria extends React.Component{
           <div className="db_empresa_container_group_form">
             <DbInput
               onChange={(slug, obj) => this.props.parent.insertField(slug, obj)}
-              matchWith={['notario', 'person']}
+              matchWith={['person']}
               name="Nombre del notario"
               type="text"
               group="Notaría"

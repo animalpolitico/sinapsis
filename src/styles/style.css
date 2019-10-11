@@ -15,7 +15,7 @@
   top: 50%;
   transform: translateY(-50%); }
 
-.cxy, .ss_dbbuilder_sidebar_collapse .material-icons, #ssdb_loader_c, .ss_db_view_empresas .ss_db_ve_c_nocontent_icon .material-icons, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_td .material-icons, #ss_analytics_trigger_arrow .material-icons, #ap_logo_container img {
+.cxy, .ss_dbbuilder_sidebar_collapse .material-icons, #ssdb_loader_c, .ss_db_view_empresas .ss_db_ve_c_nocontent_icon .material-icons, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_td .material-icons, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch[data-type="instancia"] .ss_ctr_ch_td_ball_helper, #ss_analytics_trigger_arrow .material-icons, #ap_logo_container img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -187,7 +187,6 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
 .ss_modal_dbpre .ss_predb_select {
   width: 100%;
   position: relative;
-  margin: 0.5rem 0;
   cursor: pointer; }
   .ss_modal_dbpre .ss_predb_select:hover .ss_predb_select_info {
     background: rgba(255, 255, 255, 0.05); }
@@ -205,36 +204,50 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   .ss_modal_dbpre .ss_predb_select_info {
     width: 100%;
     box-sizing: border-box;
-    padding: 0.7rem 0.5rem;
+    padding: 0.4rem 0.5rem 0.6rem;
     color: white;
-    border-bottom: 2px solid #0072ff;
     position: relative; }
+    .ss_modal_dbpre .ss_predb_select_info::after {
+      content: '';
+      display: block;
+      width: 60%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      position: absolute;
+      bottom: 0;
+      left: 0; }
   .ss_modal_dbpre .ss_predb_select_name {
     width: 100%;
     font-size: 1.1rem;
-    font-weight: 600; }
+    font-weight: 400; }
   .ss_modal_dbpre .ss_predb_select_author {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     text-transform: uppercase;
-    margin-top: 0.25rem; }
+    margin-top: 0.15rem; }
+    .ss_modal_dbpre .ss_predb_select_author::before {
+      content: '/';
+      display: inline-block;
+      margin-right: 0.15rem;
+      color: #3372ff;
+      font-weight: bolder; }
   .ss_modal_dbpre .ss_predb_select_country {
     align-items: center;
-    margin-top: 0.25rem; }
+    margin-top: 0.2rem; }
     .ss_modal_dbpre .ss_predb_select_country img {
-      width: 15px;
+      width: 10px;
       line-height: 1;
       height: 0% !important; }
     .ss_modal_dbpre .ss_predb_select_country span {
-      font-size: 0.7rem;
+      font-size: 0.6rem;
       font-weight: 600;
       text-transform: uppercase;
       display: block;
       box-sizing: border-box;
       padding-left: 0.25rem;
-      transform: translateY(0.1rem); }
+      transform: translateY(0); }
   .ss_modal_dbpre .ss_predb_select_maxtime {
-    color: #f4f4f4;
-    font-size: 0.8rem;
+    color: #ccc;
+    font-size: 0.7rem;
     margin-top: 0.5rem; }
   .ss_modal_dbpre .ss_predb_select_alert {
     margin-top: 0.25rem;
@@ -726,10 +739,19 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
     padding: 0 1rem 8rem; }
     .db_empresa_edit .db_empresa_container_form .dbef_n {
       width: 100%;
-      color: white; }
+      color: white;
+      flex-shrink: 0;
+      align-items: baseline; }
       .db_empresa_edit .db_empresa_container_form .dbef_n_n {
         font-weight: 600;
         align-items: center; }
+        .db_empresa_edit .db_empresa_container_form .dbef_n_n .dbef_n_tooltip {
+          margin-left: 8px;
+          transform: translateY(2px); }
+          .db_empresa_edit .db_empresa_container_form .dbef_n_n .dbef_n_tooltip .material-icons {
+            font-size: 0.9rem;
+            line-height: 1;
+            color: #3372ff; }
         .db_empresa_edit .db_empresa_container_form .dbef_n_n .dbef_n_n_badge {
           font-size: 0.5rem;
           margin-left: 0.5rem;
@@ -741,12 +763,14 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       .db_empresa_edit .db_empresa_container_form .dbef_n_ctas {
         flex: 1;
         justify-content: flex-end;
-        padding-right: 1rem; }
+        padding-right: 1rem;
+        align-items: center; }
         .db_empresa_edit .db_empresa_container_form .dbef_n_ctas_c {
           font-size: 0.8rem;
           background: #444;
           padding: 0.25rem 0.35rem;
           cursor: pointer;
+          max-height: 20px;
           transition: all 0.25s ease; }
           .db_empresa_edit .db_empresa_container_form .dbef_n_ctas_c:hover {
             background: #004fff; }
@@ -1695,12 +1719,44 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
           font-weight: 600;
           align-items: center; }
         .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_td_ball {
-          width: 10px;
-          height: 10px;
+          width: 12px;
+          height: 12px;
           border-radius: 50%;
-          margin-right: 5px; }
+          margin-right: 5px;
+          position: relative; }
         .ss_control_group .ss_control_group_container_switches .ss_ctr_ch input:not(:checked) ~ .ss_ctr_ch_tds {
           opacity: 0.2; }
+        .ss_control_group .ss_control_group_container_switches .ss_ctr_ch[data-type="instancia"] .ss_ctr_ch_td_ball {
+          box-sizing: border-box;
+          overflow: hidden;
+          transform: rotate(45deg);
+          position: relative; }
+          .ss_control_group .ss_control_group_container_switches .ss_ctr_ch[data-type="instancia"] .ss_ctr_ch_td_ball_helper {
+            width: 75%;
+            height: 75%;
+            z-index: 4;
+            border-radius: 50%; }
+          .ss_control_group .ss_control_group_container_switches .ss_ctr_ch[data-type="instancia"] .ss_ctr_ch_td_ball::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #FF0054;
+            box-sizing: border-box; }
+          .ss_control_group .ss_control_group_container_switches .ss_ctr_ch[data-type="instancia"] .ss_ctr_ch_td_ball::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 50%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            box-sizing: border-box;
+            background: #3372ff;
+            z-index: 2; }
     .ss_control_group .ss_control_group_container_switch {
       width: 100%;
       align-items: center;
@@ -1942,7 +1998,7 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
   border-radius: 0 !important;
   box-shadow: none !important; }
 
-.MuiDialogContent-root {
+.ss_modal_edit .MuiDialogContent-root {
   overflow: initial !important; }
 
 @media (max-width: 1040px) {

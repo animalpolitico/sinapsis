@@ -123,10 +123,21 @@
         width: 100%;
         @extend .flex;
         color: white;
+        flex-shrink: 0;
+        align-items: baseline;
         &_n{
           font-weight: 600;
           @extend .flex;
           align-items: center;
+          .dbef_n_tooltip{
+            margin-left: 8px;
+            transform: translateY(2px);
+            .material-icons{
+              font-size: 0.9rem;
+              line-height: 1;
+              color: $main;
+            }
+          }
           .dbef_n_n_badge{
             font-size: 0.5rem;
             margin-left: 0.5rem;
@@ -142,11 +153,13 @@
           @extend .flex;
           justify-content: flex-end;
           padding-right: 1rem;
+          align-items: center;
           &_c{
             font-size: 0.8rem;
             background: #444;
             padding: 0.25rem 0.35rem;
             cursor: pointer;
+            max-height: 20px;
             transition: all 0.25s ease;
             &:hover{
               background: darken($main, 10%);
