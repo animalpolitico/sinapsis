@@ -17,6 +17,7 @@
     "mapbox-gl": "^1.4.1",
     "moment": "^2.24.0",
     "number-to-letter": "^1.0.1",
+    "particles.js": "^2.0.0",
     "react": "^16.9.0",
     "react-count-to": "^0.12.0",
     "react-dates": "^20.3.0",

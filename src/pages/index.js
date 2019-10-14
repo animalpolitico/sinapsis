@@ -2,6 +2,7 @@ import React from 'react'
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import { Link } from "react-router-dom";
+import Particles from '../parts/general/particles';
 import * as d3 from "d3";
 
 export default class Index extends React.Component{
@@ -9,6 +10,7 @@ export default class Index extends React.Component{
     return(
       <div id="ss_sinapsis_home">
         <Landing />
+        <Particles />
       </div>
     )
   }

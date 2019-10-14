@@ -1555,10 +1555,9 @@ class Nodes extends React.Component{
 
 
     /* PNG */
-    var d_svg = this.canvas;
-    var bbox = d_svg.node().getBBox();
-    var width = bbox.width * 2;
-    var height = bbox.height * 2;
+    var d_svg = document.getElementById('db_viz_nodes_canvas').getBoundingClientRect();
+    var width = d_svg.width * 2;
+    var height = d_svg.height * 2;
 
     var logoW = width;
     var logoH = 70;
@@ -1860,7 +1859,7 @@ class SSCategoryToggle extends React.Component{
       <div className="ss_control_node_filter ss_control_group">
         <div className="ss_control_group_container">
           <div className="ss_control_group_container_title" style={{cursor: "pointer"}} onClick={() => this.setState({showing: !this.state.showing})}>
-            <div>Filtrar</div><Icon>{this.state.showing ? "expand_more" : "expand_less"}</Icon>
+            <div>Mostrar</div><Icon>{this.state.showing ? "expand_more" : "expand_less"}</Icon>
           </div>
           {
             this.state.showing ?
