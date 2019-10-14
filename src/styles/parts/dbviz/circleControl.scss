@@ -45,6 +45,30 @@
   }
   &.ss_control_node_filter{
     width: 100%;
+    .ss_ctr_br{
+      width: 100%;
+      @extend .flex;
+      box-sizing: border-box;
+      padding-top: 0.5rem;
+      margin-top: 0.5rem;
+      border-top: 1px solid rgba(white, 0.1);
+      box-sizing: border-box;
+      padding: 0.5rem 0.5rem 0;
+      cursor: pointer;
+      .material-icons{
+        color: red;
+        line-height: 1;
+        font-size: 0.75rem;
+        margin-right: 0.25rem;
+      }
+      div{
+        font-size: 0.7rem;
+        line-height: 1.1;
+        font-weight: 600;
+        color: white;
+      }
+    }
+
   }
   .ss_control_group_container{
     width: 100%;

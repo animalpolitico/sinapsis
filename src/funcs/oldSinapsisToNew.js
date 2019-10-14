@@ -365,6 +365,25 @@ export default class ConvertOldToDb{
         }
     })
 
+    /** Banderas Rojas**/
+    var range = [35, 36];
+    var _fields = this.groupByRange(fields, range);
+    var bs = [];
+    _fields.map(function(ob){
+      var i = Object.values(ob);
+      i.map(function(_b){
+        if(_b){
+          bs.push(_b);
+        }
+      })
+    })
+    var bsn = "Banderas rojas";
+    f['banderas-rojas'] = {
+      slug: 'banderas-rojas',
+      bs: bs
+    }
+    
+
 
     /** Contratos **/
     var range = [37, 45];

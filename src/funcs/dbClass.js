@@ -30,6 +30,7 @@ export default class DbFactory {
     this.manualSaves = 0;
     this.originalData = [];
     this.omitDbs = [];
+    this.onlyBS = false;
     this.geocoder = new window.google.maps.Geocoder();
   }
 
@@ -141,6 +142,8 @@ export default class DbFactory {
     var omitDbs = this.omitDbs;
     var categories = this.categories;
 
+    var onlyBS = this.onlyBS;
+
     for(key in db){
       if(omitDbs.indexOf(key) == -1){
         filterDb[key] = db[key];
@@ -166,7 +169,8 @@ export default class DbFactory {
             empresauid: empresa.uid,
             type: 'empresa',
             sum: self.getEmpresaSum(empresa),
-            matchWith: ['empresa']
+            matchWith: ['empresa'],
+            banderasRojas: self.getBanderasRojas(empresa.uid, _db.id)
           };
           dbfields = [...dbfields, eField];
           var fields = self.getEmpresaMatchableFields(_db.id, empresa.uid);
@@ -199,6 +203,9 @@ export default class DbFactory {
         if(f.sum){
           nodes[slug].sum = f.sum;
         }
+        if(f.banderasRojas){
+          nodes[slug].banderasRojas = f.banderasRojas;
+        }
       }
       nodes[slug].fields.push(f);
     })
@@ -209,9 +216,11 @@ export default class DbFactory {
     for(var key in nodes){
       var n = nodes[key];
       if(n.type == "empresa"){
-        if(onlyinall){
+        if(onlyBS && n.banderasRojas.length > 0){
+          fnodes[key] = n;
+        }else if(!onlyBS){
+          fnodes[key] = n;
         }
-        fnodes[key] = n;
       }else{
         var diff = [];
         var dbsin = [];
@@ -236,6 +245,7 @@ export default class DbFactory {
           _add = true;
         }
         var add = _add;
+
         if(diff.length > 1 && add){
           fnodes[key] = n;
         }
@@ -672,6 +682,26 @@ export default class DbFactory {
       return g.ismain ? true : false;
     });
     return f[0];
+  }
+
+  /**
+  * Obtiene las banderas rojas de la empresa
+  *
+  * @param euid
+  * @param dbid
+  * @return array
+  **/
+  getBanderasRojas(euid, dbuid){
+    var o = [];
+    var e = this.getEmpresa(dbuid, euid);
+    if(!e.fields){
+      return o;
+    }
+    if(e.fields['banderas-rojas'] && e.fields['banderas-rojas'].bs){
+      return e.fields['banderas-rojas'].bs;
+    }else{
+      return o;
+    }
   }
 
   /**

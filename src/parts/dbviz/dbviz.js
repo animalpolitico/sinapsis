@@ -433,7 +433,6 @@ class Analytics extends React.Component{
       };
       o.push(_o);
     })
-    console.log('o', o);
     return o;
   }
 
@@ -1048,8 +1047,22 @@ class Nodes extends React.Component{
                           }
                         })
                         .attr('id', (d, i) => 'node_'+i)
-                        .attr('stroke', '#0a0a0a')
-                        .attr('stroke-width', '4px')
+                        .attr('stroke', function(d){
+                          var c = "#0a0a0a";
+                          if(d.type == "empresa"){
+                            var bs = d.banderasRojas;
+                            var hbs = bs.length > 0;
+                            d.hasBanderasRojas = hbs;
+                            d.bs = bs;
+                            if(hbs){
+                              return "red";
+                            }
+                          }
+                          return c;
+                        })
+                        .attr('stroke-width', function(d){
+                          return d.hasBanderasRojas ? '40px' : '4px';
+                        })
                         .attr('data-type', (d) => d.type)
                         .attr('fill', function(d){
                           var t = d.type;
@@ -1770,6 +1783,7 @@ class SSNodeCoincidencias extends React.Component{
 class SSCategoryToggle extends React.Component{
   state = {
     showing: true,
+    bs: false,
     vals: [
       "rfc",
       "website",
@@ -1809,6 +1823,15 @@ class SSCategoryToggle extends React.Component{
     this.setState({
       vals: vals
     })
+  }
+
+  toggleBS(){
+    var ns = !this.state.bs
+    this.setState({
+      bs: ns
+    })
+    window.dbf.onlyBS = ns;
+    this.props.nodesMap.set();
   }
 
   majorChange(type){
@@ -1897,6 +1920,18 @@ class SSCategoryToggle extends React.Component{
                   </div>
                 )
               })
+            }
+          </div>
+          <div className="ss_ctr_br" onClick={() => this.toggleBS()}>
+            {
+              !this.state.bs ?
+              <>
+              <Icon style={{color: "red"}}>flag</Icon><div>Mostrar solo con banderas rojas</div>
+              </>
+              :
+              <>
+              <Icon style={{color: "#f6f6f6"}}>flag_outline</Icon><div>Mostrar todas</div>
+              </>
             }
           </div>
           </>
@@ -2051,6 +2086,13 @@ class SSTooltip extends React.Component{
         <div className="db_viz_tooltip_name">
           {d.name ? d.name : '(Sin información)'}
         </div>
+        {
+          d.hasBanderasRojas ?
+          <div className="db_viz_tooltip_info">
+            <Icon style={{color: "red"}}>flag</Icon> <div>Esta empresa tiene banderas rojas.</div>
+          </div>
+          : null
+        }
         <div className="db_viz_tooltip_links">
           Cantidad de coincidencias: <strong>{node.attr('data-coincidencias')}</strong>
         </div>
@@ -2061,6 +2103,8 @@ class SSTooltip extends React.Component{
           </div>
           : null
         }
+
+
 
         {
           d.type == "empresa" ?
