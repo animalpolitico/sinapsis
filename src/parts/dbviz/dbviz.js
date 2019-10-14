@@ -4,6 +4,7 @@ import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from 'tooltip.js';
+import { saveAs } from 'file-saver';
 import Paper from '@material-ui/core/Paper';
 import formatMoney from 'format-money';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -30,6 +31,7 @@ import {
 var slugify = require('slugify');
 var startLoad = new Event('sinapsisStartLoad');
 var endLoad = new Event('sinapsisEndLoad');
+var JSZip = require("jszip");
 
 
 
@@ -86,6 +88,9 @@ export default class DbViz extends React.Component{
           <div className="project_buttons_button" onClick={() => this.toggleMap()}>
             <Icon>map</Icon>
             <div>Ver mapa</div>
+          </div>
+          <div className="project_buttons_button" onClick={() => this.nodes.getScreenshot()}>
+            <Icon style={{marginRight: 0}}>photo_library</Icon>
           </div>
         </div>
           {
@@ -990,6 +995,7 @@ class Nodes extends React.Component{
       nodesLabels.append('text')
                  .text((d) => d.name.toUpperCase())
                  .attr('fill', 'white')
+                 .attr('font-family', 'benton-sans, sans-serif')
                  .attr('font-size', 300)
                  .attr('text-anchor', 'middle')
 
@@ -1538,6 +1544,61 @@ class Nodes extends React.Component{
 
   }
 
+  getScreenshot(){
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
+    var zip = new JSZip();
+
+    /* SVG */
+    var s = new XMLSerializer().serializeToString(document.getElementById("db_viz_nodes_canvas"));
+    var b64 = 'data:image/svg+xml;base64,'+ btoa( unescape( encodeURIComponent(s)));
+    zip.file('sinapsisMapaDeNodos.svg', s);
+
+
+    /* PNG */
+    var d_svg = this.canvas;
+    var bbox = d_svg.node().getBBox();
+    var width = bbox.width * 2;
+    var height = bbox.height * 2;
+
+    var logoW = width;
+    var logoH = 70;
+
+    var logoRealWidth = logoH / 0.274;
+
+    var canvas = document.createElement("canvas");
+    var context = canvas.getContext("2d");
+    canvas.width = width;
+    canvas.height = height + logoH;
+
+    var image = new Image();
+    image.src = b64;
+    image.onload = function(){
+      context.drawImage(image, 0, 0, width, height);
+      canvas.toBlob(function(blob){
+        zip.file('sinapsisMapaDeNodos.png', blob);
+        context.fillStyle = "#222222";
+        context.fillRect(0, 0, width, height + logoH);
+        context.drawImage(image, 0, 0, width, height);
+        var logo = new Image();
+        logo.src = require('../../static/logo.png');
+        logo.onload = function(){
+          context.drawImage(logo, 20, height - 10, logoRealWidth, logoH);
+          canvas.toBlob(function(blob){
+            zip.file('sinapsisMapaDeNodos.jpg', blob);
+            zip.generateAsync({type: "blob"})
+               .then(function(content) {
+                  var n = 'Imágenes Sinapsis ' + window.dbf.obj.info.name;
+                  var sn = slugify(n, {lower: true});
+                  saveAs(content, sn + ".zip");
+                  var ev = new Event('sinapsisEndLoad');
+                  window.dispatchEvent(ev);
+                });
+          })
+        }
+      })
+    }
+  }
+
   render(){
     return(
       <div className="db_viz_nodes" ref={(ref) => this.container = ref}>
@@ -1563,7 +1624,6 @@ class Nodes extends React.Component{
             <strong>{this.numberWithCommas(this.state.coincidencias)}</strong> coincidencia{this.state.coincidencias === 1 ? '' : 's'}
           </div>
         </div>
-
         <svg id="db_viz_nodes_canvas" ref={(ref) => this.canvasSvg = ref}>
 
         </svg>

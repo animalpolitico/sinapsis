@@ -32,6 +32,12 @@ const theme = createMuiTheme({
 
 
 export default class App extends React.Component{
+  state = {
+    haserror: false
+  }
+
+  componentDidCatch(error, info){
+  }
 
   render(){
     return(

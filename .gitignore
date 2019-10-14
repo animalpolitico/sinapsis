@@ -6,6 +6,7 @@
 .pnp.js
 /src/img
 /public/img
+/public/flags
 
 # testing
 /coverage
