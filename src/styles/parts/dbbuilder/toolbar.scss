@@ -3,6 +3,31 @@
   position: fixed;
   z-index: 99;
   top: 0;
+  #ss_db_save{
+    @extend .flex;
+    align-items: center;
+    background: darken($main, 5%);
+    box-sizing: border-box;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    margin-right: 0.25rem;
+    box-shadow: 0 0 4px rgba($main, 0.9);
+    &:hover{
+      background: darken($main, 10%);
+    }
+    .material-icons{
+      font-size: 18px;
+      line-height: 1;
+      color: white;
+      margin-right: 0.2rem;
+    }
+    div{
+      color: white;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+  }
   &_info{
     width: 100%;
     box-sizing: border-box;

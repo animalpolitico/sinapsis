@@ -48,6 +48,9 @@ export default class DbInput extends React.Component{
   componentDidUpdate(op, os){
     if(this.props.empresa.uid !== op.empresa.uid){
       this.setInitialValue();
+      this.setState({
+        hasloaded: false
+      })
     }
   }
 
@@ -71,7 +74,7 @@ export default class DbInput extends React.Component{
   setAutoComplete(){
     if(this.props.matchWith && this.props.matchWith.indexOf('address') > -1){
       this.setAutoCompleteAddress();
-    }else if(this.props.matchWith){
+    }else if(this.props.matchWith && this.props.matchWith.length){
       this.setAutoCompleteStandard(this.props.matchWith[0]);
     }
   }
@@ -90,7 +93,6 @@ export default class DbInput extends React.Component{
       }
       r.push(em);
     })
-    console.log('r', r);
     this.setState({
       autocompleteData: r,
       autoCompleteLoading: false
@@ -142,8 +144,10 @@ export default class DbInput extends React.Component{
   }
 
   handleFocus(){
+    document.body.classList.add('ss_focusing_input');
     this.setState({
-      isfocus: true
+      isfocus: true,
+      hasloaded: true
     })
   }
 
@@ -205,6 +209,7 @@ export default class DbInput extends React.Component{
         isfocus: false,
         autoCompleteLoading: false,
       })
+      document.body.classList.remove('ss_focusing_input');
     }
     if(this.state.haschanged){
       this.saveLocalChanges();
@@ -302,7 +307,6 @@ export default class DbInput extends React.Component{
     })
     var label = d.label;
     this.setValue(label);
-    console.log('D', d);
 
     if(d.type == "autocompleted_address"){
       this.setState({
@@ -393,9 +397,53 @@ DbInput.defaultProps = {
 
 
 class InputAutocomplete extends React.Component{
+  state = {
+    currentIndex: -1
+  }
+
+  componentDidUpdate(ep){
+    if(ep.data.length !== this.props.data.length){
+      this.setState({
+        currentIndex: -1
+      })
+    }
+  }
+
+  componentDidMount(){
+    var self = this;
+    window.addEventListener('keydown', function(e){
+      var w = e.which;
+      var ems = self.props.data;
+      var max = ems.length;
+      if(w == 40 || w == 38){
+        var i = w == 40 ? 1 : -1;
+        var c = self.state.currentIndex + i;
+            c = Math.max(0, c);
+            c = Math.min(c, max);
+        self.setState({
+          currentIndex: c
+        })
+
+        try{
+          var tid = document.getElementById('autocomplete_'+c);
+          var st = tid.offsetTop;
+          self.results.scrollTop = st - 10;
+        }catch(ex){
+          
+        }
+
+
+      }
+      if(w == 13 && self.state.currentIndex > -1){
+        var em = ems[self.state.currentIndex];
+        self.props.onSelect(em);
+      }
+    })
+  }
   render(){
     var d = this.props.data;
     var self = this;
+    this.r = [];
     return(
       <div className="ss_input_autocomplete">
         <div className="ss_input_autocomplete_loader">
@@ -405,9 +453,9 @@ class InputAutocomplete extends React.Component{
           : null
         }
         </div>
-        <div className="ss_input_autocomplete_results">
-          {d.map(function(_d){
-            return <InputAutocompleteRow d={_d} onSelect={(d) => self.props.onSelect(d)}/>
+        <div className="ss_input_autocomplete_results" ref={(ref) => this.results = ref}>
+          {d.map(function(_d, i){
+            return <InputAutocompleteRow d={_d} index={i} key={i} ref={(ref) => self.r.push(ref)} selected={i == self.state.currentIndex} onSelect={(d) => self.props.onSelect(d)}/>
           })}
         </div>
       </div>
@@ -421,8 +469,12 @@ class InputAutocompleteRow extends React.Component{
   }
   render(){
     var d = this.props.d;
+    var cs = ["ss_input_autocomplete_row"];
+    if(this.props.selected){
+      cs.push('ss_selected');
+    }
     return(
-      <div className="ss_input_autocomplete_row" onClick={() => this.select(d)}>
+      <div className={cs.join(' ')} id={"autocomplete_"+this.props.index} onClick={() => this.select(d)}>
         {d.label}
       </div>
     )

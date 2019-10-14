@@ -3,12 +3,13 @@
   height: 100%;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   z-index: 2;
   background: darken($blue, 5%);
   border-left: 2px solid beige;
   box-sizing: border-box;
   transform: translateX(100%);
+  min-width: 426px;
   .db_empresa_edit_close{
     position: absolute;
     top: 0;
@@ -346,7 +347,7 @@
     font-size: 0.8rem;
     position: relative;
     cursor: pointer;
-    &:hover{
+    &:hover, &.ss_selected{
       background: rgba(white, 0.1);
     }
     &::after{

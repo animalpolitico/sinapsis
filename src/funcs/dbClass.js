@@ -373,7 +373,7 @@ export default class DbFactory {
     var all = this.getByType(t);
     var o = [];
     var control = [];
-    if(!v){
+    if(!v || typeof v !== "string"){
       return o;
     }
     var sv = v.replace(/[.\s]/g, '');
@@ -709,6 +709,10 @@ export default class DbFactory {
   * @return Blob
   **/
   createProjectFile(){
+
+    var ev = new Event('sinapsisStartLoad');
+    window.dispatchEvent(ev);
+
     var d = this.obj;
     d.savedAt = moment.now();
     d.saves = d.saves + 1;
@@ -718,12 +722,39 @@ export default class DbFactory {
     var kbsize = txt.length * 0.000125;
     var name = d.info.slug + '_v'+ d.version + '_b_' + d.saves;
     var zip = new JSZip();
+    zip.file('leeme.txt', this.getReadMeText(name), {binar: true});
     zip.file(name + '.sinapsis', txt, {binary: true});
-    zip.file(name + '_dev.json', s, {binary: true});
+    zip.file('dev/'+ name + '_dev.json', s, {binary: true});
     zip.generateAsync({type: "blob"})
     .then(function(content) {
         saveAs(content, name + ".zip");
+        var ev = new Event('sinapsisEndLoad');
+        window.dispatchEvent(ev);
     });
+  }
+
+  /**
+  * Obtiene el ReadMe
+  *
+  * @param void
+  * @return string
+  **/
+  getReadMeText(filename){
+    var rows = [
+      'SINAPSIS >> Herramienta para encontrar conexiones entre empresas.',
+      '---Animal Político, 2019--',
+      '',
+      '',
+      'PROYECTO: '+this.obj.info.name,
+      '',
+      '¡Hola! Muchas gracias por utilizar Sinapsis. El archivo .zip que acabas de abrir contiene diversos materiales de tu proyecto:',
+      '·' + filename +'.sinapsis - Contiene el archivo de tu proyecto, este es el archivo que podrás cargar en la plataforma y contiene todas las bases de datos que introdujiste.',
+      '·En la carpeta /dev podrás encontrar tu proyecto en archivo .json que podrás utilizar para otros proyectos de programación.',
+      '',
+      '',
+      'Si tiene alguna duda o problema escribe a sinapsis@animalpolitico.com'
+    ];
+    return rows.join('\n');
   }
 
   /**

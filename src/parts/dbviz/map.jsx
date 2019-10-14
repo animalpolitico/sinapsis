@@ -3,6 +3,7 @@ import ReactMapboxGl, { Layer, Feature, Marker, Popup } from 'react-mapbox-gl';
 import { mapboxKeys } from '../../vars/mapboxconfig';
 import { getCoords } from '../../vars/countriesDict';
 import Icon from '@material-ui/core/Icon';
+import * as d3 from "d3";
 
 const Map = ReactMapboxGl({
   accessToken: mapboxKeys.access
@@ -11,7 +12,8 @@ const Map = ReactMapboxGl({
 export default class SSMap extends React.Component{
   state = {
     defaultZoom: getCoords(),
-    markers: []
+    markers: [],
+    zoom: 5
   }
   componentDidMount(){
     var self = this;
@@ -21,6 +23,11 @@ export default class SSMap extends React.Component{
     })
     window.addEventListener('ss_reload_map', function(){
       self.set();
+    })
+    window.addEventListener('sinapsisDrawerToggle', function(){
+      if(self.map){
+        window.dispatchEvent(new Event('resize'));
+      }
     })
   }
 
@@ -51,6 +58,14 @@ export default class SSMap extends React.Component{
 
   }
 
+  setZoom(lnglat, zoom){
+    zoom = zoom ? zoom : 5;
+    this.setState({
+      defaultZoom: lnglat,
+      zoom: zoom
+    })
+  }
+
 
   render(){
     var self = this;
@@ -70,13 +85,14 @@ export default class SSMap extends React.Component{
       }
 
       <Map
+        ref={(map) => this.map = map}
         style={mapboxKeys.style}
         center={this.state.defaultZoom}
-        zoom={[5]}
+        zoom={[this.state.zoom]}
       >
       {
         this.state.markers.map(function(d){
-          return <SSMarker d={d}  onME={(e, _data) => self.onME(e, _data)} onML={() => self.setState({showTooltip: false})}/>
+          return <SSMarker parent={self} d={d} onME={(e, _data) => self.onME(e, _data)} onML={() => self.setState({showTooltip: false})}/>
         })
       }
       </Map>
@@ -89,6 +105,29 @@ class SSMarker extends React.Component{
   state = {
     showTooltip: false
   }
+
+  handleClick(e){
+    var self = this;
+    var d = this.props.d;
+
+    d3.selectAll('.ss_marker_active')
+      .classed('ss_marker_active', false);
+    e.target.classList.add('ss_marker_active');
+
+
+    var data = {
+      euid: d.empresauid,
+      dbid: d.fromdb
+    }
+    var event = new CustomEvent('sinapsisOpenEmpresa', { detail: data});
+    window.dispatchEvent(event);
+
+    setTimeout(function(){
+      self.props.parent.setZoom([d.latlng.lng, d.latlng.lat], 12);
+    }, 100)
+
+  }
+
   render(){
     var d = this.props.d;
     var ename = window.dbf.getEmpresa(d.fromdb, d.empresauid).name
@@ -116,6 +155,7 @@ class SSMarker extends React.Component{
       }
 
       <Marker
+        onClick={(e) => this.handleClick(e)}
         onMouseEnter={(e) => this.setState({ showTooltip: true})}
         onMouseLeave={(e) => this.setState({ showTooltip: false})}
         coordinates={[d.latlng.lng, d.latlng.lat]}

@@ -8,6 +8,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
+import { isMexico } from '../../vars/countriesDict';
+
 
 /** Partes del formulario **/
 import DbFormGroupInfoGeneral from './formGroups/infoGral';
@@ -17,6 +19,7 @@ import DbFormGroupContrato from './formGroups/contrato';
 import DbFormGroupConvenio from './formGroups/convenio';
 import DbFormGroupTransferencias from './formGroups/transferencias';
 import DbFormGroupOtros from './formGroups/otros';
+import DbFormGroupBanderasRojas from './formGroups/banderasrojas';
 
 var slugify = require('slugify');
 const uuidv4 = require('uuid/v4');
@@ -46,14 +49,19 @@ export default class DbEditEmpresa extends React.Component{
     }
   }
   insertField(slug, obj){
-    var e = window.dbf.getEmpresa(this.props.db.id, this.props.empresa.uid);
-    var f = e.fields;
-    if(!f){
-      f = {};
+    try{
+      var e = window.dbf.getEmpresa(this.props.db.id, this.props.empresa.uid);
+      var f = e.fields;
+      if(!f){
+        f = {};
+      }
+      f[slug] = obj;
+      window.dbf.addFieldsToEmpresa(this.props.db.id, this.props.empresa.uid, f);
+      this.searchErrors();
+    }catch(ex){
+      
     }
-    f[slug] = obj;
-    window.dbf.addFieldsToEmpresa(this.props.db.id, this.props.empresa.uid, f);
-    this.searchErrors();
+
   }
   insertMultipleFields(fields){
     var e = window.dbf.getEmpresa(this.props.db.id, this.props.empresa.uid);
@@ -150,6 +158,11 @@ export default class DbEditEmpresa extends React.Component{
             <DbFormGroupPersonas empresa={this.props.empresa} parent={this} />
             <DbFormGroupNotaria empresa={this.props.empresa} parent={this} />
           </DbFormGroupInfoGeneral>
+          {
+            isMexico() ?
+            <DbFormGroupBanderasRojas empresa={this.props.empresa} parent={this} />
+            : null
+          }
           <DbFormGroupContrato empresa={this.props.empresa} parent={this} />
           <DbFormGroupConvenio empresa={this.props.empresa} parent={this} />
           <DbFormGroupTransferencias empresa={this.props.empresa} parent={this} />

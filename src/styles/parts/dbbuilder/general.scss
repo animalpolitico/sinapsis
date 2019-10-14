@@ -2,8 +2,8 @@
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  height: calc(100vh  - 50px);
-  margin-top: 50px;
+  height: calc(100vh  - 48px);
+  margin-top: 48px;
   position: relative;
   @extend .flex;
   &_sidebar{
@@ -51,9 +51,21 @@
   right: 10px;
   z-index: 9999;
 }
+.react-resizable-handle-se{
+  width: 5px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: col-resize;
+  z-index: 9999;
+  &:hover{
+    background: #333;
+  }
+}
 body.ss_show_sidebar{
   .ss_dbbuilder_sidebar{
-    width: 0%;
+    width: 0%!important;
     .ss_dbbuilder_sidebar_dbs{
       display: none;
     }

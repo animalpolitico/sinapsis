@@ -107,7 +107,8 @@ export default class DbViz extends React.Component{
 
 class SSDBControl extends React.Component{
   state = {
-    hiddenDbs: []
+    hiddenDbs: [],
+    showing: true
   }
   toggleDb(dbid){
     var s = this.state.hiddenDbs;
@@ -159,69 +160,76 @@ class SSDBControl extends React.Component{
     return(
       <div className="ss_control_node_filter ss_control_group">
         <div className="ss_control_group_container">
-          <div className="ss_control_group_container_title">
-            Bases de datos
+          <div className="ss_control_group_container_title" style={{cursor: "pointer"}} onClick={() => this.setState({showing: !this.state.showing})}>
+            <div>Bases de datos</div><Icon>{this.state.showing ? "expand_more" : "expand_less"}</Icon>
           </div>
         </div>
-        <div className="ss_control_group_container_dbs">
-          {dbs.map(function(db){
-            if(db.empresas){
-              var esize = Object.values(db.empresas).length
-            }else{
-              var esize = 0;
-            }
-            var ish = self.state.hiddenDbs.indexOf(db.id) > -1;
-            var cs = ["ss_db"];
-            if(ish){
-              cs.push("ss_db_hidden");
-            }
-            return(
-              <div className={cs.join(' ')}  onClick={() => self.toggleDb(db.id)}>
-                <div className="ss_db_info">
-                  <div className="ss_db_info_name">
-                    {db.name}
+        {
+          this.state.showing ?
+          <>
+            <div className="ss_control_group_container_dbs">
+              {dbs.map(function(db){
+                if(db.empresas){
+                  var esize = Object.values(db.empresas).length
+                }else{
+                  var esize = 0;
+                }
+                var ish = self.state.hiddenDbs.indexOf(db.id) > -1;
+                var cs = ["ss_db"];
+                if(ish){
+                  cs.push("ss_db_hidden");
+                }
+                return(
+                  <div className={cs.join(' ')}  onClick={() => self.toggleDb(db.id)}>
+                    <div className="ss_db_info">
+                      <div className="ss_db_info_name">
+                        {db.name}
+                      </div>
+                      <div className="ss_db_info_empresas">
+                        <strong>{esize}</strong> empresas
+                      </div>
+                    </div>
+                    <div className="ss_db_toggle">
+                      <Icon>{!ish ? "visibility" : "visibility_off"}</Icon>
+                    </div>
                   </div>
-                  <div className="ss_db_info_empresas">
-                    <strong>{esize}</strong> empresas
-                  </div>
-                </div>
-                <div className="ss_db_toggle">
-                  <Icon>{!ish ? "visibility" : "visibility_off"}</Icon>
-                </div>
-              </div>
-            )
-          })}
-        </div>
-        <div className="ss_control_group_container_extracontrols">
-          {
-            visible.length > 1 ?
-            <div className="ss_control_extra">
-              <label>Mostrar coincidencias</label>
-              <select onChange={(e) => this.handleMostrarCoincidencias(e.target.value)}>
-                <option value="all">Todas</option>
-                <option value="onlyinall">Solo entre todas las distintas bases</option>
-                <option value="twoormore">Solo entre bases distintas</option>
-              </select>
+                )
+              })}
             </div>
-            : null
-          }
+            <div className="ss_control_group_container_extracontrols">
+              {
+                visible.length > 1 ?
+                <div className="ss_control_extra">
+                  <label>Mostrar coincidencias</label>
+                  <select onChange={(e) => this.handleMostrarCoincidencias(e.target.value)}>
+                    <option value="all">Todas</option>
+                    <option value="onlyinall">Solo entre todas las distintas bases</option>
+                    <option value="twoormore">Solo entre bases distintas</option>
+                  </select>
+                </div>
+                : null
+              }
 
-          <div className="ss_control_extra">
-            <label>Mostrar empresas</label>
-            <select onChange={(e) => this.handleMostrarEmpresas(e.target.value)}>
-              <option value="default">Solo con coincidencias</option>
-              <option value="all">Todas</option>
-            </select>
-            {
-              totalPotentialEmpresas > 900 ?
-              <div className="ss_control_extra_warning">
-                <Icon>warning</Icon><div>Tu proyecto tiene muchas empresas, ten cuidado al seleccionar "Todas".</div>
+              <div className="ss_control_extra">
+                <label>Mostrar empresas</label>
+                <select onChange={(e) => this.handleMostrarEmpresas(e.target.value)}>
+                  <option value="default">Solo con coincidencias</option>
+                  <option value="all">Todas</option>
+                </select>
+                {
+                  totalPotentialEmpresas > 900 ?
+                  <div className="ss_control_extra_warning">
+                    <Icon>warning</Icon><div>Tu proyecto tiene muchas empresas, ten cuidado al seleccionar "Todas".</div>
+                  </div>
+                  : null
+                }
+
               </div>
-              : null
-            }
+            </div>
+          </>
+        : null
+        }
 
-          </div>
-        </div>
       </div>
     )
   }
@@ -647,6 +655,20 @@ class SearchResults extends React.Component{
       this.setState({
         selectedIndex: c
       })
+
+      /** Scrollea el contenedor **/
+      try{
+        var em = document.getElementById('ss_r_' + c);
+        var top = em.offsetTop - 50;
+            top = Math.max(top, 0);
+        if(top > (this.resultsContainer.offsetHeight - 50)){
+          this.resultsContainer.scrollTop = top;
+        }
+
+      }catch(err){
+
+      }
+
     }
 
     if(w == 13){
@@ -685,17 +707,18 @@ class SearchResults extends React.Component{
       <div className="db_search_nodes_results_c">
         {
           r.length ?
-        <div className="db_search_nodes_results_c_r">
+        <div className="db_search_nodes_results_c_r" ref={(ref) => this.resultsContainer = ref}>
           {r.map(function(result, i){
             var cs = ['ss_search_result'];
             if((i + 1) == self.state.selectedIndex){
               cs.push('ss_selected');
             }
+            var c = getTypeColor(result.type);
             return(
-              <div className={cs.join(' ')} onClick={(e) => self.isolateNode(result.id, result.name)}>
+              <div id={"ss_r_" + (i + 1)}className={cs.join(' ')} onClick={(e) => self.isolateNode(result.id, result.name)}>
                 <div className="ss_search_result_container">
-                  <div className="ss_search_result_type" style={{color: getTypeColor(result.type)}}>
-                    {getTypeName(result.type)}
+                  <div className="ss_search_result_type">
+                    <span style={{color: c}}>/</span> <div>{getTypeName(result.type)}</div>
                   </div>
                   <div className="ss_search_result_name">
                     {result.name}
@@ -1051,7 +1074,6 @@ class Nodes extends React.Component{
               displayTooltip: true
             })
           }
-
         })
         .on('click', function(d){
           d.isclicked = true;
@@ -1292,10 +1314,15 @@ class Nodes extends React.Component{
       .attr('stroke', 'rgba(0, 114, 255, 0.05)')
       .each(d => d.selected = false)
 
-    d3.selectAll('.node')
-      .filter(d => d && (d.id !== this.state.isoDoi.id))
-      .attr('opacity', 0.05)
-      .each(d => d.level = false)
+    try{
+      d3.selectAll('.node')
+        .filter(d => d && (d.id !== this.state.isoDoi.id))
+        .attr('opacity', 0.05)
+        .each(d => d.level = false)
+    }catch(ex){
+
+    }
+
 
     for(var i = -1; i < level; i++){
       var cnds = [];
@@ -1355,8 +1382,10 @@ class Nodes extends React.Component{
       isolatingNode: false,
       level: 0
     })
-
-    this.getCoincidenciasSize();
+    var self = this;
+    setTimeout(function(){
+      self.getCoincidenciasSize();
+    }, 50)
   }
 
   getEmpresaMinMax(){
@@ -1535,7 +1564,9 @@ class Nodes extends React.Component{
           </div>
         </div>
 
-        <svg id="db_viz_nodes_canvas" ref={(ref) => this.canvasSvg = ref}></svg>
+        <svg id="db_viz_nodes_canvas" ref={(ref) => this.canvasSvg = ref}>
+
+        </svg>
           {
             this.state.displayTooltip  ?
             <SSTooltip doi={this.state.doi} canvas={this.canvasSvg} />
@@ -1551,7 +1582,8 @@ class Nodes extends React.Component{
 class SSNodeSize extends React.Component{
   state = {
     type: 'monto',
-    checked: false
+    checked: false,
+    showing: true
   }
 
   handleChange(e){
@@ -1569,20 +1601,27 @@ class SSNodeSize extends React.Component{
     return(
       <div className="ss_control_node_size ss_control_group">
         <div className="ss_control_group_container">
-          <div className="ss_control_group_container_title">
-            Tamaño de círculos
+          <div className="ss_control_group_container_title" style={{cursor: "pointer"}} onClick={() => this.setState({showing: !this.state.showing})}>
+            <div>Tamaño de círculos</div><Icon>{this.state.showing ? "expand_more" : "expand_less"}</Icon>
           </div>
-          <div className="ss_control_group_container_switch">
-            <label>Por monto recibido</label>
-            <Switch
-              checked={this.state.checked}
-              onChange={(e) => this.handleChange(e)}
-              value="t"
-              size="small"
-              inputProps={{ 'aria-label': 'secondary checkbox' }}
-            />
-            <label>Por coincidencias</label>
-          </div>
+          {
+            this.state.showing ?
+            <>
+            <div className="ss_control_group_container_switch">
+              <label>Por monto recibido</label>
+              <Switch
+                checked={this.state.checked}
+                onChange={(e) => this.handleChange(e)}
+                value="t"
+                size="small"
+                inputProps={{ 'aria-label': 'secondary checkbox' }}
+              />
+              <label>Por coincidencias</label>
+            </div>
+            </>
+          : null
+          }
+
         </div>
       </div>
     )
@@ -1761,7 +1800,7 @@ class SSCategoryToggle extends React.Component{
       <div className="ss_control_node_filter ss_control_group">
         <div className="ss_control_group_container">
           <div className="ss_control_group_container_title" style={{cursor: "pointer"}} onClick={() => this.setState({showing: !this.state.showing})}>
-            <div>Mostrar</div><Icon>{this.state.showing ? "expand_more" : "expand_less"}</Icon>
+            <div>Filtrar</div><Icon>{this.state.showing ? "expand_more" : "expand_less"}</Icon>
           </div>
           {
             this.state.showing ?
@@ -1821,8 +1860,10 @@ class SSDoi extends React.Component{
       cs.push('ss_minimized');
     }
     var textColor = "#222";
+    var mtc = tc;
     if(d.type == 'instancia'){
       textColor = d.isreceptor ? "#FF0054" : "#3372ff";
+      mtc = textColor;
     }
     if(d.type == "date" || d.type == "person"){
       textColor = "#F6F6F6";
@@ -1851,7 +1892,7 @@ class SSDoi extends React.Component{
         <div className="ss_doi_window_type" style={{color: textColor, boxShadow: '0 0 6px -1px ' + tc , backgroundColor: tc}}>
           {getTypeName(d.type)}
         </div>
-        <div className="ss_doi_window_name" style={{color: ism ? tc : 'inherit'}}>
+        <div className="ss_doi_window_name" style={{color: ism ? mtc : 'inherit'}}>
           {d.name ? d.name : '(Sin información)'}
         </div>
         {
@@ -1954,10 +1995,17 @@ class SSTooltip extends React.Component{
         <div className="db_viz_tooltip_links">
           Cantidad de coincidencias: <strong>{node.attr('data-coincidencias')}</strong>
         </div>
+        {
+          d.type == "instancia" && d.isreceptor ?
+          <div className="db_viz_tooltip_info">
+            <Icon style={{color: "#FF0054"}}>info</Icon> <div>Esta {_t("instancia")} recibió más de lo que emitió.</div>
+          </div>
+          : null
+        }
 
         {
           d.type == "empresa" ?
-          <div className="db_viz_tooltip_monto">
+          <div className="db_viz_tooltip_monto" >
             Monto neto que recibió la empresa: <strong>{formatMoney(d.fields[0].sum)}</strong>
           </div>
           : null

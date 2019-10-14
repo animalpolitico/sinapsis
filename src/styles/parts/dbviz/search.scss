@@ -1,7 +1,7 @@
 .db_search_nodes{
   position: fixed;
   top: 6px;
-  right: calc(4em + 150px);
+  right: calc(4em + 155px);
   z-index: 99;
   width: 280px;
   &_results{
@@ -16,17 +16,39 @@
         .ss_search_result{
           width: 100%;
           box-sizing: border-box;
-          padding: 0.5rem 0.5rem;
           line-height: 1.1;
           font-size: 0.8rem;
           color: white;
           cursor: pointer;
-          border-bottom: 1px solid rgba(white, 0.05);
+          padding: 0.35rem;
+          position: relative;
+          &::after{
+            content: '';
+            display: block;
+            width: 60%;
+            position: absolute;
+            left: 0.35rem;
+            bottom: 0;
+            height: 1px;
+            background: rgba(white, 0.2);
+          }
+          &_name{
+            font-weight: 600;
+          }
           &_type{
             font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.5rem;
             margin-bottom: 0.25rem;
+            box-sizing: border-box;
+            @extend .flex;
+            align-items: center;
+            span{
+              font-weight: 800;
+              margin-right: 3px;
+            }
+            div{
+              height: 0%;
+              font-weight: 300;
+            }
           }
           &:hover, &.ss_selected{
             background: rgba(black, 0.2);
@@ -52,7 +74,7 @@
       display: block;
       border: 0;
       background: rgba(white, 0.05);
-      padding: 0.5rem;
+      padding: 0.4rem 0.5rem;
       box-shadow: 4px 4px 6px rgba(black, 0.2);
       color: white;
       font-family: $f;

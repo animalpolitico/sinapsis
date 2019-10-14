@@ -2,7 +2,7 @@
   "name": "sinapsis",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://pajaropolitico.com/sinapsisAlpha",
+  "homepage": "https://pajaropolitico.com/sinapsisBeta",
   "dependencies": {
     "@material-ui/core": "^4.3.2",
     "color-generator": "^0.1.0",
@@ -27,6 +27,7 @@
     "react-mapbox-gl": "^4.6.1",
     "react-moment": "^0.9.2",
     "react-places-autocomplete": "^7.2.1",
+    "react-resizable": "^1.8.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.0",
     "react-typing-animation": "^1.6.2",

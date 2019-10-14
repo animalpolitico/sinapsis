@@ -55,6 +55,18 @@
         font-weight: 800;
       }
     }
+    &_info{
+      font-size: 0.65rem;
+      box-sizing: border-box;
+      padding: 0.15rem 0.5rem;
+      @extend .flex;
+      align-items: center;
+      .material-icons{
+        font-size: 0.65rem;
+        line-height: 1;
+        margin-right: 0.15rem;
+      }
+    }
     &_click{
       font-size: 0.6rem;
       font-weight: 600;

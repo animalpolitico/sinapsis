@@ -86,7 +86,6 @@ export default class DbBuilderToolbar extends React.Component{
   }
 
   intentLangChange(e){
-    console.log('Intent handleClick');
     this.setState({
       openPopper: !this.state.openPopper,
       anchor: e.currentTarget
@@ -135,10 +134,12 @@ export default class DbBuilderToolbar extends React.Component{
             : null
           }
           <div className="ss_db_toolbar_info_td ss_db_ctas">
-            <Fab size="small" variant="extended" color="secondary" onClick={() => window.dbf.createProjectFile()}>
-              <Icon>get_app</Icon>
-              Guardar
-            </Fab>
+            <div class="ss_db_ctas_td" onClick={() => window.dbf.createProjectFile()}>
+              <div id="ss_db_save">
+                <Icon>get_app</Icon>
+                <div>Guardar</div>
+              </div>
+            </div>
             <div className="ss_db_ctas_custom ss_db_ctas_custom_lang">
               <div onClick={(e) => this.intentLangChange(e)}>
                 <img src={getFlag()} />

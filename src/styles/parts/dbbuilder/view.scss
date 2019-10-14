@@ -5,6 +5,7 @@
     box-sizing: border-box;
     padding: 0.5rem 1rem;
     @extend .flex;
+    flex-shrink: 1;
     align-items: center;
     .material-icons{
       margin-right: 5px;
@@ -22,6 +23,7 @@
       color: white;
       background: none;
       border-radius: 1.25rem;
+      max-width: 90%;
       border: 2px solid transparent;
       &:focus{
         outline: 0;

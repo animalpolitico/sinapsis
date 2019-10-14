@@ -38,6 +38,7 @@ import oldToNew from '../funcs/oldSinapsisToNew';
 import { predbs } from '../vars/rel';
 import Flag from "react-flags";
 import { countries, getLang } from "../vars/countriesDict";
+import { Resizable, ResizableBox } from 'react-resizable';
 
 
 import buildLink from "../funcs/buildlink";
@@ -67,7 +68,8 @@ export default class DbBuilderPage extends React.Component{
     recoveroptions: [],
     showrecoveroptions: false,
     isautosaving: false,
-    uid: null
+    uid: null,
+    hasloaded: false
   }
 
   componentDidMount(){
@@ -87,7 +89,8 @@ export default class DbBuilderPage extends React.Component{
     if(uid){
       this.setState({
         uid: uid,
-        showcontrol: false
+        showcontrol: false,
+        hasloaded: true
       })
       document.body.classList.add('ss_platform');
       var obj = store.get('sinapsis_'+uid);
@@ -104,9 +107,8 @@ export default class DbBuilderPage extends React.Component{
           showrecoveroptions: false
         })
       }else{
-        console.log('UID', uid);
         if(uid !== 'estafa-maestra'){
-          var url = buildLink('/construir');
+          var url = buildLink('/construir/'+uid);
           this.props.history.push(url);
         }else{
           var hasE = window.dbf.obj.dbs && Object.values(window.dbf.obj.dbs).length > 0;
@@ -115,21 +117,21 @@ export default class DbBuilderPage extends React.Component{
           }
         }
       }
+      document.body.classList.remove('ss_showing_drawer');
+
     }else{
       this.setState({
         uid: this.props.match.params.dbid,
         showcontrol: true
       })
-
       document.body.classList.remove('ss_platform');
-
     }
   }
 
   componentDidUpdate(){
     if(this.props.match.params.dbid !== this.state.uid){
       var s = true;
-      if(!this.props.match.params.dbid){
+      if(!this.props.match.params.dbid && this.state.hasloaded){
         s = window.confirm('¿Deseas regresar? Es posible que los cambios que implementaste no se puedan guardar.');
       }
       if(s){
@@ -150,7 +152,7 @@ export default class DbBuilderPage extends React.Component{
 
   startAutosave(){
     var self = this;
-    var maxkbsize = 4000;
+    var maxkbsize = 1000;
     window.addEventListener('sinapsisModified', function(){
       var isok = !self.state.showcontrol && window.dbf.obj.allowAutoSave;
       if(isok){
@@ -164,7 +166,7 @@ export default class DbBuilderPage extends React.Component{
         if(kbsize < maxkbsize){
           var ky = 'sinapsis_' + dbf.obj.uid;
           try{
-            store.set(ky, f);
+            // store.set(ky, f);
             self.autosavingT = setTimeout(function(){
               self.setState({
                 isautosaving: false
@@ -193,7 +195,8 @@ export default class DbBuilderPage extends React.Component{
     this.props.history.push(buildLink('/construir/estafa-maestra'));
 
     this.setState({
-      showcontrol: false
+      showcontrol: false,
+      hasloaded: true
     })
 
     if(f){
@@ -210,7 +213,8 @@ export default class DbBuilderPage extends React.Component{
     this.props.history.push(url);
     this.setState({
       control: 'newproject',
-      showcontrol: false
+      showcontrol: false,
+      hasloaded: true
     })
   }
 
@@ -233,7 +237,8 @@ export default class DbBuilderPage extends React.Component{
         self.props.history.push(url);
         self.setState({
           control: 'fromfile',
-          showcontrol: false
+          showcontrol: false,
+          hasloaded: true
         })
         self.sidebar.fetchDbs();
         window.dispatchEvent(onBigChanges);
@@ -550,7 +555,12 @@ class DbBuilderSidebar extends React.Component{
       navCs.push('ss_overflow');
     }
     return(
-      <div className="ss_dbbuilder_sidebar">
+      <ResizableBox
+        className="ss_dbbuilder_sidebar"
+        width={window.innerWidth * 0.3}
+        axis="x"
+
+      >
         <div className="ss_dbbuilder_sidebar_collapse" onClick={() => this.collapseSidebar()}>
           <div className="ss_dbbuilder_sidebar_collapse_icon">
             <Icon>chevron_left</Icon>
@@ -574,7 +584,7 @@ class DbBuilderSidebar extends React.Component{
               }
             </div>
         </div>
-      </div>
+      </ResizableBox>
     )
   }
 }
@@ -821,7 +831,32 @@ class DbEmpresasList extends React.Component{
   }
 
   componentDidMount(){
+    var self = this;
+    window.addEventListener('keydown', function(e){
+      var w = e.which;
+      var isnotfocusing = ! document.body.classList.contains('ss_focusing_input');
+      if((w == 40 || w == 38) && self.state.showedit && isnotfocusing){
+        var empresas = Object.keys(self.props.db.empresas);
+        var maxlength = empresas.length - 1;
+        var i = w == 40 ? 1 : -1;
+        var euid = self.state.empresa.uid;
+        try{
+          var c = empresas.indexOf(euid);
+          var nc = c + i;
+              nc = Math.max(0, nc);
+              nc = Math.min(nc, maxlength);
+          var neuid = empresas[nc];
 
+          var em = self.props.db.empresas[neuid];
+          self.selectEmpresa(em, true);
+        }catch(ex){
+
+        }
+      }
+      if(self.state.showedit && w == 27){
+        self.closeDrawer();
+      }
+    })
 
   }
 
@@ -830,6 +865,7 @@ class DbEmpresasList extends React.Component{
       showedit: true,
       empresa: em
     })
+    window.dispatchEvent(new Event('ss_lazy_indicator'));
     window.dispatchEvent(onDrawerToggle);
     document.body.classList.add('ss_showing_drawer');
     window.dbf.obj.selectedEmpresa = em.uid;
@@ -851,8 +887,19 @@ class DbEmpresasList extends React.Component{
         var ev = new CustomEvent('ss_isolate_node', {'detail': sn});
         window.dispatchEvent(ev);
       }
-
     }
+
+    /** Scroll de contenedor **/
+    var row_id = 'e_'+em.uid;
+    var _em = document.getElementById(row_id);
+    var t = _em.offsetTop;
+    var lc = this.listContainer;
+    var lch = lc.offsetHeight;
+    var lcs = lc.scrollTop;
+    if((lcs + lch) < t || t < lcs){
+      lc.scrollTop = t - 200;
+    }
+
   }
 
   closeDrawer(){
@@ -880,7 +927,7 @@ class DbEmpresasList extends React.Component{
       var hasEmpresas = false;
     }
     return(
-      <div className="ss_db_ve_c">
+      <div className="ss_db_ve_c" ref={(ref) => this.listContainer = ref}>
         {
           hasEmpresas ?
           <div className="ss_db_ve_c_empresas_list">
@@ -952,7 +999,7 @@ class DbEmpresa extends React.Component{
       fieldsSize += e.fields.length;
     }
     return(
-      <div className={cs.join(' ')} data-slug={e.slug}>
+      <div className={cs.join(' ')} data-slug={e.slug} id={"e_" + e.uid}>
         <div className="db_empresa_container" onClick={() => this.handleClick()}>
           <div className="db_empresa_container_name">
             <small>{this.props.index + 1 +'. '}</small> {e.name}
