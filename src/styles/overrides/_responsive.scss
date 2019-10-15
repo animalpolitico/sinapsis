@@ -16,4 +16,22 @@
       display: none;
     }
   }
+  .project_buttons_button{
+    .material-icons{
+      margin-right: 0!important;
+    }
+    div{
+      display: none;
+    }
+  }
+  .ss_listado_container_e{
+    width: 25%!important;
+    .ss_listado_container_e_icon{
+      width: 50px!important;
+      height: 50px!important;
+      .material-icons{
+        font-size: 1.7rem!important;
+      }
+    }
+  }
 }

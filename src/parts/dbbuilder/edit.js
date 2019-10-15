@@ -20,6 +20,7 @@ import DbFormGroupConvenio from './formGroups/convenio';
 import DbFormGroupTransferencias from './formGroups/transferencias';
 import DbFormGroupOtros from './formGroups/otros';
 import DbFormGroupBanderasRojas from './formGroups/banderasrojas';
+import DbFormGroupComentarios from './formGroups/comentarios';
 
 var slugify = require('slugify');
 const uuidv4 = require('uuid/v4');
@@ -59,7 +60,7 @@ export default class DbEditEmpresa extends React.Component{
       window.dbf.addFieldsToEmpresa(this.props.db.id, this.props.empresa.uid, f);
       this.searchErrors();
     }catch(ex){
-      
+
     }
 
   }
@@ -167,6 +168,8 @@ export default class DbEditEmpresa extends React.Component{
           <DbFormGroupConvenio empresa={this.props.empresa} parent={this} />
           <DbFormGroupTransferencias empresa={this.props.empresa} parent={this} />
           <DbFormGroupOtros empresa={this.props.empresa} parent={this} />
+          <DbFormGroupComentarios empresa={this.props.empresa} parent={this} />
+
         </div>
       </div>
     )

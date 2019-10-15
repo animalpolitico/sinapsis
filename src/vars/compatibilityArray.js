@@ -375,4 +375,7 @@ export const snps_ka = {
     name: "Monto otorgado",
     category: 'monto_otorgado',
   },
+  84: {
+    name: "Comentarios"
+  },
 }

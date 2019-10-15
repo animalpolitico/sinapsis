@@ -6,13 +6,13 @@
   z-index: 9;
   max-height: 100%;
   &_container{
-    max-height: 690px;
+    max-height: 700px;
     overflow: hidden;
     overflow-y: auto;
   }
   &_button{
     width: 100%;
-    background: #2a2a2a;
+    background: #333;
     cursor: pointer;
     @extend .flex;
     align-items: center;
@@ -39,9 +39,9 @@
 .ss_control_group{
   background: #2a2a2a;
   box-sizing: border-box;
-  margin: 0.5rem 0;
+  border-bottom: 2px solid rgba(white, 0.1);
   &:last-child{
-    margin-bottom: 0;
+    border-bottom: none;
   }
   &.ss_control_node_filter{
     width: 100%;
@@ -53,8 +53,22 @@
       margin-top: 0.5rem;
       border-top: 1px solid rgba(white, 0.1);
       box-sizing: border-box;
-      padding: 0.5rem 0.5rem 0;
+      padding: 0.5rem 0.5rem 0.25rem;
       cursor: pointer;
+      &.ss_ctr_br_buttons{
+        cursor: default;
+        .ss_ctr_br_buttons_btn{
+          margin: 0 0 0.15rem;
+          box-sizing: border-box;
+          padding: 0.3rem 0.4rem 0.2rem;
+          border: 2px solid $main;
+          cursor: pointer;
+          &:hover{
+            background: rgba($main, 0.2);
+          }
+        }
+      }
+
       .material-icons{
         color: red;
         line-height: 1;
@@ -73,14 +87,14 @@
   .ss_control_group_container{
     width: 100%;
     box-sizing: border-box;
-    padding: 0.5rem 0.25rem;
+    padding: 0.25rem 0.25rem;
     &_title{
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: white;
       line-height: 1;
       font-weight: 600;
       box-sizing: border-box;
-      padding: 0.25rem 0.5rem;
+      padding: 0.15rem 0.5rem;
       @extend .flex;
       align-items: center;
       div{
@@ -106,10 +120,10 @@
           @extend .flex;
           align-items: center;
           color: yellow;
-          margin-top: 0.4rem;
+          margin-top: 0.2rem;
           line-height: 1.1;
           *, &{
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             font-weight: 600;
           }
           .material-icons{
@@ -120,18 +134,19 @@
           font-size: 0.7rem;
           font-weight: 600;
           color: white;
+          margin-bottom: -0.1rem;
         }
         select{
           appearance: none;
           display: block;
-          width: 90%;
+          width: 100%;
           box-sizing: border-box;
           padding: 0.25rem;
           background-color: #444;
           font-size: 0.7rem;
           font-weight: 600;
           border: 0;
-          margin-top: 0.15rem;
+          margin-top: 0.1rem;
           border-radius: 0;
           color: white;
           cursor: pointer!important;
@@ -144,19 +159,18 @@
     &_dbs{
       width: 100%;
       box-sizing: border-box;
-      padding: 0.15rem 0.75rem 0.25rem;
-      max-height: 150px;
+      padding: 0.15rem 0.75rem 0;
+      max-height: 120px;
       overflow: hidden;
       overflow-y: auto;
       .ss_db{
         width: 100%;
         @extend .flex;
-        background: rgba(white, 0.1);
         box-sizing: border-box;
-        padding: 0.25rem;
         flex-wrap: nowrap;
         align-items: center;
-        margin: 0.25rem 0;
+        margin: 0.15rem 0;
+        border-bottom: 1px solid rgba(white, 0.1);
         cursor: pointer;
         &_toggle{
           height: 0%;
@@ -167,7 +181,7 @@
           }
           .material-icons{
             color: white;
-            font-size: 1rem;
+            font-size: 0.8rem;
           }
         }
         &_info{
@@ -175,7 +189,7 @@
           height: 0%;
           max-width: 85%;
           &_name{
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             white-space: nowrap;
             overflow: hidden;
@@ -184,13 +198,14 @@
             color: white;
           }
           &_empresas{
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             color: white;
+            font-weight: 600;
             strong{
               &::before{
                 content: '/';
                 color: $main;
-                margin-right: 5px;
+                margin-right: 2px;
               }
             }
           }

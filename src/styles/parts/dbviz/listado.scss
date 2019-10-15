@@ -1,0 +1,293 @@
+#ss_listado{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(#212121, 0.95);
+  z-index: 9999;
+  &_close{
+    position: absolute;
+    right: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    box-sizing: border-box;
+    padding: 0.5rem 0.5rem;
+    .material-icons{
+      color: white;
+      font-size: 2rem;
+    }
+  }
+  #ss_listado_backclose{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  &_container{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 3rem 3rem;
+    @extend .cy;
+    z-index: 2;
+    max-height: 95%;
+    overflow-y: auto;
+    #ss_listado_finals{
+      width: 100%;
+      @extend .flex;
+      justify-content: center;
+      .ss_listado_finals_btn{
+        border: 2px solid $main;
+        @extend .flex;
+        color: white;
+        font-weight: 600;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0.25rem 0.5rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        &:hover{
+          background: rgba($main, 0.1);
+        }
+        .material-icons{
+          margin-right: 0.5rem;
+          font-size: 18px;
+          line-height: 1;
+        }
+      }
+    }
+    .ss_listado_main_info{
+      width: 100%;
+      @extend .flex;
+      flex-direction: column;
+      align-items: center;
+      &_name{
+        color: white;
+        font-size: 1.8rem;
+        &::before{
+          content: '/';
+          font-weight: 600;
+          color: $main;
+          margin-right: 0.5rem;
+        }
+      }
+      &_sec{
+        font-size: 1.1rem;
+        color: #f6f6f6;
+      }
+    }
+    .ss_listado_container{
+      width: 100%;
+      @extend .flex;
+      box-sizing: border-box;
+      flex-wrap: wrap;
+      padding: 1rem;
+
+      &_e{
+        width: 20%;
+        @extend .flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin: 1rem 0;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+        &.ss_empty_listado{
+          pointer-events: none;
+          opacity: 0.4;
+        }
+        &_icon{
+          width: 70px;
+          height: 70px;
+          position: relative;
+          border: 4px solid transparent;
+          border-radius: 50%;
+          animation: lba 1s ease;
+          animation-fill-mode: both;
+          div{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            .material-icons{
+              color: white;
+              font-size: 2.2rem;
+              @extend .cxy;
+            }
+          }
+        }
+        &_info{
+          width: 100%;
+          @extend .flex;
+          flex-direction: column;
+          align-items: center;
+          &_name{
+            width: 100%;
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+          }
+          &_count{
+            width: 100%;
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: 800;
+            margin-top: 0.35rem;
+          }
+        }
+        &:hover{
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+
+
+}
+
+#ss_listado_dialog{
+  .MuiDialog-paperWidthSm{
+    max-width: 1000px;
+  }
+  #alert-dialog-title{
+    align-items: center;
+    span{
+      display: inline-block;
+      background: $main;
+      color: white;
+      font-size: 0.8rem;
+      vertical-align: middle;
+      line-height: 1;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.75rem;
+      margin-left: 0.15rem;
+      transform: translateY(-2px);
+    }
+  }
+  .ss_listado_table{
+    width: 700px;
+    .ss_listado_table_content{
+      width: 100%;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .ss_listado_table_group{
+      margin: 0.5rem 0;
+      position: relative;
+      &_c{
+        display: none;
+        background: rgba(white, 0.05);
+      }
+      input{
+        width: 100%;
+        height: 1.5rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        opacity: 0;
+        cursor: pointer;
+        &:hover{
+          & ~ .ss_listado_table_breaker{
+            background: rgba(white, 0.05);
+          }
+        }
+        &:checked  ~ {
+          .ss_listado_table_breaker{
+            background: rgba(white, 0.1);
+            .material-icons{
+              transform: rotate(180deg);
+            }
+            & ~ .ss_listado_table_group_c{
+              display: block;
+            }
+          }
+        }
+      }
+      .ss_listado_table_td{
+        font-size: 0.8rem;
+      }
+    }
+    &_tr{
+      width: 100%;
+      @extend .flex;
+      border-bottom: 1px dotted rgba(white, 0.5);
+      box-sizing: border-box;
+      padding: 0.5rem 0.25rem;
+      align-items: center;
+      &.ss_listado_simplerow{
+        cursor: pointer;
+        &:hover{
+          opacity: 0.8;
+        }
+      }
+      &:last-child{
+        border-bottom-color: transparent;
+      }
+      &.ss_listado_table_breaker{
+        border-color: rgba(white, 0.8);
+        border-bottom-style: solid;
+        box-sizing: border-box;
+
+        .ss_badge{
+          font-size: 0.55rem;
+          font-weight: 800;
+          color: white;
+          background: rgba(white, 0.3);
+          line-height: 1;
+          padding: 0.2rem 0.5rem 0.15rem;
+          margin-left: 0.35rem;
+          border-radius: 1rem;
+        }
+      }
+      &.ss_listado_table_th{
+        border-bottom-style: solid;
+      }
+      .ss_listado_table_td{
+        flex: 1;
+        line-height: 1.1;
+        overflow: hidden;
+        box-sizing: border-box;
+        @extend .flex;
+        align-items: center;
+        font-size: 0.9rem;
+        padding-right: 0.5rem;
+        .material-icons{
+          color: white;
+          position: absolute;
+          right: 0;
+        }
+      }
+    }
+  }
+}
+
+.ss_showing_drawer{
+  .ss_listado_container_e{
+    width: 25%!important;
+    .ss_listado_container_e_icon{
+      width: 50px!important;
+      height: 50px!important;
+      .material-icons{
+        font-size: 1.7rem!important;
+      }
+    }
+  }
+}
+
+@keyframes lba{
+  from{
+    border-color: transparent;
+    box-shadow: 0 0 1px rgba($main, 0.1);
+  }
+  to{
+    border-color: $main;
+    box-shadow: 0 0 6px rgba($main, 0.9);
+  }
+}

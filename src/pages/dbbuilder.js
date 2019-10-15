@@ -166,7 +166,7 @@ export default class DbBuilderPage extends React.Component{
         if(kbsize < maxkbsize){
           var ky = 'sinapsis_' + dbf.obj.uid;
           try{
-            // store.set(ky, f);
+            store.set(ky, f);
             self.autosavingT = setTimeout(function(){
               self.setState({
                 isautosaving: false
@@ -360,6 +360,7 @@ class DbInicio extends React.Component{
             <div className="ss_db_choose_lang">
               <div className="ss_db_choose_lang_label">Selecciona tu país</div>
               <div className="ss_db_choose_lang_select">
+                <div className="ss_db_choose_lang_select_arr"><Icon>keyboard_arrow_down</Icon></div>
                 <select onChange={(e) => self.setLang(e.target.value)}>
                   {
                     countries.map(function(c){
@@ -485,10 +486,15 @@ class DbBuilderSidebar extends React.Component{
       self.selectDb(dbid);
       self.refs[dbid].handleClick();
       setTimeout(function(){
-        var e = window.dbf.getEmpresa(dbid, euid);
-        self.dbview.empresalist.selectEmpresa(e);
-        var ev = new Event('sinapsisEndLoad');
-        window.dispatchEvent(ev);
+        try{
+          var e = window.dbf.getEmpresa(dbid, euid);
+          self.dbview.empresalist.selectEmpresa(e);
+          var ev = new Event('sinapsisEndLoad');
+          window.dispatchEvent(ev);
+        }catch{
+
+        }
+
       }, 500);
     })
 
@@ -1192,7 +1198,11 @@ class DbDbsNavigationNewDb extends React.Component{
         </div>
       </ClickAwayListener>
       </Popper>
-      <Dialog open={this.state.openModal} onClose={() => this.closeModal()} className="ss_modal_dbpre">
+      <Dialog
+        open={this.state.openModal}
+        onClose={() => this.closeModal()}
+        className="ss_modal_dbpre"
+        >
         <DialogTitle>Selecciona una base de datos</DialogTitle>
         <DialogContent>
           <div className="ss_modal_dbpre_select">

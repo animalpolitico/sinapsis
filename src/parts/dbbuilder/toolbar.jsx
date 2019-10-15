@@ -137,7 +137,7 @@ export default class DbBuilderToolbar extends React.Component{
             <div class="ss_db_ctas_td" onClick={() => window.dbf.createProjectFile()}>
               <div id="ss_db_save">
                 <Icon>get_app</Icon>
-                <div>Guardar</div>
+                <div>Guardar archivo</div>
               </div>
             </div>
             <div className="ss_db_ctas_custom ss_db_ctas_custom_lang">

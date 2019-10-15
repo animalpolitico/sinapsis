@@ -122,7 +122,7 @@ export default class ConvertOldToDb{
 
     fields.map(function(value, i){
       value = value.trim();
-      if(snps_ka[i] && (i < 11 || (i > 31 && 35 > i ))){
+      if(snps_ka[i] && ((i < 11 || (i > 31 && 35 > i )) || i == 84) ){
         var slug = slugify(snps_ka[i].name, {lower: true});
         if(snps_ka[i].group){
           slug = slugify(snps_ka[i].group, {lower: true}) + '-' + slug;
@@ -382,7 +382,7 @@ export default class ConvertOldToDb{
       slug: 'banderas-rojas',
       bs: bs
     }
-    
+
 
 
     /** Contratos **/

@@ -23,7 +23,6 @@
     }
     div{
       color: white;
-      text-transform: uppercase;
       font-weight: 500;
       font-size: 0.85rem;
     }
@@ -92,6 +91,22 @@ body.ss_showing_drawer{
       }
       &_select{
         width: 200px;
+        position: relative;
+        &_arr{
+          @extend .cy;
+          right: 5px;
+          z-index: 2;
+          pointer-events: none;
+          color: white;
+          height: 100%;
+          width: 20px;
+          margin-top: 5px;
+          .material-icons{
+            @extend .cxy;
+            line-height: 1;
+
+          }
+        }
         select{
           display: block;
           width: 100%;

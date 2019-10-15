@@ -130,6 +130,41 @@ export default class DbFactory {
   }
 
   /**
+  * Obtiene las bases de datos activas
+  *
+  * @param void
+  * @return array
+  **/
+  getActiveDbs(){
+    var all = this.getDbs();
+        all = Object.values(all);
+    var omit = this.omitDbs;
+
+    var a = all.filter(function(db){
+                  return omit.indexOf(db.id) == -1;
+                })
+    return a;
+  }
+
+  /**
+  * Crea un texto en CSV a partir de un array
+  *
+  * @param array
+  * @return TXT / CSV
+  **/
+  arrayToCsv(arr){
+    var lineArray = [];
+    arr.map(function(infoArray, index) {
+      var ia = [];
+      infoArray.map(v => ia.push('"'+v+'"'));
+      var line = ia.join(",");
+      lineArray.push(index == 0 ? "data:text/csv;charset=utf-8," + line : line);
+    });
+    var csvContent = lineArray.join("\n");
+    return csvContent;
+  }
+
+  /**
   * Crea los cruces
   *
   * @param void
@@ -172,16 +207,20 @@ export default class DbFactory {
             matchWith: ['empresa'],
             banderasRojas: self.getBanderasRojas(empresa.uid, _db.id)
           };
-          dbfields = [...dbfields, eField];
-          var fields = self.getEmpresaMatchableFields(_db.id, empresa.uid);
-          fields.map(function(f){
-            f.type = f.matchWith[0];
-            f.empresauid = empresa.uid;
-            f.fromdb = _db.id;
-            if((categories && categories.indexOf(f.type) > -1) || !categories){
-              dbfields = [...dbfields, f]
-            }
-          });
+          if((onlyBS && eField.banderasRojas.length > 0) || !onlyBS){
+            dbfields = [...dbfields, eField];
+            var fields = self.getEmpresaMatchableFields(_db.id, empresa.uid);
+            fields.map(function(f){
+              f.type = f.matchWith[0];
+              f.empresauid = empresa.uid;
+              f.fromdb = _db.id;
+              f.dbName = self.getDb(_db.id).name;
+              f.empresaName = self.getEmpresa(_db.id, empresa.uid).name;
+              if((categories && categories.indexOf(f.type) > -1) || !categories){
+                dbfields = [...dbfields, f]
+              }
+            });
+          }
         })
         normalized = [...normalized, ...dbfields];
       }
@@ -216,11 +255,7 @@ export default class DbFactory {
     for(var key in nodes){
       var n = nodes[key];
       if(n.type == "empresa"){
-        if(onlyBS && n.banderasRojas.length > 0){
-          fnodes[key] = n;
-        }else if(!onlyBS){
-          fnodes[key] = n;
-        }
+        fnodes[key] = n;
       }else{
         var diff = [];
         var dbsin = [];

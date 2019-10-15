@@ -7,6 +7,11 @@ import Tooltip from 'tooltip.js';
 import { saveAs } from 'file-saver';
 import Paper from '@material-ui/core/Paper';
 import formatMoney from 'format-money';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Switch from '@material-ui/core/Switch';
 import CountTo from 'react-count-to';
@@ -76,21 +81,22 @@ export default class DbViz extends React.Component{
           </div>
           <div className="nodes_controls_container" style={{display: this.state.showcontrols ? 'block' : 'none'}}>
             <SSCategoryToggle nodesMap={this.nodes} />
-            <SSNodeSize nodesMap={this.nodes}/>
             <SSDBControl nodesMap={this.nodes} />
+            <SSNodeSize nodesMap={this.nodes}/>
           </div>
         </div>
         <div className="project_buttons">
           <div className="project_buttons_button" onClick={() => this.toggleAnalytics()}>
             <Icon>bar_chart</Icon>
-            <div>Ver resumen</div>
+            <div>Estadísticas</div>
           </div>
           <div className="project_buttons_button" onClick={() => this.toggleMap()}>
-            <Icon>map</Icon>
-            <div>Ver mapa</div>
+            <Icon>map-marker</Icon>
+            <div>Mapa</div>
           </div>
-          <div className="project_buttons_button" onClick={() => this.nodes.getScreenshot()}>
-            <Icon style={{marginRight: 0}}>photo_library</Icon>
+          <div className="project_buttons_button" onClick={() => this.nodes.openListado()}>
+            <Icon>format_list_bulleted</Icon>
+            <div>Listado</div>
           </div>
         </div>
           {
@@ -334,6 +340,52 @@ function getTypeName(t){
     break;
   }
   return _t(o);
+}
+
+function getTypeIcon(t){
+  var o = "";
+  switch(t){
+    case "rfc":
+      o =  "home_work";
+    break;
+    case "website":
+      o =  "public";
+    break;
+    case "person":
+      o =  "person";
+    break;
+    case "date":
+      o =  "date_range";
+    break;
+    case "email":
+      o = "mail";
+    break;
+    case "convenio":
+      o =  "monetization_on";
+    break;
+    case "instancia":
+      o =  "apartment";
+    break;
+    case "titular":
+      o =  "person_outline";
+    break;
+    case "no_notaria":
+      o =  "how_to_reg";
+    break;
+    case "contrato":
+      o =  "monetization_on";
+    break;
+    case "address":
+      o = "my_location";
+    break;
+    case "phone":
+      o = "phone";
+    break;
+    default:
+      o = "";
+    break;
+  }
+  return o;
 }
 
 
@@ -759,7 +811,20 @@ class Nodes extends React.Component{
     displayDoi: true,
     minimizeDoi: false,
     initLoaded: false,
-    level: 0
+    level: 0,
+    listadoTypes: [
+      "rfc",
+      "website",
+      "person",
+      "date",
+      "email",
+      "phone",
+      "instancia",
+      "convenio",
+      "address",
+      "no_notaria",
+    ],
+    openListado: false
   }
   componentDidMount(){
     var self = this;
@@ -1055,18 +1120,19 @@ class Nodes extends React.Component{
                             d.hasBanderasRojas = hbs;
                             d.bs = bs;
                             if(hbs){
-                              return "red";
+                              return "#ff4b33";
                             }
                           }
                           return c;
                         })
                         .attr('stroke-width', function(d){
-                          return d.hasBanderasRojas ? '40px' : '4px';
+                          return d.hasBanderasRojas ? '80px' : '4px';
                         })
                         .attr('data-type', (d) => d.type)
                         .attr('fill', function(d){
                           var t = d.type;
-                          return getTypeColor(t);
+                          var c = getTypeColor(t);
+                          return c;
                         })
                         .call(this.drag())
 
@@ -1580,7 +1646,7 @@ class Nodes extends React.Component{
     var canvas = document.createElement("canvas");
     var context = canvas.getContext("2d");
     canvas.width = width;
-    canvas.height = height + logoH;
+    canvas.height = height;
 
     var image = new Image();
     image.src = b64;
@@ -1589,12 +1655,12 @@ class Nodes extends React.Component{
       canvas.toBlob(function(blob){
         zip.file('sinapsisMapaDeNodos.png', blob);
         context.fillStyle = "#222222";
-        context.fillRect(0, 0, width, height + logoH);
+        context.fillRect(0, 0, width, height);
         context.drawImage(image, 0, 0, width, height);
         var logo = new Image();
         logo.src = require('../../static/logo.png');
         logo.onload = function(){
-          context.drawImage(logo, 20, height - 10, logoRealWidth, logoH);
+          context.drawImage(logo, 20, height - logoH - 20, logoRealWidth, logoH);
           canvas.toBlob(function(blob){
             zip.file('sinapsisMapaDeNodos.jpg', blob);
             zip.generateAsync({type: "blob"})
@@ -1604,17 +1670,34 @@ class Nodes extends React.Component{
                   saveAs(content, sn + ".zip");
                   var ev = new Event('sinapsisEndLoad');
                   window.dispatchEvent(ev);
-                });
+              });
           })
         }
       })
     }
   }
 
+  openListado(v){
+    v = v ? v : [];
+    this.setState({
+      openListado: true
+    })
+  }
+
+
   render(){
     return(
       <div className="db_viz_nodes" ref={(ref) => this.container = ref}>
+        {
+          this.state.openListado ?
+          <SSListado v={this.state.listadoTypes} nodesMap={this} onClose={() => this.setState({openListado: false})}/>
+          :
+          null
+        }
         <div id="db_viz_nodes_controls">
+          <Fab title="Obtener imágenes" alt="Obtener imágenes" size="small" color="primary" onClick={() => this.getScreenshot()}>
+            <Icon>camera_alt</Icon>
+          </Fab>
           <Fab title="Refrescar" alt="Refrescar" size="small" color="primary" onClick={() => this.set()}>
             <Icon>autorenew</Icon>
           </Fab>
@@ -1644,8 +1727,303 @@ class Nodes extends React.Component{
             <SSTooltip doi={this.state.doi} canvas={this.canvasSvg} />
             : null
           }
-
         <div className="db_viz_glow_indicator"></div>
+      </div>
+    )
+  }
+}
+
+class SSListado extends React.Component{
+  state = {
+    d: {},
+    open: false,
+    eoi: {
+      name: '',
+      fields: []
+    }
+  }
+  componentDidMount(){
+    var self = this;
+    this.set();
+    window.addEventListener('sinapsis_lang_change', function(){
+      self.set();
+    })
+  }
+  set(){
+    var self = this;
+    var v = this.props.v;
+    var nds = d3.selectAll('.node');
+    var d = {};
+    v.map(function(t){
+      var c = self.getCoincidenciasFromType(t, nds);
+      d[t] = c;
+    })
+    this.setState({
+      d: d
+    })
+  }
+
+  getCoincidenciasFromType(t, nds){
+    var obj = {
+      name: getTypeName(t),
+      type: t,
+      icon: getTypeIcon(t),
+      coincidencias: 0,
+      fields: []
+    }
+    nds.filter(d => d.type == t)
+       .each(function(d){
+         var coin = d.coincidencias;
+         obj.coincidencias = obj.coincidencias + coin;
+         obj.fields.push(d.fields);
+       })
+
+    obj.fields.sort(function(a, b){
+      return a.length <= b.length ? 1 : -1;
+    })
+
+    obj.coincidenciasFormatted = this.props.nodesMap.numberWithCommas(obj.coincidencias);
+    return obj;
+  }
+
+  openCoincidencia(e){
+    this.setState({
+      open: true,
+      eoi: e
+    })
+  }
+
+  handleOpen(field){
+    var data = {
+      euid: field.empresauid,
+      dbid: field.fromdb
+    }
+    var e = new CustomEvent('sinapsisOpenEmpresa', { detail: data});
+    window.dispatchEvent(e);
+    this.setState({
+      open: false
+    })
+  }
+
+  typePreCsv(t){
+    var da = this.state.d[t];
+    var daf = da.fields;
+    var o = [];
+
+    o.push(
+      [
+        'Coincidencias de ' + getTypeName(t) +': ' + daf.length,
+        '',
+        '',
+        ''
+      ]
+    )
+
+    /*
+    * [Valor: coincidencia, '', '', '']
+    * [Valor, Nombre campo, Empresa, Base de datos ]
+    **/
+    daf.map(function(gr, i){
+      gr.map(function(f, y){
+        if(!y){
+          var ins = [f.value + ': ' + gr.length + ' coincidencias', '', '', '']
+          o.push(ins);
+        }
+        var ins = [f.value, f.name, f.empresaName, f.dbName]
+        o.push(ins);
+      })
+    })
+    return o;
+  }
+
+  async buildTypeCsv(t){
+    window.dispatchEvent(startLoad);
+    var pre = this.typePreCsv(t);
+    pre = [
+            [getTypeName(t), 'Tipo', 'Empresa', 'Base de datos'],
+            ...pre
+          ];
+    var txt = window.dbf.arrayToCsv(pre);
+    var w = await saveAs(txt, 'coincidencias-'+t+'-sinapsis.csv');
+    window.dispatchEvent(endLoad);
+    this.setState({
+      open: false
+    })
+  }
+
+  async buildCsv(){
+    window.dispatchEvent(startLoad);
+    var v = this.props.v;
+    var o = [];
+    v.map(t => o = [...o, ...this.typePreCsv(t)]);
+
+    o = [
+          ['Tipo', 'Campo', 'Empresa', 'Base de datos'],
+          ...o
+        ];
+    var txt = window.dbf.arrayToCsv(o);
+    var w = await saveAs(txt, 'coincidencias-sinapsis.csv');
+    window.dispatchEvent(endLoad);
+  }
+
+  fnumber(n){
+    var ns = [
+      'cero',
+      'una',
+      'dos',
+      'tres',
+      'cuatro',
+      'cinco',
+      'seis',
+      'siete',
+      'ocho',
+      'nueve'
+    ];
+
+    if(n < 10){
+      return ns[n];
+    }else{
+      return ns;
+    }
+  }
+
+  render(){
+    var v = this.props.v;
+    var self = this;
+    var eoi = this.state.eoi;
+    var activeDbs = window.dbf.getActiveDbs();
+    var activeDbsNames = [];
+    activeDbs.map(function(db){
+      activeDbsNames.push(db.name);
+    })
+    return(
+      <div id="ss_listado">
+        <div id="ss_listado_close" onClick={() => this.props.onClose()}>
+          <Icon>close</Icon>
+        </div>
+        <div id="ss_listado_container">
+          <div className="ss_listado_main_info">
+            <div className="ss_listado_main_info_name">
+              <strong>{this.props.nodesMap.numberWithCommas(this.props.nodesMap.state.coincidencias)}</strong>
+              &nbsp;coincidencias
+            </div>
+            <div className="ss_listado_main_info_sec">
+            en {this.fnumber(activeDbs.length)} base{activeDbs.length === 1 ? '' : 's'} de datos ({activeDbsNames.join(', ')})
+            </div>
+          </div>
+          <div className="ss_listado_container">
+            {
+              v.map(function(_t){
+                var e = self.state.d;
+                if(!e[_t]){
+                  return null;
+                }
+                var o = e[_t];
+                var cs = ['ss_listado_container_e'];
+                if(!o.coincidencias){
+                  cs.push('ss_empty_listado');
+                }
+                return(
+                  <div className={cs.join(' ')} onClick={() => self.openCoincidencia(o)}>
+                    <div className="ss_listado_container_e_icon">
+                      <div><Icon>{o.icon}</Icon></div>
+                    </div>
+                    <div className="ss_listado_container_e_info">
+                      <div className="ss_listado_container_e_info_count">
+                        {o.coincidenciasFormatted}
+                      </div>
+                      <div className="ss_listado_container_e_info_name">
+                        {o.name}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
+          <div id="ss_listado_finals">
+            <div className="ss_listado_finals_btn" onClick={() => this.buildCsv()}>
+              <Icon>get_app</Icon>
+              <div>Descargar en CSV</div>
+            </div>
+          </div>
+        </div>
+        <div id="ss_listado_backclose" onClick={() => this.props.onClose()}></div>
+        <Dialog
+        id="ss_listado_dialog"
+        open={this.state.open}
+        onClose={() => this.setState({open: false})}
+        >
+        <DialogTitle id="alert-dialog-title">Coincidencias de {eoi.name} <span>{eoi.coincidenciasFormatted}</span></DialogTitle>
+        <DialogContent>
+          <div className="ss_listado_table">
+            <div className="ss_listado_table_tr ss_listado_table_th">
+              <div className="ss_listado_table_td">
+                {eoi.name}
+              </div>
+              <div className="ss_listado_table_td">
+                Tipo
+              </div>
+              <div className="ss_listado_table_td">
+                Empresa
+              </div>
+              <div className="ss_listado_table_td">
+                Base de datos
+              </div>
+            </div>
+            <div className="ss_listado_table_content">
+              {
+                eoi.fields.map(function(fg){
+                  var f = fg[0];
+                  var fn = f.value;
+                  return(
+                    <div className="ss_listado_table_group">
+                      <input type="checkbox" />
+                      <div className="ss_listado_table_tr ss_listado_table_breaker">
+                        <div className="ss_listado_table_td">
+                          <strong>{fn}</strong> <span className="ss_badge">{fg.length}</span><Icon>keyboard_arrow_down</Icon>
+                        </div>
+                      </div>
+                      <div className="ss_listado_table_group_c">
+                      {
+                        fg.map(function(field){
+                          return(
+                            <div className="ss_listado_table_tr ss_listado_simplerow" onClick={() => self.handleOpen(field)}>
+                              <div className="ss_listado_table_td">
+                                <strong>{field.value}</strong>
+                              </div>
+                              <div className="ss_listado_table_td">
+                                {field.name}
+                              </div>
+                              <div className="ss_listado_table_td">
+                                {field.empresaName}
+                              </div>
+                              <div className="ss_listado_table_td">
+                                {field.dbName}
+                              </div>
+
+
+                            </div>
+                          )
+                        })
+                      }
+                    </div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button color="secondary" onClick={() => this.setState({open: false})}>
+            Cerrar
+          </Button>
+          <Button color="secondary" autoFocus onClick={() => this.buildTypeCsv(eoi.type)}>
+            Descargar en CSV
+          </Button>
+        </DialogActions>
+      </Dialog>
       </div>
     )
   }
@@ -1862,6 +2240,11 @@ class SSCategoryToggle extends React.Component{
       vals: vals
     })
 
+  }
+
+  viewListado(){
+    var s = this.state.vals;
+    this.props.nodesMap.openListado(s);
   }
 
   render(){
