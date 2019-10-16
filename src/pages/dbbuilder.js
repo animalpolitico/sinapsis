@@ -483,8 +483,13 @@ class DbBuilderSidebar extends React.Component{
       var data = e.detail;
       var euid = data.euid;
       var dbid = data.dbid;
-      self.selectDb(dbid);
-      self.refs[dbid].handleClick();
+      try{
+        self.selectDb(dbid);
+        self.refs[dbid].handleClick();
+      }catch(ex){
+        
+      }
+
       setTimeout(function(){
         try{
           var e = window.dbf.getEmpresa(dbid, euid);

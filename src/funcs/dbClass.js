@@ -300,17 +300,61 @@ export default class DbFactory {
   }
 
   /**
+  * Obtiene el top 10 de montos
+  *
+  * @param activeDbs
+  * @return array
+  **/
+  getTopMontos(onlydbs){
+    var self = this;
+    var db = this.getDbs();
+    var dbA = Object.values(db);
+    if(onlydbs){
+      dbA = dbA.filter(_db => onlydbs.indexOf(_db.id) > -1);
+    }
+    var o = [];
+    dbA.map(function(_db){
+      var empresas = _db.empresas;
+          empresas = Object.values(empresas);
+      if(empresas){
+        empresas.map(function(empresa){
+          empresa.dbid = _db.id;
+          empresa.sum = self.getEmpresaSum(empresa);
+          o.push(empresa);
+        })
+      }
+    })
+
+    o.sort(function(a, b){
+      var as = a.sum;
+      var bs = b.sum;
+      return as < bs ? 1 : -1;
+    })
+    o = o.slice(0, 10);
+    return o;
+  }
+
+  /**
   * Construye Analytics de interés
   *
   * @param void
   * @return obj
   **/
-  buildAnalytics(){
+  buildAnalytics(onlydbs){
     var db = this.getDbs();
     var dbA = Object.values(db);
+    if(onlydbs){
+      dbA = dbA.filter(_db => onlydbs.indexOf(_db.id) > -1);
+    }
+    var interestFields = ['rfc', 'folio-mercantil', 'direccion-fiscal', 'telefono', 'sitio-web', 'correo-electronico', 'representante', 'accionista'];
     var obj = {
       count: 0
     }
+    interestFields.map(function(k){
+      obj[k] = 0;
+    })
+
+
     var controlTable = {};
 
     dbA.map(function(_db){
@@ -321,7 +365,6 @@ export default class DbFactory {
           obj.count = obj.count + 1;
           var fields = empresa.fields;
           if(fields){
-            var interestFields = ['rfc', 'folio-mercantil', 'direccion-fiscal', 'telefono', 'sitio-web', 'correo-electronico'];
             interestFields.map(function(f){
               if(fields[f] && fields[f].value){
                 if(!obj[f]){
@@ -446,6 +489,40 @@ export default class DbFactory {
     return o;
   }
 
+  /**
+  * Obtiene la suma de transferencias
+  *
+  * @param void
+  * @return int
+  **/
+  getTransferenciasSum(odbs, onlypositive){
+    var self = this;
+    var db = this.getDbs();
+    var dbA = Object.values(db);
+    if(odbs){
+      dbA = dbA.filter(_db => odbs.indexOf(_db.id) > -1);
+    }
+    var count = 0;
+    dbA.map(function(_db){
+      var dbfields = [];
+      var empresas = _db.empresas;
+          empresas = Object.values(empresas);
+      if(empresas){
+        empresas.map(function(em){
+          var f = em.fields ? em.fields : {};
+              f = Object.values(f);
+
+          var c = self.getEmpresaTransferenciaSum(f);
+          if(onlypositive && c > 0){
+            count += c;
+          }else if(!onlypositive){
+            count += c;
+          }
+        })
+      }
+    })
+    return count;
+  }
 
   /**
   * Obtiene la suma de convenios
@@ -453,10 +530,13 @@ export default class DbFactory {
   * @param void
   * @return int
   **/
-  getGroupsSum(group, keySlug, montoSlug){
+  getGroupsSum(group, keySlug, montoSlug, odbs){
     var masterFields = [];
     var db = this.getDbs();
     var dbA = Object.values(db);
+    if(odbs){
+      dbA = dbA.filter(_db => odbs.indexOf(_db.id) > -1);
+    }
     dbA.map(function(_db){
       var dbfields = [];
       var empresas = _db.empresas;

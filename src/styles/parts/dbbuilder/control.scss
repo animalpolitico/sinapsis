@@ -10,9 +10,19 @@
     align-items: center;
     box-sizing: border-box;
     padding: 0.5rem 0.75rem;
-    margin: 0 0.5rem;
     cursor: pointer;
+    position: relative;
     box-shadow: 0 -2px 4px rgba(black, 0.1);
+    &:first-child{
+      &::after{
+        content: '';
+        @extend .cy;
+        height: 70%;
+        width: 1px;
+        right: 0;
+        background: #555;
+      }
+    }
     &:hover{
       background: #333;
     }

@@ -5,6 +5,7 @@
   "homepage": "https://pajaropolitico.com/sinapsisBeta",
   "dependencies": {
     "@material-ui/core": "^4.3.2",
+    "chart.js": "^2.8.0",
     "color-generator": "^0.1.0",
     "csv": "^5.1.2",
     "csvtojson": "^2.0.10",

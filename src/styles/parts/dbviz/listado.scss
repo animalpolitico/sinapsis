@@ -29,10 +29,11 @@
     width: 100%;
     box-sizing: border-box;
     padding: 3rem 3rem;
-    @extend .cy;
+    @extend .cxy;
     z-index: 2;
     max-height: 95%;
     overflow-y: auto;
+    max-width: 1000px;
     #ss_listado_finals{
       width: 100%;
       @extend .flex;

@@ -1,37 +1,10 @@
-#ss_analytics_trigger{
-  position: absolute;
-  z-index: 999;
-  left: 50%;
-  bottom: 0;
-  width: 80px;
-  height: 80px;
-  background: rgba(white, 0.1);
-  cursor: pointer;
-  border-radius: 50%;
-  transform: translate(-50%, 50%);
-  &_arrow{
-    width: 100%;
-    height: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    .material-icons{
-      @extend .cxy;
-      color: white;
-      line-height: 1;
-      padding-top: 8px;
-      font-size: 2rem;
-    }
-  }
-}
-
 .ss_analytics{
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  background: #1a1a1a;
+  background: #212121;
   z-index: 9999999;
   &_close{
     position: absolute;
@@ -47,80 +20,247 @@
   }
   &_container{
     width: 100%;
-    height: 100%;
-    position: absolute;
     box-sizing: border-box;
-    padding: 1rem 4rem 6rem;
+    padding: 3rem 4rem;
+    @extend .cxy;
+    z-index: 2;
+    max-height: 100%;
     overflow-y: auto;
-    &_group{
+    max-width: 1000px;
+    &_title{
       width: 100%;
-      margin: 3rem 0;
-      &_scatter{
-        width: 80%;
-        height: 180px;
-        margin: 0.5rem auto;
+      text-align: center;
+      font-size: 1.4rem;
+      color: #f6f6f6;
+      font-weight: 300;
+      line-height: 1.18;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      strong{
+        font-weight: 600;
+        &::before{
+          content: '/';
+          color: $main;
+          font-weight: 600;
+          margin-right: 0.25rem;
+        }
       }
-      &_h1{
-        font-size: 2rem;
-        color: white;
-        font-weight: 300;
-        margin-bottom: 1.5rem;
-        text-align: center;
-        position: relative;
+
+    }
+  }
+  .ss_analytics_dbsinfo{
+    width: 100%;
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+    color: #f6f6f6;
+    font-weight: 300;
+    text-transform: uppercase;
+    &::before{
+      content: '/';
+      color: $main;
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+  }
+  .ss_analytics_montos{
+    width: 100%;
+    margin-top: 4rem;
+    &_title{
+      font-size: 0.9rem;
+      text-align: center;
+      color: #f0f0f0;
+      font-weight: 600;
+      text-transform: uppercase;
+      @extend .flex;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 2rem;
+      &::before, &::after{
+        content: '';
+        display: block;
+        width: 10%;
+        margin: 0 1rem;
+        height: 2px;
+        background: rgba(white, 0.1);
       }
-      &_montos{
+    }
+    .ssa_top10_canvas{
+      width: 45%;
+      margin: 1rem auto;
+      canvas{
         width: 100%;
-        @extend .flex;
-        justify-content: center;
-        &_group{
+      }
+    }
+    &_row{
+      width: 90%;
+      @extend .flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0.5rem auto 0;
+
+      .ss_analytics_pie{
+        width: 25%;
+        box-sizing: border-box;
+        padding: 0.5rem;
+        &_chart{
+          width: 100%;
           box-sizing: border-box;
-          padding: 0 1.2rem;
-          color: white;
-          text-align: center;
-          &_m{
-            font-size: 1.7rem;
-            font-weight: 300;
-          }
-          &_l{
-            strong{
-              color: #A8FF00;
+          padding: 0.5rem 0.2rem;
+          position: relative;
+          &_icon{
+            @extend .cxy;
+            .material-icons{
+              line-height: 1;
+              display: block;
+              @extend .cxy;
+              color: #525050;
             }
+          }
+          canvas{
+            width: 100%;
+            position: relative;
+            z-index: 2;
+          }
+        }
+        &_info{
+          width: 70%;
+          font-size: 0.8rem;
+          @extend .flex;
+          flex-direction: column;
+          justify-content: center;
+          line-height: 1.2;
+          margin: 0.5rem auto 0;
+          text-transform: uppercase;
+          &_a{
+            width: 100%;
+            color: #f6f6f6;
+            font-weight: 500;
+            &::before{
+              content: '/';
+              color: $main;
+              font-weight: 600;
+              margin-right: 0.2rem;
+            }
+          }
+          &_b{
+            width: 100%;
+            color: #888;
+            font-weight: 500;
+            margin-top: 0.25rem;
+            text-align: left;
           }
         }
       }
-      &_charts_group{
-        width: 100%;
+      .ss_analytics_montos_monto{
         @extend .flex;
-        flex-wrap: wrap;
-        .ss_analytics_chart_binder{
-          width: 25%;
-          min-width: 100px;
-          box-sizing: border-box;
-          padding: 0.5rem;
-          .ss_analytics_chart{
-            width: 100%;
-            .recharts-wrapper{
-              margin: 0 auto;
-              display: block;
-            }
-          }
-          &_info{
-            width: 100%;
-            text-align: center;
-            line-height: 1;
-            color: white;
-            margin-top: 0.25rem;
-            box-sizing: border-box;
-            padding: 0 0.5rem;
-            strong{
-              color: #a7c5fa;
-            }
-            span{
-              font-size: 0.8rem;
-            }
+        justify-content: center;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 0 2rem;
+        &_m, &_t{
+          width: 100%;
+        }
+        &_m{
+          font-size: 1.4rem;
+          font-weight: 600;
+          color: #f6f6f6;
+        }
+        &_t{
+          text-align: left;;
+          color: white;
+          margin-top: 0.05rem;
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          &::before{
+            content: '/';
+            color: $main;
+            font-weight: bolder;
+            margin-right: 5px;
           }
         }
       }
     }
+  }
+  .ss_analytics_choose{
+    width: 100%;
+    margin-top: 0;
+    .ss_analytics_montos_title{
+      margin-bottom: 1rem;
+    }
+    &_tr{
+      width: 100%;
+      @extend .flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9rem;
+      .ssa_icon{
+        @extend .flex;
+        align-items: center;
+        margin-right: 0.5rem;
+        cursor: pointer;
+        .material-icons{
+          color: #555;
+        }
+      }
+      .ssa_btns{
+        @extend .flex;
+        .ssa_btn{
+          @extend .flex;
+          box-sizing: border-box;
+          padding: 0.3rem 2rem;
+          align-items: center;
+          color: #eee;
+          cursor: pointer;
+          font-weight: 600;
+          text-transform: uppercase;
+          border: 1px solid $main;
+          transition: all 0.3s ease;
+          box-shadow: 0 0 3px rgba($main, 0.8);
+          background: #222;
+          &:hover{
+            background: #333;
+          }
+          &.ssa_inactive{
+            color: #444;
+            opacity: 0.7;
+            border-color: #333;
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+}
+body.ss_showing_drawer{
+  .ssa_top10_canvas{
+    width: 70%!important;
+  }
+  .ss_analytics_choose{
+    display: none;
+  }
+  .ss_analytics_montos_row{
+    .ss_analytics_montos_monto{
+      width: 100%;
+      margin: 0.5rem 0;
+      text-align: center;
+    }
+    .ss_analytics_montos_monto_t{
+      text-align: center;
+    }
+  }
+  .ss_analytics_dbsinfo{
+    &::before{
+      display: none!important;
+    }
+    strong{
+      display: block;
+
+    }
+  }
+  .ss_analytics_pie{
+    width: 50%!important;
   }
 }
