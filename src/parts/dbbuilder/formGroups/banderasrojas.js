@@ -7,6 +7,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import CountTo from 'react-count-to';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';

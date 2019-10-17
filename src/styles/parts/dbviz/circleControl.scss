@@ -1,28 +1,48 @@
 .nodes_controls{
-  width: 220px;
+  width: 200px;
   position: absolute;
-  bottom: 0;
-  right: 20px;
+  top: 50%;
+  transform: translate(100%, -50%);
+  right: 0;
   z-index: 9;
-  max-height: 100%;
+  height: calc(100% - 20px);
+  transition: all 0.25s ease;
+  &.nodes_controls_showing{
+    transform: translateY(-50%);
+    .nodes_controls_button{
+      border-right: none;
+    }
+  }
   &_container{
-    max-height: 700px;
+    @extend .cy;
+    width: 100%;
     overflow: hidden;
     overflow-y: auto;
+    @extend .flex;
+    max-height: 100%;
+    border: 2px solid #333;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   &_button{
-    width: 100%;
     background: #333;
     cursor: pointer;
     @extend .flex;
     align-items: center;
     box-sizing: border-box;
-    padding: 0.5rem;
+    padding: 0.25rem;
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    border: 1px solid $main;
+    border-right: none;
+    transform: translate(-100%, -50%);
     .material-icons, div{
-      color: white;
+      color: #f6f6f6;
     }
     .material-icons{
-      font-size: 1rem;
+      font-size: 1.2rem;
     }
     div{
       font-size: 0.8rem;
@@ -39,7 +59,8 @@
 .ss_control_group{
   background: #2a2a2a;
   box-sizing: border-box;
-  border-bottom: 2px solid rgba(white, 0.1);
+  border-bottom: 2px solid $main;
+  width: 100%;
   &:last-child{
     border-bottom: none;
   }
@@ -50,10 +71,10 @@
       @extend .flex;
       box-sizing: border-box;
       padding-top: 0.5rem;
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
       border-top: 1px solid rgba(white, 0.1);
       box-sizing: border-box;
-      padding: 0.5rem 0.5rem 0.25rem;
+      padding: 0.75rem 0.5rem 0.25rem;
       cursor: pointer;
       &.ss_ctr_br_buttons{
         cursor: default;
@@ -87,24 +108,32 @@
   .ss_control_group_container{
     width: 100%;
     box-sizing: border-box;
-    padding: 0.25rem 0.25rem;
+    padding: 0.5rem 0.25rem;
     &_title{
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: white;
       line-height: 1;
-      font-weight: 600;
+      font-weight: 300;
       box-sizing: border-box;
-      padding: 0.15rem 0.5rem;
+      padding: 0.5rem 0.35rem 0.15rem;
       @extend .flex;
+      pointer-events: none;
+      text-transform: uppercase;
       align-items: center;
       div{
         flex: 1;
+        &::before{
+          content: '/';
+          color: $main;
+          margin-right: 0.25rem;
+          font-weight: 600;
+        }
       }
       .material-icons{
         font-size: 0.9rem;
         cursor: pointer;
         box-sizing: border-box;
-        display: block;
+        display: none;
         &:hover{
           opacity: 0.8;
         }
@@ -112,43 +141,66 @@
     }
     &_extracontrols{
       padding-bottom: 0.75rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0rem;
       .ss_control_extra{
         width: 100%;
         box-sizing: border-box;
-        padding: 0.15rem 0.75rem;
+        padding: 0.3rem 0.75rem;
+        position: relative;
         &_warning{
           @extend .flex;
           align-items: center;
-          color: yellow;
-          margin-top: 0.2rem;
+          margin-top: 0.35rem;
           line-height: 1.1;
+          color: #f6f6f6;
           *, &{
-            font-size: 0.5rem;
-            font-weight: 600;
+            font-size: 0.55rem;
+            font-weight: 500;
           }
           .material-icons{
+            color: yellow;
             margin-right: 0.3rem;
           }
         }
         label{
           font-size: 0.7rem;
-          font-weight: 600;
-          color: white;
-          margin-bottom: -0.1rem;
+          font-weight: 400;
+          color: #f6f6f6;
+          display: block;
+          line-height: 1;
+          margin-bottom: 0.25rem;
+        }
+        &_f{
+          position: absolute;
+          top: 1rem;
+          right: 1.1rem;
+          color: #acacac;
+          pointer-events: none;
+          .material-icons{
+            font-size: 0.9rem;
+            line-height: 1;
+            color: #bbb;
+            transform: translateY(8px);
+          }
         }
         select{
           appearance: none;
           display: block;
           width: 100%;
           box-sizing: border-box;
-          padding: 0.25rem;
-          background-color: #444;
-          font-size: 0.7rem;
+          padding: 0.25rem 1.2rem 0.25rem 0.35rem;
+          background-color: #222;
+          font-size: 0.65rem;
           font-weight: 600;
           border: 0;
           margin-top: 0.1rem;
           border-radius: 0;
-          color: white;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          color: #acacac;
+          border: 1px solid $main;
           cursor: pointer!important;
           &:focus{
             outline: 0;
@@ -170,6 +222,7 @@
         flex-wrap: nowrap;
         align-items: center;
         margin: 0.15rem 0;
+        padding-bottom: 0.25rem;
         border-bottom: 1px solid rgba(white, 0.1);
         cursor: pointer;
         &_toggle{
@@ -200,20 +253,16 @@
           &_empresas{
             font-size: 0.5rem;
             color: white;
-            font-weight: 600;
+            text-transform: uppercase;
+            font-weight: 400;
+            color: #bbb;
             strong{
-              &::before{
-                content: '/';
-                color: $main;
-                margin-right: 2px;
-              }
+              font-weight: 400;
             }
           }
         }
         &.ss_db_hidden{
-          .ss_db_info{
-            opacity: 0.5;
-          }
+          opacity: 0.4;
         }
       }
     }
@@ -223,12 +272,15 @@
       box-sizing: border-box;
       padding: 0.25rem 0.5rem 0.15rem;
       font-size: 0.65rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.75rem;
       &_btn{
         box-sizing: border-box;
         padding: 0.25rem 0.35rem;
-        background: #333;
+        background: #222;
         text-transform: uppercase;
         font-weight: 600;
+        border: 1px solid $main;
         color: white;
         margin-right: 0.35rem;
         cursor: pointer;
@@ -243,12 +295,55 @@
     }
     &_switches{
       width: 100%;
+      .ss_control_group_container_switch{
+        @extend .flex;
+        box-sizing: border-box;
+        padding: 0.35rem 0.5rem;
+        &_btn{
+          position: relative;
+          &:not(:last-child){
+            margin-right: 0.35rem;
+          }
+          input{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            cursor: pointer;
+            opacity: 0;
+          }
+          &_c{
+            position: relative;
+            box-sizing: border-box;
+            padding: 0.25rem 0.35rem;
+            background: #222;
+            border: 1px solid $main;
+            text-transform: uppercase;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: white;
+            opacity: 0.4;
+          }
+          input{
+            &:checked ~ .ss_control_group_container_switch_btn_c{
+              opacity: 1;
+            }
+          }
+        }
+      }
+
+
       .ss_ctr_ch{
         width: 100%;
         position: relative;
         box-sizing: border-box;
-        padding: 0.35rem 0.5rem;
+        padding: 0.3rem 0.5rem;
         margin: 0.25rem 0;
+        &:hover{
+          opacity: 0.7;
+        }
         input{
           width: 100%;
           height: 100%;
@@ -260,7 +355,7 @@
           cursor: pointer;
         }
         &_tds{
-          font-size: 0.75rem;
+          font-size: 0.7rem;
           @extend .flex;
           line-height: 1;
           color: white;
@@ -269,8 +364,8 @@
         }
         &_td{
           &_ball{
-            width: 12px;
-            height: 12px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             margin-right: 5px;
             position: relative;

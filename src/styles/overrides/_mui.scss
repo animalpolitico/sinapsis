@@ -7,3 +7,10 @@
     overflow: initial!important;
   }
 }
+.MuiFab-root{
+  box-shadow: none!important;
+  border: 2px solid #333!important;
+  .MuiIcon-root{
+    font-size: 1.2rem!important;
+  }
+}

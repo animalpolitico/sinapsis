@@ -6,15 +6,23 @@
   right: 0;
   overflow: hidden;
   position: relative;
+  &_info_coincidencias{
+    &::before{
+      content: '/';
+      color: $main!important;
+      margin-right: 5px;
+      font-weight: 600;
+    }
+  }
   &_tooltip{
     position: absolute;
     z-index: 99;
     background: #303030;
     pointer-events: none;
-    transform: translate(-50%, -120%);
+    transform: translate(-50%, -110%);
     max-width: 300px;
     min-width: 200px;
-    padding-bottom: 0.25rem;
+    padding-bottom: 0.5rem;
     color: #F6F6F6;
     &_name{
       font-size: 1rem;
@@ -51,8 +59,8 @@
         content: '/';
         display: inline-block;
         margin-right: 0.15rem;
-        color: $main;
-        font-weight: 800;
+        color: #f6f6f6;
+        font-weight: 400;
       }
     }
     &_info{
@@ -66,6 +74,7 @@
         line-height: 1;
         margin-right: 0.15rem;
       }
+
     }
     &_click{
       font-size: 0.6rem;
@@ -73,7 +82,7 @@
       box-sizing: border-box;
       padding: 0.25rem 0.5rem 0.15rem;
       margin-top: 0.15rem;
-      color: #eee;
+      color: #aaa;
     }
   }
   &_info{
@@ -152,7 +161,9 @@ body.ss_showing_drawer{
 .ss_doi_window{
   width: 250px;
   margin-bottom: 1rem;
-  background: #1c1c1c;
+  background: #2a2a2a;
+  border: 2px solid #333;
+  overflow: hidden;
   &_type{
     font-weight: 600;
     font-size: 0.75rem;
@@ -164,17 +175,23 @@ body.ss_showing_drawer{
     padding: 0.25rem 0.5rem;
   }
   &_name{
-    font-weight: 300;
+    font-weight: 100;
     width: 100%;
     box-sizing: border-box;
     padding: 0.75rem 0.5rem;
-    font-size: 1.1rem;
-    line-height: 1;
-    color: black;
+    font-size: 1rem;
+    line-height: 1.1;
+    color: white;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     position: relative;
+    &::before{
+      content: '/';
+      color: $main;
+      font-weight: 600;
+      margin-right: 0.25rem;
+    }
     &::after{
       content: '';
       display: block;
@@ -205,12 +222,12 @@ body.ss_showing_drawer{
     &_field{
       width: 100%;
       box-sizing: border-box;
-      padding: 0.3rem 0.5rem;
-      font-size: 0.8rem;
+      padding: 0.45rem 0.5rem;
+      font-size: 0.65rem;
       position: relative;
       cursor: pointer;
       &:hover{
-        background: rgba(white, 0.05);
+        background: rgba(white, 0.04);
       }
       &:not(:last-child){
         &::after{
@@ -230,12 +247,6 @@ body.ss_showing_drawer{
         color: #eee;
         font-weight: 600;
         font-size: 0.7em;
-        &::before{
-          content: '/';
-          color: $main;
-          display: inline-block;
-          margin-right: 0.25rem;
-        }
       }
       &_dbinfo{
         width: 100%;
@@ -247,13 +258,19 @@ body.ss_showing_drawer{
           text-overflow: ellipsis;
           align-items: center;
           box-sizing: border-box;
-          padding: 0.05rem 0;
+          padding: 0.025rem 0;
           font-size: 0.9em;
           .material-icons{
             font-size: 1em;
             line-height: 1em;
             margin-right: 0.25em;
             color: #bbb;
+            display: none;
+          }
+          &:last-child{
+            color: #999;
+            margin-top: 0.15rem;
+            font-size: 0.6rem;
           }
         }
       }
@@ -268,9 +285,11 @@ body.ss_showing_drawer{
   .ss_doi_window_controls{
     width: 100%;
     box-sizing: border-box;
-    padding: 0.15rem 0.5rem;
+    padding: 0.25rem 0.5rem;
     @extend .flex;
     align-items: center;
+    position: relative;
+    z-index: 2;
     &_td{
       height: 0%;
       &.ss_doi_window_controls_td_level{
@@ -278,22 +297,25 @@ body.ss_showing_drawer{
         @extend .flex;
         align-items: center;
         font-size: 0.9rem;
+        color: #f6f6f6;
         strong{
-          margin-left: 0.5rem;
+          margin-left: 0.35rem;
         }
         .ss_doi_levels{
-          margin-left: 0.5rem;
+          margin-left: 0.3rem;
           @extend .flex;
           .material-icons{
             font-size: 1rem;
             display: block;
-            padding: 0.25rem 0.15rem;
+            padding: 0.25rem 0.1rem;
             cursor: pointer;
+            color: $main;
             &[disabled]{
               opacity: 0.2;
               pointer-events: none;
             }
             &:hover{
+              opacity: 0.5;
               color: $main;
             }
           }
@@ -323,10 +345,12 @@ body.ss_showing_drawer{
     .ss_doi_window_name{
       font-size: 0.7rem;
       font-weight: 600;
-      padding: 0.25rem 0.5rem;
+      padding: 0.65rem 0.5rem;
       white-space: normal;
       line-height: 1.1;
       border-bottom: none;
+      border-top: 3px solid;
+      color: white;
       &::after{
         display: none;
       }

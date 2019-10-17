@@ -14,6 +14,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Switch from '@material-ui/core/Switch';
+import CountTo from 'react-count-to';
 import Map from './map';
 import { _t } from '../../vars/countriesDict';
 import Analytics from './analytics';
@@ -55,17 +56,23 @@ export default class DbViz extends React.Component{
   }
 
   render(){
+    var csn = ['nodes_controls'];
+    if(this.state.showcontrols){
+      csn.push('nodes_controls_showing');
+    }
+
+
     return(
       <>
       <div className="db_viz">
         <Nodes ref={(ref) => this.nodes = ref}/>
-        <div className="nodes_controls">
+        <div className={csn.join(' ')}>
           <div className="nodes_controls_button" onClick={() => this.toggleControls()}>
-            <Icon>{this.state.showcontrols ? 'expand_more' : 'expand_less'}</Icon><div>{this.state.showcontrols ? 'Ocultar' : 'Mostrar'} controles</div>
+            <Icon>{this.state.showcontrols ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}</Icon>
           </div>
-          <div className="nodes_controls_container" style={{display: this.state.showcontrols ? 'block' : 'none'}}>
-            <SSCategoryToggle nodesMap={this.nodes} />
+          <div className="nodes_controls_container">
             <SSDBControl nodesMap={this.nodes} />
+            <SSCategoryToggle nodesMap={this.nodes} />
             <SSNodeSize nodesMap={this.nodes}/>
           </div>
         </div>
@@ -80,7 +87,7 @@ export default class DbViz extends React.Component{
           </div>
           <div className="project_buttons_button" onClick={() => this.nodes.openListado()}>
             <Icon>format_list_bulleted</Icon>
-            <div>Listado</div>
+            <div>Coincidencias</div>
           </div>
         </div>
           {
@@ -196,6 +203,7 @@ class SSDBControl extends React.Component{
                 visible.length > 1 ?
                 <div className="ss_control_extra">
                   <label>Mostrar coincidencias</label>
+                  <div className="ss_control_extra_f"><Icon>keyboard_arrow_down</Icon></div>
                   <select onChange={(e) => this.handleMostrarCoincidencias(e.target.value)}>
                     <option value="all">Todas</option>
                     <option value="onlyinall">Solo entre todas las distintas bases</option>
@@ -207,6 +215,8 @@ class SSDBControl extends React.Component{
 
               <div className="ss_control_extra">
                 <label>Mostrar empresas</label>
+
+                <div className="ss_control_extra_f"><Icon>keyboard_arrow_down</Icon></div>
                 <select onChange={(e) => this.handleMostrarEmpresas(e.target.value)}>
                   <option value="default">Solo con coincidencias</option>
                   <option value="all">Todas</option>
@@ -832,11 +842,11 @@ class Nodes extends React.Component{
                  .text((d) => d.name.toUpperCase())
                  .attr('fill', 'white')
                  .attr('font-family', 'benton-sans, sans-serif')
-                 .attr('font-size', 300)
+                 .attr('font-size', 350)
                  .attr('text-anchor', 'middle')
 
-      var nodesPaddingLeft = 80;
-      var nodesPaddingTop = 35;
+      var nodesPaddingLeft = 100;
+      var nodesPaddingTop = 45;
 
       nodesLabels.each(function(d){
         var g = d3.select(this);
@@ -1676,11 +1686,11 @@ class SSListado extends React.Component{
         <div id="ss_listado_container">
           <div className="ss_listado_main_info">
             <div className="ss_listado_main_info_name">
-              <strong>{this.props.nodesMap.numberWithCommas(this.props.nodesMap.state.coincidencias)}</strong>
-              &nbsp;coincidencias
+              <strong><CountTo to={this.props.nodesMap.state.coincidencias} speed={1000}>{value => self.props.nodesMap.numberWithCommas(value)}</CountTo></strong>
+              &nbsp;coincidencias en {this.fnumber(activeDbs.length)} base{activeDbs.length === 1 ? '' : 's'} de datos
             </div>
             <div className="ss_listado_main_info_sec">
-            en {this.fnumber(activeDbs.length)} base{activeDbs.length === 1 ? '' : 's'} de datos ({activeDbsNames.join(', ')})
+             ({activeDbsNames.join(', ')})
             </div>
           </div>
           <div className="ss_listado_container">
@@ -1715,7 +1725,6 @@ class SSListado extends React.Component{
           </div>
           <div id="ss_listado_finals">
             <div className="ss_listado_finals_btn" onClick={() => this.buildCsv()}>
-              <Icon>get_app</Icon>
               <div>Descargar en CSV</div>
             </div>
           </div>
@@ -1729,20 +1738,6 @@ class SSListado extends React.Component{
         <DialogTitle id="alert-dialog-title">Coincidencias de {eoi.name} <span>{eoi.coincidenciasFormatted}</span></DialogTitle>
         <DialogContent>
           <div className="ss_listado_table">
-            <div className="ss_listado_table_tr ss_listado_table_th">
-              <div className="ss_listado_table_td">
-                {eoi.name}
-              </div>
-              <div className="ss_listado_table_td">
-                Tipo
-              </div>
-              <div className="ss_listado_table_td">
-                Empresa
-              </div>
-              <div className="ss_listado_table_td">
-                Base de datos
-              </div>
-            </div>
             <div className="ss_listado_table_content">
               {
                 eoi.fields.map(function(fg){
@@ -1808,14 +1803,12 @@ class SSNodeSize extends React.Component{
     showing: true
   }
 
-  handleChange(e){
-    var t = this.state.checked;
-    var nt = !t;
+  handleChange(t){
     this.setState({
-      checked: nt
+      checked: t
     })
 
-    var type = !nt ? 'monto' : 'coincidencias';
+    var type = !t ? 'monto' : 'coincidencias';
     this.props.nodesMap.changeCircleSize(type);
   }
 
@@ -1826,23 +1819,23 @@ class SSNodeSize extends React.Component{
           <div className="ss_control_group_container_title" style={{cursor: "pointer"}} onClick={() => this.setState({showing: !this.state.showing})}>
             <div>Tamaño de círculos</div><Icon>{this.state.showing ? "expand_more" : "expand_less"}</Icon>
           </div>
-          {
-            this.state.showing ?
-            <>
+          <div className="ss_control_group_container_switches">
             <div className="ss_control_group_container_switch">
-              <label>Por monto recibido</label>
-              <Switch
-                checked={this.state.checked}
-                onChange={(e) => this.handleChange(e)}
-                value="t"
-                size="small"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-              />
-              <label>Por coincidencias</label>
-            </div>
-            </>
-          : null
-          }
+              <div className="ss_control_group_container_switch_btn">
+                <input checked={!this.state.checked} type="radio" name="ss_circle" onChange={(e) => this.handleChange(false)} />
+                  <div className="ss_control_group_container_switch_btn_c">
+                    Monto
+                  </div>
+              </div>
+              <div className="ss_control_group_container_switch_btn">
+                <input checked={this.state.checked} type="radio" name="ss_circle" onChange={(e) => this.handleChange(true)} />
+                  <div  className="ss_control_group_container_switch_btn_c">
+                    Coincidencias
+                  </div>
+              </div>
+          </div>
+          </div>
+
 
         </div>
       </div>
@@ -2044,10 +2037,10 @@ class SSCategoryToggle extends React.Component{
           <>
           <div className="ss_control_group_container_btns">
             <div onClick={() => this.majorChange('all')} disabled={types.length == (this.state.vals.length - 1)} className="ss_control_group_container_btns_btn">
-              Todos
+              Todas
             </div>
             <div onClick={() => this.majorChange('none')} disabled={this.state.vals.length === 1} className="ss_control_group_container_btns_btn">
-              Ninguno
+              Ninguna
             </div>
           </div>
           <div className="ss_control_group_container_switches">
@@ -2081,11 +2074,11 @@ class SSCategoryToggle extends React.Component{
             {
               !this.state.bs ?
               <>
-              <Icon style={{color: "red"}}>flag</Icon><div>Mostrar solo con banderas rojas</div>
+              <Icon style={{color: "red"}}>flag</Icon><div>Solo con banderas rojas</div>
               </>
               :
               <>
-              <Icon style={{color: "#f6f6f6"}}>flag_outline</Icon><div>Mostrar todas</div>
+              <Icon style={{color: "#f6f6f6"}}>flag_outline</Icon><div>Todas</div>
               </>
             }
           </div>
@@ -2121,7 +2114,7 @@ class SSDoi extends React.Component{
       <div className={cs.join(' ')}>
         <div className="ss_doi_window_controls">
           <div className="ss_doi_window_controls_td ss_doi_window_controls_td_level">
-            Nivel <strong>{this.props.level}</strong>
+            Nivel de conexión <strong>{this.props.level}</strong>
             <div className="ss_doi_levels">
               <Icon disabled={this.props.level == this.props.maxlevel} onClick={() => this.props.parent.addLevel(1)}>add</Icon>
               <Icon disabled={this.props.level == 0} onClick={() => this.props.parent.addLevel(-1)}>remove</Icon>
@@ -2129,7 +2122,7 @@ class SSDoi extends React.Component{
           </div>
           <div className="ss_doi_window_controls_td" onClick={() => this.props.parent.toggleMinimizeDoi()}>
             <div className="ss_doi_window_controls_td_min">
-              <Icon>{ism ? 'call_made' : 'call_received'}</Icon>
+              <Icon>{ism ? 'maximize' : 'minimize'}</Icon>
             </div>
           </div>
           <div className="ss_doi_window_controls_td" onClick={() => this.props.parent.releaseNode()}>
@@ -2141,7 +2134,7 @@ class SSDoi extends React.Component{
         <div className="ss_doi_window_type" style={{color: textColor, boxShadow: '0 0 6px -1px ' + tc , backgroundColor: tc}}>
           {getTypeName(d.type)}
         </div>
-        <div className="ss_doi_window_name" style={{color: ism ? mtc : 'inherit'}}>
+        <div className="ss_doi_window_name" style={{borderColor: ism ? mtc : 'inherit'}}>
           {d.name ? d.name : '(Sin información)'}
         </div>
         {

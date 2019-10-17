@@ -15,8 +15,8 @@
     position: relative;
 
     &_collapse{
-      width: 25px;
-      height: 25px;
+      width: 28px;
+      height: 28px;
       position: absolute;
       right: 0;
       top: 50%;
@@ -26,10 +26,14 @@
       justify-content: center;
       align-items: center;
       background: #333;
+      border: 1px solid $main;
       transform: translate(100%, -50%);
+      justify-content: center;
+      align-items: center;
+      border-left: none;
       .material-icons{
+        color: #f6f6f6;
         @extend .cxy;
-        color: #ccc;
       }
     }
 
@@ -65,7 +69,7 @@
 }
 body.ss_show_sidebar{
   .ss_dbbuilder_sidebar{
-    width: 0%!important;
+    width: 0!important;
     .ss_dbbuilder_sidebar_dbs{
       display: none;
     }
@@ -79,12 +83,24 @@ body.ss_show_sidebar{
 
 .MuiDialog-paper{
   border-radius: 0!important;
-  background: #222!important;
+  background: #2a2a2a!important;
+  border: 2px solid #333;
   .MuiDialogTitle-root, .MuiFormControlLabel-root{
     color: #f0f0f0!important;
   }
 }
 
+.MuiButton-textSecondary{
+  font-weight: 400!important;
+  color: #f6f6f6!important;
+  border: 1px solid $main!important;
+  background: #222!important;
+  font-size: 0.7rem!important;
+}
+.MuiDialogActions-root{
+  box-sizing: border-box;
+  padding-right: 3rem!important;
+}
 .ss_modal_dbpre{
   .ss_predb{
     &_select{
@@ -196,7 +212,10 @@ body.ss_show_sidebar{
   top: 0;
   left: 0;
   z-index: 999999999;
-  background: rgba($blue, 0.8);
+  background: #333 url('../static/loader.gif') no-repeat center center;
+  background-size: cover;
+  background-blend-mode: hard-light;
+  opacity: 0.95;
   &_c{
     @extend .cxy;
   }

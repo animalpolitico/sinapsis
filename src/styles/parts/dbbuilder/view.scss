@@ -3,7 +3,7 @@
   &_name{
     width: 100%;
     box-sizing: border-box;
-    padding: 0.5rem 1rem;
+    padding: 0.35rem 1rem;
     @extend .flex;
     flex-shrink: 1;
     align-items: center;
@@ -43,7 +43,7 @@
 
   &_empresas{
     width: 100%;
-    border-top: 2px solid #f6f6f6;
+    border-top: 1px solid #f6f6f6;
     box-sizing: border-box;
     padding: 0.75rem 1rem 1rem;
     max-height: 100%;
@@ -58,10 +58,13 @@
       padding-left: 0.5rem;
       &_btn{
         display: inline-block;
-        background: #444;
+        background: #222;
         margin-left: 10px;
-        padding: 0.12rem 0.5rem;
-        font-size: 0.9rem;
+        padding: 0.28rem 0.5rem 0.15rem;
+        line-height: 1;
+        font-size: 0.7rem;
+        border: 1px solid $main;
+        text-transform: uppercase;
         cursor: pointer;
         &:hover{
           background: $main;
@@ -117,12 +120,12 @@
   }
   .ss_db_ve_c_empresas_list{
     width: 100%;
-    margin: 1rem 0 1rem;
+    margin: 0rem 0 1rem;
     padding-bottom: 4rem;
   }
   .db_empresa{
     width: 100%;
-    margin: 0.5rem 0;
+    margin: 0.25rem 0;
     &:first-child{
       margin-top: 0;
     }
@@ -130,14 +133,37 @@
       width: 100%;
       box-sizing: border-box;
       position: relative;
-      padding: 0.45rem 0.35rem 0.3rem;
+      padding: 0.25rem 0.35rem;
       cursor: pointer;
       @extend .flex;
       align-items: center;
+      font-size: 0.9rem;
+      color: #f6f6f6;
       transition: all 0.15s ease;
-      border-bottom: 1px dotted rgba(white, 0.1);
+      &::after{
+        content: '';
+        display: block;
+        width: 60%;
+        height: 1px;
+        background: rgba(white, 0.1);
+        position: absolute;
+        transition: all 0.25s ease;
+        left: 0.35rem;
+        bottom: 0;
+      }
+      small{
+        font-weight: 300;
+        font-size: 0.9rem;
+        color: #bbb;
+        transition: all 0.15s ease;
+      }
       &:hover{
-        background: darken($main, 15%);
+        small{
+        }
+        &::after{
+          width: 80%;
+          background: $main;
+        }
       }
       &_indicator{
         width: 5px;

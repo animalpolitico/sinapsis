@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @import url("https://use.typekit.net/nhy0plw.css");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_modal_dbpre .ss_predb_select_country, .ss_modal_dbpre .ss_predb_select_alert, .ss_db_toolbar #ss_db_save, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_db_toolbar_info_td .ss_db_builder_project_name, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, #ss_popper_lang .ss_popper_container_button, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_ch_i_i, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title_ch, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_title, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title .dbef_n_tooltip, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_checkboxes_ch_info, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_input .ss_db_input_container_label, .ss_db_input_select_container_input .ss_db_input_container_label, .ss_db_input_container_error, .ss_db_input_select_container_error, .project_buttons, .project_buttons_button, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_tooltip_info, .db_viz_nodes #db_viz_nodes_controls, .ss_doi_window_fields_field_dbinfo > div, .ss_doi_window .ss_doi_window_controls, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels, .db_search_nodes_results .db_search_nodes_results_c_r .ss_search_result_type, .nodes_controls_button, .ss_control_group.ss_control_node_filter .ss_ctr_br, .ss_control_group .ss_control_group_container_title, .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning, .ss_control_group .ss_control_group_container_dbs .ss_db, .ss_control_group .ss_control_group_container_btns, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics .ss_analytics_montos_title, .ss_analytics .ss_analytics_montos_row, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_info, .ss_analytics .ss_analytics_montos_row .ss_analytics_montos_monto, .ss_analytics .ss_analytics_choose_tr, .ss_analytics .ss_analytics_choose_tr .ssa_icon, .ss_analytics .ss_analytics_choose_tr .ssa_btns, .ss_analytics .ss_analytics_choose_tr .ssa_btns .ssa_btn, #ss_listado_container #ss_listado_finals, #ss_listado_container #ss_listado_finals .ss_listado_finals_btn, #ss_listado_container .ss_listado_main_info, #ss_listado_container .ss_listado_container, #ss_listado_container .ss_listado_container_e, #ss_listado_container .ss_listado_container_e_info, #ss_listado_dialog .ss_listado_table_tr, #ss_listado_dialog .ss_listado_table_tr .ss_listado_table_td {
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_modal_dbpre .ss_predb_select_country, .ss_modal_dbpre .ss_predb_select_alert, .ss_db_toolbar #ss_db_save, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_db_toolbar_info_td .ss_db_builder_project_name, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, #ss_popper_lang .ss_popper_container_button, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit_container_dbinfo, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_ch_i_i, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title_ch, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_title, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title .dbef_n_tooltip, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_checkboxes_ch_info, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form_innerlist .ss_transaction_row, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_input .ss_db_input_container_label, .ss_db_input_select_container_input .ss_db_input_container_label, .ss_db_input_container_error, .ss_db_input_select_container_error, .project_buttons, .project_buttons_button, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_tooltip_info, .db_viz_nodes #db_viz_nodes_controls, .ss_doi_window_fields_field_dbinfo > div, .ss_doi_window .ss_doi_window_controls, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels, .db_search_nodes_results .db_search_nodes_results_c_r .ss_search_result_type, .nodes_controls_container, .nodes_controls_button, .ss_control_group.ss_control_node_filter .ss_ctr_br, .ss_control_group .ss_control_group_container_title, .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning, .ss_control_group .ss_control_group_container_dbs .ss_db, .ss_control_group .ss_control_group_container_btns, .ss_control_group .ss_control_group_container_switches .ss_control_group_container_switch, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics .ss_analytics_montos_title, .ss_analytics .ss_analytics_montos_row, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_info, .ss_analytics .ss_analytics_montos_row .ss_analytics_montos_monto, .ss_analytics .ss_analytics_choose_tr, .ss_analytics .ss_analytics_choose_tr .ssa_icon, .ss_analytics .ss_analytics_choose_tr .ssa_btns, .ss_analytics .ss_analytics_choose_tr .ssa_btns .ssa_btn, #ss_listado_container #ss_listado_finals, #ss_listado_container #ss_listado_finals .ss_listado_finals_btn, #ss_listado_container .ss_listado_main_info, #ss_listado_container .ss_listado_container, #ss_listado_container .ss_listado_container_e, #ss_listado_container .ss_listado_container_e_info, #ss_listado_dialog .ss_listado_table_tr, #ss_listado_dialog .ss_listado_table_tr .ss_listado_table_td {
   display: flex;
   flex-wrap: nowrap; }
 
@@ -10,7 +10,7 @@
   left: 50%;
   transform: translateX(-50%); }
 
-.cy, .ss_db_toolbar_info_td .ss_db_builder_project_name_goback .material-icons, .project_buttons_button:first-child::after, .ss_dbbuilder_front .ss_db_choose_lang_select_arr {
+.cy, .ss_db_toolbar_info_td .ss_db_builder_project_name_goback .material-icons, .project_buttons_button:not(:last-child)::after, .ss_dbbuilder_front .ss_db_choose_lang_select_arr, .nodes_controls_container {
   position: absolute;
   top: 50%;
   transform: translateY(-50%); }
@@ -146,8 +146,8 @@ a, a:link, a:visited, a:hover {
     z-index: 10;
     position: relative; }
     .ss_dbbuilder_sidebar_collapse {
-      width: 25px;
-      height: 25px;
+      width: 28px;
+      height: 28px;
       position: absolute;
       right: 0;
       top: 50%;
@@ -156,9 +156,13 @@ a, a:link, a:visited, a:hover {
       justify-content: center;
       align-items: center;
       background: #333;
-      transform: translate(100%, -50%); }
+      border: 1px solid #0072ff;
+      transform: translate(100%, -50%);
+      justify-content: center;
+      align-items: center;
+      border-left: none; }
       .ss_dbbuilder_sidebar_collapse .material-icons {
-        color: #ccc; }
+        color: #f6f6f6; }
     .ss_dbbuilder_sidebar_dbs {
       height: 100%;
       position: relative; }
@@ -184,7 +188,7 @@ a, a:link, a:visited, a:hover {
     background: #333; }
 
 body.ss_show_sidebar .ss_dbbuilder_sidebar {
-  width: 0% !important; }
+  width: 0 !important; }
   body.ss_show_sidebar .ss_dbbuilder_sidebar .ss_dbbuilder_sidebar_dbs {
     display: none; }
   body.ss_show_sidebar .ss_dbbuilder_sidebar_collapse .material-icons {
@@ -192,9 +196,21 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
 
 .MuiDialog-paper {
   border-radius: 0 !important;
-  background: #222 !important; }
+  background: #2a2a2a !important;
+  border: 2px solid #333; }
   .MuiDialog-paper .MuiDialogTitle-root, .MuiDialog-paper .MuiFormControlLabel-root {
     color: #f0f0f0 !important; }
+
+.MuiButton-textSecondary {
+  font-weight: 400 !important;
+  color: #f6f6f6 !important;
+  border: 1px solid #0072ff !important;
+  background: #222 !important;
+  font-size: 0.7rem !important; }
+
+.MuiDialogActions-root {
+  box-sizing: border-box;
+  padding-right: 3rem !important; }
 
 .ss_modal_dbpre .ss_predb_select {
   width: 100%;
@@ -279,7 +295,10 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   top: 0;
   left: 0;
   z-index: 999999999;
-  background: rgba(42, 42, 42, 0.8); }
+  background: #333 url("../static/loader.gif") no-repeat center center;
+  background-size: cover;
+  background-blend-mode: hard-light;
+  opacity: 0.95; }
 
 #ss_borrar_input {
   width: 100%;
@@ -554,7 +573,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   .ss_db_view_name {
     width: 100%;
     box-sizing: border-box;
-    padding: 0.5rem 1rem;
+    padding: 0.35rem 1rem;
     flex-shrink: 1;
     align-items: center; }
     .ss_db_view_name .material-icons {
@@ -585,7 +604,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       border-color: red; }
   .ss_db_view_empresas {
     width: 100%;
-    border-top: 2px solid #f6f6f6;
+    border-top: 1px solid #f6f6f6;
     box-sizing: border-box;
     padding: 0.75rem 1rem 1rem;
     max-height: 100%;
@@ -598,10 +617,13 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       padding-left: 0.5rem; }
       .ss_db_view_empresas_title_btn {
         display: inline-block;
-        background: #444;
+        background: #222;
         margin-left: 10px;
-        padding: 0.12rem 0.5rem;
-        font-size: 0.9rem;
+        padding: 0.28rem 0.5rem 0.15rem;
+        line-height: 1;
+        font-size: 0.7rem;
+        border: 1px solid #0072ff;
+        text-transform: uppercase;
         cursor: pointer; }
         .ss_db_view_empresas_title_btn:hover {
           background: #0072ff; }
@@ -643,24 +665,41 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
               color: white; }
   .ss_db_view .ss_db_ve_c_empresas_list {
     width: 100%;
-    margin: 1rem 0 1rem;
+    margin: 0rem 0 1rem;
     padding-bottom: 4rem; }
   .ss_db_view .db_empresa {
     width: 100%;
-    margin: 0.5rem 0; }
+    margin: 0.25rem 0; }
     .ss_db_view .db_empresa:first-child {
       margin-top: 0; }
     .ss_db_view .db_empresa_container {
       width: 100%;
       box-sizing: border-box;
       position: relative;
-      padding: 0.45rem 0.35rem 0.3rem;
+      padding: 0.25rem 0.35rem;
       cursor: pointer;
       align-items: center;
-      transition: all 0.15s ease;
-      border-bottom: 1px dotted rgba(255, 255, 255, 0.1); }
-      .ss_db_view .db_empresa_container:hover {
-        background: #0050b3; }
+      font-size: 0.9rem;
+      color: #f6f6f6;
+      transition: all 0.15s ease; }
+      .ss_db_view .db_empresa_container::after {
+        content: '';
+        display: block;
+        width: 60%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+        position: absolute;
+        transition: all 0.25s ease;
+        left: 0.35rem;
+        bottom: 0; }
+      .ss_db_view .db_empresa_container small {
+        font-weight: 300;
+        font-size: 0.9rem;
+        color: #bbb;
+        transition: all 0.15s ease; }
+      .ss_db_view .db_empresa_container:hover::after {
+        width: 80%;
+        background: #0072ff; }
       .ss_db_view .db_empresa_container_indicator {
         width: 5px;
         height: 5px;
@@ -772,7 +811,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
     box-sizing: border-box;
     flex: 1;
     overflow-y: auto;
-    padding: 0 1rem 1rem; }
+    padding: 0 0.5rem 1rem; }
     .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg {
       width: 100%;
       margin: 0.25rem 0; }
@@ -1111,16 +1150,17 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
 .project_buttons {
   bottom: 0;
   z-index: 99;
-  transform: translateX(calc(-50% - 2rem)); }
+  transform: translateX(calc(-50%));
+  border: 1px solid #444;
+  border-bottom: none; }
   .project_buttons_button {
     background: #2c2c2c;
     align-items: center;
     box-sizing: border-box;
-    padding: 0.5rem 0.75rem;
+    padding: 0.4rem 0.7rem;
     cursor: pointer;
-    position: relative;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); }
-    .project_buttons_button:first-child::after {
+    position: relative; }
+    .project_buttons_button:not(:last-child)::after {
       content: '';
       height: 70%;
       width: 1px;
@@ -1131,7 +1171,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
     .project_buttons_button .material-icons {
       color: #0072ff;
       font-size: 1rem;
-      margin-right: 0.5rem; }
+      margin-right: 0.4rem; }
     .project_buttons_button div {
       color: white;
       font-weight: 500;
@@ -1166,16 +1206,19 @@ body.ss_showing_drawer .project_buttons_button {
       .ss_dbbuilder_front .ss_db_choose_decorator_slogan {
         font-size: 1rem;
         text-transform: uppercase;
-        line-height: 1.1;
+        line-height: 1.3;
         text-align: center;
         color: #f6f6f6;
+        font-weight: 300;
         position: relative; }
-        .ss_dbbuilder_front .ss_db_choose_decorator_slogan span {
-          display: inline-block;
-          width: 0.7rem;
-          height: 2px;
-          background: #0072ff;
-          transform: translate(0.1rem, -0.3rem) rotate(-45deg); }
+        .ss_dbbuilder_front .ss_db_choose_decorator_slogan strong {
+          font-weight: 600; }
+        .ss_dbbuilder_front .ss_db_choose_decorator_slogan span::before {
+          content: '/';
+          color: #0072ff;
+          margin-right: 0.1rem;
+          font-weight: 600;
+          display: inline-block; }
     .ss_dbbuilder_front .ss_db_choose_lang {
       width: 100%;
       justify-content: center;
@@ -1214,10 +1257,11 @@ body.ss_showing_drawer .project_buttons_button {
           font-size: 0.8rem;
           color: white;
           margin-top: 0.5rem;
-          position: relative; }
+          position: relative;
+          box-shadow: 0 0 5px #0072ff; }
           .ss_dbbuilder_front .ss_db_choose_lang_select select:focus {
             outline: 0;
-            box-shadow: 0 0 4px rgba(0, 114, 255, 0.8); }
+            box-shadow: 0 0 4px #0072ff; }
           .ss_dbbuilder_front .ss_db_choose_lang_select select option {
             text-align: center;
             appearance: textfield; }
@@ -1240,7 +1284,7 @@ body.ss_showing_drawer .project_buttons_button {
         position: absolute;
         top: 0;
         left: 0;
-        border: 3px solid rgba(255, 255, 255, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.3);
         background: no-repeat center center;
         background-size: cover; }
         .ss_dbbuilder_front .ss_db_choose_td_c::after {
@@ -1251,18 +1295,19 @@ body.ss_showing_drawer .project_buttons_button {
           position: absolute;
           bottom: 0;
           left: 0;
-          background: rgba(17, 30, 44, 0.5);
+          background: rgba(38, 45, 52, 0.5);
           z-index: 1;
           transition: all 0.25s ease-out; }
         .ss_dbbuilder_front .ss_db_choose_td_c_l {
-          width: 3px;
-          height: calc(100% + 6px);
+          width: 2px;
+          height: calc(100% + 4px);
           position: absolute;
           top: 0;
           left: 0;
-          transform: translate(-100%, -3px);
+          transform: translate(-100%, -2px);
           background: #0072ff;
-          z-index: 5; }
+          z-index: 5;
+          box-shadow: 0 0 8px rgba(0, 114, 255, 0.8); }
         .ss_dbbuilder_front .ss_db_choose_td_c_c {
           width: 12px;
           height: 12px;
@@ -1293,7 +1338,7 @@ body.ss_showing_drawer .project_buttons_button {
       .ss_dbbuilder_front .ss_db_choose_td .material-icons {
         font-size: 5rem;
         color: #0072ff;
-        text-shadow: 0 0 30px #0072ff;
+        text-shadow: 0 0 20px #0072ff;
         display: block;
         padding: 1rem;
         transition: all 0.25s ease;
@@ -1301,9 +1346,9 @@ body.ss_showing_drawer .project_buttons_button {
       .ss_dbbuilder_front .ss_db_choose_td_label {
         width: 100%;
         color: white;
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         line-height: 1.3;
-        font-weight: 400;
+        font-weight: 300;
         position: absolute;
         box-sizing: border-box;
         padding: 1.5rem;
@@ -1335,15 +1380,20 @@ body.ss_showing_drawer .project_buttons_button {
   right: 0;
   overflow: hidden;
   position: relative; }
+  .db_viz_info_coincidencias::before {
+    content: '/';
+    color: #0072ff !important;
+    margin-right: 5px;
+    font-weight: 600; }
   .db_viz_tooltip {
     position: absolute;
     z-index: 99;
     background: #303030;
     pointer-events: none;
-    transform: translate(-50%, -120%);
+    transform: translate(-50%, -110%);
     max-width: 300px;
     min-width: 200px;
-    padding-bottom: 0.25rem;
+    padding-bottom: 0.5rem;
     color: #F6F6F6; }
     .db_viz_tooltip_name {
       font-size: 1rem;
@@ -1377,8 +1427,8 @@ body.ss_showing_drawer .project_buttons_button {
         content: '/';
         display: inline-block;
         margin-right: 0.15rem;
-        color: #0072ff;
-        font-weight: 800; }
+        color: #f6f6f6;
+        font-weight: 400; }
     .db_viz_tooltip_info {
       font-size: 0.65rem;
       box-sizing: border-box;
@@ -1394,7 +1444,7 @@ body.ss_showing_drawer .project_buttons_button {
       box-sizing: border-box;
       padding: 0.25rem 0.5rem 0.15rem;
       margin-top: 0.15rem;
-      color: #eee; }
+      color: #aaa; }
   .db_viz_info {
     position: absolute;
     bottom: 0;
@@ -1452,7 +1502,9 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
 .ss_doi_window {
   width: 250px;
   margin-bottom: 1rem;
-  background: #1c1c1c; }
+  background: #2a2a2a;
+  border: 2px solid #333;
+  overflow: hidden; }
   .ss_doi_window_type {
     font-weight: 600;
     font-size: 0.75rem;
@@ -1463,17 +1515,22 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
     box-sizing: border-box;
     padding: 0.25rem 0.5rem; }
   .ss_doi_window_name {
-    font-weight: 300;
+    font-weight: 100;
     width: 100%;
     box-sizing: border-box;
     padding: 0.75rem 0.5rem;
-    font-size: 1.1rem;
-    line-height: 1;
-    color: black;
+    font-size: 1rem;
+    line-height: 1.1;
+    color: white;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     position: relative; }
+    .ss_doi_window_name::before {
+      content: '/';
+      color: #0072ff;
+      font-weight: 600;
+      margin-right: 0.25rem; }
     .ss_doi_window_name::after {
       content: '';
       display: block;
@@ -1499,12 +1556,12 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
     .ss_doi_window_fields_field {
       width: 100%;
       box-sizing: border-box;
-      padding: 0.3rem 0.5rem;
-      font-size: 0.8rem;
+      padding: 0.45rem 0.5rem;
+      font-size: 0.65rem;
       position: relative;
       cursor: pointer; }
       .ss_doi_window_fields_field:hover {
-        background: rgba(255, 255, 255, 0.05); }
+        background: rgba(255, 255, 255, 0.04); }
       .ss_doi_window_fields_field:not(:last-child)::after {
         content: '';
         display: block;
@@ -1520,11 +1577,6 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
         color: #eee;
         font-weight: 600;
         font-size: 0.7em; }
-        .ss_doi_window_fields_field_group::before {
-          content: '/';
-          color: #0072ff;
-          display: inline-block;
-          margin-right: 0.25rem; }
       .ss_doi_window_fields_field_dbinfo {
         width: 100%; }
         .ss_doi_window_fields_field_dbinfo > div {
@@ -1534,13 +1586,18 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
           text-overflow: ellipsis;
           align-items: center;
           box-sizing: border-box;
-          padding: 0.05rem 0;
+          padding: 0.025rem 0;
           font-size: 0.9em; }
           .ss_doi_window_fields_field_dbinfo > div .material-icons {
             font-size: 1em;
             line-height: 1em;
             margin-right: 0.25em;
-            color: #bbb; }
+            color: #bbb;
+            display: none; }
+          .ss_doi_window_fields_field_dbinfo > div:last-child {
+            color: #999;
+            margin-top: 0.15rem;
+            font-size: 0.6rem; }
       .ss_doi_window_fields_field_name {
         font-size: 1.2em;
         margin: 0.25rem 0;
@@ -1548,27 +1605,32 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
   .ss_doi_window .ss_doi_window_controls {
     width: 100%;
     box-sizing: border-box;
-    padding: 0.15rem 0.5rem;
-    align-items: center; }
+    padding: 0.25rem 0.5rem;
+    align-items: center;
+    position: relative;
+    z-index: 2; }
     .ss_doi_window .ss_doi_window_controls_td {
       height: 0%; }
       .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level {
         flex: 1;
         align-items: center;
-        font-size: 0.9rem; }
+        font-size: 0.9rem;
+        color: #f6f6f6; }
         .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level strong {
-          margin-left: 0.5rem; }
+          margin-left: 0.35rem; }
         .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels {
-          margin-left: 0.5rem; }
+          margin-left: 0.3rem; }
           .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels .material-icons {
             font-size: 1rem;
             display: block;
-            padding: 0.25rem 0.15rem;
-            cursor: pointer; }
+            padding: 0.25rem 0.1rem;
+            cursor: pointer;
+            color: #0072ff; }
             .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels .material-icons[disabled] {
               opacity: 0.2;
               pointer-events: none; }
             .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels .material-icons:hover {
+              opacity: 0.5;
               color: #0072ff; }
       .ss_doi_window .ss_doi_window_controls_td_min {
         cursor: pointer;
@@ -1586,10 +1648,12 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
   .ss_doi_window.ss_minimized .ss_doi_window_name {
     font-size: 0.7rem;
     font-weight: 600;
-    padding: 0.25rem 0.5rem;
+    padding: 0.65rem 0.5rem;
     white-space: normal;
     line-height: 1.1;
-    border-bottom: none; }
+    border-bottom: none;
+    border-top: 3px solid;
+    color: white; }
     .ss_doi_window.ss_minimized .ss_doi_window_name::after {
       display: none; }
 
@@ -1669,27 +1733,43 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
         background: rgba(255, 255, 255, 0.075); }
 
 .nodes_controls {
-  width: 220px;
+  width: 200px;
   position: absolute;
-  bottom: 0;
-  right: 20px;
+  top: 50%;
+  transform: translate(100%, -50%);
+  right: 0;
   z-index: 9;
-  max-height: 100%; }
+  height: calc(100% - 20px);
+  transition: all 0.25s ease; }
+  .nodes_controls.nodes_controls_showing {
+    transform: translateY(-50%); }
+    .nodes_controls.nodes_controls_showing .nodes_controls_button {
+      border-right: none; }
   .nodes_controls_container {
-    max-height: 700px;
-    overflow: hidden;
-    overflow-y: auto; }
-  .nodes_controls_button {
     width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    max-height: 100%;
+    border: 2px solid #333;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+  .nodes_controls_button {
     background: #333;
     cursor: pointer;
     align-items: center;
     box-sizing: border-box;
-    padding: 0.5rem; }
+    padding: 0.25rem;
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    border: 1px solid #0072ff;
+    border-right: none;
+    transform: translate(-100%, -50%); }
     .nodes_controls_button .material-icons, .nodes_controls_button div {
-      color: white; }
+      color: #f6f6f6; }
     .nodes_controls_button .material-icons {
-      font-size: 1rem; }
+      font-size: 1.2rem; }
     .nodes_controls_button div {
       font-size: 0.8rem;
       box-sizing: border-box;
@@ -1701,7 +1781,8 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
 .ss_control_group {
   background: #2a2a2a;
   box-sizing: border-box;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.1); }
+  border-bottom: 2px solid #0072ff;
+  width: 100%; }
   .ss_control_group:last-child {
     border-bottom: none; }
   .ss_control_group.ss_control_node_filter {
@@ -1710,10 +1791,10 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
       width: 100%;
       box-sizing: border-box;
       padding-top: 0.5rem;
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       box-sizing: border-box;
-      padding: 0.5rem 0.5rem 0.25rem;
+      padding: 0.75rem 0.5rem 0.25rem;
       cursor: pointer; }
       .ss_control_group.ss_control_node_filter .ss_ctr_br.ss_ctr_br_buttons {
         cursor: default; }
@@ -1738,58 +1819,86 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
   .ss_control_group .ss_control_group_container {
     width: 100%;
     box-sizing: border-box;
-    padding: 0.25rem 0.25rem; }
+    padding: 0.5rem 0.25rem; }
     .ss_control_group .ss_control_group_container_title {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: white;
       line-height: 1;
-      font-weight: 600;
+      font-weight: 300;
       box-sizing: border-box;
-      padding: 0.15rem 0.5rem;
+      padding: 0.5rem 0.35rem 0.15rem;
+      pointer-events: none;
+      text-transform: uppercase;
       align-items: center; }
       .ss_control_group .ss_control_group_container_title div {
         flex: 1; }
+        .ss_control_group .ss_control_group_container_title div::before {
+          content: '/';
+          color: #0072ff;
+          margin-right: 0.25rem;
+          font-weight: 600; }
       .ss_control_group .ss_control_group_container_title .material-icons {
         font-size: 0.9rem;
         cursor: pointer;
         box-sizing: border-box;
-        display: block; }
+        display: none; }
         .ss_control_group .ss_control_group_container_title .material-icons:hover {
           opacity: 0.8; }
     .ss_control_group .ss_control_group_container_extracontrols {
-      padding-bottom: 0.75rem; }
+      padding-bottom: 0.75rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0rem; }
       .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra {
         width: 100%;
         box-sizing: border-box;
-        padding: 0.15rem 0.75rem; }
+        padding: 0.3rem 0.75rem;
+        position: relative; }
         .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning {
           align-items: center;
-          color: yellow;
-          margin-top: 0.2rem;
-          line-height: 1.1; }
+          margin-top: 0.35rem;
+          line-height: 1.1;
+          color: #f6f6f6; }
           .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning *, .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning {
-            font-size: 0.5rem;
-            font-weight: 600; }
+            font-size: 0.55rem;
+            font-weight: 500; }
           .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning .material-icons {
+            color: yellow;
             margin-right: 0.3rem; }
         .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra label {
           font-size: 0.7rem;
-          font-weight: 600;
-          color: white;
-          margin-bottom: -0.1rem; }
+          font-weight: 400;
+          color: #f6f6f6;
+          display: block;
+          line-height: 1;
+          margin-bottom: 0.25rem; }
+        .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_f {
+          position: absolute;
+          top: 1rem;
+          right: 1.1rem;
+          color: #acacac;
+          pointer-events: none; }
+          .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_f .material-icons {
+            font-size: 0.9rem;
+            line-height: 1;
+            color: #bbb;
+            transform: translateY(8px); }
         .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra select {
           appearance: none;
           display: block;
           width: 100%;
           box-sizing: border-box;
-          padding: 0.25rem;
-          background-color: #444;
-          font-size: 0.7rem;
+          padding: 0.25rem 1.2rem 0.25rem 0.35rem;
+          background-color: #222;
+          font-size: 0.65rem;
           font-weight: 600;
           border: 0;
           margin-top: 0.1rem;
           border-radius: 0;
-          color: white;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          color: #acacac;
+          border: 1px solid #0072ff;
           cursor: pointer !important; }
           .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra select:focus {
             outline: 0; }
@@ -1806,6 +1915,7 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
         flex-wrap: nowrap;
         align-items: center;
         margin: 0.15rem 0;
+        padding-bottom: 0.25rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         cursor: pointer; }
         .ss_control_group .ss_control_group_container_dbs .ss_db_toggle {
@@ -1832,24 +1942,27 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
           .ss_control_group .ss_control_group_container_dbs .ss_db_info_empresas {
             font-size: 0.5rem;
             color: white;
-            font-weight: 600; }
-            .ss_control_group .ss_control_group_container_dbs .ss_db_info_empresas strong::before {
-              content: '/';
-              color: #0072ff;
-              margin-right: 2px; }
-        .ss_control_group .ss_control_group_container_dbs .ss_db.ss_db_hidden .ss_db_info {
-          opacity: 0.5; }
+            text-transform: uppercase;
+            font-weight: 400;
+            color: #bbb; }
+            .ss_control_group .ss_control_group_container_dbs .ss_db_info_empresas strong {
+              font-weight: 400; }
+        .ss_control_group .ss_control_group_container_dbs .ss_db.ss_db_hidden {
+          opacity: 0.4; }
     .ss_control_group .ss_control_group_container_btns {
       width: 100%;
       box-sizing: border-box;
       padding: 0.25rem 0.5rem 0.15rem;
-      font-size: 0.65rem; }
+      font-size: 0.65rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.75rem; }
       .ss_control_group .ss_control_group_container_btns_btn {
         box-sizing: border-box;
         padding: 0.25rem 0.35rem;
-        background: #333;
+        background: #222;
         text-transform: uppercase;
         font-weight: 600;
+        border: 1px solid #0072ff;
         color: white;
         margin-right: 0.35rem;
         cursor: pointer; }
@@ -1860,12 +1973,43 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
           pointer-events: none; }
     .ss_control_group .ss_control_group_container_switches {
       width: 100%; }
+      .ss_control_group .ss_control_group_container_switches .ss_control_group_container_switch {
+        box-sizing: border-box;
+        padding: 0.35rem 0.5rem; }
+        .ss_control_group .ss_control_group_container_switches .ss_control_group_container_switch_btn {
+          position: relative; }
+          .ss_control_group .ss_control_group_container_switches .ss_control_group_container_switch_btn:not(:last-child) {
+            margin-right: 0.35rem; }
+          .ss_control_group .ss_control_group_container_switches .ss_control_group_container_switch_btn input {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            cursor: pointer;
+            opacity: 0; }
+          .ss_control_group .ss_control_group_container_switches .ss_control_group_container_switch_btn_c {
+            position: relative;
+            box-sizing: border-box;
+            padding: 0.25rem 0.35rem;
+            background: #222;
+            border: 1px solid #0072ff;
+            text-transform: uppercase;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: white;
+            opacity: 0.4; }
+          .ss_control_group .ss_control_group_container_switches .ss_control_group_container_switch_btn input:checked ~ .ss_control_group_container_switch_btn_c {
+            opacity: 1; }
       .ss_control_group .ss_control_group_container_switches .ss_ctr_ch {
         width: 100%;
         position: relative;
         box-sizing: border-box;
-        padding: 0.35rem 0.5rem;
+        padding: 0.3rem 0.5rem;
         margin: 0.25rem 0; }
+        .ss_control_group .ss_control_group_container_switches .ss_ctr_ch:hover {
+          opacity: 0.7; }
         .ss_control_group .ss_control_group_container_switches .ss_ctr_ch input {
           width: 100%;
           height: 100%;
@@ -1876,14 +2020,14 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
           opacity: 0;
           cursor: pointer; }
         .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds {
-          font-size: 0.75rem;
+          font-size: 0.7rem;
           line-height: 1;
           color: white;
           font-weight: 600;
           align-items: center; }
         .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_td_ball {
-          width: 12px;
-          height: 12px;
+          width: 8px;
+          height: 8px;
           border-radius: 50%;
           margin-right: 5px;
           position: relative; }
@@ -1967,11 +2111,11 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
   z-index: 9999999; }
   .ss_analytics_close {
     position: absolute;
-    right: 2rem;
+    right: 2.5rem;
     cursor: pointer;
     z-index: 10;
     box-sizing: border-box;
-    padding: 0.5rem 0.5rem; }
+    padding: 1.5rem 0.5rem; }
     .ss_analytics_close .material-icons {
       color: white;
       font-size: 2rem; }
@@ -2061,13 +2205,14 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
             position: relative;
             z-index: 2; }
         .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_info {
-          width: 70%;
+          width: 85%;
           font-size: 0.8rem;
           flex-direction: column;
           justify-content: center;
           line-height: 1.2;
-          margin: 0.5rem auto 0;
-          text-transform: uppercase; }
+          margin: 0.5rem  0 0;
+          text-transform: uppercase;
+          margin-left: 15%; }
           .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_info_a {
             width: 100%;
             color: #f6f6f6;
@@ -2235,15 +2380,15 @@ body.ss_showing_drawer .ss_analytics_pie {
   position: absolute;
   top: 0;
   left: 0;
-  background: rgba(33, 33, 33, 0.95);
+  background: #212121;
   z-index: 9999; }
   #ss_listado_close {
     position: absolute;
-    right: 2rem;
+    right: 2.5rem;
     cursor: pointer;
     z-index: 10;
     box-sizing: border-box;
-    padding: 0.5rem 0.5rem; }
+    padding: 1.5rem 0.5rem; }
     #ss_listado_close .material-icons {
       color: white;
       font-size: 2rem; }
@@ -2263,16 +2408,20 @@ body.ss_showing_drawer .ss_analytics_pie {
     max-width: 1000px; }
     #ss_listado_container #ss_listado_finals {
       width: 100%;
-      justify-content: center; }
+      justify-content: center;
+      margin-top: 1rem; }
       #ss_listado_container #ss_listado_finals .ss_listado_finals_btn {
         border: 2px solid #0072ff;
         color: white;
-        font-weight: 600;
+        background: #222;
+        font-weight: 300;
         align-items: center;
         box-sizing: border-box;
-        padding: 0.25rem 0.5rem;
+        padding: 0.4rem 0.75rem;
+        text-transform: uppercase;
         cursor: pointer;
-        font-size: 0.9rem; }
+        box-shadow: 0 0 4px rgba(0, 114, 255, 0.8);
+        font-size: 0.8rem; }
         #ss_listado_container #ss_listado_finals .ss_listado_finals_btn:hover {
           background: rgba(0, 114, 255, 0.1); }
         #ss_listado_container #ss_listado_finals .ss_listado_finals_btn .material-icons {
@@ -2282,10 +2431,13 @@ body.ss_showing_drawer .ss_analytics_pie {
     #ss_listado_container .ss_listado_main_info {
       width: 100%;
       flex-direction: column;
-      align-items: center; }
+      align-items: center;
+      margin-bottom: 2rem; }
       #ss_listado_container .ss_listado_main_info_name {
         color: white;
-        font-size: 1.8rem; }
+        font-size: 1.3rem; }
+        #ss_listado_container .ss_listado_main_info_name strong {
+          font-size: 1.8rem; }
         #ss_listado_container .ss_listado_main_info_name::before {
           content: '/';
           font-weight: 600;
@@ -2293,7 +2445,7 @@ body.ss_showing_drawer .ss_analytics_pie {
           margin-right: 0.5rem; }
       #ss_listado_container .ss_listado_main_info_sec {
         font-size: 1.1rem;
-        color: #f6f6f6; }
+        color: #ccc; }
     #ss_listado_container .ss_listado_container {
       width: 100%;
       box-sizing: border-box;
@@ -2310,12 +2462,13 @@ body.ss_showing_drawer .ss_analytics_pie {
         transition: opacity 0.3s ease; }
         #ss_listado_container .ss_listado_container_e.ss_empty_listado {
           pointer-events: none;
-          opacity: 0.4; }
+          opacity: 0.4;
+          filter: grayscale(1); }
         #ss_listado_container .ss_listado_container_e_icon {
           width: 70px;
           height: 70px;
           position: relative;
-          border: 4px solid transparent;
+          border: 3px solid transparent;
           border-radius: 50%;
           animation: lba 1s ease;
           animation-fill-mode: both; }
@@ -2326,8 +2479,8 @@ body.ss_showing_drawer .ss_analytics_pie {
             width: 100%;
             height: 100%; }
             #ss_listado_container .ss_listado_container_e_icon div .material-icons {
-              color: white;
-              font-size: 2.2rem; }
+              color: #888;
+              font-size: 1.7rem; }
         #ss_listado_container .ss_listado_container_e_info {
           width: 100%;
           flex-direction: column;
@@ -2351,7 +2504,18 @@ body.ss_showing_drawer .ss_analytics_pie {
 #ss_listado_dialog .MuiDialog-paperWidthSm {
   max-width: 1000px; }
 #ss_listado_dialog #alert-dialog-title {
-  align-items: center; }
+  align-items: center;
+  margin-top: 1rem;
+  padding-left: 5.5% !important; }
+  #ss_listado_dialog #alert-dialog-title *, #ss_listado_dialog #alert-dialog-title {
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 1.2rem; }
+  #ss_listado_dialog #alert-dialog-title h2::before {
+    content: '/';
+    color: #0072ff;
+    font-weight: 600;
+    margin-right: 0.35rem; }
   #ss_listado_dialog #alert-dialog-title span {
     display: inline-block;
     background: #0072ff;
@@ -2362,11 +2526,13 @@ body.ss_showing_drawer .ss_analytics_pie {
     padding: 0.25rem 0.5rem;
     border-radius: 0.75rem;
     margin-left: 0.15rem;
+    font-weight: 600;
     transform: translateY(-2px); }
 #ss_listado_dialog .ss_listado_table {
   width: 700px; }
   #ss_listado_dialog .ss_listado_table .ss_listado_table_content {
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
     max-height: 300px;
     overflow-y: auto; }
   #ss_listado_dialog .ss_listado_table .ss_listado_table_group {
@@ -2374,7 +2540,16 @@ body.ss_showing_drawer .ss_analytics_pie {
     position: relative; }
     #ss_listado_dialog .ss_listado_table .ss_listado_table_group_c {
       display: none;
-      background: rgba(255, 255, 255, 0.05); }
+      background: #222;
+      box-sizing: border-box; }
+      #ss_listado_dialog .ss_listado_table .ss_listado_table_group_c .ss_listado_simplerow {
+        border-bottom-style: solid !important;
+        border-bottom-color: rgba(255, 255, 255, 0.1) !important; }
+      #ss_listado_dialog .ss_listado_table .ss_listado_table_group_c .ss_listado_table_td {
+        line-height: 1.2 !important;
+        font-size: 0.7rem !important; }
+        #ss_listado_dialog .ss_listado_table .ss_listado_table_group_c .ss_listado_table_td strong {
+          font-weight: 300; }
     #ss_listado_dialog .ss_listado_table .ss_listado_table_group input {
       width: 100%;
       height: 1.5rem;
@@ -2407,17 +2582,20 @@ body.ss_showing_drawer .ss_analytics_pie {
     #ss_listado_dialog .ss_listado_table_tr:last-child {
       border-bottom-color: transparent; }
     #ss_listado_dialog .ss_listado_table_tr.ss_listado_table_breaker {
-      border-color: rgba(255, 255, 255, 0.8);
+      border-color: rgba(255, 255, 255, 0.1);
       border-bottom-style: solid;
-      box-sizing: border-box; }
+      box-sizing: border-box;
+      font-weight: 300; }
+      #ss_listado_dialog .ss_listado_table_tr.ss_listado_table_breaker strong {
+        font-weight: 300; }
       #ss_listado_dialog .ss_listado_table_tr.ss_listado_table_breaker .ss_badge {
         font-size: 0.55rem;
         font-weight: 800;
         color: white;
-        background: rgba(255, 255, 255, 0.3);
+        background: #222;
         line-height: 1;
-        padding: 0.2rem 0.5rem 0.15rem;
-        margin-left: 0.35rem;
+        padding: 0.25rem 0.5rem 0.2rem;
+        margin-left: 0.45rem;
         border-radius: 1rem; }
     #ss_listado_dialog .ss_listado_table_tr.ss_listado_table_th {
       border-bottom-style: solid; }
@@ -2428,11 +2606,12 @@ body.ss_showing_drawer .ss_analytics_pie {
       box-sizing: border-box;
       align-items: center;
       font-size: 0.9rem;
-      padding-right: 0.5rem; }
+      padding-right: 0.5rem;
+      padding-left: 0.5rem; }
       #ss_listado_dialog .ss_listado_table_tr .ss_listado_table_td .material-icons {
         color: white;
         position: absolute;
-        right: 0; }
+        right: 15px; }
 
 .ss_showing_drawer .ss_listado_container_e {
   width: 25% !important; }
@@ -2491,6 +2670,12 @@ body.ss_showing_drawer .ss_analytics_pie {
 
 .ss_modal_edit .MuiDialogContent-root {
   overflow: initial !important; }
+
+.MuiFab-root {
+  box-shadow: none !important;
+  border: 2px solid #333 !important; }
+  .MuiFab-root .MuiIcon-root {
+    font-size: 1.2rem !important; }
 
 @media (max-width: 1090px) {
   .ss_db_toolbar_info_td.ss_db_lastmodified, .ss_db_builder_project_name_placeholder {

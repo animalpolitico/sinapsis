@@ -365,7 +365,7 @@ class AnalyticsPiePie extends React.Component{
         </div>
         <div className="ss_analytics_pie_info">
           <div className="ss_analytics_pie_info_a">
-            El <strong>{pct}%</strong> no tiene <strong>{d.name}</strong>
+            El <strong>{pct}%</strong><br/>no tiene <strong>{d.name}</strong>
           </div>
           <div className="ss_analytics_pie_info_b">
             ({this.props.count - d.count} de {this.props.count})

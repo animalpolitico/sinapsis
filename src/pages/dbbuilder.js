@@ -406,7 +406,7 @@ class DbInicio extends React.Component{
                 <div className="ss_db_choose_td_label">
                   Cargar proyecto
                 </div>
-                <Icon>merge_type</Icon>
+                <Icon>keyboard_capslock</Icon>
               </div>
             </div>
             <div className="ss_db_choose_td" onClick={() => this.props.parent.startNewProject()}>
@@ -456,7 +456,6 @@ class DbLoader extends React.Component{
         this.state.loading ?
         <div id="ssdb_loader">
           <div id="ssdb_loader_c">
-            <CircularProgress color="secondary"/>
           </div>
         </div>
         : null
@@ -487,7 +486,7 @@ class DbBuilderSidebar extends React.Component{
         self.selectDb(dbid);
         self.refs[dbid].handleClick();
       }catch(ex){
-        
+
       }
 
       setTimeout(function(){

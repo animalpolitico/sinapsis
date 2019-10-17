@@ -18,7 +18,7 @@ export default class DbInput extends React.Component{
   }
   componentDidMount(){
     this.setInitialValue();
-
+    this.mi = null;
   }
   setInitialValue(){
     var em = this.props.empresa;
@@ -72,10 +72,16 @@ export default class DbInput extends React.Component{
   }
 
   setAutoComplete(){
+    var self = this;
+    clearTimeout(this.mi);
     if(this.props.matchWith && this.props.matchWith.indexOf('address') > -1){
-      this.setAutoCompleteAddress();
+      this.mi = setTimeout(function(){
+        self.setAutoCompleteAddress();
+      }, 500);
     }else if(this.props.matchWith && this.props.matchWith.length){
-      this.setAutoCompleteStandard(this.props.matchWith[0]);
+      this.mi = setTimeout(function(){
+        self.setAutoCompleteStandard(self.props.matchWith[0]);
+      }, 500);
     }
   }
 

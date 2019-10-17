@@ -8,11 +8,11 @@
   z-index: 9999999;
   &_close{
     position: absolute;
-    right: 2rem;
+    right: 2.5rem;
     cursor: pointer;
     z-index: 10;
     box-sizing: border-box;
-    padding: 0.5rem 0.5rem;
+    padding: 1.5rem 0.5rem;
     .material-icons{
       color: white;
       font-size: 2rem;
@@ -126,14 +126,15 @@
           }
         }
         &_info{
-          width: 70%;
+          width: 85%;
           font-size: 0.8rem;
           @extend .flex;
           flex-direction: column;
           justify-content: center;
           line-height: 1.2;
-          margin: 0.5rem auto 0;
+          margin: 0.5rem  0 0;
           text-transform: uppercase;
+          margin-left: 15%;
           &_a{
             width: 100%;
             color: #f6f6f6;
