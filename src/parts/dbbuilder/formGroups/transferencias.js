@@ -158,7 +158,7 @@ export default class DbFormGroupTransferencias extends React.Component{
               }
             </div>
             <div className="dbef_n_ctas">
-              <div className="dbef_n_ctas_c" onClick={() => this.open()}>Añadir</div>
+              <div className="dbef_n_ctas_c" onClick={() => this.open()}>Agregar</div>
             </div>
           </div>
         </ExpansionPanelSummary>

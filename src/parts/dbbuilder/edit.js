@@ -113,11 +113,7 @@ export default class DbEditEmpresa extends React.Component{
         <div className="db_empresa_name">
           <div className="db_empresa_name_t">
             <div>
-              <input
-                type="text"
-                value={this.props.empresa.name}
-                onChange={(e) => this.handleNameChange(e.target.value)}
-              />
+              {this.props.empresa.name}
             </div>
           </div>
           {
@@ -134,6 +130,9 @@ export default class DbEditEmpresa extends React.Component{
             </div>
             : null
           }
+          <div className="db_empresa_name_trash" onClick={() => this.intentDelete()}>
+            <Icon>edit</Icon>
+          </div>
           <div className="db_empresa_name_trash" onClick={() => this.intentDelete()}>
             <Icon>delete</Icon>
           </div>
@@ -155,10 +154,9 @@ export default class DbEditEmpresa extends React.Component{
           </Dialog>
         </div>
         <div className="db_empresa_container_form">
-          <DbFormGroupInfoGeneral empresa={this.props.empresa} parent={this} ref={(ref) => this.infoGeneral = ref}>
-            <DbFormGroupPersonas empresa={this.props.empresa} parent={this} />
-            <DbFormGroupNotaria empresa={this.props.empresa} parent={this} />
-          </DbFormGroupInfoGeneral>
+          <DbFormGroupInfoGeneral empresa={this.props.empresa} parent={this} ref={(ref) => this.infoGeneral = ref} />
+          <DbFormGroupPersonas empresa={this.props.empresa} parent={this} />
+          <DbFormGroupNotaria empresa={this.props.empresa} parent={this} />
           {
             isMexico() ?
             <DbFormGroupBanderasRojas empresa={this.props.empresa} parent={this} />

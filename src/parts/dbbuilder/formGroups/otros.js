@@ -151,7 +151,7 @@ export default class DbFormGroupOtros extends React.Component{
               Otros relacionados <span className="dbef_n_n_badge">{otros.length}</span>
             </div>
             <div className="dbef_n_ctas">
-              <div className="dbef_n_ctas_c" onClick={() => this.open()}>Añadir</div>
+              <div className="dbef_n_ctas_c" onClick={() => this.open()}>Agregar</div>
             </div>
           </div>
         </ExpansionPanelSummary>

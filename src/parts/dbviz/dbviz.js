@@ -113,6 +113,7 @@ class SSDBControl extends React.Component{
     showing: true
   }
   toggleDb(dbid){
+    window.dispatchEvent(startLoad);
     var s = this.state.hiddenDbs;
     if(s.indexOf(dbid) == -1){
       s.push(dbid);
@@ -122,7 +123,6 @@ class SSDBControl extends React.Component{
     this.setState({
       hiddenDbs: s
     })
-    window.dispatchEvent(startLoad);
     window.dbf.hideDbs(s);
     var ev = new Event('ss_lazy_indicator');
     window.dispatchEvent(ev);
@@ -438,10 +438,11 @@ export class Search extends React.Component{
             <input
               onFocus={() => this.searchResults(this.state.v)}
               value={this.state.v}
-              placeholder="Busca por término"
+              placeholder="Buscar..."
               type="text"
               onChange={(e) => this.searchResults(e.target.value) }
-              />
+            />
+            <Icon>search</Icon>
           </div>
           <div className="db_search_nodes_results">
             {

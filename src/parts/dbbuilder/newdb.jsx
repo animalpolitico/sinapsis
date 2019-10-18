@@ -13,7 +13,7 @@ export default class DBNewDatabase extends React.Component{
     var mn = dbf.getMainObject();
     return(
       <div className="ss_new_db">
-        <p>Añadir {mn.name}</p>
+        <p>Agregar {mn.name}</p>
         {
           gr.map(function(g){
             return <DBFormGroup g={g} />

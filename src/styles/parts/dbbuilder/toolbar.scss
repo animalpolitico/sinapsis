@@ -6,39 +6,43 @@
   #ss_db_save{
     @extend .flex;
     align-items: center;
-    background: darken($main, 5%);
+    background: #111;
+    border: 1px solid $main;
     box-sizing: border-box;
-    padding: 0.2rem 0.6rem;
+    padding: 0.25rem 0.5rem;
     cursor: pointer;
     transition: all 0.2s ease-out;
     margin-right: 0.25rem;
-    box-shadow: 0 0 4px rgba($main, 0.9);
+    box-shadow: 0 0 2px rgba($main, 0.5);
     &:hover{
       background: darken($main, 10%);
     }
     .material-icons{
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1;
       color: white;
-      margin-right: 0.2rem;
+      margin-right: 0.35rem;
     }
     div{
       color: white;
-      font-size: 1rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
       font-weight: 400;
     }
   }
   &_info{
     width: 100%;
     box-sizing: border-box;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 0.5rem 0.5rem 2rem;
     background: darken($blue, 5%);
+    border-bottom: 2px solid #333;
     @extend .flex;
     align-items: center;
     &_td{
       &.ss_db_lastmodified{
         font-size: 0.8rem;
         color: #f0f0f0;
+        display: none;
       }
       &.ss_db_ctas{
         flex: 1;
@@ -49,10 +53,10 @@
         padding-right: 1rem;
         .ss_db_ctas_custom_lang{
           img{
-            width: 30px;
+            width: 25px;
             display: block;
             cursor: pointer;
-            margin-left: 0.75rem;
+            margin-left: 1.5rem;
           }
         }
         .MuiButtonBase-root{
@@ -90,8 +94,15 @@
         }
         &_placeholder{
           color: #ccc;
-          margin-right: 1rem;
-          font-weight: 600;
+          margin-right: 0.5rem;
+          font-weight: 300;
+          text-transform: uppercase;
+          &::before{
+            content: '/';
+            color: $main;
+            font-weight: 600;
+            margin-right: 0.6rem;
+          }
         }
         &_icon{
           height: 100%;
@@ -99,13 +110,13 @@
           right: 0;
           top: 0;
           pointer-events: none;
-          display: none;
+          display: flex;
           align-items: center;
           justify-content: center;
           transform: translateX(-70%);
           .material-icons{
             font-size: 1.2rem;
-            color: #888;
+            color: #777;
           }
         }
         input{
@@ -115,15 +126,14 @@
           border: 0;
           font-family: $f;
           box-sizing: border-box;
-          padding: 0.25rem 0.5rem;
-          font-weight: 600;
+          padding: 0.25rem 1rem 0.25rem 0.15rem;
+          font-weight: 500;
+          min-width: 200px;
+          text-transform: uppercase;
           border: 1px solid transparent;
-          transform: translateX(-0.5rem);
-          border-radius: 1rem;
           &:focus{
             outline: 0;
-            background: white;
-            color: #333;
+            border-color: #333;
           }
         }
         &.ss_error{

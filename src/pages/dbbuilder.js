@@ -11,6 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import FPSStats from "react-fps-stats";
 import Radio from '@material-ui/core/Radio';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -69,10 +70,12 @@ export default class DbBuilderPage extends React.Component{
     showrecoveroptions: false,
     isautosaving: false,
     uid: null,
-    hasloaded: false
+    hasloaded: false,
+    showfps: false
   }
 
   componentDidMount(){
+    var self = this;
     this.startAutosave();
     this.set();
     window.scroll(0,0);
@@ -81,6 +84,16 @@ export default class DbBuilderPage extends React.Component{
         ev.preventDefault();
         return ev.returnValue = '¿Deseas cerrar la pestaña?';
     });
+
+    window.addEventListener('keypress', function(e){
+      var w = e.which;
+      if(w == 36){
+        self.setState({
+          showfps: !self.state.showfps
+        })
+      }
+    })
+
   }
 
   set(){
@@ -132,7 +145,7 @@ export default class DbBuilderPage extends React.Component{
     if(this.props.match.params.dbid !== this.state.uid){
       var s = true;
       if(!this.props.match.params.dbid && this.state.hasloaded){
-        s = window.confirm('¿Deseas regresar? Es posible que los cambios que implementaste no se puedan guardar.');
+        s = window.confirm('¿Deseas regresar? Guarda tu archivo para no perder los cambios hechos.');
       }
       if(s){
         this.set();
@@ -299,6 +312,14 @@ export default class DbBuilderPage extends React.Component{
         </Helmet>
         <DbLoader />
         {
+          this.state.showfps ?
+          <div className="ss_page_fps">
+            <FPSStats />
+          </div>
+          : null
+        }
+
+        {
           this.state.showcontrol ?
             <DbInicio parent={this}/>
           :
@@ -436,12 +457,14 @@ class DbLoader extends React.Component{
   componentDidMount(){
     var self = this;
     window.addEventListener('sinapsisStartLoad', function(){
+      document.body.style.cursor = "wait";
       self.setState({
         loading: true
       })
     })
 
     window.addEventListener('sinapsisEndLoad', function(){
+      document.body.style.cursor = "default";
       self.setState({
         loading: false
       })
@@ -956,15 +979,9 @@ class DbEmpresasList extends React.Component{
             }
           </div>
           :
-          <div className="ss_db_ve_c_nocontent">
-            <div className="ss_db_ve_c_nocontent_icon">
-              <Icon>dns</Icon>
-            </div>
+          <div className="ss_db_ve_c_nocontent" onClick={() => this.props.parent.showAddDialog()}>
             <div className="ss_db_ve_c_nocontent_des">
               <p>Sin empresas</p>
-              <div className="ss_db_ve_c_nocontent_des_cta">
-                <a href="#" onClick={() => this.props.parent.showAddDialog()}>Agregar empresa</a>
-              </div>
             </div>
           </div>
         }
@@ -1244,10 +1261,10 @@ class PreDb extends React.Component{
     var p = this.props.p;
     var m = p.size;
 
-    var ts = '< 10 segundos';
+    var ts = '10 segundos';
     if(m > 2){
       if(m < 10){
-        ts = '< 1 minuto';
+        ts = '1 minuto';
       }else{
         var mm = Math.ceil(m / 10);
         ts = mm + ' minuto' + (mm > 1 ? 's' : '');

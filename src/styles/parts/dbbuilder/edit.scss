@@ -5,8 +5,9 @@
   top: 0;
   right: 0;
   z-index: 2;
-  background: darken($blue, 5%);
-  border-left: 2px solid beige;
+  background: #2a2a2a;
+  border-left: 2px solid #444;
+  border-right: 2px solid #444;
   box-sizing: border-box;
   transform: translateX(100%);
   min-width: 426px;
@@ -14,10 +15,16 @@
     position: absolute;
     top: 0;
     right: 0;
-    padding: 1rem;
+    padding: 0.5rem 0.5rem;
     cursor: pointer;
     .material-icons{
       color: white;
+      font-size: 16px;
+    }
+    &:hover{
+      .material-icons{
+        color: $main;
+      }
     }
   }
   &_container{
@@ -36,9 +43,11 @@
       color: white;
       font-weight: 300;
       @extend .flex;
+      margin-top: 2.5rem;
       align-items: center;
       &_errors{
         @extend .flex;
+        display: none;
         &_td{
           @extend .flex;
           align-items: center;
@@ -56,42 +65,33 @@
       }
       &_trash{
         cursor: pointer;
-        padding-left: 0.5rem;
+        padding-left: 1rem;
         position: relative;
         @extend .flex;
         align-items: center;
         justify-content: center;
         .material-icons{
+          font-size: 16px;
+          color: #ccc;
+          &:hover{
+            color: $main;
+          }
         }
       }
       &_t{
         flex: 1;
         @extend .flex;
         align-items: center;
+        box-sizing: border-box;
+        padding-left: 1rem;
         .material-icons{
           opacity: 0.8;
           margin-right: 0.25rem;
         }
         div{
           flex: 1;
-          input{
-            font-size: 1.2rem;
-            font-family: $f;
-            font-weight: 300;
-            color: white;
-            background: none;
-            border: 0;
-            box-sizing: border-box;
-            display: block;
-            padding: 0.5rem 0.75rem;
-            width: 100%;
-            &:focus{
-              outline: 0;
-              background: white;
-              color: $blue;
-              border-radius: 1.5rem;
-            }
-          }
+          font-size: 0.95rem;
+          line-height: 1.2;
         }
       }
     }
@@ -100,7 +100,7 @@
       box-sizing: border-box;
       padding: 1rem;
       font-size: 0.95rem;
-      @extend .flex;
+      display: none;
       align-items: center;
       .material-icons{
         font-size: 0.85rem;
@@ -109,6 +109,7 @@
       }
       .ss_dbe_dbname{
         color: white;
+        display: none;
       }
     }
   }
@@ -120,14 +121,35 @@
       flex: 1;
       overflow-y: auto;
       padding: 0 0.5rem 1rem;
+      .MuiExpansionPanelDetails-root{
+        padding: 5px 16px!important;
+      }
+      .MuiPaper-root{
+        box-shadow: none;
+        box-sizing: border-box;
+        border: 1px solid #333!important;
+        background: #252525!important;
+        &::before{
+          display: none;
+        }
+        &:not(:last-child){
+          margin-bottom: 0.5rem;
+        }
+        .MuiExpansionPanelSummary-root{
+          min-height: 30px;
+          padding: 0 0.5rem;
+        }
+      }
       .db_empresa_container_group_rg{
         width: 100%;
-        margin: 0.25rem 0;
+        margin: 0.35rem 0;
+        box-sizing: border-box;
+        padding: 0 1rem;
         .material-icons{
-          font-size: 1rem;
+          font-size: 0.8rem;
           line-height: 1;
           margin-right: 0.15rem;
-          color: #f6f6f6;
+          color: #777;
         }
         input:checked ~ {
           .rg_title_ch, .db_empresa_container_group_rg_checkboxes_ch_info{
@@ -146,6 +168,8 @@
           @extend .flex;
           position: relative;
           align-items: center;
+          font-size: 0.8rem;
+          font-weight: 300;
           input{
             width: 60%;
             height: 100%;
@@ -192,9 +216,10 @@
               @extend .flex;
               cursor: pointer;
               align-items: center;
-
+              font-size: 0.8rem;
+              margin-top: 0.3rem;
               .rg_ch_i_i{
-                margin-right: 5px;
+                margin-right: 2px;
               }
             }
           }
@@ -205,9 +230,12 @@
         @extend .flex;
         color: white;
         flex-shrink: 0;
+        font-size: 0.9rem;
+        box-sizing: border-box;
+        padding-left: 1rem;
         align-items: baseline;
         &_n{
-          font-weight: 600;
+          font-weight: 300;
           @extend .flex;
           align-items: center;
           .dbef_n_tooltip{
@@ -225,7 +253,7 @@
             padding: 0.2rem 0.5rem 0.1rem;
             border-radius: 1rem;
             background-color: $main;
-            font-weight: 600;
+            font-weight: 800;
             color: white;
           }
         }
@@ -236,12 +264,14 @@
           padding-right: 1rem;
           align-items: center;
           &_c{
-            font-size: 0.8rem;
-            background: #444;
-            padding: 0.25rem 0.35rem;
+            font-size: 0.7rem;
+            background: #222;
+            padding: 0.25rem 0.4rem;
             cursor: pointer;
             max-height: 20px;
             transition: all 0.25s ease;
+            text-transform: uppercase;
+            border: 1px solid $main;
             &:hover{
               background: darken($main, 10%);
             }
@@ -275,6 +305,14 @@
   width: 100%;
   @extend .flex;
   flex-wrap: wrap;
+  &_empty{
+    font-size: 0.8rem;
+    color: #999;
+    box-sizing: border-box;
+    padding-left: 0.55rem;
+    font-weight: 600;
+    margin-bottom: 0.65rem;
+  }
   .db_empresa_container_group_radios{
     width: 100%;
     @extend .flex;
@@ -321,17 +359,19 @@
   .db_empresa_subgroup{
     width: 100%;
     margin: 0.5rem 0;
+    box-sizing: border-box;
+    padding-left: 0.5rem;
     &_title{
       width: 100%;
       box-sizing: border-box;
       color: white;
       font-weight: 500;
       box-sizing: border-box;
-      padding-bottom: 0.25rem;
+      padding-bottom: -0.2rem;
       font-size: 0.9rem;
       &::before{
         content: '/';
-        color: $main;
+        color: #ccc;
         display: inline-block;
         font-size: 0.8em;
         margin-right: 0.25rem;
@@ -350,10 +390,7 @@
     }
     &_content{
       &_empty{
-        font-size: 0.9rem;
-        color: white;
-        font-weight: 600;
-        margin-top: 0.35rem;
+
       }
     }
   }
@@ -362,8 +399,8 @@
     box-sizing: border-box;
     .ss_transaction_row{
       box-sizing: border-box;
-      margin: 0.25rem 0;
-      border-bottom: 1px dotted rgba(white, 0.1);
+      margin-bottom: 0.25rem;
+      border-bottom: 1px solid rgba(white, 0.1);
       @extend .flex;
       align-items: center;
       &_d{
@@ -488,13 +525,12 @@
 }
 .ss_db_input, .ss_db_input_select{
   box-sizing: border-box;
-  padding: 0.4rem 0.5rem;
-  flex: 1;
-  min-width: 50%;
+  padding: 0.5rem 0.6rem;
+  width: 50%!important;
   position: relative;
   margin-bottom: 0.5rem;
-  &.ss_large, &.ss_db_input_select{
-    min-width: 100%;
+  &.ss_db_input_select{
+    width: 100%!important;
   }
   select{
     width: 100%;
@@ -531,34 +567,33 @@
         align-items: center;
         box-sizing: border-box;
         padding: 0.5rem;
-        color: #999;
+        color: #777;
         line-height: 1;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         transition: transform 0.35s ease;
         pointer-events: none;
+        height: auto;
+        padding: 0.25rem 0;
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+        transform: translateY(-100%);
       }
       input{
         width: 100%;
         display: block;
         box-sizing: border-box;
         padding: 0.5rem;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         border: 0;
         font-family: $f;
-        background: white;
-        border: 2px solid white;
+        color: white;
+        background: transparent;
+        border: 1px solid #555;
         &:focus, &.ss_with_value{
           outline: 0;
-          ~ .ss_db_input_container_label{
-            height: auto;
-            padding: 0.25rem 0;
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 600;
-            transform: translateY(-100%);
-          }
         }
       }
     }

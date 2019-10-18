@@ -1,3 +1,4 @@
+
 import moment from 'moment';
 import 'moment/locale/es';
 import { saveAs } from 'file-saver';
@@ -947,7 +948,7 @@ export default class DbFactory {
     var name = d.info.slug + '_v'+ d.version + '_b_' + d.saves;
     var zip = new JSZip();
     zip.file('leeme.txt', this.getReadMeText(name), {binar: true});
-    zip.file(name + '.sinapsis', txt, {binary: true});
+    zip.file('proyectoSinapsis.sinapsis', txt, {binary: true});
     zip.file('dev/'+ name + '_dev.json', s, {binary: true});
     zip.generateAsync({type: "blob"})
     .then(function(content) {
@@ -972,8 +973,8 @@ export default class DbFactory {
       'PROYECTO: '+this.obj.info.name,
       '',
       '¡Hola! Muchas gracias por utilizar Sinapsis. El archivo .zip que acabas de abrir contiene diversos materiales de tu proyecto:',
-      '·' + filename +'.sinapsis - Contiene el archivo de tu proyecto, este es el archivo que podrás cargar en la plataforma y contiene todas las bases de datos que introdujiste.',
-      '·En la carpeta /dev podrás encontrar tu proyecto en archivo .json que podrás utilizar para otros proyectos de programación.',
+      '* proyectoSinapsis.sinapsis - Contiene el archivo de tu proyecto, este es el archivo que podrás cargar en la plataforma y contiene todas las bases de datos que introdujiste.',
+      '* En la carpeta /dev podrás encontrar tu proyecto en archivo .json que podrás utilizar para otros proyectos de programación.',
       '',
       '',
       'Si tiene alguna duda o problema escribe a sinapsis@animalpolitico.com'
