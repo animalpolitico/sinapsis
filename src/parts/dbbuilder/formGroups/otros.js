@@ -140,7 +140,7 @@ export default class DbFormGroupOtros extends React.Component{
 
   render(){
     var self = this;
-    var addL = this.state.isedit ? 'Editar' : 'Agregar';
+    var addL = this.state.isedit ? 'Guardar' : 'Agregar';
     var otros = this.getGroup();
 
     return(

@@ -16,7 +16,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Switch from '@material-ui/core/Switch';
 import CountTo from 'react-count-to';
 import Map from './map';
-import { _t } from '../../vars/countriesDict';
+import { isMexico, _t } from '../../vars/countriesDict';
 import Analytics from './analytics';
 var slugify = require('slugify');
 var startLoad = new Event('sinapsisStartLoad');
@@ -2070,18 +2070,23 @@ class SSCategoryToggle extends React.Component{
               })
             }
           </div>
-          <div className="ss_ctr_br" onClick={() => this.toggleBS()}>
-            {
-              !this.state.bs ?
-              <>
-              <Icon style={{color: "red"}}>flag</Icon><div>Solo con banderas rojas</div>
-              </>
-              :
-              <>
-              <Icon style={{color: "#f6f6f6"}}>flag_outline</Icon><div>Todas</div>
-              </>
-            }
-          </div>
+          {
+            isMexico() ?
+            <div className="ss_ctr_br" onClick={() => this.toggleBS()}>
+              {
+                !this.state.bs ?
+                <>
+                <Icon style={{color: "red"}}>flag</Icon><div>Solo con banderas rojas</div>
+                </>
+                :
+                <>
+                <Icon style={{color: "#f6f6f6"}}>flag_outline</Icon><div>Todas</div>
+                </>
+              }
+            </div>
+            : null
+          }
+
           </>
             : null
           }

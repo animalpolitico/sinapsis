@@ -396,6 +396,50 @@ export default class DbFactory {
   }
 
   /**
+  * Construye Analytics de interés
+  *
+  * @param void
+  * @return obj
+  **/
+  buildAnalyticsBr(onlydbs){
+    var db = this.getDbs();
+    var dbA = Object.values(db);
+    if(onlydbs){
+      dbA = dbA.filter(_db => onlydbs.indexOf(_db.id) > -1);
+    }
+    var interestFields = ['SinAntReg', 'ASFnoLocalizada', 'SATdefinitiva', 'SATpresunta', 'NoInscritoRUPC', 'RegCompraNet', 'InscritoRUPC'];
+    var obj = {
+      count: 0
+    }
+    interestFields.map(function(k){
+      obj[k] = 0;
+    })
+    var controlTable = {};
+
+    dbA.map(function(_db){
+      var empresas = _db.empresas;
+          empresas = Object.values(empresas);
+      if(empresas){
+        empresas.map(function(empresa){
+          obj.count = obj.count + 1;
+          var fields = empresa.fields;
+          if(fields){
+            fields = Object.values(fields);
+            var f = fields.filter(_f => _f.slug == "banderas-rojas");
+            if(f.length){
+              var bs = f[0].bs;
+              if(bs){
+                bs.map(e => obj[e] = obj[e] + 1);
+              }
+            }
+          }
+        })
+      }
+    })
+    return obj;
+  }
+
+  /**
   * Obtiene todas las direcciones con latitud y longitud
   *
   * @param void
@@ -408,6 +452,9 @@ export default class DbFactory {
     dbA.map(function(_db){
       var dbfields = [];
       var empresas = _db.empresas;
+      if(!empresas){
+        empresas = {};
+      }
           empresas = Object.values(empresas);
       if(empresas){
         empresas.map(function(empresa){
@@ -518,6 +565,38 @@ export default class DbFactory {
           }else if(!onlypositive){
             count += c;
           }
+        })
+      }
+    })
+    return count;
+  }
+
+  /**
+  * Obtiene la suma de licitaciones
+  *
+  * @param void
+  * @return int
+  **/
+  getLicitacionesSum(odbs, onlypositive){
+    var self = this;
+    var db = this.getDbs();
+    var dbA = Object.values(db);
+    if(odbs){
+      dbA = dbA.filter(_db => odbs.indexOf(_db.id) > -1);
+    }
+    var count = 0;
+    dbA.map(function(_db){
+      var dbfields = [];
+      var empresas = _db.empresas;
+          empresas = Object.values(empresas);
+      if(empresas){
+        empresas.map(function(em){
+          var f = em.fields ? em.fields : {};
+              f = Object.values(f);
+          var ls = f.filter(_f => _f.slug == "contrato-monto-total-de-licitacion");
+          ls.map(function(_ls){
+            count += parseFloat(_ls.value);
+          })
         })
       }
     })

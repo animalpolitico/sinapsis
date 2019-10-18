@@ -22,6 +22,7 @@ export default class DbFormGroupPersonas extends React.Component{
     isedit: false,
     personType: '-',
     fields: {},
+    funcionario: false,
     modalChanged: false
   }
 
@@ -133,7 +134,7 @@ export default class DbFormGroupPersonas extends React.Component{
 
   render(){
     var self = this;
-    var addL = this.state.isedit ? 'Editar' : 'Agregar';
+    var addL = this.state.isedit ? 'Guardar' : 'Agregar';
     var repLegales = this.getGroup('representante');
     var accionistas = this.getGroup('accionista');
     var administradores = this.getGroup('administrador');
@@ -161,6 +162,8 @@ export default class DbFormGroupPersonas extends React.Component{
         fields: consejeros
       }
     ];
+
+    var funcionario = this.state.funcionario;
 
     return(
       <ExpansionPanel>
@@ -277,8 +280,57 @@ export default class DbFormGroupPersonas extends React.Component{
                       />
                       : null
                     }
+
+                    <div className="db_empresa_container_group_radios">
+                      <div className="db_empresa_container_group_radios_title">
+                        ¿Fue funcionarix?
+                      </div>
+                      <div className="db_empresa_container_group_radios_radio">
+                        <input checked={funcionario} onChange={() => this.setState({funcionario: true, res: true})} type="radio" name="ss_c_e_t" />
+                          <div className="db_empresa_container_group_radios_radio_c">
+                            Sí
+                          </div>
+                      </div>
+                      <div className="db_empresa_container_group_radios_radio">
+                        <input checked={!funcionario} onChange={() => this.setState({funcionario: false, res: true})} type="radio" name="ss_c_e_t" />
+                          <div className="db_empresa_container_group_radios_radio_c">
+                            No
+                          </div>
+                      </div>
+                    </div>
+
+                    {
+                      funcionario ?
+                      <>
+                      <DbInput
+                        onChange={(slug, obj) => this.insertField(slug, obj)}
+                        matchWith={['instancia']}
+                        name="Nombre de la dependencia"
+                        type="text"
+                        group={this.state.personType}
+                        empresa={this.props.empresa}
+                        db={this.props.parent.props.db}
+                        ref={this.setChildRef}
+                      />
+                      <DbInput
+                        onChange={(slug, obj) => this.insertField(slug, obj)}
+                        name="Último año activx"
+                        type="text"
+                        group={this.state.personType}
+                        empresa={this.props.empresa}
+                        db={this.props.parent.props.db}
+                        ref={this.setChildRef}
+                      />
+                    </>
+
+                    : null
+
+                    }
+
                   </>
               : null}
+
+
 
             </div>
           </DialogContent>

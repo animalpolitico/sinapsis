@@ -86,7 +86,23 @@ body.ss_show_sidebar{
   background: #2a2a2a!important;
   border: 2px solid #333;
   .MuiDialogTitle-root, .MuiFormControlLabel-root{
-    color: #f0f0f0!important;
+    align-items: center;
+    margin-top: 1rem;
+    padding-left: 5.5%!important;
+    *, &{
+      font-weight: 300;
+      text-transform: uppercase;
+      font-size: 1.2rem;
+    }
+    h2{
+      color: #f6f6f6;
+      &::before{
+        content: '/';
+        color: $main;
+        font-weight: 600;
+        margin-right: 0.35rem;
+      }
+    }
   }
 }
 
@@ -99,7 +115,7 @@ body.ss_show_sidebar{
 }
 .MuiDialogActions-root{
   box-sizing: border-box;
-  padding-right: 3rem!important;
+  padding-right: 2rem!important;
 }
 .ss_modal_dbpre{
   .ss_predb{

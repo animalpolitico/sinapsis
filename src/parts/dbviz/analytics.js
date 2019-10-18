@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import Icon from '@material-ui/core/Icon';
 import formatMoney from 'format-money';
 import CountTo from 'react-count-to';
-import { _t } from '../../vars/countriesDict';
+import { _t, isMexico } from '../../vars/countriesDict';
 var Chart = require('chart.js');
 var onDrawerToggle = new Event('sinapsisDrawerToggle');
 export default class Analytics extends React.Component{
@@ -85,6 +85,7 @@ export default class Analytics extends React.Component{
   render(){
     var dbs = this.getActiveDbs();
     var analytics = window.dbf.buildAnalytics(this.state.activeDbs);
+    var analyticsBR = window.dbf.buildAnalyticsBr(this.state.activeDbs);
     var top10m = window.dbf.getTopMontos(this.state.activeDbs);
     return(
       <div className="ss_analytics">
@@ -101,7 +102,12 @@ export default class Analytics extends React.Component{
             <AnalyticsTop10 rand={this.state.rand} m={top10m} ref={(ref) => this.top = ref} parent={this} active={this.state.activeDbs}/>
             : null
           }
-          <AnalyticsPie rand={this.state.rand} ref={(ref) => this.pies = ref} parent={this} analytics={analytics} active={this.state.activeDbs}/>
+          <AnalyticsPie isBr={false} invert={true} title="Información del llenado" rand={this.state.rand} ref={(ref) => this.pies = ref} parent={this} analytics={analytics} active={this.state.activeDbs}/>
+          {
+            isMexico() ?
+            <AnalyticsPie isBr={true} invert={false} rand={this.state.rand} title="Banderas rojas" parent={this} analytics={analyticsBR} active={this.state.activeDbs}/>
+            : null
+          }
         </div>
       </div>
     )
@@ -235,6 +241,30 @@ class AnalyticsPie extends React.Component{
       case "accionista":
         o = "accionista";
       break;
+
+      case "SinAntReg":
+        o = "sin antecedentes registrales";
+      break;
+      case "ASFnoLocalizada":
+        o = "ASF no localizada";
+      break;
+      case "direccion-fiscal":
+        o = "dirección fiscal";
+      break;
+      case "SATdefinitiva":
+        o = "SAT definitiva";
+      break;
+      case "SATpresunta":
+        o = "SAT presunta";
+      break;
+      case "NoInscritoRUPC":
+        o = "no inscrito en RUPC";
+      break;
+      case "RegCompraNet":
+        o = "no registrada en CompraNet";
+      break;
+
+
     }
     return _t(o);
   }
@@ -275,18 +305,18 @@ class AnalyticsPie extends React.Component{
     var analytics = this.props.analytics;
     var pan = [];
     for(var key in analytics){
-      if(key !== "count"){
+      if(key !== "count" && key !== "InscritoRUPC"){
         pan.push({key: key, count: analytics[key], name: this.buildName(key), icon: this.getIcon(key)});
       }
     }
     return(
       <div className="ss_analytics_montos">
-        <div className="ss_analytics_montos_title">Información del llenado</div>
+        <div className="ss_analytics_montos_title">{this.props.title}</div>
         <div className="ss_analytics_montos_row">
           {
             pan.map(function(d){
               return(
-                <AnalyticsPiePie rand={self.props.rand} d={d} count={analytics.count} />
+                <AnalyticsPiePie rand={self.props.rand} d={d} count={analytics.count} {...self.props} />
               )
             })
           }
@@ -320,30 +350,33 @@ class AnalyticsPiePie extends React.Component{
     if(isNaN(pct)){
       pct = 0;
     }
-    pct = 1 - pct;
+    pct = this.props.invert ? 1 - pct : pct;
     return pct;
   }
 
   createChart(){
+    var self = this;
     var pct = this.getRawPct();
     var d = this.props.d;
     var c = this.props.count;
     var id = this.getCanvasId();
     var ctx = document.getElementById(id).getContext('2d');
-    var dta = [d.count, c - d.count];
+    var dta = this.props.invert ? [d.count, c - d.count] : [c - d.count, d.count];
+    var color = this.props.isBr ? "rgb(237, 81, 65)" : "#0072ff";
+    var lsl = this.props.invert ? ['Con '+ d.name, 'Sin '+d.name] : ['Sin '+d.name, 'Con '+ d.name];
     var chart = new window.Chart(ctx, {
           type: 'doughnut',
           data: {
-            labels: ['Con '+ d.name, 'Sin '+d.name],
+            labels: lsl,
             datasets: [{
               label: '%',
               data: dta,
-              backgroundColor: ['#373737', '#0072ff'],
+              backgroundColor: ['#373737', color],
               borderWidth: 0,
             }]
           },
           options: {
-            cutoutPercentage: 80,
+            cutoutPercentage: self.props.isBr ? 60 : 80,
             legend: {
               display: false
             }
@@ -365,10 +398,19 @@ class AnalyticsPiePie extends React.Component{
         </div>
         <div className="ss_analytics_pie_info">
           <div className="ss_analytics_pie_info_a">
-            El <strong>{pct}%</strong><br/>no tiene <strong>{d.name}</strong>
+            El <strong>{pct}%</strong><br/>{this.props.invert ? " no tiene " : " como "}<strong>{d.name}</strong>
           </div>
           <div className="ss_analytics_pie_info_b">
-            ({this.props.count - d.count} de {this.props.count})
+            {
+              this.props.invert ?
+              <>
+              ({this.props.count - d.count} de {this.props.count})
+              </>
+              :
+              <>
+              ({d.count} de {this.props.count})
+              </>
+            }
           </div>
         </div>
       </div>
@@ -382,6 +424,7 @@ class AnalyticsMontos extends React.Component{
     var sumaConvenio = window.dbf.getGroupsSum("convenio", "convenio-numero-de-convenio", "convenio-monto-del-convenio", this.props.active);
     var sumaContrato = window.dbf.getGroupsSum("contrato", "contrato-numero-de-contrato", "contrato-monto-del-contrato", this.props.active);
     var sumaTransferencias = window.dbf.getTransferenciasSum(this.props.active, true);
+    var sumaLicitaciones = window.dbf.getLicitacionesSum(this.props.active, true);
     return(
       <div className="ss_analytics_montos">
         <div className="ss_analytics_montos_title">Montos</div>
@@ -389,6 +432,7 @@ class AnalyticsMontos extends React.Component{
           <AnalyticsMontosMonto value={sumaConvenio} label="convenios" />
           <AnalyticsMontosMonto value={sumaContrato} label="contratos" />
           <AnalyticsMontosMonto value={sumaTransferencias} label="transferencias" />
+          <AnalyticsMontosMonto value={sumaLicitaciones} label="licitaciones" />
         </div>
       </div>
     )

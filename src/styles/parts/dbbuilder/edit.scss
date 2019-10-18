@@ -275,6 +275,49 @@
   width: 100%;
   @extend .flex;
   flex-wrap: wrap;
+  .db_empresa_container_group_radios{
+    width: 100%;
+    @extend .flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 0 0.5rem;
+    margin-bottom: 0.6rem;
+    margin-top: 0.6rem;
+    &_title{
+      width: 100%;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    &_radio{
+      position: relative;
+      margin-top: 0.5rem;
+      &_c{
+        padding: 0.25rem 0.6rem;
+        background: #222;
+        border: 1px solid $main;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+        opacity: 0.5;
+      }
+      input{
+        position: absolute;
+        top: 0;
+        cursor: pointer;
+        left: 0;
+        z-index: 2;
+        width: 100%;
+        opacity: 0;
+        height: 100%;
+        &:checked ~ {
+          .db_empresa_container_group_radios_radio_c{
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
   .db_empresa_subgroup{
     width: 100%;
     margin: 0.5rem 0;
@@ -449,6 +492,7 @@
   flex: 1;
   min-width: 50%;
   position: relative;
+  margin-bottom: 0.5rem;
   &.ss_large, &.ss_db_input_select{
     min-width: 100%;
   }
@@ -458,6 +502,12 @@
     padding: 0.5rem;
     box-sizing: border-box;
     font-size: 0.9rem;
+    appearance: none;
+    border-radius: 0;
+    background: #222;
+    border: 1px solid $main;
+    color: white;
+    cursor: pointer;
   }
   &_container{
     width: 100%;
@@ -559,7 +609,6 @@
   .MuiDialogTitle-root{
     h2{
       font-weight: 300;
-      color: beige;
     }
   }
   .MuiPaper-root{

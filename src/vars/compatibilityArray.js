@@ -211,6 +211,25 @@ export const snps_ka = {
     category: 'monto',
     sumWith: ['montos_contrato', 'montos_totales']
   },
+  46: {
+    bypass: true
+  },
+  47: {
+    bypass: true
+  },
+  48: {
+    name: "Fecha de fallo",
+    group: 'contrato',
+    bigGroup: 'contrato',
+    matchWith: ['date'],
+    type: 'date'
+  },
+  49: {
+    name: "Monto total de licitación",
+    group: 'contrato',
+    bigGroup: 'contrato',
+    type: 'currency'
+  },
   53: {
     name: "¿Quién otorga los recursos?",
     group: 'convenio',

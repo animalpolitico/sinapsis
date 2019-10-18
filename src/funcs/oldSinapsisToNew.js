@@ -386,7 +386,7 @@ export default class ConvertOldToDb{
 
 
     /** Contratos **/
-    var range = [37, 45];
+    var range = [37, 49];
     var _fields = this.groupByRange(fields, range);
     _fields.map(function(arr, ind){
         var cuid = uuidv4();

@@ -12,7 +12,7 @@ import Icon from '@material-ui/core/Icon';
 import DbInput from '../inputs';
 import TransactionRow from '../transaction';
 import Tooltip from '@material-ui/core/Tooltip';
-import { isMexico } from '../../../vars/countriesDict';
+import { isMexico, _t } from '../../../vars/countriesDict';
 const uuidv4 = require('uuid/v4');
 var slugify = require('slugify');
 
@@ -23,7 +23,10 @@ export default class DbFormGroupContrato extends React.Component{
     isedit: false,
     personType: 'contrato',
     fields: {},
-    modalChanged: false
+    modalChanged: false,
+    contratoType: 'empresa',
+    licitacion: false,
+    res: false
   }
 
   componentDidMount(){
@@ -50,7 +53,8 @@ export default class DbFormGroupContrato extends React.Component{
       open: true,
       guid: guid,
       fields: {},
-      isedit: isEdit
+      isedit: isEdit,
+      res: false
     })
   }
 
@@ -125,8 +129,22 @@ export default class DbFormGroupContrato extends React.Component{
 
   render(){
     var self = this;
-    var addL = this.state.isedit ? 'Editar' : 'Agregar';
+    var addL = this.state.isedit ? 'Guardar' : 'Agregar';
     var contratos = this.getGroup();
+
+    var type = this.state.contratoType;
+
+    if(this.state.isedit && !this.state.res){
+      var t = contratos[0].filter(f => f.slug == "contrato-quien-otorga-los-recursos");
+      console.log('T', t);
+      if(t.length){
+        var type = t[0].type;
+      }
+    }
+
+    var mw = type == "empresa" ? ['empresa'] : ['instancia'];
+
+    var licitacion = this.state.licitacion;
 
     return(
       <ExpansionPanel>
@@ -189,9 +207,26 @@ export default class DbFormGroupContrato extends React.Component{
           <DialogContent>
             <div className="db_empresa_container_group_form">
                   <>
+                  <div className="db_empresa_container_group_radios">
+                    <div className="db_empresa_container_group_radios_title">
+                      ¿Quien otorga los recursos es empresa o {_t('instancia / dependencia')}?
+                    </div>
+                    <div className="db_empresa_container_group_radios_radio">
+                      <input checked={type == "empresa"} onChange={() => this.setState({contratoType: 'empresa', res: true})} type="radio" name="ss_c_e_t" />
+                        <div className="db_empresa_container_group_radios_radio_c">
+                          Empresa
+                        </div>
+                    </div>
+                    <div className="db_empresa_container_group_radios_radio">
+                      <input checked={type == "instancia"} onChange={() => this.setState({contratoType: 'instancia', res: true})} type="radio" name="ss_c_e_t" />
+                        <div className="db_empresa_container_group_radios_radio_c">
+                          {_t('Instancia / Dependencia')}
+                        </div>
+                    </div>
+                  </div>
                     <DbInput
                       onChange={(slug, obj) => this.insertField(slug, obj)}
-                      matchWith={['empresa', 'instancia']}
+                      matchWith={mw}
                       name="¿Quién otorga los recursos?"
                       type="text"
                       category="emisor"
@@ -279,6 +314,49 @@ export default class DbFormGroupContrato extends React.Component{
                       db={this.props.parent.props.db}
                       ref={this.setChildRef}
                     />
+                    <div className="db_empresa_container_group_radios">
+                      <div className="db_empresa_container_group_radios_title">
+                        ¿Fue parte de una licitación?
+                      </div>
+                      <div className="db_empresa_container_group_radios_radio">
+                        <input checked={licitacion} onChange={() => this.setState({licitacion: true, res1: true})} type="radio" name="ss_c_e_t_1" />
+                          <div className="db_empresa_container_group_radios_radio_c">
+                            Sí
+                          </div>
+                      </div>
+                      <div className="db_empresa_container_group_radios_radio">
+                        <input checked={!licitacion} onChange={() => this.setState({licitacion: false, res1: true})} type="radio" name="ss_c_e_t_1" />
+                          <div className="db_empresa_container_group_radios_radio_c">
+                            No
+                          </div>
+                      </div>
+                    </div>
+                    {
+                      licitacion ?
+                      <>
+                        <DbInput
+                          onChange={(slug, obj) => this.insertField(slug, obj)}
+                          name="Fecha de fallo"
+                          type="date"
+                          matchWith={['date']}
+                          group="contrato"
+                          empresa={this.props.empresa}
+                          db={this.props.parent.props.db}
+                          ref={this.setChildRef}
+                        />
+                        <DbInput
+                          onChange={(slug, obj) => this.insertField(slug, obj)}
+                          name="Monto total de licitación"
+                          type="currency"
+                          group="contrato"
+                          empresa={this.props.empresa}
+                          db={this.props.parent.props.db}
+                          ref={this.setChildRef}
+                        />
+                      </>
+                    : null
+                    }
+
                   </>
             </div>
           </DialogContent>

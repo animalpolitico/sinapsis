@@ -95,7 +95,7 @@
       }
     }
     &_row{
-      width: 90%;
+      width: 100%;
       @extend .flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -160,12 +160,12 @@
         justify-content: center;
         flex-direction: column;
         box-sizing: border-box;
-        padding: 0 2rem;
+        padding: 0 1rem;
         &_m, &_t{
           width: 100%;
         }
         &_m{
-          font-size: 1.4rem;
+          font-size: 1.2rem;
           font-weight: 600;
           color: #f6f6f6;
         }
@@ -173,7 +173,7 @@
           text-align: left;;
           color: white;
           margin-top: 0.05rem;
-          font-size: 0.8rem;
+          font-size: 0.7rem;
           text-transform: uppercase;
           &::before{
             content: '/';

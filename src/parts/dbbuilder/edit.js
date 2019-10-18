@@ -246,7 +246,7 @@ class ModalAddField extends React.Component{
   }
 
   render(){
-    var addL = this.props.isedit ? 'Editar' : 'Agregar';
+    var addL = this.props.isedit ? 'Guardar' : 'Agregar';
 
     return(
       <Dialog open={this.props.open} onClose={() => this.close()} className="ss_modal_edit">
