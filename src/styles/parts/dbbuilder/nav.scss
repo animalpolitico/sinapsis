@@ -12,22 +12,12 @@
     @extend .flex;
     justify-content:center;
     align-items: center;
-    padding: 0.5rem 5px;
     border-bottom: 1px solid white;
     border-bottom-color: #aaa;
     flex: 1;
     position: relative;
     &:first-child{
       transform: none;
-    }
-    &.ss_inactive{
-      border-color: red!important;
-      .ss_dbtab_circle{
-        background-color: rgba(white, 0.1)!important;
-      }
-      .ss_dbbuilder_sidebar_dbs_nav_td_input span{
-        text-decoration: line-through;
-      }
     }
     &_input{
       white-space: nowrap;
@@ -38,15 +28,36 @@
       @extend .flex;
       align-items: center;
       justify-content: center;
-      .ss_dbtab_circle{
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        margin-right: 5px;
-        flex-shrink: 0;
-        display: none;
+      position: relative;
+      width: 100%;
+      &_tools{
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        background: #333;
+        @extend .flex;
+        align-items: center;
+        padding: 0 0.2rem;
+        box-shadow: -1px 0 2px rgba(black, 0.1);
+        z-index: 2;
+        transition: all 0.15s ease;
+        transform: translateX(110%);
+        &_tool{
+          cursor: pointer;
+          @extend .flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0 0.2rem;
+          .material-icons{
+            font-size: 12px;
+          }
+          &:hover{
+            color: $main;
+          }
+        }
       }
-      span{
+      .ssds_n{
         display: block;
         overflow: hidden;
         white-space: nowrap;
@@ -54,16 +65,27 @@
         text-transform: uppercase;
         font-weight: 300;
         font-size: 0.8rem;
+        padding: 0.5rem;
+        width: 100%;
+        text-align: center;
       }
     }
     &.ss_active{
-      min-width: 100px;
+      min-width: 200px;
       border-bottom-color: $main;
       background: #222;
       box-sizing: border-box;
     }
     &:hover{
-      background-color: lighten($blue, 5%);
+      .ss_dbbuilder_sidebar_dbs_nav_td_input_tools{
+        transform: none;
+      }
+      &:not(.ss_active){
+        .ssds_n{
+          background-color: lighten($blue, 5%);
+        }
+
+      }
     }
     &.ss_db_newdb{
       color: #f6f6f6;
@@ -71,17 +93,22 @@
       min-width: 30px;
       text-transform: uppercase;
       border-bottom-color: #aaa;
-      &.ss_db_newdb_active{
+      cursor: pointer;
+      box-sizing: border-box;
+      padding: 0.5rem;
+      &.ss_db_newdb_active, &:hover{
         background: rgba(white, 0.075);
       }
       span{
         font-weight: 300;
         font-size: 0.8rem;
+
         &:not(.material-icons){
           margin-left: 5px;
         }
         &.material-icons{
           color: $main;
+          font-weight: bolder;
         }
       }
     }
@@ -100,14 +127,16 @@
   .ss_popper_container{
     width: 150px;
     background: #222;
-    box-shadow: 3px 3px 6px rgba(black, 0.5);
+    border: 1px solid #333;
+    box-shadow: 0 0 4px rgba(black, 0.1);
     overflow: hidden;
     max-height: 200px;
     overflow-y: auto;
+    transform: translateY(-6px);
     &_button{
       width: 100%;
       box-sizing: border-box;
-      padding: 0.75rem 0.5rem;
+      padding: 0.5rem 0.5rem;
       @extend .flex;
       align-items: center;
       color: white;
@@ -140,8 +169,8 @@
       div{
         flex: 1;
         line-height: 1;
-        font-size: 0.9rem;
-        font-weight: 600;
+        font-size: 0.8rem;
+        font-weight: 500;
         padding-left: 0.5rem;
         box-sizing: border-box;
       }

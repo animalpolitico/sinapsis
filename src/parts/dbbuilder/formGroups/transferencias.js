@@ -29,6 +29,14 @@ export default class DbFormGroupTransferencias extends React.Component{
 
   componentDidMount(){
     this.refs = [];
+    var self = this;
+    window.addEventListener('keydown', function(e){
+      var w = e.which;
+      var bc = document.body.classList.contains('ss_focusing_input');
+      if(w == 13 && !bc && self.state.open){
+        self.add();
+      }
+    })
   }
 
   close(){
@@ -70,16 +78,19 @@ export default class DbFormGroupTransferencias extends React.Component{
 
   add(){
     var fs = this.state.fields;
+    var _f = fs;
     var dbuid = this.props.parent.props.db.id;
     var euid = this.props.empresa.uid;
-    if(this.state.transferenciaType == 'emisor' && !this.state.isedit){
-      var neweid = window.dbf.addEmpresaFromTransferencia(this.props.parent.props.db, this.props.empresa, this.state.guid, fs);
-      for(var key in fs){
-        fs[key].linkedWith = neweid;
-      }
-    }
     window.dbf.addFieldsFromGuid(dbuid, euid, this.state.guid, fs);
+    if(!this.state.isedit && this.state.transferenciaType == "emisor"){
+      this.addNewEmpresa(fs);
+    }
     this.close();
+  }
+
+  addNewEmpresa(z){
+    var y = JSON.stringify(z);
+    window.dbf.addEmpresaFromTransferencia(this.props.parent.props.db, this.props.empresa, this.state.guid, y);
   }
 
   insertField(slug, obj, blockchanged){
@@ -100,6 +111,7 @@ export default class DbFormGroupTransferencias extends React.Component{
 
   onSelectTransferenciaType(e){
     var t = e.target.value;
+    console.log('t', t);
     var preSlug = 'tipo transferencia';
     var slug = slugify(preSlug);
     var obj = {
@@ -107,6 +119,7 @@ export default class DbFormGroupTransferencias extends React.Component{
       value: t,
       bigGroup: 'transferencia',
       isvalid: true,
+      category: t,
       guid: this.state.guid,
       groupUid: this.state.guid,
       name: 'Tipo de transferencia'
@@ -126,7 +139,8 @@ export default class DbFormGroupTransferencias extends React.Component{
   }
 
   editTransferencia(guid, transferencia){
-    var e = transferencia[0].value;
+    var e = transferencia[0].category;
+    console.log('E', e, transferencia);
     this.setState({
       transferenciaType: e
     })
@@ -240,7 +254,6 @@ export default class DbFormGroupTransferencias extends React.Component{
                 <>
                   <DbInput
                     onChange={(slug, obj) => this.insertField(slug, obj)}
-                    matchWith={['empresa', 'instancia', 'person']}
                     name="recursos"
                     aka="¿Quién otorgó los recursos?"
                     type="text"

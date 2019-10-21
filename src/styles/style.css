@@ -1,21 +1,21 @@
 @charset "UTF-8";
 @import url("https://use.typekit.net/nhy0plw.css");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_dbbuilder_sidebar_dbs .ss_db_view > div, .ss_modal_dbpre .ss_predb_select_country, .ss_modal_dbpre .ss_predb_select_alert, .ss_db_toolbar #ss_db_save, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_db_toolbar_info_td .ss_db_builder_project_name, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, #ss_popper_lang .ss_popper_container_button, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_ch_i_i, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title_ch, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_title, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title .dbef_n_tooltip, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_checkboxes_ch_info, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form .db_empresa_container_group_radios, .db_empresa_container_group_form_innerlist .ss_transaction_row, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_input .ss_db_input_container_label, .ss_db_input_select_container_input .ss_db_input_container_label, .ss_db_input_container_error, .ss_db_input_select_container_error, .project_buttons, .project_buttons_button, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_tooltip_info, .db_viz_nodes #db_viz_nodes_controls, .ss_doi_window_fields_field_dbinfo > div, .ss_doi_window .ss_doi_window_controls, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels, .db_search_nodes_results .db_search_nodes_results_c_r .ss_search_result_type, .nodes_controls_container, .nodes_controls_button, .ss_control_group.ss_control_node_filter .ss_ctr_br, .ss_control_group .ss_control_group_container_title, .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning, .ss_control_group .ss_control_group_container_dbs .ss_db, .ss_control_group .ss_control_group_container_btns, .ss_control_group .ss_control_group_container_switches .ss_control_group_container_switch, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics .ss_analytics_montos_title, .ss_analytics .ss_analytics_montos_row, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_info, .ss_analytics .ss_analytics_montos_row .ss_analytics_montos_monto, .ss_analytics .ss_analytics_choose_tr, .ss_analytics .ss_analytics_choose_tr .ssa_icon, .ss_analytics .ss_analytics_choose_tr .ssa_btns, .ss_analytics .ss_analytics_choose_tr .ssa_btns .ssa_btn, #ss_listado_container #ss_listado_finals, #ss_listado_container #ss_listado_finals .ss_listado_finals_btn, #ss_listado_container .ss_listado_main_info, #ss_listado_container .ss_listado_container, #ss_listado_container .ss_listado_container_e, #ss_listado_container .ss_listado_container_e_info, #ss_listado_dialog .ss_listado_table_tr, #ss_listado_dialog .ss_listado_table_tr .ss_listado_table_td {
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_sidebar_collapse, .ss_dbbuilder_sidebar_dbs .ss_db_view > div, .ss_modal_dbpre .ss_predb_select_country, .ss_modal_dbpre .ss_predb_select_alert, .ss_db_toolbar #ss_db_save, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_db_toolbar_info_td .ss_db_builder_project_name, .ss_db_toolbar_info_td .ss_db_builder_project_name_inputlike, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, .ss_dbbuilder_sidebar_dbs_nav_td_input_tools, .ss_dbbuilder_sidebar_dbs_nav_td_input_tools_tool, #ss_popper_lang .ss_popper_container_button, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_ch_i_i, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title_ch, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_title, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title .dbef_n_tooltip, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_checkboxes_ch_info, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form .db_empresa_container_group_radios, .db_empresa_container_group_form_innerlist .ss_transaction_row, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_input .ss_db_input_container_label, .ss_db_input_select_container_input .ss_db_input_container_label, .ss_db_input_container_error, .ss_db_input_select_container_error, .project_buttons, .project_buttons_button, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_tooltip_info, .db_viz_nodes #db_viz_nodes_controls, .ss_doi_window_fields_field_dbinfo > div, .ss_doi_window .ss_doi_window_controls, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels, .db_search_nodes_results .db_search_nodes_results_c_r .ss_search_result_type, .nodes_controls_container, .nodes_controls_button, .ss_control_group.ss_control_node_filter .ss_ctr_br, .ss_control_group .ss_control_group_container_title, .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning, .ss_control_group .ss_control_group_container_dbs .ss_db, .ss_control_group .ss_control_group_container_btns, .ss_control_group .ss_control_group_container_switches .ss_control_group_container_switch, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics .ss_analytics_montos_title, .ss_analytics .ss_analytics_montos_row, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_info, .ss_analytics .ss_analytics_montos_row .ss_analytics_montos_monto, .ss_analytics .ss_analytics_choose_tr, .ss_analytics .ss_analytics_choose_tr .ssa_icon, .ss_analytics .ss_analytics_choose_tr .ssa_btns, .ss_analytics .ss_analytics_choose_tr .ssa_btns .ssa_btn, #ss_listado_container #ss_listado_finals, #ss_listado_container #ss_listado_finals .ss_listado_finals_btn, #ss_listado_container .ss_listado_main_info, #ss_listado_container .ss_listado_container, #ss_listado_container .ss_listado_container_e, #ss_listado_container .ss_listado_container_e_info, #ss_listado_dialog .ss_listado_table_tr, #ss_listado_dialog .ss_listado_table_tr .ss_listado_table_td {
   display: flex;
   flex-wrap: nowrap; }
 
-.cx, .project_buttons {
+.cx, .project_buttons, .db_viz_guides .dguide_y {
   position: absolute;
   left: 50%;
   transform: translateX(-50%); }
 
-.cy, .ss_db_toolbar_info_td .ss_db_builder_project_name_goback .material-icons, .project_buttons_button:not(:last-child)::after, .ss_dbbuilder_front .ss_db_choose_lang_select_arr, .db_search_nodes_input .material-icons, .nodes_controls_container {
+.cy, .ss_db_toolbar_info_td .ss_db_builder_project_name_goback .material-icons, .project_buttons_button:not(:last-child)::after, .ss_dbbuilder_front .ss_db_choose_lang_select_arr, .db_viz_guides .dguide_x, .db_search_nodes_input .material-icons, .nodes_controls_container {
   position: absolute;
   top: 50%;
   transform: translateY(-50%); }
 
-.cxy, .ss_dbbuilder_sidebar_collapse .material-icons, #ssdb_loader_c, .ss_db_view_empresas .ss_db_ve_c_nocontent_icon .material-icons, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang_select_arr .material-icons, .ss_dbbuilder_front .ss_db_choose_td .material-icons, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch[data-type="instancia"] .ss_ctr_ch_td_ball_helper, .ss_analytics_container, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_chart_icon, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_chart_icon .material-icons, #ss_listado_container, #ss_listado_container .ss_listado_container_e_icon div .material-icons, #ap_logo_container img {
+.cxy, .ss_dbbuilder_sidebar_collapse .material-icons, #ssdb_loader_c, .ss_db_view_empresas .ss_db_ve_c_nocontent_icon .material-icons, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang_select_arr .material-icons, .ss_dbbuilder_front .ss_db_choose_td .material-icons, .db_viz .nodes_container::after, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch[data-type="instancia"] .ss_ctr_ch_td_ball_helper, .ss_analytics_container, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_chart_icon, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_chart_icon .material-icons, #ss_listado_container, #ss_listado_container .ss_listado_container_e_icon div .material-icons, #ap_logo_container img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -233,6 +233,8 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   border: 1px solid #0072ff !important;
   background: #222 !important;
   font-size: 0.7rem !important; }
+  .MuiButton-textSecondary.Mui-disabled {
+    opacity: 0.5 !important; }
 
 .MuiDialogActions-root {
   box-sizing: border-box;
@@ -409,18 +411,17 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
           margin-right: 0.6rem; }
       .ss_db_toolbar_info_td .ss_db_builder_project_name_icon {
         height: 100%;
-        position: absolute;
-        right: 0;
-        top: 0;
-        pointer-events: none;
         display: flex;
         align-items: center;
         justify-content: center;
-        transform: translateX(-70%); }
+        margin-left: 0.75rem;
+        cursor: pointer; }
         .ss_db_toolbar_info_td .ss_db_builder_project_name_icon .material-icons {
           font-size: 1.2rem;
           color: #777; }
-      .ss_db_toolbar_info_td .ss_db_builder_project_name input {
+          .ss_db_toolbar_info_td .ss_db_builder_project_name_icon .material-icons:hover {
+            color: #0072ff; }
+      .ss_db_toolbar_info_td .ss_db_builder_project_name_inputlike {
         font-size: 1rem;
         color: white;
         background: none;
@@ -432,9 +433,6 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
         min-width: 200px;
         text-transform: uppercase;
         border: 1px solid transparent; }
-        .ss_db_toolbar_info_td .ss_db_builder_project_name input:focus {
-          outline: 0;
-          border-color: #333; }
       .ss_db_toolbar_info_td .ss_db_builder_project_name.ss_error input {
         border-color: #c67d66; }
         .ss_db_toolbar_info_td .ss_db_builder_project_name.ss_error input::placeholder {
@@ -455,19 +453,12 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
     overflow: hidden;
     justify-content: center;
     align-items: center;
-    padding: 0.5rem 5px;
     border-bottom: 1px solid white;
     border-bottom-color: #aaa;
     flex: 1;
     position: relative; }
     .ss_dbbuilder_sidebar_dbs_nav_td:first-child {
       transform: none; }
-    .ss_dbbuilder_sidebar_dbs_nav_td.ss_inactive {
-      border-color: red !important; }
-      .ss_dbbuilder_sidebar_dbs_nav_td.ss_inactive .ss_dbtab_circle {
-        background-color: rgba(255, 255, 255, 0.1) !important; }
-      .ss_dbbuilder_sidebar_dbs_nav_td.ss_inactive .ss_dbbuilder_sidebar_dbs_nav_td_input span {
-        text-decoration: line-through; }
     .ss_dbbuilder_sidebar_dbs_nav_td_input {
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -475,36 +466,60 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       font-size: 0.9rem;
       overflow: hidden;
       align-items: center;
-      justify-content: center; }
-      .ss_dbbuilder_sidebar_dbs_nav_td_input .ss_dbtab_circle {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        margin-right: 5px;
-        flex-shrink: 0;
-        display: none; }
-      .ss_dbbuilder_sidebar_dbs_nav_td_input span {
+      justify-content: center;
+      position: relative;
+      width: 100%; }
+      .ss_dbbuilder_sidebar_dbs_nav_td_input_tools {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        background: #333;
+        align-items: center;
+        padding: 0 0.2rem;
+        box-shadow: -1px 0 2px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        transition: all 0.15s ease;
+        transform: translateX(110%); }
+        .ss_dbbuilder_sidebar_dbs_nav_td_input_tools_tool {
+          cursor: pointer;
+          justify-content: center;
+          align-items: center;
+          padding: 0 0.2rem; }
+          .ss_dbbuilder_sidebar_dbs_nav_td_input_tools_tool .material-icons {
+            font-size: 12px; }
+          .ss_dbbuilder_sidebar_dbs_nav_td_input_tools_tool:hover {
+            color: #0072ff; }
+      .ss_dbbuilder_sidebar_dbs_nav_td_input .ssds_n {
         display: block;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         text-transform: uppercase;
         font-weight: 300;
-        font-size: 0.8rem; }
+        font-size: 0.8rem;
+        padding: 0.5rem;
+        width: 100%;
+        text-align: center; }
     .ss_dbbuilder_sidebar_dbs_nav_td.ss_active {
-      min-width: 100px;
+      min-width: 200px;
       border-bottom-color: #0072ff;
       background: #222;
       box-sizing: border-box; }
-    .ss_dbbuilder_sidebar_dbs_nav_td:hover {
+    .ss_dbbuilder_sidebar_dbs_nav_td:hover .ss_dbbuilder_sidebar_dbs_nav_td_input_tools {
+      transform: none; }
+    .ss_dbbuilder_sidebar_dbs_nav_td:hover:not(.ss_active) .ssds_n {
       background-color: #373737; }
     .ss_dbbuilder_sidebar_dbs_nav_td.ss_db_newdb {
       color: #f6f6f6;
       white-space: nowrap;
       min-width: 30px;
       text-transform: uppercase;
-      border-bottom-color: #aaa; }
-      .ss_dbbuilder_sidebar_dbs_nav_td.ss_db_newdb.ss_db_newdb_active {
+      border-bottom-color: #aaa;
+      cursor: pointer;
+      box-sizing: border-box;
+      padding: 0.5rem; }
+      .ss_dbbuilder_sidebar_dbs_nav_td.ss_db_newdb.ss_db_newdb_active, .ss_dbbuilder_sidebar_dbs_nav_td.ss_db_newdb:hover {
         background: rgba(255, 255, 255, 0.075); }
       .ss_dbbuilder_sidebar_dbs_nav_td.ss_db_newdb span {
         font-weight: 300;
@@ -512,7 +527,8 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
         .ss_dbbuilder_sidebar_dbs_nav_td.ss_db_newdb span:not(.material-icons) {
           margin-left: 5px; }
         .ss_dbbuilder_sidebar_dbs_nav_td.ss_db_newdb span.material-icons {
-          color: #0072ff; }
+          color: #0072ff;
+          font-weight: bolder; }
   .ss_dbbuilder_sidebar_dbs_nav.ss_overflow .ss_db_newdb .ss_db_nav_s {
     display: none; }
 
@@ -522,14 +538,16 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   #ss_popper_lang .ss_popper_container {
     width: 150px;
     background: #222;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     max-height: 200px;
-    overflow-y: auto; }
+    overflow-y: auto;
+    transform: translateY(-6px); }
     #ss_popper_lang .ss_popper_container_button {
       width: 100%;
       box-sizing: border-box;
-      padding: 0.75rem 0.5rem;
+      padding: 0.5rem 0.5rem;
       align-items: center;
       color: white;
       font-family: benton-sans, sans-serif;
@@ -556,8 +574,8 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       #ss_popper_lang .ss_popper_container_button div {
         flex: 1;
         line-height: 1;
-        font-size: 0.9rem;
-        font-weight: 600;
+        font-size: 0.8rem;
+        font-weight: 500;
         padding-left: 0.5rem;
         box-sizing: border-box; }
 
@@ -1071,17 +1089,14 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
           font-size: 0.9rem;
           line-height: 1; }
         .db_empresa_container_group_form_innerlist .ss_transaction_row_d:hover .material-icons {
-          color: red; }
+          color: #0072ff; }
       .db_empresa_container_group_form_innerlist .ss_transaction_row_c {
-        cursor: pointer;
         flex: 1;
         color: white;
         align-items: center;
         box-sizing: border-box;
         padding: 0.5rem 0.25rem 0.5rem;
         overflow: hidden; }
-        .db_empresa_container_group_form_innerlist .ss_transaction_row_c:hover {
-          opacity: 0.8; }
         .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n {
           margin-right: 1rem;
           font-weight: 300;
@@ -1124,13 +1139,13 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   width: 100%;
   position: absolute;
   bottom: 0;
-  background: #222;
+  background: #333;
+  border: 1px solid #444;
+  border-top: none;
   transform: translateY(100%);
   z-index: 99;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-  padding-bottom: 7px; }
-  .ss_input_autocomplete_loader {
-    min-height: 7px; }
+  box-sizing: border-box;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3); }
   .ss_input_autocomplete .ss_input_autocomplete_results {
     width: 100%;
     max-height: 250px;
@@ -1138,22 +1153,15 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   .ss_input_autocomplete .ss_input_autocomplete_row {
     width: 100%;
     box-sizing: border-box;
-    padding: 0.5rem;
+    padding: 0.25rem;
     line-height: 1.1;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     position: relative;
     cursor: pointer; }
     .ss_input_autocomplete .ss_input_autocomplete_row:hover, .ss_input_autocomplete .ss_input_autocomplete_row.ss_selected {
       background: rgba(255, 255, 255, 0.1); }
-    .ss_input_autocomplete .ss_input_autocomplete_row::after {
-      content: '';
-      display: block;
-      width: 50%;
-      height: 1px;
-      background: rgba(255, 255, 255, 0.5);
-      position: absolute;
-      left: 0.5rem;
-      bottom: 0; }
+    .ss_input_autocomplete .ss_input_autocomplete_row:not(:last-child) {
+      border-bottom: 1px solid #444; }
 
 .ss_db_input, .ss_db_input_select {
   box-sizing: border-box;
@@ -1161,7 +1169,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   width: 50% !important;
   position: relative;
   margin-bottom: 0.5rem; }
-  .ss_db_input.ss_db_input_select, .ss_db_input_select.ss_db_input_select {
+  .ss_db_input.ss_db_input_select, .ss_db_input.ss_textarea, .ss_db_input_select.ss_db_input_select, .ss_db_input_select.ss_textarea {
     width: 100% !important; }
   .ss_db_input select, .ss_db_input_select select {
     width: 100%;
@@ -1184,6 +1192,9 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       order: 2;
       position: relative;
       margin-top: 0.75rem; }
+      .ss_db_input_container_input textarea, .ss_db_input_select_container_input textarea {
+        resize: none;
+        min-height: 100px; }
       .ss_db_input_container_input .ss_db_input_container_label, .ss_db_input_select_container_input .ss_db_input_container_label {
         width: 100%;
         height: 100%;
@@ -1208,7 +1219,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
         font-size: 0.75rem;
         font-weight: 600;
         transform: translateY(-100%); }
-      .ss_db_input_container_input input, .ss_db_input_select_container_input input {
+      .ss_db_input_container_input input, .ss_db_input_container_input textarea, .ss_db_input_select_container_input input, .ss_db_input_select_container_input textarea {
         width: 100%;
         display: block;
         box-sizing: border-box;
@@ -1219,7 +1230,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
         color: white;
         background: transparent;
         border: 1px solid #555; }
-        .ss_db_input_container_input input:focus, .ss_db_input_container_input input.ss_with_value, .ss_db_input_select_container_input input:focus, .ss_db_input_select_container_input input.ss_with_value {
+        .ss_db_input_container_input input:focus, .ss_db_input_container_input input.ss_with_value, .ss_db_input_container_input textarea:focus, .ss_db_input_container_input textarea.ss_with_value, .ss_db_input_select_container_input input:focus, .ss_db_input_select_container_input input.ss_with_value, .ss_db_input_select_container_input textarea:focus, .ss_db_input_select_container_input textarea.ss_with_value {
           outline: 0; }
     .ss_db_input_container_label, .ss_db_input_select_container_label {
       font-size: 0.9rem;
@@ -1490,6 +1501,36 @@ body.ss_showing_drawer .project_buttons_button {
   right: 0;
   overflow: hidden;
   position: relative; }
+  .db_viz .ss_guide {
+    opacity: 0; }
+  .db_viz_guides {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    pointer-events: none; }
+    .db_viz_guides .dguide_y {
+      width: 2px;
+      height: 100%;
+      background: rgba(120, 120, 120, 0.15); }
+    .db_viz_guides .dguide_x {
+      width: 100%;
+      height: 2px;
+      background: rgba(120, 120, 120, 0.15); }
+  .db_viz .nodes_container {
+    position: relative; }
+    .db_viz .nodes_container::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 100px;
+      background: green;
+      pointer-events: none; }
+  .db_viz .node:hover {
+    opacity: 0.7;
+    cursor: pointer; }
   .db_viz_info_coincidencias::before {
     content: '/';
     color: #0072ff !important;
@@ -1505,6 +1546,12 @@ body.ss_showing_drawer .project_buttons_button {
     min-width: 200px;
     padding-bottom: 0.5rem;
     color: #F6F6F6; }
+    .db_viz_tooltip.tooltip_alignbottom {
+      transform: translate(-50%, 3%); }
+    .db_viz_tooltip.tooltip_alignright {
+      transform: translate(0, -110%); }
+    .db_viz_tooltip.tooltip_alignbottom.tooltip_alignright {
+      transform: translate(0, 3%); }
     .db_viz_tooltip_name {
       font-size: 1rem;
       font-weight: 300;
@@ -1593,7 +1640,7 @@ body.ss_showing_drawer .project_buttons_button {
       z-index: 3;
       flex-direction: column; }
       .db_viz_nodes #db_viz_nodes_controls button {
-        margin: 0.5rem 0; }
+        margin: 0.25rem 0; }
     .db_viz_nodes svg {
       position: relative;
       z-index: 2; }
@@ -1766,6 +1813,9 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
     color: white; }
     .ss_doi_window.ss_minimized .ss_doi_window_name::after {
       display: none; }
+
+body.ss_dragging .ss_guide {
+  opacity: 1; }
 
 .db_search_nodes {
   position: fixed;
@@ -2794,6 +2844,9 @@ body.ss_showing_drawer .ss_analytics_pie {
 
 .MuiDialogContent-root {
   padding: 0.5rem 1rem !important; }
+
+.MuiButtonBase-root.Mui-focused {
+  background: #222 !important; }
 
 @media (max-width: 1090px) {
   .ss_db_toolbar_info_td.ss_db_lastmodified, .ss_db_builder_project_name_placeholder {

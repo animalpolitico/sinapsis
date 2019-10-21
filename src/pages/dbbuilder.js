@@ -87,11 +87,11 @@ export default class DbBuilderPage extends React.Component{
 
     window.addEventListener('keypress', function(e){
       var w = e.which;
-      if(w == 36){
-        self.setState({
-          showfps: !self.state.showfps
-        })
-      }
+      // if(w == 36){
+      //   self.setState({
+      //     showfps: !self.state.showfps
+      //   })
+      // }
     })
 
   }
@@ -923,15 +923,20 @@ class DbEmpresasList extends React.Component{
     }
 
     /** Scroll de contenedor **/
-    var row_id = 'e_'+em.uid;
-    var _em = document.getElementById(row_id);
-    var t = _em.offsetTop;
-    var lc = this.listContainer;
-    var lch = lc.offsetHeight;
-    var lcs = lc.scrollTop;
-    if((lcs + lch) < t || t < lcs){
-      lc.scrollTop = t - 200;
+    try {
+      var row_id = 'e_'+em.uid;
+      var _em = document.getElementById(row_id);
+      var t = _em.offsetTop;
+      var lc = this.listContainer;
+      var lch = lc.offsetHeight;
+      var lcs = lc.scrollTop;
+      if((lcs + lch) < t || t < lcs){
+        lc.scrollTop = t - 200;
+      }
+    }catch(ex){
+      
     }
+
 
   }
 
@@ -1309,23 +1314,28 @@ class DbDbsNavigationTd extends React.Component{
   state = {
     name: '',
     showing: true,
-    isblurred: true
+    isblurred: true,
+    borrarText: '',
+    showEdit: false,
+    name: this.props.db.name
   }
   componentDidMount(){
     var self = this;
-    this.set();
     if(this.props.index === 0){
       setTimeout(function(){
         self.handleClick();
       }, 100);
     }
+
+    window.addEventListener("keypress", function(e){
+      var w = e.which;
+      if(e.keyCode == 13 && self.state.name && self.state.showEdit){
+        self.changeDbName();
+      }
+    }, true);
+
   }
-  set(){
-    var db = this.props.db;
-    this.setState({
-      name: db.name
-    })
-  }
+
   handleClick(e){
     var all_actives = document.querySelectorAll('.ss_dbbuilder_sidebar_dbs_nav_td.ss_active');
     if(all_actives){
@@ -1341,22 +1351,115 @@ class DbDbsNavigationTd extends React.Component{
     this.props.parent.selectDb(db.id);
   }
 
+  handleIntentDelete(){
+    this.setState({
+      borrarText: '',
+      showDelete: true
+    })
+  }
+
+  handleDialogClose(){
+    this.setState({
+      showEdit: false
+    })
+  }
+  handleDeleteClose(){
+    this.setState({
+      showDelete: false
+    })
+  }
+
+  deleteDb(){
+    window.dispatchEvent(startLoad);
+    window.dbf.deleteDb(this.props.db);
+    this.props.parent.fetchDbs();
+    window.dispatchEvent(onBigChanges);
+    this.handleDeleteClose();
+    window.dispatchEvent(new Event('sinapsis_close_edit'));
+  }
+
+  changeDbName(){
+    var db = this.props.db;
+    db.name = this.state.name;
+    window.dbf.editDb(db.id, db);
+    this.handleDialogClose();
+  }
+
   render(){
     var db = this.props.db;
     var cs = ["ss_dbbuilder_sidebar_dbs_nav_td"];
     if(!this.state.showing){
       cs.push('ss_inactive');
     }
+
+    var candelete = slugify(this.state.borrarText, {lower: true}) == "borrar";
+
     return (
+      <>
       <div
         id={'ss_nav_'+db.id}
         className={cs.join(' ')}
-        onClick={(e) => this.handleClick(e)}
         >
-        <div className="ss_dbbuilder_sidebar_dbs_nav_td_input" title={this.state.name}>
-          <div className="ss_dbtab_circle" style={{backgroundColor: 'white'}}></div><span>{this.state.name}</span>
+        <div className="ss_dbbuilder_sidebar_dbs_nav_td_input">
+          <div className="ss_dbbuilder_sidebar_dbs_nav_td_input_tools">
+            <div className="ss_dbbuilder_sidebar_dbs_nav_td_input_tools_tool" title={'Editar nombre de ' + this.state.name} onClick={() => this.setState({showEdit: true})}>
+              <Icon>edit</Icon>
+            </div>
+            <div className="ss_dbbuilder_sidebar_dbs_nav_td_input_tools_tool" title={'Borrar ' + this.state.name} onClick={() => this.handleIntentDelete()} >
+              <Icon>delete</Icon>
+            </div>
+          </div>
+          <div className="ssds_n" title={'Ver ' + this.state.name} onClick={(e) => this.handleClick(e)}>{this.state.name}</div>
         </div>
       </div>
+
+      <Dialog open={this.state.showEdit} onClose={() => this.handleDialogClose()}>
+        <DialogTitle id="form-dialog-title">Nombre de la base de datos</DialogTitle>
+          <DialogContent style={{width: 400}}>
+          <TextField
+            autoFocus
+            label="Nombre de la base de datos"
+            fullWidth
+            value={this.state.name}
+            color="secondary"
+            onChange={(e) => this.setState({name: e.target.value})}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button color="secondary" onClick={() => this.handleDialogClose()}>
+            Cerrar
+          </Button>
+          <Button color="secondary" disabled={!this.state.name} onClick={() => this.changeDbName()}>
+            Guardar
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={this.state.showDelete} onClose={() => this.handleDeleteClose()}>
+        <DialogTitle id="form-dialog-title">¿Borrar base de datos?</DialogTitle>
+          <DialogContent style={{width: 400}}>
+            Esta acción es irreversible. Por favor escribe la palabra "Borrar" para continuar.
+          <TextField
+            autoFocus
+            fullWidth
+            value={this.state.borrarText}
+            color="secondary"
+            onChange={(e) => this.setState({borrarText: e.target.value})}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button color="secondary" onClick={() => this.handleDeleteClose()}>
+            Cerrar
+          </Button>
+          <Button color="secondary" disabled={!candelete} onClick={() => this.deleteDb()}>
+            Borrar permanentemente
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      </>
+
+
     )
   }
 }

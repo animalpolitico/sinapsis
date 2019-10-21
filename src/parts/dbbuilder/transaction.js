@@ -73,15 +73,15 @@ export default class TransactionRow extends React.Component{
 
   edit(){
     var uid = this.props.g[0].groupUid || this.props.g[0].guid ;
-    console.log('UID', uid);
     this.props.onClick(uid);
   }
 
   delete(){
     var g = this.props.g;
+    console.log('t', this.props);
     var t = g[0];
-    var euid = t.empresauid;
-    var dbid = t.fromdb;
+    var euid = this.props.empresa.uid;
+    var dbid = this.props.parent.props.dbid;
     var guid = t.groupUid;
 
     window.dbf.deleteGroup(guid, euid, dbid);
@@ -91,7 +91,7 @@ export default class TransactionRow extends React.Component{
     var n = this.buildName();
     return(
       <div className="ss_transaction_row">
-        <div className="ss_transaction_row_c" onClick={() => this.edit()}>
+        <div className="ss_transaction_row_c">
           <div className="ss_transaction_row_n">
             {
               n.showT ?
@@ -124,6 +124,9 @@ export default class TransactionRow extends React.Component{
               n.monto ? window.dbf.fm(n.monto) : null
             }
           </div>
+        </div>
+        <div className="ss_transaction_row_d"  onClick={() => this.edit()}>
+          <Icon size="small">edit</Icon>
         </div>
         <div className="ss_transaction_row_d" onClick={() => this.delete()}>
           <Icon size="small">delete</Icon>

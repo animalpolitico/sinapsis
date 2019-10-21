@@ -28,6 +28,15 @@ export default class DbFormGroupPersonas extends React.Component{
 
   componentDidMount(){
     this.refs = [];
+    var self = this;
+    window.addEventListener('keydown', function(e){
+      var w = e.which;
+      var bc = document.body.classList.contains('ss_focusing_input');
+      if(w == 13 && !bc && self.state.open){
+        self.add();
+      }
+    })
+
   }
 
   close(){
@@ -395,10 +404,13 @@ class PersonRow extends React.Component{
     var n = this.getName();
     return(
       <div className="ss_transaction_row">
-        <div className="ss_transaction_row_c"  onClick={() => this.edit()}>
+        <div className="ss_transaction_row_c">
           <div className="ss_transaction_row_n">
             {n}
           </div>
+        </div>
+        <div className="ss_transaction_row_d" onClick={() => this.edit()}>
+          <Icon size="small">edit</Icon>
         </div>
         <div className="ss_transaction_row_d" onClick={() => this.delete()}>
           <Icon size="small">delete</Icon>

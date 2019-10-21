@@ -6,6 +6,48 @@
   right: 0;
   overflow: hidden;
   position: relative;
+  .ss_guide{
+    opacity: 0;
+  }
+  &_guides{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    pointer-events: none;
+    .dguide_y{
+      width: 2px;
+      height: 100%;
+      @extend .cx;
+      background: rgba(120,120,120, 0.15);
+    }
+    .dguide_x{
+      width: 100%;
+      height: 2px;
+      @extend .cy;
+      background: rgba(120,120,120, 0.15);
+    }
+  }
+  .nodes_container{
+    position: relative;
+    &::after{
+      content: '';
+      display: block;
+      width: 100px;
+      height: 100px;
+      @extend .cxy;
+      background: green;
+      pointer-events: none;
+    }
+  }
+  .node{
+    &:hover{
+      opacity: 0.7;
+      cursor: pointer;
+    }
+  }
   &_info_coincidencias{
     &::before{
       content: '/';
@@ -24,6 +66,16 @@
     min-width: 200px;
     padding-bottom: 0.5rem;
     color: #F6F6F6;
+    &.tooltip_alignbottom{
+      transform: translate(-50%, 3%);
+    }
+    &.tooltip_alignright{
+      transform: translate(0, -110%);
+    }
+    &.tooltip_alignbottom.tooltip_alignright{
+      transform: translate(0, 3%);
+    }
+
     &_name{
       font-size: 1rem;
       font-weight: 300;
@@ -131,7 +183,7 @@
       @extend .flex;
       flex-direction: column;
       button{
-        margin: 0.5rem 0;
+        margin: 0.25rem 0;
       }
     }
     svg{
@@ -355,5 +407,10 @@ body.ss_showing_drawer{
         display: none;
       }
     }
+  }
+}
+body.ss_dragging{
+  .ss_guide{
+    opacity: 1;
   }
 }

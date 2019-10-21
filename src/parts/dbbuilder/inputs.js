@@ -54,8 +54,23 @@ export default class DbInput extends React.Component{
     }
   }
 
+  maskValue(v){
+    // var t = this.props.type;
+    // if(t == "currency"){
+    //   v = v.replace('$', '');
+    //   v = v.replace(',', '');
+    //   v = '$' + window.dbf.numberWithCommas(v);
+    // }
+    return v;
+  }
+
+
   setValue(v, forceNoChange){
     var self = this;
+
+    v = this.maskValue(v);
+
+
     this.setState({
       value: v,
       haschanged: forceNoChange ? false : true
@@ -224,8 +239,13 @@ export default class DbInput extends React.Component{
   }
 
   getFieldSlug(){
+    var inn = this.getInputName();
     var n = this.props.group ? this.props.group + '-' : '';
-        n = n + this.getInputName();
+    if(this.props.group == "transferencia"){
+      inn = inn.replace(/[.\s]/g, '');
+      inn = slugify(inn, {lower: true});
+    }
+    n = n + inn;
     var slug = slugify(n, {lower: true});
     return slug;
   }
@@ -274,6 +294,12 @@ export default class DbInput extends React.Component{
     if(this.props.groupUid){
       obj.groupUid = this.props.groupUid;
     }
+
+    if(this.props.transferenciaGroup){
+      obj.transferenciaGroup = this.props.transferenciaGroup;
+    }
+
+
     var forceMap = false;
     if(this.state.autocompleted_address){
       var ad = this.state.autocompleted_address;
@@ -312,18 +338,21 @@ export default class DbInput extends React.Component{
     this.setState({
       isfocus: false
     })
-    var label = d.label;
-    this.setValue(label);
+    if(d){
+      var label = d.label;
+      this.setValue(label);
 
-    if(d.type == "autocompleted_address"){
-      this.setState({
-        autocompleted_address: d
-      })
+      if(d.type == "autocompleted_address"){
+        this.setState({
+          autocompleted_address: d
+        })
+      }
+
+      setTimeout(function(){
+        self.saveLocalChanges();
+      }, 50)
     }
 
-    setTimeout(function(){
-      self.saveLocalChanges();
-    }, 50)
 
   }
 
@@ -345,10 +374,25 @@ export default class DbInput extends React.Component{
       ics.push('ss_with_value');
     }
 
+    if(this.props.textarea){
+      cs.push('ss_textarea');
+    }
+
     return(
       <div className={cs.join(' ')}>
         <div className="ss_db_input_container">
           <div className="ss_db_input_container_input">
+            {
+              this.props.textarea ?
+              <textarea
+                className={ics.join(' ')}
+                value={this.state.value}
+                placeholder={this.props.placeholder}
+                onChange={(e) => this.setValue(e.target.value)}
+                onFocus={() => this.handleFocus()}
+                onBlur={() => this.handleBlur()}
+              ></textarea>
+            :
             <input
               className={ics.join(' ')}
               type="text"
@@ -357,9 +401,15 @@ export default class DbInput extends React.Component{
               onFocus={() => this.handleFocus()}
               onBlur={() => this.handleBlur()}
             />
+            }
+          {
+            !this.props.hideLabel ?
             <div className="ss_db_input_container_label">
               {_t(this.getName())}
             </div>
+            : null
+          }
+
             {
               this.state.isfocus && this.state.value.length > 0 && this.state.autocompleteData.length > 0 ?
               <div

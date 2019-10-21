@@ -106,20 +106,20 @@
         }
         &_icon{
           height: 100%;
-          position: absolute;
-          right: 0;
-          top: 0;
-          pointer-events: none;
           display: flex;
           align-items: center;
           justify-content: center;
-          transform: translateX(-70%);
+          margin-left: 0.75rem;
+          cursor: pointer;
           .material-icons{
             font-size: 1.2rem;
             color: #777;
+            &:hover{
+              color: $main;
+            }
           }
         }
-        input{
+        &_inputlike{
           font-size: 1rem;
           color: white;
           background: none;
@@ -131,10 +131,7 @@
           min-width: 200px;
           text-transform: uppercase;
           border: 1px solid transparent;
-          &:focus{
-            outline: 0;
-            border-color: #333;
-          }
+          @extend .flex;
         }
         &.ss_error{
           input{

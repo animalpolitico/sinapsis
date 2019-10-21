@@ -233,6 +233,14 @@ export default class DbFactory {
       if(f.id){
         slug = f.id;
       }
+      /* Fecha */
+      if(f.type == "date"){
+        var time = moment(v);
+        if(time.isValid()){
+          slug = time.unix();
+        }
+      }
+
       if(!nodes[slug]){
         nodes[slug] = {
           id: slug,
@@ -297,6 +305,8 @@ export default class DbFactory {
     Object.values(nodes).map(function(e){
       finalObj.nodes = [...finalObj.nodes, e];
     });
+
+
     return finalObj;
   }
 
@@ -316,8 +326,8 @@ export default class DbFactory {
     var o = [];
     dbA.map(function(_db){
       var empresas = _db.empresas;
-          empresas = Object.values(empresas);
       if(empresas){
+        empresas = Object.values(empresas);
         empresas.map(function(empresa){
           empresa.dbid = _db.id;
           empresa.sum = self.getEmpresaSum(empresa);
@@ -360,8 +370,8 @@ export default class DbFactory {
 
     dbA.map(function(_db){
       var empresas = _db.empresas;
-          empresas = Object.values(empresas);
       if(empresas){
+        empresas = Object.values(empresas);
         empresas.map(function(empresa){
           obj.count = obj.count + 1;
           var fields = empresa.fields;
@@ -419,8 +429,8 @@ export default class DbFactory {
 
     dbA.map(function(_db){
       var empresas = _db.empresas;
-          empresas = Object.values(empresas);
       if(empresas){
+        empresas = Object.values(empresas);
         empresas.map(function(empresa){
           obj.count = obj.count + 1;
           var fields = empresa.fields;
@@ -554,12 +564,11 @@ export default class DbFactory {
     dbA.map(function(_db){
       var dbfields = [];
       var empresas = _db.empresas;
-          empresas = Object.values(empresas);
       if(empresas){
+        empresas = Object.values(empresas);
         empresas.map(function(em){
           var f = em.fields ? em.fields : {};
               f = Object.values(f);
-
           var c = self.getEmpresaTransferenciaSum(f);
           if(onlypositive && c > 0){
             count += c;
@@ -589,8 +598,8 @@ export default class DbFactory {
     dbA.map(function(_db){
       var dbfields = [];
       var empresas = _db.empresas;
-          empresas = Object.values(empresas);
       if(empresas){
+        empresas = Object.values(empresas);
         empresas.map(function(em){
           var f = em.fields ? em.fields : {};
               f = Object.values(f);
@@ -620,8 +629,8 @@ export default class DbFactory {
     dbA.map(function(_db){
       var dbfields = [];
       var empresas = _db.empresas;
-          empresas = Object.values(empresas);
       if(empresas){
+        empresas = Object.values(empresas);
         empresas.map(function(empresa){
           var fields = empresa.fields;
               fields = Object.values(fields);
@@ -1109,18 +1118,23 @@ export default class DbFactory {
   * @param guid, euid, db
   **/
   deleteGroup(guid, euid, dbid){
-    var ev = new Event('sinapsisStartLoad');
-    window.dispatchEvent(ev);
+    try{
+      console.log(guid, euid, dbid);
+      var ev = new Event('sinapsisStartLoad');
+      window.dispatchEvent(ev);
+      var f = this.getEmpresaFields(dbid, euid);
+      var topreserve = f.filter(function(a){
+        return a.groupUid !== guid
+      });
+      var ff = {};
+      topreserve.map(function(d){
+        ff[d.slug] = d;
+      })
+      this.obj.dbs[dbid].empresas[euid].fields = ff;
+    }catch(ex){
+      console.log('EX', ex);
+    }
 
-    var f = this.getEmpresaFields(dbid, euid);
-    var topreserve = f.filter(function(a){
-      return a.groupUid !== guid
-    });
-    var ff = {};
-    topreserve.map(function(d){
-      ff[d.slug] = d;
-    })
-    this.obj.dbs[dbid].empresas[euid].fields = ff;
     this.refresh();
     this.setModified();
   }
@@ -1349,28 +1363,40 @@ export default class DbFactory {
   * @param dbid, euid, guid, fields
   * @return new empresa
   **/
-  addEmpresaFromTransferencia(db, empresa, guid, fs){
+  addEmpresaFromTransferencia(db, empresa, guid, y){
     try{
-      var fields = fs;
-      var n = 'Empresa que recibió transferencia de ' + empresa.name;
-      Object.values(fields).map(function(field){
-        if(field.category == 'receptor'){
-          n = field.value;
+      var z = JSON.parse(y);
+      var _gi = null;
+      for(var key in z){
+        var e = z[key];
+        _gi = e.guid;
+        if(e.name == "Tipo de transferencia"){
+          var ov = e.value;
+          var nv = ov == "emisor" ? "receptor" : "emisor";
+          e.value = nv;
+          e.category = nv;
         }
-      })
-      var edb = this.addEmpresaToDb(db, n);
-      /* Añade la transferencia */
-      for(var key in fields){
-        fields[key].linkedWith = empresa.uid;
-        if(fields[key].category == 'emisor'){
-          fields[key].category = 'receptor'
-        }
-        if(fields[key].bigGroup == 'transferencia'){
-          fields[key].value = 'receptor';
+        if(e.slug == "transferencia-recursos"){
+          var lbl = ov == "emisor" ? "¿Quién otorgó los recursos?" : "¿A quién otorgó los recursos?";
+          e.name = lbl;
+          e.category = ov;
+          var ne = e.value;
+          if(ov == "emisor"){
+            e.value = empresa.name;
+          }
         }
       }
-      this.addFieldsToEmpresa(db.id, edb[1].uid, fields);
-      return edb[1].uid;
+      if(ne){
+        /* Busca la empresa, si no la crea */
+        var guid = this.empresaExists(ne, db);
+        if(!guid){
+          var rspns = this.addEmpresaToDb(db, ne);
+          var guid = rspns[1].uid;
+        }
+        if(guid !== empresa.uid){
+          this.addFieldsFromGuid(db.id, guid, _gi, z);
+        }
+      }
     }catch{
       console.warn('Ocurrió un error al agregar la empresa de la transferencia.');
       return false;

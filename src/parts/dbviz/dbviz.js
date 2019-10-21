@@ -733,7 +733,14 @@ class Nodes extends React.Component{
                        isPerfectZoom: false
                      })
                      canvas.select('.nodes_container').attr('transform', d);
-                   });
+                   })
+                   .on('start', function(){
+                     document.body.style.cursor =
+                     d3.selectAll('.ss_guide').style('opacity', 1);
+                   })
+                   .on('end', function(){
+                     d3.selectAll('.ss_guide').style('opacity', 0);
+                   })
      this.zoom = zoom;
      canvas.call(zoom)
 
@@ -876,6 +883,8 @@ class Nodes extends React.Component{
 
       })
 
+
+
       var nodesCircles = self.nodesContainer
                         .selectAll('circle')
                         .data(circlesData)
@@ -956,6 +965,16 @@ class Nodes extends React.Component{
         })
 
         this.setNodeCircleSize();
+
+        /** Indicador de centro **/
+        self.nodesContainer
+            .append('text')
+            .text('×')
+            .attr('fill', 'rgba(120,120,120, 0.3)')
+            .attr('font-weight', 600)
+            .attr('font-size', 600)
+            .style('transform', 'translate(-16%, 16%)')
+            .attr('class', 'ss_guide')
 
       window.dispatchEvent(endLoad);
       setTimeout(function(){
@@ -1238,6 +1257,9 @@ class Nodes extends React.Component{
   }
 
   releaseNode(){
+    this.setState({
+      displayTooltip: false
+    })
     this.nodesContainer.selectAll('.nodes_link').attr('stroke', 'rgba(0, 114, 255, 0.4)');
     this.nodesContainer
         .selectAll('.node')
@@ -1367,9 +1389,6 @@ class Nodes extends React.Component{
 
        var ev = new Event('ss_lazy_indicator');
        window.dispatchEvent(ev);
-
-
-
        simulation.stop();
      }
 
@@ -1510,6 +1529,10 @@ class Nodes extends React.Component{
             <SSTooltip doi={this.state.doi} canvas={this.canvasSvg} />
             : null
           }
+        <div className="db_viz_guides ss_guide">
+          <div className="db_viz_guides_guide dguide_y"></div>
+          <div className="db_viz_guides_guide dguide_x"></div>
+        </div>
         <div className="db_viz_glow_indicator"></div>
       </div>
     )
@@ -2229,9 +2252,20 @@ class SSTooltip extends React.Component{
     if(d.type == "date" || d.type == "person"){
       textColor = "#F6F6F6";
     }
+
+    var cs = ['db_viz_tooltip'];
+    if(coords[1] - 200 < 0){
+      cs.push('tooltip_alignbottom');
+    }
+    if(coords[0] - 200 < 0){
+      cs.push('tooltip_alignright');
+    }
+
+
+
     return(
       <div
-        className="db_viz_tooltip"
+        className={cs.join(' ')}
         style={{left: coords[0], top: coords[1]}}
       >
         <div className="db_viz_tooltip_type_name" style={{color: textColor, backgroundColor: color, boxShadow: '0 0 8px -1px ' + color}}>

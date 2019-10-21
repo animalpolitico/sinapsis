@@ -31,6 +31,14 @@ export default class DbFormGroupContrato extends React.Component{
 
   componentDidMount(){
     this.refs = [];
+    var self = this;
+    window.addEventListener('keydown', function(e){
+      var w = e.which;
+      var bc = document.body.classList.contains('ss_focusing_input');
+      if(w == 13 && !bc && self.state.open){
+        self.add();
+      }
+    })
   }
 
   close(){

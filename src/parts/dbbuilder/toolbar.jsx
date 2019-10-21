@@ -2,6 +2,12 @@ import React from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Icon from '@material-ui/core/Icon';
 import moment from 'moment';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import 'moment/locale/es';
@@ -182,10 +188,17 @@ class DbBuilderToolbarName extends React.Component{
     focused: false,
     modified: false,
     error: false,
+    showEdit: false,
     project_name: 'Proyecto increíble'
   }
 
   componentDidMount(){
+    var self = this;
+    window.addEventListener("keypress", function(e){
+      if(e.keyCode == 13 && self.state.project_name && self.state.showEdit){
+        self.changeProjectName();
+      }
+    }, true);
   }
 
   forceName(){
@@ -214,6 +227,17 @@ class DbBuilderToolbarName extends React.Component{
     this.props.parent.goBack();
   }
 
+  handleDialogClose(){
+    this.setState({
+      showEdit: false
+    })
+  }
+
+  changeProjectName(){
+    window.dbf.setName(this.state.project_name);
+    this.handleDialogClose();
+  }
+
   render(){
     var cs = ["ss_db_builder_project_name"];
     if(this.state.focused){
@@ -223,6 +247,7 @@ class DbBuilderToolbarName extends React.Component{
       cs.push('ss_error');
     }
     return(
+      <>
       <div className={cs.join(' ')}>
         <div className="ss_db_builder_project_name_goback" onClick={() => this.goBack()}>
           <Icon>keyboard_backspace</Icon>
@@ -230,18 +255,35 @@ class DbBuilderToolbarName extends React.Component{
         <div className="ss_db_builder_project_name_placeholder">
           Proyecto
         </div>
-        <input
-          type="text"
-          placeholder="Nombre del proyecto"
-          onChange={(e) => this.handleChange(e.target.value)}
-          onBlur={() => this.setState({focused: false})}
-          onFocus={() => this.setState({focused: true})}
-          value={this.state.project_name}
-        />
-        <div className="ss_db_builder_project_name_icon">
-          <Icon>edit</Icon>
+        <div className="ss_db_builder_project_name_inputlike">
+          {this.state.project_name}
+          <div className="ss_db_builder_project_name_icon" onClick={() => this.setState({showEdit: true})}>
+            <Icon>edit</Icon>
+          </div>
         </div>
       </div>
+      <Dialog open={this.state.showEdit} onClose={() => this.handleDialogClose()}>
+        <DialogTitle id="form-dialog-title">Nombre del proyecto</DialogTitle>
+          <DialogContent style={{width: 400}}>
+          <TextField
+            autoFocus
+            label="Nombre del proyecto"
+            fullWidth
+            value={this.state.project_name}
+            color="secondary"
+            onChange={(e) => this.setState({project_name: e.target.value})}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button color="secondary" onClick={() => this.handleDialogClose()}>
+            Cerrar
+          </Button>
+          <Button color="secondary" disabled={!this.state.project_name} onClick={() => this.changeProjectName()}>
+            Guardar
+          </Button>
+        </DialogActions>
+      </Dialog>
+      </>
     )
   }
 }

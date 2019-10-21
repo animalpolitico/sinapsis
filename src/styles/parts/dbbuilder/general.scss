@@ -130,6 +130,9 @@ body.ss_show_sidebar{
   border: 1px solid $main!important;
   background: #222!important;
   font-size: 0.7rem!important;
+  &.Mui-disabled{
+    opacity: 0.5!important;
+  }
 }
 .MuiDialogActions-root{
   box-sizing: border-box;

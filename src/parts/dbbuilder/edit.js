@@ -2,6 +2,7 @@ import React from 'react';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
+import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -29,15 +30,31 @@ export default class DbEditEmpresa extends React.Component{
   state = {
     showDeleteDialog : false,
     empresaErrors: {},
+    empresa_name: this.props.empresa.name
   }
   componentDidMount(){
     var self = this;
     this.searchErrors();
+
     window.addEventListener('sinapsis_lang_change', function(){
       self.setState({
         s: ''
       })
     })
+
+
+    window.addEventListener('sinapsis_close_edit', function(){
+      self.closeDrawer();
+    })
+
+    window.addEventListener("keypress", function(e){
+      var w = e.which;
+      if(e.keyCode == 13 && self.state.empresa_name && self.state.showEdit){
+        self.handleNameChange();
+      }
+    }, true);
+
+
   }
   componentDidUpdate(op, os){
     if(this.props.empresa.uid !== op.empresa.uid){
@@ -83,9 +100,13 @@ export default class DbEditEmpresa extends React.Component{
       empresaErrors: err
     })
   }
-  handleNameChange(value){
-    var name = value;
+
+  handleNameChange(){
+    var name = this.state.empresa_name;
     window.dbf.modifyEmpresaName(this.props.db.id, this.props.empresa.uid, name);
+    this.setState({
+      showEdit: false
+    })
   }
   closeDrawer(){
     this.props.parent.closeDrawer();
@@ -113,7 +134,7 @@ export default class DbEditEmpresa extends React.Component{
         <div className="db_empresa_name">
           <div className="db_empresa_name_t">
             <div>
-              {this.props.empresa.name}
+              {this.state.empresa_name}
             </div>
           </div>
           {
@@ -130,12 +151,13 @@ export default class DbEditEmpresa extends React.Component{
             </div>
             : null
           }
-          <div className="db_empresa_name_trash" onClick={() => this.intentDelete()}>
+          <div className="db_empresa_name_trash" onClick={() => this.setState({showEdit: true})}>
             <Icon>edit</Icon>
           </div>
           <div className="db_empresa_name_trash" onClick={() => this.intentDelete()}>
             <Icon>delete</Icon>
           </div>
+
           <Dialog open={this.state.showDeleteDialog} onClose={() => this.setState({ showDeleteDialog: false})}>
             <DialogTitle>¿Estás segurx?</DialogTitle>
             <DialogContent>
@@ -152,22 +174,45 @@ export default class DbEditEmpresa extends React.Component{
               </Button>
             </DialogActions>
           </Dialog>
+
+          <Dialog open={this.state.showEdit} onClose={() => this.handleDialogClose()}>
+            <DialogTitle id="form-dialog-title">Editar nombre de empresa</DialogTitle>
+              <DialogContent style={{width: 400}}>
+              <TextField
+                autoFocus
+                label="Razón social de la empresa"
+                fullWidth
+                value={this.state.empresa_name}
+                color="secondary"
+                onChange={(e) => this.setState({empresa_name: e.target.value})}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button color="secondary" onClick={() => this.handleDialogClose()}>
+                Cerrar
+              </Button>
+              <Button color="secondary" disabled={!this.state.empresa_name} onClick={() => this.handleNameChange()}>
+                Guardar
+              </Button>
+            </DialogActions>
+          </Dialog>
+
         </div>
         <div className="db_empresa_container_form">
-          <DbFormGroupInfoGeneral empresa={this.props.empresa} parent={this} ref={(ref) => this.infoGeneral = ref} />
-          <DbFormGroupPersonas empresa={this.props.empresa} parent={this} />
-          <DbFormGroupNotaria empresa={this.props.empresa} parent={this} />
+          <DbFormGroupInfoGeneral empresa={this.props.empresa} parent={this} ref={(ref) => this.infoGeneral = ref}>
+            <DbFormGroupPersonas dbid={this.props.db.id} empresa={this.props.empresa} parent={this} />
+            <DbFormGroupNotaria empresa={this.props.empresa} parent={this} />
+          </DbFormGroupInfoGeneral>
           {
             isMexico() ?
             <DbFormGroupBanderasRojas empresa={this.props.empresa} parent={this} />
             : null
           }
-          <DbFormGroupContrato empresa={this.props.empresa} parent={this} />
-          <DbFormGroupConvenio empresa={this.props.empresa} parent={this} />
-          <DbFormGroupTransferencias empresa={this.props.empresa} parent={this} />
-          <DbFormGroupOtros empresa={this.props.empresa} parent={this} />
-          <DbFormGroupComentarios empresa={this.props.empresa} parent={this} />
-
+          <DbFormGroupContrato dbid={this.props.db.id} empresa={this.props.empresa} parent={this} />
+          <DbFormGroupConvenio dbid={this.props.db.id}  empresa={this.props.empresa} parent={this} />
+          <DbFormGroupTransferencias dbid={this.props.db.id}  empresa={this.props.empresa} parent={this} />
+          <DbFormGroupOtros dbid={this.props.db.id}  empresa={this.props.empresa} parent={this} />
+          <DbFormGroupComentarios dbid={this.props.db.id}  empresa={this.props.empresa} parent={this} />
         </div>
       </div>
     )
