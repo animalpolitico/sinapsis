@@ -10,7 +10,7 @@
   left: 50%;
   transform: translateX(-50%); }
 
-.cy, .ss_db_toolbar_info_td .ss_db_builder_project_name_goback .material-icons, .project_buttons_button:not(:last-child)::after, .ss_dbbuilder_front .ss_db_choose_lang_select_arr, .db_viz_guides .dguide_x, .db_search_nodes_input .material-icons, .nodes_controls_container {
+.cy, .project_buttons_button:not(:last-child)::after, .ss_dbbuilder_front .ss_db_choose_lang_select_arr, .db_viz_guides .dguide_x, .db_search_nodes_input .material-icons, .nodes_controls_container {
   position: absolute;
   top: 50%;
   transform: translateY(-50%); }
@@ -141,8 +141,8 @@ a, a:link, a:visited, a:hover {
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  height: calc(100vh  - 50px);
-  margin-top: 50px;
+  height: calc(100vh  - 55px);
+  margin-top: 55px;
   position: relative; }
   .ss_dbbuilder_sidebar {
     width: 30%;
@@ -394,11 +394,16 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       .ss_db_toolbar_info_td .ss_db_builder_project_name_goback {
         color: white;
         cursor: pointer;
-        margin-right: 1rem;
+        margin-right: 1.5rem;
         height: 0%;
         position: relative;
-        background: blue;
-        width: 30px; }
+        width: 35px;
+        transition: all 0.2s ease; }
+        .ss_db_toolbar_info_td .ss_db_builder_project_name_goback img {
+          width: 100%;
+          transform: translateY(2px); }
+        .ss_db_toolbar_info_td .ss_db_builder_project_name_goback:hover {
+          filter: hue-rotate(80deg); }
       .ss_db_toolbar_info_td .ss_db_builder_project_name_placeholder {
         color: #ccc;
         margin-right: 0.5rem;
@@ -1819,7 +1824,7 @@ body.ss_dragging .ss_guide {
 
 .db_search_nodes {
   position: fixed;
-  top: 10px;
+  top: 13px;
   right: calc(4em + 178px);
   z-index: 99;
   width: 250px; }

@@ -250,7 +250,7 @@ class DbBuilderToolbarName extends React.Component{
       <>
       <div className={cs.join(' ')}>
         <div className="ss_db_builder_project_name_goback" onClick={() => this.goBack()}>
-          <Icon>keyboard_backspace</Icon>
+          <img src={require('../../static/imagotipo.png')} />
         </div>
         <div className="ss_db_builder_project_name_placeholder">
           Proyecto

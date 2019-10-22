@@ -83,13 +83,17 @@
         &_goback{
           color: white;
           cursor: pointer;
-          margin-right: 1rem;
+          margin-right: 1.5rem;
           height: 0%;
           position: relative;
-          background: blue;
-          width: 30px;
-          .material-icons{
-            @extend .cy;
+          width: 35px;
+          transition: all 0.2s ease;
+          img{
+            width: 100%;
+            transform: translateY(2px);
+          }
+          &:hover{
+            filter: hue-rotate(80deg);
           }
         }
         &_placeholder{
