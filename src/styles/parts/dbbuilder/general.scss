@@ -73,7 +73,7 @@
   z-index: 9999;
 }
 .react-resizable-handle-se{
-  width: 5px;
+  width: 20px;
   height: 100%;
   position: absolute;
   right: 0;
@@ -204,7 +204,7 @@ body.ss_show_sidebar{
         }
       }
       &_maxtime{
-        color: #ccc;
+        color: $main;
         font-size: 0.7rem;
         margin-top: 0.5rem;
       }

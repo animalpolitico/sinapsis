@@ -114,6 +114,17 @@ export default class DbFormGroupBanderasRojas extends React.Component{
                     </div>
                 </div>
                 <div className="db_empresa_container_group_rg_checkboxes_ch">
+                  <input checked={bs.indexOf('SATdesvirtuados') > -1} className="br_i" onChange={(e) => this.handleChange(e)} type="radio" name="sat_status" value="SATdesvirtuados"></input>
+                    <div className="db_empresa_container_group_rg_checkboxes_ch_info">
+                      <div className="rg_ch_i_i">
+                        <Icon>{bs.indexOf('SATdesvirtuados') > -1 ? "radio_button_checked" : "radio_button_unchecked"}</Icon>
+                      </div>
+                      <div className="rg_ch_i_l">
+                        Desvirtuada
+                      </div>
+                    </div>
+                </div>
+                <div className="db_empresa_container_group_rg_checkboxes_ch">
                   <input checked={bs.indexOf('SATpresunta') > -1} className="br_i" onChange={(e) => this.handleChange(e)} type="radio" name="sat_status" value="SATpresunta"></input>
                     <div className="db_empresa_container_group_rg_checkboxes_ch_info">
                       <div className="rg_ch_i_i">
@@ -121,6 +132,17 @@ export default class DbFormGroupBanderasRojas extends React.Component{
                       </div>
                       <div className="rg_ch_i_l">
                         Presunta
+                      </div>
+                    </div>
+                </div>
+                <div className="db_empresa_container_group_rg_checkboxes_ch">
+                  <input checked={bs.indexOf('SATfavorables') > -1} className="br_i" onChange={(e) => this.handleChange(e)} type="radio" name="sat_status" value="SATfavorables"></input>
+                    <div className="db_empresa_container_group_rg_checkboxes_ch_info">
+                      <div className="rg_ch_i_i">
+                        <Icon>{bs.indexOf('SATfavorables') > -1 ? "radio_button_checked" : "radio_button_unchecked"}</Icon>
+                      </div>
+                      <div className="rg_ch_i_l">
+                        Sentencias favorables
                       </div>
                     </div>
                 </div>

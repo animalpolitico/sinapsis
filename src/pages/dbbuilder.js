@@ -810,7 +810,7 @@ class DbView extends React.Component{
 
             <div className="ss_db_view_empresas">
               <div className="ss_db_view_empresas_title">
-                <span>Empresas en la base</span>
+                <span>Empresas en {this.props.db.name}</span>
                 <div className="ss_db_view_empresas_title_btn" style={{cursor: 'pointer'}} onClick={() => this.showAddDialog()}>Agregar</div>
               </div>
               <DbEmpresasList ref={(ref) => this.empresalist = ref} parent={this} db={this.state.db} />
@@ -931,10 +931,10 @@ class DbEmpresasList extends React.Component{
       var lch = lc.offsetHeight;
       var lcs = lc.scrollTop;
       if((lcs + lch) < t || t < lcs){
-        lc.scrollTop = t - 200;
+        lc.scrollTop = t - 120;
       }
     }catch(ex){
-      
+
     }
 
 

@@ -142,12 +142,13 @@ class SSMarker extends React.Component{
           <div className="ss_map_tooltip_type">
             {d.name}
           </div>
-          <div className="ss_map_tooltip_name">
-            {d.value}
-          </div>
           <div className="ss_map_tooltip_ename">
             {ename}
           </div>
+          <div className="ss_map_tooltip_name">
+            {d.value}
+          </div>
+
 
         </div>
       </Popup>

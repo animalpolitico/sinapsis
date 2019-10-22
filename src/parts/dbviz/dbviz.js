@@ -641,8 +641,8 @@ class Nodes extends React.Component{
       if(w == 27){
         self.releaseNode();
       }
-      if((w == 187 || w == 189) && self.state.isolatingNode){
-        self.addLevel(w == 187 ? 1 : -1);
+      if((w == 187 || w == 189) || (w == 171 || w == 173) && self.state.isolatingNode){
+        self.addLevel((w == 187 || w == 171) ? 1 : -1);
       }
     })
 
@@ -2061,10 +2061,10 @@ class SSCategoryToggle extends React.Component{
           <>
           <div className="ss_control_group_container_btns">
             <div onClick={() => this.majorChange('all')} disabled={types.length == (this.state.vals.length - 1)} className="ss_control_group_container_btns_btn">
-              Todas
+              Ninguna
             </div>
             <div onClick={() => this.majorChange('none')} disabled={this.state.vals.length === 1} className="ss_control_group_container_btns_btn">
-              Ninguna
+              Todas
             </div>
           </div>
           <div className="ss_control_group_container_switches">
@@ -2302,8 +2302,13 @@ class SSTooltip extends React.Component{
           : null
         }
 
-        <div className="db_viz_tooltip_click">
-          Da clic en el círculo para más información
+        <div className="db_viz_tooltip_click" style={{color: d.type == "instancia" ? textColor : color}}>
+          {
+            d.type == "instancia" ?
+            <span>Da clic en la instancia para más información</span>
+            :
+            <span>Da clic en el círculo para más información</span>
+          }
         </div>
 
 

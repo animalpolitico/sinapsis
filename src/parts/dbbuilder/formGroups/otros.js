@@ -242,6 +242,9 @@ export default class DbFormGroupOtros extends React.Component{
 }
 
 class OtrosRow extends React.Component{
+  state = {
+    showDelete: false
+  }
   edit(){
     try{
       var t = this.props.p[0];
@@ -277,6 +280,7 @@ class OtrosRow extends React.Component{
   render(){
     var n = this.getName();
     return(
+      <>
       <div className="ss_transaction_row" >
         <div className="ss_transaction_row_c">
           <div className="ss_transaction_row_n">
@@ -286,10 +290,25 @@ class OtrosRow extends React.Component{
         <div className="ss_transaction_row_d"  onClick={() => this.edit()}>
           <Icon size="small">edit</Icon>
         </div>
-        <div className="ss_transaction_row_d" onClick={() => this.delete()}>
+        <div className="ss_transaction_row_d" onClick={() => this.setState({showDelete: true})}>
           <Icon size="small">delete</Icon>
         </div>
       </div>
+      <Dialog open={this.state.showDelete} onClose={() => this.setState({showDelete: false})}>
+        <DialogTitle id="form-dialog-title">¿Borrar?</DialogTitle>
+          <DialogContent>
+            Esta acción es irreversible.
+          </DialogContent>
+        <DialogActions>
+          <Button color="secondary" onClick={() => this.setState({showDelete: false})}>
+            Cerrar
+          </Button>
+          <Button color="secondary" onClick={() => this.delete()}>
+            Borrar permanentemente
+          </Button>
+        </DialogActions>
+      </Dialog>
+      </>
     )
   }
 }

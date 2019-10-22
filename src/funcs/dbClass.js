@@ -157,11 +157,11 @@ export default class DbFactory {
     var lineArray = [];
     arr.map(function(infoArray, index) {
       var ia = [];
-      infoArray.map(v => ia.push('"'+v+'"'));
+      infoArray.map(v => v ? ia.push('\=\"'+v+'\"') : ia.push('\"\"'));
       var line = ia.join(",");
       lineArray.push(index == 0 ? "data:text/csv;charset=utf-8," + line : line);
     });
-    var csvContent = lineArray.join("\n");
+    var csvContent = lineArray.join("\r\n");
     return csvContent;
   }
 

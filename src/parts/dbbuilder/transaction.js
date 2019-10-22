@@ -1,7 +1,16 @@
 import React from 'react';
 import Icon from '@material-ui/core/Icon';
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 export default class TransactionRow extends React.Component{
+  state = {
+    showDelete: false
+  }
+
   buildName(){
     var f = this.props.g;
     var t = f[0];
@@ -90,6 +99,7 @@ export default class TransactionRow extends React.Component{
   render(){
     var n = this.buildName();
     return(
+      <>
       <div className="ss_transaction_row">
         <div className="ss_transaction_row_c">
           <div className="ss_transaction_row_n">
@@ -128,10 +138,26 @@ export default class TransactionRow extends React.Component{
         <div className="ss_transaction_row_d"  onClick={() => this.edit()}>
           <Icon size="small">edit</Icon>
         </div>
-        <div className="ss_transaction_row_d" onClick={() => this.delete()}>
+        <div className="ss_transaction_row_d" onClick={() => this.setState({showDelete: true})}>
           <Icon size="small">delete</Icon>
         </div>
       </div>
+
+      <Dialog open={this.state.showDelete} onClose={() => this.setState({showDelete: false})}>
+        <DialogTitle id="form-dialog-title">¿Borrar?</DialogTitle>
+          <DialogContent>
+            Esta acción es irreversible.
+          </DialogContent>
+        <DialogActions>
+          <Button color="secondary" onClick={() => this.setState({showDelete: false})}>
+            Cerrar
+          </Button>
+          <Button color="secondary" onClick={() => this.delete()}>
+            Borrar permanentemente
+          </Button>
+        </DialogActions>
+      </Dialog>
+      </>
     )
   }
 }

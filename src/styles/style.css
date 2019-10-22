@@ -32,7 +32,8 @@ html, body {
   left: 0; }
 
 body.ss_platform #wrapper {
-  overflow: hidden; }
+  overflow: hidden;
+  min-width: 1100px; }
 
 #binder {
   width: 100%;
@@ -290,7 +291,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       padding-left: 0.25rem;
       transform: translateY(0); }
   .ss_modal_dbpre .ss_predb_select_maxtime {
-    color: #ccc;
+    color: #0072ff;
     font-size: 0.7rem;
     margin-top: 0.5rem; }
   .ss_modal_dbpre .ss_predb_select_alert {
@@ -913,7 +914,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
         font-size: 0.8rem;
         font-weight: 300; }
         .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_title input {
-          width: 60%;
+          width: 50%;
           height: 100%;
           position: absolute;
           top: 0;
@@ -926,8 +927,9 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
         justify-content: center;
         margin-left: 0.35rem; }
         .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title .dbef_n_tooltip .material-icons {
-          color: #f6f6f6;
-          font-size: 0.8rem; }
+          color: #0072ff;
+          font-size: 0.8rem;
+          transform: translateY(2px); }
       .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_checkboxes {
         width: 100%;
         box-sizing: border-box;
@@ -998,7 +1000,8 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       border-radius: 0;
       background: #2a2a2a; }
       .db_empresa_edit .db_empresa_container_form .MuiPaper-root .MuiExpansionPanelSummary-root .material-icons {
-        color: #f2f2f2; }
+        color: #0072ff;
+        transform: translateY(1px); }
   .db_empresa_edit .db_empresa_container_group {
     width: 100%;
     box-sizing: border-box; }
@@ -2483,29 +2486,32 @@ body.ss_showing_drawer .ss_analytics_pie {
   z-index: 9999999; }
   #ss_map .ss_map_tooltip {
     width: 180px;
-    background: #333;
+    background: #2a2a2a;
+    border: 1px solid #333;
     transform: translateY(-30px);
     box-sizing: border-box;
     padding: 0.5rem;
     line-height: 1.1; }
     #ss_map .ss_map_tooltip_type {
-      font-weight: 600;
       color: white;
-      font-size: 0.8rem; }
-    #ss_map .ss_map_tooltip_name {
-      font-size: 0.9rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
       font-weight: 300;
-      margin: 0.5rem 0;
-      color: #f6f6f6; }
-    #ss_map .ss_map_tooltip_ename {
-      font-weight: 800;
-      color: white;
-      font-size: 0.8rem; }
-      #ss_map .ss_map_tooltip_ename::before {
+      margin-bottom: 0.25rem; }
+      #ss_map .ss_map_tooltip_type::before {
         content: '/';
         color: #0072ff;
         display: inline-block;
-        margin-right: 0.25rem; }
+        margin-right: 0.25rem;
+        font-weight: 600; }
+    #ss_map .ss_map_tooltip_name {
+      font-size: 0.7rem;
+      margin: 0.25rem 0;
+      color: #f6f6f6; }
+    #ss_map .ss_map_tooltip_ename {
+      font-weight: 600;
+      color: white;
+      font-size: 0.7rem; }
   #ss_map .mapboxgl-popup-content {
     background: none;
     box-shadow: none;
@@ -2537,6 +2543,8 @@ body.ss_showing_drawer .ss_analytics_pie {
     border-radius: 50%;
     transition: all 0.3s ease;
     cursor: pointer; }
+    #ss_map .ss_map_marker:hover {
+      opacity: 0.8; }
     #ss_map .ss_map_marker.ss_marker_active {
       width: 30px;
       z-index: 10;
