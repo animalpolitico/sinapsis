@@ -758,6 +758,22 @@ class Nodes extends React.Component{
       var circlesData = [];
       var labelsData = [];
 
+      /* Convenios solo vía contratos */
+      data.links = data.links.filter(function(l){
+        var s = l.source;
+        var t = l.target;
+        var pass = true;
+        if(s.type == "instancia"){
+          var f = s.fields;
+          pass = false;
+          f.map(function(_f){
+            if(_f.group == "contrato"){
+              pass = true;
+            }
+          })
+        }
+        return pass;
+      })
 
 
       data.nodes.map(function(d){
@@ -1116,14 +1132,48 @@ class Nodes extends React.Component{
     n.map(function(d){
       var id = d.id;
       var f = d.fields;
+      var econv = []; // Convenios en la empresa
+      var isempresa = d.type == "empresa";
       f.map(function(_f){
-        if(id !== _f.id && ids.indexOf(_f.empresauid) > -1){
+        var t = _f.empresauid;
+
+        if(_f.group == "convenio" && _f.category == "receptor"){
+          try{
+            var otorga = window.dbf.obj.dbs[_f.fromdb].empresas[_f.empresauid].fields[_f.guid + '-convenio-quien-otorga-los-recursos'];
+            if(otorga){
+              var _t = otorga.value;
+                  _t = 'instancia-'+_t;
+                  _t = slugify(_t, {lower: true});
+              t = _t;
+            }
+          }catch(ex){
+            console.log('error', ex);
+          }
+        }
+
+        if(_f.matchWith.indexOf('titular') > -1){
+          try{
+            var otorga = window.dbf.obj.dbs[_f.fromdb].empresas[_f.empresauid].fields[_f.guid + '-convenio-quien-otorga-los-recursos'];
+            if(otorga){
+              var _t = otorga.value;
+                  _t = 'instancia-'+_t;
+                  _t = slugify(_t, {lower: true});
+              t = _t;
+            }
+          }catch(ex){
+            
+          }
+        }
+
+
+        if(id !== _f.id && ids.indexOf(t) > -1 && !(isempresa && _f.group == "convenio")){
           links.push({
             source: id,
-            target: _f.empresauid
+            target: t
           })
         }
       })
+
     })
 
 
@@ -1144,23 +1194,7 @@ class Nodes extends React.Component{
       }
     })
 
-    /* Convenios solo vía contratos */
-    links = links.filter(function(l){
-      var s = l.source;
-      var t = l.target;
-      var pass = true;
-      if(s.type == "instancia"){
-        var f = s.fields;
-        pass = false;
-        f.map(function(_f){
-          console.log('_f', _f);
-          if(_f.group == "contrato"){
-            pass = true;
-          }
-        })
-      }
-      return pass;
-    })
+
 
 
     return links;
