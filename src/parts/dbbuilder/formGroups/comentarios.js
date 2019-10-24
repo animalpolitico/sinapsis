@@ -20,6 +20,9 @@ export default class DbFormGroupComentarios extends React.Component{
   componentDidMount(){
   }
   render(){
+
+    var hascomentarios = this.props.empresa.fields && this.props.empresa.fields['comentarios'] && this.props.empresa.fields['comentarios'].value;
+
     return(
       <>
       <ExpansionPanel expanded={this.state.open} onChange={(e, ex) => this.setState({open: ex})}>
@@ -27,6 +30,11 @@ export default class DbFormGroupComentarios extends React.Component{
           <div className="dbef_n">
             <div className="dbef_n_n">
               Comentarios
+              {
+                hascomentarios ? 
+                <span className="dbef_n_n_badge">{1}</span>
+                : null
+              }
             </div>
             <div className="dbef_n_ctas">
               {

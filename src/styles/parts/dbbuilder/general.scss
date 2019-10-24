@@ -12,6 +12,47 @@
   margin-top: 55px;
   position: relative;
   @extend .flex;
+  &_empty_tip{
+    width: 90%;
+    background: #222;
+    box-sizing: border-box;
+    padding: 2rem 1rem;
+    margin: 3rem auto;
+    border: 2px solid #333;
+    box-shadow: 0 0 3px rgba(black, 0.1);
+    &_icon{
+      width: 100%;
+      @extend .flex;
+      justify-content: center;
+      .material-icons{
+        font-size: 3rem;
+        color: $main;
+      }
+    }
+    &_text{
+      width: 100%;
+      text-align: center;
+      color: #f6f6f6;
+      font-size: 1.1rem;
+      font-weight: 300;
+      @extend .flex;
+      flex-direction: column;
+      align-items: center;
+      &_btn{
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        border: 1px solid $main;
+        display: inline-block;
+        background: #1c1c1c;
+        padding: 0.25rem 0.5rem;
+        cursor: pointer;
+        &:hover{
+          background: $main;
+        }
+      }
+    }
+  }
   &_sidebar{
     width: 30%;
     background: $blue;

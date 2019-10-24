@@ -125,8 +125,12 @@ export default class DbEditEmpresa extends React.Component{
   render(){
     var self = this;
     var haserrors = this.state.empresaErrors.total > 0;
+    var cs = ['db_empresa_edit_container'];
+    if(this.props.blockEdit){
+      cs.push('db_block_edit');
+    }
     return(
-      <div className="db_empresa_edit_container">
+      <div className={cs.join(' ')}>
         <div className="db_empresa_edit_close" onClick={() => this.closeDrawer()}>
           <Icon>close</Icon>
         </div>

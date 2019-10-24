@@ -202,6 +202,7 @@
         align-items: center;
         margin-right: 0.5rem;
         cursor: pointer;
+        display: none;
         .material-icons{
           color: #555;
         }
@@ -211,22 +212,30 @@
         .ssa_btn{
           @extend .flex;
           box-sizing: border-box;
-          padding: 0.3rem 2rem;
+          padding: 0.3rem 0.5rem;
           align-items: center;
           color: #eee;
           cursor: pointer;
           font-weight: 600;
           text-transform: uppercase;
-          border: 1px solid $main;
-          transition: all 0.3s ease;
-          box-shadow: 0 0 3px rgba($main, 0.8);
+
+          transition: all 0.1s ease;
           background: #222;
+          &_icon{
+            line-height: 1;
+            margin-right: 0.35rem;
+            .material-icons{
+              font-size: 16px;
+              line-height: 1;
+              color: $main;
+            }
+          }
           &:hover{
             background: #333;
           }
           &.ssa_inactive{
             color: #444;
-            opacity: 0.7;
+            opacity: 0.9;
             border-color: #333;
             box-shadow: none;
           }

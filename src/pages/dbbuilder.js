@@ -71,7 +71,8 @@ export default class DbBuilderPage extends React.Component{
     isautosaving: false,
     uid: null,
     hasloaded: false,
-    showfps: false
+    showfps: false,
+    fromFile: false
   }
 
   componentDidMount(){
@@ -107,7 +108,7 @@ export default class DbBuilderPage extends React.Component{
       })
       document.body.classList.add('ss_platform');
       var obj = store.get('sinapsis_'+uid);
-      if(obj){
+      if(obj && !this.state.fromFile){
         var obj_j = JSON.parse(obj);
         if(!obj_j.recovered){
           obj_j.recovered = 0;
@@ -251,7 +252,8 @@ export default class DbBuilderPage extends React.Component{
         self.setState({
           control: 'fromfile',
           showcontrol: false,
-          hasloaded: true
+          hasloaded: true,
+          fromFile: true
         })
         self.sidebar.fetchDbs();
         window.dispatchEvent(onBigChanges);
@@ -326,7 +328,7 @@ export default class DbBuilderPage extends React.Component{
             <div>
               <DbBuilderToolbar parent={this} ref={(ref) => this.toolbar = ref}/>
               <div className="ss_dbbuilder">
-                <DbBuilderSidebar ref={(ref) => this.sidebar = ref}/>
+                <DbBuilderSidebar ref={(ref) => this.sidebar = ref} parent={this}/>
                 <DbViz ref={(ref) => this.viz = ref}/>
               </div>
             </div>
@@ -615,6 +617,26 @@ class DbBuilderSidebar extends React.Component{
                 <DbView ref={(ref) => this.dbview = ref} db={this.state.db} navRef={this.refs[this.state.db.id]} parent={self}/>
                 : null
               }
+
+              {
+                dbsA.length == 0 ?
+                <div className="ss_dbbuilder_empty_tip">
+                  <div className="ss_dbbuilder_empty_tip_icon">
+                    <Icon>help_outline</Icon>
+                  </div>
+                  <div className="ss_dbbuilder_empty_tip_text">
+                    <p>¿No sabes por dónde comenzar?</p>
+                    <div
+                      className="ss_dbbuilder_empty_tip_text_btn"
+                      onClick={() => this.props.parent.loadEstafa(true)}
+                    >
+                      Explora la Estafa Maestra
+                    </div>
+                  </div>
+                </div>
+                : null
+              }
+
             </div>
         </div>
       </ResizableBox>
@@ -700,7 +722,9 @@ class DbView extends React.Component{
         duplicateEmpresa: exists
       })
     }else{
-      var data = window.dbf.addEmpresaToDb(this.state.db, v);
+      var ispersona = this.state.empresaType == "persona";
+
+      var data = window.dbf.addEmpresaToDb(this.state.db, v, ispersona);
       this.empresalist.selectEmpresa(data[1])
       this.setState({
         db: data[0]
@@ -756,6 +780,9 @@ class DbView extends React.Component{
       nameCs.push('ss_error');
     }
     var canAdd = this.state.dialogValue.length > 0;
+
+    var block = this.props.db.blockEdit;
+
     return(
       <div className="ss_db_view">
         {
@@ -811,9 +838,21 @@ class DbView extends React.Component{
             <div className="ss_db_view_empresas">
               <div className="ss_db_view_empresas_title">
                 <span>Empresas en {this.props.db.name}</span>
-                <div className="ss_db_view_empresas_title_btn" style={{cursor: 'pointer'}} onClick={() => this.showAddDialog()}>Agregar</div>
+                {
+                  !block ?
+                  <div className="ss_db_view_empresas_title_btn" style={{cursor: 'pointer'}} onClick={() => this.showAddDialog()}>Agregar</div>
+                  : null
+                }
               </div>
-              <DbEmpresasList ref={(ref) => this.empresalist = ref} parent={this} db={this.state.db} />
+              {
+                block ?
+                <div className="ss_db_view_empresas_notice">
+                  <Icon>info</Icon>
+                  <div>Esta base de datos es solo de lectura, no podrás editar los campos ni agregar nuevas empresas.</div>
+                </div>
+                : null
+              }
+              <DbEmpresasList blockEdit={block} ref={(ref) => this.empresalist = ref} parent={this} db={this.state.db} />
             </div>
 
           </div>
@@ -822,9 +861,19 @@ class DbView extends React.Component{
         <Dialog open={this.state.showdialog} onClose={() => this.handleDialogClose()}>
           <DialogTitle id="form-dialog-title">Empresa nueva</DialogTitle>
             <DialogContent style={{width: 400}}>
+              <div className="ss_db_input_select" style={{paddingLeft: 0, paddingRight: 0}}>
+                <div className="db_empresa_container_group_radios_title">
+                  ¿Es empresa o prestador de servicios?
+                </div>
+                <select onChange={(e) => this.setState({empresaType: e.target.value, res: true})}>
+                  <option value="empresa">Empresa</option>
+                  <option value="persona">Prestador de servicios</option>
+                </select>
+              </div>
             <DialogContentText>
               Escribe el nombre de la empresa, más adelante podrás añadir el resto de información.
             </DialogContentText>
+
             <TextField
               autoFocus
               label="Razón social de la empresa"
@@ -867,7 +916,7 @@ class DbEmpresasList extends React.Component{
     var self = this;
     window.addEventListener('keydown', function(e){
       var w = e.which;
-      var isnotfocusing = ! document.body.classList.contains('ss_focusing_input');
+      var isnotfocusing = !document.body.classList.contains('ss_focusing_input') && !document.body.classList.contains('ss_showing_search');
       if((w == 40 || w == 38) && self.state.showedit && isnotfocusing){
         var empresas = Object.keys(self.props.db.empresas);
         var maxlength = empresas.length - 1;
@@ -896,7 +945,8 @@ class DbEmpresasList extends React.Component{
   selectEmpresa(em, isolateNode){
     this.setState({
       showedit: true,
-      empresa: em
+      empresa: em,
+      blockEdit: this.props.blockEdit
     })
     window.dispatchEvent(new Event('ss_lazy_indicator'));
     window.dispatchEvent(onDrawerToggle);
@@ -930,9 +980,7 @@ class DbEmpresasList extends React.Component{
       var lc = this.listContainer;
       var lch = lc.offsetHeight;
       var lcs = lc.scrollTop;
-      if((lcs + lch) < t || t < lcs){
-        lc.scrollTop = t - 120;
-      }
+      lc.scrollTop = t - 200;
     }catch(ex){
 
     }
@@ -975,6 +1023,7 @@ class DbEmpresasList extends React.Component{
                 <DbEmpresa
                     empresa={empresa}
                     db={db}
+                    blockEdit={self.props.blockEdit}
                     key={k}
                     index={k}
                     parent={self}
@@ -993,7 +1042,7 @@ class DbEmpresasList extends React.Component{
         {
           this.state.showedit ?
           <div className="db_empresa_edit">
-            <DbEditEmpresa db={this.props.db} empresa={this.state.empresa} parent={this} />
+            <DbEditEmpresa db={this.props.db} blockEdit={this.state.blockEdit} empresa={this.state.empresa} parent={this} />
           </div>
           : null
         }
@@ -1083,11 +1132,12 @@ class DbDbsNavigationNewDb extends React.Component{
     })
   }
 
-  selectPreDB(path, name){
+  selectPreDB(path, name, blockEdit){
     console.log('PATH', path, name);
     this.setState({
       selectedDb: path,
-      selectedName: name
+      selectedName: name,
+      blockEdit: blockEdit
     })
   }
 
@@ -1095,23 +1145,29 @@ class DbDbsNavigationNewDb extends React.Component{
     var self = this;
     var v = this.state.selectedDb;
     var n = this.state.selectedName;
+    var block = this.state.blockEdit;
     window.dispatchEvent(startLoad);
     this.setState({
       openModal: false,
       selectedDb: null,
-      selectedName: null
+      selectedName: null,
+      blockEdit: false
     })
     var c = await d3.csv(v);
-    var ont = new oldToNew(n, c, true);
-    var db = ont.save();
-    if(!window.dbf.obj.dbs){
-      window.dbf.obj.dbs = {};
-    }
-    window.dbf.obj.dbs[db.id] = db;
-    window.dbf.setModified();
-    window.dispatchEvent(onBigChanges);
-    self.props.parent.fetchDbs();
-    window.dispatchEvent(endLoad);
+    setTimeout(function(){
+      var ont = new oldToNew(n, c, true);
+      var db = ont.save();
+      if(!window.dbf.obj.dbs){
+        window.dbf.obj.dbs = {};
+      }
+      window.dbf.obj.dbs[db.id] = db;
+      window.dbf.obj.dbs[db.id].blockEdit = block;
+      window.dbf.setModified();
+      window.dispatchEvent(onBigChanges);
+      self.props.parent.fetchDbs();
+      window.dispatchEvent(endLoad);
+    }, 500)
+
 
 
   }
@@ -1278,9 +1334,11 @@ class PreDb extends React.Component{
 
     var showAlert = m > 10;
 
+    var block = p.blockEdit ? true : false;
+
     return(
       <div className="ss_predb_select">
-        <input type="radio" name="predb_input" onChange={(e) => this.props.parent.selectPreDB(p.file, p.name)}/>
+        <input type="radio" name="predb_input" onChange={(e) => this.props.parent.selectPreDB(p.file, p.name, block)}/>
         <div className="ss_predb_select_info">
         <div className="ss_predb_select_name">
           {p.name}

@@ -215,22 +215,14 @@ export default class DbFormGroupContrato extends React.Component{
           <DialogContent>
             <div className="db_empresa_container_group_form">
                   <>
-                  <div className="db_empresa_container_group_radios">
+                  <div className="ss_db_input_select">
                     <div className="db_empresa_container_group_radios_title">
                       ¿Quien otorga los recursos es empresa o {_t('instancia / dependencia')}?
                     </div>
-                    <div className="db_empresa_container_group_radios_radio">
-                      <input checked={type == "empresa"} onChange={() => this.setState({contratoType: 'empresa', res: true})} type="radio" name="ss_c_e_t" />
-                        <div className="db_empresa_container_group_radios_radio_c">
-                          Empresa
-                        </div>
-                    </div>
-                    <div className="db_empresa_container_group_radios_radio">
-                      <input checked={type == "instancia"} onChange={() => this.setState({contratoType: 'instancia', res: true})} type="radio" name="ss_c_e_t" />
-                        <div className="db_empresa_container_group_radios_radio_c">
-                          {_t('Instancia / Dependencia')}
-                        </div>
-                    </div>
+                    <select onChange={(e) => this.setState({contratoType: e.target.value, res: true})} value={type}>
+                      <option value="empresa">Empresa</option>
+                      <option value="instancia">{_t('Instancia / Dependencia')}</option>
+                    </select>
                   </div>
                     <DbInput
                       onChange={(slug, obj) => this.insertField(slug, obj)}

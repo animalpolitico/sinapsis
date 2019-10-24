@@ -171,7 +171,7 @@
           font-size: 0.8rem;
           font-weight: 300;
           input{
-            width: 50%;
+            width: 30%;
             height: 100%;
             position: absolute;
             top: 0;
@@ -328,6 +328,7 @@
       text-transform: uppercase;
       font-size: 0.8rem;
       font-weight: 500;
+      margin-bottom: 0.25rem;
     }
     &_radio{
       position: relative;
@@ -647,5 +648,34 @@
     min-width: 600px;
     font-family: $f;
     border-radius: 0;
+  }
+}
+.db_empresa_edit_container.db_block_edit{
+  .ss_db_input{
+    .ss_db_input_container_error{
+      display: none!important;
+    }
+    .ss_db_input_container_input{
+      input{
+        pointer-events: none;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        color: #f6f6f6!important;
+        border-color: #ccc!important;
+      }
+    }
+  }
+  .dbef_n_ctas_c{
+    display: none!important;
+  }
+  .ss_transaction_row_d{
+    display: none!important;
+  }
+  .br_i{
+    pointer-events: none!important;
+  }
+  .db_empresa_name_trash{
+    display: none;
   }
 }

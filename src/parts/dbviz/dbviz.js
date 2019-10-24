@@ -431,6 +431,7 @@ export class Search extends React.Component{
 
   render(){
     var r = Math.random() * 10000000;
+    document.body.classList.toggle('ss_showing_search', this.state.results.length > 0);
     return(
       <ClickAwayListener onClickAway={() => this.setState({showResults: false})}>
         <div className="db_search_nodes">
@@ -511,6 +512,7 @@ class SearchResults extends React.Component{
     }
 
     if(w == 13){
+      window.dispatchEvent(new Event('sinapsis_close_edit'));
       var r = this.props.results;
       var em = r[this.state.selectedIndex - 1];
       if(em){
@@ -683,11 +685,12 @@ class Nodes extends React.Component{
       this.nodesData = nodesData;
       var _links = this.buildLinks();
       nodesData.links = _links;
+
       this.nodesData = nodesData;
 
       var nodesData = this.filterInitNodes();
-      this.nodesData = nodesData;
 
+      this.nodesData = nodesData;
 
       const width = container.offsetWidth,
             height = container.offsetHeight;
@@ -720,10 +723,6 @@ class Nodes extends React.Component{
      this.simulation = simulation;
      this.nodesContainer = canvas.append('g').attr('class', 'nodes_container');
 
-
-
-
-
      var zoom = d3.zoom()
                   .extent([[0, 0], [width, height]])
                   .scaleExtent([-3, 8])
@@ -745,12 +744,9 @@ class Nodes extends React.Component{
      canvas.call(zoom)
 
 
-
      simulation.nodes(nodesData.nodes)
                .on('tick', this.drawNodes)
-               .on('end', function(){
 
-               })
 
 
 
@@ -761,6 +757,8 @@ class Nodes extends React.Component{
       var data = this.nodesData;
       var circlesData = [];
       var labelsData = [];
+
+
 
       data.nodes.map(function(d){
         var t = d.type;
@@ -799,12 +797,16 @@ class Nodes extends React.Component{
                      .data(data.links)
                      .enter()
                      .append('line')
-                     .attr('stroke-width', lSize)
+                     .attr('stroke-width', Math.round(lSize) +'px')
                      .attr('class', 'nodes_link')
                      .attr('data-from', l => l.source.id)
                      .attr('data-to', l => l.target.id)
                      .attr('stroke', 'rgba(0, 114, 255, 0.4)')
       this.links = links;
+
+
+
+
 
       bgs.on('click', function(){
               self.releaseNode();
@@ -1026,6 +1028,7 @@ class Nodes extends React.Component{
 
 
 
+
     var uidWithConnections = [];
 
     l.map(function(_l){
@@ -1123,6 +1126,8 @@ class Nodes extends React.Component{
       })
     })
 
+
+
     /* Unicidad */
     var js = {};
     links = links.filter(function(l){
@@ -1138,6 +1143,25 @@ class Nodes extends React.Component{
         }
       }
     })
+
+    /* Convenios solo vía contratos */
+    links = links.filter(function(l){
+      var s = l.source;
+      var t = l.target;
+      var pass = true;
+      if(s.type == "instancia"){
+        var f = s.fields;
+        pass = false;
+        f.map(function(_f){
+          console.log('_f', _f);
+          if(_f.group == "contrato"){
+            pass = true;
+          }
+        })
+      }
+      return pass;
+    })
+
 
     return links;
   }
@@ -1431,6 +1455,15 @@ class Nodes extends React.Component{
 
     /* SVG */
     var s = new XMLSerializer().serializeToString(document.getElementById("db_viz_nodes_canvas"));
+    s = s.replace(/stroke\-width\=\"80px\"/g, 'stroke-width="1px"');
+    s = s.replace(/stroke\-width\=\"4px\"/g, 'stroke-width="0px"');
+    s = s.replace(/stroke\-width\=\"24\"/g, 'stroke-width="1px"');
+    s = s.replace(/stroke\-width\=\"57px\"/g, 'stroke-width="0.15"');
+    s = s.replace(/stroke\-width\=\"16px\"/g, 'stroke-width="0.15"');
+    s = s.replace(/benton\-sans\,/g, '');
+    s = s.replace(/fill\=\"transparent\"/g, 'fill="#2a2a2a"');
+    s = s.replace(/rgba\(0\,\s114\,\s255\,\s0\.4\)/g, '#0072ff');
+
     var b64 = 'data:image/svg+xml;base64,'+ btoa( unescape( encodeURIComponent(s)));
     zip.file('sinapsisMapaDeNodos.svg', s);
 
@@ -1486,6 +1519,22 @@ class Nodes extends React.Component{
     })
   }
 
+  getMontosTemp(){
+    var o = [];
+    d3.selectAll('.node')
+      .filter(d => d.type == "empresa")
+      .each(function(d){
+        var i = [
+          d.name,
+          d.sum ? d.sum : '-'
+        ];
+        o.push(i);
+      });
+    var t = window.dbf.arrayToCsv(o);
+    console.log('t', t);
+    saveAs(t, 'montos.csv');
+  }
+
 
   render(){
     return(
@@ -1510,6 +1559,7 @@ class Nodes extends React.Component{
             </Fab>
             : null
           }
+
         </div>
         <div className="db_viz_info">
           {
@@ -2060,12 +2110,13 @@ class SSCategoryToggle extends React.Component{
             this.state.showing ?
           <>
           <div className="ss_control_group_container_btns">
-            <div onClick={() => this.majorChange('all')} disabled={types.length == (this.state.vals.length - 1)} className="ss_control_group_container_btns_btn">
-              Ninguna
-            </div>
-            <div onClick={() => this.majorChange('none')} disabled={this.state.vals.length === 1} className="ss_control_group_container_btns_btn">
+            <div data-highlighted={types.length == (this.state.vals.length - 1) ? "1" : "0"} onClick={() => this.majorChange('all')} className="ss_control_group_container_btns_btn">
               Todas
             </div>
+            <div data-highlighted={this.state.vals.length === 1 ? "1" : "0"} onClick={() => this.majorChange('none')}  className="ss_control_group_container_btns_btn">
+              Ninguna
+            </div>
+
           </div>
           <div className="ss_control_group_container_switches">
             {
@@ -2297,7 +2348,7 @@ class SSTooltip extends React.Component{
         {
           d.type == "empresa" ?
           <div className="db_viz_tooltip_monto" >
-            Monto neto que recibió la empresa: <strong>{formatMoney(d.fields[0].sum)}</strong>
+            Monto neto que recibió la empresa: <strong>{d.fields[0].sum == 0 ? '(sin información)' : formatMoney(d.fields[0].sum)}</strong>
           </div>
           : null
         }

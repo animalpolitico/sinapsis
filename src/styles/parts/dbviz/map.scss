@@ -5,6 +5,51 @@
   top: 0;
   left: 0;
   background: #1a1a1a;
+  &_controls{
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 3;
+    background: #2a2a2a;
+    box-sizing: border-box;
+    padding: 1rem;
+    border: 1px solid #333;
+    box-shadow: 0 0 4px rgba(black, 0.1);
+    font-size: 0.8rem;
+    .ss_map_controls_group{
+      width: 100%;
+      &_title{
+        color: #f6f6f6;
+        text-transform: uppercase;
+        &::before{
+          content: '/';
+          font-weight: 600;
+          color: $main;
+          margin-right: 0.2rem;
+        }
+      }
+      &_content{
+        margin-top: 0.25rem;
+        &_tr{
+          @extend .flex;
+          align-items: center;
+          &:not(:last-child){
+            margin-bottom: 0.15rem;
+          }
+          input{
+            cursor: pointer;
+          }
+          div{
+            flex: 1;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #f6f6f6;
+            margin-left: 0.2rem;
+          }
+        }
+      }
+    }
+  }
   z-index: 9999999;
   .ss_map_tooltip{
     width: 180px;
@@ -13,7 +58,7 @@
     transform: translateY(-30px);
     box-sizing: border-box;
     padding: 0.5rem;
-    line-height: 1.1;
+    line-height: 1.15;
     &_type{
       color: white;
       font-size: 0.7rem;
@@ -30,14 +75,13 @@
     }
     &_name{
       font-size: 0.7rem;
-      margin: 0.25rem 0;
+      margin: 0.5rem 0 0.25rem;
       color: #f6f6f6;
     }
     &_ename{
       font-weight: 600;
       color: white;
       font-size: 0.7rem;
-
     }
   }
   .mapboxgl-popup-content{

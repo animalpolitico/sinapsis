@@ -230,7 +230,22 @@ export default class DbFormGroupBanderasRojas extends React.Component{
                 <div className="rg_title_ch">
                   <Icon>{bs.indexOf('SinAntReg') > -1 ? "check_box" : "check_box_outline_blank"}</Icon>
                 </div>
-                <div className="rg_title">No tiene antecedentes registrales</div>
+                <div className="rg_title">
+                  No tiene antecedentes registrales
+                  {
+                    isMexico() ?
+                    <div className="dbef_n_tooltip">
+                      <Tooltip
+                        title="Puedes hacer una solicitud de información a la Secretaría de Economía. Da clic para visitar su sitio"
+                      >
+                        <a href="https://www.gob.mx/se/" target="_blank">
+                          <Icon size="small">help</Icon>
+                        </a>
+                      </Tooltip>
+                    </div>
+                    : null
+                  }
+                </div>
               </div>
             </div>
 

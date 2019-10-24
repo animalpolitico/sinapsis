@@ -176,7 +176,11 @@ class AnalyticsTop10 extends React.Component{
             label: function(ti,d){
               return 'Monto neto recibido: '+formatMoney(ti.yLabel);
             }
-          }
+          },
+          custom: function(tooltip) {
+            if (!tooltip) return;
+            tooltip.displayColors = false;
+          },
         },
         scales: {
           xAxes: [{
@@ -519,6 +523,9 @@ class AnalyticsControl extends React.Component{
                 }
                 return(
                   <div className={cs.join(' ')} onClick={() => self.props.toggleDb(db.id)}>
+                    <div className="ssa_btn_icon">
+                      <Icon>{isactive ? 'check_box' : 'check_box_outline_blank'}</Icon>
+                    </div>
                     <div className="ssa_btn_label">
                       {db.name}
                     </div>

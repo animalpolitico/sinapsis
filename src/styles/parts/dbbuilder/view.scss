@@ -74,6 +74,30 @@
         }
       }
     }
+    &_notice{
+      width: 100%;
+      background: #222;
+      box-sizing: border-box;
+      padding: 0.5rem 1rem;
+      border: 1px solid #333;
+      @extend .flex;
+      margin: 0.5rem 0;
+      align-items: center;
+      &,*{
+        font-size: 0.7rem;
+      }
+      .material-icons{
+        font-size: 0.8rem;
+        color: yellow;
+        line-height: 1;
+      }
+      div{
+        color: #f6f6f6;
+        line-height: 1.1;
+        box-sizing: border-box;
+        padding-left: 0.5rem;
+      }
+    }
     .ss_db_ve_c{
       width: 100%;
       flex: 1;

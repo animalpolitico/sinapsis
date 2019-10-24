@@ -12,6 +12,9 @@ var JSZip = require("jszip");
 const uuidv4 = require('uuid/v4');
 var gen = require('color-generator');
 
+const { convertArrayToCSV } = require('convert-array-to-csv');
+
+
 var onProjectModified = new Event('sinapsisModified');
 
 
@@ -151,18 +154,12 @@ export default class DbFactory {
   * Crea un texto en CSV a partir de un array
   *
   * @param array
-  * @return TXT / CSV
+  * @return blob
   **/
   arrayToCsv(arr){
-    var lineArray = [];
-    arr.map(function(infoArray, index) {
-      var ia = [];
-      infoArray.map(v => v ? ia.push('\=\"'+v+'\"') : ia.push('\"\"'));
-      var line = ia.join(",");
-      lineArray.push(index == 0 ? "data:text/csv;charset=utf-8," + line : line);
-    });
-    var csvContent = lineArray.join("\r\n");
-    return csvContent;
+    var csv = convertArrayToCSV(arr);
+    var blob = new Blob([csv], {type: "text/csv;charset=utf-8"});
+    return blob;
   }
 
   /**
@@ -305,6 +302,8 @@ export default class DbFactory {
     Object.values(nodes).map(function(e){
       finalObj.nodes = [...finalObj.nodes, e];
     });
+
+
 
 
     return finalObj;
@@ -1060,16 +1059,60 @@ export default class DbFactory {
   * @param db
   * @return db
   **/
-  addEmpresaToDb(db, v){
+  addEmpresaToDb(db, v, ispersona){
     if(!db.empresas){
       db.empresas = {};
     }
     var empresa = {
       name: v,
       slug: slugify(v, {lower: true}),
-      uid: this.createUid()
+      uid: this.createUid(),
+      fields: {}
     };
     db.empresas[empresa.uid] = empresa;
+
+    /* Prestador de servicios */
+    if(ispersona){
+      var u = this.createUid();
+      var s = slugify(u + ' ' + 'tipo persona', {lower: true});
+      var i = {
+        group: "representante",
+        value: "representante",
+        bigGroup: "persona",
+        isvalid: true,
+        guid: u,
+        groupUid: u,
+        name: "Tipo de persona"
+      }
+      db.empresas[empresa.uid].fields[s] = i;
+
+      var s = slugify(u + ' ' + 'representante-nombre-completo', {lower: true});
+      var i = {
+        group: "representante",
+        value: "representante",
+        bigGroup: "persona",
+        isvalid: true,
+        guid: u,
+        groupUid: u,
+        value: v,
+        category: "name",
+        matchWith: ['person'],
+        type: "person",
+        empresauid: empresa.uid,
+        fromdb: db.id,
+        dbName: db.name,
+        empresaName: v,
+        slug: "representante-nombre-completo",
+        name: "Nombre completo"
+      }
+      db.empresas[empresa.uid].fields[s] = i;
+
+
+    }
+
+
+
+
     this.editDb(db.id, db);
     this.refresh();
     return [db, empresa];

@@ -13,6 +13,7 @@ export default class SSMap extends React.Component{
   state = {
     defaultZoom: getCoords(),
     markers: [],
+    onlyCoincidencias: true,
     zoom: 5
   }
   componentDidMount(){
@@ -71,6 +72,22 @@ export default class SSMap extends React.Component{
     var self = this;
     return(
       <div id="ss_map">
+      <div id="ss_map_controls">
+        <div className="ss_map_controls_group">
+          <div className="ss_map_controls_group_title">Mostrar direcciones</div>
+          <div className="ss_map_controls_group_content">
+            <div className="ss_map_controls_group_content_tr">
+              <input checked={this.state.onlyCoincidencias} type="radio" name="ssmapcoincidencias" onChange={() => this.setState({onlyCoincidencias: true})} />
+              <div>Solo de empresas con coincidencias</div>
+            </div>
+            <div className="ss_map_controls_group_content_tr">
+              <input checked={!this.state.onlyCoincidencias} type="radio" name="ssmapcoincidencias" onChange={() => this.setState({onlyCoincidencias: false})} />
+              <div>Todas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="ss_map_close" onClick={() => this.props.onClose()}><Icon>close</Icon></div>
 
       {
@@ -92,7 +109,7 @@ export default class SSMap extends React.Component{
       >
       {
         this.state.markers.map(function(d){
-          return <SSMarker parent={self} d={d} onME={(e, _data) => self.onME(e, _data)} onML={() => self.setState({showTooltip: false})}/>
+          return <SSMarker onlyCoincidencias={self.state.onlyCoincidencias} parent={self} d={d} onME={(e, _data) => self.onME(e, _data)} onML={() => self.setState({showTooltip: false})}/>
         })
       }
       </Map>
@@ -131,6 +148,19 @@ class SSMarker extends React.Component{
   render(){
     var d = this.props.d;
     var ename = window.dbf.getEmpresa(d.fromdb, d.empresauid).name
+    var euid = d.empresauid;
+
+    var show = false;
+
+    d3.selectAll('.node[data-id="'+euid+'"]')
+      .filter(d => show = d.coincidencias > 0);
+
+    show = (this.props.onlyCoincidencias && show) || !this.props.onlyCoincidencias
+
+    if(!show){
+      return null;
+    }
+
     return(
       <>
       {
