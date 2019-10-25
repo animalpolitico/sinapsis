@@ -1488,7 +1488,8 @@ class Nodes extends React.Component{
     var zip = new JSZip();
 
     /* SVG */
-    var s = new XMLSerializer().serializeToString(document.getElementById("db_viz_nodes_canvas"));
+    var p = new XMLSerializer().serializeToString(document.getElementById("db_viz_nodes_canvas"));
+    var s = p;
     s = s.replace(/stroke\-width\=\"80px\"/g, 'stroke-width="1px"');
     s = s.replace(/stroke\-width\=\"40px\"/g, 'stroke-width="1px"');
     s = s.replace(/stroke\-width\=\"4px\"/g, 'stroke-width="0px"');
