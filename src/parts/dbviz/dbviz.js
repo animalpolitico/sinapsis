@@ -936,7 +936,7 @@ class Nodes extends React.Component{
                           return c;
                         })
                         .attr('stroke-width', function(d){
-                          return d.hasBanderasRojas ? '80px' : '4px';
+                          return d.hasBanderasRojas ? '40px' : '4px';
                         })
                         .attr('data-type', (d) => d.type)
                         .attr('fill', function(d){
@@ -1161,7 +1161,7 @@ class Nodes extends React.Component{
               t = _t;
             }
           }catch(ex){
-            
+
           }
         }
 
@@ -1490,10 +1490,13 @@ class Nodes extends React.Component{
     /* SVG */
     var s = new XMLSerializer().serializeToString(document.getElementById("db_viz_nodes_canvas"));
     s = s.replace(/stroke\-width\=\"80px\"/g, 'stroke-width="1px"');
+    s = s.replace(/stroke\-width\=\"40px\"/g, 'stroke-width="1px"');
     s = s.replace(/stroke\-width\=\"4px\"/g, 'stroke-width="0px"');
     s = s.replace(/stroke\-width\=\"24\"/g, 'stroke-width="1px"');
     s = s.replace(/stroke\-width\=\"57px\"/g, 'stroke-width="0.15"');
     s = s.replace(/stroke\-width\=\"16px\"/g, 'stroke-width="0.15"');
+    s = s.replace(/stroke\-width\=\"17px\"/g, 'stroke-width="0.15"');
+    s = s.replace(/stroke\-width\=\"23px\"/g, 'stroke-width="0.15"');
     s = s.replace(/benton\-sans\,/g, '');
     s = s.replace(/fill\=\"transparent\"/g, 'fill="#2a2a2a"');
     s = s.replace(/rgba\(0\,\s114\,\s255\,\s0\.4\)/g, '#0072ff');
