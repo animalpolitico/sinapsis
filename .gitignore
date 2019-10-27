@@ -7,7 +7,9 @@
 /src/img
 /public/img
 /public/flags
+.sass-cache
 /.sass-cache
+
 
 # testing
 /coverage
