@@ -1940,28 +1940,22 @@ class SSListado extends React.Component{
     var daf = da.fields;
     var o = [];
 
-    o.push(
-      [
-        'Coincidencias de ' + getTypeName(t) +': ' + daf.length,
-        '',
-        '',
-        ''
-      ]
-    )
 
-    /*
-    * [Valor: coincidencia, '', '', '']
-    * [Valor, Nombre campo, Empresa, Base de datos ]
-    **/
+
     daf.map(function(gr, i){
+      var empresas = [];
+      var bds = [];
+
+      console.log('gr', gr);
+
       gr.map(function(f, y){
-        if(!y){
-          var ins = [f.value + ': ' + gr.length + ' coincidencias', '', '', '']
-          o.push(ins);
-        }
-        var ins = [f.value, f.name, f.empresaName, f.dbName]
-        o.push(ins);
+        empresas.push(f.empresaName);
+        bds.push(f.dbName);
       })
+      empresas = Array.from(new Set(empresas));
+      bds = Array.from(new Set(bds));
+      var ins = [t, gr[0].value, gr.length, empresas.join(', '), bds.join(', ')]
+      o.push(ins);
     })
     return o;
   }
@@ -1970,7 +1964,7 @@ class SSListado extends React.Component{
     window.dispatchEvent(startLoad);
     var pre = this.typePreCsv(t);
     pre = [
-            [getTypeName(t), 'Tipo', 'Empresa', 'Base de datos'],
+            ['Tipo', 'Valor', 'Coincidencias', 'Empresas', 'Bases de datos'],
             ...pre
           ];
     var txt = window.dbf.arrayToCsv(pre);
@@ -1988,7 +1982,7 @@ class SSListado extends React.Component{
     v.map(t => o = [...o, ...this.typePreCsv(t)]);
 
     o = [
-          ['Tipo', 'Campo', 'Empresa', 'Base de datos'],
+          ['Tipo', 'Valor', 'Coincidencias', 'Empresas', 'Bases de datos'],
           ...o
         ];
     var txt = window.dbf.arrayToCsv(o);

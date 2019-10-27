@@ -99,7 +99,6 @@ export default class ConvertOldToDb{
   }
 
   setEmpresa(fields){
-    console.log('fields', fields);
 
     var n = fields[0];
     var s = n.replace(/[.\s]/g, '');
