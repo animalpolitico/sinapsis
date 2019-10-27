@@ -4,6 +4,7 @@ import Icon from '@material-ui/core/Icon';
 import { _t } from '../../vars/countriesDict';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { getLatLng } from 'react-places-autocomplete';
+import formatMoney from 'format-money';
 
 var slugify = require('slugify');
 const uuidv4 = require('uuid/v4');
@@ -55,24 +56,27 @@ export default class DbInput extends React.Component{
   }
 
   maskValue(v){
-    // var t = this.props.type;
-    // if(t == "currency"){
-    //   v = v.replace('$', '');
-    //   v = v.replace(',', '');
-    //   v = '$' + window.dbf.numberWithCommas(v);
-    // }
+    var t = this.props.type;
+    if(t == "currency"){
+      v = v.toString();
+      v = v.replace('$', '');
+      v = v.replace(/\,/g, '');
+      console.log('V2', v);
+      v = '$' + window.dbf.numberWithCommas(v);
+      console.log('V3', v);
+    }
     return v;
   }
 
 
   setValue(v, forceNoChange){
     var self = this;
-
+    var rawvalue = v;
     v = this.maskValue(v);
-
 
     this.setState({
       value: v,
+      rawvalue: rawvalue,
       haschanged: forceNoChange ? false : true
     })
     setTimeout(function(){

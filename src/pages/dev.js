@@ -2,716 +2,96 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/es';
 import formatMoney from 'format-money';
-import estafa from '../static/csvs/estafa-maestra.csv';
-import EstafaJson from '../static/jsons/estafa-maestra.json';
 import * as d3 from "d3";
 import { saveAs } from 'file-saver';
-import { snps_ka } from '../vars/compatibilityArray';
-import { convertToSinapsisFile } from '../funcs/covertToSinapsis';
+import DbFactory from '../funcs/dbClass';
+import { getLatLng } from 'react-places-autocomplete';
+
 moment.locale('es');
 var ntol = require('number-to-letter');
 var slugify = require('slugify');
 
 const csvjson =require('csvtojson')
 const uuidv4 = require('uuid/v4');
-
+const address = require('../static/consumable/addresses.json');
+const abook = require('../static/consumable/abook.json');
+window.abook = abook;
+if(!window.abook){
+  window.abook = {};
+}
+var dbf = new DbFactory();
+var dbf_obj = dbf.set();
+window.dbf = dbf;
 
 export default class DevSandbox extends React.Component{
 
   componentDidMount(){
-    var cls = new ConvertOldToDb('Estafa Maestra', estafa);
-    // var d = convertToSinapsisFile(EstafaJson);
 
+  }
+
+  trigger(){
+    var self = this;
+    setTimeout(function(){
+      self.getLatLng(0);
+    }, 10)
+  }
+
+  async getLatLng(index){
+    try{
+      var self = this;
+      var a = address[index];
+      if(!a){
+        return;
+      }
+      var s = slugify(a, {lower: true});
+      if(window.abook[s] && index < address.length){
+        console.log('Skipping', index);
+        setTimeout(function(){
+          self.getLatLng(index + 1);
+        }, 100);
+        return;
+      }
+      console.log('Rendering', index, 'of', address.length);
+      try{
+        var r = await dbf.geocode(a);
+      }catch(ex){
+        console.log('Error #1', ex);
+      }
+      if(r && r.length){
+        try{
+          var p = await getLatLng(r[0]);
+        }catch(ex){
+          console.log('ERROR', ex);
+        }
+        if(p){
+          window.abook[s] = {
+            latlng: p,
+            name: a,
+            googleResult: r[0].formatted_address,
+            slug: s
+          }
+        }
+      }
+      if(index < (address.length - 1)){
+        setTimeout(function(){
+          self.getLatLng(index + 1);
+        }, 350)
+      }else{
+        var j = JSON.stringify(window.abook);
+        var blob = new Blob([j], {type: "application/json;charset=utf-8"});
+        saveAs(blob, 'addressesBook.json');
+      }
+    }catch{
+      var j = JSON.stringify(window.abook);
+      var blob = new Blob([j], {type: "application/json;charset=utf-8"});
+      saveAs(blob, 'addressesBook.json');
+    }
   }
 
   render(){
     return(
-      <div>
-        Hola
-      </div>
+      <button onClick={() => this.trigger()}>Hola</button>
     )
-  }
-}
-
-
-
-
-class ConvertOldToDb{
-  constructor(name, file){
-    this.name = name;
-    this.file = file;
-    this.uid = uuidv4();
-    this.slug = slugify(this.name, {lower: true});
-    this.get();
-  }
-
-  async get(){
-    var c = await d3.csv(this.file);
-    var a = Object.values(c);
-    a.pop();
-    this.array = a;
-    this.set();
-  }
-
-  set(){
-    this.setInitialObject();
-    this.cleanEmpresas();
-    this.setEmpresas();
-    this.save();
-  }
-
-  setEmpresas(){
-    var self = this;
-    this.empresas.map(function(empresa){
-      self.setEmpresa(empresa);
-    })
-    // console.log('t', this.obj);
-  }
-
-  setEmpresa(fields){
-    var n = fields[0];
-    var uid = uuidv4();
-    var s = slugify(n, {lower: true});
-
-    var obj = {
-      name: n,
-      slug: s,
-      uid: uid,
-      fields: {}
-    };
-
-    this.obj.empresas[uid] = obj;
-
-    this.setEmpresaFields(fields, uid);
-  }
-
-  setEmpresaFields(fields, uid){
-    var e = this.obj.empresas[uid];
-    var f = e.fields;
-
-    fields.map(function(value, i){
-      value = value.trim();
-      if(snps_ka[i] && (i < 11 || (i > 31 && 35 > i ))){
-        var slug = slugify(snps_ka[i].name, {lower: true});
-        if(snps_ka[i].group){
-          slug = slugify(snps_ka[i].group, {lower: true}) + '-' + slug;
-        }
-        var ff = {
-          name: snps_ka[i].name,
-          slug: slug,
-          isvalid: true,
-          value: value,
-          empresauid: uid
-        };
-        if(snps_ka[i].type){
-          ff.type = snps_ka[i].type;
-        }
-        if(snps_ka[i].group){
-          ff.group = snps_ka[i].group;
-        }
-        if(snps_ka[i].matchWith){
-          ff.matchWith = snps_ka[i].matchWith;
-        }
-        if(value && value !== "SIN_DATO"){
-          f[slug] = ff;
-        }
-      }
-    });
-
-    /** Representante legal **/
-    var range = [11, 13];
-    var _fields = this.groupByRange(fields, range);
-    _fields.map(function(arr, ind){
-      if(ind < 1){
-        var cuid = uuidv4();
-        var x = 0;
-        for(var key in arr){
-          var value = arr[key];
-          var inf = snps_ka[key];
-          var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
-          var slug = slugify(cuid + '-' + preslug, {lower: true});
-          var ff = {
-            name: inf.name,
-            slug: preslug,
-            isvalid: true,
-            value: value,
-            group: inf.bigGroup,
-            groupUid: cuid,
-            empresauid: uid,
-            guid: cuid
-          };
-          if(inf.type){
-            ff.type = inf.type;
-          }
-          if(inf.category){
-            ff.category = inf.category;
-          }
-          if(inf.matchWith){
-            ff.matchWith = inf.matchWith;
-          }
-          if(value){
-            f[slug] = ff;
-            x++;
-          }
-        }
-        if(x > 0){
-          var slug = slugify(cuid + '-tipo-persona' , {lower: true});
-          var ff = {
-            name: "Tipo de persona",
-            slug: slug,
-            isvalid: true,
-            value: inf.bigGroup,
-            group: inf.bigGroup,
-            bigGroup: "persona",
-            groupUid: cuid,
-            guid: cuid
-          };
-          f[slug] = ff;
-        }
-      }
-    })
-
-    /** Accionistas **/
-    var range = [16, 21];
-    var _fields = this.groupByRange(fields, range);
-    _fields.map(function(arr, ind){
-        var cuid = uuidv4();
-        var x = 0;
-        for(var key in arr){
-          var value = arr[key];
-          value = value.trim();
-          var inf = snps_ka[key];
-          var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
-          var slug = slugify(cuid + '-' + preslug, {lower: true});
-          var ff = {
-            name: inf.name,
-            slug: preslug,
-            isvalid: true,
-            value: value,
-            group: inf.bigGroup,
-            groupUid: cuid,
-            empresauid: uid,
-            guid: cuid
-          };
-          if(inf.type){
-            ff.type = inf.type;
-          }
-          if(inf.category){
-            ff.category = inf.category;
-          }
-          if(inf.matchWith){
-            ff.matchWith = inf.matchWith;
-          }
-          if(inf.sumWith){
-            ff.sumWith = inf.sumhWith;
-          }
-          if(value && !inf.bypass && value !== "SIN_DATO"){
-            f[slug] = ff;
-            x++;
-          }
-        }
-        if(x > 0){
-          var slug = slugify(cuid + '-tipo-persona' , {lower: true});
-          var ff = {
-            name: "Tipo de persona",
-            slug: slug,
-            isvalid: true,
-            value: inf.bigGroup,
-            group: inf.bigGroup,
-            bigGroup: "persona",
-            groupUid: cuid,
-            guid: cuid
-          };
-          f[slug] = ff;
-        }
-    })
-    /** Admin **/
-    var range = [22, 24];
-    var _fields = this.groupByRange(fields, range);
-    _fields.map(function(arr, ind){
-        var cuid = uuidv4();
-        var x = 0;
-        for(var key in arr){
-          var value = arr[key];
-          value = value.trim();
-          var inf = snps_ka[key];
-          var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
-          var slug = slugify(cuid + '-' + preslug, {lower: true});
-          var ff = {
-            name: inf.name,
-            slug: preslug,
-            isvalid: true,
-            value: value,
-            group: inf.bigGroup,
-            groupUid: cuid,
-            empresauid: uid,
-            guid: cuid
-          };
-          if(inf.type){
-            ff.type = inf.type;
-          }
-          if(inf.category){
-            ff.category = inf.category;
-          }
-          if(inf.matchWith){
-            ff.matchWith = inf.matchWith;
-          }
-          if(inf.sumWith){
-            ff.sumWith = inf.sumhWith;
-          }
-          if(value && !inf.bypass && value !== "SIN_DATO"){
-            f[slug] = ff;
-            x++;
-          }
-        }
-        if(x > 0){
-          var slug = slugify(cuid + '-tipo-persona' , {lower: true});
-          var ff = {
-            name: "Tipo de persona",
-            slug: slug,
-            isvalid: true,
-            value: inf.bigGroup,
-            group: inf.bigGroup,
-            bigGroup: "persona",
-            groupUid: cuid,
-            guid: cuid
-          };
-          f[slug] = ff;
-        }
-    })
-    /** Consejero **/
-    var range = [27, 29];
-    var _fields = this.groupByRange(fields, range);
-    _fields.map(function(arr, ind){
-        var cuid = uuidv4();
-        var x = 0;
-        for(var key in arr){
-          var value = arr[key];
-          value = value.trim();
-          var inf = snps_ka[key];
-          var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
-          var slug = slugify(cuid + '-' + preslug, {lower: true});
-          var ff = {
-            name: inf.name,
-            slug: preslug,
-            isvalid: true,
-            value: value,
-            group: inf.bigGroup,
-            groupUid: cuid,
-            empresauid: uid,
-            guid: cuid
-          };
-          if(inf.type){
-            ff.type = inf.type;
-          }
-          if(inf.category){
-            ff.category = inf.category;
-          }
-          if(inf.matchWith){
-            ff.matchWith = inf.matchWith;
-          }
-          if(inf.sumWith){
-            ff.sumWith = inf.sumhWith;
-          }
-          if(value && !inf.bypass && value !== "SIN_DATO"){
-            f[slug] = ff;
-            x++;
-          }
-        }
-        if(x > 0){
-          var slug = slugify(cuid + '-tipo-persona' , {lower: true});
-          var ff = {
-            name: "Tipo de persona",
-            slug: slug,
-            isvalid: true,
-            value: inf.bigGroup,
-            group: inf.bigGroup,
-            bigGroup: "persona",
-            groupUid: cuid,
-            guid: cuid
-          };
-          f[slug] = ff;
-        }
-    })
-
-
-    /** Contratos **/
-    var range = [37, 45];
-    var _fields = this.groupByRange(fields, range);
-    _fields.map(function(arr, ind){
-        var cuid = uuidv4();
-        var x = 0;
-        for(var key in arr){
-          var value = arr[key];
-          value = value.trim();
-          var inf = snps_ka[key];
-          var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
-          var slug = slugify(cuid + '-' + preslug, {lower: true});
-          var ff = {
-            name: inf.name,
-            slug: preslug,
-            isvalid: true,
-            value: value,
-            group: inf.bigGroup,
-            groupUid: cuid,
-            guid: cuid,
-            empresauid: uid
-          };
-          if(inf.type){
-            ff.type = inf.type;
-          }
-          if(inf.category){
-            ff.category = inf.category;
-          }
-          if(inf.matchWith){
-            ff.matchWith = inf.matchWith;
-          }
-          if(inf.sumWith){
-            ff.sumWith = inf.sumWith;
-          }
-          if(inf.sumWith && value){
-            value = value.replace(/[^0-9.]/g, '');
-            value = parseFloat(value);
-            ff.value = value;
-          }
-          if(value && !inf.bypass && value !== "SIN_DATO"){
-            f[slug] = ff;
-            x++;
-          }
-        }
-    })
-
-    /** Convenios **/
-    var range = [53, 63];
-    var _fields = this.groupByRange(fields, range);
-    _fields.map(function(arr, ind){
-        var cuid = uuidv4();
-        var x = 0;
-        for(var key in arr){
-          var value = arr[key];
-          value = value.trim();
-          var inf = snps_ka[key];
-          var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
-          var slug = slugify(cuid + '-' + preslug, {lower: true});
-          var ff = {
-            name: inf.name,
-            slug: preslug,
-            isvalid: true,
-            value: value,
-            group: inf.bigGroup,
-            groupUid: cuid,
-            guid: cuid,
-            empresauid: uid
-          };
-          if(inf.type){
-            ff.type = inf.type;
-          }
-          if(inf.category){
-            ff.category = inf.category;
-          }
-          if(inf.matchWith){
-            ff.matchWith = inf.matchWith;
-          }
-          if(inf.sumWith){
-            ff.sumWith = inf.sumWith;
-          }
-          if(inf.sumWith && value){
-            value = value.replace(/[^0-9.]/g, '');
-            value = parseFloat(value);
-            ff.value = value;
-          }
-          if(value && !inf.bypass && value !== "SIN_DATO"){
-            f[slug] = ff;
-            x++;
-          }
-        }
-    })
-
-    /** Transferencias de dependencia a instancia **/
-    var range = [64, 65];
-    var _fields = this.groupByRange(fields, range);
-    _fields.map(function(arr, ind){
-        var cuid = uuidv4();
-        var x = 0;
-        for(var key in arr){
-          var value = arr[key];
-          value = value.trim();
-          var inf = snps_ka[key];
-          var preslug = slugify(inf.bigGroup + '-' + (inf.realName ? inf.realName : inf.name), {lower: true});
-          var slug = slugify(cuid + '-' + preslug, {lower: true});
-          var ff = {
-            name: inf.name,
-            slug: preslug,
-            isvalid: true,
-            value: value,
-            group: inf.bigGroup,
-            groupUid: cuid,
-            guid: cuid,
-            empresauid: uid
-          };
-          if(inf.type){
-            ff.type = inf.type;
-          }
-          if(inf.category){
-            ff.category = inf.category;
-          }
-          if(inf.matchWith){
-            ff.matchWith = inf.matchWith;
-          }
-          if(inf.sumWith){
-            ff.sumWith = inf.sumWith;
-          }
-          if(inf.sumWith && value){
-            value = value.replace(/[^0-9.]/g, '');
-            value = parseFloat(value);
-            ff.value = value;
-          }
-          if(value && !inf.bypass && value !== "SIN_DATO"){
-            f[slug] = ff;
-            x++;
-          }
-        }
-        if(x > 0){
-          var slug = slugify(cuid + '-tipo-transferencia' , {lower: true});
-          var ff = {
-            name: "Tipo de transferencia",
-            isvalid: true,
-            value: "receptor",
-            group: "transferencia",
-            bigGroup: "transferencia",
-            groupUid: cuid,
-            guid: cuid,
-            slug: slug,
-          };
-          // console.log('TRANSFERENCIA', ff);
-          f[slug] = ff;
-        }
-    })
-
-    /** Transferencia de empresa a esta empresa  **/
-    var range = [67,68];
-    var _fields = this.groupByRange(fields, range);
-    _fields.map(function(arr, ind){
-        var cuid = uuidv4();
-        var x = 0;
-        for(var key in arr){
-          var value = arr[key];
-          value = value.trim();
-          var inf = snps_ka[key];
-          var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
-          var slug = slugify(cuid + '-' + preslug, {lower: true});
-          var ff = {
-            name: inf.name,
-            slug: preslug,
-            isvalid: true,
-            value: value,
-            group: inf.bigGroup,
-            groupUid: cuid,
-            guid: cuid,
-            empresauid: uid
-          };
-          if(inf.type){
-            ff.type = inf.type;
-          }
-          if(inf.category){
-            ff.category = inf.category;
-          }
-          if(inf.matchWith){
-            ff.matchWith = inf.matchWith;
-          }
-          if(inf.sumWith){
-            ff.sumWith = inf.sumWith;
-          }
-          if(inf.sumWith && value){
-            value = value.replace(/[^0-9.]/g, '');
-            value = parseFloat(value);
-            ff.value = value;
-          }
-          if(value && !inf.bypass && value !== "SIN_DATO"){
-            f[slug] = ff;
-            x++;
-          }
-        }
-        if(x > 0){
-          var slug = slugify(cuid + '-tipo-transferencia' , {lower: true});
-          var ff = {
-            name: "Tipo de transferencia",
-            isvalid: true,
-            value: "receptor",
-            group: "transferencia",
-            bigGroup: "transferencia",
-            groupUid: cuid,
-            guid: cuid
-          };
-          f[slug] = ff;
-        }
-    })
-
-    /** Transferencia de esta empresa a otras empresas **/
-    var range = [69, 70];
-    var _fields = this.groupByRange(fields, range);
-    _fields.map(function(arr, ind){
-        var cuid = uuidv4();
-        var x = 0;
-        for(var key in arr){
-          var value = arr[key];
-          value = value.trim();
-          var inf = snps_ka[key];
-          var preslug = slugify(inf.bigGroup + '-' + inf.name, {lower: true});
-          var slug = slugify(cuid + '-' + preslug, {lower: true});
-          var ff = {
-            name: inf.name,
-            slug: preslug,
-            isvalid: true,
-            value: value,
-            group: inf.bigGroup,
-            groupUid: cuid,
-            guid: cuid,
-            empresauid: uid
-          };
-          if(inf.type){
-            ff.type = inf.type;
-          }
-          if(inf.category){
-            ff.category = inf.category;
-          }
-          if(inf.matchWith){
-            ff.matchWith = inf.matchWith;
-          }
-          if(inf.sumWith){
-            ff.sumWith = inf.sumWith;
-          }
-          if(inf.sumWith && value){
-            value = value.replace(/[^0-9.]/g, '');
-            value = parseFloat(value);
-            ff.value = value;
-          }
-          if(value && !inf.bypass && value !== "SIN_DATO"){
-            f[slug] = ff;
-            // console.log('FF', ff);
-            x++;
-          }
-        }
-        if(x > 0){
-          var slug = slugify(cuid + '-tipo-transferencia' , {lower: true});
-          var ff = {
-            name: "Tipo de transferencia",
-            isvalid: true,
-            value: "emisor",
-            group: "transferencia",
-            bigGroup: "transferencia",
-            groupUid: cuid,
-            guid: cuid
-          };
-          f[slug] = ff;
-        }
-    })
-
-    /** Otros **/
-    var otrosRange = [72, 81];
-    for(var i = otrosRange[0]; i <= otrosRange[1]; i++){
-      var sn = snps_ka[i];
-      var _fields = this.groupByRange(fields, [i, i]);
-      _fields.map(function(_f){
-        var em = Object.values(_f)[0];
-        if(em){
-          var t = sn.category;
-          var n = sn.name;
-
-          var guid = uuidv4();
-          var preslug = slugify('otros ' + n, {lower: true});
-          var slug = guid + '-' + preslug;
-
-          var obj = {
-            name: n,
-            slug: preslug,
-            isvalid: true,
-            value: em,
-            matchWith: [t],
-            group: "otros",
-            guid: guid,
-            groupUid: guid,
-            empresauid: uid
-          }
-          f[slug] = obj;
-        }
-      })
-    }
-
-  }
-
-  groupByRange(fields, range){
-    var ia = {};
-    var z = 0;
-    for(var i = range[0]; i <= range[1]; i++){
-      var f = fields[i];
-      var a = f.split(';');
-      for(var y = 0; y < a.length; y++){
-        var v = a[y];
-        if(!ia[y]){
-          ia[y] = {};
-        }
-        ia[y][i] = v;
-      }
-    }
-    return Object.values(ia);
-  }
-
-
-  save(){
-
-    // var dbs = {};
-    //     dbs[this.uid] = this.obj;
-    //
-    // var project = {
-    //   uid: uuidv4(),
-    //   info: {
-    //     name: this.name,
-    //     slug: this.slug
-    //   },
-    //   allowAutoSave: true,
-    //   projectStructure: "sinapsis_empresas_auto",
-    //   classVersion: "0.0.1",
-    //   saves: 1,
-    //   modified: moment.now(),
-    //   version: 1,
-    //   created: moment.now(),
-    //   dbs: dbs,
-    //   savedAt: moment.now()
-    // };
-
-
-    // var j = JSON.stringify(project);
-    // var content = btoa(encodeURI(j));
-    var content = JSON.stringify(this.obj);
-
-
-    var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-    // saveAs(blob, this.slug + ".sinapsis");
-    saveAs(blob, this.slug + ".json");
-  }
-
-  cleanEmpresas(){
-    var a = this.array;
-    a = a.map(function(e){
-      return Object.values(e);
-    })
-    this.empresas = a;
-  }
-
-  setInitialObject(){
-    var wrapper = {};
-    var obj = {
-      id: this.uid,
-      name: this.name,
-      created: moment.now(),
-      color: "rgb(244, 41, 28)",
-      modified: moment.now(),
-      empresas: {}
-    };
-    wrapper[this.uid] = obj;
-    this.obj = obj;
-    this.wrapper = wrapper;
   }
 
 }

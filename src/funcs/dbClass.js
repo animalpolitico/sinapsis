@@ -1,4 +1,3 @@
-
 import moment from 'moment';
 import 'moment/locale/es';
 import { saveAs } from 'file-saver';
@@ -13,7 +12,7 @@ const uuidv4 = require('uuid/v4');
 var gen = require('color-generator');
 
 const { convertArrayToCSV } = require('convert-array-to-csv');
-
+const abook = require('../static/consumable/abook.json');
 
 var onProjectModified = new Event('sinapsisModified');
 
@@ -470,6 +469,17 @@ export default class DbFactory {
         empresas.map(function(empresa){
           var fields = empresa.fields;
               fields = Object.values(fields);
+
+          /* Busca en el libro de direcciones */
+          fields.map(function(f){
+            if(f.type == "address"){
+              var s = slugify(f.value, {lower: true});
+              if(abook[s]){
+                f.latlng = abook[s].latlng;
+              }
+            }
+          })
+
           var withLatLng = fields.filter(f => f.latlng ? true : false);
           withLatLng.map(function(d){
             o.push(d);
@@ -941,7 +951,7 @@ export default class DbFactory {
   * @param void
   * @return Blob
   **/
-  createProjectFile(){
+  createProjectFile(szip){
 
     var ev = new Event('sinapsisStartLoad');
     window.dispatchEvent(ev);
@@ -958,6 +968,13 @@ export default class DbFactory {
     zip.file('leeme.txt', this.getReadMeText(name), {binar: true});
     zip.file('proyectoSinapsis.sinapsis', txt, {binary: true});
     zip.file('dev/'+ name + '_dev.json', s, {binary: true});
+    if(szip){
+      for(var s_name in szip){
+        var _f = szip[s_name];
+        zip.file('imagenes/'+s_name, _f);
+      }
+    }
+
     zip.generateAsync({type: "blob"})
     .then(function(content) {
         saveAs(content, name + ".zip");

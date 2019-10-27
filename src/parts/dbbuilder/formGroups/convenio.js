@@ -260,6 +260,7 @@ export default class DbFormGroupConvenio extends React.Component{
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       matchWith={['person']}
                       name="Persona que firma (otorga)"
+                      aka="Nombre de la persona que firma de la instancia que otorga los recursos"
                       type="text"
                       group="convenio"
                       empresa={this.props.empresa}
@@ -269,6 +270,7 @@ export default class DbFormGroupConvenio extends React.Component{
                     <DbInput
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       name="Cargo de quien firma (otorga)"
+                      aka="Cargo de quien firma de la instancia que otorga los recursos"
                       type="text"
                       group="convenio"
                       empresa={this.props.empresa}
@@ -279,6 +281,7 @@ export default class DbFormGroupConvenio extends React.Component{
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       matchWith={['person']}
                       name="Persona que firma (recibe)"
+                      aka="Nombre de la persona que firma de la instancia que recibe los recursos"
                       type="text"
                       group="convenio"
                       empresa={this.props.empresa}
@@ -288,6 +291,7 @@ export default class DbFormGroupConvenio extends React.Component{
                     <DbInput
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       name="Cargo de quien firma (recibe)"
+                      aka="Cargo de quien firma de la instancia que recibe los recursos"
                       type="text"
                       group="convenio"
                       empresa={this.props.empresa}
@@ -309,7 +313,7 @@ export default class DbFormGroupConvenio extends React.Component{
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       matchWith={['person', 'titular']}
                       name="Titular de instancia"
-                      aka="Titular de instancia que otorga"
+                      aka="Titular de instancia que otorga al momento de firmar el convenio"
                       type="text"
                       group="convenio"
                       empresa={this.props.empresa}
@@ -320,7 +324,7 @@ export default class DbFormGroupConvenio extends React.Component{
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       matchWith={['person', 'titular']}
                       name="Titular de instancia"
-                      aka="Titular de instancia que recibe"
+                      aka="Titular de instancia que recibe al momento de firmar el convenio"
                       type="text"
                       group="convenio"
                       empresa={this.props.empresa}

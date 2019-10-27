@@ -231,7 +231,7 @@ export default class DbFormGroupTransferencias extends React.Component{
                   <DbInput
                     onChange={(slug, obj) => this.insertField(slug, obj)}
                     name="recursos"
-                    aka="¿A quién otorgó los recursos?"
+                    aka="Nombre de la empresa que recibió los recursoss"
                     type="text"
                     category="receptor"
                     group="transferencia"
@@ -271,7 +271,7 @@ export default class DbFormGroupTransferencias extends React.Component{
                   <DbInput
                     onChange={(slug, obj) => this.insertField(slug, obj)}
                     name="recursos"
-                    aka="¿Quién otorgó los recursos?"
+                    aka={this.state.contratoType == "empresa" ? "Nombre de la empresa que otorga los recursos" : "Nombre de la instancia que otorga los recursos"}
                     type="text"
                     category="emisor"
                     group="transferencia"
@@ -291,6 +291,20 @@ export default class DbFormGroupTransferencias extends React.Component{
                     db={this.props.parent.props.db}
                     ref={this.setChildRef}
                   />
+                {
+                  this.state.contratoType == "instancia" ?
+                  <DbInput
+                    onChange={(slug, obj) => this.insertField(slug, obj)}
+                    name="Número de convenio relacionado"
+                    group="transferencia"
+                    matchWith={['convenio']}
+                    empresa={this.props.empresa}
+                    db={this.props.parent.props.db}
+                    ref={this.setChildRef}
+                  />
+                : null
+                }
+
                 </>
               : null }
               </>

@@ -148,6 +148,23 @@
         box-sizing: border-box;
         padding: 0.3rem 0.75rem;
         position: relative;
+        &_toggle{
+          width: 100%;
+          @extend .flex;
+          align-items: center;
+          line-height: 1;
+          cursor: pointer;
+          margin-bottom: 0.25rem;
+          label{
+            line-height: 1;
+            flex: 1;
+          }
+          .material-icons{
+            color: white;
+            font-size: 14px;
+            line-height: 1;
+          }
+        }
         &_warning{
           @extend .flex;
           align-items: center;

@@ -16,6 +16,7 @@
     border: 1px solid #333;
     box-shadow: 0 0 4px rgba(black, 0.1);
     font-size: 0.8rem;
+    z-index: 10;
     .ss_map_controls_group{
       width: 100%;
       &_title{
@@ -55,7 +56,7 @@
     width: 180px;
     background: #2a2a2a;
     border: 1px solid #333;
-    transform: translateY(-30px);
+    transform: translateY(-10px);
     box-sizing: border-box;
     padding: 0.5rem;
     line-height: 1.15;
@@ -115,24 +116,22 @@
   .ss_map_marker{
     width: 25px;
     height: 25px;
-    background: rgba($main, 0.9);
-    box-shadow: 0 0 10px rgba($main, 0.8);
+    background: $main;
     border-radius: 50%;
-    transition: all 0.3s ease;
     cursor: pointer;
+    opacity: 0.9;
+    border: 1px solid $main;
     &:hover{
       opacity: 0.8;
     }
     &.ss_map_marker_no{
-      background: rgba(#fb5d5d, 0.9);
-      box-shadow: 0 0 10px rgba(#fb5d5d, 0.8);
+      background: #fb5d5d;
     }
     &.ss_marker_active{
       width: 30px;
       z-index: 10;
       height: 30px;
-      background: rgba(rgb(228, 194, 96), 0.9);
-      box-shadow: 0 0 10px rgba(rgb(228, 194, 96), 0.9);
+      background: rgb(228, 194, 96);
     }
   }
 }

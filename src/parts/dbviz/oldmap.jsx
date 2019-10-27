@@ -14,8 +14,7 @@ export default class SSMap extends React.Component{
     defaultZoom: getCoords(),
     markers: [],
     onlyCoincidencias: true,
-    zoom: 5,
-    st: false
+    zoom: 5
   }
   componentDidMount(){
     var self = this;
@@ -68,67 +67,9 @@ export default class SSMap extends React.Component{
     })
   }
 
-  buildMarkers(){
-    var self = this;
-    var oc = this.state.onlyCoincidencias;
-    var o = {
-      'a': [],
-      'b': []
-    };
-    var m = this.state.markers;
-    m.map(function(d){
-      var ename = window.dbf.getEmpresa(d.fromdb, d.empresauid).name
-      var euid = d.empresauid;
-      var show = false;
-      var hasc = false;
-      var coords = [d.latlng.lng, d.latlng.lat];
-      d3.selectAll('.node[data-id="'+euid+'"]')
-        .filter(d => hasc = d.coincidencias > 0);
-      var d = {
-        coords: coords,
-        name: ename,
-        type: d.name,
-        euid: euid,
-        fromdb: d.fromdb,
-        value: d.value
-      }
-      var marker = <Feature coordinates={coords}
-                            onClick={() => self.openMarker(d)}
-                            onMouseEnter={function(e){
-                              document.getElementsByClassName('mapboxgl-canvas')[0].style.cursor = "pointer";
-                              self.layers.setState({d: d, st: true})
-                            }}
-                            onMouseLeave={function(){
-                              document.getElementsByClassName('mapboxgl-canvas')[0].style.cursor = "grab";
-                              self.layers.setState({st: false});
-                            }}
-                          />
-      if(hasc){
-        o.a.push(marker);
-      }else{
-        o.b.push(marker);
-      }
-    })
-    return o;
-  }
-
-  openMarker(d){
-    var self = this;
-    var data = {
-      euid: d.euid,
-      dbid: d.fromdb
-    }
-    window.dispatchEvent(new Event('sinapsisStartLoad'));
-    var event = new CustomEvent('sinapsisOpenEmpresa', { detail: data});
-    window.dispatchEvent(event);
-    setTimeout(function(){
-      self.setZoom(d.coords, 12);
-    }, 100)
-  }
 
   render(){
     var self = this;
-    var markers = this.buildMarkers();
     return(
       <div id="ss_map">
       <div id="ss_map_controls">
@@ -149,80 +90,104 @@ export default class SSMap extends React.Component{
 
       <div className="ss_map_close" onClick={() => this.props.onClose()}><Icon>close</Icon></div>
 
+      {
+        this.state.showTooltip ?
+        <div
+          className="ss_map_tooltip"
+          style={{left: this.state.tooltipCoords.left, top: this.state.tooltipCoords.top}}
+        >
+
+        </div>
+        : null
+      }
+
       <Map
+        onStyleDataLoading={() => console.log('render')}
         ref={(map) => this.map = map}
         style={mapboxKeys.style}
         center={this.state.defaultZoom}
         zoom={[this.state.zoom]}
       >
       <ZoomControl position="bottom-right"/>
-      <Layers markers={markers} ref={(ref) => this.layers = ref} />
+      {
+        this.state.markers.map(function(d){
+          return <SSMarker onlyCoincidencias={self.state.onlyCoincidencias} parent={self} d={d} onME={(e, _data) => self.onME(e, _data)} onML={() => self.setState({showTooltip: false})}/>
+        })
+      }
       </Map>
       </div>
     )
   }
 }
 
-class Layers extends React.Component{
+class SSMarker extends React.Component{
   state = {
-    st: false,
-    d: {}
+    showTooltip: false
   }
+
+  handleClick(e){
+    var self = this;
+    var d = this.props.d;
+
+    d3.selectAll('.ss_marker_active')
+      .classed('ss_marker_active', false);
+    e.target.classList.add('ss_marker_active');
+
+
+    var data = {
+      euid: d.empresauid,
+      dbid: d.fromdb
+    }
+    var event = new CustomEvent('sinapsisOpenEmpresa', { detail: data});
+    window.dispatchEvent(event);
+
+    setTimeout(function(){
+      self.props.parent.setZoom([d.latlng.lng, d.latlng.lat], 12);
+    }, 100)
+
+  }
+
   render(){
-    var markers = this.props.markers;
+
+    var d = this.props.d;
+    var ename = window.dbf.getEmpresa(d.fromdb, d.empresauid).name
+    var euid = d.empresauid;
+    var show = false;
+
+    d3.selectAll('.node[data-id="'+euid+'"]')
+      .filter(d => show = d.coincidencias > 0);
+    var isempty = false;
+    var cs = ['ss_map_marker'];
+
+    console.log('SHOW', show);
+
+    if(!show){
+      isempty = true;
+    }
+
+    show = (this.props.onlyCoincidencias && show) || !this.props.onlyCoincidencias
+
+    if(!show){
+      return null;
+    }
+
+
     return(
       <>
-      <Layer type="circle" minZoom={0}
-        paint={
-          {
-            "circle-radius": {
-              'base': 25,
-              'stops': [[5, 25], [12, 10]]
-            },
-            "circle-color": "#0072ff",
-            "circle-opacity": {
-              'base': 0.3,
-              'stops': [[5, 0.3], [12, 0.8]]
-            },
-          }
-        }>
-        {markers.a}
-      </Layer>
       {
-        !this.state.onlyCoincidencias ?
-        <Layer type="circle" minZoom={0}
-          paint={
-            {
-              "circle-radius": {
-                'base': 25,
-                'stops': [[5, 25], [12, 10]]
-              },
-              "circle-color": "#fb5d5d",
-              "circle-opacity": {
-                'base': 0.3,
-                'stops': [[5, 0.3], [12, 0.8]]
-              },
-            }
-          }>
-          {markers.b}
-        </Layer>
-        : null
-      }
-
-      {
-        this.state.st ?
+        this.state.showTooltip ?
         <Popup
-          coordinates={this.state.d.coords}
+          coordinates={[d.latlng.lng, d.latlng.lat]}
         >
         <div className="ss_map_tooltip">
           <div className="ss_map_tooltip_type">
-            {this.state.d.type}
+            {d.name}
           </div>
           <div className="ss_map_tooltip_ename">
-            {this.state.d.name}
+            {ename}
           </div>
           <div className="ss_map_tooltip_name">
-            {this.state.d.value}
+            {d.value}
           </div>
 
 
@@ -230,6 +195,14 @@ class Layers extends React.Component{
       </Popup>
       : null
       }
+      <Layer type="circle" minZoom={0} paint={{"circle-radius": 20, "circle-color": (isempty ? "#fb5d5d" : "#0072ff"), 'circle-opacity': 0.8}}>
+        <Feature
+          onMouseEnter={(e) => this.setState({ showTooltip: true})}
+          onMouseLeave={(e) => this.setState({ showTooltip: false})}
+          coordinates={[d.latlng.lng, d.latlng.lat]}
+        />
+      </Layer>
+
       </>
     )
   }

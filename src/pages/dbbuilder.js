@@ -645,7 +645,8 @@ class DbView extends React.Component{
     dialogValue: '',
     showDeleteDialog: false,
     view: true,
-    borrar: ''
+    borrar: '',
+    empresaType: "empresa"
   }
   componentDidMount(){
     this.set();

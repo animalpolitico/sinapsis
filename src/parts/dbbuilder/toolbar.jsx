@@ -126,6 +126,16 @@ export default class DbBuilderToolbar extends React.Component{
     this.toolbarname.forceName();
   }
 
+  saveProject(){
+    console.log('props', this.props);
+    if(this.props.parent.viz.nodes){
+      this.props.parent.viz.nodes.getScreenshot(function(zip){
+        window.dbf.createProjectFile(zip);
+      });
+    }
+
+  }
+
   render(){
     var self = this;
     return(
@@ -147,7 +157,7 @@ export default class DbBuilderToolbar extends React.Component{
             : null
           }
           <div className="ss_db_toolbar_info_td ss_db_ctas">
-            <div class="ss_db_ctas_td" onClick={() => window.dbf.createProjectFile()}>
+            <div class="ss_db_ctas_td" onClick={() => this.saveProject()}>
               <div id="ss_db_save">
                 <Icon>get_app</Icon>
                 <div>Guardar archivo</div>

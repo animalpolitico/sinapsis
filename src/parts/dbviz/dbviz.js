@@ -268,8 +268,13 @@ class SSDBControl extends React.Component{
               }
 
               <div className="ss_control_extra">
-                <label>Mostrar empresas</label>
-
+                <div className="ss_control_extra_toggle" onClick={() => this.setState({showCC: !this.state.showCC})}>
+                  <label>Mostrar empresas</label>
+                  <Icon>{ this.state.showCC ? "keyboard_arrow_up" : "keyboard_arrow_down"}</Icon>
+                </div>
+                {
+                  this.state.showCC ?
+                <>
                 <div className="ss_control_extra_f"><Icon>keyboard_arrow_down</Icon></div>
                 <select onChange={(e) => this.handleMostrarEmpresas(e.target.value)}>
                   <option value="default">Solo con coincidencias</option>
@@ -282,6 +287,8 @@ class SSDBControl extends React.Component{
                   </div>
                   : null
                 }
+                </>
+              : null }
 
               </div>
             </div>
@@ -791,10 +798,11 @@ class Nodes extends React.Component{
                      canvas.select('.nodes_container').attr('transform', d);
                    })
                    .on('start', function(){
-                     document.body.style.cursor =
+                     document.getElementById('db_viz_nodes_canvas').style.cursor = "grabbing";
                      d3.selectAll('.ss_guide').style('opacity', 1);
                    })
                    .on('end', function(){
+                     document.getElementById('db_viz_nodes_canvas').style.cursor = "grab";
                      d3.selectAll('.ss_guide').style('opacity', 0);
                    })
      this.zoom = zoom;
@@ -1546,6 +1554,7 @@ class Nodes extends React.Component{
        if (!d3.event.active) simulation.alphaTarget(0.05).restart();
        d.fixed = true;
 
+
        var ev = new Event('ss_lazy_indicator');
        window.dispatchEvent(ev);
        simulation.stop();
@@ -1584,10 +1593,10 @@ class Nodes extends React.Component{
 
   }
 
-  getScreenshot(){
+  getScreenshot(callable){
     window.dispatchEvent(new Event('sinapsisStartLoad'));
     var zip = new JSZip();
-
+    var files = {};
     /* SVG */
     var p = new XMLSerializer().serializeToString(document.getElementById("db_viz_nodes_canvas"));
     var s = p;
@@ -1603,8 +1612,10 @@ class Nodes extends React.Component{
     s = s.replace(/fill\=\"transparent\"/g, 'fill="#2a2a2a"');
     s = s.replace(/rgba\(0\,\s114\,\s255\,\s0\.4\)/g, '#0072ff');
 
-    var b64 = 'data:image/svg+xml;base64,'+ btoa( unescape( encodeURIComponent(s)));
     zip.file('sinapsisMapaDeNodos.svg', s);
+    files["sinapsisMapaDeNodos.svg"] = s;
+
+    var b64 = 'data:image/svg+xml;base64,'+ btoa( unescape( encodeURIComponent(p)));
 
 
     /* PNG */
@@ -1627,24 +1638,35 @@ class Nodes extends React.Component{
     image.onload = function(){
       context.drawImage(image, 0, 0, width, height);
       canvas.toBlob(function(blob){
-        zip.file('sinapsisMapaDeNodos.png', blob);
-        context.fillStyle = "#222222";
-        context.fillRect(0, 0, width, height);
-        context.drawImage(image, 0, 0, width, height);
         var logo = new Image();
         logo.src = require('../../static/logo.png');
         logo.onload = function(){
           context.drawImage(logo, 20, height - logoH - 20, logoRealWidth, logoH);
           canvas.toBlob(function(blob){
-            zip.file('sinapsisMapaDeNodos.jpg', blob);
-            zip.generateAsync({type: "blob"})
-               .then(function(content) {
-                  var n = 'Imágenes Sinapsis ' + window.dbf.obj.info.name;
-                  var sn = slugify(n, {lower: true});
-                  saveAs(content, sn + ".zip");
-                  var ev = new Event('sinapsisEndLoad');
-                  window.dispatchEvent(ev);
-              });
+            zip.file('sinapsisMapaDeNodos.png', blob);
+            files['sinapsisMapaDeNodos.png'] = blob;
+            context.fillStyle = "#222222";
+            context.fillRect(0, 0, width, height);
+            context.drawImage(image, 0, 0, width, height);
+            context.drawImage(logo, 20, height - logoH - 20, logoRealWidth, logoH);
+            canvas.toBlob(function(blob){
+              zip.file('sinapsisMapaDeNodos.jpg', blob);
+              files['sinapsisMapaDeNodos.jpg'] = blob;
+              if(!callable){
+                zip.generateAsync({type: "blob"})
+                   .then(function(content) {
+                      var n = 'Imágenes Sinapsis ' + window.dbf.obj.info.name;
+                      var sn = slugify(n, {lower: true});
+                      saveAs(content, sn + ".zip");
+                      var ev = new Event('sinapsisEndLoad');
+                      window.dispatchEvent(ev);
+                  });
+              }else{
+                return callable(files)
+              }
+            })
+
+
           })
         }
       })
@@ -1675,10 +1697,28 @@ class Nodes extends React.Component{
         o.push(i);
       });
     var t = window.dbf.arrayToCsv(o);
-    console.log('t', t);
     saveAs(t, 'montos.csv');
   }
 
+  downloadAllAddress(){
+    var as = window.dbf.getByType('address');
+    var ss = {};
+    as.map(function(f){
+      var a = f.value;
+      var s = slugify(a, {lower: true});
+      if(!ss[s]){
+        ss[s] = a;
+      }
+    })
+    var toconv = Object.values(ss);
+    var em = JSON.stringify(toconv);
+    console.log('em', em);
+    var blob = new Blob([em], {type: "application/json;charset=utf-8"});
+    saveAs(blob, 'addresses.json');
+
+
+
+  }
 
   render(){
     return(
@@ -1704,6 +1744,8 @@ class Nodes extends React.Component{
             </Fab>
             : null
           }
+
+
 
         </div>
         <div className="db_viz_info">

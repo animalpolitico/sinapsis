@@ -231,7 +231,7 @@ export default class DbFormGroupContrato extends React.Component{
                     <DbInput
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       matchWith={mw}
-                      name="¿Quién otorga los recursos?"
+                      aka={this.state.contratoType == "empresa" ? "Nombre de la empresa que otorga los recursos" : "Nombre de la instancia que otorga los recursos"}
                       type="text"
                       category="emisor"
                       group="contrato"
