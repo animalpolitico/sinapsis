@@ -1954,7 +1954,7 @@ class SSListado extends React.Component{
       })
       empresas = Array.from(new Set(empresas));
       bds = Array.from(new Set(bds));
-      var ins = [t, gr[0].value, gr.length, empresas.join(', '), bds.join(', ')]
+      var ins = [getTypeName(t), gr[0].value, gr.length, empresas.join(';'), bds.join(';')]
       o.push(ins);
     })
     return o;
