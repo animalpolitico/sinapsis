@@ -12,7 +12,7 @@ import Icon from '@material-ui/core/Icon';
 import DbInput from '../inputs';
 import TransactionRow from '../transaction';
 import Tooltip from '@material-ui/core/Tooltip';
-import { isMexico } from '../../../vars/countriesDict';
+import { isMexico, _t } from '../../../vars/countriesDict';
 
 const uuidv4 = require('uuid/v4');
 var slugify = require('slugify');
@@ -24,7 +24,8 @@ export default class DbFormGroupTransferencias extends React.Component{
     isedit: false,
     transferenciaType: '-',
     fields: {},
-    modalChanged: false
+    modalChanged: false,
+    contratoType: ''
   }
 
   componentDidMount(){
@@ -151,6 +152,7 @@ export default class DbFormGroupTransferencias extends React.Component{
     var self = this;
     var addL = this.state.isedit ? 'Guardar' : 'Agregar';
     var transferencias = this.getGroup();
+    var type = this.state.contratoType;
     return(
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<Icon>expand_more</Icon>}>
@@ -222,6 +224,7 @@ export default class DbFormGroupTransferencias extends React.Component{
               </div>
               : null
               }
+
               {
                 this.state.transferenciaType == 'emisor' ?
                 <>
@@ -252,6 +255,19 @@ export default class DbFormGroupTransferencias extends React.Component{
               {
                 this.state.transferenciaType == 'receptor' ?
                 <>
+                <div className="ss_db_input_select">
+                  <div className="db_empresa_container_group_radios_title">
+                    ¿Quien otorga los recursos es empresa o {_t('instancia / dependencia')}?
+                  </div>
+                  <select onChange={(e) => this.setState({contratoType: e.target.value, res: true})} value={type}>
+                    <option value="" disabled selected>Selecciona...</option>
+                    <option value="empresa">Empresa</option>
+                    <option value="instancia">{_t('Instancia / Dependencia')}</option>
+                  </select>
+                </div>
+                {
+                  this.state.res ?
+                <>
                   <DbInput
                     onChange={(slug, obj) => this.insertField(slug, obj)}
                     name="recursos"
@@ -262,6 +278,7 @@ export default class DbFormGroupTransferencias extends React.Component{
                     empresa={this.props.empresa}
                     db={this.props.parent.props.db}
                     ref={this.setChildRef}
+                    matchWith={ this.state.contratoType ? [this.state.contratoType] : null}
                   />
                   <DbInput
                     onChange={(slug, obj) => this.insertField(slug, obj)}
@@ -275,6 +292,8 @@ export default class DbFormGroupTransferencias extends React.Component{
                     ref={this.setChildRef}
                   />
                 </>
+              : null }
+              </>
               : null}
 
 

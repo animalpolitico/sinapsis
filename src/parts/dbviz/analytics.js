@@ -90,11 +90,14 @@ export default class Analytics extends React.Component{
     return(
       <div className="ss_analytics">
         <div className="ss_analytics_close" onClick={() => this.props.onClose()}><Icon>close</Icon></div>
-        <div className="ss_analytics_container">
-          <div className="ss_analytics_container_title">
+          <div className="ss_analytics_container_fixed">
+
+        <div className="ss_analytics_container_title">
             Resumen del proyecto<br /><strong>{window.dbf.obj.info.name}</strong>
           </div>
           <AnalyticsControl active={this.state.activeDbs} setAll={(dba) => this.setAll(dba)} toggleDb={(dbid) => this.toggleDb(dbid)}/>
+          </div>
+      <div className="ss_analytics_container">
           <AnalyticsInfo parent={this} active={dbs}/>
           <AnalyticsMontos parent={this} active={this.state.activeDbs}/>
           {
@@ -402,7 +405,7 @@ class AnalyticsPiePie extends React.Component{
         </div>
         <div className="ss_analytics_pie_info">
           <div className="ss_analytics_pie_info_a">
-            El <strong>{pct}%</strong><br/>{this.props.invert ? " no tiene " : " "}<strong>{d.name}</strong>
+            {this.props.invert ? "En el" : "El"} <strong>{pct}%</strong><br/>{this.props.invert ? " no se ha llenado el " : " "}<strong>{d.name}</strong>
           </div>
           <div className="ss_analytics_pie_info_b">
             {

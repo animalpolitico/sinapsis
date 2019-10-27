@@ -149,11 +149,15 @@ class SSMarker extends React.Component{
     var d = this.props.d;
     var ename = window.dbf.getEmpresa(d.fromdb, d.empresauid).name
     var euid = d.empresauid;
-
     var show = false;
 
     d3.selectAll('.node[data-id="'+euid+'"]')
       .filter(d => show = d.coincidencias > 0);
+
+    var cs = ['ss_map_marker'];
+    if(!show){
+      cs.push('ss_map_marker_no');
+    }
 
     show = (this.props.onlyCoincidencias && show) || !this.props.onlyCoincidencias
 
@@ -192,7 +196,7 @@ class SSMarker extends React.Component{
         coordinates={[d.latlng.lng, d.latlng.lat]}
       >
         <div
-          className="ss_map_marker"
+          className={cs.join(' ')}
 
         >
 

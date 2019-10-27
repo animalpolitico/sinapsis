@@ -19,6 +19,7 @@ export default class ConvertOldToDb{
     this.file = file;
     this.alreadyConverted = alreadyConverted ? true : false;
     this.uid = uuidv4();
+    this.empresas = [];
     this.slug = slugify(this.name, {lower: true});
     this.get();
   }
@@ -98,19 +99,28 @@ export default class ConvertOldToDb{
   }
 
   setEmpresa(fields){
+    console.log('fields', fields);
+
     var n = fields[0];
-    var uid = uuidv4();
     var s = n.replace(/[.\s]/g, '');
         s = slugify(s, {remove: /[*+,~.()'"!:@]/g, lower: true});
-    var obj = {
-      name: n,
-      slug: s,
-      uid: uid,
-      fields: {}
-    };
 
-    this.obj.empresas[uid] = obj;
-
+    var exists = false;
+    if(this.empresas[s]){
+      exists = true;
+      uid = this.empresas[s];
+      console.log('EXISTS', uid);
+    }else{
+      var uid = uuidv4();
+      var obj = {
+        name: n,
+        slug: s,
+        uid: uid,
+        fields: {}
+      };
+      this.obj.empresas[uid] = obj;
+      this.empresas[s] = uid;
+    }
     this.setEmpresaFields(fields, uid);
 
   }

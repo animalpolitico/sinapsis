@@ -324,11 +324,10 @@
             font-size: 0.6rem;
             font-weight: 600;
             color: white;
-            opacity: 0.4;
           }
           input{
             &:checked ~ .ss_control_group_container_switch_btn_c{
-              opacity: 1;
+              background: $main;
             }
           }
         }

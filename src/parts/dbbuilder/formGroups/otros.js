@@ -195,12 +195,13 @@ export default class DbFormGroupOtros extends React.Component{
                   <option value="date">Fecha</option>
                   <option value="email">Correo electrónico</option>
                   <option value="website">Sitio web</option>
+                  <option value="phone">Teléfono</option>
                   <option value="convenio">Número de contrato o convenio</option>
                   <option value="instancia">Dependencia / Instancia</option>
                   <option value="monto_recibido">Monto recibido</option>
                   <option value="monto_otorgado">Monto otorgado</option>
                   <option value="titular">Titular de instancia</option>
-                  <option value="cfdi">CFDI</option>
+                  <option value="*">Otro</option>
                 </select>
               </div>
               : null

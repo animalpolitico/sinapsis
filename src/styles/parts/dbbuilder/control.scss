@@ -1,7 +1,7 @@
 .project_buttons{
   @extend .cx;
   bottom: 0;
-  z-index: 99;
+  z-index: 9999999999999;
   @extend .flex;
   transform: translateX(calc(-50%));
   border: 1px solid #444;

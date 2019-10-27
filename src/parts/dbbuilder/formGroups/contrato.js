@@ -24,7 +24,7 @@ export default class DbFormGroupContrato extends React.Component{
     personType: 'contrato',
     fields: {},
     modalChanged: false,
-    contratoType: 'empresa',
+    contratoType: '',
     licitacion: false,
     res: false
   }
@@ -220,10 +220,14 @@ export default class DbFormGroupContrato extends React.Component{
                       ¿Quien otorga los recursos es empresa o {_t('instancia / dependencia')}?
                     </div>
                     <select onChange={(e) => this.setState({contratoType: e.target.value, res: true})} value={type}>
+                      <option value="" disabled selected>Selecciona...</option>
                       <option value="empresa">Empresa</option>
                       <option value="instancia">{_t('Instancia / Dependencia')}</option>
                     </select>
                   </div>
+                  {
+                    this.state.res || this.state.isedit ?
+                  <>
                     <DbInput
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       matchWith={mw}
@@ -346,6 +350,15 @@ export default class DbFormGroupContrato extends React.Component{
                         />
                         <DbInput
                           onChange={(slug, obj) => this.insertField(slug, obj)}
+                          name="Número de licitación"
+                          matchWith={['convenio']}
+                          group="contrato"
+                          empresa={this.props.empresa}
+                          db={this.props.parent.props.db}
+                          ref={this.setChildRef}
+                        />
+                        <DbInput
+                          onChange={(slug, obj) => this.insertField(slug, obj)}
                           name="Monto total de licitación"
                           type="currency"
                           group="contrato"
@@ -356,7 +369,7 @@ export default class DbFormGroupContrato extends React.Component{
                       </>
                     : null
                     }
-
+                    </> : null }
                   </>
             </div>
           </DialogContent>

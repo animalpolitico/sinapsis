@@ -309,6 +309,18 @@ export default class DbFormGroupConvenio extends React.Component{
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       matchWith={['person', 'titular']}
                       name="Titular de instancia"
+                      aka="Titular de instancia que otorga"
+                      type="text"
+                      group="convenio"
+                      empresa={this.props.empresa}
+                      db={this.props.parent.props.db}
+                      ref={this.setChildRef}
+                    />
+                    <DbInput
+                      onChange={(slug, obj) => this.insertField(slug, obj)}
+                      matchWith={['person', 'titular']}
+                      name="Titular de instancia"
+                      aka="Titular de instancia que recibe"
                       type="text"
                       group="convenio"
                       empresa={this.props.empresa}

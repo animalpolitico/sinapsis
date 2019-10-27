@@ -6,6 +6,9 @@
   right: 0;
   overflow: hidden;
   position: relative;
+  .node_dont_touch{
+    display: none;
+  }
   .ss_guide{
     opacity: 0;
   }

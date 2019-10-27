@@ -121,6 +121,12 @@
       flex: 1;
       overflow-y: auto;
       padding: 0 0.5rem 1rem;
+      &_divider{
+        width: 100%;
+        height: 1px;
+        background: #333;
+        margin: 1rem 0;
+      }
       .MuiExpansionPanelDetails-root{
         padding: 5px 16px!important;
       }
@@ -340,7 +346,6 @@
         text-transform: uppercase;
         font-size: 0.8rem;
         margin-right: 0.5rem;
-        opacity: 0.5;
       }
       input{
         position: absolute;
@@ -353,7 +358,7 @@
         height: 100%;
         &:checked ~ {
           .db_empresa_container_group_radios_radio_c{
-            opacity: 1;
+            background: $main;
           }
         }
       }
@@ -524,6 +529,26 @@
   margin-bottom: 0.5rem;
   &.ss_db_input_select, &.ss_textarea{
     width: 100%!important;
+  }
+  .db_empresa_container_group_radios_title{
+    margin-top: 0.75rem;
+  }
+  .ss_db_input_select_radios{
+    @extend .flex;
+    align-items: center;
+    margin-top: 0.15rem;
+    &_radio{
+      @extend .flex;
+      align-items: center;
+      margin-right: 0.5rem;
+      cursor: pointer;
+      label{
+        line-height: 1;
+        margin-left: 0.15rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+    }
   }
   select{
     width: 100%;

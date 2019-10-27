@@ -115,6 +115,13 @@ export default class DbBuilderToolbar extends React.Component{
     this.props.parent.goBack();
   }
 
+  contactAction(url){
+    window.open(url);
+    this.setState({
+      openContact: false
+    })
+  }
+
   forceName(){
     this.toolbarname.forceName();
   }
@@ -171,13 +178,29 @@ export default class DbBuilderToolbar extends React.Component{
               </Popper>
               </div>
             </div>
+            <div className="ss_db_ctas_custom ss_db_ctas_custom_send" onClick={() => this.setState({openContact: true})}>
+              <Icon>contact_support</Icon>
+            </div>
+            <Dialog open={this.state.openContact} onClose={() => this.setState({openContact: false})}>
+              <DialogTitle id="form-dialog-title">¿Necesitas ayuda?</DialogTitle>
+              <DialogContent style={{width: 400}}>
+                Si tienes alguna duda, sugerencia, comentario o quieres que precarguemos alguna base de datos a Sinapsis, escríbenos a <a style={{textDecoration: 'underline'}} href="mailto:sinapsis@animalpolitico.com">sinapsis@animalpolitico.com</a> o a nuestro <a style={{textDecoration: 'underline'}} href="https://join.slack.com/t/sinapsissede/shared_invite/enQtODEyODkwNDczODYyLTMxMTAyZTUwZWZhODFmZGVkMjMyNjllMWNiNGRkM2U0YzZkMzFkNmJhMzYyYmJkNmRkZmIxNmRiMTE0NGZlNGY">canal de Slack</a>.
+              </DialogContent>
+              <DialogActions>
+                <Button color="secondary" onClick={() => this.setState({openContact: false})}>
+                  Cerrar
+                </Button>
+                <Button color="secondary" onClick={() => this.contactAction('https://join.slack.com/t/sinapsissede/shared_invite/enQtODEyODkwNDczODYyLTMxMTAyZTUwZWZhODFmZGVkMjMyNjllMWNiNGRkM2U0YzZkMzFkNmJhMzYyYmJkNmRkZmIxNmRiMTE0NGZlNGY')}>
+                  Ir a Slack
+                </Button>
+                <Button color="secondary" onClick={() => this.contactAction('mailto:sinapsis@animalpolitico.com')}>
+                  Escribir correo
+                </Button>
+              </DialogActions>
+            </Dialog>
           </div>
         </div>
-        {
-          this.state.isloading ?
-          <div className="ss_db_toolbar_progress"><LinearProgress /></div>
-          : null
-        }
+
       </div>
     )
   }

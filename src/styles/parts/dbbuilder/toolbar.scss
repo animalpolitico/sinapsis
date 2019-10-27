@@ -51,12 +51,27 @@
         align-items: center;
         box-sizing: border-box;
         padding-right: 1rem;
+        .ss_db_ctas_custom_send{
+          background: blue;
+          margin-left: 0.75rem;
+          margin-right: 0.25rem;
+          .material-icons{
+            cursor: pointer;
+            line-height: 1;
+            font-size: 1.2rem;
+            color: #f6f6f6;
+            @extend .cy;
+            &:hover{
+              opacity: 0.8;
+            }
+          }
+        }
         .ss_db_ctas_custom_lang{
           img{
             width: 25px;
             display: block;
             cursor: pointer;
-            margin-left: 1.5rem;
+            margin-left: 1rem;
           }
         }
         .MuiButtonBase-root{

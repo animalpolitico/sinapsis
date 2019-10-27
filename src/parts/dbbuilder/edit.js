@@ -207,14 +207,16 @@ export default class DbEditEmpresa extends React.Component{
             <DbFormGroupPersonas dbid={this.props.db.id} empresa={this.props.empresa} parent={this} />
             <DbFormGroupNotaria empresa={this.props.empresa} parent={this} />
           </DbFormGroupInfoGeneral>
+          <div className="db_empresa_container_form_divider"></div>
+          <DbFormGroupContrato dbid={this.props.db.id} empresa={this.props.empresa} parent={this} />
+          <DbFormGroupConvenio dbid={this.props.db.id}  empresa={this.props.empresa} parent={this} />
+          <DbFormGroupTransferencias dbid={this.props.db.id}  empresa={this.props.empresa} parent={this} />
+          <div className="db_empresa_container_form_divider"></div>
           {
             isMexico() ?
             <DbFormGroupBanderasRojas empresa={this.props.empresa} parent={this} />
             : null
           }
-          <DbFormGroupContrato dbid={this.props.db.id} empresa={this.props.empresa} parent={this} />
-          <DbFormGroupConvenio dbid={this.props.db.id}  empresa={this.props.empresa} parent={this} />
-          <DbFormGroupTransferencias dbid={this.props.db.id}  empresa={this.props.empresa} parent={this} />
           <DbFormGroupOtros dbid={this.props.db.id}  empresa={this.props.empresa} parent={this} />
           <DbFormGroupComentarios dbid={this.props.db.id}  empresa={this.props.empresa} parent={this} />
         </div>

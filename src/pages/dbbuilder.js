@@ -31,16 +31,12 @@ import DbBuilderToolbar from '../parts/dbbuilder/toolbar';
 import DbEditEmpresa from '../parts/dbbuilder/edit';
 import DbViz from '../parts/dbviz/dbviz';
 
-/** Bases de datos precargadas **/
-import PreDB_Estafa from '../static/consumable/estafa-maestra.json';
-import PreDB_SATDef from '../static/consumable/sat-definitivos.json';
 
 import oldToNew from '../funcs/oldSinapsisToNew';
 import { predbs } from '../vars/rel';
 import Flag from "react-flags";
-import { countries, getLang } from "../vars/countriesDict";
+import { countries, getLang, _t } from "../vars/countriesDict";
 import { Resizable, ResizableBox } from 'react-resizable';
-
 
 import buildLink from "../funcs/buildlink";
 import {Helmet} from "react-helmet";
@@ -56,10 +52,7 @@ var startLoad = new Event('sinapsisStartLoad');
 var endLoad = new Event('sinapsisEndLoad');
 var slugify = require('slugify');
 
-var dbsPre = {
-  'estafa-maestra': PreDB_Estafa,
-  'sat-definitivos': PreDB_SATDef
-}
+
 
 
 export default class DbBuilderPage extends React.Component{
@@ -205,6 +198,7 @@ export default class DbBuilderPage extends React.Component{
     window.dbf.obj.info.slug = 'estafa-maestra';
     window.dbf.obj.dbs = {};
     window.dbf.obj.dbs[j.id] = j;
+    window.dbf.obj.dbs[j.id].country = "MEX";
 
     this.props.history.push(buildLink('/construir/estafa-maestra'));
 
@@ -655,6 +649,7 @@ class DbView extends React.Component{
   }
   componentDidMount(){
     this.set();
+    window.addEventListener('sinapsis_lang_change', () => this.set())
   }
 
   componentDidUpdate(p, n){
@@ -852,6 +847,15 @@ class DbView extends React.Component{
                 </div>
                 : null
               }
+              {
+                this.props.db.country && this.props.db.country !== getLang() ?
+                <div className="ss_db_view_empresas_notice">
+                  <Icon>info</Icon>
+                  <div>Esta base de datos no pertenece al país que seleccionaste, algunos términos como <strong>{_t('RFC')}</strong> no son exactos.</div>
+                </div>
+                : null
+              }
+
               <DbEmpresasList blockEdit={block} ref={(ref) => this.empresalist = ref} parent={this} db={this.state.db} />
             </div>
 
@@ -861,26 +865,30 @@ class DbView extends React.Component{
         <Dialog open={this.state.showdialog} onClose={() => this.handleDialogClose()}>
           <DialogTitle id="form-dialog-title">Empresa nueva</DialogTitle>
             <DialogContent style={{width: 400}}>
-              <div className="ss_db_input_select" style={{paddingLeft: 0, paddingRight: 0}}>
-                <div className="db_empresa_container_group_radios_title">
-                  ¿Es empresa o prestador de servicios?
-                </div>
-                <select onChange={(e) => this.setState({empresaType: e.target.value, res: true})}>
-                  <option value="empresa">Empresa</option>
-                  <option value="persona">Prestador de servicios</option>
-                </select>
-              </div>
-            <DialogContentText>
-              Escribe el nombre de la empresa, más adelante podrás añadir el resto de información.
-            </DialogContentText>
 
             <TextField
               autoFocus
               label="Razón social de la empresa"
               fullWidth
+              helperText="Escribe el nombre de la empresa, más adelante podrás añadir el resto de información."
               color="secondary"
               onChange={(e) => this.setState({dialogValue: e.target.value})}
             />
+            <div className="ss_db_input_select" style={{paddingLeft: 0, paddingRight: 0}}>
+              <div className="db_empresa_container_group_radios_title">
+                ¿Es empresa o prestador de servicios?
+              </div>
+              <div className="ss_db_input_select_radios">
+                <div className="ss_db_input_select_radios_radio">
+                  <input id="ssetype_empresa" checked={this.state.empresaType == "empresa"} type="radio" name="ssetype" onChange={() => this.setState({empresaType: "empresa", res: true})} />
+                  <label for="ssetype_empresa">Empresa</label>
+                </div>
+                <div className="ss_db_input_select_radios_radio">
+                  <input id="ssetype_persona" checked={this.state.empresaType == "persona"} type="radio" name="ssetype" onChange={() => this.setState({empresaType: "persona", res: true})} />
+                  <label for="ssetype_persona">Prestador de servicios</label>
+                </div>
+              </div>
+            </div>
           </DialogContent>
           <DialogActions>
             <Button color="secondary" onClick={() => this.handleDialogClose()}>
@@ -1102,6 +1110,11 @@ class DbDbsNavigationNewDb extends React.Component{
     openModal: false,
     selectedDb: null
   }
+
+  componentDidMount(){
+    window.addEventListener('ss_new_db', () => this.newDB());
+  }
+
   togglePopper(e){
     /* OLD
     */
@@ -1132,11 +1145,11 @@ class DbDbsNavigationNewDb extends React.Component{
     })
   }
 
-  selectPreDB(path, name, blockEdit){
-    console.log('PATH', path, name);
+  selectPreDB(path, name, blockEdit, country){
     this.setState({
       selectedDb: path,
       selectedName: name,
+      selectedCountry: country,
       blockEdit: blockEdit
     })
   }
@@ -1162,6 +1175,9 @@ class DbDbsNavigationNewDb extends React.Component{
       }
       window.dbf.obj.dbs[db.id] = db;
       window.dbf.obj.dbs[db.id].blockEdit = block;
+      if(self.state.selectedCountry){
+        window.dbf.obj.dbs[db.id].country = self.state.selectedCountry;
+      }
       window.dbf.setModified();
       window.dispatchEvent(onBigChanges);
       self.props.parent.fetchDbs();
@@ -1338,7 +1354,7 @@ class PreDb extends React.Component{
 
     return(
       <div className="ss_predb_select">
-        <input type="radio" name="predb_input" onChange={(e) => this.props.parent.selectPreDB(p.file, p.name, block)}/>
+        <input type="radio" name="predb_input" onChange={(e) => this.props.parent.selectPreDB(p.file, p.name, block, p.country)}/>
         <div className="ss_predb_select_info">
         <div className="ss_predb_select_name">
           {p.name}

@@ -18,6 +18,7 @@ import CountTo from 'react-count-to';
 import Map from './map';
 import { isMexico, _t } from '../../vars/countriesDict';
 import Analytics from './analytics';
+import Grow from '@material-ui/core/Grow';
 var slugify = require('slugify');
 var startLoad = new Event('sinapsisStartLoad');
 var endLoad = new Event('sinapsisEndLoad');
@@ -55,6 +56,17 @@ export default class DbViz extends React.Component{
     })
   }
 
+  closeAllWindows(){
+    this.setState({
+      displayAnalytics: false,
+      displayMap: false,
+      openListado: false
+    })
+    this.nodes.setState({
+      openListado: false
+    })
+  }
+
   render(){
     var csn = ['nodes_controls'];
     if(this.state.showcontrols){
@@ -65,30 +77,52 @@ export default class DbViz extends React.Component{
     return(
       <>
       <div className="db_viz">
-        <Nodes ref={(ref) => this.nodes = ref}/>
+        {
+          this.nodes && !this.state.hideNoResults ?
+          <SSNoResults parent={this} nodes={this.nodes} onClose={() => this.setState({hideNoResults: true})}/>
+          : null
+        }
+        <Nodes ref={(ref) => this.nodes = ref} categoryToggle={this.categoryToggle}/>
+
         <div className={csn.join(' ')}>
           <div className="nodes_controls_button" onClick={() => this.toggleControls()}>
             <Icon>{this.state.showcontrols ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}</Icon>
           </div>
           <div className="nodes_controls_container">
             <SSDBControl nodesMap={this.nodes} />
-            <SSCategoryToggle nodesMap={this.nodes} />
+            <SSCategoryToggle nodesMap={this.nodes} ref={(ref) => this.categoryToggle = ref} />
             <SSNodeSize nodesMap={this.nodes}/>
           </div>
         </div>
         <div className="project_buttons">
+          {
+            !this.state.displayAnalytics ?
           <div className="project_buttons_button" onClick={() => this.toggleAnalytics()}>
             <Icon>bar_chart</Icon>
             <div>Estadísticas</div>
           </div>
+          : null }
+          {
+            !this.state.displayMap ?
           <div className="project_buttons_button" onClick={() => this.toggleMap()}>
             <Icon>map-marker</Icon>
             <div>Mapa</div>
           </div>
-          <div className="project_buttons_button" onClick={() => this.nodes.openListado()}>
+          : null }
+          {
+            !this.state.openListado ?
+          <div className="project_buttons_button" onClick={() => this.nodes.openListado([], this)} parent={this}>
             <Icon>format_list_bulleted</Icon>
             <div>Coincidencias</div>
           </div>
+          : null }
+          {
+            this.state.displayMap || this.state.displayAnalytics || this.state.openListado ?
+          <div className="project_buttons_button" onClick={() => this.closeAllWindows()}>
+            <Icon>bubble_chart</Icon>
+            <div>Nodos</div>
+          </div>
+          : null }
         </div>
           {
             this.state.displayAnalytics ?
@@ -112,20 +146,40 @@ class SSDBControl extends React.Component{
     hiddenDbs: [],
     showing: true
   }
+
+  componentDidMount(){
+    window.addEventListener('ss_activate_all_dbs', () => this.showAll())
+  }
+
   toggleDb(dbid){
     window.dispatchEvent(startLoad);
-    var s = this.state.hiddenDbs;
-    if(s.indexOf(dbid) == -1){
-      s.push(dbid);
-    }else{
-      s.splice(s.indexOf(dbid), 1);
-    }
-    this.setState({
-      hiddenDbs: s
-    })
-    window.dbf.hideDbs(s);
-    var ev = new Event('ss_lazy_indicator');
-    window.dispatchEvent(ev);
+    var self = this;
+    setTimeout(function(){
+      var s = self.state.hiddenDbs;
+      if(s.indexOf(dbid) == -1){
+        s.push(dbid);
+      }else{
+        s.splice(s.indexOf(dbid), 1);
+      }
+      self.setState({
+        hiddenDbs: s
+      })
+      window.dbf.hideDbs(s);
+      var ev = new Event('ss_lazy_indicator');
+      window.dispatchEvent(ev);
+    }, 500)
+  }
+
+  showAll(){
+    window.dispatchEvent(startLoad);
+    var self = this;
+    setTimeout(function(){
+      var s = [];
+      self.setState({
+        hiddenDbs: s
+      })
+      window.dbf.hideDbs(s);
+    }, 500)
   }
 
   getVisibleDbs(){
@@ -670,6 +724,9 @@ class Nodes extends React.Component{
 
   async set(){
     try{
+      if(this.props.categoryToggle){
+        this.props.categoryToggle.reset();
+      }
       if(this.state.initLoaded){
         window.dispatchEvent(startLoad);
       }
@@ -849,20 +906,35 @@ class Nodes extends React.Component{
                    .attr('fill', function(d){
                      var c = getTypeColor(d.type);
                      if(d.type == "instancia"){
+
                        var counts = {r: 0, e: 0};
+                       d.isreceptor = false;
+                       d.isemisor = false;
                        d.fields.map(function(_f){
-                         var k = _f.category == "receptor" ? "r" : "e";
-                         counts[k] = counts[k] + 1;
+                         if(_f.group == "convenio"){
+                           var k = _f.category == "receptor" ? "r" : "e";
+                           counts[k] = counts[k] + 1;
+                         }
                        })
-                       if(counts.r > counts.e){
+                       if(counts.r > 0){
                          /* Diferencia de emisor/receptor */
                          d.isreceptor = true;
+                       }
+                       if(counts.e > 0){
+                         d.isemisor = true;
                        }
                      }
                      return c;
                    })
                    .attr('stroke-width', 24)
                    .attr('stroke', d => d.type == "instancia" ? d.isreceptor ? "#FF0054" : "#3372ff" : null)
+
+      nodesLabels.filter(d => d.isreceptor && d.isemisor)
+                 .append('polyline')
+                 .attr('stroke-width', 24)
+                 .attr('stroke', "#3372ff")
+                 .attr('fill', 'rgba(0,0,0,0)')
+
 
       nodesLabels.append('text')
                  .text((d) => d.name.toUpperCase())
@@ -896,6 +968,12 @@ class Nodes extends React.Component{
            .attr('x', -ww / 2)
            .attr('y', -h + nodesPaddingTop)
 
+          g.selectAll('polyline')
+           .attr('points', function(){
+             var p = ww / 2 + ' ' + hh + ' ' + 0 + ' ' + hh + ' ' + 0 + ' ' + 0 + ' ' + ww / 2 + ' ' + 0;
+             return p;
+           })
+           .attr('transform', 'translate('+ -ww / 2 +', '+ (-h + 48) +')')
 
         }
 
@@ -1021,6 +1099,9 @@ class Nodes extends React.Component{
     var isisolating = this.state.isolatingNode;
     d3.selectAll('.nodes_link')
       .each(function(l){
+        if(d3.select(this).classed('node_dont_touch')){
+          return;
+        }
         if(isisolating){
           if(l.selected){
             x++;
@@ -1241,7 +1322,7 @@ class Nodes extends React.Component{
   getNodeLinks(id){
     var ls = d3.selectAll('.nodes_link')
             .filter(function(d){
-              return d.source.id == id || d.target.id == id;
+              return d.source.id == id || d.target.id == id && !d3.select(this).classed('node_dont_touch');
             })
     return ls;
   }
@@ -1396,12 +1477,32 @@ class Nodes extends React.Component{
   }
 
   filterCategory(vals){
-    if(vals.indexOf('empresa') == -1){
-      vals.push('empresa');
-    }
+    /* Actualiza el mapa de nodos */
+    // if(vals.indexOf('empresa') == -1){
+    //   vals.push('empresa');
+    // }
+    //
+    // window.dbf.categories = vals;
+    // this.set();
 
-    window.dbf.categories = vals;
-    this.set();
+    /* Quita la clase */
+    d3.selectAll('.node_dont_touch')
+      .classed('node_dont_touch', false)
+
+    var removed = [];
+    d3.selectAll('.node')
+      .each(function(d){
+        if(vals.indexOf(d.type) == -1){
+          removed.push(d.id);
+          d3.select(this).classed('node_dont_touch', true);
+        }
+      })
+
+    removed.map(function(id){
+      d3.selectAll('.nodes_link[data-from="'+id+'"], .nodes_link[data-to="'+id+'"]')
+        .classed('node_dont_touch', true);
+    })
+    this.getCoincidenciasSize()
 
   }
 
@@ -1550,11 +1651,16 @@ class Nodes extends React.Component{
     }
   }
 
-  openListado(v){
-    v = v ? v : [];
+  openListado(v, parent){
     this.setState({
       openListado: true
     })
+    if(parent){
+      parent.setState({
+        openListado: true
+      })
+    }
+
   }
 
   getMontosTemp(){
@@ -1577,6 +1683,7 @@ class Nodes extends React.Component{
   render(){
     return(
       <div className="db_viz_nodes" ref={(ref) => this.container = ref}>
+
         {
           this.state.openListado ?
           <SSListado v={this.state.listadoTypes} nodesMap={this} onClose={() => this.setState({openListado: false})}/>
@@ -1626,6 +1733,135 @@ class Nodes extends React.Component{
     )
   }
 }
+
+class SSNoResults extends React.Component{
+  state = {
+    tip: false
+  }
+
+  componentDidMount(){
+    this.set();
+    window.addEventListener('ss_lazy_indicator', () => this.set())
+    window.addEventListener('sinapsisEndLoad', () => this.set())
+  }
+
+  set(){
+    var self = this;
+    setTimeout(function(){
+      var t = self.getTip();
+      self.setState({
+        tip: t
+      })
+    }, 100);
+
+  }
+
+  getTip(){
+    var obj = false;
+    if(this.props.nodes.state.coincidencias > 0 || this.props.nodes.state.isolatingNode){
+      return obj;
+    }
+    var dbsSize = 0;
+    var dbs = [];
+    if(window.dbf.obj.dbs){
+      dbs = Object.values(window.dbf.obj.dbs)
+      dbsSize = dbs.length;
+    }
+
+    /* No info */
+    if(!dbsSize){
+      var obj = {
+        tip: 'No tienes ninguna base de datos, agrega una para comenzar.',
+        cta: 'Agregar base',
+        action: () => this.addDb()
+      }
+      return obj;
+    }
+
+    if(dbsSize){
+      var notShowing = 0;
+      dbs.map((db) => db.hide ? notShowing++ : null);
+      if(notShowing == dbsSize){
+        var obj = {
+          tip: 'No tienes ninguna base de datos activa, activa una al menos.',
+          cta: 'Activar bases de datos',
+          action: () => this.activateAllDbs()
+        }
+        return obj;
+      }
+    }
+
+    /* Filtros */
+    console.log('this', this.props.n);
+    if(this.props.nodes && this.props.nodes.props.categoryToggle){
+      var v = this.props.nodes.props.categoryToggle.state;
+      if(v.vals.length < 10 || v.bs){
+        var obj = {
+          tip: 'Tienes algunos filtros activados, cambia la configuración de estos filtros.',
+          cta: 'Quitar todos los filtros',
+          action: () => this.filterNone()
+        }
+        return obj;
+      }
+    }
+
+
+    /* No dbs showing */
+
+    var obj = {
+      tip: 'Es probable que tus bases de datos no tengan datos que coincidan, intenta agregar más información.',
+    }
+    return obj;
+  }
+
+  filterNone(){
+    this.props.nodes.props.categoryToggle.majorChange('all');
+  }
+
+  activateAllDbs(){
+    window.dispatchEvent(new Event('ss_activate_all_dbs'));
+
+  }
+
+  addDb(){
+    window.dispatchEvent(new Event('ss_new_db'));
+  }
+
+  render(){
+    var tipObj = this.state.tip;
+    if(!tipObj){
+      return null;
+    }
+    return(
+        <div className="ss_no_results">
+          <div className="ss_no_results_close" onClick={() => this.props.onClose()}><Icon>close</Icon></div>
+          <div className="ss_no_results_title">Sin coincidencias</div>
+          <div className="ss_no_results_des">No encontramos coincidencias con los datos existentes.</div>
+          {
+            tipObj ?
+            <div className="ss_no_results_tip">
+              <Icon>warning</Icon>
+              <div>{tipObj.tip}</div>
+            </div>
+            : null
+          }
+          <div className="ss_no_results_ctas">
+            <div className="ss_no_results_ctas_cta" onClick={() => this.props.parent.setState({displayAnalytics: true})}>
+              Ver estadísticas
+            </div>
+            {
+              tipObj && tipObj.cta ?
+              <div className="ss_no_results_ctas_cta" onClick={tipObj.action}>
+                {tipObj.cta}
+              </div>
+              : null
+            }
+          </div>
+        </div>
+    )
+  }
+}
+
 
 class SSListado extends React.Component{
   state = {
@@ -2054,6 +2290,25 @@ class SSCategoryToggle extends React.Component{
     ]
   }
 
+  reset(force){
+    this.setState({
+      vals: [
+        "rfc",
+        "website",
+        "person",
+        "date",
+        "email",
+        "phone",
+        "instancia",
+        "convenio",
+        "address",
+        "no_notaria",
+        'empresa'
+      ],
+    })
+
+  }
+
   componentDidMount(){
     var self = this;
     window.addEventListener('sinapsis_lang_change', function(){
@@ -2074,6 +2329,8 @@ class SSCategoryToggle extends React.Component{
     if(!ischecked && exists){
       vals.splice(vals.indexOf(v), 1);
     }
+    var ev = new Event('ss_lazy_indicator');
+    window.dispatchEvent(ev);
     this.props.nodesMap.filterCategory(vals);
     this.setState({
       vals: vals
@@ -2107,11 +2364,11 @@ class SSCategoryToggle extends React.Component{
     }else{
       var vals = ['empresa'];
     }
-
-    this.props.nodesMap.filterCategory(vals);
-
     var ev = new Event('ss_lazy_indicator');
     window.dispatchEvent(ev);
+    this.props.nodesMap.filterCategory(vals);
+
+
 
     this.setState({
       vals: vals
@@ -2374,9 +2631,23 @@ class SSTooltip extends React.Component{
           Cantidad de coincidencias: <strong>{node.attr('data-coincidencias')}</strong>
         </div>
         {
-          d.type == "instancia" && d.isreceptor ?
+          d.type == "instancia" && d.isreceptor && d.isemisor ?
           <div className="db_viz_tooltip_info">
-            <Icon style={{color: "#FF0054"}}>info</Icon> <div>Esta {_t("instancia")} recibió más de lo que emitió.</div>
+            <Icon>info</Icon> <div>Esta instancia otorgó y recibió convenios.</div>
+          </div>
+          : null
+        }
+        {
+          d.type == "instancia" && d.isreceptor && !d.isemisor ?
+          <div className="db_viz_tooltip_info">
+            <Icon>info</Icon> <div>Esta instancia solo recibió convenios.</div>
+          </div>
+          : null
+        }
+        {
+          d.type == "instancia" && d.isemisor && !d.isreceptor ?
+          <div className="db_viz_tooltip_info">
+            <Icon>info</Icon> <div>Esta instancia solo otorgó convenios.</div>
           </div>
           : null
         }
