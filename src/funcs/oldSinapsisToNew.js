@@ -109,7 +109,6 @@ export default class ConvertOldToDb{
     if(this.empresas[s]){
       exists = true;
       uid = this.empresas[s];
-      console.log('EXISTS', uid);
     }else{
       var uid = uuidv4();
       var obj = {
