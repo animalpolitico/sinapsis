@@ -391,7 +391,7 @@ function getTypeName(t){
       o = "Teléfono";
     break;
     default:
-      o = false;
+      o = t;
     break;
   }
   return _t(o);
@@ -2322,7 +2322,8 @@ class SSCategoryToggle extends React.Component{
       "convenio",
       "address",
       "no_notaria",
-      'empresa'
+      'empresa',
+      ...window.dbf.getNewOtros()
     ]
   }
 
@@ -2339,7 +2340,8 @@ class SSCategoryToggle extends React.Component{
         "convenio",
         "address",
         "no_notaria",
-        'empresa'
+        'empresa',
+        ...window.dbf.getNewOtros()
       ],
     })
 
@@ -2395,7 +2397,8 @@ class SSCategoryToggle extends React.Component{
         "convenio",
         "address",
         "no_notaria",
-        'empresa'
+        'empresa',
+        ...window.dbf.getNewOtros()
       ];
     }else{
       var vals = ['empresa'];
@@ -2430,6 +2433,7 @@ class SSCategoryToggle extends React.Component{
       "phone",
       "no_notaria",
       "website",
+      ...window.dbf.getNewOtros()
     ];
     return(
       <div className="ss_control_node_filter ss_control_group">

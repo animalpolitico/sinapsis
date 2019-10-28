@@ -187,6 +187,10 @@ body.ss_show_sidebar{
       position: relative;
       cursor: pointer;
       min-width: 350px;
+      &[disabled]{
+        opacity: 0.5;
+        pointer-events: none;
+      }
       &:hover{
         .ss_predb_select_info{
           background: rgba(white, 0.05);

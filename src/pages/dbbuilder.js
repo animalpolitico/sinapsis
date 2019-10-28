@@ -1109,11 +1109,24 @@ class DbDbsNavigationNewDb extends React.Component{
     openPopper: false,
     anchor: null,
     openModal: false,
-    selectedDb: null
+    selectedDb: null,
+    hasOpened: false,
+    loadedDbs: [],
   }
 
   componentDidMount(){
-    window.addEventListener('ss_new_db', () => this.newDB());
+    var self = this;
+    window.addEventListener('ss_new_db', function(){
+      if(!self.state.hasOpened){
+        self.newDB();
+        self.setState({
+          hasOpened: true
+        })
+      }
+    });
+  }
+  componentWillUnmount(){
+    window.removeEventListener('ss_new_db', this.newDB);
   }
 
   togglePopper(e){
@@ -1165,7 +1178,8 @@ class DbDbsNavigationNewDb extends React.Component{
       openModal: false,
       selectedDb: null,
       selectedName: null,
-      blockEdit: false
+      blockEdit: false,
+      loadedDbs: [...this.state.loadedDbs, n]
     })
     var c = await d3.csv(v);
     setTimeout(function(){
@@ -1312,7 +1326,7 @@ class DbDbsNavigationNewDb extends React.Component{
                 var ok = predb.onlyIn.indexOf(getLang()) > -1;
               }
               if(ok){
-                return <PreDb parent={self} p={predb} />
+                return <PreDb disabled={self.state.loadedDbs.indexOf(predb.name) > -1} parent={self} p={predb} />
               }else{
                 return null;
               }
@@ -1354,7 +1368,7 @@ class PreDb extends React.Component{
     var block = p.blockEdit ? true : false;
 
     return(
-      <div className="ss_predb_select">
+      <div className="ss_predb_select" disabled={this.props.disabled}>
         <input type="radio" name="predb_input" onChange={(e) => this.props.parent.selectPreDB(p.file, p.name, block, p.country)}/>
         <div className="ss_predb_select_info">
         <div className="ss_predb_select_name">

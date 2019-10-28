@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import DbInput from '../inputs';
 import formatMoney from 'format-money';
+import { isMexico, _t } from '../../../vars/countriesDict';
 import TransactionRow from '../transaction';
 const uuidv4 = require('uuid/v4');
 var slugify = require('slugify');
@@ -32,11 +33,11 @@ export default class DbFormGroupOtros extends React.Component{
     this.refs = [];
     var self = this;
     window.addEventListener('keydown', function(e){
-      var w = e.which;
-      var bc = document.body.classList.contains('ss_focusing_input');
-      if(w == 13 && self.state.type && !bc && self.state.open){
-        self.add();
-      }
+      // var w = e.which;
+      // var bc = document.body.classList.contains('ss_focusing_input');
+      // if(w == 13 && self.state.type && !bc && self.state.open){
+      //   self.add();
+      // }
     })
   }
 
@@ -95,6 +96,14 @@ export default class DbFormGroupOtros extends React.Component{
     this.setState({
       fields: fs,
     })
+
+    if(obj.category == "*"){
+      console.log('OBJ', obj);
+      this.setState({
+        mw: [obj.value]
+      });
+    }
+
     if(!blockchanged){
       this.setState({
         modalChanged: true
@@ -151,6 +160,8 @@ export default class DbFormGroupOtros extends React.Component{
     var addL = this.state.isedit ? 'Guardar' : 'Agregar';
     var otros = this.getGroup();
 
+    var newOtros = window.dbf.getNewOtros();
+
     return(
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<Icon>expand_more</Icon>}>
@@ -188,26 +199,32 @@ export default class DbFormGroupOtros extends React.Component{
                 {/* Selecciona el tipo de persona */}
                 <select onChange={(e) => this.onSelectOtrosType(e)} value={this.state.category}>
                   <option value="-" selected disabled>Tipo</option>
-                  <option value="empresa">Nombre de empresa</option>
-                  <option value="person">Nombre de persona</option>
-                  <option value="address">Dirección</option>
-                  <option value="rfc">RFC</option>
-                  <option value="date">Fecha</option>
-                  <option value="email">Correo electrónico</option>
-                  <option value="website">Sitio web</option>
-                  <option value="phone">Teléfono</option>
-                  <option value="convenio">Número de contrato o convenio</option>
-                  <option value="instancia">Dependencia / Instancia</option>
-                  <option value="monto_recibido">Monto recibido</option>
-                  <option value="monto_otorgado">Monto otorgado</option>
-                  <option value="titular">Titular de instancia</option>
-                  <option value="*">Otro</option>
+                  <option value="empresa">Empresa relacionadas a esta empresa</option>
+                  <option value="person">Persona relacionada a esta empresa</option>
+                  <option value="address">Domicilio relacionado a estra empresa</option>
+                  <option value="rfc">{_t('RFC')} relacionado a esta empresa</option>
+                  <option value="date">Fecha relacionada a esta empresa</option>
+                  <option value="email">Correo electrónico relacionado a esta empresa</option>
+                  <option value="website">Sitio web relacionado a esta empresa</option>
+                  <option value="phone">Teléfono relacionado a esta empresa</option>
+                  <option value="convenio">Número de contrato o convenio relacionado a esta empresa</option>
+                  <option value="instancia">Dependencia / Instancia relacionada a esta empresa</option>
+                  <option value="monto_recibido">Monto recibido a esta empresa</option>
+                  <option value="monto_otorgado">Monto otorgado de esta empresa</option>
+                  <option value="titular">Titular de instancia relacionado a montos recibidos</option>
+                  {
+                    newOtros.map(function(_o){
+                      return (<option value={_o}>{_o}</option>)
+                    })
+                  }
+
+                  <option value="*">Nuevo</option>
                 </select>
               </div>
               : null
               }
               {
-                this.state.category ?
+                this.state.category && this.state.category !== "*"?
 
                 <>
                   <DbInput
@@ -223,6 +240,34 @@ export default class DbFormGroupOtros extends React.Component{
                   />
                 </>
 
+              : null
+              }
+
+              {
+                this.state.category == "*" ?
+                <>
+                <DbInput
+                  onChange={(slug, obj) => this.insertField(slug, obj)}
+                  name={"Nombre del campo"}
+                  matchWith={[]}
+                  category={this.state.category}
+                  group="otros"
+                  empresa={this.props.empresa}
+                  db={this.props.parent.props.db}
+                  ref={this.setChildRef}
+                />
+                  <DbInput
+                    onChange={(slug, obj) => this.insertField(slug, obj)}
+                    name={"Valor"}
+                    type={this.state.type}
+                    matchWith={this.state.mw}
+                    category={this.state.mw ? this.state.mw[0] : ''}
+                    group="otros"
+                    empresa={this.props.empresa}
+                    db={this.props.parent.props.db}
+                    ref={this.setChildRef}
+                  />
+                </>
               : null
               }
 
@@ -259,10 +304,19 @@ class OtrosRow extends React.Component{
   getName(){
     var t = this.props.p[0];
     var s = t.name + ': ';
-    var v = t.value;
-    if(t.type == "monto" || t.category.indexOf('monto') > -1){
-      v = formatMoney(v);
+    if(t.category == "*"){
+      s = t.value + ': ';
+      t = this.props.p[1] ? this.props.p[1] : {};
     }
+    var v = t.value;
+    try{
+      if(t.type == "monto" || t.category.indexOf('monto') > -1){
+        v = formatMoney(v);
+      }
+    }catch(ex){
+      
+    }
+
     s = s + v;
     return s;
   }

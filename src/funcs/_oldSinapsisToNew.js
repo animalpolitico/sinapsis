@@ -130,42 +130,35 @@ export default class ConvertOldToDb{
 
     fields.map(function(value, i){
       value = value.trim();
-      if(snps_ka[i] && ((i < 13 || (i > 41 && 45 > i )) || i == 95) ){
-        if(!snps_ka[i].bypass){
-          var slug = slugify(snps_ka[i].name, {lower: true});
-          if(snps_ka[i].group){
-            try{
-              slug = slugify(snps_ka[i].group, {lower: true}) + '-' + slug;
-            }catch(ex){
-              console.log('ERROR CON',snps_ka[i].group);
-            }
-          }
-          var ff = {
-            name: snps_ka[i].name,
-            slug: slug,
-            isvalid: true,
-            value: value,
-            empresauid: uid
-          };
-          if(snps_ka[i].type){
-            ff.type = snps_ka[i].type;
-          }
-          if(snps_ka[i].group){
-            ff.group = snps_ka[i].group;
-          }
-          if(snps_ka[i].matchWith){
-            ff.matchWith = snps_ka[i].matchWith;
-          }
-          if(value && value !== "SIN_DATO"){
-            f[slug] = ff;
-          }
+      if(snps_ka[i] && ((i < 11 || (i > 31 && 35 > i )) || i == 84) ){
+        var slug = slugify(snps_ka[i].name, {lower: true});
+        if(snps_ka[i].group){
+          slug = slugify(snps_ka[i].group, {lower: true}) + '-' + slug;
         }
-
+        var ff = {
+          name: snps_ka[i].name,
+          slug: slug,
+          isvalid: true,
+          value: value,
+          empresauid: uid
+        };
+        if(snps_ka[i].type){
+          ff.type = snps_ka[i].type;
+        }
+        if(snps_ka[i].group){
+          ff.group = snps_ka[i].group;
+        }
+        if(snps_ka[i].matchWith){
+          ff.matchWith = snps_ka[i].matchWith;
+        }
+        if(value && value !== "SIN_DATO"){
+          f[slug] = ff;
+        }
       }
     });
 
     /** Representante legal **/
-    var range = [13, 19];
+    var range = [11, 13];
     var _fields = this.groupByRange(fields, range);
     _fields.map(function(arr, ind){
       if(ind < 1){
@@ -195,7 +188,7 @@ export default class ConvertOldToDb{
           if(inf.matchWith){
             ff.matchWith = inf.matchWith;
           }
-          if(value && !inf.bypass){
+          if(value){
             f[slug] = ff;
             x++;
           }
@@ -218,7 +211,7 @@ export default class ConvertOldToDb{
     })
 
     /** Accionistas **/
-    var range = [20, 27];
+    var range = [16, 21];
     var _fields = this.groupByRange(fields, range);
     _fields.map(function(arr, ind){
         var cuid = uuidv4();
@@ -272,7 +265,7 @@ export default class ConvertOldToDb{
         }
     })
     /** Admin **/
-    var range = [28, 34];
+    var range = [22, 24];
     var _fields = this.groupByRange(fields, range);
     _fields.map(function(arr, ind){
         var cuid = uuidv4();
@@ -326,7 +319,7 @@ export default class ConvertOldToDb{
         }
     })
     /** Consejero **/
-    var range = [35, 41];
+    var range = [27, 29];
     var _fields = this.groupByRange(fields, range);
     _fields.map(function(arr, ind){
         var cuid = uuidv4();
@@ -381,7 +374,7 @@ export default class ConvertOldToDb{
     })
 
     /** Banderas Rojas**/
-    var range = [47, 48];
+    var range = [35, 36];
     var _fields = this.groupByRange(fields, range);
     var bs = [];
     _fields.map(function(ob){
@@ -401,7 +394,7 @@ export default class ConvertOldToDb{
 
 
     /** Contratos **/
-    var range = [49, 59];
+    var range = [37, 49];
     var _fields = this.groupByRange(fields, range);
     _fields.map(function(arr, ind){
         var cuid = uuidv4();
@@ -447,7 +440,7 @@ export default class ConvertOldToDb{
     })
 
     /** Convenios **/
-    var range = [60, 72];
+    var range = [53, 63];
     var _fields = this.groupByRange(fields, range);
     _fields.map(function(arr, ind){
         var cuid = uuidv4();
@@ -493,7 +486,7 @@ export default class ConvertOldToDb{
     })
 
     /** Transferencias de dependencia a instancia **/
-    var range = [73, 75];
+    var range = [64, 65];
     var _fields = this.groupByRange(fields, range);
     _fields.map(function(arr, ind){
         var cuid = uuidv4();
@@ -556,7 +549,7 @@ export default class ConvertOldToDb{
     })
 
     /** Transferencia de empresa a esta empresa  **/
-    var range = [76,77];
+    var range = [67,68];
     var _fields = this.groupByRange(fields, range);
     _fields.map(function(arr, ind){
         var cuid = uuidv4();
@@ -619,7 +612,7 @@ export default class ConvertOldToDb{
     })
 
     /** Transferencia de esta empresa a otras empresas **/
-    var range = [78, 79];
+    var range = [69, 70];
     var _fields = this.groupByRange(fields, range);
     _fields.map(function(arr, ind){
         var cuid = uuidv4();
@@ -681,7 +674,7 @@ export default class ConvertOldToDb{
     })
 
     /** Otros **/
-    var otrosRange = [80, 92];
+    var otrosRange = [72, 83];
     for(var i = otrosRange[0]; i <= otrosRange[1]; i++){
       var sn = snps_ka[i];
       try{
@@ -728,60 +721,7 @@ export default class ConvertOldToDb{
             groupUid: guid,
             empresauid: uid
           }
-          f[slug] = obj;
 
-
-        }
-      })
-    }
-    /** OTROS NUEVO **/
-    var otrosRange = [93, 94];
-    for(var i = otrosRange[0]; i <= otrosRange[1]; i++){
-      var sn = snps_ka[i];
-      try{
-        var _fields = this.groupByRange(fields, otrosRange);
-      }catch(ex){
-        var _fields = [];
-      }
-      _fields.map(function(_f){
-        var vv = Object.values(_f);
-        var em = vv[0];
-        if(em){
-          var t = em;
-          var n = em;
-          var guid = uuidv4();
-          var preslug = slugify('otros ' + n  , {lower: true});
-          var slug = guid + '-' + preslug;
-          var matchWith = [t];
-          var type = t;
-          if(t.indexOf('monto') > -1){
-            em = em.replace(',', '');
-            em = parseFloat(em);
-            if(isNaN(em)){
-              em = 0;
-            }
-            type = 'monto';
-            matchWith = false;
-          }
-
-          if(t == "empresa"){
-            matchWith = false;
-          }
-          var obj = {
-            name: n,
-            slug: preslug,
-            isvalid: true,
-            value: vv[1],
-            matchWith: matchWith,
-            group: "otros",
-            guid: guid,
-            fromdb: dbid,
-            type: type,
-            newOtros: em,
-            category: t,
-            groupUid: guid,
-            empresauid: uid
-          }
           f[slug] = obj;
         }
       })

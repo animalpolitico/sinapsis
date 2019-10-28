@@ -281,6 +281,9 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   position: relative;
   cursor: pointer;
   min-width: 350px; }
+  .ss_modal_dbpre .ss_predb_select[disabled] {
+    opacity: 0.5;
+    pointer-events: none; }
   .ss_modal_dbpre .ss_predb_select:hover .ss_predb_select_info {
     background: rgba(255, 255, 255, 0.05); }
   .ss_modal_dbpre .ss_predb_select input {

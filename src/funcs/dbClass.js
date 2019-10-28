@@ -498,23 +498,94 @@ export default class DbFactory {
   **/
   getByType(t){
     var o = [];
-    var db = this.getDbs();
-    var dbA = Object.values(db);
-    dbA.map(function(_db){
-      var dbfields = [];
-      var empresas = _db.empresas;
-          empresas = Object.values(empresas);
-      if(empresas){
-        empresas.map(function(empresa){
-          var fields = empresa.fields;
-              fields = Object.values(fields);
-          var withType = fields.filter(f => f.type == t);
-          withType.map(function(d){
-            o.push(d);
+    try{
+      var db = this.getDbs();
+      var dbA = Object.values(db);
+      dbA.map(function(_db){
+        var dbfields = [];
+        var empresas = _db.empresas;
+            empresas = Object.values(empresas);
+        if(empresas){
+          empresas.map(function(empresa){
+            var fields = empresa.fields;
+                fields = Object.values(fields);
+            var withType = fields.filter(f => f.type == t);
+            withType.map(function(d){
+              o.push(d);
+            })
           })
-        })
-      }
-    })
+        }
+      })
+    }catch{
+
+    }
+
+    return o;
+  }
+
+  /**
+  * Obtiene todas los campos de una category
+  *
+  * @param void
+  * @return array
+  **/
+  getByCategory(t){
+    var o = [];
+    try{
+      var db = this.getDbs();
+      var dbA = Object.values(db);
+      dbA.map(function(_db){
+        var dbfields = [];
+        var empresas = _db.empresas;
+            empresas = Object.values(empresas);
+        if(empresas){
+          empresas.map(function(empresa){
+            var fields = empresa.fields;
+                fields = Object.values(fields);
+            var withType = fields.filter(f => f.category == t);
+            withType.map(function(d){
+              o.push(d);
+            })
+          })
+        }
+      })
+    }catch{
+
+    }
+
+    return o;
+  }
+
+  /**
+  * Obtiene todas los campos de una category
+  *
+  * @param void
+  * @return array
+  **/
+  getByNewOtros(t){
+    var o = [];
+    try{
+      var db = this.getDbs();
+      var dbA = Object.values(db);
+      dbA.map(function(_db){
+        var dbfields = [];
+        var empresas = _db.empresas;
+            empresas = Object.values(empresas);
+        if(empresas){
+          empresas.map(function(empresa){
+            var fields = empresa.fields;
+                fields = Object.values(fields);
+            var withType = fields.filter(f => f.newOtros ? true : false || f.category == "*");
+            withType.map(function(d){
+              o.push(d);
+            })
+          })
+        }
+      })
+    }catch{
+
+    }
+
     return o;
   }
 
@@ -707,7 +778,25 @@ export default class DbFactory {
   }
 
 
-
+  /**
+  * Obtiene todos los tipos de "Otros"
+  *
+  * @param void
+  * @return array
+  **/
+  getNewOtros(){
+    var o = [];
+    var fs = this.getByNewOtros();
+    if(fs){
+      fs.map(function(s){
+        var v = s.category == "*" ? s.value : s.newOtros;
+        if(o.indexOf(v) == -1){
+          o.push(v);
+        }
+      })
+    }
+    return o;
+  }
 
   /**
   * Obtiene la suma de empresa

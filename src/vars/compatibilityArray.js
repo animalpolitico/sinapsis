@@ -2,208 +2,284 @@ export const snps_ka = {
   1: {
     name: "RFC",
     matchWith: ['rfc'],
-    type: 'rfc'
+    type: 'rfc',
+    cell: 'B',
   },
   2: {
-    name: "Folio mercantil"
+    name: "Folio mercantil",
+    cell: 'C'
   },
   3: {
-    name: "Objeto social"
+    name: "Objeto social",
+    cell: 'D'
   },
   4: {
-    name: "Fecha de creación",
-    matchWith: ['date'],
+    name: "Número de empleados",
+    cell: 'E',
   },
   5: {
-    name: "Capital social mínimo"
+    name: "Fecha de creación",
+    matchWith: ['date'],
+    cell: 'F'
   },
   6: {
+    name: "Capital social mínimo",
+    cell: 'G'
+  },
+  7: {
     name: "Dirección fiscal",
     matchWith: ['address'],
-    type: 'address'
+    type: 'address',
+    cell: 'H'
   },
   8: {
-    name: "Teléfono",
-    matchWith: ['phone'],
-    type: 'phone'
+    bypass: true,
+    cell: 'I'
   },
   9: {
-    name: "Sitio web",
-    matchWith: ['website'],
-    type: 'website'
+    bypass: true,
+    cell: 'J'
   },
   10: {
-    name: "Correo electrónico",
-    matchWith: ['email'],
-    type: 'email'
+    name: "Teléfono",
+    matchWith: ['phone'],
+    type: 'phone',
+    cell: 'K'
   },
   11: {
-    name: "Nombre completo",
-    category: "name",
-    type: "person",
-    matchWith: ['person'],
-    bigGroup: 'representante'
+    name: "Sitio web",
+    matchWith: ['website'],
+    type: 'website',
+    cell: 'L'
   },
   12: {
-    name: "RFC",
-    category: "rfc",
-    type: "rfc",
-    matchWith: ['rfc'],
-    bigGroup: 'representante'
+    name: "Correo electrónico",
+    matchWith: ['email'],
+    type: 'email',
+    cell: 'M'
   },
+  /* R */
   13: {
-    name: "Dirección",
-    category: "address",
-    type: "address",
-    matchWith: ['address'],
-    bigGroup: 'representante'
-  },
-  16: {
     name: "Nombre completo",
     category: "name",
     type: "person",
     matchWith: ['person'],
-    bigGroup: 'accionista'
+    bigGroup: 'representante',
+    cell: 'N'
   },
-  17: {
+  14: {
     name: "RFC",
     category: "rfc",
     type: "rfc",
     matchWith: ['rfc'],
-    bigGroup: 'accionista'
+    bigGroup: 'representante',
+    cell: 'O'
   },
-  18: {
+  15: {
     name: "Dirección",
     category: "address",
     type: "address",
     matchWith: ['address'],
-    bigGroup: 'accionista'
+    bigGroup: 'representante',
+    cell: 'P'
+  },
+  16: {
+    bypass: true,
+  },
+  17: {
+    bypass: true
+  },
+  18: {
+    bypass: true,
   },
   19: {
     bypass: true
   },
+  /* A */
   20: {
-    bypass: true
+    name: "Nombre completo",
+    category: "name",
+    type: "person",
+    matchWith: ['person'],
+    bigGroup: 'accionista'
   },
   21: {
+    name: "RFC",
+    category: "rfc",
+    type: "rfc",
+    matchWith: ['rfc'],
+    bigGroup: 'accionista'
+  },
+  22: {
+    name: "Dirección",
+    category: "address",
+    type: "address",
+    matchWith: ['address'],
+    bigGroup: 'accionista'
+  },
+  23: {
+    bypass: true
+  },
+  24: {
+    bypass: true
+  },
+  25: {
+    bypass: true
+  },
+  26: {
+    bypass: true
+  },
+  27: {
     name: "Capital aportado",
     sumWith: ["inner_capital_aportado"]
   },
-  22: {
-    name: "Nombre completo",
-    category: "name",
-    type: "person",
-    matchWith: ['person'],
-    bigGroup: 'administrador'
-  },
-  23: {
-    name: "RFC",
-    category: "rfc",
-    type: "rfc",
-    matchWith: ['rfc'],
-    bigGroup: 'administrador'
-  },
-  24: {
-    name: "Dirección",
-    category: "address",
-    type: "address",
-    matchWith: ['address'],
-    bigGroup: 'administrador'
-  },
-  27: {
-    name: "Nombre completo",
-    category: "name",
-    type: "person",
-    matchWith: ['person'],
-    bigGroup: 'consejero'
-  },
+  /* Admin */
   28: {
-    name: "RFC",
-    category: "rfc",
-    type: "rfc",
-    matchWith: ['rfc'],
-    bigGroup: 'consejero'
+    name: "Nombre completo",
+    category: "name",
+    type: "person",
+    matchWith: ['person'],
+    bigGroup: 'administrador'
   },
   29: {
+    name: "RFC",
+    category: "rfc",
+    type: "rfc",
+    matchWith: ['rfc'],
+    bigGroup: 'administrador'
+  },
+  30: {
+    name: "Dirección",
+    category: "address",
+    type: "address",
+    matchWith: ['address'],
+    bigGroup: 'administrador'
+  },
+  31: {
+    bypass: true
+  },
+  32: {
+    bypass: true
+  },
+  33: {
+    bypass: true
+  },
+  34: {
+    bypass: true
+  },
+  /* Comisario */
+  35: {
+    name: "Nombre completo",
+    category: "name",
+    type: "person",
+    matchWith: ['person'],
+    bigGroup: 'consejero'
+  },
+  36: {
+    name: "RFC",
+    category: "rfc",
+    type: "rfc",
+    matchWith: ['rfc'],
+    bigGroup: 'consejero'
+  },
+  37: {
     name: "Dirección",
     category: "address",
     type: "address",
     matchWith: ['address'],
     bigGroup: 'consejero'
   },
-  32: {
+  38: {
+    bypass: true
+  },
+  39: {
+    bypass: true
+  },
+  40: {
+    bypass: true
+  },
+  41: {
+    bypass: true
+  },
+  /* Revisar en primera función */
+  42: {
     name: "Nombre del notario",
     matchWith: ['person'],
     type: 'notario',
     group: 'Notaría'
   },
-  33: {
+  43: {
     name: "Número de notaría",
     matchWith: ['no_notaria'],
     type: 'no_notaria',
     group: 'Notaría'
   },
-  34: {
+  44: {
     name: "Dirección de notaría",
     matchWith: ['address'],
     type: 'addresss',
     group: 'Notaría'
   },
-  37: {
+  45: {
+    bypass: true
+  },
+  46: {
+    bypass: true
+  },
+  /* Termina revisar en primera función */
+  /* BANDERAS ROJAS */
+  47: {
+    bypass: true
+  },
+  48: {
+    bypass: true
+  },
+  /* Contrato */
+  49: {
     name: "¿Quién otorga los recursos?",
     group: 'contrato',
     bigGroup: 'contrato',
     category: "emisor",
     matchWith: ['empresa', 'instancia']
   },
-  38: {
+  50: {
     name: "Número de contrato",
     group: 'contrato',
     bigGroup: 'contrato',
     matchWith: ['convenio']
   },
-  39: {
+  51: {
     name: "Fecha de inicio",
     group: 'contrato',
     bigGroup: 'contrato',
     matchWith: ['date'],
     type: 'date',
   },
-  40: {
+  52: {
     name: "Fecha de término",
     group: 'contrato',
     bigGroup: 'contrato',
     matchWith: ['date'],
     type: 'date'
   },
-  41: {
+  53: {
     name: "Servicio realizado",
     group: 'contrato',
     bigGroup: 'contrato',
   },
-  42: {
+  54: {
     name: "Persona que firma",
     group: 'contrato',
     bigGroup: 'contrato',
     type: 'person',
     matchWith: ['person']
   },
-  42: {
-    name: "Persona que firma",
-    group: 'contrato',
-    bigGroup: 'contrato',
-    type: 'person',
-    matchWith: ['person']
-  },
-  43: {
+  55: {
     name: "Cargo de quien firma",
     group: 'contrato',
     bigGroup: 'contrato',
   },
-  44: {
-    bypass: true
-  },
-  45: {
+  56: {
     name: "Monto del contrato",
     group: 'contrato',
     bigGroup: 'contrato',
@@ -211,87 +287,88 @@ export const snps_ka = {
     category: 'monto',
     sumWith: ['montos_contrato', 'montos_totales']
   },
-  46: {
-    bypass: true
+  57: {
+    name: "Número de licitación",
+    group: 'contrato',
+    bigGroup: 'contrato',
+    matchWith: ['convenio'],
   },
-  47: {
-    bypass: true
-  },
-  48: {
+  58: {
     name: "Fecha de fallo",
     group: 'contrato',
     bigGroup: 'contrato',
     matchWith: ['date'],
     type: 'date'
   },
-  49: {
+  59: {
     name: "Monto total de licitación",
     group: 'contrato',
     bigGroup: 'contrato',
     type: 'currency'
   },
-  53: {
+  /* Convenio */
+  60: {
     name: "¿Quién otorga los recursos?",
     group: 'convenio',
     bigGroup: 'convenio',
     category: "emisor",
     matchWith: ['instancia']
   },
-  54: {
+  61: {
     name: "¿Quién recibe los recursos?",
     group: 'convenio',
     bigGroup: 'convenio',
     category: "receptor",
     matchWith: ['instancia']
   },
-  55: {
+  62: {
     name: "Número de convenio",
     group: 'convenio',
     bigGroup: 'convenio',
     matchWith: ['convenio']
   },
-  56: {
+  63: {
     name: "Fecha de inicio",
     group: 'convenio',
     bigGroup: 'convenio',
     matchWith: ['date'],
     type: 'date'
   },
-  57: {
+  64: {
     name: "Fecha de término",
     group: 'convenio',
     bigGroup: 'convenio',
     matchWith: ['date'],
     type: 'date'
   },
-  58: {
+  65: {
     name: "Objeto del convenio",
     group: 'convenio',
     bigGroup: 'convenio',
   },
-  59: {
+  66: {
     name: "Persona que firma (otorga)",
     group: 'convenio',
     bigGroup: 'convenio',
     matchWith: ['person']
   },
-  60: {
+  67: {
     name: "Cargo de quien firma (otorga)",
     group: 'convenio',
     bigGroup: 'convenio',
   },
-  61: {
+  68: {
     name: "Persona que firma (recibe)",
     group: 'convenio',
     bigGroup: 'convenio',
     matchWith: ['person']
   },
-  62: {
+  69: {
     name: "Cargo de quien firma (recibe)",
     group: 'convenio',
     bigGroup: 'convenio',
   },
-  63: {
+  70: {
     name: "Monto del convenio",
     type: 'currency',
     category: 'monto',
@@ -299,7 +376,20 @@ export const snps_ka = {
     bigGroup: 'convenio',
     sumWith: ['montos_convenio']
   },
-  64: {
+  71: {
+    name: "Titular de instancia que otorga al momento de firmar el convenio",
+    group: 'convenio',
+    bigGroup: 'convenio',
+    matchWith: ['person', 'titular']
+  },
+  72: {
+    name: "Titular de instancia que recibe al momento de firmar el convenio",
+    group: 'convenio',
+    bigGroup: 'convenio',
+    matchWith: ['person', 'titular']
+  },
+  /* Transferencias */
+  73: {
     name: "¿Quién otorgó los recursos?",
     realName: 'recursos',
     category: 'emisor',
@@ -308,7 +398,7 @@ export const snps_ka = {
     matchWith: ['instancia'],
     type: 'empresa'
   },
-  65: {
+  74: {
     name: "Monto de la transferencia",
     type: 'currency',
     category: 'monto',
@@ -316,14 +406,20 @@ export const snps_ka = {
     bigGroup: 'transferencia',
     sumWith: ['montos_transferencia', 'montos_totales']
   },
-  67: {
+  75: {
+    name: "Número de convenio relacionado",
+    group: 'transferencia',
+    bigGroup: 'transferencia',
+    matchWith: ['convenio']
+  },
+  76: {
     name: "recursos",
     category: 'emisor',
     group: 'transferencia',
     bigGroup: 'transferencia',
     matchWith: ['empresa']
   },
-  68: {
+  77: {
     name: "Monto de la transferencia",
     type: 'currency',
     category: 'monto',
@@ -331,14 +427,14 @@ export const snps_ka = {
     bigGroup: 'transferencia',
     sumWith: ['montos_transferencia', 'montos_totales']
   },
-  69: {
+  78: {
     name: "recursos",
     category: 'receptor',
     group: 'transferencia',
     bigGroup: 'transferencia',
     matchWith: ['empresa', 'instancia', 'person']
   },
-  70: {
+  79: {
     name: "Monto de la transferencia",
     type: 'currency',
     category: 'monto',
@@ -346,55 +442,60 @@ export const snps_ka = {
     bigGroup: 'transferencia',
     sumWith: ['montos_transferencia', 'montos_totales']
   },
-  72: {
+  /* Otros */
+  80: {
     name: "Nombre de la empresa",
     category: 'empresa',
   },
-  73: {
+  81: {
     name: "Nombre de persona",
     category: 'person',
   },
-  74: {
+  82: {
     name: "Dirección",
     category: 'address',
   },
-  75: {
+  83: {
     name: "RFC",
     category: 'rfc',
   },
-  76: {
+  84: {
     name: "Fecha",
     category: 'date',
   },
-  77: {
+  85: {
     name: "Correo electrónico",
     category: 'email',
   },
-  78: {
+  86: {
     name: "Sitio web",
     category: 'website',
   },
-  79: {
+  87: {
     name: "Teléfono",
     category: 'phone',
   },
-  80: {
+  88: {
     name: "Número de contrato o convenio",
     category: 'convenio',
   },
-  81: {
+  89: {
     name: "Dependencia / Instancia",
     category: 'instancia',
   },
-  82: {
+  90: {
     name: "Monto recibido",
     category: 'monto_recibido',
   },
-  83: {
+  91: {
+    name: "Titulares de instancia",
+    category: 'titular',
+  },
+  92: {
     name: "Monto otorgado",
     category: 'monto_otorgado',
   },
-  84: {
+  95: {
     name: "Comentarios"
   },
 }
