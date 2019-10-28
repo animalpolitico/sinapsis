@@ -127,7 +127,6 @@ export default class DbBuilderToolbar extends React.Component{
   }
 
   saveProject(){
-    console.log('props', this.props);
     if(this.props.parent.viz.nodes){
       this.props.parent.viz.nodes.getScreenshot(function(zip){
         window.dbf.createProjectFile(zip);

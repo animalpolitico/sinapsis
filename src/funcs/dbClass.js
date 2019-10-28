@@ -3,6 +3,7 @@ import 'moment/locale/es';
 import { saveAs } from 'file-saver';
 import { getISO } from '../vars/countriesDict';
 import formatMoney from 'format-money';
+import ConvertDbToCsv from './tocsv';
 moment.locale('es');
 var ntol = require('number-to-letter');
 var slugify = require('slugify');
@@ -1035,12 +1036,34 @@ export default class DbFactory {
   }
 
   /**
+  * Obtiene los CSVs
+  *
+  * @param void
+  * @return array
+  **/
+  createProjectCSVs(){
+    var self = this;
+    /** Bases a CSV */
+    var dbs = this.getDbs();
+    var csvs = [];
+    Object.values(dbs).map(function(db){
+      var c = new ConvertDbToCsv(db);
+      var co = c.getData();
+      co.d = self.arrayToCsv(co.d)
+      csvs.push(co);
+    })
+
+    return csvs;
+  }
+
+  /**
   * Construye un archivo .sinapsis
   *
   * @param void
   * @return Blob
   **/
   createProjectFile(szip){
+
 
     var ev = new Event('sinapsisStartLoad');
     window.dispatchEvent(ev);
@@ -1063,6 +1086,15 @@ export default class DbFactory {
         zip.file('imagenes/'+s_name, _f);
       }
     }
+
+    var csvs = this.createProjectCSVs();
+    if(csvs.length){
+      csvs.map(function(c){
+        zip.file('csv/'+ c.slug +'.csv', c.d);
+      })
+    }
+
+
 
     zip.generateAsync({type: "blob"})
     .then(function(content) {
