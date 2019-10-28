@@ -22,7 +22,7 @@ export const predbs = [
     file: require('../static/csvs/empresas-fantasma-ver.csv')
   },
   {
-    name: 'Privilegios Fiscales (2007-2015)',
+    name: 'Privilegios Fiscales Condonados (2007-2015)',
     country: 'MEX',
     countryLabel: 'México',
     blockEdit: true,
@@ -33,6 +33,19 @@ export const predbs = [
     last: '2019-10-01',
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/pf-7-15.csv')
+  },
+  {
+    name: 'Privilegios Fiscales Cancelaciones (2007-2015)',
+    country: 'MEX',
+    countryLabel: 'México',
+    blockEdit: true,
+    author: 'Fundar',
+    onlyIn: ['MEX'],
+    size: 20,
+    slug: 'estafa-maestra',
+    last: '2019-10-01',
+    flag: require('../static/flags/mexico.svg'),
+    file: require('../static/csvs/pf-cancelaciones-715.csv')
   },
   {
     name: 'SAT Definitivos',
@@ -61,5 +74,33 @@ export const predbs = [
     last: '2019-09-30',
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/sat-pre.csv')
+  },
+  {
+    name: 'SAT Desvirtuados',
+    description: 'Empresas fantasma definitivas',
+    country: 'MEX',
+    onlyIn: ['MEX'],
+    blockEdit: true,
+    countryLabel: 'México',
+    author: 'SAT',
+    size: 3,
+    slug: 'sat-Desvirtuados',
+    last: '2019-09-30',
+    flag: require('../static/flags/mexico.svg'),
+    file: require('../static/csvs/sat-desvirtuados.csv')
+  },
+  {
+    name: 'SAT Favorables',
+    description: 'Empresas fantasma definitivas',
+    country: 'MEX',
+    onlyIn: ['MEX'],
+    blockEdit: true,
+    countryLabel: 'México',
+    author: 'SAT',
+    size: 3,
+    slug: 'sat-favorables',
+    last: '2019-09-30',
+    flag: require('../static/flags/mexico.svg'),
+    file: require('../static/csvs/sat-favorables.csv')
   }
 ]

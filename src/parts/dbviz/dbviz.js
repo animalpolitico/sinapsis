@@ -1834,7 +1834,6 @@ class SSNoResults extends React.Component{
     }
 
     /* Filtros */
-    console.log('this', this.props.n);
     if(this.props.nodes && this.props.nodes.props.categoryToggle){
       var v = this.props.nodes.props.categoryToggle.state;
       if(v.vals.length < 10 || v.bs){

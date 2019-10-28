@@ -75,6 +75,7 @@ export default class SSMap extends React.Component{
       'a': [],
       'b': []
     };
+    var coordsMaster = [];
     var m = this.state.markers;
     m.map(function(d){
       var ename = window.dbf.getEmpresa(d.fromdb, d.empresauid).name
@@ -82,6 +83,7 @@ export default class SSMap extends React.Component{
       var show = false;
       var hasc = false;
       var coords = [d.latlng.lng, d.latlng.lat];
+      coordsMaster.push(coords);
       d3.selectAll('.node[data-id="'+euid+'"]')
         .filter(d => hasc = d.coincidencias > 0);
       var d = {
@@ -109,6 +111,32 @@ export default class SSMap extends React.Component{
         o.b.push(marker);
       }
     })
+
+    /** Promedios **/
+    var pms = {};
+    coordsMaster.map(function(c){
+      var lng = c[0];
+      var lat = c[1];
+
+      lng = Math.round(lng * 10) / 10
+      lat = Math.round(lat * 10) / 10;
+
+      var s = lng+','+lat;
+      if(!pms[s]){
+        pms[s] = 0;
+      }
+      pms[s] = pms[s] + 1;
+    })
+    var fpms = [];
+    var max = 0;
+    for(var key in pms){
+      var coords = key.split(',');
+      max = Math.max(pms[key], max)
+      var marker = <Feature coordinates={coords} properties={{"size": pms[key]}} onClick={(e) => console.log('MARKER', e)}/>
+      fpms.push(marker);
+    }
+    o.fpms = fpms;
+    o.max = max;
     return o;
   }
 
@@ -170,14 +198,15 @@ class Layers extends React.Component{
   }
   render(){
     var markers = this.props.markers;
+
     return(
       <>
-      <Layer type="circle" minZoom={0}
+      <Layer type="circle" minZoom={10}
         paint={
           {
             "circle-radius": {
-              'base': 25,
-              'stops': [[5, 25], [12, 10]]
+              'base': 5,
+              'stops': [[5, 5], [12, 10]]
             },
             "circle-color": "#0072ff",
             "circle-opacity": {
@@ -190,7 +219,7 @@ class Layers extends React.Component{
       </Layer>
       {
         !this.state.onlyCoincidencias ?
-        <Layer type="circle" minZoom={0}
+        <Layer type="circle" minZoom={10}
           paint={
             {
               "circle-radius": {
@@ -208,6 +237,18 @@ class Layers extends React.Component{
         </Layer>
         : null
       }
+
+      <Layer type="circle" minZoom={0}
+        maxZoom={10}
+        paint={
+          {
+            "circle-radius": ["interpolate",["linear"],["get", "size"],0,5,markers.max,40],
+            "circle-color": "#0072ff",
+            "circle-opacity": 0.8
+          }
+        }>
+        {markers.fpms}
+      </Layer>
 
       {
         this.state.st ?

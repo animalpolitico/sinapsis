@@ -193,7 +193,7 @@ export default class DbBuilderToolbar extends React.Component{
             <Dialog open={this.state.openContact} onClose={() => this.setState({openContact: false})}>
               <DialogTitle id="form-dialog-title">¿Necesitas ayuda?</DialogTitle>
               <DialogContent style={{width: 400}}>
-                Si tienes alguna duda, sugerencia, comentario o quieres que precarguemos alguna base de datos a Sinapsis, escríbenos a <a style={{textDecoration: 'underline'}} href="mailto:sinapsis@animalpolitico.com">sinapsis@animalpolitico.com</a> o a nuestro <a style={{textDecoration: 'underline'}} href="https://join.slack.com/t/sinapsissede/shared_invite/enQtODEyODkwNDczODYyLTMxMTAyZTUwZWZhODFmZGVkMjMyNjllMWNiNGRkM2U0YzZkMzFkNmJhMzYyYmJkNmRkZmIxNmRiMTE0NGZlNGY">canal de Slack</a>.
+                ¿Necesitas precargar una bae de datos?, ¿tienes alguna duda, sugerencia o comentario?<br /><br/>- <a style={{textDecoration: 'underline'}} href="mailto:sinapsis@animalpolitico.com">sinapsis@animalpolitico.com</a><br/>- <a style={{textDecoration: 'underline'}} href="https://join.slack.com/t/sinapsissede/shared_invite/enQtODEyODkwNDczODYyLTMxMTAyZTUwZWZhODFmZGVkMjMyNjllMWNiNGRkM2U0YzZkMzFkNmJhMzYyYmJkNmRkZmIxNmRiMTE0NGZlNGY">Canal de Slack</a>
               </DialogContent>
               <DialogActions>
                 <Button color="secondary" onClick={() => this.setState({openContact: false})}>

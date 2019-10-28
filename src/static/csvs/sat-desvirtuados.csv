@@ -1,0 +1,360 @@
+"EMPRESA: 
+Razón social (nombre de la empresa)","EMPRESA: 
+RFC","EMPRESA: 
+Folio mercantil","EMPRESA: 
+Objeto social (descripción de actividades)","EMPRESA: 
+Número de empleados","EMPRESA: 
+Fecha de creación (dd/mm/aaaa)","EMPRESA: 
+Capital social mínimo (con cuánto dinero se registró la empresa)","EMPRESA: 
+Dirección fiscal","EMPRESA: 
+Latitud y longitud (separadas por coma)","EMPRESA: 
+Entidad Federativa (llena esta columna sólo si no tienes la dirección y/o la coordenada geográfica)","EMPRESA: 
+Teléfono","EMPRESA: 
+Web","EMPRESA: 
+Correo electrónico","REP LEGAL: 
+Nombre completo","REP LEGAL: 
+RFC","REP LEGAL: 
+Dirección","REP LEGAL: 
+Latitud y longitud (separadas por coma)","REP LEGAL: 
+Entidad Federativa (llena esta columna sólo si no tienes la dirección y/o la coordenada geográfica)","REP LEGAL: 
+Nombre de la dependencia donde fue funcionario (si es que aplica)","REP LEGAL: 
+Último año en activo de la dependencia donde fue funcionario (si es que aplica)","ACCIONISTAS: 
+Nombre completo (separar nombres con punto y coma)","ACCIONISTAS:
+RFC","ACCIONISTAS: 
+Dirección","ACCIONISTAS: 
+Latitud y longitud (separadas por coma)","ACCIONISTAS: 
+Entidad Federativa (llena esta columna sólo si no tienes la dirección y/o la coordenada geográfica)","ACCIONISTAS: 
+Nombre de la dependencia donde fue funcionario (si es que aplica)","ACCIONISTAS: 
+Último año en activo de la dependencia donde fue funcionario (si es que aplica)","ACCIONISTAS: 
+Capital aportado","ADMIN: 
+Nombre completo","ADMIN: 
+RFC","ADMIN: 
+Dirección","ADMIN: 
+Latitud y longitud (separadas por coma)","ADMIN: 
+Entidad Federativa (llena esta columna sólo si no tienes la dirección y/o la coordenada geográfica)","ADMIN: 
+Nombre de la dependencia donde fue funcionario (si es que aplica)","ADMIN: 
+Último año en activo de la dependencia donde fue funcionario (si es que aplica)","COMIS / CONSE: 
+Nombre completo","COMIS / CONSE: 
+RFC","COMIS / CONSE: 
+Dirección","COMIS / CONSE: 
+Latitud y longitud (separadas por coma)","COMIS / CONSE: 
+Entidad Federativa (llena esta columna sólo si no tienes la dirección y/o la coordenada geográfica)","COMIS / CONSE: 
+Nombre de la dependencia donde fue funcionario (si es que aplica)","COMIS / CONSE: 
+Último año en activo de la dependencia donde fue funcionario (si es que aplica)","NOTARIA: 
+Nombre del notario que firma el acta","NOTARIA: 
+Número de la notaría","NOTARIA: 
+Dirección de la notaría","NOTARIA: 
+Latitud y longitud (separadas por coma)","NOTARIA: 
+Entidad Federativa (llena esta columna sólo si no tienes la dirección y/o la coordenada geográfica)","INFO OFICIAL: 
+Estatus CompraNet (InscritoRUPC, NoInscritoRUPC, RegCompraNet)","INFO OFICIAL: 
+Empresa fantasma o no localizada (SATdefinitiva, SATpresunta, SATdesvirtuada, SATfavorable, ASFnoLocalizada, SinAntReg)","CONTRATO: 
+Empresa, dependencia o instancia que otorga los recursos","CONTRATO: 
+Número de contrato","CONTRATO: 
+Fecha de inicio de contrato","CONTRATO: 
+Fecha de término de contrato","CONTRATO: 
+Servicio/obra realizada","CONTRATO: 
+Nombre de la persona que firma","CONTRATO: 
+Cargo de la persona que firma","CONTRATO: 
+Montos de contratos individuales","CONTRATO: 
+Número de licitación ","CONTRATO: 
+Fecha de fallo de la licitación","CONTRATO: 
+Monto total de la licitación","CONVENIO: 
+Dependencia o instancia que OTORGA los recursos","CONVENIO: 
+Dependencia o instancia que RECIBE los recursos","CONVENIO: 
+Número de convenio","CONVENIO: 
+Fecha de inicio de convenio","CONVENIO: 
+Fecha de término convenio","CONVENIO: 
+Objeto del convenio","CONVENIO: 
+Nombre de la persona que firma (de la dependencia o instancia que OTORGA los recursos)","CONVENIO: 
+Cargo de la persona que firma (de la dependencia o instancia que OTORGA los recursos)","CONVENIO: 
+Nombre de la persona que firma (de la dependencia o instancia que RECIBE los recursos)","CONVENIO: 
+Cargo de la persona que firma (de la dependencia o instancia que RECIBE los recursos)","CONVENIO: 
+Monto total del convenio","CONVENIO: 
+Nombre del titular de la dependencia o instancia que otorga los recurso","CONVENIO: 
+Nombre del titular de la dependencia o instancia que recibe los recurso","TRANSFERENCIA DEPENDENCIA O INSTANCIA: 
+Dependencia o instancia que otorga los recursos","TRANSFERENCIA DEPENDENCIA O INSTANCIA: 
+Monto de transferencias individuales","TRANSFERENCIA DEPENDENCIA O INSTANCIA: 
+Número de convenio relacionado a esta transferencia","TRANSFERENCIAS A ESTA EMPRESA: 
+Empresa que otorga los recursos","TRANSFERENCIAS A ESTA EMPRESA: 
+Monto de transferencias individuales","TRANSFERENCIAS DE ESTA EMPRESA: 
+Empresa a la que le transfirió esta empresa","TRANSFERENCIAS DE ESTA EMPRESA: 
+Monto de transferencias individuales","OTRO: 
+Otras empresas relacionadas a esta empresa (separar con punto y coma)","OTRO: 
+Otras personas relacionadas a esta empresa (separar con punto y coma)","OTRO: 
+Otros domicilios relacionados a esta empresa (separar con punto y coma)","OTRO: 
+Otros RFC relacionados a esta empresa (separar con punto y coma)","OTRO: 
+Otras fechas relacionadas a esta empresa (separar con punto y coma)","OTRO: 
+Otros correos electrónicos relacionados a esta empresa (separar con punto y coma)","OTRO: 
+Otros sitios web relacionados a esta empresa (separar con punto y coma)","OTRO: 
+Otros teléfonos relacionados a esta empresa (separar con punto y coma)","OTRO: 
+Otros números de contratos o convenios relacionados a esta empresa (separar con punto y coma)","OTRO: 
+Otras dependencias o instancias relacionadas a esta empresa (separar con punto y coma","OTRO: 
+Montos recibidos","OTRO: 
+Titulares de instancias de montos recibidos","OTRO: 
+Montos otorgados","NUEVO: 
+Nombre de la categoría (separar con punto y coma)","NUEVO: 
+Contenido (separar con punto y coma)","OTRO: 
+Comentarios adicionales (formato de escritura: libre)"
+"AQUAERIS ACUACULTURA Y ARQUITECTURA SUSTENTABLE, S.C.",AAA091014835,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"INGENIOS SANTOS, S.A. DE C.V.",AAA100303L51,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"AGUILAS DEL CENTRO, S. DE R.L. DE C.V.",ACE121002N40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"AGRÍCOLA CARLOS Y LUIS, S.P.R. DE R.I.",ACL130731KI0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,19/10/2018,,,,,,,,,,,
+"ALEPPO CONSULTORES, S.A. DE C.V.",ACO131014DC4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"ASESORÍA DDAY, S.A. DE C.V. ",ADD130411TF7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+"VBE CONSTRUCCIONES, S.A DE C.V.",AEC111111ENA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/09/2019,,,,,,,,,,,
+AERARIUM S.A. DE C.V.,AER091209LT2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,02/03/2015,,,,,,,,,,,
+"ARRENDADORA EVERSTONE, S.A. DE C.V.",AEV1701123V0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"ATRIUM EXXL, S.A. DE C.V.",AEX131014G81,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"ALEO GRUPO CONSTRUCTOR, S.A. DE C.V.",AGC140411FX5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/03/2018,,,,,,,,,,,
+"AZCAPOTZALCO- LORETO INMOBILIARIO, S.A. .DE C.V.",AIN061226CY2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"ARRENDADORA MAGA, S.A. DE C.V.",AMA071219ED6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"ADEN DE MEXICO, S.A. DE C.V.",AME931004D80,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/03/2018,,,,,,,,,,,
+"ACEROS Y MATERIALES OCTO, S.A. DE C.V.",AMO150812KJ8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"COMPAÑÍA AZUCARERA DE LOS MOCHIS, S.A. DE C.V.",AMO590630LA9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"ACEROS Y PERFILES CUAUHTEMOC, S.A. DE C.V.",APC030624DA3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"ALMASHOW PRODUCCIONES, S.A. DE C.V.",APR140227T3A,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"ACTITUD POSITIVA EN TONER, S. DE R.L. M.I.",APT040201KA5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"ARINCO, S.A. DE C.V.",ARI841214IK4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"ALTERPRAXIS SERVICIOS CORPORATIVOS, S.C.",ASC070703P39,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,23/10/2018,,,,,,,,,,,
+"ACUICOLA TIERRA DE CANAAN, S.A. DE C.V.",ATC0704024I1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,19/10/2018,,,,,,,,,,,
+ALCUDIA DE LA FUENTE DANIEL HERMINIO,AUFD8111263L4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+"BANDERAS ABASTECEDORA, S.A DE C.V.",BAB0108033A5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/01/2018,,,,,,,,,,,
+"BEIRAT ASESORES, S.A. DE C.V.",BAS121220DU9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"BIO CHARTER JETS, S.A. DE C.V.",BCJ110923GL4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"BITFX INFORMATION TECHNOLOGY, S. DE R.L. DE C.V.",BIT110908RJ6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"BASALTOS DEL NORESTE, S.A. DE C.V.",BNO060417AR2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"BITACORE SOLUCIONES, S.A. DE C.V.",BSO090625C67,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"BOUTIQUE TECNOLOGICA, S.A. DE C.V.",BTE100325K42,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"BOMBAS Y TALLERES DE MÉXICO, S.A. DE C.V.",BTM0409096G7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"BIASA TRADING, S.A. DE C.V.",BTR090605MZ7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/03/2018,,,,,,,,,,,
+"CORPORATIVO DE ASESORAMIENTO EMPRESARIAL DEL GOLFO, S.A. DE C.V.",CAE100209QR9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/03/2018,,,,,,,,,,,
+"CONCRETO Y ACERO INDUSTRIAL, S.A. DE C.V.",CAI991014B39,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+CASTILLO LÓPEZ LILIANA ELOÍSA,CALL680723GY6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+CARRASCO SANTOS VICTOR MANUEL,CASV600810FW0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,08/11/2018,,,,,,,,,,,
+"CATOLIMP, S.A. DE C.V.",CAT090625CF4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"CONSTRUCTORA BAI, S.A. DE C.V.",CBA830727EF6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"ESTRUCTURA VL, S.A.P.I. DE C.V.",CBM140913566,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"CORTMAR CONSULTING GROUP, S.A. DE C.V. ",CCG150408U15,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+"CISAV CONSULTING, S.C.",CCO091209PJ4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+"CONSTRUCTORA DAND, S.A. DE C.V.",CDA171101V50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"COMERCIAL DONGU, S.A. DE C.V.",CDO070621HG3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"CEDGUR, S.A. DE C.V.",CED0805124C4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"CORBY ESTRATEGIAS INTEGRALES, S.A. DE C.V.",CEI130717QH6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"CONSULTOR EMBAJADOR DE MÉXICO, S.C.",CEM140221DH5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/01/2018,,,,,,,,,,,
+"COMERCIALIZADORA DE GESTIONES EMPRESARIALES SUMA, S.A. DE C.V.",CGE071217570,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/09/2019,,,,,,,,,,,
+"CHIAPILITA, S.A. DE C.V.",CIA130409SG9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,08/11/2018,,,,,,,,,,,
+"CAAF INTEGRACIÓN CONSTRUCTIVA, S.A. DE C.V.",CIC130131779,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"CONSTRUCCIÓN E INFRAESTRUCTURA GUADIANA, S.A. DE C.V.",CIG091005317,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+CIMEX INTERNACIONAL S.A. DE C.V.,CIN8801057M7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+CONSULTORIA INTEGRAL TAMNNEC SC,CIT101215PF3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"COMERCIALIZADORA LORCA, S. DE R.L. DE C.V.",CLO1101102Y0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+COMERCIALIZADORA MALIBRAN S.A. DE C.V.,CMA071115AU2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,02/03/2015,,,,,,,,,,,
+"CONSTRUCCIONES MIBI, S.A. DE C.V.",CMI160721H69,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"COCKERILL MAINTENANCE & INGENIERE DE MÉXICO CMI, S.A. DE C.V.",CMI991213SG9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"CENTRO MERCANTIL LOGROS, S.A. DE C.V.",CML131223CB1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"CONSTRUCTORA MONTESCLAROS, S.A. DE C.V.",CMO070907SW0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,23/10/2018,,,,,,,,,,,
+"COUNTRA NACIONAL, S.A. DE C.V.",CNA090625KL3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"CITY NETWORKS, S.A. DE C.V. ",CNE111205RT3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+"COMASEMX, S.A. DE C.V.",COM130419AE0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"COMPROSI, S.A. DE C.V.",COM151021TR6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"Constructora Planigrupo, S.A. de C.V",CPL7711285H9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"COMERCIALIZADORA Y PROCESOS SILLAS, S.A. DE C.V.",CPS1207305A2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+CORPORATIVO RADEMI S.A. DE C.V.,CRA081201Q68,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,02/03/2015,,,,,,,,,,,
+"CONSTRUCCIONES REVA, S.A. DE C.V.",CRE090310NA8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/03/2018,,,,,,,,,,,
+"CONSTRUCCIONES RIVERO FRANCO, S. DE R.L. DE C.V. ",CRF080901P47,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"COMBUSTIBLES RIMAN, S.A. DE C.V.",CRI011107EUA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"COMERCIALIZADORA ROWASA, S.A. DE C.V.",CRO0203181R7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+"CONSTRUCTORA RECA DE REYNOSA,S.A. DE C.V.",CRR940307L22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"COMERCIALIZADORA SHOGUN, S.A. DE C.V.",CSH040531497,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"CONSTRUCTORA Y SERVICIOS INMOBILIARIOS JAM, S. DE R.L. DE C.V.",CSI0910174Z0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+COMERCIAL SERVICIOS MADAJUL S.A. DE C.V.,CSM031008RA0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,02/03/2015,,,,,,,,,,,
+"COMUNICACIÓN TECNOLOGICA DE MONTERREY, S.A. DE C.V.",CTM100420G50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+CORPORATIVO VOLAPUK S.A. DE C.V.,CVO0906297W6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,02/03/2015,,,,,,,,,,,
+"CORPORATIVO XIMA, S.A. DE C.V.",CXI0608119M9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"DANVI, S.A. DE C.V.",DAN080512PY0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"DISTRIBUIDORES ASOCIADOS DE LA REPÚBLICA MEXICANA, S.A. DE C.V.",DAR100118G81,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"DESARROLLOS DOMO, S.A. DE C.V.",DDO040519K14,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"DESTINO ENTERTAINMENT, S. DE R.L.",DEN1405273G6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"DISEÑOS INGENIERÍA Y SISTEMAS PARA LA INDUSTRIA Y COMERCIO, S.C.",DIS080521KB5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"DESARROLLO Y LOGÍSTICA EMPRESARIAL DE VERACRUZ, S.C.",DLE021121DK3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"DESARROLLOS LOCSA, S.A. DE C.V. ",DLO000207F23,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"DESARROLLO DE PROYECTOS ALFANI, S.A. DE C.V.",DPA15100983A,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/09/2019,,,,,,,,,,,
+"DESARROLLO PROFESIONAL DE ORGANIZACIONES, S.A. DE C.V.",DPD120420MP2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"DISEÑOS PICOLO MUNDO, S.A. DE C.V.",DPM0607072F1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"DRAKE-MESA, S. DE R.L. DE C.V.",DRA120223821,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"DIPA SOLUTIONS, S.A. DE C.V.",DSO100706KM1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/03/2017,,,,,,,,,,,
+ENTERPRISE CONSULTING GROUP SC ,ECG0205063B3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"EITHEL DISEÑO, S.A. DE C.V.",EDI1403258S1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,12/10/2018,,,,,,,,,,,
+"EMPRESARIOS EMPRENDEDORES DE XALAPA, S.A. DE C.V.",EED1306245R1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"ELECTROMETALES, S.A. DE C.V.",ELE121019BS4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,19/10/2018,,,,,,,,,,,
+"ESTRUCTURA LY, S.A.P.I. DE C.V.",ELY140325JX8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"ENTERPRISE MANAGEMENT SERVICE, S.A. DE C.V. ",EMS050427V82,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/03/2018,,,,,,,,,,,
+ESCOBAR MORENO PEDRO,EOMP530628FH0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,23/10/2018,,,,,,,,,,,
+3E PAYROLL AND TAX S.A. DE C.V.,EPT070903GW3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"ENSERCH RECICLAJES ECOLOGICOS, S.A. DE C.V.",ERE071024FQ2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/09/2019,,,,,,,,,,,
+"ENTERPRISE SOURCE CAPITAL DE MÉXICO, S.A. DE C.V.",ESC110914563,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,08/11/2018,,,,,,,,,,,
+"ESTUDIOS Y SERVICIOS ECOLÓGICOS Y AMBIENTALES DE TABASCO, S.A.P.I. DE C.V.",ESE0501142S4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"ECO TAXIS SULTANA, S.A. DE C.V. ",ETS921119SA2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/03/2017,,,,,,,,,,,
+"EXPENSUM, S.A. DE C.V. ",EXP130207PU0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"FK AUTOMOTRIZ SERVICE CENTER, S. DE R.L. DE C.V.",FAS140903D89,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,08/11/2018,,,,,,,,,,,
+"FORO CONSTRUCCIONES, S.A. DE C.V.",FCO980512JD6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"FIRMA INTELECTUAL DE MANEJO EMPRESARIAL, S.A. DE C.V.",FIM101018T34,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"FABRICACIONES Y MECANIZACIONES DE CULIACÁN, S.A. DE C.V.",FMC040908QA1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"FGSS DE MONTERREY, S.A.  DE C.V.",FMO1006108L7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"FODEQ, S.A. DE C.V.",FOD100331TLA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"FOTOLITO, S.A. DE C.V.",FOT930706EU7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"FARMACIAS Y SIMILARES LATINOAMERICANOS, S.A. DE C.V.",FSL020312KM1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"FRACCIONAMIENTOS URBANOS EFICIENTES, S.A. DE C.V.",FUE1010083G1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"GRUPO CIEN DE LA ANGELÓPOLIS, S.C.",GCA130617KE5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,12/10/2018,,,,,,,,,,,
+"GLABAL CRECIMIENTO EN CUENTAS, S. DE R.L. DE C.V. ",GCE1008262I0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/09/2019,,,,,,,,,,,
+"GRUPO DEHM, S.A. DE C.V.",GDE060919MK5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"GEOTECNIA Y DESARROLLO DE INFRAESTRUCTURA, S.A. DE C.V.",GDI010116TK8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"GRUPO EL-ROI, S.A. DE C.V. ",GEL120905KE8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"GENTE EN EXCELENCIA, S.C.",GEX040107SRA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"GRUPO INDUSTRIAL ANCOR, S.A. DE C.V.",GIA120709BR3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+"GRUPO INDUSTRIAL DE TABASCO, S.A. DE C.V.",GIT0802279B8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"GRUPO KURGAND, S.A. DE C.V. ",GKU120515KE4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+GRUPO LIFAR S.C. DE R.L. DE C.V.,GLI040729JX2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,02/03/2015,,,,,,,,,,,
+"GREEN LEMON MEDIA, S.A. DE C.V.",GLM080305H85,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"GRUPO LOST, S.A. DE C.V.",GLO0812117P1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,23/10/2018,,,,,,,,,,,
+"GOLDMEDIA, S.C.",GOL130411DA4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+"GRECO PROMOTORA, S.A. DE C.V.",GPR890822V14,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"GRUPO RODTAM, S.A. DE C.V.",GRO100713JE2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"GALBIN SEGURIDAD PRIVADA, S.A. DE C.V.",GSP000616FV4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"GREENE´S SERVICES MEXICO, S. DE R.L. DE C.V.",GSS12081655A,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+GUTIERREZ LÓPEZ GERARDO,GULG7210027L5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"GYMFORUS,, S.A. DE C.V.",GYM101022A86,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"GRUPO ZARAJI, S.A. DE C.V.",GZA150508IC6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,12/10/2018,,,,,,,,,,,
+"HAZEN, S.A. DE C.V.",HAZ0712031N7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"HG DISEÑO EN UNIFORMES, S.A. DE C.V.",HDU090427NZ6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"HORUS GRUPO EMPRESARIAL, S.A. DE C.V.",HGE0704133L6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"INMOBILIARIA ALSO, S.A. DE C.V.",IAL950529EN7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"INMOBILIARIA BOSQUES DE LA SIERRA, S.A. DE C.V.",IBS0212113V7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"IKER COMUNICACIONES, S. DE R.L. M.I.",ICO120305CR9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"INMOBILIARIA CYOM, S.A. DE C.V.",ICY071108CE9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"INTEGRATION ENGINEERING AND CONSTRUCTION SYSTEMS, S.A. DE C.V.",IEC011022QF7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"INTERNATIONAL EXCHANGE MÉXICO, S.A. DE C.V.",IEM0710317P6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"INMOBILIARIA FORESTA, S.A. DE C.V.",IFO050531BI6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,08/11/2018,,,,,,,,,,,
+"INKO IMPRESORES, S.A. DE C.V.",IIM160128AH3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"INTEGRA LIDERAZGO EN RECICLAJE, S.A. DE C.V.",ILR130903S89,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"INMOBISPOT MÉXICO, S.A. DE C.V.",IME150326IB9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"INTERSERVICIOS DE NEGOCIOS, S.C.",INE080215D10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+"INMANDECO, S.A. DE C.V. ",INM111111D81,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/01/2018,,,,,,,,,,,
+"INTEGRASUAR, S.A. DE C.V.",INT1611225X9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/09/2019,,,,,,,,,,,
+"INTEGRASUGU, S.A. DE C.V.",INT161122B63,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/09/2019,,,,,,,,,,,
+"INVERSIONES OPM, S.A. DE C.V.",IOP131204FH7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,23/10/2018,,,,,,,,,,,
+"IMPULSORA DE PROYECTOS CAMBERRI, S.A. DE C.V.",IPC120110269,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"INNOVACIONES PRÁCTICAS MESOL, S. DE R.L. DE C.V.",IPM160209QT3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"INK SERVICES APP, S.A. DE C.V.",ISA120424R79,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"INSTITUTO DE SERVICIOS DE CAPACITACION Y ASESORIA PROFESIONAL, S.C.",ISC061207IF5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/09/2019,,,,,,,,,,,
+INGENIERIA Y TECNICAS ESPECIALIZADAS S.A. DE CV.,ITE800303BK0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"INNOVACIÓN TECNOLÓGICA AL SECTOR AGRÍCOLA, AC",ITS150130HF6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,23/10/2018,,,,,,,,,,,
+"INMUEBLES UIS, S.A. DE C.V.",IUI070702988,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"JAJOMAR, S.A. DE C.V.",JAJ000823DE9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"JUNI SERRA, S. DE R.L. DE C.V.",JSE130830LY0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,08/11/2018,,,,,,,,,,,
+"KNP ABOGADOS, S.C.",KAB140925I29,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/01/2018,,,,,,,,,,,
+"KERS SERVICES, S.A. DE C.V.",KSE140211GC6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"LMG ADMINISTRADORES, S.C.",LAD130410D71,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"LOGISTICA EMPRESARIAL BRESON, S.A. DE C.V.",LEB150923S28,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"LENUBAC, S.A. DE C.V.",LEN120413R17,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"LIKEABLE MEDIA MÉXICO, S.A.P.I. DE C.V.",LMM130711NW5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+LÓPEZ AGUILAR MARÍA GUDELIA,LOAG570216G87,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+LOPEZ ORTIZ JORGE OCTAVIO,LOOJ61081282A,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/09/2019,,,,,,,,,,,
+"LOGISTIC SORSAL, S.A. DE C.V.",LSO120427L51,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+"MANUFACTURA AVANZADA DE PRODUCTOS DE PRECISION, S.A. DE C.V.",MAP120117FQ9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"MAZZTING, S.A. DE C.V.,",MAZ1302117T3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"MOY BAJA, S.A. DE C.V. ",MBA070705U6A,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+"MAPLE BIENES RAICES, S.A. DE C.V. ",MBR061114K85,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+MATERIALES Y COMODITIES S.A. DE C.V.,MCO100820RU2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,02/03/2015,,,,,,,,,,,
+"MGB CONCRETOS, S.A. DE C.V.",MCO150312674,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"MERC-X, S.A. DE C.V. ",MER131021328,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"MERLON, S.A. DE C.V. ",MER990813SCA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,18/12/2018,,,,,,,,,,,
+"MARATHON FG DEL NORTE, S.A. DE C.V.",MFN1006109W4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"MINAJARO, S.A. DE C.V.",MIN110330C22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"MOBILE TECHNOLOGY 24, S.A. DE C.V.",MTV140321553,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+MUÑOZ HERNÁNDEZ  J. REFUGIO,MUHJ650219LGA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/03/2018,,,,,,,,,,,
+"NAVARRO ACEVES GRUPO CONSTRUCTOR, S.A. DE C.V.",NAG0304041H5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+NAVARRETE PADILLA JESUS ARMANDO,NAPJ760914HNA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"NEOMEGA CONSTRUCCIONES, S.A. DE C.V.",NCO1012101Z7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,23/10/2018,,,,,,,,,,,
+"""NORTE EMPRESARIAL CONSULTORES"", S.C.",NEC080911KC1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"NITICOLOR, S.A. DE C.V.",NIT1411243C7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"NUBAJ Y NUBAJ CONSULTING, S.A. DE C.V.",NNC121031D79,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,19/10/2018,,,,,,,,,,,
+"E-NNOVATIVE SOLUTIONS, S.A. DE C.V.",NSO020827HX4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"OBRAS Y CAMINOS BO, S.A. DE C.V.",OCB110707GK1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/01/2018,,,,,,,,,,,
+"OPERADORA EMPRESARIAL CIEN DE MÉXICO, S.A. DE C.V.",OEC1308301Z6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"OPERADORA DE INSTALACIONES MARÍTIMAS, S.A. DE C.V.",OIM140704175,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"OPERACION INACS, S. DE R.L. DE C.V.",OIN160708L48,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/03/2018,,,,,,,,,,,
+"OPERADORA DE SERVICIOS NAYKANT, S.A. DE C.V.",OSN120727BV8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"OPERADORA VICMA, S.A. DE C.V.",OVI0107277H7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"OPERADORA VIVEREGIO, S.A. DE C.V.",OVI1204205E4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,12/10/2018,,,,,,,,,,,
+"PACIFIC.COM.MX, S.A. DE C.V.",PCM020219JQ6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"PARK DEVELOPMENT, S. DE R.L. DE C.V.",PDE081009UJ6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"PROVEN EFECTIVENESS, S.A. DE C.V.",PEF110805PG6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+PÉREZ SÁNCHEZ ALEX WILBER,PESA730920DD3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+" PALMA FRUT, S.P.R. DE R.L. DE C.V.",PFR080919LR2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,08/11/2018,,,,,,,,,,,
+"PACIFIC GENESIS DE MÉXICO, S. DE R.L. DE C.V.",PGM130227R59,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"PARQUE INDUSTRIAL APODACA, S.A. DE C.V.",PIA980421QT4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"PUNTO DE INICIO EVALUACIÓN DE PROYECTOS, S.A. DE C.V.",PIE121206VC1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"PROYECTOS INMOBILIARIOS STRATA TERRA, S.A.P.I. .DE C.V.",PIS0809087E5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"PLSM, S. DE R.L. DE C.V.    ",PLS010430M88,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"PLAZA MAGNOLIA, S.A. DE C.V.",PMA021223QQ4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/01/2018,,,,,,,,,,,
+"PROYECTO MONTALVO, S.A. DE CV",PMO070621IZ1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+SOCIEDAD COOPERATIVA DE PRODUCCION PESQUERA SISTEMAS LAGUNARES SC DE RL DE CV.,PPS1003199X8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,08/11/2018,,,,,,,,,,,
+"PUNTO ROJO SERVICIOS ACTIVOS, S.A. DE C.V.",PRS111213MG9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"PROYECTOS Y SOLUCIONES GPS, S.A. DE C.V. ",PSG151007AD7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"POINT TO POINT LOGISTIC, S.A. DE C.V.",PTP140121EU3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"PRODUCTORES EL VALLE DE EL PORTON, S.P.R. DE R.I.",PVP121107HN5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,23/10/2018,,,,,,,,,,,
+"QUINSO ESTRATEGIAS Y SOLUCIONES EMPRESARIALES, S.A. DE C.V.",QES150112V73,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+"QUALITY SERVICE, S.A. DE C.V.",QSE980129NX8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"QUALTEL, S.A. DE C.V.",QUA0703017X6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+QUIHUIS VELAZQUEZ JORGE ABRAHAM,QUVJ7905023ZA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/01/2018,,,,,,,,,,,
+"RANCHO EL CONDE DE SAN JAVIER, S.P.R. DE R.L. DE C.V.",RCD070820GE7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/09/2019,,,,,,,,,,,
+"RENTOTE, S.A. DE C.V.",REN121210GN9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+ROBLES  BARRAGÁN VICTOR HUGO,ROBV611013LX9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+ROMERO PRIEGO JOSE MANUEL,ROPM640921I40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+RODRIGUEZ RASCON WSBALDO,RORW710516FJ3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"REALIZACIÓN DE VALORES REGIOMONTANOS, S.A. DE C.V.",RVR160701M85,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+SURTIDORA DE ALAMBRES Y ACEROS DEL BAJIO S.A. DE C.V.,SAA950320965,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,02/03/2015,,,,,,,,,,,
+SÁNCHEZ ARIAS GILBERTO,SAAG691230KYA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"SISTEMAS DE AGUA LIMPIA, S.A. DE C.V.",SAL1111304V6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+SANTIAGO LÓPEZ NELLY,SALN790417EW7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"SOLUCIONES ADMINISTRATIVAS Y TECNOLOGICAS SANTA LUCIA, S.A. DE C.V.",SAT130422855,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"SERVICIOS CORPORATIVOS PEMOBO, S.A. DE C.V.",SCP150803A63,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,
+SERNA BARRIGA JOSÉ CRUZ,SEBC7011152S6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/03/2018,,,,,,,,,,,
+"SEGUMER, S.A. DE  C.V.",SEG080424BG9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"SERVICIOS E INSUMOS TAP, S.A. DE C.V.",SEI1008305L6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"SERVIASIST, S. DE R.L. DE C.V.",SER0811114H2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"SICROMIN, S.A DE CV",SIC090625PK5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"SMART ISTAY MGFS, S.A. DE C.V.",SIM161031KW7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"SOLECI, S.A. DE C.V.",SOL080424RF9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"SOLUSEC, S.A. DE C.V.",SOL1504093D5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/09/2019,,,,,,,,,,,
+"SOZIUS, S.A. DE C.V.",SOZ090612L45,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,12/10/2018,,,,,,,,,,,
+"SPYGA PERSONAL, S.A. DE C.V.",SPE090513NF1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"SELEX RECURSOS HUMANOS, S.A. DE C.V.",SRH1012176I8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"SÚPER SERVICIO 11, S.A. DE C.V.",SSO941018H51,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"SUPER SERVICIO VARGAS, S.A. DE C.V.",SSV551209UP7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"SINDICATO VENUSTIANO CARRANZA DE TRABAJADORES ADMINISTRATIVOS DEL TRANSPORTE, INGENIERÍA, SERVICIOS Y DE LA CONSTRUCCIÓN, SIMILARES Y CONEXOS",SVC100428TJ3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+TELAS Y AVIOS MACHUME S.A. DE C.V.,TAM100218TS9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,02/03/2015,,,,,,,,,,,
+"TAYSON, S.A. DE C.V.",TAY030228QX1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"TRANSFER, S.A. DE C.V.",TFE081229FV2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"TRANSPORTES GV DEL NORTE, S.A. DE C.V. ",TGN110317K51,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"TRANSPORTES LEO'S, S.A. DE C.V.",TLE0810137L1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"TRANSPORTES MINOTAURO, S.A. DE C.V.",TMI091208IR0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,07/12/2017,,,,,,,,,,,
+"TORRE MAYOR MANAGEMENT, S.C.",TMM150309UF0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,12/10/2018,,,,,,,,,,,
+TORRES JOSE RUBEN,TORU641203625,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,06/03/2017,,,,,,,,,,,
+"TERRANOVA PROCESS TECHNOLOGIES, S.A. DE C.V.",TPT110803LZ0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+"TRANSMOCASA, S.A. DE C.V.",TRA121116HLA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,30/08/2018,,,,,,,,,,,
+"TERRA REGIA, S.A. DE C.V.",TRE040421KI8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"TELEFONÍA Y REDES DEL SUR, S.A. DE C.V.",TRS020606879,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/03/2018,,,,,,,,,,,
+THREE S INC. DE MEXICO S. DE R.L. DE C.V.,TSI1208282A4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"TERRA VITAL INMOBILIARE, S.A DE C.V.",TVI0811258E8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+ROUTES CONSTRUCCIÓN S.A. DE C.V.,UCJ070725MC4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,26/09/2018,,,,,,,,,,,
+"URBANIZADORA DE JESUS, S.A. DE C.V.",UJE0205021X4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"VISION CORPORATIVA ARNO, S.A. DE C.V",VCA1509232P7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,29/03/2019,,,,,,,,,,,
+"VÍA DIRECTA, S.A. DE C.V.",VDI020717A51,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/03/2018,,,,,,,,,,,
+VILLASEÑOR ALCALA GABRIEL,VIAG8612149I8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+VILLEGAS GARDEA FRANCISCO XAVIER,VIGF7910171W8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/06/2017,,,,,,,,,,,
+"VICTOR SYSTEMS, S.A. DE C.V.",VSY970131BI6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/09/2019,,,,,,,,,,,
+ZAMARRIPA LEYVA VICTOR,ZALV540728H53,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,13/10/2017,,,,,,,,,,,
+ZERMEÑO HURTADO DORA ANGELICA,ZEHD630424369,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,09/03/2018,,,,,,,,,,,
+"ZAFIRO INDUSTRIAL TDM, S.A. DE C.V. ",ZIT150707U64,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SATdesvirtuados,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,27/06/2019,,,,,,,,,,,

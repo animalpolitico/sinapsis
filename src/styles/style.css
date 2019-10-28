@@ -948,7 +948,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
     .db_empresa_edit .db_empresa_container_form_divider {
       width: 100%;
       height: 1px;
-      background: #333;
+      background: white;
       margin: 1rem 0; }
     .db_empresa_edit .db_empresa_container_form .MuiExpansionPanelDetails-root {
       padding: 5px 16px !important; }

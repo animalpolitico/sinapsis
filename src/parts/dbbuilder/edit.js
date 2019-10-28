@@ -203,6 +203,7 @@ export default class DbEditEmpresa extends React.Component{
 
         </div>
         <div className="db_empresa_container_form">
+          <div className="db_empresa_container_form_divider"></div>
           <DbFormGroupInfoGeneral empresa={this.props.empresa} parent={this} ref={(ref) => this.infoGeneral = ref}>
             <DbFormGroupPersonas dbid={this.props.db.id} empresa={this.props.empresa} parent={this} />
             <DbFormGroupNotaria empresa={this.props.empresa} parent={this} />
