@@ -118,7 +118,7 @@ export default class SSMap extends React.Component{
       var lng = c[0];
       var lat = c[1];
 
-      lng = Math.round(lng * 10) / 10
+      lng = Math.round(lng * 10) / 10;
       lat = Math.round(lat * 10) / 10;
 
       var s = lng+','+lat;
@@ -128,13 +128,60 @@ export default class SSMap extends React.Component{
       pms[s] = pms[s] + 1;
     })
     var fpms = [];
+    var tpms = [];
     var max = 0;
+
+    var _tmp = [];
     for(var key in pms){
-      var coords = key.split(',');
-      max = Math.max(pms[key], max)
-      var marker = <Feature coordinates={coords} properties={{"size": pms[key]}} onClick={(e) => console.log('MARKER', e)}/>
-      fpms.push(marker);
+      _tmp.push([pms[key], key]);
     }
+
+    _tmp = _tmp.sort(function(a, b){
+      return b[0] - a[0];
+    })
+
+
+    _tmp.map(function(e){
+      var key = e[1];
+      var s = e[0];
+      var coords = key.split(',');
+      var cc = [];
+      coords.map(function(_c){
+        cc.push(parseFloat(_c));
+      })
+
+      coords = cc;
+
+      max = Math.max(s, max)
+      var marker = <Feature
+                      coordinates={coords}
+                      properties={{"size": pms[key]}}
+                      onClick={(e) => self.setState({defaultZoom: [e.lngLat.lng, e.lngLat.lat], zoom: 10})}
+                      onMouseEnter={function(e){
+                        document.getElementsByClassName('mapboxgl-canvas')[0].style.cursor = "pointer";
+                      }}
+                      onMouseLeave={function(){
+                        document.getElementsByClassName('mapboxgl-canvas')[0].style.cursor = "grab";
+                      }}
+                    />
+      fpms.push(marker);
+
+      var marker = <Feature
+                      coordinates={coords}
+                      properties={{"size": pms[key]}}
+                      onMouseEnter={function(e){
+                        document.getElementsByClassName('mapboxgl-canvas')[0].style.cursor = "pointer";
+                      }}
+                      onMouseLeave={function(){
+                        document.getElementsByClassName('mapboxgl-canvas')[0].style.cursor = "grab";
+                      }}
+                    />
+      tpms.push(marker);
+
+    })
+
+
+    o.tpms = tpms;
     o.fpms = fpms;
     o.max = max;
     return o;
@@ -198,7 +245,6 @@ class Layers extends React.Component{
   }
   render(){
     var markers = this.props.markers;
-
     return(
       <>
       <Layer type="circle" minZoom={10}
@@ -242,12 +288,31 @@ class Layers extends React.Component{
         maxZoom={10}
         paint={
           {
-            "circle-radius": ["interpolate",["linear"],["get", "size"],0,5,markers.max,40],
+            "circle-radius": ["interpolate",["linear"],["get", "size"],0,4,markers.max,40],
             "circle-color": "#0072ff",
             "circle-opacity": 0.8
           }
         }>
         {markers.fpms}
+      </Layer>
+
+      <Layer
+        type="symbol"
+        minZoom={0}
+        maxZoom={10}
+        layout={
+          {
+            "text-field": ["get", "size"],
+            "text-size": ["interpolate",["linear"],["get", "size"],0,9,markers.max,40]
+          }
+        }
+        paint={
+          {
+            "text-color": "#f6f6f6"
+          }
+        }
+      >
+        {markers.tpms}
       </Layer>
 
       {
@@ -256,17 +321,25 @@ class Layers extends React.Component{
           coordinates={this.state.d.coords}
         >
         <div className="ss_map_tooltip">
-          <div className="ss_map_tooltip_type">
-            {this.state.d.type}
-          </div>
-          <div className="ss_map_tooltip_ename">
-            {this.state.d.name}
-          </div>
+          {
+            this.state.d.type !== "fpms" ?
+            <>
+            <div className="ss_map_tooltip_type">
+              {this.state.d.type}
+            </div>
+            <div className="ss_map_tooltip_ename">
+              {this.state.d.name}
+            </div>
+            </>
+          : null }
           <div className="ss_map_tooltip_name">
-            {this.state.d.value}
+            {
+              this.state.d.type == "fpms" ?
+              (this.state.d.size + ' direcciones')
+              :
+              this.state.d.value
+            }
           </div>
-
-
         </div>
       </Popup>
       : null
