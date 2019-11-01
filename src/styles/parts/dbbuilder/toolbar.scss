@@ -52,15 +52,20 @@
         box-sizing: border-box;
         padding-right: 1rem;
         .ss_db_ctas_custom_send{
-          background: blue;
           margin-left: 0.75rem;
           margin-right: 0.25rem;
+          line-height: 1;
+          img{
+            width: 15px;
+            margin-left: 0.5rem;
+          }
           .material-icons{
             cursor: pointer;
             line-height: 1;
             font-size: 1.2rem;
             color: #f6f6f6;
             @extend .cy;
+            transform: translateY(-60%);
             &:hover{
               opacity: 0.8;
             }

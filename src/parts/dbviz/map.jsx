@@ -95,7 +95,17 @@ export default class SSMap extends React.Component{
         value: d.value
       }
       var marker = <Feature coordinates={coords}
-                            onClick={() => self.openMarker(d)}
+                            onClick={function(e){
+                              var f = e.feature;
+                              var l = f.layer;
+
+                              console.log('f', f);
+
+                              var a = ['match', ['get', 'id'], f.properties.id, '#ec991d', "#0072ff"];
+
+                              self.mapApi.setPaintProperty(l.id, 'circle-color', a);
+                              self.openMarker(d);
+                            }}
                             onMouseEnter={function(e){
                               document.getElementsByClassName('mapboxgl-canvas')[0].style.cursor = "pointer";
                               self.layers.setState({d: d, st: true})
@@ -229,6 +239,7 @@ export default class SSMap extends React.Component{
         style={mapboxKeys.style}
         center={this.state.defaultZoom}
         zoom={[this.state.zoom]}
+        onStyleLoad={(m) => this.mapApi = m}
       >
       <ZoomControl position="bottom-right"/>
       <Layers markers={markers} ref={(ref) => this.layers = ref} />

@@ -30,7 +30,7 @@ import DbFactory from '../funcs/dbClass';
 import DbBuilderToolbar from '../parts/dbbuilder/toolbar';
 import DbEditEmpresa from '../parts/dbbuilder/edit';
 import DbViz from '../parts/dbviz/dbviz';
-
+import DbMobileAlert from '../parts/dbbuilder/mobilealert';
 
 import oldToNew from '../funcs/oldSinapsisToNew';
 import { predbs } from '../vars/rel';
@@ -52,6 +52,8 @@ var startLoad = new Event('sinapsisStartLoad');
 var endLoad = new Event('sinapsisEndLoad');
 var slugify = require('slugify');
 
+var mobile = require('is-mobile');
+
 
 
 
@@ -65,7 +67,8 @@ export default class DbBuilderPage extends React.Component{
     uid: null,
     hasloaded: false,
     showfps: false,
-    fromFile: false
+    fromFile: false,
+    loadedDbs: []
   }
 
   componentDidMount(){
@@ -199,12 +202,13 @@ export default class DbBuilderPage extends React.Component{
     window.dbf.obj.dbs = {};
     window.dbf.obj.dbs[j.id] = j;
     window.dbf.obj.dbs[j.id].country = "MEX";
+    window.dbf.obj.hasEstafa = true;
 
     this.props.history.push(buildLink('/construir/estafa-maestra'));
 
     this.setState({
       showcontrol: false,
-      hasloaded: true
+      hasloaded: true,
     })
 
     if(f){
@@ -301,8 +305,13 @@ export default class DbBuilderPage extends React.Component{
     if(!this.state.showcontrol){
       var title = "Proyecto: " + window.dbf.obj.info.name;
     }
+    var cs = ["ss_page"];
+    if(mobile()){
+      cs.push('ss_mobile');
+    }
+
     return(
-      <div className="ss_page">
+      <div className={cs.join(' ')}>
         <Helmet>
           <title>{title + ' >> Sinapsis'}</title>
         </Helmet>
@@ -320,6 +329,11 @@ export default class DbBuilderPage extends React.Component{
             <DbInicio parent={this}/>
           :
             <div>
+              {
+                mobile() ?
+                <DbMobileAlert />
+                : null
+              }
               <DbBuilderToolbar parent={this} ref={(ref) => this.toolbar = ref}/>
               <div className="ss_dbbuilder">
                 <DbBuilderSidebar ref={(ref) => this.sidebar = ref} parent={this}/>
@@ -390,7 +404,7 @@ class DbInicio extends React.Component{
               </div>
             </div>
 
-            <div className="ss_db_choose_td">
+            <div className="ss_db_choose_td ss_db_estafa">
               <div
                 onClick={() => this.props.parent.loadEstafa()}
                 className="ss_db_choose_td_c"
@@ -408,6 +422,18 @@ class DbInicio extends React.Component{
                 <Icon>visibility</Icon>
               </div>
             </div>
+            <div className="ss_db_choose_td" onClick={() => this.props.parent.startNewProject()}>
+              <div className="ss_db_choose_td_c"   style={{backgroundImage: "url('"+  require('../static/ty-new.png') +"')"}}>
+                <div className="ss_db_choose_td_c_d">
+                  <div className="ss_db_choose_td_c_l"></div>
+                  <div className="ss_db_choose_td_c_c"></div>
+                </div>
+                <Icon>add</Icon>
+                <div className="ss_db_choose_td_label">
+                  Nuevo proyecto
+                </div>
+              </div>
+            </div>
             <div className="ss_db_choose_td">
               <div className="ss_db_choose_td_c" style={{backgroundImage: "url('"+  require('../static/ty-cargar.png') +"')"}}>
                 <div className="ss_db_choose_td_c_d">
@@ -421,23 +447,12 @@ class DbInicio extends React.Component{
                   onChange={(e) => this.props.parent.loadFile(e)}
                 />
                 <div className="ss_db_choose_td_label">
-                  Cargar proyecto
+                  Cargar proyecto anterior<br/><span>(solo archivos .sinapsis)</span>
                 </div>
                 <Icon>keyboard_capslock</Icon>
               </div>
             </div>
-            <div className="ss_db_choose_td" onClick={() => this.props.parent.startNewProject()}>
-              <div className="ss_db_choose_td_c"   style={{backgroundImage: "url('"+  require('../static/ty-new.png') +"')"}}>
-                <div className="ss_db_choose_td_c_d">
-                  <div className="ss_db_choose_td_c_l"></div>
-                  <div className="ss_db_choose_td_c_c"></div>
-                </div>
-                <Icon>add</Icon>
-                <div className="ss_db_choose_td_label">
-                  Nuevo proyecto
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
@@ -737,13 +752,20 @@ class DbView extends React.Component{
   }
 
   delete(){
-    window.dbf.deleteDb(this.state.db);
-    this.props.parent.fetchDbs();
-    window.dispatchEvent(onBigChanges);
-    this.setState({
-      showDeleteDialog: false
-    })
-    this.empresalist.closeDrawer();
+    console.log('deleting');
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
+    var self = this;
+    setTimeout(function(){
+      window.dbf.deleteDb(this.state.db);
+      self.props.parent.fetchDbs();
+      window.dispatchEvent(onBigChanges);
+      self.setState({
+        showDeleteDialog: false
+      })
+      self.empresalist.closeDrawer();
+    }, 500)
+
+
   }
 
   toggleView(){
@@ -1325,8 +1347,13 @@ class DbDbsNavigationNewDb extends React.Component{
               if(predb.onlyIn){
                 var ok = predb.onlyIn.indexOf(getLang()) > -1;
               }
+              var blockEstafa = false;
+              if(predb.name == "Estafa Maestra" && window.dbf.obj.hasEstafa){
+                blockEstafa = true;
+              }
+
               if(ok){
-                return <PreDb disabled={self.state.loadedDbs.indexOf(predb.name) > -1} parent={self} p={predb} />
+                return <PreDb disabled={self.state.loadedDbs.indexOf(predb.name) > -1 || blockEstafa} parent={self} p={predb} />
               }else{
                 return null;
               }
@@ -1460,11 +1487,17 @@ class DbDbsNavigationTd extends React.Component{
 
   deleteDb(){
     window.dispatchEvent(startLoad);
-    window.dbf.deleteDb(this.props.db);
-    this.props.parent.fetchDbs();
-    window.dispatchEvent(onBigChanges);
-    this.handleDeleteClose();
-    window.dispatchEvent(new Event('sinapsis_close_edit'));
+    var self = this;
+
+    setTimeout(function(){
+      window.dbf.deleteDb(self.props.db);
+      self.props.parent.fetchDbs();
+      window.dispatchEvent(onBigChanges);
+      self.handleDeleteClose();
+      window.dispatchEvent(new Event('sinapsis_close_edit'));
+    }, 1000);
+
+
   }
 
   changeDbName(){

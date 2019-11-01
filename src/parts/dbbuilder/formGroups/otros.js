@@ -199,7 +199,6 @@ export default class DbFormGroupOtros extends React.Component{
                 {/* Selecciona el tipo de persona */}
                 <select onChange={(e) => this.onSelectOtrosType(e)} value={this.state.category}>
                   <option value="-" selected disabled>Tipo</option>
-                  <option value="empresa">Empresa relacionadas a esta empresa</option>
                   <option value="person">Persona relacionada a esta empresa</option>
                   <option value="address">Domicilio relacionado a estra empresa</option>
                   <option value="rfc">{_t('RFC')} relacionado a esta empresa</option>
@@ -314,7 +313,7 @@ class OtrosRow extends React.Component{
         v = formatMoney(v);
       }
     }catch(ex){
-      
+
     }
 
     s = s + v;

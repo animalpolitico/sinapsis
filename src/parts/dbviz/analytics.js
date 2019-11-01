@@ -21,11 +21,28 @@ export default class Analytics extends React.Component{
     })
   }
 
+  componentDidUpdate(pp, ps){
+    if(pp.r !== this.props.r){
+      this.set();
+    }
+
+  }
+
+
   set(){
     var kis = Object.keys(window.dbf.getDbs());
+    var odbs = window.dbf.omitDbs;
+
+    var k = [];
+    kis.map(dbid => odbs.indexOf(dbid) == -1 ? k.push(dbid) : null);
+
+    console.log('K', kis, k);
+
     this.setState({
-      activeDbs: kis
+      activeDbs: k,
+      omitDbs: odbs
     })
+    window.dispatchEvent(new Event('sinapsisEndLoad'));
   }
 
   fnumber(n){
@@ -76,6 +93,7 @@ export default class Analytics extends React.Component{
   getActiveDbs(){
     var adbs = this.state.activeDbs;
     var o = [];
+    var odbs = window.dbf.omitDbs;
     adbs.map(function(dbid){
       o.push(window.dbf.getDb(dbid));
     })
@@ -105,12 +123,13 @@ export default class Analytics extends React.Component{
             <AnalyticsTop10 rand={this.state.rand} m={top10m} ref={(ref) => this.top = ref} parent={this} active={this.state.activeDbs}/>
             : null
           }
-          <AnalyticsPie isBr={false} invert={true} title="Información del llenado" rand={this.state.rand} ref={(ref) => this.pies = ref} parent={this} analytics={analytics} active={this.state.activeDbs}/>
           {
             isMexico() ?
             <AnalyticsPie isBr={true} invert={false} rand={this.state.rand} title="Banderas rojas" parent={this} analytics={analyticsBR} active={this.state.activeDbs}/>
             : null
           }
+          <AnalyticsPie isBr={false} invert={true} title="Información del llenado" rand={this.state.rand} ref={(ref) => this.pies = ref} parent={this} analytics={analytics} active={this.state.activeDbs}/>
+          <div style={{width: '100%', height: '3rem'}}></div>
         </div>
       </div>
     )
@@ -263,6 +282,12 @@ class AnalyticsPie extends React.Component{
       break;
       case "SATpresunta":
         o = "SAT presunta";
+      break;
+      case "SATfavorables":
+        o = "SAT favorable";
+      break;
+      case "SATdesvirtuados":
+        o = "SAT desvirtuada";
       break;
       case "NoInscritoRUPC":
         o = "no inscrito en RUPC";
@@ -510,6 +535,7 @@ class AnalyticsControl extends React.Component{
     var self = this;
     var dbs = Object.values(window.dbf.getDbs());
     var active = this.props.active;
+    console.log('Active', active);
     var areall = dbs.length == active.length;
     return(
       <div className="ss_analytics_choose ss_analytics_montos">

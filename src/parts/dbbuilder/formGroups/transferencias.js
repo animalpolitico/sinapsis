@@ -78,15 +78,21 @@ export default class DbFormGroupTransferencias extends React.Component{
   }
 
   add(){
-    var fs = this.state.fields;
-    var _f = fs;
-    var dbuid = this.props.parent.props.db.id;
-    var euid = this.props.empresa.uid;
-    window.dbf.addFieldsFromGuid(dbuid, euid, this.state.guid, fs);
-    if(!this.state.isedit && this.state.transferenciaType == "emisor"){
-      this.addNewEmpresa(fs);
-    }
-    this.close();
+    var self = this;
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
+    setTimeout(function(){
+      var fs = self.state.fields;
+      var _f = fs;
+      var dbuid = self.props.parent.props.db.id;
+      var euid = self.props.empresa.uid;
+      window.dbf.addFieldsFromGuid(dbuid, euid, self.state.guid, fs);
+      if(!self.state.isedit && self.state.transferenciaType == "emisor"){
+        self.addNewEmpresa(fs);
+      }
+      self.close();
+      window.dispatchEvent(new Event('sinapsisEndLoad'));
+    }, 300)
+
   }
 
   addNewEmpresa(z){
@@ -235,6 +241,7 @@ export default class DbFormGroupTransferencias extends React.Component{
                     type="text"
                     category="receptor"
                     group="transferencia"
+                    autoComplete={['empresa']}
                     empresa={this.props.empresa}
                     db={this.props.parent.props.db}
                     ref={this.setChildRef}
@@ -257,7 +264,7 @@ export default class DbFormGroupTransferencias extends React.Component{
                 <>
                 <div className="ss_db_input_select">
                   <div className="db_empresa_container_group_radios_title">
-                    ¿Quien otorga los recursos es empresa o {_t('instancia / dependencia')}?
+                    ¿Quién otorga los recursos?
                   </div>
                   <select onChange={(e) => this.setState({contratoType: e.target.value, res: true})} value={type}>
                     <option value="" disabled selected>Selecciona...</option>
@@ -275,6 +282,7 @@ export default class DbFormGroupTransferencias extends React.Component{
                     type="text"
                     category="emisor"
                     group="transferencia"
+                    autoComplete={[this.state.contratoType]}
                     empresa={this.props.empresa}
                     db={this.props.parent.props.db}
                     ref={this.setChildRef}

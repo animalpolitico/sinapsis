@@ -39,6 +39,14 @@
     }
   }
 }
+body.ss_showing_analytics{
+  .project_buttons{
+    background: #2c2c2c;
+    width: 100%;
+    justify-content: center;
+    border: 0;
+  }
+}
 body.ss_showing_drawer{
   .project_buttons_button{
     margin: 0;
@@ -262,12 +270,11 @@ body.ss_showing_drawer{
         left: 0;
         z-index: 4;
         span{
-          font-size: 0.8rem;
-          line-height: 0.8rem;
-          display: none;
+          font-size: 0.7rem;
           width: 100%;
-          color: #f8f8f8;
-          margin-top: 1rem;
+          font-weight: 500;
+          color: #999;
+          margin-top: 0.2rem;
         }
       }
     }

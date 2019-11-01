@@ -417,7 +417,7 @@ export default class DbFactory {
     if(onlydbs){
       dbA = dbA.filter(_db => onlydbs.indexOf(_db.id) > -1);
     }
-    var interestFields = ['SinAntReg', 'ASFnoLocalizada', 'SATdefinitiva', 'SATpresunta', 'NoInscritoRUPC', 'RegCompraNet', 'InscritoRUPC'];
+    var interestFields = ['SinAntReg', 'ASFnoLocalizada', 'SATdefinitiva', 'SATpresunta','SATdesvirtuados','SATfavorables', 'NoInscritoRUPC', 'RegCompraNet', 'InscritoRUPC'];
     var obj = {
       count: 0
     }
@@ -499,6 +499,7 @@ export default class DbFactory {
   **/
   getByType(t){
     var o = [];
+    console.log('t', t);
     try{
       var db = this.getDbs();
       var dbA = Object.values(db);
@@ -506,7 +507,11 @@ export default class DbFactory {
         var dbfields = [];
         var empresas = _db.empresas;
             empresas = Object.values(empresas);
-        if(empresas){
+        if(t == "empresa"){
+          console.log('empresas', empresas);
+          o = [...o, ...empresas];
+        }
+        if(empresas && t !== "empresa"){
           empresas.map(function(empresa){
             var fields = empresa.fields;
                 fields = Object.values(fields);
@@ -606,8 +611,10 @@ export default class DbFactory {
     var sv = v.replace(/[.\s]/g, '');
         sv = slugify(sv, {lower: true, remove: /[*+~.,()'"!:@]/g});
     all.map(function(d){
-      if(d.value){
-        var vs = d.value.replace(/[.\s]/g, '');
+      console.log('d', d);
+      var dv = t == "empresa" ? d.name : d.value;
+      if(dv){
+        var vs = dv.replace(/[.\s]/g, '');
             vs = slugify(vs, {lower: true, remove: /[*+~.,()'"!:@]/g});
         var add = false;
         if(sv.length > vs.length){
@@ -1075,10 +1082,10 @@ export default class DbFactory {
     var j = btoa(encodeURI(s));
     var txt = j;
     var kbsize = txt.length * 0.000125;
-    var name = d.info.slug + '_v'+ d.version + '_b_' + d.saves;
+    var name = d.info.slug + '_v'+ d.saves;
     var zip = new JSZip();
     zip.file('leeme.txt', this.getReadMeText(name), {binar: true});
-    zip.file('proyectoSinapsis.sinapsis', txt, {binary: true});
+    zip.file(name + '.sinapsis', txt, {binary: true});
     zip.file('dev/'+ name + '_dev.json', s, {binary: true});
     if(szip){
       for(var s_name in szip){
@@ -1112,19 +1119,33 @@ export default class DbFactory {
   **/
   getReadMeText(filename){
     var rows = [
-      'SINAPSIS >> Herramienta para encontrar conexiones entre empresas.',
-      '---Animal Político, 2019--',
+      'sinapsis.lat',
+      'Herramienta para descubrir conexiones entre empresas',
+      '',
+      'Animal Político (www.animalpolitico.com)',
+      'México, 2019',
       '',
       '',
-      'PROYECTO: '+this.obj.info.name,
-      '',
-      '¡Hola! Muchas gracias por utilizar Sinapsis. El archivo .zip que acabas de abrir contiene diversos materiales de tu proyecto:',
-      '* proyectoSinapsis.sinapsis - Contiene el archivo de tu proyecto, este es el archivo que podrás cargar en la plataforma y contiene todas las bases de datos que introdujiste.',
-      '* En la carpeta /dev podrás encontrar tu proyecto en archivo .json que podrás utilizar para otros proyectos de programación.',
+      '- - - - - - - - - - - - - - - - - - - - - - - - - - -',
       '',
       '',
-      'Si tiene alguna duda o problema escribe a sinapsis@animalpolitico.com'
+      '¡Hola! Nos alegra mucho que estés usando Sinapsis. El archivo .zip que acabas de descargar contiene diversos materiales sobre tu proyecto:',
+      '',
+      '- CSV: archivos csv (que puedes abrir con Excel o Numbers) con las bases de datos usadas en tu proyecto',
+      '- DEV: el archivo .json para que si eres desarrollador lo puedas usar para otros proyectos',
+      '- IMAGENES: archivos JPG y PNG para que los insertes en tus publicaciones y archivo SVG para que si sabes usar programas de diseño lo puedas abrir en vectores y transformar',
+      '- Archivo .sinapsis: ese es tu proyecto, aquí se guarda toda la información que le hayas añadido y es el que podrás cargar desde cualquier computadora cuando lo quieras seguir trabajando',
+      '',
+      '',
+      '- - - - - - - - - - - - - - - - - - - - - - - - - - -',
+      '',
+      '',
+      '¿Dudas?, ¿sugerencias?, ¿observaciones?:',
+      '',
+      '- sinapsis@animalpolitico.com',
+      '- https://t.me/sinapsislat (grupo de Telegram)'
     ];
+
     return rows.join('\n');
   }
 

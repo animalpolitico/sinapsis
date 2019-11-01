@@ -75,12 +75,18 @@ export default class DbFormGroupConvenio extends React.Component{
   }
 
   add(){
-    var fs = this.state.fields;
-    var dbuid = this.props.parent.props.db.id;
-    var euid = this.props.empresa.uid;
+    var self = this;
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
+    setTimeout(function(){
+      var fs = self.state.fields;
+      var dbuid = self.props.parent.props.db.id;
+      var euid = self.props.empresa.uid;
 
-    window.dbf.addFieldsFromGuid(dbuid, euid, this.state.guid, fs);
-    this.close();
+      window.dbf.addFieldsFromGuid(dbuid, euid, self.state.guid, fs);
+      self.close();
+      window.dispatchEvent(new Event('sinapsisEndLoad'));
+    }, 300)
+
   }
 
   insertField(slug, obj, blockchanged){
@@ -199,6 +205,7 @@ export default class DbFormGroupConvenio extends React.Component{
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       matchWith={['instancia']}
                       name="¿Quién otorga los recursos?"
+                      aka="¿Qué instancia otorga los recursos?"
                       type="text"
                       category="emisor"
                       group="convenio"
@@ -210,6 +217,7 @@ export default class DbFormGroupConvenio extends React.Component{
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       matchWith={['instancia']}
                       name="¿Quién recibe los recursos?"
+                      aka="¿Qué instancia recibe los recursos?"
                       type="text"
                       category="receptor"
                       group="convenio"

@@ -1,11 +1,11 @@
 @charset "UTF-8";
 @import url("https://use.typekit.net/nhy0plw.css");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_empty_tip_icon, .ss_dbbuilder_empty_tip_text, .ss_dbbuilder_sidebar_collapse, .ss_dbbuilder_sidebar_dbs .ss_db_view > div, .ss_modal_dbpre .ss_predb_select_country, .ss_modal_dbpre .ss_predb_select_alert, .ss_db_toolbar #ss_db_save, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_db_toolbar_info_td .ss_db_builder_project_name, .ss_db_toolbar_info_td .ss_db_builder_project_name_inputlike, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, .ss_dbbuilder_sidebar_dbs_nav_td_input_tools, .ss_dbbuilder_sidebar_dbs_nav_td_input_tools_tool, #ss_popper_lang .ss_popper_container_button, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas_notice, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_ch_i_i, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title_ch, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_title, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title .dbef_n_tooltip, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_checkboxes_ch_info, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form .db_empresa_container_group_radios, .db_empresa_container_group_form_innerlist .ss_transaction_row, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input .ss_db_input_select_radios, .ss_db_input_select .ss_db_input_select_radios, .ss_db_input .ss_db_input_select_radios_radio, .ss_db_input_select .ss_db_input_select_radios_radio, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_input .ss_db_input_container_label, .ss_db_input_select_container_input .ss_db_input_container_label, .ss_db_input_container_error, .ss_db_input_select_container_error, .project_buttons, .project_buttons_button, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang, .ss_dbbuilder_front .ss_db_choose_td, .db_viz_tooltip_info, .db_viz_nodes #db_viz_nodes_controls, .ss_doi_window_fields_field_dbinfo > div, .ss_doi_window .ss_doi_window_controls, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels, .db_search_nodes_results .db_search_nodes_results_c_r .ss_search_result_type, .nodes_controls_container, .nodes_controls_button, .ss_control_group.ss_control_node_filter .ss_ctr_br, .ss_control_group .ss_control_group_container_title, .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_toggle, .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning, .ss_control_group .ss_control_group_container_dbs .ss_db, .ss_control_group .ss_control_group_container_btns, .ss_control_group .ss_control_group_container_switches .ss_control_group_container_switch, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics .ss_analytics_montos_title, .ss_analytics .ss_analytics_montos_row, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_info, .ss_analytics .ss_analytics_montos_row .ss_analytics_montos_monto, .ss_analytics .ss_analytics_choose_tr, .ss_analytics .ss_analytics_choose_tr .ssa_icon, .ss_analytics .ss_analytics_choose_tr .ssa_btns, .ss_analytics .ss_analytics_choose_tr .ssa_btns .ssa_btn, #ss_map_controls .ss_map_controls_group_content_tr, #ss_listado_container #ss_listado_finals, #ss_listado_container #ss_listado_finals .ss_listado_finals_btn, #ss_listado_container .ss_listado_main_info, #ss_listado_container .ss_listado_container, #ss_listado_container .ss_listado_container_e, #ss_listado_container .ss_listado_container_e_info, #ss_listado_dialog .ss_listado_table_tr, #ss_listado_dialog .ss_listado_table_tr .ss_listado_table_td, .ss_no_results_tip, .ss_no_results_ctas {
+.flex, #ss_header_c, #ss_header_c_m, #ss_header_c_m .ss_header_c_m_menu, #ss_header_c_m .ss_header_c_m_dots, #ss_header_c_ap, #ss_header_c_logo, .ss_dbbuilder, .ss_dbbuilder_empty_tip_icon, .ss_dbbuilder_empty_tip_text, .ss_dbbuilder_sidebar_collapse, .ss_dbbuilder_sidebar_dbs .ss_db_view > div, .MuiDialog-paper .MuiDialogTitle-root h2, .MuiDialog-paper .MuiFormControlLabel-root h2, .ss_modal_dbpre .ss_predb_select_country, .ss_modal_dbpre .ss_predb_select_alert, .ss_db_toolbar #ss_db_save, .ss_db_toolbar_info, .ss_db_toolbar_info_td.ss_db_ctas, .ss_db_toolbar_info_td .ss_db_builder_project_name, .ss_db_toolbar_info_td .ss_db_builder_project_name_inputlike, .ss_dbbuilder_sidebar_dbs_nav, .ss_dbbuilder_sidebar_dbs_nav_td, .ss_dbbuilder_sidebar_dbs_nav_td_input, .ss_dbbuilder_sidebar_dbs_nav_td_input_tools, .ss_dbbuilder_sidebar_dbs_nav_td_input_tools_tool, #ss_popper_lang .ss_popper_container_button, #ss_db_popper .ss_popper_container_button, .ss_db_view_name, .ss_db_view_empresas, .ss_db_view_empresas_title, .ss_db_view_empresas_notice, .ss_db_view_empresas .ss_db_ve_c_nocontent, .ss_db_view .db_empresa_container, .db_empresa_edit_container, .db_empresa_edit_container .db_empresa_name, .db_empresa_edit_container .db_empresa_name_errors, .db_empresa_edit_container .db_empresa_name_errors_td, .db_empresa_edit_container .db_empresa_name_trash, .db_empresa_edit_container .db_empresa_name_t, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_ch_i_i, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title_ch, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_title, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg .rg_title .dbef_n_tooltip, .db_empresa_edit .db_empresa_container_form .db_empresa_container_group_rg_checkboxes_ch_info, .db_empresa_edit .db_empresa_container_form .dbef_n, .db_empresa_edit .db_empresa_container_form .dbef_n_n, .db_empresa_edit .db_empresa_container_form .dbef_n_ctas, .db_empresa_container_group_form, .db_empresa_container_group_form .db_empresa_container_group_radios, .db_empresa_container_group_form_innerlist .ss_transaction_row, .db_empresa_container_group_form_innerlist .ss_transaction_row_c, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_d, .db_empresa_container_group_form_innerlist .ss_transaction_row_c .ss_transaction_row_n_c, .ss_db_input .ss_db_input_select_radios, .ss_db_input_select .ss_db_input_select_radios, .ss_db_input .ss_db_input_select_radios_radio, .ss_db_input_select .ss_db_input_select_radios_radio, .ss_db_input_container, .ss_db_input_select_container, .ss_db_input_container_input .ss_db_input_container_label, .ss_db_input_select_container_input .ss_db_input_container_label, .ss_db_input_container_error, .ss_db_input_select_container_error, .project_buttons, .project_buttons_button, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang, .ss_dbbuilder_front .ss_db_choose_td, .mobile_alert, .db_viz_tooltip_info, .db_viz_nodes #db_viz_nodes_controls, .ss_doi_window_fields_field_dbinfo > div, .ss_doi_window .ss_doi_window_controls, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level, .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels, .db_search_nodes_results .db_search_nodes_results_c_r .ss_search_result_type, .nodes_controls_container, .nodes_controls_button, .ss_control_group.ss_control_node_filter .ss_ctr_br, .ss_control_group .ss_control_group_container_title, .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_toggle, .ss_control_group .ss_control_group_container_extracontrols .ss_control_extra_warning, .ss_control_group .ss_control_group_container_dbs .ss_db, .ss_control_group .ss_control_group_container_btns, .ss_control_group .ss_control_group_container_switches .ss_control_group_container_switch, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_tds, .ss_control_group .ss_control_group_container_switch, .ss_analytics .ss_analytics_montos_title, .ss_analytics .ss_analytics_montos_row, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_info, .ss_analytics .ss_analytics_montos_row .ss_analytics_montos_monto, .ss_analytics .ss_analytics_choose_tr, .ss_analytics .ss_analytics_choose_tr .ssa_icon, .ss_analytics .ss_analytics_choose_tr .ssa_btns, .ss_analytics .ss_analytics_choose_tr .ssa_btns .ssa_btn, #ss_map_controls .ss_map_controls_group_content_tr, #ss_listado_container #ss_listado_finals, #ss_listado_container #ss_listado_finals .ss_listado_finals_btn, #ss_listado_container .ss_listado_main_info, #ss_listado_container .ss_listado_container, #ss_listado_container .ss_listado_container_e, #ss_listado_container .ss_listado_container_e_info, #ss_listado_dialog .ss_listado_table_tr, #ss_listado_dialog .ss_listado_table_tr .ss_listado_table_td, .ss_no_results_tip, .ss_no_results_ctas, #ss_h_credits .ss_h_s_credits_group_container_p_i_n, #ss_h_casos .ss_h_s_casos_caso_publisher, #ss_h_landing, #ss_h_goto .ss_h_s_goto_container_ctas {
   display: flex;
   flex-wrap: nowrap; }
 
-.cx, .project_buttons, .db_viz_guides .dguide_y {
+.cx, .project_buttons, .db_viz_guides .dguide_y, #ss_h_casos .ss_h_s_casos_caso_publisher {
   position: absolute;
   left: 50%;
   transform: translateX(-50%); }
@@ -15,7 +15,7 @@
   top: 50%;
   transform: translateY(-50%); }
 
-.cxy, .ss_dbbuilder_sidebar_collapse .material-icons, #ssdb_loader_c, .ss_db_view_empresas .ss_db_ve_c_nocontent_icon .material-icons, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang_select_arr .material-icons, .ss_dbbuilder_front .ss_db_choose_td .material-icons, .db_viz .nodes_container::after, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch[data-type="instancia"] .ss_ctr_ch_td_ball_helper, .ss_analytics_container, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_chart_icon, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_chart_icon .material-icons, #ss_listado_container, #ss_listado_container .ss_listado_container_e_icon div .material-icons, .ss_no_results, #ap_logo_container img {
+.cxy, .ss_dbbuilder_sidebar_collapse .material-icons, #ssdb_loader_c, .ss_db_view_empresas .ss_db_ve_c_nocontent_icon .material-icons, .ss_dbbuilder_front .ss_db_choose, .ss_dbbuilder_front .ss_db_choose_lang_select_arr .material-icons, .ss_dbbuilder_front .ss_db_choose_td .material-icons, .db_viz .nodes_container::after, .ss_control_group .ss_control_group_container_switches .ss_ctr_ch[data-type="instancia"] .ss_ctr_ch_td_ball_helper, .ss_analytics_container, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_chart_icon, .ss_analytics .ss_analytics_montos_row .ss_analytics_pie_chart_icon .material-icons, #ss_listado_container, #ss_listado_container .ss_listado_container_e_icon div .material-icons, .ss_no_results, #ss_h_casos .ss_h_s_casos_caso_logo, #ss_h_landing .ss_h_s_c_arrows .material-icons, #ss_h_video .ss_h_s_video_icon {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -31,7 +31,7 @@ html, body {
   top: 0;
   left: 0; }
 
-body.ss_platform #wrapper {
+body.ss_platform #wrapper:not(.wrapper_mobile) {
   overflow: hidden;
   min-width: 1100px;
   background: #222; }
@@ -143,8 +143,8 @@ a, a:link, a:visited, a:hover {
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  height: calc(100vh  - 55px);
-  margin-top: 55px;
+  height: calc(100vh  - 58px);
+  margin-top: 58px;
   position: relative; }
   .ss_dbbuilder_empty_tip {
     width: 90%;
@@ -249,13 +249,20 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
     align-items: center;
     margin-top: 1rem;
     padding-left: 5.5% !important; }
-    .MuiDialog-paper .MuiDialogTitle-root *, .MuiDialog-paper .MuiDialogTitle-root, .MuiDialog-paper .MuiFormControlLabel-root *, .MuiDialog-paper .MuiFormControlLabel-root {
+    .MuiDialog-paper .MuiDialogTitle-root *:not(.material-icons), .MuiDialog-paper .MuiDialogTitle-root, .MuiDialog-paper .MuiFormControlLabel-root *:not(.material-icons), .MuiDialog-paper .MuiFormControlLabel-root {
       font-weight: 300;
       text-transform: uppercase;
       font-size: 1.2rem; }
     .MuiDialog-paper .MuiDialogTitle-root h2, .MuiDialog-paper .MuiFormControlLabel-root h2 {
       color: #f6f6f6;
-      font-weight: 100; }
+      font-weight: 100;
+      line-height: 1;
+      align-items: center; }
+      .MuiDialog-paper .MuiDialogTitle-root h2 .material-icons, .MuiDialog-paper .MuiFormControlLabel-root h2 .material-icons {
+        font-size: 0.9rem;
+        line-height: 1;
+        margin-right: 0.5rem;
+        transform: translateY(2px); }
       .MuiDialog-paper .MuiDialogTitle-root h2::before, .MuiDialog-paper .MuiFormControlLabel-root h2::before {
         content: '/';
         color: #0072ff;
@@ -409,14 +416,18 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       box-sizing: border-box;
       padding-right: 1rem; }
       .ss_db_toolbar_info_td.ss_db_ctas .ss_db_ctas_custom_send {
-        background: blue;
         margin-left: 0.75rem;
-        margin-right: 0.25rem; }
+        margin-right: 0.25rem;
+        line-height: 1; }
+        .ss_db_toolbar_info_td.ss_db_ctas .ss_db_ctas_custom_send img {
+          width: 15px;
+          margin-left: 0.5rem; }
         .ss_db_toolbar_info_td.ss_db_ctas .ss_db_ctas_custom_send .material-icons {
           cursor: pointer;
           line-height: 1;
           font-size: 1.2rem;
-          color: #f6f6f6; }
+          color: #f6f6f6;
+          transform: translateY(-60%); }
           .ss_db_toolbar_info_td.ss_db_ctas .ss_db_ctas_custom_send .material-icons:hover {
             opacity: 0.8; }
       .ss_db_toolbar_info_td.ss_db_ctas .ss_db_ctas_custom_lang img {
@@ -1304,13 +1315,20 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
         line-height: 1;
         overflow: hidden;
         transition: transform 0.35s ease;
-        pointer-events: none;
         height: auto;
         padding: 0.25rem 0;
         color: white;
         font-size: 0.7rem;
         font-weight: 600;
         transform: translateY(-100%); }
+        .ss_db_input_container_input .ss_db_input_container_label_icon, .ss_db_input_select_container_input .ss_db_input_container_label_icon {
+          font-size: 0.5rem;
+          line-height: 1;
+          margin-left: 0.5rem; }
+          .ss_db_input_container_input .ss_db_input_container_label_icon .material-icons, .ss_db_input_select_container_input .ss_db_input_container_label_icon .material-icons {
+            color: #0072ff;
+            line-height: 1;
+            font-size: 0.7rem; }
       .ss_db_input_container_input input, .ss_db_input_container_input textarea, .ss_db_input_select_container_input input, .ss_db_input_select_container_input textarea {
         width: 100%;
         display: block;
@@ -1407,6 +1425,12 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       color: white;
       font-weight: 500;
       font-size: 0.85rem; }
+
+body.ss_showing_analytics .project_buttons {
+  background: #2c2c2c;
+  width: 100%;
+  justify-content: center;
+  border: 0; }
 
 body.ss_showing_drawer .project_buttons_button {
   margin: 0; }
@@ -1588,12 +1612,11 @@ body.ss_showing_drawer .project_buttons_button {
         left: 0;
         z-index: 4; }
         .ss_dbbuilder_front .ss_db_choose_td_label span {
-          font-size: 0.8rem;
-          line-height: 0.8rem;
-          display: none;
+          font-size: 0.7rem;
           width: 100%;
-          color: #f8f8f8;
-          margin-top: 1rem; }
+          font-weight: 500;
+          color: #999;
+          margin-top: 0.2rem; }
 
 #ss_fab_release {
   animation: ss_glow 1s linear infinite alternate; }
@@ -1603,6 +1626,31 @@ body.ss_showing_drawer .project_buttons_button {
     box-shadow: 0 0 2px #0072FF; }
   to {
     box-shadow: 0 0 10px #0072FF; } }
+.mobile_alert {
+  width: 100%;
+  position: fixed;
+  background: yellow;
+  bottom: 0;
+  z-index: 9999999999999999;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1rem;
+  line-height: 1.1; }
+  .mobile_alert_close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.25rem;
+    cursor: pointer;
+    line-height: 1; }
+    .mobile_alert_close .material-icons {
+      font-size: 0.7rem; }
+  .mobile_alert_icon {
+    margin-right: 0.5rem; }
+  .mobile_alert_text {
+    font-size: 0.9rem;
+    font-weight: 600; }
+
 .db_viz {
   flex: 1;
   margin: 0;
@@ -1895,13 +1943,19 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
             display: block;
             padding: 0.25rem 0.1rem;
             cursor: pointer;
-            color: #0072ff; }
+            color: #0072ff;
+            animation: doilg 1s ease-out infinite alternate; }
             .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels .material-icons[disabled] {
               opacity: 0.2;
               pointer-events: none; }
             .ss_doi_window .ss_doi_window_controls_td.ss_doi_window_controls_td_level .ss_doi_levels .material-icons:hover {
               opacity: 0.5;
               color: #0072ff; }
+@keyframes doilg {
+  from {
+    text-shadow: 0 0 0 rgba(0, 114, 255, 0.1); }
+  to {
+    text-shadow: 0 0 7px #0072ff; } }
       .ss_doi_window .ss_doi_window_controls_td_min {
         cursor: pointer;
         padding-left: 0.35rem; }
@@ -1932,8 +1986,8 @@ body.ss_dragging .ss_guide {
 
 .db_search_nodes {
   position: fixed;
-  top: 13px;
-  right: calc(4em + 178px);
+  top: 15px;
+  right: calc(4em + 230px);
   z-index: 99;
   width: 250px; }
   .db_search_nodes_results {
@@ -2074,26 +2128,20 @@ body.ss_dragging .ss_guide {
       box-sizing: border-box;
       padding: 0.75rem 0.5rem 0.25rem;
       cursor: pointer; }
-      .ss_control_group.ss_control_node_filter .ss_ctr_br.ss_ctr_br_buttons {
-        cursor: default; }
-        .ss_control_group.ss_control_node_filter .ss_ctr_br.ss_ctr_br_buttons .ss_ctr_br_buttons_btn {
-          margin: 0 0 0.15rem;
-          box-sizing: border-box;
-          padding: 0.3rem 0.4rem 0.2rem;
-          border: 2px solid #0072ff;
-          cursor: pointer; }
-          .ss_control_group.ss_control_node_filter .ss_ctr_br.ss_ctr_br_buttons .ss_ctr_br_buttons_btn:hover {
-            background: rgba(0, 114, 255, 0.2); }
-      .ss_control_group.ss_control_node_filter .ss_ctr_br .material-icons {
-        color: red;
-        line-height: 1;
-        font-size: 0.75rem;
-        margin-right: 0.25rem; }
-      .ss_control_group.ss_control_node_filter .ss_ctr_br div {
+      .ss_control_group.ss_control_node_filter .ss_ctr_br_b {
+        width: 8px;
+        height: 8px;
+        background: #f6f6f6;
+        border-radius: 50%;
+        border: 1px solid red;
+        margin-right: 5px; }
+      .ss_control_group.ss_control_node_filter .ss_ctr_br_l {
         font-size: 0.7rem;
         line-height: 1.1;
         font-weight: 600;
         color: white; }
+      .ss_control_group.ss_control_node_filter .ss_ctr_br.ss_ctr_br_c .ss_ctr_br_b {
+        border: 0; }
   .ss_control_group .ss_control_group_container {
     width: 100%;
     box-sizing: border-box;
@@ -2412,7 +2460,7 @@ body.ss_dragging .ss_guide {
   .ss_analytics_container {
     width: 100%;
     box-sizing: border-box;
-    padding: 190px 4rem 3rem;
+    padding: 190px 4rem 4rem;
     z-index: 2;
     max-height: 100%;
     overflow-y: auto;
@@ -3057,38 +3105,408 @@ body.ss_showing_drawer .ss_no_results {
   width: 100%;
   overflow: hidden;
   position: relative;
-  background: #2a2a2a;
+  background: #2d2d2d;
   min-height: 100vh; }
   #ss_sinapsis_home .ss_h_s {
     width: 100%;
     position: relative; }
 
-#ss_h_landing {
-  height: 100vh; }
+.ss_h_h1 {
+  text-transform: uppercase;
+  font-size: 1.5rem; }
+  .ss_h_h1_s {
+    color: #f6f6f6;
+    font-weight: 300; }
+  .ss_h_h1_b {
+    background-color: #f6f6f6;
+    font-weight: 600;
+    padding-top: 2px;
+    color: #2d2d2d;
+    padding: 2px 3px 0;
+    display: inline-block; }
 
-#ap_logo {
-  width: 50px;
-  height: 50px;
+.ss_diagc {
+  background: url("../static/pleca.png") no-repeat center bottom;
+  background-size: 100% auto;
+  padding: 3rem 0 8rem;
+  margin-bottom: -8rem; }
+  @media (min-width: 768px) {
+    .ss_diagc {
+      background-image: url("../static/l.png");
+      background-position: right bottom; } }
+
+.ss_h_s_h1p {
+  width: 75%;
+  margin: 0 auto 2rem;
+  position: relative;
+  z-index: 2; }
+  .ss_h_s_h1p_p {
+    width: 90%;
+    margin-top: 1.5rem;
+    color: #989898;
+    font-size: 0.9rem;
+    line-height: 1.3; }
+
+.ss_h_points {
   margin: 0 auto;
-  background: blue;
-  position: relative; }
-  #ap_logo_container {
+  width: 75%;
+  position: relative;
+  z-index: 2; }
+  .ss_h_points_point {
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0; }
-    #ap_logo_container img {
-      width: 20px;
-      z-index: 2; }
-    #ap_logo_container svg {
-      width: 100%;
-      height: 100%;
+    position: relative;
+    padding-top: 1.8rem;
+    margin-bottom: 2.1rem; }
+    .ss_h_points_point:last-child {
+      margin-bottom: 0; }
+    .ss_h_points_point_decorator {
+      width: 50%;
+      height: 2px;
+      background: #444;
       position: absolute;
       top: 0;
-      left: 0;
-      display: block; }
+      left: 0; }
+      .ss_h_points_point_decorator div {
+        width: 60%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: #0072ff;
+        box-shadow: 0 0 3px rgba(0, 114, 255, 0.9); }
+    .ss_h_points_point_title {
+      text-transform: uppercase;
+      color: #f6f6f6;
+      font-size: 1.1rem;
+      font-weight: 300; }
+      .ss_h_points_point_title strong {
+        margin-left: 4px; }
+    .ss_h_points_point_content {
+      width: 90%;
+      margin-top: 0.5rem;
+      color: #989898;
+      font-size: 0.9rem;
+      line-height: 1.3; }
+      @media (min-width: 768px) {
+        .ss_h_points_point_content {
+          width: 60%; } }
+      .ss_h_points_point_content a {
+        color: #0072ff;
+        font-weight: 600; }
 
+#ss_h_usa {
+  padding-top: 2rem; }
+  @media (min-width: 768px) {
+    #ss_h_usa {
+      width: 900px !important;
+      margin: 0 auto;
+      background: url("../static/brain3.png") no-repeat right center;
+      background-size: 300px; } }
+
+#ss_h_faq {
+  padding-bottom: 6rem; }
+  @media (min-width: 768px) {
+    #ss_h_faq {
+      width: 900px !important;
+      margin: 0 auto; } }
+
+#ss_h_credits {
+  background: #f5f5f5;
+  position: relative;
+  z-index: 3;
+  margin-bottom: -10px;
+  transform: translateY(-10px);
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2); }
+  #ss_h_credits .ss_h_s_credits {
+    width: 75%;
+    padding: 3rem 0;
+    margin: 0 auto; }
+    @media (min-width: 768px) {
+      #ss_h_credits .ss_h_s_credits {
+        width: 700px !important;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap; } }
+    #ss_h_credits .ss_h_s_credits .ss_h_h1_b {
+      background: #0072ff;
+      color: #f6f6f6;
+      margin-bottom: 1rem; }
+    #ss_h_credits .ss_h_s_credits .ss_h_h1 {
+      width: 100%; }
+    #ss_h_credits .ss_h_s_credits_group {
+      margin: 2rem 0; }
+      @media (min-width: 768px) {
+        #ss_h_credits .ss_h_s_credits_group {
+          width: 50%; } }
+      #ss_h_credits .ss_h_s_credits_group_title {
+        font-size: 1.1rem;
+        color: #999;
+        text-transform: uppercase;
+        font-weight: 300;
+        margin-bottom: 0.5rem; }
+      #ss_h_credits .ss_h_s_credits_group_container {
+        width: 100%; }
+        #ss_h_credits .ss_h_s_credits_group_container_p {
+          margin: 0.5rem 0;
+          box-sizing: border-box;
+          padding: 0.6rem 0;
+          position: relative; }
+          #ss_h_credits .ss_h_s_credits_group_container_p_d {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background: #bbbbbb; }
+            #ss_h_credits .ss_h_s_credits_group_container_p_d div {
+              width: 60%;
+              height: 100%;
+              position: absolute;
+              left: 0;
+              top: 0;
+              background: #0072ff;
+              box-shadow: 0 0 2px rgba(0, 114, 255, 0.5); }
+          #ss_h_credits .ss_h_s_credits_group_container_p_i_c {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #707070; }
+          #ss_h_credits .ss_h_s_credits_group_container_p_i_n {
+            color: #707070;
+            align-items: flex-end;
+            font-weight: 500; }
+            #ss_h_credits .ss_h_s_credits_group_container_p_i_n a {
+              color: #c6c4c4;
+              font-size: 0.7rem;
+              margin-left: 7px; }
+              #ss_h_credits .ss_h_s_credits_group_container_p_i_n a::before {
+                margin-right: 3px;
+                content: '/';
+                font-size: 1rem; }
+          #ss_h_credits .ss_h_s_credits_group_container_p_i_m {
+            text-transform: uppercase;
+            color: #444;
+            font-weight: 600;
+            font-size: 0.6rem; }
+
+#ss_h_casos {
+  padding-top: 0rem;
+  padding-bottom: 3rem;
+  margin-top: 2rem; }
+  @media (min-width: 768px) {
+    #ss_h_casos {
+      width: 900px !important;
+      margin: 3rem auto 0; } }
+  #ss_h_casos .ss_h_s_casos {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2; }
+    @media (min-width: 768px) {
+      #ss_h_casos .ss_h_s_casos {
+        display: flex;
+        flex-wrap: wrap;
+        width: 75%; } }
+    #ss_h_casos .ss_h_s_casos_caso {
+      width: 100%;
+      box-sizing: border-box;
+      border: 2px solid #0072ff;
+      box-shadow: 0 0 5px rgba(0, 114, 255, 0.8);
+      position: relative;
+      background: #2d2d2d no-repeat center center;
+      background-size: cover;
+      background-blend-mode: soft-light;
+      cursor: pointer;
+      margin: 1.5rem 0; }
+      @media (min-width: 768px) {
+        #ss_h_casos .ss_h_s_casos_caso {
+          width: 45%;
+          margin-top: 0.5rem; }
+          #ss_h_casos .ss_h_s_casos_caso:first-child {
+            margin-right: 2.5%; } }
+      #ss_h_casos .ss_h_s_casos_caso_publisher {
+        bottom: 2rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; }
+        #ss_h_casos .ss_h_s_casos_caso_publisher_a {
+          color: #989898;
+          font-weight: 700;
+          text-transform: uppercase;
+          font-size: 0.5rem; }
+        #ss_h_casos .ss_h_s_casos_caso_publisher_b {
+          margin-top: 0.5rem; }
+          #ss_h_casos .ss_h_s_casos_caso_publisher_b img {
+            width: 55%;
+            margin: 0 auto;
+            display: block; }
+      #ss_h_casos .ss_h_s_casos_caso_logo {
+        width: 70%; }
+        #ss_h_casos .ss_h_s_casos_caso_logo img {
+          width: 100%; }
+      #ss_h_casos .ss_h_s_casos_caso::after {
+        content: '';
+        display: block;
+        padding-top: 120%;
+        width: 100%; }
+
+.ss_txtr {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background: url("../static/mt1.jpg") no-repeat center bottom;
+  background-size: 100% auto;
+  mix-blend-mode: color-dodge; }
+
+#ss_h_landing {
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #2d2d2d url("../static/mt1.jpg") no-repeat center top;
+  background-size: 100% auto;
+  background-blend-mode: color-dodge; }
+  #ss_h_landing .ss_h_s_c {
+    width: 90%;
+    margin: 0 auto; }
+    @media (min-width: 768px) {
+      #ss_h_landing .ss_h_s_c {
+        width: 400px; } }
+    #ss_h_landing .ss_h_s_c_logo {
+      width: 50px;
+      margin: 0 auto; }
+      @media (min-width: 768px) {
+        #ss_h_landing .ss_h_s_c_logo {
+          width: 60px; } }
+      #ss_h_landing .ss_h_s_c_logo img {
+        width: 100%; }
+    #ss_h_landing .ss_h_s_c_g {
+      width: 100%;
+      background: url("../static/ha.gif") no-repeat center center;
+      background-size: contain;
+      margin: 2rem auto; }
+      @media (min-width: 768px) {
+        #ss_h_landing .ss_h_s_c_g {
+          width: 88%;
+          margin: 4rem auto 7rem; } }
+      #ss_h_landing .ss_h_s_c_g::after {
+        content: '';
+        display: block;
+        padding-top: 100%;
+        width: 100%; }
+    #ss_h_landing .ss_h_s_c_arrows {
+      width: 50px;
+      height: 50px;
+      margin: 4rem auto 0;
+      position: relative;
+      cursor: pointer; }
+      #ss_h_landing .ss_h_s_c_arrows .material-icons {
+        position: absolute;
+        font-size: 3.5rem;
+        color: white; }
+        #ss_h_landing .ss_h_s_c_arrows .material-icons:first-child {
+          color: #0072ff;
+          text-shadow: 0 0 3px #0072ff; }
+        #ss_h_landing .ss_h_s_c_arrows .material-icons:last-child {
+          animation: harr 1.5s ease-out infinite alternate; }
+@keyframes harr {
+  from {
+    transform: translate(-50%, -50%); }
+  to {
+    transform: translate(-50%, -20%); } }
+#ss_h_video {
+  margin: 1rem 0 0;
+  padding-top: 2rem; }
+  #ss_h_video .ss_h_s_video {
+    width: 84%;
+    margin: 0 auto;
+    border: 2px solid #0072ff;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(0, 114, 255, 0.8);
+    position: relative;
+    background: url("../static/brain1.png") no-repeat center center;
+    background-size: contain; }
+    @media (min-width: 768px) {
+      #ss_h_video .ss_h_s_video {
+        width: 850px; } }
+    #ss_h_video .ss_h_s_video_ball {
+      width: 15px;
+      height: 15px;
+      position: absolute;
+      top: 0;
+      border-radius: 50%;
+      left: 0;
+      box-shadow: 0 0 5px 2px rgba(0, 114, 255, 0.8);
+      transform: translate(-50%, -50%);
+      background: rgba(0, 114, 255, 0.9); }
+    #ss_h_video .ss_h_s_video .ss_h_h1 {
+      position: absolute;
+      top: 1.6rem;
+      left: 1.3rem; }
+    #ss_h_video .ss_h_s_video_icon {
+      color: #f6f6f6;
+      opacity: 0.8; }
+      #ss_h_video .ss_h_s_video_icon .material-icons {
+        font-size: 3.5rem; }
+    #ss_h_video .ss_h_s_video::after {
+      content: '';
+      display: block;
+      padding-top: 140%; }
+      @media (min-width: 768px) {
+        #ss_h_video .ss_h_s_video::after {
+          padding-top: 60%; } }
+
+#ss_h_goto {
+  margin-top: 4rem; }
+  #ss_h_goto .ss_h_s_goto_container {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2; }
+    @media (min-width: 768px) {
+      #ss_h_goto .ss_h_s_goto_container {
+        width: 500px; } }
+    #ss_h_goto .ss_h_s_goto_container_img {
+      width: 85%;
+      margin: 0 auto; }
+      #ss_h_goto .ss_h_s_goto_container_img img {
+        width: 100%; }
+    #ss_h_goto .ss_h_s_goto_container_ctas {
+      width: 100%;
+      margin: 0 auto;
+      flex-direction: column;
+      padding: 2rem 12% 3rem;
+      box-sizing: border-box;
+      background: url("../static/con.png") no-repeat -10px top;
+      background-size: auto 80%;
+      transform: translateY(-2rem);
+      margin-bottom: -2rem; }
+      #ss_h_goto .ss_h_s_goto_container_ctas_cta {
+        width: 100%;
+        text-transform: uppercase;
+        background: #0072ff;
+        color: #f6f6f6;
+        font-weight: 600;
+        text-align: center;
+        cursor: pointer;
+        font-size: 0.8rem;
+        box-shadow: 0 0 5px 2px rgba(0, 114, 255, 0.5);
+        padding: 0.6rem 0.2rem 0.5rem;
+        box-sizing: border-box;
+        border: 1px solid #0072ff;
+        margin: 0.5rem 0; }
+        #ss_h_goto .ss_h_s_goto_container_ctas_cta:not(.hcta_outlined) {
+          animation: hcta 1s ease infinite alternate; }
+        #ss_h_goto .ss_h_s_goto_container_ctas_cta.hcta_outlined {
+          background: transparent; }
+@keyframes hcta {
+  from {
+    box-shadow: 0 0 5px 2px rgba(0, 114, 255, 0.5); }
+  to {
+    box-shadow: 0 0 8px 4px rgba(0, 114, 255, 0.7); } }
 .MuiButton-root {
   border-radius: 0 !important;
   box-shadow: none !important; }
@@ -3136,5 +3554,45 @@ body.ss_showing_drawer .ss_no_results {
       height: 50px !important; }
       .ss_listado_container_e .ss_listado_container_e_icon .material-icons {
         font-size: 1.7rem !important; } }
+.ss_mobile .ss_db_choose {
+  width: 100%; }
+.ss_mobile .ss_dbbuilder_front {
+  min-height: 600px !important; }
+  .ss_mobile .ss_dbbuilder_front .ss_db_choose_td:not(.ss_db_estafa) {
+    display: none; }
+.ss_mobile .ss_dbbuilder_front .ss_db_choose_td .material-icons {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: auto;
+  right: 0;
+  font-size: 2rem;
+  transform: none; }
+.ss_mobile .ss_dbbuilder_sidebar {
+  display: none; }
+.ss_mobile .ss_db_choose_td_c {
+  background-position: center top; }
+.ss_mobile .ss_dbbuilder_front .ss_db_choose_td::after {
+  padding-top: 70%; }
+.ss_mobile #wrapper {
+  min-width: 0 !important; }
+.ss_mobile #db_viz_nodes_controls .MuiButtonBase-root:first-child {
+  display: none !important; }
+.ss_mobile .project_buttons {
+  display: none; }
+.ss_mobile .db_viz_info {
+  padding: 0.5rem 1rem; }
+.ss_mobile .ss_doi_window_fields, .ss_mobile .ss_doi_window_fields_info, .ss_mobile .ss_doi_window_name::after, .ss_mobile .ss_db_builder_project_name_icon {
+  display: none !important; }
+.ss_mobile .ss_db_toolbar_info {
+  padding: 0.5rem 1rem; }
+  .ss_mobile .ss_db_toolbar_info .ss_db_ctas {
+    display: none !important; }
+.ss_mobile .db_search_nodes {
+  display: none; }
+.ss_mobile .ss_doi_window {
+  transform: none; }
+.ss_mobile .nodes_controls_container .ss_control_group:first-child {
+  display: none !important; }
 
 /*# sourceMappingURL=style.css.map */

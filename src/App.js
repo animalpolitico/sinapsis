@@ -17,6 +17,9 @@ import DbBuilderPage from './pages/dbbuilder';
 import DevSandbox from './pages/dev';
 import NotFound from './pages/404';
 
+var mobile = require('is-mobile');
+
+
 const theme = createMuiTheme({
     palette: {
       type: 'dark',
@@ -43,7 +46,7 @@ export default class App extends React.Component{
     return(
       <ThemeProvider theme={theme}>
         <Router>
-          <div id="wrapper">
+          <div id="wrapper" className={mobile() ? 'wrapper_mobile' : ''}>
             <div id="binder">
               <Switch>
                 <Route path={buildLink("/")} exact component={Index} />

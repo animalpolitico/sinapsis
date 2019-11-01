@@ -97,9 +97,13 @@ export default class DbInput extends React.Component{
       this.mi = setTimeout(function(){
         self.setAutoCompleteAddress();
       }, 500);
-    }else if(this.props.matchWith && this.props.matchWith.length){
+    }else if((this.props.matchWith && this.props.matchWith.length) || this.props.autoComplete && this.props.autoComplete.length){
+      var c = this.props.matchWith[0];
+      if(!this.props.matchWith || !c){
+        var c = this.props.autoComplete[0];
+      }
       this.mi = setTimeout(function(){
-        self.setAutoCompleteStandard(self.props.matchWith[0]);
+        self.setAutoCompleteStandard(c);
       }, 500);
     }
   }
@@ -109,10 +113,12 @@ export default class DbInput extends React.Component{
       autoCompleteLoading: true,
     })
     var r = [];
+    console.log('Type', type);
     var all = window.dbf.searchByType(this.state.value, type);
+    console.log('all', all);
     all.map(function(d){
       var em = {
-        label: d.value,
+        label: d.value || d.name,
         type: 'autocompleted',
         additionalData: d
       }
@@ -316,6 +322,7 @@ export default class DbInput extends React.Component{
 
 
     if(this.props.onChange){
+      window.dispatchEvent(new Event('ss_lazy_indicator'));
       this.props.onChange(slug, obj);
       if(forceMap){
         var ev = new Event('ss_reload_map');
@@ -381,6 +388,17 @@ export default class DbInput extends React.Component{
       cs.push('ss_textarea');
     }
 
+    /** Google Maps **/
+    var show_gm = false;
+    if(this.props.matchWith && this.props.matchWith.indexOf('address') > -1 && this.state.value){
+      show_gm = true;
+      var gm_url = "https://www.google.com/maps/search/" + this.state.value.replace(' ', '+');
+
+
+    }
+
+
+
     return(
       <div className={cs.join(' ')}>
         <div className="ss_db_input_container">
@@ -409,6 +427,16 @@ export default class DbInput extends React.Component{
             !this.props.hideLabel ?
             <div className="ss_db_input_container_label">
               {_t(this.getName())}
+              {
+                show_gm ?
+                <div className="ss_db_input_container_label_icon">
+                  <a href={gm_url} target="_blank">
+                    <Icon>my_location</Icon>
+                  </a>
+                </div>
+                : null
+              }
+
             </div>
             : null
           }

@@ -593,13 +593,22 @@
         line-height: 1;
         overflow: hidden;
         transition: transform 0.35s ease;
-        pointer-events: none;
         height: auto;
         padding: 0.25rem 0;
         color: white;
         font-size: 0.7rem;
         font-weight: 600;
         transform: translateY(-100%);
+        &_icon{
+          font-size: 0.5rem;
+          line-height: 1;
+          margin-left: 0.5rem;
+          .material-icons{
+            color: $main;
+            line-height: 1;
+            font-size: 0.7rem;
+          }
+        }
       }
       input, textarea{
         width: 100%;

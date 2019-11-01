@@ -31,7 +31,8 @@ export default class DbViz extends React.Component{
     showSearch: true,
     showcontrols: true,
     displayAnalytics: false,
-    displayMap: false
+    displayMap: false,
+    r: 0
   }
   constructor(props){
     super(props);
@@ -39,9 +40,17 @@ export default class DbViz extends React.Component{
   }
 
   toggleAnalytics(){
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
+    var ns = !this.state.displayAnalytics;
     this.setState({
-      displayAnalytics: !this.state.displayAnalytics
+      displayAnalytics: ns,
+      r: Math.random() * 1000000
     })
+    document.body.classList.toggle('ss_showing_analytics', ns);
+
+    if(!ns){
+      window.dispatchEvent(new Event('sinapsisEndLoad'));
+    }
   }
 
   toggleMap(){
@@ -65,9 +74,11 @@ export default class DbViz extends React.Component{
     this.nodes.setState({
       openListado: false
     })
+    document.body.classList.remove('ss_showing_analytics');
   }
 
   render(){
+    var self = this;
     var csn = ['nodes_controls'];
     if(this.state.showcontrols){
       csn.push('nodes_controls_showing');
@@ -82,7 +93,7 @@ export default class DbViz extends React.Component{
           <SSNoResults parent={this} nodes={this.nodes} onClose={() => this.setState({hideNoResults: true})}/>
           : null
         }
-        <Nodes ref={(ref) => this.nodes = ref} categoryToggle={this.categoryToggle}/>
+        <Nodes ref={(ref) => this.nodes = ref} parent={this} categoryToggle={this.categoryToggle}/>
 
         <div className={csn.join(' ')}>
           <div className="nodes_controls_button" onClick={() => this.toggleControls()}>
@@ -97,21 +108,37 @@ export default class DbViz extends React.Component{
         <div className="project_buttons">
           {
             !this.state.displayAnalytics ?
-          <div className="project_buttons_button" onClick={() => this.toggleAnalytics()}>
+          <div className="project_buttons_button"
+            onClick={function(){
+              self.closeAllWindows();
+              self.toggleAnalytics();
+            }}
+            >
             <Icon>bar_chart</Icon>
             <div>Estadísticas</div>
           </div>
           : null }
           {
             !this.state.displayMap ?
-          <div className="project_buttons_button" onClick={() => this.toggleMap()}>
+          <div className="project_buttons_button"
+            onClick={function(){
+              self.closeAllWindows();
+              self.toggleMap();
+            }}
+          >
             <Icon>map-marker</Icon>
             <div>Mapa</div>
           </div>
           : null }
           {
             !this.state.openListado ?
-          <div className="project_buttons_button" onClick={() => this.nodes.openListado([], this)} parent={this}>
+          <div
+            className="project_buttons_button"
+            onClick={function(){
+              self.closeAllWindows();
+              self.nodes.openListado([], self);
+            }}
+            parent={this}>
             <Icon>format_list_bulleted</Icon>
             <div>Coincidencias</div>
           </div>
@@ -126,7 +153,7 @@ export default class DbViz extends React.Component{
         </div>
           {
             this.state.displayAnalytics ?
-            <Analytics onClose={() => this.toggleAnalytics()} nodesMap={this.nodes}/>
+            <Analytics onClose={() => this.toggleAnalytics()} r={this.state.r} nodesMap={this.nodes}/>
             : null
           }
           {
@@ -191,8 +218,26 @@ class SSDBControl extends React.Component{
 
   handleMostrarEmpresas(v){
     var showall = v == "all";
+    if(showall){
+      this.setState({
+        showWarning: true
+      })
+    }else{
+      this.setState({
+        mostrarV: v
+      })
+      window.dispatchEvent(startLoad);
+      this.props.nodesMap.toggleEmpresas(showall);
+    }
+  }
+
+  proceedTodas(){
     window.dispatchEvent(startLoad);
-    this.props.nodesMap.toggleEmpresas(showall);
+    this.props.nodesMap.toggleEmpresas(true);
+    this.setState({
+      mostrarV: 'all',
+      showWarning: false
+    })
   }
 
   handleMostrarCoincidencias(type){
@@ -259,38 +304,47 @@ class SSDBControl extends React.Component{
                   <label>Mostrar coincidencias</label>
                   <div className="ss_control_extra_f"><Icon>keyboard_arrow_down</Icon></div>
                   <select onChange={(e) => this.handleMostrarCoincidencias(e.target.value)}>
-                    <option value="all">Todas</option>
-                    <option value="onlyinall">Solo entre todas las distintas bases</option>
-                    <option value="twoormore">Solo entre bases distintas</option>
+                    <option value="all">TODAS (dentro de la misma base de datos y entre otras bases de datos)</option>
+
+                    <option value="twoormore">MÍNIMO 2 (tiene que coincidir en por lo menos 2 distintas bases)</option>
+                      {
+                        visible.length > 2 ?
+                        <option value="onlyinall">ENTRE LAS {visible.length} (tiene que coincidir en las {visible.length} bases de datos)</option>
+                        : null
+                      }
                   </select>
                 </div>
                 : null
               }
 
               <div className="ss_control_extra">
-                <div className="ss_control_extra_toggle" onClick={() => this.setState({showCC: !this.state.showCC})}>
-                  <label>Mostrar empresas</label>
-                  <Icon>{ this.state.showCC ? "keyboard_arrow_up" : "keyboard_arrow_down"}</Icon>
-                </div>
-                {
-                  this.state.showCC ?
-                <>
+                <label>Mostrar empresas</label>
                 <div className="ss_control_extra_f"><Icon>keyboard_arrow_down</Icon></div>
-                <select onChange={(e) => this.handleMostrarEmpresas(e.target.value)}>
+                <select onChange={(e) => this.handleMostrarEmpresas(e.target.value)} value={this.state.mostrarV}>
                   <option value="default">Solo con coincidencias</option>
-                  <option value="all">Todas</option>
+                  <option value="all">Todas las empresas</option>
                 </select>
-                {
-                  totalPotentialEmpresas > 900 ?
-                  <div className="ss_control_extra_warning">
-                    <Icon>warning</Icon><div>Tu proyecto tiene muchas empresas, ten cuidado al seleccionar "Todas".</div>
-                  </div>
-                  : null
-                }
-                </>
-              : null }
-
               </div>
+
+              <Dialog open={this.state.showWarning} onClose={() => this.setState({showWarning: false})}>
+                <DialogTitle id="form-dialog-title"><Icon style={{color: "yellow"}}>warning</Icon>Cuidado</DialogTitle>
+                  <DialogContent>
+                    Esta acción va a mostrar todas las empresas de tu proyecto, esto podría saturar la visualización de nodos
+                    <br/>
+                    ¿Deseas continuar?
+                  </DialogContent>
+                <DialogActions>
+                  <Button color="secondary" onClick={() => this.setState({showWarning: false, mostrarV: 'default'})}>
+                    No, regresar
+                  </Button>
+                  <Button color="secondary" onClick={() => this.proceedTodas()}>
+                    Sí, continuar
+                  </Button>
+                </DialogActions>
+              </Dialog>
+
+
+
             </div>
           </>
         : null
@@ -949,6 +1003,7 @@ class Nodes extends React.Component{
                  .attr('fill', 'white')
                  .attr('font-family', 'benton-sans, sans-serif')
                  .attr('font-size', 350)
+                 .attr('font-weight', (d) => d.type == "person" ? 600 : 400)
                  .attr('text-anchor', 'middle')
 
       var nodesPaddingLeft = 100;
@@ -981,7 +1036,7 @@ class Nodes extends React.Component{
              var p = ww / 2 + ' ' + hh + ' ' + 0 + ' ' + hh + ' ' + 0 + ' ' + 0 + ' ' + ww / 2 + ' ' + 0;
              return p;
            })
-           .attr('transform', 'translate('+ -ww / 2 +', '+ (-h + 48) +')')
+           .attr('transform', 'translate('+ -ww / 2 +', '+ (-h + 45) +')')
 
         }
 
@@ -1009,7 +1064,7 @@ class Nodes extends React.Component{
                         })
                         .attr('id', (d, i) => 'node_'+i)
                         .attr('stroke', function(d){
-                          var c = "#0a0a0a";
+                          var c = "#2a2a2a";
                           if(d.type == "empresa"){
                             var bs = d.banderasRojas;
                             var hbs = bs.length > 0;
@@ -1721,12 +1776,17 @@ class Nodes extends React.Component{
   }
 
   render(){
+    var self = this;
     return(
       <div className="db_viz_nodes" ref={(ref) => this.container = ref}>
 
         {
           this.state.openListado ?
-          <SSListado v={this.state.listadoTypes} nodesMap={this} onClose={() => this.setState({openListado: false})}/>
+          <SSListado v={this.state.listadoTypes} nodesMap={this}
+            onClose={function(){
+              self.setState({openListado: false})
+              self.props.parent.closeAllWindows();
+            }}/>
           :
           null
         }
@@ -1778,7 +1838,8 @@ class Nodes extends React.Component{
 
 class SSNoResults extends React.Component{
   state = {
-    tip: false
+    tip: false,
+    show: true
   }
 
   componentDidMount(){
@@ -1792,9 +1853,10 @@ class SSNoResults extends React.Component{
     setTimeout(function(){
       var t = self.getTip();
       self.setState({
-        tip: t
+        tip: t,
+        show: true
       })
-    }, 100);
+    }, 500);
 
   }
 
@@ -1813,6 +1875,7 @@ class SSNoResults extends React.Component{
     /* No info */
     if(!dbsSize){
       var obj = {
+        title: 'Proyecto nuevo',
         tip: 'No tienes ninguna base de datos, agrega una para comenzar.',
         cta: 'Agregar base',
         action: () => this.addDb()
@@ -1833,26 +1896,26 @@ class SSNoResults extends React.Component{
       }
     }
 
-    /* Filtros */
-    if(this.props.nodes && this.props.nodes.props.categoryToggle){
-      var v = this.props.nodes.props.categoryToggle.state;
-      if(v.vals.length < 10 || v.bs){
-        var obj = {
-          tip: 'Tienes algunos filtros activados, cambia la configuración de estos filtros.',
-          cta: 'Quitar todos los filtros',
-          action: () => this.filterNone()
-        }
-        return obj;
-      }
-    }
+    // /* Filtros */
+    // if(this.props.nodes && this.props.nodes.props.categoryToggle){
+    //   var v = this.props.nodes.props.categoryToggle.state;
+    //   if(v.vals.length < 10 || v.bs){
+    //     var obj = {
+    //       tip: 'Tienes algunos filtros activados, cambia la configuración de estos filtros.',
+    //       cta: 'Quitar todos los filtros',
+    //       action: () => this.filterNone()
+    //     }
+    //     return obj;
+    //   }
+    // }
 
 
     /* No dbs showing */
-
-    var obj = {
-      tip: 'Es probable que tus bases de datos no tengan datos que coincidan, intenta agregar más información.',
-    }
-    return obj;
+    //
+    // var obj = {
+    //   tip: 'Es probable que tus bases de datos no tengan datos que coincidan, intenta agregar más información.',
+    // }
+    return false;
   }
 
   filterNone(){
@@ -1870,13 +1933,13 @@ class SSNoResults extends React.Component{
 
   render(){
     var tipObj = this.state.tip;
-    if(!tipObj){
+    if(!tipObj || !this.state.show){
       return null;
     }
     return(
         <div className="ss_no_results">
           <div className="ss_no_results_close" onClick={() => this.props.onClose()}><Icon>close</Icon></div>
-          <div className="ss_no_results_title">Sin coincidencias</div>
+          <div className="ss_no_results_title">{tipObj.title ? tipObj.title : 'Sin coincidencias'}</div>
           <div className="ss_no_results_des">No encontramos coincidencias con los datos existentes.</div>
           {
             tipObj ?
@@ -1897,6 +1960,9 @@ class SSNoResults extends React.Component{
               </div>
               : null
             }
+            <div className="ss_no_results_ctas_cta" onClick={() => this.setState({show: false})}>
+              Entendido
+            </div>
           </div>
         </div>
     )
@@ -2126,12 +2192,18 @@ class SSListado extends React.Component{
                 eoi.fields.map(function(fg){
                   var f = fg[0];
                   var fn = f.value;
+                  var istitular = f.matchWith && f.matchWith.indexOf('titular') > -1;
                   return(
                     <div className="ss_listado_table_group">
                       <input type="checkbox" />
                       <div className="ss_listado_table_tr ss_listado_table_breaker">
                         <div className="ss_listado_table_td">
-                          <strong>{fn}</strong> <span className="ss_badge">{fg.length}</span><Icon>keyboard_arrow_down</Icon>
+                          <strong>{fn}</strong>
+                          {istitular ?
+                            <span style={{color: "#ff82d4", fontWeight: 600, marginLeft: 5}}>(titular de instancia)</span>
+                            : null
+                          }
+                        <span className="ss_badge">{fg.length}</span><Icon>keyboard_arrow_down</Icon>
                         </div>
                       </div>
                       <div className="ss_listado_table_group_c">
@@ -2453,6 +2525,17 @@ class SSCategoryToggle extends React.Component{
 
           </div>
           <div className="ss_control_group_container_switches">
+            <div className="ss_ctr_ch">
+              <div className="ss_ctr_ch_tds">
+                <div className="ss_ctr_ch_td">
+                  <div className="ss_ctr_ch_td_ball" style={{backgroundColor: '#f6f6f6'}}>
+                    <div className="ss_ctr_ch_td_ball_helper" style={{backgroundColor: "#f6f6f6"}}>
+                    </div>
+                  </div>
+                </div>
+                <div className="ss_ctr_ch_td">Empresa</div>
+              </div>
+            </div>
             {
               types.map(function(m){
                 return(
@@ -2481,17 +2564,9 @@ class SSCategoryToggle extends React.Component{
           </div>
           {
             isMexico() ?
-            <div className="ss_ctr_br" onClick={() => this.toggleBS()}>
-              {
-                !this.state.bs ?
-                <>
-                <Icon style={{color: "red"}}>flag</Icon><div>Solo con banderas rojas</div>
-                </>
-                :
-                <>
-                <Icon style={{color: "#f6f6f6"}}>flag_outline</Icon><div>Todas</div>
-                </>
-              }
+            <div className={"ss_ctr_br " + (this.state.bs ? "ss_ctr_br_c" : "")} onClick={() => this.toggleBS()}>
+              <div className="ss_ctr_br_b"></div>
+              <div className="ss_ctr_br_l">{!this.state.bs ? "Solo con banderas rojas" : "Todas"}</div>
             </div>
             : null
           }

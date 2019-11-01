@@ -35,3 +35,73 @@
     }
   }
 }
+
+.ss_mobile{
+  .ss_db_choose{
+    width: 100%;
+  }
+  .ss_dbbuilder_front{
+    min-height: 600px!important;
+    .ss_db_choose_td{
+      &:not(.ss_db_estafa){
+        display: none;
+      }
+    }
+  }
+  .ss_dbbuilder_front .ss_db_choose_td .material-icons{
+      position: absolute;
+      right: 0;
+      top: 0;
+      left: auto;
+      right: 0;
+      font-size: 2rem;
+      transform: none;
+  }
+  .ss_dbbuilder_sidebar{
+    display: none;
+  }
+  .ss_db_choose_td_c{
+    background-position: center top;
+  }
+  .ss_dbbuilder_front .ss_db_choose_td::after{
+    padding-top: 70%;
+  }
+  #wrapper{
+    min-width: 0!important;
+  }
+  #db_viz_nodes_controls{
+    .MuiButtonBase-root{
+      &:first-child{
+        display: none!important;
+      }
+    }
+  }
+  .project_buttons{
+    display: none;
+  }
+  .db_viz_info{
+    padding: 0.5rem 1rem;
+  }
+  .ss_doi_window_fields, .ss_doi_window_fields_info, .ss_doi_window_name::after, .ss_db_builder_project_name_icon{
+    display: none!important;
+  }
+  .ss_db_toolbar_info{
+    padding: 0.5rem 1rem;
+    .ss_db_ctas{
+      display: none!important;
+    }
+  }
+  .db_search_nodes{
+    display: none;
+  }
+  .ss_doi_window{
+    transform: none;
+  }
+  .nodes_controls_container{
+    .ss_control_group{
+      &:first-child{
+        display: none!important;
+      }
+    }
+  }
+}

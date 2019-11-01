@@ -1,0 +1,31 @@
+.mobile_alert{
+  width: 100%;
+  position: fixed;
+  background: yellow;
+  bottom: 0;
+  z-index: 9999999999999999;
+  @extend .flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1rem;
+  line-height: 1.1;
+  &_close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.25rem;
+    cursor: pointer;
+    line-height: 1;
+    .material-icons{
+      font-size: 0.7rem;
+    }
+  }
+  &_icon{
+    margin-right: 0.5rem;
+  }
+  &_text{
+    font-size: 0.9rem;
+    font-weight: 600;
+
+  }
+}

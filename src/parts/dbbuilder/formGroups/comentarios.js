@@ -31,7 +31,7 @@ export default class DbFormGroupComentarios extends React.Component{
             <div className="dbef_n_n">
               Comentarios
               {
-                hascomentarios ? 
+                hascomentarios ?
                 <span className="dbef_n_n_badge">{1}</span>
                 : null
               }
@@ -39,7 +39,7 @@ export default class DbFormGroupComentarios extends React.Component{
             <div className="dbef_n_ctas">
               {
                 this.state.open ?
-                <div className="dbef_n_ctas_c" onClick={() => this.setState({open: false})}>Guardar</div>
+                <div className="dbef_n_ctas_c">Guardar</div>
                 : null
               }
             </div>

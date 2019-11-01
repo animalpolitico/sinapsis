@@ -1,8 +1,12 @@
+$bgc: #2d2d2d;
+$mww: 90%;
+$dwp: 768px;
+
 #ss_sinapsis_home{
   width: 100%;
   overflow: hidden;
   position: relative;
-  background: #2a2a2a;
+  background: $bgc;
   min-height: 100vh;
   .ss_h_s{
     width: 100%;
@@ -10,34 +14,487 @@
   }
 }
 
-#ss_h_landing{
-  height: 100vh;
+.ss_h_h1{
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  &_s{
+    color: #f6f6f6;
+    font-weight: 300;
+  }
+  &_b{
+    background-color: #f6f6f6;
+    font-weight: 600;
+    padding-top: 2px;
+    color: $bgc;
+    padding: 2px 3px 0;
+    display: inline-block;
+  }
 }
 
-#ap_logo{
-  width: 50px;
-  height: 50px;
-  margin: 0 auto;
-  background: blue;
+.ss_diagc{
+  background: url('../static/pleca.png') no-repeat center bottom;
+  background-size: 100% auto;
+  padding: 3rem 0 8rem;
+  margin-bottom: -8rem;
+  @media (min-width: $dwp){
+    background-image: url('../static/l.png');
+    background-position: right bottom;
+  }
+}
+
+.ss_h_s_h1p{
+  width: 75%;
+  margin: 0 auto 2rem;
   position: relative;
-  &_container{
+  z-index: 2;
+  &_p{
+    width: 90%;
+    margin-top: 1.5rem;
+    color:#989898;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+}
+
+.ss_h_points{
+  margin: 0 auto;
+  width: 75%;
+  position: relative;
+  z-index: 2;
+
+  &_point{
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    img{
-      width: 20px;
-      @extend .cxy;
-      z-index: 2;
+    position: relative;
+    padding-top: 1.8rem;
+    margin-bottom: 2.1rem;
+    &:last-child{
+      margin-bottom: 0;
     }
-    svg{
-      width: 100%;
-      height: 100%;
+    &_decorator{
+      width: 50%;
+      height: 2px;
+      background: #444;
       position: absolute;
       top: 0;
       left: 0;
+      div{
+        width: 60%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: $main;
+        box-shadow: 0 0 3px rgba($main, 0.9);
+      }
+    }
+    &_title{
+      text-transform: uppercase;
+      color: #f6f6f6;
+      font-size: 1.1rem;
+      font-weight: 300;
+      strong{
+        margin-left: 4px;
+      }
+    }
+    &_content{
+      width: 90%;
+      margin-top: 0.5rem;
+      color:#989898;
+      font-size: 0.9rem;
+      line-height: 1.3;
+      @media (min-width: $dwp){
+        width: 60%;
+      }
+      a{
+        color: $main;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+#ss_h_usa{
+  padding-top: 2rem;
+  @media (min-width: $dwp){
+    width: 900px!important;
+    margin: 0 auto;
+    background: url('../static/brain3.png') no-repeat right center;
+    background-size: 300px;
+  }
+}
+
+#ss_h_faq{
+  padding-bottom: 6rem;
+  @media (min-width: $dwp){
+    width: 900px!important;
+    margin: 0 auto;
+  }
+}
+
+#ss_h_credits{
+  background: #f5f5f5;
+  position: relative;
+  z-index: 3;
+  margin-bottom: -10px;
+  transform: translateY(-10px);
+  box-shadow: 0 -5px 10px rgba(black, 0.2);
+
+  .ss_h_s_credits{
+    width: 75%;
+    padding: 3rem 0;
+    margin: 0 auto;
+    @media (min-width: $dwp){
+      width: 700px!important;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .ss_h_h1_b{
+      background: $main;
+      color: #f6f6f6;
+      margin-bottom: 1rem;
+    }
+    .ss_h_h1{
+      width: 100%;
+    }
+    &_group{
+      margin: 2rem 0;
+      @media (min-width: $dwp){
+        width: 50%;
+      }
+      &_title{
+        font-size: 1.1rem;
+        color: #999;
+        text-transform: uppercase;
+        font-weight: 300;
+        margin-bottom: 0.5rem;
+      }
+      &_container{
+        width: 100%;
+        &_p{
+          margin: 0.5rem 0;
+          box-sizing: border-box;
+          padding: 0.6rem 0;
+          position: relative;
+          &_d{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background: #bbbbbb;
+            div{
+              width: 60%;
+              height: 100%;
+              position: absolute;
+              left: 0;
+              top: 0;
+              background: $main;
+              box-shadow: 0 0 2px rgba($main,0.5);
+            }
+          }
+          &_i{
+            &_c{
+              text-transform: uppercase;
+              font-size: 0.7rem;
+              font-weight: 600;
+              color: #707070;
+            }
+            &_n{
+              @extend .flex;
+              color:#707070;
+              align-items: flex-end;
+              font-weight: 500;
+              a{
+                color: #c6c4c4;
+                font-size: 0.7rem;
+                margin-left: 7px;
+                &::before{
+                  margin-right: 3px;
+                  content: '/';
+                  font-size: 1rem;
+                }
+              }
+            }
+            &_m{
+              text-transform: uppercase;
+              color: #444;
+              font-weight: 600;
+              font-size: 0.6rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#ss_h_casos{
+  padding-top: 0rem;
+  padding-bottom: 3rem;
+  margin-top: 2rem;
+  @media (min-width: $dwp){
+    width: 900px!important;
+    margin: 3rem auto 0;
+  }
+  .ss_h_s_casos{
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    @media (min-width: $dwp){
+      display: flex;
+      flex-wrap: wrap;
+      width: 75%;
+    }
+    &_caso{
+      width: 100%;
+      box-sizing: border-box;
+      border: 2px solid $main;
+      box-shadow: 0 0 5px rgba($main, 0.8);
+      position: relative;
+      background: $bgc no-repeat center center;
+      background-size: cover;
+      background-blend-mode: soft-light;
+      cursor: pointer;
+      margin: 1.5rem 0;
+      @media (min-width: $dwp){
+        width: 45%;
+        margin-top: 0.5rem;
+        &:first-child{
+          margin-right: 2.5%;
+        }
+      }
+      &_publisher{
+        @extend .cx;
+        bottom: 2rem;
+        @extend .flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &_a{
+          color: #989898;
+          font-weight: 700;
+          text-transform: uppercase;
+          font-size: 0.5rem;
+        }
+        &_b{
+          margin-top: 0.5rem;
+          img{
+            width: 55%;
+            margin: 0 auto;
+            display: block;
+          }
+        }
+      }
+      &_logo{
+        @extend .cxy;
+        width: 70%;
+        img{
+          width: 100%;
+        }
+      }
+      &::after{
+        content: '';
+        display: block;
+        padding-top: 120%;
+        width: 100%;
+      }
+    }
+  }
+}
+
+
+
+.ss_txtr{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background:  url('../static/mt1.jpg') no-repeat center bottom;
+  background-size: 100% auto;
+  mix-blend-mode: color-dodge;
+}
+
+#ss_h_landing{
+  height: 100vh;
+  @extend .flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: $bgc url('../static/mt1.jpg') no-repeat center top;
+  background-size: 100% auto;
+  background-blend-mode: color-dodge;
+  .ss_h_s_c{
+    width: $mww;
+    margin: 0 auto;
+    @media (min-width: $dwp){
+      width: 400px;
+    }
+    &_logo{
+      width: 50px;
+      margin: 0 auto;
+      @media (min-width: $dwp){
+        width: 60px;
+      }
+      img{
+        width: 100%;
+      }
+    }
+    &_g{
+      width: 100%;
+      background: url('../static/ha.gif') no-repeat center center;
+      background-size: contain;
+      margin: 2rem auto;
+      @media (min-width: $dwp){
+        width: 88%;
+        margin: 4rem auto 7rem;
+      }
+      &::after{
+        content: '';
+        display: block;
+        padding-top: 100%;
+        width: 100%;
+      }
+    }
+    &_arrows{
+      width: 50px;
+      height: 50px;
+      margin: 4rem auto 0;
+      position: relative;
+      cursor: pointer;
+      .material-icons{
+        position: absolute;
+        @extend .cxy;
+        font-size: 3.5rem;
+        color: white;
+        &:first-child{
+          color: $main;
+          text-shadow: 0 0 3px $main;
+        }
+        &:last-child{
+          animation: harr 1.5s ease-out infinite alternate;
+        }
+        @keyframes harr{
+          from{
+            transform: translate(-50%,-50%);
+          }
+          to{
+            transform: translate(-50%,-20%);
+          }
+        }
+      }
+    }
+  }
+}
+#ss_h_video{
+  margin: 1rem 0 0;
+  padding-top: 2rem;
+  .ss_h_s_video{
+    width: 84%;
+    margin: 0 auto;
+    border: 2px solid $main;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba($main, 0.8);
+    position: relative;
+    background: url('../static/brain1.png') no-repeat center center;
+    background-size: contain;
+    @media (min-width: $dwp){
+      width: 850px;
+    }
+    &_ball{
+      width: 15px;
+      height: 15px;
+      position: absolute;
+      top: 0;
+      border-radius: 50%;
+      left: 0;
+      box-shadow: 0 0 5px 2px rgba($main, 0.8);
+      transform: translate(-50%,-50%);
+      background: rgba($main, 0.9);
+    }
+    .ss_h_h1{
+      position: absolute;
+      top: 1.6rem;
+      left: 1.3rem;
+    }
+    &_icon{
+      @extend .cxy;
+      color: #f6f6f6;
+      opacity: 0.8;
+      .material-icons{
+        font-size: 3.5rem;
+      }
+    }
+    &::after{
+      content: '';
       display: block;
+      padding-top: 140%;
+      @media (min-width: $dwp){
+        padding-top: 60%;
+      }
+    }
+  }
+}
+#ss_h_goto{
+  margin-top: 4rem;
+  .ss_h_s_goto_container{
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    @media (min-width: $dwp){
+      width: 500px;
+    }
+    &_img{
+      width: 85%;
+      margin: 0 auto;
+      img{
+        width: 100%;
+      }
+    }
+    &_ctas{
+      width: 100%;
+      margin: 0 auto;
+      @extend .flex;
+      flex-direction: column;
+      padding: 2rem 12% 3rem;
+      box-sizing: border-box;
+      background: url('../static/con.png') no-repeat -10px top;
+      background-size: auto 80%;
+      transform:translateY(-2rem);
+      margin-bottom: -2rem;
+      &_cta{
+        width: 100%;
+        text-transform: uppercase;
+        background: $main;
+        color: #f6f6f6;
+        font-weight: 600;
+        text-align: center;
+        cursor: pointer;
+        font-size: 0.8rem;
+        box-shadow: 0 0 5px 2px rgba($main, 0.5);
+        padding: 0.6rem 0.2rem 0.5rem;
+        box-sizing: border-box;
+        border: 1px solid $main;
+        margin: 0.5rem 0;
+        &:not(.hcta_outlined){
+          animation: hcta 1s ease infinite alternate;
+        }
+        &.hcta_outlined{
+          background: transparent;
+        }
+        @keyframes hcta{
+          from{
+            box-shadow: 0 0 5px 2px rgba($main, 0.5);
+          }
+          to{
+            box-shadow: 0 0 8px 4px rgba($main, 0.7);
+          }
+        }
+      }
     }
   }
 }

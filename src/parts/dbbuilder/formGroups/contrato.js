@@ -79,13 +79,17 @@ export default class DbFormGroupContrato extends React.Component{
   }
 
   add(){
-    var fs = this.state.fields;
-    var dbuid = this.props.parent.props.db.id;
-    var euid = this.props.empresa.uid;
-    // console.log('Adding', fs);
+    var self = this;
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
+    setTimeout(function(){
+      var fs = self.state.fields;
+      var dbuid = self.props.parent.props.db.id;
+      var euid = self.props.empresa.uid;
+      window.dbf.addFieldsFromGuid(dbuid, euid, self.state.guid, fs);
+      self.close();
+      window.dispatchEvent(new Event('sinapsisEndLoad'));
+    }, 300)
 
-    window.dbf.addFieldsFromGuid(dbuid, euid, this.state.guid, fs);
-    this.close();
   }
 
   insertField(slug, obj, blockchanged){
@@ -217,7 +221,7 @@ export default class DbFormGroupContrato extends React.Component{
                   <>
                   <div className="ss_db_input_select">
                     <div className="db_empresa_container_group_radios_title">
-                      ¿Quien otorga los recursos es empresa o {_t('instancia / dependencia')}?
+                      ¿Quién otorga los recursos?
                     </div>
                     <select onChange={(e) => this.setState({contratoType: e.target.value, res: true})} value={type}>
                       <option value="" disabled selected>Selecciona...</option>
@@ -230,7 +234,8 @@ export default class DbFormGroupContrato extends React.Component{
                   <>
                     <DbInput
                       onChange={(slug, obj) => this.insertField(slug, obj)}
-                      matchWith={mw}
+                      autoComplete={mw}
+                      matchWith={mw.indexOf('instancia') > -1 ? ['instancia'] : []}
                       aka={this.state.contratoType == "empresa" ? "Nombre de la empresa que otorga los recursos" : "Nombre de la instancia que otorga los recursos"}
                       type="text"
                       category="emisor"

@@ -76,31 +76,24 @@
       box-sizing: border-box;
       padding: 0.75rem 0.5rem 0.25rem;
       cursor: pointer;
-      &.ss_ctr_br_buttons{
-        cursor: default;
-        .ss_ctr_br_buttons_btn{
-          margin: 0 0 0.15rem;
-          box-sizing: border-box;
-          padding: 0.3rem 0.4rem 0.2rem;
-          border: 2px solid $main;
-          cursor: pointer;
-          &:hover{
-            background: rgba($main, 0.2);
-          }
-        }
+      &_b{
+        width: 8px;
+        height: 8px;
+        background: #f6f6f6;
+        border-radius: 50%;
+        border: 1px solid red;
+        margin-right: 5px;
       }
-
-      .material-icons{
-        color: red;
-        line-height: 1;
-        font-size: 0.75rem;
-        margin-right: 0.25rem;
-      }
-      div{
+      &_l{
         font-size: 0.7rem;
         line-height: 1.1;
         font-weight: 600;
         color: white;
+      }
+      &.ss_ctr_br_c{
+        .ss_ctr_br_b{
+          border: 0;
+        }
       }
     }
 

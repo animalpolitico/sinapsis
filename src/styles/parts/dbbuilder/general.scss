@@ -8,8 +8,8 @@
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  height: calc(100vh  - 55px);
-  margin-top: 55px;
+  height: calc(100vh  - 58px);
+  margin-top: 58px;
   position: relative;
   @extend .flex;
   &_empty_tip{
@@ -147,14 +147,24 @@ body.ss_show_sidebar{
     align-items: center;
     margin-top: 1rem;
     padding-left: 5.5%!important;
-    *, &{
+    *:not(.material-icons), &{
       font-weight: 300;
       text-transform: uppercase;
       font-size: 1.2rem;
     }
+
     h2{
       color: #f6f6f6;
       font-weight: 100;
+      @extend .flex;
+      line-height: 1;
+      align-items: center;
+      .material-icons{
+        font-size: 0.9rem;
+        line-height: 1;
+        margin-right: 0.5rem;
+        transform: translateY(2px);
+      }
       &::before{
         content: '/';
         color: $main;

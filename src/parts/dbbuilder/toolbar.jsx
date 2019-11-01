@@ -188,19 +188,24 @@ export default class DbBuilderToolbar extends React.Component{
               </div>
             </div>
             <div className="ss_db_ctas_custom ss_db_ctas_custom_send" onClick={() => this.setState({openContact: true})}>
-              <Icon>contact_support</Icon>
+              <Icon>help_outline</Icon>
+            </div>
+            <div className="ss_db_ctas_custom ss_db_ctas_custom_send">
+              <a href="https://github.com/animalpolitico/sinapsis" target="_blank">
+                <img src={require('../../static/github.svg')} />
+              </a>
             </div>
             <Dialog open={this.state.openContact} onClose={() => this.setState({openContact: false})}>
               <DialogTitle id="form-dialog-title">¿Necesitas ayuda?</DialogTitle>
               <DialogContent style={{width: 400}}>
-                ¿Necesitas precargar una bae de datos?, ¿tienes alguna duda, sugerencia o comentario?<br /><br/>- <a style={{textDecoration: 'underline'}} href="mailto:sinapsis@animalpolitico.com">sinapsis@animalpolitico.com</a><br/>- <a style={{textDecoration: 'underline'}} href="https://join.slack.com/t/sinapsissede/shared_invite/enQtODEyODkwNDczODYyLTMxMTAyZTUwZWZhODFmZGVkMjMyNjllMWNiNGRkM2U0YzZkMzFkNmJhMzYyYmJkNmRkZmIxNmRiMTE0NGZlNGY">Canal de Slack</a>
+                ¿Necesitas precargar una base de datos?, ¿tienes alguna duda, sugerencia o comentario?<br /><br/>- <a style={{textDecoration: 'underline'}} href="mailto:sinapsis@animalpolitico.com">sinapsis@animalpolitico.com</a><br/>- <a style={{textDecoration: 'underline'}} href="https://t.me/sinapsislat">Grupo de Telegram</a>
               </DialogContent>
               <DialogActions>
                 <Button color="secondary" onClick={() => this.setState({openContact: false})}>
                   Cerrar
                 </Button>
-                <Button color="secondary" onClick={() => this.contactAction('https://join.slack.com/t/sinapsissede/shared_invite/enQtODEyODkwNDczODYyLTMxMTAyZTUwZWZhODFmZGVkMjMyNjllMWNiNGRkM2U0YzZkMzFkNmJhMzYyYmJkNmRkZmIxNmRiMTE0NGZlNGY')}>
-                  Ir a Slack
+                <Button color="secondary" onClick={() => this.contactAction('https://t.me/sinapsislat')}>
+                  Ir a Telegram
                 </Button>
                 <Button color="secondary" onClick={() => this.contactAction('mailto:sinapsis@animalpolitico.com')}>
                   Escribir correo
@@ -281,6 +286,9 @@ class DbBuilderToolbarName extends React.Component{
     return(
       <>
       <div className={cs.join(' ')}>
+        <div className="ss_db_builder_project_name_goback" onClick={() => window.open("https://animalpolitico.com")}>
+          <img src={require('../../static/api.png')} />
+        </div>
         <div className="ss_db_builder_project_name_goback" onClick={() => this.goBack()}>
           <img src={require('../../static/imagotipo.png')} />
         </div>

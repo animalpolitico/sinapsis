@@ -11,7 +11,7 @@ html,body{
   left: 0;
 }
 body.ss_platform{
-  #wrapper{
+  #wrapper:not(.wrapper_mobile){
     overflow: hidden;
     min-width: 1100px;
     background: #222;

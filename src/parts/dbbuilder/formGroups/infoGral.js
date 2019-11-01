@@ -44,7 +44,7 @@ export default class DbFormGroupInfoGeneral extends React.Component{
             <div className="dbef_n_ctas">
               {
                 this.state.open ?
-                <div className="dbef_n_ctas_c" onClick={() => this.setState({open: false})} style={{display: 'none'}}>Guardar</div>
+                <div className="dbef_n_ctas_c" onClick={() => this.setState({open: false})}>Guardar</div>
                 : null
               }
             </div>
