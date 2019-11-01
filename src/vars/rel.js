@@ -1,5 +1,18 @@
 export const predbs = [
   {
+    name: '1,000 empresas más grandes por ingresos en 2017 (total patrimonio)',
+    description: 'Empresas fantasma definitivas',
+    country: 'COL',
+    blockEdit: true,
+    countryLabel: 'Colombia',
+    author: 'Superintendencia de Sociedades: www.supersociedades.gov.co COLOMBIA',
+    size: 3,
+    slug: 'sat-favorables',
+    last: '2019-09-30',
+    flag: require('../static/flags/colombia.svg'),
+    file: require('../static/csvs/col-patrimonio-2017.csv')
+  },
+  {
     name: 'Estafa Maestra',
     country: 'MEX',
     countryLabel: 'México',
@@ -98,17 +111,5 @@ export const predbs = [
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/sat-favorables.csv')
   },
-  {
-    name: '1,000 empresas más grandes por ingresos en 2017 (total patrimonio)',
-    description: 'Empresas fantasma definitivas',
-    country: 'COL',
-    blockEdit: true,
-    countryLabel: 'Colombia',
-    author: 'Superintendencia de Sociedades.',
-    size: 3,
-    slug: 'sat-favorables',
-    last: '2019-09-30',
-    flag: require('../static/flags/colombia.svg'),
-    file: require('../static/csvs/col-patrimonio-2017.csv')
-  }
+
 ]

@@ -25,11 +25,12 @@ var endLoad = new Event('sinapsisEndLoad');
 var JSZip = require("jszip");
 
 
+var mobile = require('is-mobile');
 
 export default class DbViz extends React.Component{
   state = {
     showSearch: true,
-    showcontrols: true,
+    showcontrols: mobile() ? false : true,
     displayAnalytics: false,
     displayMap: false,
     r: 0
@@ -491,7 +492,7 @@ function getTypeIcon(t){
       o = "phone";
     break;
     default:
-      o = "";
+      o = "trip_origin";
     break;
   }
   return o;
@@ -723,6 +724,7 @@ class Nodes extends React.Component{
       "convenio",
       "address",
       "no_notaria",
+      ...window.dbf.getNewOtros()
     ],
     openListado: false
   }
@@ -1077,7 +1079,7 @@ class Nodes extends React.Component{
                           return c;
                         })
                         .attr('stroke-width', function(d){
-                          return d.hasBanderasRojas ? '40px' : '4px';
+                          return d.hasBanderasRojas ? '40px' : '6px';
                         })
                         .attr('data-type', (d) => d.type)
                         .attr('fill', function(d){
@@ -1878,7 +1880,8 @@ class SSNoResults extends React.Component{
         title: 'Proyecto nuevo',
         tip: 'No tienes ninguna base de datos, agrega una para comenzar.',
         cta: 'Agregar base',
-        action: () => this.addDb()
+        action: () => this.addDb(),
+        removeEstadisticas:true
       }
       return obj;
     }
@@ -1896,18 +1899,18 @@ class SSNoResults extends React.Component{
       }
     }
 
-    // /* Filtros */
-    // if(this.props.nodes && this.props.nodes.props.categoryToggle){
-    //   var v = this.props.nodes.props.categoryToggle.state;
-    //   if(v.vals.length < 10 || v.bs){
-    //     var obj = {
-    //       tip: 'Tienes algunos filtros activados, cambia la configuración de estos filtros.',
-    //       cta: 'Quitar todos los filtros',
-    //       action: () => this.filterNone()
-    //     }
-    //     return obj;
-    //   }
-    // }
+    /* Filtros */
+    if(this.props.nodes && this.props.nodes.props.categoryToggle){
+      var v = this.props.nodes.props.categoryToggle.state;
+      if(v.vals.length < 10 || v.bs){
+        var obj = {
+          tip: 'Tienes algunos filtros activados, cambia la configuración de estos filtros.',
+          cta: 'Quitar todos los filtros',
+          action: () => this.filterNone()
+        }
+        return obj;
+      }
+    }
 
 
     /* No dbs showing */
@@ -1950,9 +1953,14 @@ class SSNoResults extends React.Component{
             : null
           }
           <div className="ss_no_results_ctas">
-            <div className="ss_no_results_ctas_cta" onClick={() => this.props.parent.setState({displayAnalytics: true})}>
-              Ver estadísticas
-            </div>
+            {
+              !tipObj.removeEstadisticas ?
+              <div className="ss_no_results_ctas_cta" onClick={() => this.props.parent.setState({displayAnalytics: true})}>
+                Ver estadísticas
+              </div>
+              : null
+            }
+
             {
               tipObj && tipObj.cta ?
               <div className="ss_no_results_ctas_cta" onClick={tipObj.action}>
@@ -1976,7 +1984,8 @@ class SSListado extends React.Component{
     open: false,
     eoi: {
       name: '',
-      fields: []
+      fields: [],
+      t: []
     }
   }
   componentDidMount(){
@@ -1989,12 +1998,15 @@ class SSListado extends React.Component{
   set(){
     var self = this;
     var v = this.props.v;
+    v = [...v, ...window.dbf.getNewOtros()];
     var nds = d3.selectAll('.node');
     var d = {};
+
     v.map(function(t){
       var c = self.getCoincidenciasFromType(t, nds);
       d[t] = c;
     })
+
     this.setState({
       d: d
     })
@@ -2006,20 +2018,33 @@ class SSListado extends React.Component{
       type: t,
       icon: getTypeIcon(t),
       coincidencias: 0,
-      fields: []
+      fields: [],
+      t: []
     }
     nds.filter(d => d.type == t)
        .each(function(d){
          var coin = d.coincidencias;
          obj.coincidencias = obj.coincidencias + coin;
-         obj.fields.push(d.fields);
+         if(!d.istitular){
+           obj.fields.push(d.fields);
+         }else{
+           obj.t.push(d.fields);
+         }
        })
 
     obj.fields.sort(function(a, b){
       return a.length <= b.length ? 1 : -1;
     })
+    obj.t.sort(function(a, b){
+      return a.length <= b.length ? 1 : -1;
+    })
+
+
 
     obj.coincidenciasFormatted = this.props.nodesMap.numberWithCommas(obj.coincidencias);
+
+    console.log('obj', obj);
+
     return obj;
   }
 
@@ -2120,6 +2145,8 @@ class SSListado extends React.Component{
 
   render(){
     var v = this.props.v;
+    v = [...window.dbf.getNewOtros(), ...v]
+
     var self = this;
     var eoi = this.state.eoi;
     var activeDbs = window.dbf.getActiveDbs();
@@ -2234,6 +2261,53 @@ class SSListado extends React.Component{
                   )
                 })
               }
+              {
+                eoi.t.map(function(fg){
+                  var f = fg[0];
+                  var fn = f.value;
+                  var istitular = true;
+                  return(
+                    <div className="ss_listado_table_group">
+                      <input type="checkbox" />
+                      <div className="ss_listado_table_tr ss_listado_table_breaker">
+                        <div className="ss_listado_table_td">
+                          <strong>{fn}</strong>
+                          {istitular ?
+                            <span style={{color: "#ff82d4", fontWeight: 600, marginLeft: 5}}>(titular de instancia)</span>
+                            : null
+                          }
+                        <span className="ss_badge">{fg.length}</span><Icon>keyboard_arrow_down</Icon>
+                        </div>
+                      </div>
+                      <div className="ss_listado_table_group_c">
+                      {
+                        fg.map(function(field){
+                          return(
+                            <div className="ss_listado_table_tr ss_listado_simplerow" onClick={() => self.handleOpen(field)}>
+                              <div className="ss_listado_table_td">
+                                <strong>{field.value}</strong>
+                              </div>
+                              <div className="ss_listado_table_td">
+                                {field.name}
+                              </div>
+                              <div className="ss_listado_table_td">
+                                {field.empresaName}
+                              </div>
+                              <div className="ss_listado_table_td">
+                                {field.dbName}
+                              </div>
+
+
+                            </div>
+                          )
+                        })
+                      }
+                    </div>
+                    </div>
+                  )
+                })
+              }
+
             </div>
           </div>
         </DialogContent>
@@ -2566,7 +2640,7 @@ class SSCategoryToggle extends React.Component{
             isMexico() ?
             <div className={"ss_ctr_br " + (this.state.bs ? "ss_ctr_br_c" : "")} onClick={() => this.toggleBS()}>
               <div className="ss_ctr_br_b"></div>
-              <div className="ss_ctr_br_l">{!this.state.bs ? "Solo con banderas rojas" : "Todas"}</div>
+              <div className="ss_ctr_br_l">{!this.state.bs ? "Empresa con banderas rojas" : "Todas"}</div>
             </div>
             : null
           }

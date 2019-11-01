@@ -223,7 +223,7 @@ export default class DbFormGroupTransferencias extends React.Component{
               <div className="ss_db_input_select">
                 {/* Selecciona el tipo de persona */}
                 <select onChange={(e) => this.onSelectTransferenciaType(e)}>
-                  <option value="-" selected disabled>Selecciona un tipo de transferencia</option>
+                  <option value="-" selected>Selecciona un tipo de transferencia</option>
                   <option value="emisor">Emisor</option>
                   <option value="receptor">Receptor</option>
                 </select>

@@ -70,17 +70,29 @@
     min-width: 0!important;
   }
   #db_viz_nodes_controls{
+    display: none!important;
     .MuiButtonBase-root{
       &:first-child{
-        display: none!important;
       }
+    }
+  }
+  .nodes_controls_button{
+    background: #f6f6f6;
+    .material-icons{
+      color: $main;
     }
   }
   .project_buttons{
     display: none;
   }
   .db_viz_info{
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1rem 6rem;
+    .ss_doi_window_name{
+      white-space: normal;
+    }
+  }
+  .nodes_controls.nodes_controls_showing{
+    top: 40%;
   }
   .ss_doi_window_fields, .ss_doi_window_fields_info, .ss_doi_window_name::after, .ss_db_builder_project_name_icon{
     display: none!important;

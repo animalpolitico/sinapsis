@@ -462,25 +462,42 @@ class DbInicio extends React.Component{
 
 class DbLoader extends React.Component{
   state = {
-    loading: false
+    loading: false,
+    mins: false,
+    i: null
   }
 
   componentDidMount(){
     var self = this;
-    window.addEventListener('sinapsisStartLoad', function(){
+    window.addEventListener('sinapsisStartLoad', function(e){
       document.body.style.cursor = "wait";
       self.setState({
-        loading: true
+        loading: true,
       })
     })
+
+
 
     window.addEventListener('sinapsisEndLoad', function(){
       document.body.style.cursor = "default";
       self.setState({
-        loading: false
+        loading: false,
       })
     })
 
+  }
+
+  setI(){
+    var self = this;
+    var i = setInterval(function(){
+      console.log('i', self.state.ti + 1);
+      self.setState({
+        ti: self.state.ti + 1
+      })
+    }, 1000);
+    self.setState({
+      i: i
+    })
   }
 
   render(){

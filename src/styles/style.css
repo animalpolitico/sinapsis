@@ -1955,7 +1955,7 @@ body.ss_showing_drawer .ss_dbbuilder_sidebar_collapse {
   from {
     text-shadow: 0 0 0 rgba(0, 114, 255, 0.1); }
   to {
-    text-shadow: 0 0 7px #0072ff; } }
+    text-shadow: 0 0 5px #338eff, 0 0 10px #0072ff; } }
       .ss_doi_window .ss_doi_window_controls_td_min {
         cursor: pointer;
         padding-left: 0.35rem; }
@@ -3576,12 +3576,20 @@ body.ss_showing_drawer .ss_no_results {
   padding-top: 70%; }
 .ss_mobile #wrapper {
   min-width: 0 !important; }
-.ss_mobile #db_viz_nodes_controls .MuiButtonBase-root:first-child {
+.ss_mobile #db_viz_nodes_controls {
   display: none !important; }
+.ss_mobile .nodes_controls_button {
+  background: #f6f6f6; }
+  .ss_mobile .nodes_controls_button .material-icons {
+    color: #0072ff; }
 .ss_mobile .project_buttons {
   display: none; }
 .ss_mobile .db_viz_info {
-  padding: 0.5rem 1rem; }
+  padding: 0.5rem 1rem 6rem; }
+  .ss_mobile .db_viz_info .ss_doi_window_name {
+    white-space: normal; }
+.ss_mobile .nodes_controls.nodes_controls_showing {
+  top: 40%; }
 .ss_mobile .ss_doi_window_fields, .ss_mobile .ss_doi_window_fields_info, .ss_mobile .ss_doi_window_name::after, .ss_mobile .ss_db_builder_project_name_icon {
   display: none !important; }
 .ss_mobile .ss_db_toolbar_info {

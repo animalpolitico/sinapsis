@@ -736,8 +736,7 @@ export default class ConvertOldToDb{
     }
     /** OTROS NUEVO **/
     var otrosRange = [93, 94];
-    for(var i = otrosRange[0]; i <= otrosRange[1]; i++){
-      var sn = snps_ka[i];
+    for(var i = 0; i < 1; i++){
       try{
         var _fields = this.groupByRange(fields, otrosRange);
       }catch(ex){

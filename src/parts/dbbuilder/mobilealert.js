@@ -11,12 +11,11 @@ export default class DbMobileAlert extends React.Component{
     }
     return(
       <div className="mobile_alert">
-        <div className="mobile_alert_close" onClick={() => this.setState({show: false})}><Icon>close</Icon></div>
         <div className="mobile_alert_icon">
           <Icon>warning</Icon>
         </div>
         <div className="mobile_alert_text">
-          Esta es una versión light de Sinapsis porque estás en un dispositivo móvil. Para utilizar Sinapsis utiliza un navegador en escritorio.
+          Estás navegando Sinapsis en su versión light. Para utilizar todas las capacidades de la herramienta ÁBRELA EN UNA COMPUTADORA DE ESCRITORIO
         </div>
       </div>
     )

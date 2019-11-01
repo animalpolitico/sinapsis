@@ -381,7 +381,7 @@ body.ss_showing_drawer{
               text-shadow: 0 0 0 rgba($main, 0.1);
             }
             to{
-              text-shadow: 0 0 7px rgba($main, 1);
+              text-shadow: 0 0 5px rgba(lighten($main, 10%), 1), 0 0 10px rgba($main, 1);
             }
           }
         }
