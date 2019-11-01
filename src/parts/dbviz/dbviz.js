@@ -1563,10 +1563,26 @@ class Nodes extends React.Component{
         }
       })
 
+
+    var r = [];
+
     removed.map(function(id){
       d3.selectAll('.nodes_link[data-from="'+id+'"], .nodes_link[data-to="'+id+'"]')
-        .classed('node_dont_touch', true);
+        .classed('node_dont_touch', true)
+        .each(function(d){
+          var ai = d.target.id;
+          if(r.indexOf(ai) == -1){
+            r.push(ai);
+          }
+          // var ai = d.source.id;
+          // if(r.indexOf(ai) == -1){
+          //   r.push(ai);
+          // }
+        })
+
+
     })
+
     this.getCoincidenciasSize()
 
   }
@@ -1943,7 +1959,11 @@ class SSNoResults extends React.Component{
         <div className="ss_no_results">
           <div className="ss_no_results_close" onClick={() => this.props.onClose()}><Icon>close</Icon></div>
           <div className="ss_no_results_title">{tipObj.title ? tipObj.title : 'Sin coincidencias'}</div>
-          <div className="ss_no_results_des">No encontramos coincidencias con los datos existentes.</div>
+          {
+            !tipObj.removeEstadisticas ?
+            <div className="ss_no_results_des">No encontramos coincidencias con los datos existentes.</div>
+            : null
+          }
           {
             tipObj ?
             <div className="ss_no_results_tip">
@@ -2220,6 +2240,7 @@ class SSListado extends React.Component{
                   var f = fg[0];
                   var fn = f.value;
                   var istitular = f.matchWith && f.matchWith.indexOf('titular') > -1;
+                  console.log('fg', fg);
                   return(
                     <div className="ss_listado_table_group">
                       <input type="checkbox" />
@@ -2244,8 +2265,16 @@ class SSListado extends React.Component{
                               <div className="ss_listado_table_td">
                                 {field.name}
                               </div>
-                              <div className="ss_listado_table_td">
+                              <div className="ss_listado_table_td ss_no_flex">
                                 {field.empresaName}
+                                {
+                                  field.empresaSum ?
+                                  <>
+                                  <br />
+                                  <strong>(Monto neto recibido: {formatMoney(field.empresaSum)})</strong>
+                                  </>
+                                  : null
+                                }
                               </div>
                               <div className="ss_listado_table_td">
                                 {field.dbName}
@@ -2290,8 +2319,16 @@ class SSListado extends React.Component{
                               <div className="ss_listado_table_td">
                                 {field.name}
                               </div>
-                              <div className="ss_listado_table_td">
+                              <div className="ss_listado_table_td ss_no_flex">
                                 {field.empresaName}
+                                {
+                                  field.empresaSum ?
+                                  <>
+                                  <br />
+                                  <strong>(Monto neto recibido: {formatMoney(field.empresaSum)})</strong>
+                                  </>
+                                  : null
+                                }
                               </div>
                               <div className="ss_listado_table_td">
                                 {field.dbName}

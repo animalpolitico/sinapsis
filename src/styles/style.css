@@ -2943,7 +2943,7 @@ body.ss_showing_drawer .ss_analytics_pie {
         line-height: 1.2 !important;
         font-size: 0.7rem !important; }
         #ss_listado_dialog .ss_listado_table .ss_listado_table_group_c .ss_listado_table_td strong {
-          font-weight: 300; }
+          font-weight: 600; }
     #ss_listado_dialog .ss_listado_table .ss_listado_table_group input {
       width: 100%;
       height: 1.5rem;
@@ -3002,6 +3002,10 @@ body.ss_showing_drawer .ss_analytics_pie {
       font-size: 0.9rem;
       padding-right: 0.5rem;
       padding-left: 0.5rem; }
+      #ss_listado_dialog .ss_listado_table_tr .ss_listado_table_td.ss_no_flex {
+        display: block; }
+        #ss_listado_dialog .ss_listado_table_tr .ss_listado_table_td.ss_no_flex strong {
+          font-size: 0.6rem; }
       #ss_listado_dialog .ss_listado_table_tr .ss_listado_table_td .material-icons {
         color: white;
         position: absolute;
@@ -3028,7 +3032,7 @@ body.ss_showing_drawer .ss_analytics_pie {
   z-index: 9999;
   box-sizing: border-box;
   padding: 1rem;
-  max-width: 350px;
+  max-width: 380px;
   animation: ssnr 0.25s ease;
   animation-fill-mode: both; }
 @keyframes ssnr {

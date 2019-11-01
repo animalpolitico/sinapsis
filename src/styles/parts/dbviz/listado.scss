@@ -219,7 +219,7 @@
           line-height: 1.2!important;
           font-size: 0.7rem!important;
           strong{
-            font-weight: 300;
+            font-weight: 600;
           }
         }
       }
@@ -301,6 +301,12 @@
         font-size: 0.9rem;
         padding-right: 0.5rem;
         padding-left: 0.5rem;
+        &.ss_no_flex{
+          display: block;
+          strong{
+            font-size: 0.6rem;
+          }
+        }
         .material-icons{
           color: white;
           position: absolute;

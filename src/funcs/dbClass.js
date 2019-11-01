@@ -195,13 +195,14 @@ export default class DbFactory {
       if(empresas){
         var empresasA = Object.values(empresas);
         empresasA.map(function(empresa){
+          var sum = self.getEmpresaSum(empresa);
           var eField = {
             id: empresa.uid,
             value: empresa.name,
             fromdb: _db.id,
             empresauid: empresa.uid,
             type: 'empresa',
-            sum: self.getEmpresaSum(empresa),
+            sum: sum,
             matchWith: ['empresa'],
             banderasRojas: self.getBanderasRojas(empresa.uid, _db.id)
           };
@@ -214,6 +215,7 @@ export default class DbFactory {
               f.fromdb = _db.id;
               f.dbName = self.getDb(_db.id).name;
               f.empresaName = self.getEmpresa(_db.id, empresa.uid).name;
+              f.empresaSum = sum;
               if((categories && categories.indexOf(f.type) > -1) || !categories){
                 dbfields = [...dbfields, f]
               }

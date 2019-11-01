@@ -48,6 +48,7 @@ var credits = {
     {
       name: 'Gilberto León',
       credit: 'Programación de versión alpha',
+      tw: 'gilbertoleon'
     },
     {
       name: 'Mauricio Robles',
