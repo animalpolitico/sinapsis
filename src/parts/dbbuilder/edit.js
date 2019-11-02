@@ -61,7 +61,8 @@ export default class DbEditEmpresa extends React.Component{
       this.setState({
         fields: {},
         showDeleteDialog: false,
-        empresaErrors: {}
+        empresaErrors: {},
+        empresa_name: this.props.empresa.name
       })
       this.searchErrors();
     }
@@ -179,7 +180,7 @@ export default class DbEditEmpresa extends React.Component{
             </DialogActions>
           </Dialog>
 
-          <Dialog open={this.state.showEdit} onClose={() => this.handleDialogClose()}>
+          <Dialog open={this.state.showEdit} onClose={() => this.setState({showEdit: false})}>
             <DialogTitle id="form-dialog-title">Editar nombre de empresa</DialogTitle>
               <DialogContent style={{width: 400}}>
               <TextField
@@ -195,7 +196,7 @@ export default class DbEditEmpresa extends React.Component{
               <Button color="secondary" onClick={() => this.handleDialogClose()}>
                 Cerrar
               </Button>
-              <Button color="secondary" disabled={!this.state.empresa_name} onClick={() => this.handleNameChange()}>
+              <Button color="secondary" disabled={!this.state.empresa_name} onClick={() => this.setState({showEdit: false})}>
                 Guardar
               </Button>
             </DialogActions>

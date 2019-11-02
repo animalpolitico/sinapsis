@@ -20,6 +20,10 @@ export default class DbInput extends React.Component{
   componentDidMount(){
     this.setInitialValue();
     this.mi = null;
+    var self = this;
+    window.addEventListener('sinapsis_lang_change', function(){
+      self.validate();
+    })
   }
   setInitialValue(){
     var em = this.props.empresa;

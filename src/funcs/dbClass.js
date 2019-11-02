@@ -317,7 +317,10 @@ export default class DbFactory {
   * @param activeDbs
   * @return array
   **/
-  getTopMontos(onlydbs){
+  getTopMontos(onlydbs, _n){
+    if(!_n){
+      _n = 10;
+    }
     var self = this;
     var db = this.getDbs();
     var dbA = Object.values(db);
@@ -332,7 +335,10 @@ export default class DbFactory {
         empresas.map(function(empresa){
           empresa.dbid = _db.id;
           empresa.sum = self.getEmpresaSum(empresa);
-          o.push(empresa);
+          if(empresa.sum > 0){
+            o.push(empresa);
+          }
+
         })
       }
     })
@@ -342,7 +348,7 @@ export default class DbFactory {
       var bs = b.sum;
       return as < bs ? 1 : -1;
     })
-    o = o.slice(0, 10);
+    o = o.slice(0, _n);
     return o;
   }
 
@@ -613,7 +619,6 @@ export default class DbFactory {
     var sv = v.replace(/[.\s]/g, '');
         sv = slugify(sv, {lower: true, remove: /[*+~.,()'"!:@]/g});
     all.map(function(d){
-      console.log('d', d);
       var dv = t == "empresa" ? d.name : d.value;
       if(dv){
         var vs = dv.replace(/[.\s]/g, '');

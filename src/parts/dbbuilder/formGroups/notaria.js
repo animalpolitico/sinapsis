@@ -13,15 +13,26 @@ import DbInput from '../inputs';
 import { _t } from '../../../vars/countriesDict';
 
 export default class DbFormGroupNotaria extends React.Component{
+  state = {
+    open: false
+  }
   render(){
     return(
-      <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<Icon>expand_more</Icon>}>
+      <ExpansionPanel open={this.state.open} onChange={(e, ex) => this.setState({open: ex})}>
+        <ExpansionPanelSummary expandIcon={<Icon>expand_more</Icon>} >
           <div className="dbef_n">
             <div className="dbef_n_n">
               {_t("Notaría")}
             </div>
+            <div className="dbef_n_ctas">
+              {
+                this.state.open ?
+                <div className="dbef_n_ctas_c" onClick={() => this.setState({open: false})}>Guardar</div>
+                : null
+              }
+            </div>
           </div>
+
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <div className="db_empresa_container_group_form">

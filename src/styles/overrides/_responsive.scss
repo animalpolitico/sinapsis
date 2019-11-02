@@ -37,6 +37,7 @@
 }
 
 .ss_mobile{
+
   .ss_db_choose{
     width: 100%;
   }
@@ -64,7 +65,7 @@
     background-position: center top;
   }
   .ss_dbbuilder_front .ss_db_choose_td::after{
-    padding-top: 70%;
+    padding-top: 50%;
   }
   #wrapper{
     min-width: 0!important;
@@ -75,6 +76,9 @@
       &:first-child{
       }
     }
+  }
+  .nodes_controls{
+    display: none;
   }
   .nodes_controls_button{
     background: #f6f6f6;
@@ -87,6 +91,7 @@
   }
   .db_viz_info{
     padding: 0.5rem 1rem 6rem;
+    display: none;
     .ss_doi_window_name{
       white-space: normal;
     }

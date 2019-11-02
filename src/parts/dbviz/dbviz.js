@@ -1114,8 +1114,10 @@ class Nodes extends React.Component{
           }
         })
         .on('click', function(d){
-          d.isclicked = true;
-          self.isolateNode(d.id)
+          if(!mobile()){
+            d.isclicked = true;
+            self.isolateNode(d.id)
+          }
         })
         .on('mouseleave', function(d){
           self.nodesContainer.selectAll('.viz_tooltip').remove();
@@ -1229,7 +1231,7 @@ class Nodes extends React.Component{
     }else if(param == "coincidencias"){
       /* Obtiene el maximo de coincidencias */
       var compMax = 0;
-      d3.selectAll('.node_circle')
+      d3.selectAll('.node_circle:not(.node_dont_touch)')
         .each(function(d){
           if(!d.blockShow){
             compMax = Math.max(d.coincidencias, compMax);
@@ -1376,7 +1378,8 @@ class Nodes extends React.Component{
     if(doi){
       this.setState({
         isolatingNode: true,
-        isoDoi: doi
+        isoDoi: doi,
+        blockedLevel: false
       })
       setTimeout(function(){
         self.setNodeLinksLevel();
@@ -1393,7 +1396,8 @@ class Nodes extends React.Component{
   }
 
   setNodeLinksLevel(){
-
+    var oldC = this.currentCoincidencias;
+    this.currentCoincidencias = 1000000;
     var self = this;
     var level = this.state.level;
 
@@ -1448,10 +1452,17 @@ class Nodes extends React.Component{
     }
 
     var c = this.getCoincidenciasSize();
+    this.currentCoincidencias = c;
 
-    if(c === this.state.firstCoincidencias){
+
+    if((c === this.state.firstCoincidencias || c == oldC) && c){
       this.setState({
-        maxlevel: level
+        maxlevel: level,
+        blockedLevel: true
+      })
+    }else{
+      this.setState({
+        blockedLevel: false
       })
     }
 
@@ -1550,6 +1561,8 @@ class Nodes extends React.Component{
     // window.dbf.categories = vals;
     // this.set();
 
+    var isempty = vals.length === 1;
+
     /* Quita la clase */
     d3.selectAll('.node_dont_touch')
       .classed('node_dont_touch', false)
@@ -1582,8 +1595,32 @@ class Nodes extends React.Component{
 
 
     })
+    if(!isempty){
+      this.removeEmpty();
+    }else{
+      d3.selectAll('.node[data-type="empresa"]')
+        .classed('node_dont_touch', false)
+    }
 
-    this.getCoincidenciasSize()
+    this.getCoincidenciasSize();
+    this.setNodeCircleSize();
+  }
+
+  removeEmpty(){
+    d3.selectAll('.node[data-type="empresa"]')
+      .each(function(d){
+        var c = 0;
+        var id = d.id;
+        d3.selectAll('.nodes_link[data-to="'+ id +'"]:not(.node_dont_touch)')
+          .each(function(l){
+            c++;
+          })
+        d.coincidencias = c;
+        var n = d3.select(this);
+        n.attr('data-coincidencias', c);
+        n.classed('node_dont_touch', c == 0);
+      })
+
 
   }
 
@@ -1647,6 +1684,10 @@ class Nodes extends React.Component{
 
   addLevel(qty){
     var self = this;
+    if(this.state.blockedLevel && qty == 1){
+      return;
+    }
+
     if(!qty){
       qty = 1;
     }
@@ -1916,17 +1957,18 @@ class SSNoResults extends React.Component{
     }
 
     /* Filtros */
-    if(this.props.nodes && this.props.nodes.props.categoryToggle){
-      var v = this.props.nodes.props.categoryToggle.state;
-      if(v.vals.length < 10 || v.bs){
-        var obj = {
-          tip: 'Tienes algunos filtros activados, cambia la configuración de estos filtros.',
-          cta: 'Quitar todos los filtros',
-          action: () => this.filterNone()
-        }
-        return obj;
-      }
-    }
+    // if(this.props.nodes && this.props.nodes.props.categoryToggle){
+    //   var v = this.props.nodes.props.categoryToggle.state;
+    //   if((v.vals.length < 10 && !(v.vals.length === 1))){
+    //     var obj = {
+    //       tip: 'Tienes algunos filtros activados, cambia la configuración de estos filtros.',
+    //       cta: 'Quitar todos los filtros',
+    //       removeEstadisticas: true,
+    //       action: () => this.filterNone()
+    //     }
+    //     return obj;
+    //   }
+    // }
 
 
     /* No dbs showing */
@@ -2236,6 +2278,14 @@ class SSListado extends React.Component{
           <div className="ss_listado_table">
             <div className="ss_listado_table_content">
               {
+                eoi.name == "Persona" ?
+                <div className="ss_listado_table_content_subtitle" style={{marginTop: '1.5rem'}}>
+                  COINCIDENCIAS DE PERSONAS
+                </div>
+                : null
+              }
+
+              {
                 eoi.fields.map(function(fg){
                   var f = fg[0];
                   var fn = f.value;
@@ -2289,6 +2339,18 @@ class SSListado extends React.Component{
                     </div>
                   )
                 })
+              }
+              {
+                eoi.t.length > 0 ?
+                <>
+                <div className="ss_listado_table_content_subtitle" style={{marginTop: '1.5rem'}}>
+                  COINCIDENCIAS DE TITULARES DE INSTANCIAS
+                </div>
+                <div style={{fontSize: '0.75rem', lineHeight: '1.1', maxWidth: '70%', marginTop: '4px', color: '#ccc'}}>
+                  El siguiente listado corresponde a las personas que eran titulares de instancias al momento de la firma de contratos y/o convenios
+                </div>
+                </>
+                : null
               }
               {
                 eoi.t.map(function(fg){
@@ -2636,7 +2698,7 @@ class SSCategoryToggle extends React.Component{
 
           </div>
           <div className="ss_control_group_container_switches">
-            <div className="ss_ctr_ch">
+            <div className="ss_ctr_ch" onClick={() => window.alert('No se puede ocultar a las empresas ya que todos los cruces parten de ellas')}>
               <div className="ss_ctr_ch_tds">
                 <div className="ss_ctr_ch_td">
                   <div className="ss_ctr_ch_td_ball" style={{backgroundColor: '#f6f6f6'}}>

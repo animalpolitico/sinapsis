@@ -15,7 +15,8 @@ export default class SSMap extends React.Component{
     markers: [],
     onlyCoincidencias: true,
     zoom: 5,
-    st: false
+    st: false,
+    czoom: 5
   }
   componentDidMount(){
     var self = this;
@@ -94,15 +95,16 @@ export default class SSMap extends React.Component{
         fromdb: d.fromdb,
         value: d.value
       }
+
+      var isdf = d.type == "Dirección fiscal";
+
+
       var marker = <Feature coordinates={coords}
+                            properties={{"isdf": isdf ? "1" : "0"}}
                             onClick={function(e){
                               var f = e.feature;
                               var l = f.layer;
-
-                              console.log('f', f);
-
                               var a = ['match', ['get', 'id'], f.properties.id, '#ec991d', "#0072ff"];
-
                               self.mapApi.setPaintProperty(l.id, 'circle-color', a);
                               self.openMarker(d);
                             }}
@@ -230,6 +232,25 @@ export default class SSMap extends React.Component{
             </div>
           </div>
         </div>
+        <div className="ss_map_controls_group">
+          <div className="ss_map_controls_group_title">Leyenda</div>
+          <div className="ss_map_controls_group_content">
+            <div className="ss_map_controls_group_content_leyends">
+              <div className="ss_map_controls_group_content_leyends_leyend">
+                <div className="ss_map_controls_group_content_leyends_leyend_a" style={{backgroundColor: '#e3e32a'}}></div>
+                <div className="ss_map_controls_group_content_leyends_leyend_b">Direcciones fiscales</div>
+              </div>
+              <div className="ss_map_controls_group_content_leyends_leyend">
+                <div className="ss_map_controls_group_content_leyends_leyend_a" style={{backgroundColor: '#CC99FF'}}></div>
+                <div className="ss_map_controls_group_content_leyends_leyend_b">Direcciones de socios</div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
       </div>
 
       <div className="ss_map_close" onClick={() => this.props.onClose()}><Icon>close</Icon></div>
@@ -265,7 +286,7 @@ class Layers extends React.Component{
               'base': 5,
               'stops': [[5, 5], [12, 10]]
             },
-            "circle-color": "#0072ff",
+            "circle-color": ['match', ['get', 'isdf'], "1", '#e3e32a', "#CC99FF"],
             "circle-opacity": {
               'base': 0.3,
               'stops': [[5, 0.3], [12, 0.8]]

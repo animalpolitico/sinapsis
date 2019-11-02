@@ -53,6 +53,10 @@ $dwp: 768px;
     color:#989898;
     font-size: 0.9rem;
     line-height: 1.3;
+    a{
+      color: $main;
+      font-weight: 500;
+    }
   }
 }
 
@@ -225,6 +229,22 @@ $dwp: 768px;
           }
         }
       }
+      &.ss_h_small{
+        .ss_h_s_credits_group_container_p_d{
+          display: none;
+        }
+        .ss_h_s_credits_group_container_p{
+          padding: 0.2rem 0;
+          margin: 0.15rem 0;
+        }
+        .ss_h_s_credits_group_container_p_i_c, .ss_h_s_credits_group_container_p_i_m{
+          font-size: 0.6rem;
+        }
+        .ss_h_s_credits_group_container_p_i_n, {
+          font-size: 0.8rem;
+        }
+      }
+
     }
   }
 }

@@ -12,13 +12,14 @@
     z-index: 3;
     background: #2a2a2a;
     box-sizing: border-box;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     border: 1px solid #333;
     box-shadow: 0 0 4px rgba(black, 0.1);
     font-size: 0.8rem;
     z-index: 10;
     .ss_map_controls_group{
       width: 100%;
+      margin: 1rem 0;
       &_title{
         color: #f6f6f6;
         text-transform: uppercase;
@@ -31,6 +32,28 @@
       }
       &_content{
         margin-top: 0.25rem;
+        &_leyends{
+          width: 100%;
+          &_leyend{
+            @extend .flex;
+            align-items: center;
+            margin: 0.35rem 0;
+            &_a{
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+              transform: translateY(-1px);
+              margin-right: 0.25rem;
+            }
+            &_b{
+              color: #f6f6f6;
+              text-transform: uppercase;
+              font-weight: 500;
+              font-size: 0.7rem;
+              line-height: 1;
+            }
+          }
+        }
         &_tr{
           @extend .flex;
           align-items: center;

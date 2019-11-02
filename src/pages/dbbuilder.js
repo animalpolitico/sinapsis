@@ -91,6 +91,21 @@ export default class DbBuilderPage extends React.Component{
       // }
     })
 
+    // window.addEventListener('mousewheel', function(e){
+    //   if(e.ctrlKey){
+    //     console.log('Prevent');
+    //     e.preventDefault();
+    //     return false;
+    //   }
+    // },{passive: false})
+    //
+    // window.addEventListener('DOMMouseScroll', function(e){
+    //   if(e.ctrlKey){
+    //     e.preventDefault();
+    //     return;
+    //   }
+    // })
+
   }
 
   set(){
@@ -316,6 +331,11 @@ export default class DbBuilderPage extends React.Component{
           <title>{title + ' >> Sinapsis'}</title>
         </Helmet>
         <DbLoader />
+          {
+            mobile() ?
+            <DbMobileAlert />
+            : null
+          }
         {
           this.state.showfps ?
           <div className="ss_page_fps">
@@ -329,11 +349,7 @@ export default class DbBuilderPage extends React.Component{
             <DbInicio parent={this}/>
           :
             <div>
-              {
-                mobile() ?
-                <DbMobileAlert />
-                : null
-              }
+
               <DbBuilderToolbar parent={this} ref={(ref) => this.toolbar = ref}/>
               <div className="ss_dbbuilder">
                 <DbBuilderSidebar ref={(ref) => this.sidebar = ref} parent={this}/>
@@ -1212,6 +1228,7 @@ class DbDbsNavigationNewDb extends React.Component{
     var v = this.state.selectedDb;
     var n = this.state.selectedName;
     var block = this.state.blockEdit;
+    window.dispatchEvent(new Event('sinapsis_close_edit'));
     window.dispatchEvent(startLoad);
     this.setState({
       openModal: false,
@@ -1258,6 +1275,14 @@ class DbDbsNavigationNewDb extends React.Component{
       reader.readAsText(file, "UTF-8");
       reader.onload = function(ev){
         var t =  ev.target.result;
+        if(!(t.indexOf('EMPRESA:') === 1)){
+          self.setState({
+            showInvalid: true
+          })
+          window.dispatchEvent(endLoad);
+          return;
+        }
+
         var ont = new oldToNew(name, t);
         var db = ont.save();
         if(!window.dbf.obj.dbs){
@@ -1308,6 +1333,15 @@ class DbDbsNavigationNewDb extends React.Component{
     }
   }
 
+  downloadCurrentPlantilla(type){
+    var ex = type == "xls" ? "xlsx" : "csv";
+    var url = process.env.PUBLIC_URL + '/plantilla_sinapsis.' + ex;
+    window.open(url);
+    this.setState({
+      showInvalid: false
+    })
+  }
+
   render(){
     var self = this;
     var id = 'ss_db_popper';
@@ -1350,6 +1384,27 @@ class DbDbsNavigationNewDb extends React.Component{
         </div>
       </ClickAwayListener>
       </Popper>
+      <Dialog
+        open={this.state.showInvalid}
+        onClose={() => this.setState({showInvalid: false})}
+      >
+        <DialogTitle>Error de formato</DialogTitle>
+        <DialogContent>
+          Este CSV no está en el formato adecuado, para que funcione necesitas trasladar tu base a la plantilla de Sinapsis
+        </DialogContent>
+        <DialogActions>
+          <Button color="secondary" onClick={() => this.setState({showInvalid: false})}>
+            Cancelar
+          </Button>
+          <Button color="secondary" onClick={() => this.downloadCurrentPlantilla('xls')}>
+            Descargar en XLS
+          </Button>
+          <Button color="secondary" onClick={() => this.downloadCurrentPlantilla()}>
+            Descargar en CSV
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <Dialog
         open={this.state.openModal}
         onClose={() => this.closeModal()}
@@ -1419,13 +1474,18 @@ class PreDb extends React.Component{
           {p.name}
         </div>
         <div className="ss_predb_select_author">
-          De <strong>{p.author}</strong>
+          <a href={p.url} target="_blank">De <strong>{p.author}</strong></a>
         </div>
 
         <div className="ss_predb_select_country">
           <img src={p.flag} />
           <span>{p.countryLabel}</span>
         </div>
+
+        <div className="ss_predb_select_author">
+          Última actualización: <strong>{p.last}</strong>
+        </div>
+
         <div className="ss_predb_select_maxtime">
           Tiempo aproximado de carga: <strong>{ts}</strong>
         </div>
@@ -1575,7 +1635,7 @@ class DbDbsNavigationTd extends React.Component{
       </Dialog>
 
       <Dialog open={this.state.showDelete} onClose={() => this.handleDeleteClose()}>
-        <DialogTitle id="form-dialog-title">¿Borrar base de datos?</DialogTitle>
+        <DialogTitle id="form-dialog-title">¿Borrar {this.props.db.name}?</DialogTitle>
           <DialogContent style={{width: 400}}>
             Esta acción es irreversible. Por favor escribe la palabra "Borrar" para continuar.
           <TextField

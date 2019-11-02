@@ -9,14 +9,16 @@ var onDrawerToggle = new Event('sinapsisDrawerToggle');
 export default class Analytics extends React.Component{
   state = {
     activeDbs: [],
-    rand: 0
+    rand: 0,
+    rand2: 0
   }
   componentDidMount(){
     var self = this;
     this.set();
     window.addEventListener('sinapsisDrawerToggle', function(){
       self.setState({
-        rand: Math.random() * 100000
+        rand: Math.random() * 100000,
+        rand2: Math.random() * 100000
       })
     })
   }
@@ -100,11 +102,41 @@ export default class Analytics extends React.Component{
     return o;
   }
 
+  getInstancias(){
+    var o = [];
+
+    d3.selectAll('.nodes_label')
+      .filter(function(d){
+        return d.type == "instancia"
+      })
+      .each(function(d){
+        var i = {
+          c: d.coincidencias,
+          label: d.name
+        }
+        o.push(i);
+      })
+    if(o.length){
+      o.sort(function(a, b){
+        var as = a.c;
+        var bs = b.c;
+        return as < bs ? 1 : -1;
+      })
+    }
+
+
+    return o;
+
+  }
+
   render(){
     var dbs = this.getActiveDbs();
     var analytics = window.dbf.buildAnalytics(this.state.activeDbs);
     var analyticsBR = window.dbf.buildAnalyticsBr(this.state.activeDbs);
-    var top10m = window.dbf.getTopMontos(this.state.activeDbs);
+    var top10m = window.dbf.getTopMontos(this.state.activeDbs, 10000);
+    var top10a = this.getInstancias();
+
+
     return(
       <div className="ss_analytics">
         <div className="ss_analytics_close" onClick={() => this.props.onClose()}><Icon>close</Icon></div>
@@ -124,6 +156,11 @@ export default class Analytics extends React.Component{
             : null
           }
           {
+            top10a.length > 1 ?
+            <AnalyticsTopInstancias rand={this.state.rand2} m={top10a} ref={(ref) => this.top = ref} parent={this} active={this.state.activeDbs}/>
+            : null
+          }
+          {
             isMexico() ?
             <AnalyticsPie isBr={true} invert={false} rand={this.state.rand} title="Banderas rojas" parent={this} analytics={analyticsBR} active={this.state.activeDbs}/>
             : null
@@ -136,7 +173,215 @@ export default class Analytics extends React.Component{
   }
 }
 
+class AnalyticsTopInstancias extends React.Component{
+  state = {
+    showingAll: false
+  }
+  componentDidMount(){
+    this.graph();
+  }
+
+  graph(){
+    if(this.chart){
+      this.chart.destroy();
+    }
+    this.setState({
+      showingAll: false
+    })
+    var id = "canvas_top10a";
+    // document.getElementById(id).height = null;
+    var self = this;
+    var m = this.props.m.slice(0, 10);
+    var ctx = document.getElementById(id).getContext('2d');
+    var labels = [];
+    var data = [];
+    m.map(function(_m){
+      labels.push(_m.label);
+      data.push(_m.c);
+    })
+
+    document.getElementById(id).height = labels.length * 20 + 10;
+
+
+
+    var chart = new window.Chart(ctx, {
+      type: 'horizontalBar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Coincidencias',
+          data: data,
+          backgroundColor: "#0072ff",
+          borderWidth: 0
+        }]
+      },
+      options: {
+        aspectRatio: 1,
+        legend: {
+          display: false
+        },
+        tooltips: {
+          callbacks: {
+            label: function(ti,d){
+              return 'Coincidencias: '+ ti.xLabel;
+            },
+            title: function(ti,d){
+              return d.labels[ti[0].index]
+            }
+          },
+          custom: function(tooltip) {
+            if (!tooltip) return;
+            tooltip.displayColors = false;
+          },
+        },
+        scales: {
+          xAxes: [{
+            ticks: {
+              callback: function(label){
+                return label
+              }
+            }
+
+          }],
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                fontColor: '#f6f6f6',
+                fontSize: 9,
+                callback: function(label){
+                  return label
+                }
+              }
+            }
+          ]
+        }
+      }
+    })
+    window.dispatchEvent(new Event('sinapsisEndLoad'));
+
+    this.chart = chart;
+  }
+
+  graphH(){
+    this.chart.destroy();
+    var id = "canvas_top10a";
+    // document.getElementById(id).height = null;
+    var self = this;
+    var m = this.props.m.slice(0, 200);
+    var ctx = document.getElementById(id).getContext('2d');
+    var labels = [];
+    var data = [];
+    m.map(function(_m){
+      labels.push(_m.label);
+      data.push(_m.c);
+    })
+
+    document.getElementById(id).height = labels.length * 10 + 5;
+
+    var chart = new window.Chart(ctx, {
+      type: 'horizontalBar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Coincidencias',
+          data: data,
+          backgroundColor: "#0072ff",
+          borderWidth: 0
+        }]
+      },
+      options: {
+        aspectRatio: 1,
+        legend: {
+          display: false
+        },
+        tooltips: {
+          callbacks: {
+            label: function(ti,d){
+              return 'Coincidencias: '+ ti.xLabel;
+            },
+            title: function(ti,d){
+              return d.labels[ti[0].index]
+            }
+          },
+          custom: function(tooltip) {
+            if (!tooltip) return;
+            tooltip.displayColors = false;
+          },
+        },
+        scales: {
+          xAxes: [{
+            ticks: {
+              callback: function(label){
+                return label
+              }
+            }
+
+          }],
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                fontColor: '#f6f6f6',
+                fontSize: 9,
+                callback: function(label){
+                  return label
+                }
+              }
+            }
+          ]
+        }
+      }
+    })
+    window.dispatchEvent(new Event('sinapsisEndLoad'));
+
+    this.chart = chart;
+  }
+
+  showAll(){
+    this.setState({
+      showingAll: true
+    })
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
+    this.graphH();
+
+  }
+
+  toggleAll(){
+    var s = !this.state.showingAll;
+    if(!s){
+      this.graph();
+    }else{
+      this.showAll();
+    }
+    this.setState({
+      showingAll: s
+    })
+
+  }
+
+  render(){
+    var cs = ["ss_analytics_montos"];
+    if(this.state.showingAll){
+      cs.push('ss_an_big');
+    }
+    return(
+      <div className={cs.join(' ')}>
+        <div className="ss_analytics_montos_title">{this.state.showingAll ? 'Instancias por coincidencia' : "Las 10 instancias con más coincidencias"} <span onClick={() => this.showAll()}>Ver todas</span></div>
+        <div className="ssa_top10_canvas">
+          <canvas id="canvas_top10a"></canvas>
+        </div>
+      </div>
+    )
+  }
+}
+
 class AnalyticsTop10 extends React.Component{
+
+  state = {
+    showingAll: false
+  }
+
   componentDidMount(){
     this.graph();
   }
@@ -165,9 +410,16 @@ class AnalyticsTop10 extends React.Component{
   }
 
   graph(){
-    var self = this;
-    var m = this.props.m;
+    if(this.chart){
+      this.chart.destroy();
+    }
+    this.setState({
+      showingAll: false
+    })
     var id = "canvas_top10";
+    // document.getElementById(id).height = null;
+    var self = this;
+    var m = this.props.m.slice(0, 10);
     var ctx = document.getElementById(id).getContext('2d');
     var labels = [];
     var data = [];
@@ -175,8 +427,6 @@ class AnalyticsTop10 extends React.Component{
       labels.push(_m.name);
       data.push(_m.sum);
     })
-
-
     var chart = new window.Chart(ctx, {
       type: 'bar',
       data: {
@@ -225,12 +475,116 @@ class AnalyticsTop10 extends React.Component{
         }
       }
     })
+
+    this.chart = chart;
+  }
+
+  graphH(){
+    this.chart.destroy();
+
+    var self = this;
+    var m = this.props.m;
+    var id = "canvas_top10";
+    var ctx = document.getElementById(id).getContext('2d');
+    var labels = [];
+    var data = [];
+    m.map(function(_m){
+      labels.push(_m.name);
+      data.push(_m.sum);
+    })
+
+    document.getElementById(id).height = labels.length * 8 + 3;
+
+
+
+    var chart = new window.Chart(ctx, {
+      type: 'horizontalBar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Monto recibido ($)',
+          data: data,
+          backgroundColor: "#0072ff",
+          borderWidth: 0
+        }]
+      },
+      options: {
+        aspectRatio: 1,
+        legend: {
+          display: false
+        },
+        tooltips: {
+          callbacks: {
+            label: function(ti,d){
+              return 'Monto neto recibido: '+formatMoney(ti.xLabel);
+            },
+            title: function(ti,d){
+              return d.labels[ti[0].index]
+            }
+          },
+          custom: function(tooltip) {
+            if (!tooltip) return;
+            tooltip.displayColors = false;
+          },
+        },
+        scales: {
+          xAxes: [{
+            ticks: {
+              callback: function(label){
+                return '$' + self.kFormatter(label);
+              }
+            }
+
+          }],
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                fontColor: '#f6f6f6',
+                fontSize: 9,
+                callback: function(label){
+                  return label.substr(0, 12) + '...'
+                }
+              }
+            }
+          ]
+        }
+      }
+    })
+    window.dispatchEvent(new Event('sinapsisEndLoad'));
+
+  }
+
+  showAll(){
+    this.setState({
+      showingAll: true
+    })
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
+    this.graphH();
+
+  }
+
+  toggleAll(){
+    var s = !this.state.showingAll;
+    if(!s){
+      this.graph();
+    }else{
+      this.showAll();
+    }
+    this.setState({
+      showingAll: s
+    })
+
   }
 
   render(){
+    var cs = ["ss_analytics_montos"];
+    if(this.state.showingAll){
+      cs.push('ss_an_big');
+    }
     return(
-      <div className="ss_analytics_montos">
-        <div className="ss_analytics_montos_title">Los {this.props.m.length} mayores montos</div>
+      <div className={cs.join(' ')}>
+        <div className="ss_analytics_montos_title">{this.state.showingAll ? 'Montos por empresa' : "Los 10 mayores montos"} <span onClick={() => this.showAll()}>Ver todas</span></div>
         <div className="ssa_top10_canvas">
           <canvas id="canvas_top10"></canvas>
         </div>

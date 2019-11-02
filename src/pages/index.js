@@ -36,25 +36,106 @@ export default class Index extends React.Component{
 var credits = {
   main: [
     {
-      name: 'Yosune Chamizo',
-      credit: 'Diseño de información',
-      tw: '_yosune',
+      credit: 'Diseño de información y coordinación',
+      persons: [
+        {
+          name: 'Yosune Chamizo Alberro',
+          tw: '_yosune'
+        }
+      ]
     },
     {
-      name: 'Jesús Santamaría',
-      credit: 'Diseño de identidad y UI',
-      tw: 'RE_Ilustrador',
+      credit: 'Desarollo de versión alpha',
+      persons: [
+        {
+          name: 'Gilberto León',
+          tw: 'gilbertoleon'
+        }
+      ]
     },
     {
-      name: 'Gilberto León',
-      credit: 'Programación de versión alpha',
-      tw: 'gilbertoleon'
+      credit: 'Desarrollo de versión beta',
+      persons: [
+        {
+          name: 'Mauricio Martínez Robles',
+          tw: 'lopsum'
+        }
+      ]
     },
     {
-      name: 'Mauricio Robles',
-      credit: 'Programación de versión beta',
-      tw: 'lopsum'
-    }
+      credit: 'Diseño y desarrollo web',
+      persons: [
+        {
+          name: 'Jesús Santamaría',
+          tw: 'RE_Ilustrador'
+        },
+        {
+          name: 'Mauricio Martínez Robles',
+          tw: 'lopsum'
+        }
+      ]
+    },
+    {
+      credit: 'Identidad gráfica',
+      persons: [
+        {
+          name: 'Jesús Santamaría',
+          tw: 'RE_Ilustrador'
+        }
+      ]
+    },
+    {
+      credit: 'Video',
+      persons: [
+        {
+          name: 'Rodrigo Crespo',
+          tw: 'rodrigocrespo_'
+        }
+      ]
+    },
+    {
+      credit: 'Redes sociales',
+      persons: [
+        {
+          name: 'Jorge Ramis',
+          tw: 'jramiiis'
+        }
+      ]
+    },
+    {
+      credit: 'Investigación',
+      persons: [
+        {
+          name: 'Nayeli Roldán',
+          tw: 'nayaroldan'
+        },
+        {
+          name: 'Manuel Ureste',
+          tw: 'ManuVPC'
+        },
+        {
+          name: 'Miriam Castillo',
+          tw: 'Micmoya'
+        }
+      ]
+    },
+    {
+      credit: 'Dirección y edición general',
+      persons: [
+        {
+          name: 'Tania L. Montalvo',
+          tw: 'tanlmont'
+        },
+        {
+          name: 'Francisco Sandoval',
+          tw: 'MrTerremoto'
+        },
+        {
+          name: 'Daniel Moreno',
+          tw: 'dmorenochavez'
+        }
+      ]
+    },
   ],
   colab: [
     {
@@ -124,7 +205,7 @@ class Credits extends React.Component{
         <div className="ss_h_s_credits">
           <SSH1 bold="Créditos" />
           <CreditsGroup g={credits.main} />
-          <CreditsGroup g={credits.colab} title="Traducciones" />
+          <CreditsGroup g={credits.colab} title="Agradecimientos" />
         </div>
       </div>
     )
@@ -134,8 +215,12 @@ class Credits extends React.Component{
 
 class CreditsGroup extends React.Component{
   render(){
+    var cs = ["ss_h_s_credits_group"];
+    if(this.props.title){
+      cs.push('ss_h_small');
+    }
     return(
-      <div className="ss_h_s_credits_group">
+      <div className={cs.join(' ')}>
         {
           this.props.title ?
           <div className="ss_h_s_credits_group_title">
@@ -156,27 +241,39 @@ class CreditsGroup extends React.Component{
 class CreditsPerson extends React.Component{
   render(){
     var e = this.props.e;
+    var isg = e.persons ? true : false;
+    var persons = isg ? e.persons : [e];
+
     return(
       <div className="ss_h_s_credits_group_container_p">
         <div className="ss_h_s_credits_group_container_i">
           <div className="ss_h_s_credits_group_container_p_i_c">{e.credit}</div>
-          <div className="ss_h_s_credits_group_container_p_i_n">
-            <div>{e.name}</div>
-            {
-              e.tw ?
-              <a href={"https://twitter.com/" + e.tw} target="_blank">
-                @{e.tw}
-              </a>
-              : null
-            }
-          </div>
           {
-            e.medio ?
-            <div className="ss_h_s_credits_group_container_p_i_m">
-              {e.medio}
-            </div>
-            : null
+            persons.map(function(_e){
+              return(
+                <>
+                <div className="ss_h_s_credits_group_container_p_i_n">
+                  <div>{_e.name}</div>
+                  {
+                    _e.tw ?
+                    <a href={"https://twitter.com/" + _e.tw} target="_blank">
+                      @{_e.tw}
+                    </a>
+                    : null
+                  }
+                </div>
+                {
+                  _e.medio ?
+                  <div className="ss_h_s_credits_group_container_p_i_m">
+                    {_e.medio}
+                  </div>
+                  : null
+                }
+                </>
+              )
+            })
           }
+
         </div>
         <div className="ss_h_s_credits_group_container_p_d">
           <div></div>
@@ -204,7 +301,7 @@ class H1AndP extends React.Component{
       <div className="ss_h_s_h1p">
         <SSH1 {...this.props} />
         <div className="ss_h_s_h1p_p">
-          {this.props.text}
+          {this.props.text || this.props.children}
         </div>
       </div>
     )
@@ -220,7 +317,7 @@ class UsaSinapsis extends React.Component{
       },
       {
         title: ['Apoyado por la', 'comunidad'],
-        content: 'Sinapsis es mantenido por la comunidad al ser de código abierto.',
+        content: 'Sinapsis es mantenido por la comunidad datera al ser de código abierto.',
         link: {
           text: 'Visita nuestro repositorio.',
           url: 'https://github.com/animalpolitico/sinapsis'
@@ -232,7 +329,7 @@ class UsaSinapsis extends React.Component{
       },
       {
         title: ['Bases', 'precargadas'],
-        content: 'Precargamos bases de datos públicas de latinoamérica. Algunas de ellas son La Estafa Maestra, las listas de empresas fantasmas del SAT entre otras'
+        content: 'Precargamos bases de datos públicas de latinoamérica. Algunas de ellas son La Estafa Maestra, las listas de empresas fantasmas del SAT, las 1,000 empresa más grandes por ingresos en 2017 de Colombia, entre otras'
       },
     ]
     return(
@@ -241,8 +338,16 @@ class UsaSinapsis extends React.Component{
         <H1AndP
           pre="Usa"
           bold="Sinapsis"
-          text="Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."
-        />
+        >
+          Sinapsis es una herramienta que permite cruzar distintas bases de datos para obtener conexiones entre empresas.
+          <br/><br/>
+          Puedes elaborar tu propia base, añadir una existente (usando nuestra plantilla), o precargar las públicas que vienen en la herramienta.
+          <br/><br/>
+          En Animal Político diseñamos este software pensando en las necesidades de periodistas e investigadores.
+          <br/><br/>
+          ¡Úsala!
+        </H1AndP>
+
         <Points p={points} />
       </div>
     )
@@ -296,8 +401,16 @@ class FAQ extends React.Component{
         <H1AndP
           pre="Preguntas"
           bold="Frecuentes"
-          text="¿Tienes una pregunta que no está listada aquí? ¡Contáctanos!"
-        />
+        >
+          ¿Tienes una pregunta que no está listada aquí?
+          <br/>
+          <br/>
+          ¡Contáctanos!
+          <br/>
+          -<a href="mailto:sinapsis@animalpolitico.com">sinapsis@animalpolitico.com</a>
+          <br/>
+          -<a href="https://t.me/sinapsislat" target="_blank">Grupo de Telegram</a>
+        </H1AndP>
         <Points p={points} />
       </div>
     )
@@ -330,7 +443,7 @@ class Casos extends React.Component{
         <H1AndP
           pre="Casos"
           bold="de uso"
-          text="Investigaciones periodísticas donde se utilizó Sinapsis"
+          text="Sinapsis se construyó durante la investigación de los siguientes proyectos periodísticos"
         />
 
       <div className="ss_h_s_casos">
@@ -422,9 +535,6 @@ class GoTo extends React.Component{
           <div className="ss_h_s_goto_container_ctas">
             <div className="ss_h_s_goto_container_ctas_cta" onClick={() => this.props.history.push(buildLink('/construir'))}>
               Ir a Sinapsis
-            </div>
-            <div className="ss_h_s_goto_container_ctas_cta hcta_outlined" onClick={() => this.props.history.push(buildLink('/construir/estafa-maestra'))}>
-              Explorar La Estafa Maestra
             </div>
           </div>
 

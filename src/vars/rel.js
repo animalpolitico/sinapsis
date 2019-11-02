@@ -5,10 +5,11 @@ export const predbs = [
     country: 'COL',
     blockEdit: true,
     countryLabel: 'Colombia',
-    author: 'Superintendencia de Sociedades: www.supersociedades.gov.co COLOMBIA',
+    author: 'Superintendencia de Sociedades: www.supersociedades.gov.co',
     size: 3,
     slug: 'sat-favorables',
-    last: '2019-09-30',
+    last: '2019-11-01',
+    url: "http://www.supersociedades.gov.co",
     flag: require('../static/flags/colombia.svg'),
     file: require('../static/csvs/col-patrimonio-2017.csv')
   },
@@ -19,7 +20,8 @@ export const predbs = [
     author: 'Animal Político & Mexicanos Contra la Corrupción',
     size: 2,
     slug: 'estafa-maestra',
-    last: '2019-10-01',
+    last: '2019-11-01',
+    url: "https://animalpolitico.com/estafa-maestra",
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/estafa-maestra.csv')
   },
@@ -32,6 +34,7 @@ export const predbs = [
     blockEdit: true,
     slug: 'estafa-maestra',
     last: '2019-10-01',
+    url: "https://www.animalpolitico.com/las-empresas-fantasma-de-veracruz",
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/empresas-fantasma-ver.csv')
   },
@@ -43,7 +46,8 @@ export const predbs = [
     author: 'Fundar',
     size: 4,
     slug: 'estafa-maestra',
-    last: '2019-10-01',
+    last: '2019-09-30',
+    url: "https://privilegiosfiscales.fundar.org.mx/#top",
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/pf-7-15.csv')
   },
@@ -55,7 +59,8 @@ export const predbs = [
     author: 'Fundar',
     size: 20,
     slug: 'estafa-maestra',
-    last: '2019-10-01',
+    last: '2019-09-30',
+    url: "https://privilegiosfiscales.fundar.org.mx/#top",
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/pf-cancelaciones-715.csv')
   },
@@ -68,7 +73,8 @@ export const predbs = [
     author: 'SAT',
     size: 5,
     slug: 'sat-definitivos',
-    last: '2019-09-30',
+    last: '2019-10-08',
+    url: "http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html",
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/sat-def.csv')
   },
@@ -81,7 +87,8 @@ export const predbs = [
     author: 'SAT',
     size: 3,
     slug: 'sat-definitivos',
-    last: '2019-09-30',
+    last: '2019-10-08',
+    url: "http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html",
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/sat-pre.csv')
   },
@@ -94,7 +101,8 @@ export const predbs = [
     author: 'SAT',
     size: 3,
     slug: 'sat-Desvirtuados',
-    last: '2019-09-30',
+    last: '2019-10-08',
+    url: "http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html",
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/sat-desvirtuados.csv')
   },
@@ -107,7 +115,8 @@ export const predbs = [
     author: 'SAT',
     size: 3,
     slug: 'sat-favorables',
-    last: '2019-09-30',
+    last: '2019-10-08',
+    url: "http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html",
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/sat-favorables.csv')
   },

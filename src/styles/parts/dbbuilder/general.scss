@@ -238,6 +238,13 @@ body.ss_show_sidebar{
         font-size: 0.6rem;
         text-transform: uppercase;
         margin-top: 0.15rem;
+        a{
+          position: relative;
+          z-index: 10;
+          &:hover{
+            opacity: 0.8;
+          }
+        }
       }
       &_country{
         @extend .flex;
@@ -259,7 +266,7 @@ body.ss_show_sidebar{
         }
       }
       &_maxtime{
-        color: $main;
+        color: lighten($main, 10%);
         font-size: 0.7rem;
         margin-top: 0.5rem;
       }
@@ -267,10 +274,10 @@ body.ss_show_sidebar{
         margin-top: 0.25rem;
         color: yellow;
         @extend .flex;
-        font-size: 0.8rem;
+        font-size: 0.6rem;
         align-items: center;
         .material-icons{
-          font-size: 0.8rem;
+          font-size: 0.6rem;
         }
         label{
           box-sizing: border-box;
