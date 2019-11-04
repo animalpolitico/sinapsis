@@ -145,6 +145,7 @@ export default class ConvertOldToDb{
             slug: slug,
             isvalid: true,
             value: value,
+            fromdb: dbid,
             empresauid: uid
           };
           if(snps_ka[i].type){

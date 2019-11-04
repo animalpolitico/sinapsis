@@ -3472,5 +3472,50 @@
     "name": "Londres No. 226 Piso 4 Int. 1",
     "googleResult": "Piso 4 Int. 1, Londres 226, Juárez, 06600 Juárez, CDMX, México",
     "slug": "londres-no.-226-piso-4-int.-1"
+  },
+  "bogota": {
+    "latlng": {
+      "lat": 4.6482837,
+      "lng": -74.2478934
+    },
+    "name": "Bogotá, Colombia",
+    "googleResult": "Bogotá, Colombia",
+    "slug": "bogota"
+  },
+  "bogota-cundinamarca":{
+    "latlng": {
+      "lat": 4.6482837,
+      "lng": -74.2478934
+    },
+    "name": "Bogotá - Cundinamarca",
+    "googleResult": "Bogotá - Cundinamarca, Colombia",
+    "slug": "bogota-cundinamarca"
+  },
+  "eje-cafetero": {
+    "latlng": {
+      "lat": 4.7622387,
+      "lng": -76.1472078
+    },
+    "name": "Eje Cafetero, Colombia",
+    "googleResult": "Eje Cafetero, Colombia",
+    "slug": "eje-cafetero"
+  },
+  "antioquia": {
+    "latlng": {
+      "lat": 7.1495092,
+      "lng": -76.6246861
+    },
+    "name": "Antioquia, Colombia",
+    "googleResult": "Antioquia, Colombia",
+    "slug": "antioquia"
+  },
+  "centro-oriente": {
+    "latlng": {
+      "lat": 4.6154528,
+      "lng": -74.1325764
+    },
+    "name": "Centro Oriente, Colombia",
+    "googleResult": "Centro Oriente, Colombia",
+    "slug": "centro-oriente"
   }
 }

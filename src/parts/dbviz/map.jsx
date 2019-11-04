@@ -78,6 +78,9 @@ export default class SSMap extends React.Component{
     };
     var coordsMaster = [];
     var m = this.state.markers;
+    console.log('M', m);
+
+
     m.map(function(d){
       var ename = window.dbf.getEmpresa(d.fromdb, d.empresauid).name
       var euid = d.empresauid;

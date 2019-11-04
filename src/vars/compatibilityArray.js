@@ -37,7 +37,9 @@ export const snps_ka = {
     cell: 'I'
   },
   9: {
-    bypass: true,
+    name: "Entidad Federativa",
+    type: 'address',
+    trygeocode: true,
     cell: 'J'
   },
   10: {
