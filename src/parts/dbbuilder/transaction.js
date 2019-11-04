@@ -100,7 +100,6 @@ export default class TransactionRow extends React.Component{
   render(){
     var n = this.buildName();
     var c = window.dbf.getDbCurrencyObj(this.props.db.id);
-    console.log('t', c);
 
     return(
       <>
