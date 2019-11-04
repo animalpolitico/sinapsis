@@ -35,7 +35,7 @@ import DbMobileAlert from '../parts/dbbuilder/mobilealert';
 import oldToNew from '../funcs/oldSinapsisToNew';
 import { predbs } from '../vars/rel';
 import Flag from "react-flags";
-import { countries, getLang, _t } from "../vars/countriesDict";
+import { countries, getLang, _t, getCurrencies } from "../vars/countriesDict";
 import { Resizable, ResizableBox } from 'react-resizable';
 
 import buildLink from "../funcs/buildlink";
@@ -824,6 +824,14 @@ class DbView extends React.Component{
     })
   }
 
+  changeCurrency(){
+    var c = this.state.toChangeCurrency;
+    window.dbf.obj.dbs[this.props.db.id].currency = c;
+    this.setState({
+      openCurrencyChange: false
+    })
+  }
+
   render(){
     var dbf = window.dbf;
     var nameCs = ['ss_db_view_name'];
@@ -833,6 +841,9 @@ class DbView extends React.Component{
     var canAdd = this.state.dialogValue.length > 0;
 
     var block = this.props.db.blockEdit;
+
+    var currencyObj = dbf.getDbCurrencyObj(this.props.db.id);
+
 
     return(
       <div className="ss_db_view">
@@ -894,7 +905,44 @@ class DbView extends React.Component{
                   <div className="ss_db_view_empresas_title_btn" style={{cursor: 'pointer'}} onClick={() => this.showAddDialog()}>Agregar</div>
                   : null
                 }
+                <div className="ss_db_view_empresas_currency">
+                  Montos expresados en <strong>{currencyObj.currency + ' ('+currencyObj.symbol+')'}</strong>
+                  {
+                    !block ?
+                    <a href="javascript:void(0)" onClick={() => this.setState({openCurrencyChange: true})}>Editar</a>
+                    : null
+                  }
+                </div>
               </div>
+
+              <Dialog open={this.state.openCurrencyChange} onClose={() => this.setState({openCurrencyChange: false})}>
+                <DialogTitle id="form-dialog-title">Moneda</DialogTitle>
+                  <DialogContent style={{width: 400}}>
+                    <div className="db_empresa_container_group_form">
+                      <div className="ss_db_input_select">
+                        <select onChange={(e) => this.setState({toChangeCurrency: e.target.value})}>
+                          {
+                            getCurrencies().map(function(c){
+                              return (
+                                <option selected={c == currencyObj.currency} value={c}>{c}</option>
+                              )
+                            })
+                          }
+                        </select>
+                      </div>
+                    </div>
+                  </DialogContent>
+                <DialogActions>
+                  <Button color="secondary" onClick={() => this.setState({openCurrencyChange: false})}>
+                    Cerrar
+                  </Button>
+                  <Button color="secondary"  onClick={() => this.changeCurrency()}>
+                    Editar
+                  </Button>
+                </DialogActions>
+              </Dialog>
+
+
               {
                 block ?
                 <div className="ss_db_view_empresas_notice">
@@ -921,7 +969,6 @@ class DbView extends React.Component{
         <Dialog open={this.state.showdialog} onClose={() => this.handleDialogClose()}>
           <DialogTitle id="form-dialog-title">Empresa nueva</DialogTitle>
             <DialogContent style={{width: 400}}>
-
             <TextField
               autoFocus
               label="Razón social de la empresa"

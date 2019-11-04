@@ -737,11 +737,21 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       color: white;
       font-weight: 400;
       font-size: 0.9rem;
+      flex-wrap: wrap;
       align-items: center;
       padding-top: 0.25rem;
       padding-bottom: 0.75rem;
       padding-left: 0.5rem;
-      border-bottom: 1px solid #444; }
+      border-bottom: 1px solid #444;
+      margin-bottom: 0.25rem; }
+      .ss_db_view_empresas_title .ss_db_view_empresas_currency {
+        width: 100%;
+        font-size: 0.6rem;
+        color: #888;
+        margin-top: 0.15rem; }
+        .ss_db_view_empresas_title .ss_db_view_empresas_currency a {
+          margin-left: 0.3rem;
+          text-decoration: underline; }
       .ss_db_view_empresas_title_btn {
         display: inline-block;
         background: #222;
@@ -761,8 +771,10 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       box-sizing: border-box;
       padding: 0.5rem 1rem;
       border: 1px solid #333;
-      margin: 0.5rem 0;
+      margin-bottom: 0.25rem;
       align-items: center; }
+      .ss_db_view_empresas_notice:first-of-type {
+        margin-top: 0.5rem; }
       .ss_db_view_empresas_notice, .ss_db_view_empresas_notice * {
         font-size: 0.7rem; }
       .ss_db_view_empresas_notice .material-icons {
@@ -1709,8 +1721,8 @@ body.ss_showing_drawer .project_buttons_button {
     background: #303030;
     pointer-events: none;
     transform: translate(-50%, -110%);
-    max-width: 300px;
-    min-width: 200px;
+    max-width: 350px;
+    min-width: 250px;
     padding-bottom: 0.5rem;
     color: #F6F6F6; }
     .db_viz_tooltip.tooltip_alignbottom {
@@ -2513,6 +2525,9 @@ body.ss_dragging .ss_guide {
   .ss_analytics .ss_analytics_montos {
     width: 100%;
     margin-top: 4rem; }
+    .ss_analytics .ss_analytics_montos#ssam {
+      width: 80%;
+      margin: 4rem auto 0; }
     .ss_analytics .ss_analytics_montos_title {
       font-size: 0.9rem;
       text-align: center;
@@ -2599,15 +2614,16 @@ body.ss_dragging .ss_guide {
         justify-content: center;
         flex-direction: column;
         box-sizing: border-box;
-        padding: 0 1rem; }
+        padding: 0.75rem;
+        min-width: 50%; }
         .ss_analytics .ss_analytics_montos_row .ss_analytics_montos_monto_m, .ss_analytics .ss_analytics_montos_row .ss_analytics_montos_monto_t {
-          width: 100%; }
+          width: 100%;
+          text-align: center; }
         .ss_analytics .ss_analytics_montos_row .ss_analytics_montos_monto_m {
           font-size: 1.2rem;
           font-weight: 600;
           color: #f6f6f6; }
         .ss_analytics .ss_analytics_montos_row .ss_analytics_montos_monto_t {
-          text-align: left;
           color: white;
           margin-top: 0.05rem;
           font-size: 0.7rem;

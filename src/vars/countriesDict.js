@@ -6,6 +6,9 @@ export const countries = [
     name: 'México',
     code: 'MEX',
     iso: 'MX',
+    currency: 'MXN',
+    currencySign: '$',
+    toMXN: 1,
     img: require('../static/flags/mexico.svg'),
     coords: [-102.552784, 23.634501]
   },
@@ -13,6 +16,9 @@ export const countries = [
     name: 'Paraguay',
     code: 'PRY',
     iso: 'PY',
+    currency: 'PYG',
+    currencySign: '₲',
+    toMXN: 0.0030,
     translatedBy: ['Maricarmen Sequera', 'TEDIC NGO'],
     img: require('../static/flags/paraguay.svg'),
     coords: [-58.443832, -23.442503]
@@ -21,6 +27,9 @@ export const countries = [
     name: 'República Dominicana',
     code: 'DOM',
     iso: 'DO',
+    currencySign: 'RD$',
+    currency: 'DOP',
+    toMXN: 0.36,
     translatedBy: ['Daniel Harel'],
     img: require('../static/flags/dominican-republic.svg'),
     coords: [-70.162651, 18.735693]
@@ -29,6 +38,9 @@ export const countries = [
     name: 'Bolivia',
     code: 'BOL',
     iso: 'BO',
+    currency: 'BOB',
+    currencySign: 'B$',
+    toMXN: 2.76,
     translatedBy: ['Raisa Valda Ampuero', 'Warmi.Red'],
     img: require('../static/flags/bolivia.svg'),
     coords: [-63.588653, -16.290154]
@@ -37,6 +49,9 @@ export const countries = [
     name: 'Costa Rica',
     code: 'CRI',
     iso: 'CR',
+    currency: 'CRC',
+    currencySign: '₡',
+    toMXN: 0.033,
     img: require('../static/flags/costa-rica.svg'),
     translatedBy: ['Ana Sofía Ruiz', 'Iniciativa Latinoamericana por los Datos Abiertos (ILDA)'],
     coords: [-83.753428, 9.748917]
@@ -45,6 +60,9 @@ export const countries = [
     name: 'Perú',
     code: 'PER',
     iso: 'PE',
+    toMXN: 5.70,
+    currency: 'PEN',
+    currencySign: 'S/',
     img: require('../static/flags/peru.svg'),
     translatedBy: ['Gabriela Flores Ch.', 'Asociación civil Japiqay, Memoria y Ciudadanía'],
     coords: [-75.015152, -9.189967]
@@ -53,6 +71,9 @@ export const countries = [
     name: 'Panamá',
     code: 'PAN',
     iso: 'PA',
+    toMXN: 19.5,
+    currency: 'USD',
+    currencySign: '$',
     img: require('../static/flags/panama.svg'),
     translatedBy: ['Lia Hernández', 'IPANDETEC'],
     coords: [-80.782127, 8.537981]
@@ -61,6 +82,9 @@ export const countries = [
     name: 'Venezuela',
     code: 'VEN',
     iso: 'VE',
+    currency: 'VEF',
+    currencySign: 'Bs.',
+    toMXN: 1.93470,
     img: require('../static/flags/venezuela.svg'),
     translatedBy: ['Yuleina Carmona'],
     coords: [-66.58973, 6.42375]
@@ -69,6 +93,9 @@ export const countries = [
     name: 'Guatemala',
     code: 'GTM',
     iso: 'GT',
+    currency: 'GTQ',
+    currencySign: "Q",
+    toMXN: 2.48,
     img: require('../static/flags/guatemala.svg'),
     translatedBy: ['Suchit Chávez', 'Plaza Pública'],
     coords: [-90.230759, 15.783471]
@@ -77,6 +104,9 @@ export const countries = [
     name: 'Honduras',
     code: 'HND',
     iso: 'HN',
+    currency: 'HNL',
+    toMXN: 0.77,
+    currencySign: 'L',
     img: require('../static/flags/honduras.svg'),
     translatedBy: ['Felisa Franco', 'Secretaría de Finanzas'],
     coords: [-86.241905, 15.199999]
@@ -85,6 +115,9 @@ export const countries = [
     name: 'Ecuador',
     code: 'ECU',
     iso: 'EC',
+    toMXN: 19.5,
+    currency: 'USD',
+    currencySign: '$',
     img: require('../static/flags/ecuador.svg'),
     translatedBy: ['Camilo Burneo'],
     coords: [-78.183406, 	-1.831239]
@@ -93,6 +126,9 @@ export const countries = [
     name: 'Argentina',
     code: 'ARG',
     iso: 'AR',
+    toMXN: 0.32,
+    currency: 'ARS',
+    currencySign: '$',
     translatedBy: ['Nicolás'],
     img: require('../static/flags/argentina.svg'),
     coords: [-63.616672, -38.416097]
@@ -101,6 +137,9 @@ export const countries = [
     name: 'Colombia',
     code: 'COL',
     iso: 'CO',
+    toMXN: 0.0057,
+    currency: 'COP',
+    currencySign: '$',
     img: require('../static/flags/colombia.svg'),
     translatedBy: ['Juliana Galvis', 'Datasketch'],
     coords: [-74.297333, 4.570868]
@@ -316,6 +355,25 @@ export function getISO(){
   }
 }
 
+export function getCountryCurrency(country){
+  var t = countries.filter(f => f.code == country);
+  if(t.length && t[0].coords){
+    return t[0].currency;
+  }else{
+    return "MXN";
+  }
+}
+
+export function getCurrentCountry(){
+  var country = getLang();
+  var t = countries.filter(f => f.code == country);
+  if(t.length && t[0].coords){
+    return t[0];
+  }else{
+    return countries[0];
+  }
+}
+
 export function getFlag(){
   var country = getLang();
   var t = countries.filter(f => f.code == country);
@@ -326,7 +384,12 @@ export function getFlag(){
   }
 }
 
-
+export function getCurrencies(){
+  var c = [];
+  countries.map(_c => c.indexOf(_c.currency) == -1 ? c.push(_c.currency) : null);
+  c = c.sort();
+  return c;
+}
 
 export function getLang(){
   var country = store.get('sinapsis_lang');

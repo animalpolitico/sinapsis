@@ -1,8 +1,8 @@
 import moment from 'moment';
 import 'moment/locale/es';
 import { saveAs } from 'file-saver';
-import { getISO } from '../vars/countriesDict';
-import formatMoney from 'format-money';
+import { countries, getISO, getLang, getCountryCurrency, getCurrentCountry } from '../vars/countriesDict';
+import formatMoney, { convertToActualCurrency } from './formatMoney';
 import ConvertDbToCsv from './tocsv';
 moment.locale('es');
 var ntol = require('number-to-letter');
@@ -162,6 +162,39 @@ export default class DbFactory {
     return blob;
   }
 
+
+  /**
+  * Obtiene un CSV con estadísticas
+  *
+  * @param void
+  * @return CSV / TXT
+  **/
+  getStatisticsCSV(){
+    var o = [];
+    /* Montos */
+    var self = this;
+    var db = this.getDbs();
+    var dbA = Object.values(db);
+    dbA.map(function(_db){
+      var empresas = _db.empresas;
+      if(empresas){
+        empresas = Object.values(empresas);
+        empresas.map(function(empresa){
+          empresa.dbid = _db.id;
+          self.getEmpresaSum(empresa, _db.country);
+        })
+      }
+    })
+
+
+
+
+  }
+
+
+
+
+
   /**
   * Crea los cruces
   *
@@ -195,7 +228,7 @@ export default class DbFactory {
       if(empresas){
         var empresasA = Object.values(empresas);
         empresasA.map(function(empresa){
-          var sum = self.getEmpresaSum(empresa);
+          var sum = self.getEmpresaSum(empresa, _db.country);
           var eField = {
             id: empresa.uid,
             value: empresa.name,
@@ -334,7 +367,7 @@ export default class DbFactory {
         empresas = Object.values(empresas);
         empresas.map(function(empresa){
           empresa.dbid = _db.id;
-          empresa.sum = self.getEmpresaSum(empresa);
+          empresa.sum = self.getEmpresaSum(empresa, _db.country);
           if(empresa.sum > 0){
             o.push(empresa);
           }
@@ -350,6 +383,47 @@ export default class DbFactory {
     })
     o = o.slice(0, _n);
     return o;
+  }
+
+  /**
+  * Obtiene el currency de una base
+  *
+  * @param dbid
+  * @return code
+  **/
+  getDbCurrencyObj(dbid){
+    var _db = this.getDb(dbid);
+    if(_db.currency){
+      var c = _db.currency;
+    }else{
+      if(_db.country){
+        var country = _db.country;
+        var c = getCountryCurrency(country);
+      }else{
+        var country = getCurrentCountry();
+        var c = country.currency;
+      }
+    }
+
+    var s = countries.filter(_c => _c.currency == c);
+        s = s[0];
+
+    var obj = {
+      currency: c,
+      symbol: s.currencySign,
+      toMXN: s.toMXN
+    }
+    return obj;
+  }
+
+  /**
+  * Obtiene el currency de una base
+  *
+  * @param dbid
+  * @return code
+  **/
+  getDbCurrency(dbid){
+    return this.getDbCurrencyObj(dbid).currency;
   }
 
   /**
@@ -658,6 +732,7 @@ export default class DbFactory {
     var count = 0;
     dbA.map(function(_db){
       var dbfields = [];
+      var currency = self.getDbCurrency(_db.id);
       var empresas = _db.empresas;
       if(empresas){
         empresas = Object.values(empresas);
@@ -665,6 +740,7 @@ export default class DbFactory {
           var f = em.fields ? em.fields : {};
               f = Object.values(f);
           var c = self.getEmpresaTransferenciaSum(f);
+              c = convertToActualCurrency(c, currency);
           if(onlypositive && c > 0){
             count += c;
           }else if(!onlypositive){
@@ -692,6 +768,7 @@ export default class DbFactory {
     var count = 0;
     dbA.map(function(_db){
       var dbfields = [];
+      var currency = self.getDbCurrency(_db.id);
       var empresas = _db.empresas;
       if(empresas){
         empresas = Object.values(empresas);
@@ -700,7 +777,9 @@ export default class DbFactory {
               f = Object.values(f);
           var ls = f.filter(_f => _f.slug == "contrato-monto-total-de-licitacion");
           ls.map(function(_ls){
-            count += parseFloat(_ls.value);
+             var _c = parseFloat(_ls.value);
+                 _c = convertToActualCurrency(_c, currency);
+             count += _c;
           })
         })
       }
@@ -715,6 +794,7 @@ export default class DbFactory {
   * @return int
   **/
   getGroupsSum(group, keySlug, montoSlug, odbs){
+    var self = this;
     var masterFields = [];
     var db = this.getDbs();
     var dbA = Object.values(db);
@@ -724,6 +804,8 @@ export default class DbFactory {
     dbA.map(function(_db){
       var dbfields = [];
       var empresas = _db.empresas;
+      var currency = self.getDbCurrency(_db.id);
+
       if(empresas){
         empresas = Object.values(empresas);
         empresas.map(function(empresa){
@@ -735,6 +817,7 @@ export default class DbFactory {
           if(convenioFields){
             var groups = {};
             convenioFields.map(function(c){
+              c.currency = currency;
               var guid = c.guid;
               if(!groups[guid]){
                 groups[guid] = [];
@@ -776,6 +859,7 @@ export default class DbFactory {
       if(isNaN(m)){
         m = 0;
       }
+      m = convertToActualCurrency(m, a.currency);
       if(!control[no]){
         control[no] = m;
       }
@@ -819,10 +903,16 @@ export default class DbFactory {
   * @param empresa
   * @return int
   **/
-  getEmpresaSum(empresa){
+  getEmpresaSum(empresa, country){
     if(!empresa.fields){
       return 0;
     }
+
+
+
+    country = !country ? 'MEX' : country;
+    var currency = getCountryCurrency(country);
+
     var f = Object.values(empresa.fields);
     var i = 0;
     f.map(function(d){
@@ -838,7 +928,7 @@ export default class DbFactory {
       i = 0;
     }
 
-    return i;
+    return convertToActualCurrency(i, currency);
   }
 
   /**

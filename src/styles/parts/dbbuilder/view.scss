@@ -53,11 +53,23 @@
       font-weight: 400;
       font-size: 0.9rem;
       @extend .flex;
+      flex-wrap: wrap;
       align-items: center;
       padding-top: 0.25rem;
       padding-bottom: 0.75rem;
       padding-left: 0.5rem;
       border-bottom: 1px solid #444;
+      margin-bottom: 0.25rem;
+      .ss_db_view_empresas_currency{
+        width: 100%;
+        font-size: 0.6rem;
+        color: #888;
+        margin-top: 0.15rem;
+        a{
+          margin-left: 0.3rem;
+          text-decoration: underline;
+        }
+      }
       &_btn{
         display: inline-block;
         background: #222;
@@ -81,8 +93,11 @@
       padding: 0.5rem 1rem;
       border: 1px solid #333;
       @extend .flex;
-      margin: 0.5rem 0;
+      margin-bottom: 0.25rem;
       align-items: center;
+      &:first-of-type{
+        margin-top: 0.5rem;
+      }
       &,*{
         font-size: 0.7rem;
       }

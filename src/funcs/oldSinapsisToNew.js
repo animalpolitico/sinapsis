@@ -1,6 +1,6 @@
 import moment from 'moment';
 import 'moment/locale/es';
-import formatMoney from 'format-money';
+import formatMoney from './formatMoney';
 import * as d3 from "d3";
 import { snps_ka } from '../vars/compatibilityArray';
 import { saveAs } from 'file-saver';
@@ -702,7 +702,7 @@ export default class ConvertOldToDb{
           var matchWith = [t];
           var type = t;
           if(t.indexOf('monto') > -1){
-            em = em.replace(',', '');
+            em = em.replace(/\,/g, '');
             em = parseFloat(em);
             if(isNaN(em)){
               em = 0;
@@ -755,7 +755,7 @@ export default class ConvertOldToDb{
           var matchWith = [t];
           var type = t;
           if(t.indexOf('monto') > -1){
-            em = em.replace(',', '');
+            em = em.replace(/\,/g, '');
             em = parseFloat(em);
             if(isNaN(em)){
               em = 0;

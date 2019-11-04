@@ -96,6 +96,7 @@ export default class DbFormGroupInfoGeneral extends React.Component{
               onChange={(slug, obj) => this.props.parent.insertField(slug, obj)}
               name="Capital social mínimo"
               type="currency"
+              db={this.props.parent.props.db}
               empresa={this.props.empresa}
             />
             <DbInput

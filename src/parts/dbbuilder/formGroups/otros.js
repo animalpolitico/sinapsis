@@ -10,7 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import DbInput from '../inputs';
-import formatMoney from 'format-money';
+import formatMoney from '../../../funcs/formatMoney';
 import { isMexico, _t } from '../../../vars/countriesDict';
 import TransactionRow from '../transaction';
 const uuidv4 = require('uuid/v4');
@@ -180,7 +180,7 @@ export default class DbFormGroupOtros extends React.Component{
               {
                 otros.map(function(g){
                   return(
-                    <OtrosRow p={g} parent={self} onClick={(guid, t) => self.edit(guid, t)} />
+                    <OtrosRow p={g} parent={self} db={self.props.parent.props.db} onClick={(guid, t) => self.edit(guid, t)} />
                   )
                 })
               }
@@ -310,7 +310,8 @@ class OtrosRow extends React.Component{
     var v = t.value;
     try{
       if(t.type == "monto" || t.category.indexOf('monto') > -1){
-        v = formatMoney(v);
+        var cobj = window.dbf.getDbCurrencyObj(this.props.db.id);
+        v = formatMoney(v, cobj);
       }
     }catch(ex){
 

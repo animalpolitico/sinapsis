@@ -4,7 +4,7 @@ import Icon from '@material-ui/core/Icon';
 import { _t, isMexico } from '../../vars/countriesDict';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { getLatLng } from 'react-places-autocomplete';
-import formatMoney from 'format-money';
+import formatMoney from '../../funcs/formatMoney';
 
 var slugify = require('slugify');
 const uuidv4 = require('uuid/v4');
@@ -65,9 +65,7 @@ export default class DbInput extends React.Component{
       v = v.toString();
       v = v.replace('$', '');
       v = v.replace(/\,/g, '');
-      console.log('V2', v);
-      v = '$' + window.dbf.numberWithCommas(v);
-      console.log('V3', v);
+      v = window.dbf.numberWithCommas(v);
     }
     return v;
   }
@@ -375,6 +373,19 @@ export default class DbInput extends React.Component{
 
   }
 
+  getLabel(){
+    var l = _t(this.getName());
+    var t = this.props.type;
+
+    if(t == "currency"){
+      var currency = window.dbf.getDbCurrencyObj(this.props.db.id);
+      l += " ("+ currency.symbol +" "+currency.currency+")";
+    }
+
+
+    return l;
+  }
+
   render(){
     var cs = ['ss_db_input'];
 
@@ -435,7 +446,7 @@ export default class DbInput extends React.Component{
           {
             !this.props.hideLabel ?
             <div className="ss_db_input_container_label">
-              {_t(this.getName())}
+              {this.getLabel()}
               {
                 show_gm ?
                 <div className="ss_db_input_container_label_icon">

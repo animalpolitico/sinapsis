@@ -1,7 +1,7 @@
 import React from "react";
 import * as d3 from "d3";
 import Icon from '@material-ui/core/Icon';
-import formatMoney from 'format-money';
+import formatMoney from '../../funcs/formatMoney';
 import CountTo from 'react-count-to';
 import { _t, isMexico } from '../../vars/countriesDict';
 var Chart = require('chart.js');
@@ -806,13 +806,26 @@ class AnalyticsPiePie extends React.Component{
 
 
 class AnalyticsMontos extends React.Component{
+  state ={
+    s: 0
+  }
+
+  componentDidMount(){
+    var self = this;
+    window.addEventListener('sinapsis_lang_change', function(){
+      self.setState({
+        s: Math.random() * 100000
+      })
+    })
+  }
+  
   render(){
     var sumaConvenio = window.dbf.getGroupsSum("convenio", "convenio-numero-de-convenio", "convenio-monto-del-convenio", this.props.active);
     var sumaContrato = window.dbf.getGroupsSum("contrato", "contrato-numero-de-contrato", "contrato-monto-del-contrato", this.props.active);
     var sumaTransferencias = window.dbf.getTransferenciasSum(this.props.active, true);
     var sumaLicitaciones = window.dbf.getLicitacionesSum(this.props.active, true);
     return(
-      <div className="ss_analytics_montos">
+      <div className="ss_analytics_montos" id="ssam">
         <div className="ss_analytics_montos_title">Montos</div>
         <div className="ss_analytics_montos_row">
           <AnalyticsMontosMonto value={sumaConvenio} label="convenios" />
@@ -826,6 +839,7 @@ class AnalyticsMontos extends React.Component{
 }
 
 class AnalyticsMontosMonto extends React.Component{
+
   render(){
     return(
       <div className="ss_analytics_montos_monto">

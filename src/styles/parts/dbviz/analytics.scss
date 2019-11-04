@@ -77,6 +77,10 @@
   .ss_analytics_montos{
     width: 100%;
     margin-top: 4rem;
+    &#ssam{
+      width: 80%;
+      margin: 4rem auto 0; 
+    }
     &_title{
       font-size: 0.9rem;
       text-align: center;
@@ -189,9 +193,11 @@
         justify-content: center;
         flex-direction: column;
         box-sizing: border-box;
-        padding: 0 1rem;
+        padding: 0.75rem;
+        min-width: 50%;
         &_m, &_t{
           width: 100%;
+          text-align: center;
         }
         &_m{
           font-size: 1.2rem;
@@ -199,7 +205,6 @@
           color: #f6f6f6;
         }
         &_t{
-          text-align: left;;
           color: white;
           margin-top: 0.05rem;
           font-size: 0.7rem;

@@ -6,7 +6,7 @@ import Fab from '@material-ui/core/Fab';
 import Tooltip from 'tooltip.js';
 import { saveAs } from 'file-saver';
 import Paper from '@material-ui/core/Paper';
-import formatMoney from 'format-money';
+import formatMoney from '../../funcs/formatMoney';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -739,6 +739,11 @@ class Nodes extends React.Component{
       setTimeout(function(){
         self.resize();
       }, 300);
+    })
+
+    window.addEventListener('sinapsis_lang_change', function(){
+      d3.selectAll('#db_viz_nodes_canvas *').remove();
+      self.set();
     })
 
     window.addEventListener('ss_lazy_indicator', function(){
@@ -2869,6 +2874,8 @@ class SSDoiField extends React.Component{
 
 class SSTooltip extends React.Component{
   render(){
+
+
     try{
       var coords = d3.mouse(this.props.canvas);
     }catch{
