@@ -906,7 +906,7 @@ class DbView extends React.Component{
                   : null
                 }
                 <div className="ss_db_view_empresas_currency">
-                  Montos expresados en <strong>{currencyObj.currency + ' ('+currencyObj.symbol+')'}</strong>
+                  Montos expresados en <strong>{currencyObj.name + ' ('+currencyObj.symbol+')'}</strong>
                   {
                     !block ?
                     <a href="javascript:void(0)" onClick={() => this.setState({openCurrencyChange: true})}>Editar</a>
@@ -924,7 +924,7 @@ class DbView extends React.Component{
                           {
                             getCurrencies().map(function(c){
                               return (
-                                <option selected={c == currencyObj.currency} value={c}>{c}</option>
+                                <option selected={c.currency == currencyObj.currency} value={c.currency}>{c.name} ({c.symbol} {c.currency})</option>
                               )
                             })
                           }

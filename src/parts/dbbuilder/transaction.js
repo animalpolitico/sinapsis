@@ -6,6 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
+import formatMoney from '../../funcs/formatMoney';
 export default class TransactionRow extends React.Component{
   state = {
     showDelete: false
@@ -98,6 +99,9 @@ export default class TransactionRow extends React.Component{
 
   render(){
     var n = this.buildName();
+    var c = window.dbf.getDbCurrencyObj(this.props.db.id);
+    console.log('t', c);
+
     return(
       <>
       <div className="ss_transaction_row">
@@ -131,7 +135,7 @@ export default class TransactionRow extends React.Component{
           </div>
           <div className="ss_transaction_row_d">
             {
-              n.monto ? window.dbf.fm(n.monto) : null
+              n.monto ? formatMoney(n.monto, c) : null
             }
           </div>
         </div>

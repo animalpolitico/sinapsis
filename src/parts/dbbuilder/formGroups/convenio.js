@@ -178,6 +178,7 @@ export default class DbFormGroupConvenio extends React.Component{
                         parent={self}
                         g={e}
                         key={k}
+                        db={self.props.parent.props.db}
                         empresa={self.props.empresa}
                         count={k + 1}
                         onClick={(uid) => self.editContrato(uid)}

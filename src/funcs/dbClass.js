@@ -410,6 +410,7 @@ export default class DbFactory {
 
     var obj = {
       currency: c,
+      name: s.currencyName,
       symbol: s.currencySign,
       toMXN: s.toMXN
     }

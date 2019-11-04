@@ -197,6 +197,7 @@ export default class DbFormGroupContrato extends React.Component{
                         key={k}
                         empresa={self.props.empresa}
                         receptorIsEmpresa
+                        db={self.props.parent.props.db}
                         count={k + 1}
                         onClick={(uid) => self.editContrato(uid)}
                         singleName="Contrato"

@@ -8,6 +8,7 @@ export const countries = [
     iso: 'MX',
     currency: 'MXN',
     currencySign: '$',
+    currencyName: 'Peso Mexicano',
     toMXN: 1,
     img: require('../static/flags/mexico.svg'),
     coords: [-102.552784, 23.634501]
@@ -18,6 +19,7 @@ export const countries = [
     iso: 'PY',
     currency: 'PYG',
     currencySign: '₲',
+    currencyName: 'Guaraní Paraguayo',
     toMXN: 0.0030,
     translatedBy: ['Maricarmen Sequera', 'TEDIC NGO'],
     img: require('../static/flags/paraguay.svg'),
@@ -29,6 +31,7 @@ export const countries = [
     iso: 'DO',
     currencySign: 'RD$',
     currency: 'DOP',
+    currencyName: 'Peso Dominicano',
     toMXN: 0.36,
     translatedBy: ['Daniel Harel'],
     img: require('../static/flags/dominican-republic.svg'),
@@ -40,6 +43,7 @@ export const countries = [
     iso: 'BO',
     currency: 'BOB',
     currencySign: 'B$',
+    currencyName: 'Boliviano',
     toMXN: 2.76,
     translatedBy: ['Raisa Valda Ampuero', 'Warmi.Red'],
     img: require('../static/flags/bolivia.svg'),
@@ -50,6 +54,7 @@ export const countries = [
     code: 'CRI',
     iso: 'CR',
     currency: 'CRC',
+    currencyName: 'Colón',
     currencySign: '₡',
     toMXN: 0.033,
     img: require('../static/flags/costa-rica.svg'),
@@ -62,6 +67,7 @@ export const countries = [
     iso: 'PE',
     toMXN: 5.70,
     currency: 'PEN',
+    currencyName: 'Sol',
     currencySign: 'S/',
     img: require('../static/flags/peru.svg'),
     translatedBy: ['Gabriela Flores Ch.', 'Asociación civil Japiqay, Memoria y Ciudadanía'],
@@ -73,6 +79,7 @@ export const countries = [
     iso: 'PA',
     toMXN: 19.5,
     currency: 'USD',
+    currencyName: 'Dólar Estadounidense',
     currencySign: '$',
     img: require('../static/flags/panama.svg'),
     translatedBy: ['Lia Hernández', 'IPANDETEC'],
@@ -84,6 +91,7 @@ export const countries = [
     iso: 'VE',
     currency: 'VEF',
     currencySign: 'Bs.',
+    currencyName: 'Bolívar Soberano',
     toMXN: 1.93470,
     img: require('../static/flags/venezuela.svg'),
     translatedBy: ['Yuleina Carmona'],
@@ -95,6 +103,7 @@ export const countries = [
     iso: 'GT',
     currency: 'GTQ',
     currencySign: "Q",
+    currencyName: 'Quetzal',
     toMXN: 2.48,
     img: require('../static/flags/guatemala.svg'),
     translatedBy: ['Suchit Chávez', 'Plaza Pública'],
@@ -107,6 +116,7 @@ export const countries = [
     currency: 'HNL',
     toMXN: 0.77,
     currencySign: 'L',
+    currencyName: 'Lempira',
     img: require('../static/flags/honduras.svg'),
     translatedBy: ['Felisa Franco', 'Secretaría de Finanzas'],
     coords: [-86.241905, 15.199999]
@@ -118,6 +128,7 @@ export const countries = [
     toMXN: 19.5,
     currency: 'USD',
     currencySign: '$',
+    currencyName: 'Dólar Estadounidense',
     img: require('../static/flags/ecuador.svg'),
     translatedBy: ['Camilo Burneo'],
     coords: [-78.183406, 	-1.831239]
@@ -129,6 +140,7 @@ export const countries = [
     toMXN: 0.32,
     currency: 'ARS',
     currencySign: '$',
+    currencyName: 'Peso Argentino',
     translatedBy: ['Nicolás'],
     img: require('../static/flags/argentina.svg'),
     coords: [-63.616672, -38.416097]
@@ -139,6 +151,7 @@ export const countries = [
     iso: 'CO',
     toMXN: 0.0057,
     currency: 'COP',
+    currencyName: 'Peso Colombiano',
     currencySign: '$',
     img: require('../static/flags/colombia.svg'),
     translatedBy: ['Juliana Galvis', 'Datasketch'],
@@ -386,8 +399,24 @@ export function getFlag(){
 
 export function getCurrencies(){
   var c = [];
-  countries.map(_c => c.indexOf(_c.currency) == -1 ? c.push(_c.currency) : null);
-  c = c.sort();
+  var control = [];
+  countries.map(function(_c){
+    if(control.indexOf(_c.currency) == -1){
+      var i = {
+        name: _c.currencyName,
+        currency: _c.currency,
+        symbol: _c.currencySign
+      }
+
+      c.push(i);
+      control.push(_c.currency);
+    }
+  })
+  c = c.sort(function(a, b){
+    var str1 = a.currency;
+    var str2 = b.currency;
+    return ((str1 == str2) ? 0 : (( str1 > str2) ? 1 : -1));
+  });
   return c;
 }
 
