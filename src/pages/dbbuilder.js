@@ -1563,6 +1563,7 @@ class DbDbsNavigationTd extends React.Component{
     isblurred: true,
     borrarText: '',
     showEdit: false,
+    hidden: false,
     name: this.props.db.name
   }
   componentDidMount(){
@@ -1579,6 +1580,16 @@ class DbDbsNavigationTd extends React.Component{
         self.changeDbName();
       }
     }, true);
+
+    window.addEventListener("ss_on_db_toggle", function(e){
+      var dbid = self.props.db.id;
+      var d = e.detail;
+      if(d.id == dbid){
+        self.setState({
+          hidden: d.h
+        })
+      }
+    })
 
   }
 
@@ -1637,6 +1648,11 @@ class DbDbsNavigationTd extends React.Component{
     this.handleDialogClose();
   }
 
+  toggleDb(){
+    var ev = new CustomEvent('ss_toggle_db', {'detail': {id: this.props.db.id}});
+    window.dispatchEvent(ev);
+  }
+
   render(){
     var db = this.props.db;
     var cs = ["ss_dbbuilder_sidebar_dbs_nav_td"];
@@ -1654,6 +1670,9 @@ class DbDbsNavigationTd extends React.Component{
         >
         <div className="ss_dbbuilder_sidebar_dbs_nav_td_input">
           <div className="ss_dbbuilder_sidebar_dbs_nav_td_input_tools">
+            <div className="ss_dbbuilder_sidebar_dbs_nav_td_input_tools_tool" title={'Ocultar de ' + this.state.name} onClick={() => this.toggleDb()}>
+              <Icon>{this.state.hidden ? 'visibility_off' : 'visibility'}</Icon>
+            </div>
             <div className="ss_dbbuilder_sidebar_dbs_nav_td_input_tools_tool" title={'Editar nombre de ' + this.state.name} onClick={() => this.setState({showEdit: true})}>
               <Icon>edit</Icon>
             </div>

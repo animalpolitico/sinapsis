@@ -585,6 +585,18 @@ export default class DbFactory {
   }
 
   /**
+  * Busca si una dirección se puede abrir en Google Maps
+  *
+  * @param void
+  * @return bool
+  **/
+  isAddressGoogleMaps(a){
+    var s = slugify(a, {lower: true});
+    return abook[s] ? abook[s] : false;
+  }
+
+
+  /**
   * Obtiene todas los campos de un tipo
   *
   * @param void

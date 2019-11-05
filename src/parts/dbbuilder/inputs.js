@@ -8,6 +8,7 @@ import formatMoney from '../../funcs/formatMoney';
 
 var slugify = require('slugify');
 const uuidv4 = require('uuid/v4');
+const queryString = require('query-string');
 
 export default class DbInput extends React.Component{
   state = {
@@ -421,8 +422,13 @@ export default class DbInput extends React.Component{
     /** Google Maps **/
     var show_gm = false;
     if(this.props.matchWith && this.props.matchWith.indexOf('address') > -1 && this.state.value){
-      show_gm = true;
-      var gm_url = "https://www.google.com/maps/search/" + this.state.value.replace(' ', '+');
+      var isl = window.dbf.isAddressGoogleMaps(this.state.value);
+      if(isl){
+        show_gm = true;
+        var fll = '@'+isl.latlng.lat+','+isl.latlng.lng;
+        var ggl = isl.googleResult;
+        var gm_url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ggl);
+      }
 
 
     }

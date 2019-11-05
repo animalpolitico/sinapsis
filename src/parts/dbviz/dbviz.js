@@ -176,7 +176,17 @@ class SSDBControl extends React.Component{
   }
 
   componentDidMount(){
+    var self = this;
     window.addEventListener('ss_activate_all_dbs', () => this.showAll())
+    window.addEventListener('ss_toggle_db', function(e){
+      try{
+        var id = e.detail.id;
+        self.toggleDb(id);
+      }catch{
+
+      }
+    })
+
   }
 
   toggleDb(dbid){
@@ -185,13 +195,23 @@ class SSDBControl extends React.Component{
     setTimeout(function(){
       var s = self.state.hiddenDbs;
       if(s.indexOf(dbid) == -1){
+        var h = true;
         s.push(dbid);
       }else{
+        var h = false;
         s.splice(s.indexOf(dbid), 1);
       }
       self.setState({
         hiddenDbs: s
       })
+
+      var o = {
+        id: dbid,
+        h: h
+      }
+
+      window.dispatchEvent(new CustomEvent('ss_on_db_toggle', {'detail': o}));
+
       window.dbf.hideDbs(s);
       var ev = new Event('ss_lazy_indicator');
       window.dispatchEvent(ev);
