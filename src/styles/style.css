@@ -3674,4 +3674,15 @@ body.ss_showing_drawer .ss_no_results {
 .ss_mobile .nodes_controls_container .ss_control_group:first-child {
   display: none !important; }
 
+#ss_ne_i {
+  width: 100%; }
+  #ss_ne_i_i .ss_db_input {
+    width: 100% !important;
+    padding: 0.25rem 0 0; }
+  #ss_ne_i_p {
+    font-size: 0.7rem;
+    color: #888;
+    max-width: 70%;
+    line-height: 1.1; }
+
 /*# sourceMappingURL=style.css.map */

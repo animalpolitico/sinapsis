@@ -31,6 +31,8 @@ import DbBuilderToolbar from '../parts/dbbuilder/toolbar';
 import DbEditEmpresa from '../parts/dbbuilder/edit';
 import DbViz from '../parts/dbviz/dbviz';
 import DbMobileAlert from '../parts/dbbuilder/mobilealert';
+import DbInput from '../parts/dbbuilder/inputs';
+
 
 import oldToNew from '../funcs/oldSinapsisToNew';
 import { predbs } from '../vars/rel';
@@ -969,14 +971,18 @@ class DbView extends React.Component{
         <Dialog open={this.state.showdialog} onClose={() => this.handleDialogClose()}>
           <DialogTitle id="form-dialog-title">Empresa nueva</DialogTitle>
             <DialogContent style={{width: 400}}>
-            <TextField
-              autoFocus
-              label="Razón social de la empresa"
-              fullWidth
-              helperText="Escribe el nombre de la empresa, más adelante podrás añadir el resto de información."
-              color="secondary"
-              onChange={(e) => this.setState({dialogValue: e.target.value})}
-            />
+            <div id="ss_ne_i">
+              <div id="ss_ne_i_i">
+                <DbInput
+                  name={this.state.empresaType  == "empresa" ? "Razón social de la empresa" : "Razón social de la persona"}
+                  autoComplete={[this.state.empresaType == "empresa" ? "empresa" : "person"]}
+                  onValue={(e) => this.setState({dialogValue: e})}
+                />
+              </div>
+              <div id="ss_ne_i_p">
+                Escribe el nombre de la empresa, más adelante podrás añadir el resto de información.
+              </div>
+            </div>
             <div className="ss_db_input_select" style={{paddingLeft: 0, paddingRight: 0}}>
               <div className="db_empresa_container_group_radios_title">
                 ¿Es empresa o prestador de servicios?

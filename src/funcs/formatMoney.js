@@ -41,7 +41,7 @@ function MXNto(qty, to){
 }
 
 
-function convertCurrency(qty, from, to){
+export function convertCurrency(qty, from, to){
   from = !from ? 'MXN' : from;
   to = !to ? country.currency : to;
 

@@ -15,7 +15,7 @@ export default class DbMobileAlert extends React.Component{
           <Icon>warning</Icon>
         </div>
         <div className="mobile_alert_text">
-          Estás navegando Sinapsis en su versión light. Para utilizar todas las capacidades de la herramienta ÁBRELA EN UNA COMPUTADORA DE ESCRITORIO
+          Estás previsualizando únicamente el mapa de La Estafa Maestra. Para utilizar todas las capacidades de la herramienta ÁBRELA EN UNA COMPUTADORA DE ESCRITORIO. 
         </div>
       </div>
     )

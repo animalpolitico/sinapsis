@@ -6,7 +6,7 @@ import Fab from '@material-ui/core/Fab';
 import Tooltip from 'tooltip.js';
 import { saveAs } from 'file-saver';
 import Paper from '@material-ui/core/Paper';
-import formatMoney from '../../funcs/formatMoney';
+import formatMoney, {convertCurrency} from '../../funcs/formatMoney';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -16,7 +16,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Switch from '@material-ui/core/Switch';
 import CountTo from 'react-count-to';
 import Map from './map';
-import { isMexico, _t } from '../../vars/countriesDict';
+import { isMexico, _t, getCurrentCountry } from '../../vars/countriesDict';
 import Analytics from './analytics';
 import Grow from '@material-ui/core/Grow';
 var slugify = require('slugify');
@@ -1870,7 +1870,6 @@ class Nodes extends React.Component{
           }
 
 
-
         </div>
         <div className="db_viz_info">
           {
@@ -2902,6 +2901,23 @@ class SSTooltip extends React.Component{
     }
 
 
+    var sum = d.fields[0].sum;
+    var mnt = "";
+    if(!sum){
+      mnt = "(sin información)"
+    }else{
+      var dbc = window.dbf.getDbCurrencyObj(d.fields[0].fromdb);
+      var cc = getCurrentCountry();
+      var converted = formatMoney(sum);
+      mnt = converted;
+      if(cc.currency !== dbc.currency){
+        var original = convertCurrency(sum, cc.currency, dbc.currency);
+        var oConverted = formatMoney(original, dbc);
+        mnt = oConverted + " ("+mnt+")";
+      }
+    }
+
+
 
     return(
       <div
@@ -2951,7 +2967,7 @@ class SSTooltip extends React.Component{
         {
           d.type == "empresa" ?
           <div className="db_viz_tooltip_monto" >
-            Monto neto que recibió la empresa: <strong>{d.fields[0].sum == 0 ? '(sin información)' : formatMoney(d.fields[0].sum)}</strong>
+            Monto neto que recibió la empresa: <strong>{mnt}</strong>
           </div>
           : null
         }

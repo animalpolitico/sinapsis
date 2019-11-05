@@ -818,7 +818,7 @@ class AnalyticsMontos extends React.Component{
       })
     })
   }
-  
+
   render(){
     var sumaConvenio = window.dbf.getGroupsSum("convenio", "convenio-numero-de-convenio", "convenio-monto-del-convenio", this.props.active);
     var sumaContrato = window.dbf.getGroupsSum("contrato", "contrato-numero-de-contrato", "contrato-monto-del-contrato", this.props.active);
@@ -826,7 +826,7 @@ class AnalyticsMontos extends React.Component{
     var sumaLicitaciones = window.dbf.getLicitacionesSum(this.props.active, true);
     return(
       <div className="ss_analytics_montos" id="ssam">
-        <div className="ss_analytics_montos_title">Montos</div>
+        <div className="ss_analytics_montos_title">Montos <span onClick={() => window.dbf.downloadMontos()}>Descargar en CSV</span></div>
         <div className="ss_analytics_montos_row">
           <AnalyticsMontosMonto value={sumaConvenio} label="convenios" />
           <AnalyticsMontosMonto value={sumaContrato} label="contratos" />

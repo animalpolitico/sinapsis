@@ -15,7 +15,8 @@ export default class DbInput extends React.Component{
     autoCompleteLoading: false,
     isfocus: false,
     autocompleteData: [],
-    hasloaded: false
+    hasloaded: false,
+    value: ""
   }
   componentDidMount(){
     this.setInitialValue();
@@ -27,36 +28,44 @@ export default class DbInput extends React.Component{
   }
   setInitialValue(){
     var em = this.props.empresa;
-    if(!this.props.meta){
-      var fs = em.fields;
-      if(!fs){
-        fs = {};
+    if(em){
+      if(!this.props.meta){
+        var fs = em.fields;
+        if(!fs){
+          fs = {};
+        }
+        var v = "";
+        var slug = this.getFieldSlug();
+        var field = fs[slug];
+        if(field){
+          v = field.value;
+        }
+      }else{
+        if(em.meta && em.meta[this.props.meta]){
+          v = em.meta[this.props.meta];
+        }
       }
-      var v = "";
-      var slug = this.getFieldSlug();
-      var field = fs[slug];
-      if(field){
-        v = field.value;
+
+      if(this.props.defaultValue){
+        v = this.props.defaultValue;
       }
+      this.setValue(v, true);
     }else{
-      if(em.meta && em.meta[this.props.meta]){
-        v = em.meta[this.props.meta];
-      }
+      this.validate();
     }
 
-    if(this.props.defaultValue){
-      v = this.props.defaultValue;
-    }
-    this.setValue(v, true);
   }
 
   componentDidUpdate(op, os){
-    if(this.props.empresa.uid !== op.empresa.uid){
-      this.setInitialValue();
-      this.setState({
-        hasloaded: false
-      })
+    if(this.props.empresa){
+      if(this.props.empresa.uid !== op.empresa.uid){
+        this.setInitialValue();
+        this.setState({
+          hasloaded: false
+        })
+      }
     }
+
   }
 
   maskValue(v){
@@ -75,6 +84,9 @@ export default class DbInput extends React.Component{
     var self = this;
     var rawvalue = v;
     v = this.maskValue(v);
+    if(this.props.onValue){
+      this.props.onValue(v);
+    }
 
     this.setState({
       value: v,
@@ -115,9 +127,7 @@ export default class DbInput extends React.Component{
       autoCompleteLoading: true,
     })
     var r = [];
-    console.log('Type', type);
     var all = window.dbf.searchByType(this.state.value, type);
-    console.log('all', all);
     all.map(function(d){
       var em = {
         label: d.value || d.name,

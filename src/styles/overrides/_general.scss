@@ -1,0 +1,15 @@
+#ss_ne_i{
+  width: 100%;
+  &_i{
+    .ss_db_input{
+      width: 100%!important;
+      padding: 0.25rem 0 0;
+    }
+  }
+  &_p{
+    font-size: 0.7rem;
+    color: #888;
+    max-width: 70%;
+    line-height: 1.1;
+  }
+}

@@ -19,8 +19,10 @@ export default class Index extends React.Component{
         </Helmet>
         <Landing />
         <DiagBg>
+          <Element name="video">
+            <GoTo history={this.props.history}/>
+          </Element>
           <Video />
-          <GoTo history={this.props.history}/>
         </DiagBg>
         <UsaSinapsis />
         <DiagBg>
@@ -534,7 +536,7 @@ class GoTo extends React.Component{
 
           <div className="ss_h_s_goto_container_ctas">
             <div className="ss_h_s_goto_container_ctas_cta" onClick={() => this.props.history.push(buildLink('/construir'))}>
-              Ir a Sinapsis
+              Ir a la herramienta
             </div>
           </div>
 
@@ -547,7 +549,6 @@ class GoTo extends React.Component{
 class Video extends React.Component{
   render(){
     return(
-      <Element name="video">
         <div className="ss_h_s" id="ss_h_video">
           <div className="ss_h_s_video">
             <div className="ss_h_s_video_ball"></div>
@@ -555,7 +556,6 @@ class Video extends React.Component{
             <SSH1 pre="¿Qué es" bold="Sinapsis?" />
           </div>
         </div>
-      </Element>
     )
   }
 

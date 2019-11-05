@@ -392,28 +392,38 @@ export default class DbFactory {
   * @return code
   **/
   getDbCurrencyObj(dbid){
-    var _db = this.getDb(dbid);
-    if(_db.currency){
-      var c = _db.currency;
-    }else{
-      if(_db.country){
-        var country = _db.country;
-        var c = getCountryCurrency(country);
+    try{
+      var _db = this.getDb(dbid);
+      if(_db.currency){
+        var c = _db.currency;
       }else{
-        var country = getCurrentCountry();
-        var c = country.currency;
+        if(_db.country){
+          var country = _db.country;
+          var c = getCountryCurrency(country);
+        }else{
+          var country = getCurrentCountry();
+          var c = country.currency;
+        }
+      }
+
+      var s = countries.filter(_c => _c.currency == c);
+          s = s[0];
+
+      var obj = {
+        currency: c,
+        name: s.currencyName,
+        symbol: s.currencySign,
+        toMXN: s.toMXN
+      }
+    }catch{
+      var obj = {
+        currency: '',
+        name: '',
+        symbol: '',
+        toMXN: ''
       }
     }
 
-    var s = countries.filter(_c => _c.currency == c);
-        s = s[0];
-
-    var obj = {
-      currency: c,
-      name: s.currencyName,
-      symbol: s.currencySign,
-      toMXN: s.toMXN
-    }
     return obj;
   }
 
@@ -908,9 +918,6 @@ export default class DbFactory {
     if(!empresa.fields){
       return 0;
     }
-
-
-
     country = !country ? 'MEX' : country;
     var currency = getCountryCurrency(country);
 
@@ -931,6 +938,65 @@ export default class DbFactory {
 
     return convertToActualCurrency(i, currency);
   }
+
+  /**
+  * Obtiene un CSV con montos
+  *
+  * @param void
+  * @return void
+  **/
+  downloadMontos(){
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
+    var self = this;
+    var country = getCurrentCountry();
+    var subfix = '('+country.currencySign+' '+country.currency+')';
+    var o = [
+      ['Empresa', 'Base de datos', 'Montos en contratos '+subfix, 'Montos en transferencias '+subfix, 'Otros '+subfix, 'Monto neto recibido '+subfix]
+    ]
+    var b = [];
+    var db = this.getDbs();
+    var dbA = Object.values(db);
+    dbA.map(function(_db){
+      var ccode = _db.country;
+      if(!ccode){
+        ccode = "MEX";
+      }
+      var currency = getCountryCurrency(ccode);
+      var empresas = _db.empresas;
+          empresas = Object.values(empresas);
+      empresas.map(function(empresa){
+        if(!empresa.fields){
+          empresa.fields = {};
+        }
+        var f = Object.values(empresa.fields);
+        var transfer = self.getEmpresaTransferenciaSum(f);
+            transfer = convertToActualCurrency(transfer, currency)
+        var otros = self.getEmpresaOtrosSum(f);
+            otros = convertToActualCurrency(otros, currency);
+        var cf = f.filter(d => d.sumWith && d.group == "contrato");
+        var contratos = 0;
+        cf.map(v => contratos += v.value);
+        contratos = convertToActualCurrency(contratos, currency);
+        var ti = [empresa.name, _db.name, contratos, transfer, otros, self.getEmpresaSum(empresa, ccode)]
+        b.push(ti);
+      })
+    })
+
+    b = b.sort(function(a, b){
+      return a[5] <= b[5] ? 1 : -1;
+    })
+
+    o = [...o, ...b];
+
+    var blob = this.arrayToCsv(o);
+
+    var slug = "Montos " + this.obj.info.name + " v" + this.obj.version;
+        slug = slugify(slug, {lower: true});
+    saveAs(blob, slug +'.csv');
+    window.dispatchEvent(new Event('sinapsisEndLoad'));
+  }
+
+
 
   /**
   * Obtiene la suma de las transferencias de la empresa
