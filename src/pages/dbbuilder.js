@@ -20,6 +20,7 @@ import 'moment/locale/es';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -35,6 +36,7 @@ import DbInput from '../parts/dbbuilder/inputs';
 
 
 import oldToNew from '../funcs/oldSinapsisToNew';
+import demo from '../funcs/demo';
 import { predbs } from '../vars/rel';
 import Flag from "react-flags";
 import { countries, getLang, _t, getCurrencies } from "../vars/countriesDict";
@@ -55,6 +57,8 @@ var endLoad = new Event('sinapsisEndLoad');
 var slugify = require('slugify');
 
 var mobile = require('is-mobile');
+
+
 
 
 
@@ -139,6 +143,7 @@ export default class DbBuilderPage extends React.Component{
           this.props.history.push(url);
         }else{
           var hasE = window.dbf.obj.dbs && Object.values(window.dbf.obj.dbs).length > 0;
+          demo();
           if(!hasE){
             self.loadEstafa(true);
           }
@@ -436,6 +441,7 @@ class DbInicio extends React.Component{
                   Explorar<br/>
                   la estafa <br />
                   maestra
+                  <br/><span>Descubre la herramienta</span>
                 </div>
                 <Icon>visibility</Icon>
               </div>
@@ -524,6 +530,7 @@ class DbLoader extends React.Component{
       {
         this.state.loading ?
         <div id="ssdb_loader">
+          <LinearProgress color="secondary" />
           <div id="ssdb_loader_c">
           </div>
         </div>
@@ -638,7 +645,7 @@ class DbBuilderSidebar extends React.Component{
         className="ss_dbbuilder_sidebar"
         width={window.innerWidth * 0.3}
         axis="x"
-
+        id="db_sidebar"
       >
         <div className="ss_dbbuilder_sidebar_collapse" onClick={() => this.collapseSidebar()}>
           <div className="ss_dbbuilder_sidebar_collapse_icon">
@@ -904,10 +911,10 @@ class DbView extends React.Component{
                 <span>Empresas en {this.props.db.name}</span>
                 {
                   !block ?
-                  <div className="ss_db_view_empresas_title_btn" style={{cursor: 'pointer'}} onClick={() => this.showAddDialog()}>Agregar</div>
+                  <div id="db_new_empresa_btn" className="ss_db_view_empresas_title_btn" style={{cursor: 'pointer'}} onClick={() => this.showAddDialog()}>Agregar</div>
                   : null
                 }
-                <div className="ss_db_view_empresas_currency">
+                <div className="ss_db_view_empresas_currency" id="db_currency_legend">
                   Montos expresados en <strong>{currencyObj.name + ' ('+currencyObj.symbol+')'}</strong>
                   {
                     !block ?
@@ -1232,17 +1239,30 @@ class DbDbsNavigationNewDb extends React.Component{
         })
       }
     });
+
+    window.addEventListener('ij_open_newdb', function(){
+      var e = document.getElementById('new_db_ijs');
+
+      self.togglePopper(e, true);
+    })
+
   }
   componentWillUnmount(){
     window.removeEventListener('ss_new_db', this.newDB);
   }
 
-  togglePopper(e){
+  togglePopper(e, force){
+
+    var a = !force ? e.currentTarget : e;
+    console.log('a', a);
+
+    var s = !force ? !this.state.openPopper : true;
+
     /* OLD
     */
     this.setState({
-      openPopper: !this.state.openPopper,
-      anchor: e.currentTarget
+      openPopper: s,
+      anchor: a
     })
   }
   newDB(){
@@ -1404,12 +1424,12 @@ class DbDbsNavigationNewDb extends React.Component{
     }
     return(
       <>
-      <div aria-describedby={id} className={cs.join(' ')} onClick={(e) => this.togglePopper(e)}>
+      <div aria-describedby={id} id="new_db_ijs" className={cs.join(' ')} ref={(e) => this.newdbbtn = e} onClick={(e) => this.togglePopper(e)}>
         <Icon>add</Icon><span className="ss_db_nav_s">Nueva base de datos</span>
       </div>
       <Popper id={id} open={this.state.openPopper} anchorEl={this.state.anchor}>
         <ClickAwayListener onClickAway={() => this.setState({openPopper: false})}>
-        <div className="ss_popper_container">
+        <div className="ss_popper_container" id="new_db_dropdown">
           <div className="ss_popper_container_button" onClick={() => this.newDB()}>
             <div>Nueva</div>
           </div>

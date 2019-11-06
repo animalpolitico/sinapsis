@@ -133,7 +133,7 @@ export default class Analytics extends React.Component{
     var dbs = this.getActiveDbs();
     var analytics = window.dbf.buildAnalytics(this.state.activeDbs);
     var analyticsBR = window.dbf.buildAnalyticsBr(this.state.activeDbs);
-    var top10m = window.dbf.getTopMontos(this.state.activeDbs, 10000);
+    var top10m = window.dbf.getTopMontos(this.state.activeDbs, 100);
     var top10a = this.getInstancias();
 
 

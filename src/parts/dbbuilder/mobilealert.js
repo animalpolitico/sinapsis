@@ -15,7 +15,7 @@ export default class DbMobileAlert extends React.Component{
           <Icon>warning</Icon>
         </div>
         <div className="mobile_alert_text">
-          Estás previsualizando únicamente el mapa de La Estafa Maestra. Para utilizar todas las capacidades de la herramienta ÁBRELA EN UNA COMPUTADORA DE ESCRITORIO. 
+          Ésta es parte de la visualización de La Estafa Maestra. Si quieres usar la herramienta debes hacerlo en una COMPUTADORA DE ESCRITORIO.
         </div>
       </div>
     )

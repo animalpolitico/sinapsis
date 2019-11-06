@@ -88,7 +88,7 @@ export default class DbViz extends React.Component{
 
     return(
       <>
-      <div className="db_viz">
+      <div className="db_viz" id="db_viz">
         {
           this.nodes && !this.state.hideNoResults ?
           <SSNoResults parent={this} nodes={this.nodes} onClose={() => this.setState({hideNoResults: true})}/>
@@ -100,7 +100,7 @@ export default class DbViz extends React.Component{
           <div className="nodes_controls_button" onClick={() => this.toggleControls()}>
             <Icon>{this.state.showcontrols ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}</Icon>
           </div>
-          <div className="nodes_controls_container">
+          <div className="nodes_controls_container" id="db_vc_tdb">
             <SSDBControl nodesMap={this.nodes} />
             <SSCategoryToggle nodesMap={this.nodes} ref={(ref) => this.categoryToggle = ref} />
             <SSNodeSize nodesMap={this.nodes}/>
@@ -2992,14 +2992,19 @@ class SSTooltip extends React.Component{
           : null
         }
 
-        <div className="db_viz_tooltip_click" style={{color: d.type == "instancia" ? textColor : color}}>
-          {
-            d.type == "instancia" ?
-            <span>Da clic en la instancia para más información</span>
-            :
-            <span>Da clic en el círculo para más información</span>
-          }
-        </div>
+        {
+          !mobile() ?
+          <div className="db_viz_tooltip_click" style={{color: d.type == "instancia" ? textColor : color}}>
+            {
+              d.type == "instancia" ?
+              <span>Da clic en la instancia para más información</span>
+              :
+              <span>Da clic en el círculo para más información</span>
+            }
+          </div>
+          : null
+        }
+
 
 
       </div>

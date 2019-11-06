@@ -604,7 +604,6 @@ export default class DbFactory {
   **/
   getByType(t){
     var o = [];
-    console.log('t', t);
     try{
       var db = this.getDbs();
       var dbA = Object.values(db);
@@ -963,7 +962,7 @@ export default class DbFactory {
     var country = getCurrentCountry();
     var subfix = '('+country.currencySign+' '+country.currency+')';
     var o = [
-      ['Empresa', 'Base de datos', 'Montos en contratos '+subfix, 'Montos en transferencias '+subfix, 'Otros '+subfix, 'Monto neto recibido '+subfix]
+      ['Empresa', 'Monto neto recibido '+subfix, 'Base de datos', 'Montos en contratos '+subfix, 'Montos en transferencias '+subfix, 'Otros '+subfix, ]
     ]
     var b = [];
     var db = this.getDbs();
@@ -975,6 +974,9 @@ export default class DbFactory {
       }
       var currency = getCountryCurrency(ccode);
       var empresas = _db.empresas;
+      if(!empresas){
+        empresas = {};
+      }
           empresas = Object.values(empresas);
       empresas.map(function(empresa){
         if(!empresa.fields){
@@ -989,13 +991,13 @@ export default class DbFactory {
         var contratos = 0;
         cf.map(v => contratos += v.value);
         contratos = convertToActualCurrency(contratos, currency);
-        var ti = [empresa.name, _db.name, contratos, transfer, otros, self.getEmpresaSum(empresa, ccode)]
+        var ti = [empresa.name,self.getEmpresaSum(empresa, ccode), _db.name, contratos, transfer, otros, ]
         b.push(ti);
       })
     })
 
     b = b.sort(function(a, b){
-      return a[5] <= b[5] ? 1 : -1;
+      return a[1] <= b[1] ? 1 : -1;
     })
 
     o = [...o, ...b];

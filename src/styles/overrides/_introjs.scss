@@ -1,0 +1,77 @@
+.introjs-overlay{
+  background: #222!important;
+}
+.introjs-tooltip{
+  border: 2px solid #333;
+  max-width: 400px;
+  min-width: 250px;
+  background: #2a2a2a;
+  border-radius: 0;
+  box-shadow: none;
+  transition: none;
+  &, *{
+    font-family: $f;
+  }
+  .introjs-tooltiptext{
+    margin: 0.5rem 0;
+    box-sizing: border-box;
+    padding: 0 0.5rem;
+    h2{
+      margin: 0;
+      line-height: 1.1;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      color: #f6f6f6;
+      font-weight: 300;
+      &::before{
+        content: '/';
+        color: $main;
+        margin-right: 0.2rem;
+        font-weight: 600;
+      }
+    }
+    p{
+      color: #f6f6f6;
+      font-size: 0.9rem;
+      line-height: 1.15;
+    }
+  }
+}
+.introjs-helperNumberLayer{
+  &, *{
+    font-family: $f;
+  }
+  background: #202020;
+  border: 1px solid $main;
+  font-weight: 300;
+  transition: none;
+  line-height: 23px;
+}
+
+.introjs-tooltipbuttons{
+  .introjs-button{
+    border: 1px solid $main;
+    background: #222!important;
+    border-radius: 0!important;
+    color: #f6f6f6;
+    text-transform: uppercase;
+    text-shadow: none;
+    &:hover{
+      box-shadow: 0 0 4px rgba($main, 0.5)!important;
+    }
+  }
+}
+.introjs-tooltipReferenceLayer{
+  transition: none;
+}
+.introjs-helperLayer{
+  border-radius: 0!important;
+  background: rgba(#444, 0.9)!important;
+  transition: none;
+}
+.introjs-arrow.left{
+  border-right-color: #333;
+}
+.introjs-arrow.right{
+  border-left-color: #333;
+}
