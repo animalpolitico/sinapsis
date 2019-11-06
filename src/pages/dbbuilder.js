@@ -143,7 +143,9 @@ export default class DbBuilderPage extends React.Component{
           this.props.history.push(url);
         }else{
           var hasE = window.dbf.obj.dbs && Object.values(window.dbf.obj.dbs).length > 0;
-          demo();
+          if(!mobile()){
+            demo();
+          }
           if(!hasE){
             self.loadEstafa(true);
           }

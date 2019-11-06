@@ -32,8 +32,16 @@ html, body {
   left: 0; }
 
 body.ss_platform {
-  zoom: 1; }
-  body.ss_platform #wrapper:not(.wrapper_mobile) {
+  zoom: 1;
+  overflow: hidden;
+  background: #222; }
+  body.ss_platform #root {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0; }
+  body.ss_platform #wrapper:not(.wrapper_mobile), body.ss_platform #root {
     overflow: hidden;
     min-width: 1100px;
     background: #222; }
@@ -383,6 +391,8 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   position: fixed;
   z-index: 99;
   top: 0; }
+  .ss_db_toolbar.introjs-fixParent {
+    z-index: 9999999 !important; }
   .ss_db_toolbar #ss_db_save {
     align-items: center;
     background: #111;
@@ -1417,10 +1427,12 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
 
 .project_buttons {
   bottom: 0;
-  z-index: 9999999999999;
-  transform: translateX(calc(-50%));
+  z-index: 9999;
+  transform: translateX(calc(-50%)) !important;
   border: 1px solid #444;
   border-bottom: none; }
+  .project_buttons.introjs-fixParent {
+    z-index: 99999889 !important; }
   .project_buttons_button {
     background: #2c2c2c;
     align-items: center;
@@ -2093,13 +2105,16 @@ body.ss_dragging .ss_guide {
   height: calc(100% - 20px);
   transition: all 0.25s ease; }
   .nodes_controls.nodes_controls_showing {
-    transform: translateY(-50%); }
+    transform: translateY(-50%) !important; }
     .nodes_controls.nodes_controls_showing .nodes_controls_button {
       border-right: none; }
+    .nodes_controls.nodes_controls_showing.introjs-fixParent {
+      z-index: 9999999 !important; }
   .nodes_controls_container {
     width: 100%;
     overflow: hidden;
     overflow-y: auto;
+    transform: translateY(-50%) !important;
     max-height: 100%;
     border: 2px solid #333;
     flex-direction: column;
@@ -3679,41 +3694,46 @@ body.ss_showing_drawer .ss_no_results {
 
 .introjs-tooltip {
   border: 2px solid #333;
-  max-width: 400px;
+  max-width: 450px;
   min-width: 250px;
   background: #2a2a2a;
   border-radius: 0;
-  box-shadow: none;
-  transition: none; }
+  box-shadow: none; }
   .introjs-tooltip, .introjs-tooltip * {
     font-family: benton-sans, sans-serif; }
   .introjs-tooltip .introjs-tooltiptext {
     margin: 0.5rem 0;
     box-sizing: border-box;
     padding: 0 0.5rem; }
-    .introjs-tooltip .introjs-tooltiptext h2 {
+    .introjs-tooltip .introjs-tooltiptext h2, .introjs-tooltip .introjs-tooltiptext h1 {
       margin: 0;
       line-height: 1.1;
       font-size: 1.1rem;
       text-transform: uppercase;
       color: #f6f6f6;
       font-weight: 300; }
-      .introjs-tooltip .introjs-tooltiptext h2::before {
+      .introjs-tooltip .introjs-tooltiptext h2::before, .introjs-tooltip .introjs-tooltiptext h1::before {
         content: '/';
         color: #0072ff;
         margin-right: 0.2rem;
         font-weight: 600; }
+    .introjs-tooltip .introjs-tooltiptext h1 {
+      font-size: 1.4rem;
+      min-width: 350px; }
     .introjs-tooltip .introjs-tooltiptext p {
       color: #f6f6f6;
       font-size: 0.9rem;
       line-height: 1.15; }
 
 .introjs-helperNumberLayer {
+  transform: translate(25%, 25%);
   background: #202020;
   border: 1px solid #0072ff;
-  font-weight: 300;
-  transition: none;
-  line-height: 23px; }
+  font-weight: 600;
+  width: 16px;
+  height: 16px;
+  font-size: 0.55rem;
+  line-height: 17px; }
   .introjs-helperNumberLayer, .introjs-helperNumberLayer * {
     font-family: benton-sans, sans-serif; }
 
@@ -3727,19 +3747,32 @@ body.ss_showing_drawer .ss_no_results {
   .introjs-tooltipbuttons .introjs-button:hover {
     box-shadow: 0 0 4px rgba(0, 114, 255, 0.5) !important; }
 
-.introjs-tooltipReferenceLayer {
-  transition: none; }
-
 .introjs-helperLayer {
   border-radius: 0 !important;
-  background: rgba(68, 68, 68, 0.9) !important;
-  transition: none; }
+  background: rgba(68, 68, 68, 0.9) !important; }
 
 .introjs-arrow.left {
   border-right-color: #333; }
 
-.introjs-arrow.right {
+.introjs-arrow.top {
+  border-bottom-color: #333; }
+
+.introjs-arrow.bottom {
+  border-top-color: #333; }
+
+.introjs-arrow.right, .introjs-arrow.right-bottom {
   border-left-color: #333; }
+
+body.ij_clear .introjs-overlay {
+  opacity: 0.1 !important; }
+
+body.ij_ft .introjs-helperNumberLayer {
+  transform: translate(120%, 15%) !important; }
+
+body.ij_nm .introjs-helperNumberLayer {
+  top: 0 !important;
+  left: 0 !important;
+  transform: none !important; }
 
 #ss_ne_i {
   width: 100%; }

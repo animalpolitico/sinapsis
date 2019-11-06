@@ -3,12 +3,11 @@
 }
 .introjs-tooltip{
   border: 2px solid #333;
-  max-width: 400px;
+  max-width: 450px;
   min-width: 250px;
   background: #2a2a2a;
   border-radius: 0;
   box-shadow: none;
-  transition: none;
   &, *{
     font-family: $f;
   }
@@ -16,7 +15,7 @@
     margin: 0.5rem 0;
     box-sizing: border-box;
     padding: 0 0.5rem;
-    h2{
+    h2, h1{
       margin: 0;
       line-height: 1.1;
       font-size: 1.1rem;
@@ -30,6 +29,10 @@
         font-weight: 600;
       }
     }
+    h1{
+      font-size: 1.4rem;
+      min-width: 350px;
+    }
     p{
       color: #f6f6f6;
       font-size: 0.9rem;
@@ -41,11 +44,14 @@
   &, *{
     font-family: $f;
   }
+  transform: translate(25%,25%);
   background: #202020;
   border: 1px solid $main;
-  font-weight: 300;
-  transition: none;
-  line-height: 23px;
+  font-weight: 600;
+  width: 16px;
+  height: 16px;
+  font-size: 0.55rem;
+  line-height: 17px;
 }
 
 .introjs-tooltipbuttons{
@@ -62,16 +68,39 @@
   }
 }
 .introjs-tooltipReferenceLayer{
-  transition: none;
 }
 .introjs-helperLayer{
   border-radius: 0!important;
   background: rgba(#444, 0.9)!important;
-  transition: none;
 }
 .introjs-arrow.left{
   border-right-color: #333;
 }
-.introjs-arrow.right{
+.introjs-arrow.top{
+  border-bottom-color: #333;
+}
+.introjs-arrow.bottom{
+  border-top-color: #333;
+}
+.introjs-arrow.right, .introjs-arrow.right-bottom{
   border-left-color: #333;
+}
+
+body.ij_clear{
+  .introjs-overlay{
+    opacity: 0.1!important;
+  }
+}
+body.ij_ft{
+  .introjs-helperNumberLayer{
+    transform: translate(120%, 15%)!important;
+  }
+}
+
+body.ij_nm{
+  .introjs-helperNumberLayer{
+    top: 0!important;
+    left: 0!important;
+    transform: none!important;
+  }
 }

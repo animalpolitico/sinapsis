@@ -162,9 +162,9 @@ export default class DbBuilderToolbar extends React.Component{
                 <div>Guardar archivo</div>
               </div>
             </div>
-            <div className="ss_db_ctas_custom ss_db_ctas_custom_lang">
+            <div className="ss_db_ctas_custom ss_db_ctas_custom_lang" >
               <div onClick={(e) => this.intentLangChange(e)}>
-                <img src={getFlag()} />
+                <img src={getFlag()} id="db_ij_country"/>
               <Popper id="ss_popper_lang" open={this.state.openPopper} anchorEl={this.state.anchor}>
                   <ClickAwayListener onClickAway={() => this.setState({openPopper: false})}>
                   <div className="ss_popper_container">
@@ -285,17 +285,17 @@ class DbBuilderToolbarName extends React.Component{
     }
     return(
       <>
-      <div className={cs.join(' ')}>
+      <div className={cs.join(' ')} >
         <div className="ss_db_builder_project_name_goback" onClick={() => window.open("https://animalpolitico.com")}>
           <img src={require('../../static/api.png')} />
         </div>
         <div className="ss_db_builder_project_name_goback" onClick={() => this.goBack()}>
           <img src={require('../../static/imagotipo.png')} />
         </div>
-        <div className="ss_db_builder_project_name_placeholder">
+        <div className="ss_db_builder_project_name_placeholder" >
           Proyecto
         </div>
-        <div className="ss_db_builder_project_name_inputlike">
+        <div className="ss_db_builder_project_name_inputlike" id="db_ij_projectname">
           {this.state.project_name}
           <div className="ss_db_builder_project_name_icon" onClick={() => this.setState({showEdit: true})}>
             <Icon>edit</Icon>

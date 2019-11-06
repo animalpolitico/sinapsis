@@ -88,7 +88,7 @@ export default class DbViz extends React.Component{
 
     return(
       <>
-      <div className="db_viz" id="db_viz">
+      <div className="db_viz">
         {
           this.nodes && !this.state.hideNoResults ?
           <SSNoResults parent={this} nodes={this.nodes} onClose={() => this.setState({hideNoResults: true})}/>
@@ -100,16 +100,17 @@ export default class DbViz extends React.Component{
           <div className="nodes_controls_button" onClick={() => this.toggleControls()}>
             <Icon>{this.state.showcontrols ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}</Icon>
           </div>
-          <div className="nodes_controls_container" id="db_vc_tdb">
+          <div className="nodes_controls_container" >
             <SSDBControl nodesMap={this.nodes} />
             <SSCategoryToggle nodesMap={this.nodes} ref={(ref) => this.categoryToggle = ref} />
             <SSNodeSize nodesMap={this.nodes}/>
           </div>
         </div>
-        <div className="project_buttons">
+        <div className="project_buttons" id="db_ij_projectbuttons">
           {
             !this.state.displayAnalytics ?
           <div className="project_buttons_button"
+            id="db_ij_projectbuttons_a"
             onClick={function(){
               self.closeAllWindows();
               self.toggleAnalytics();
@@ -122,6 +123,7 @@ export default class DbViz extends React.Component{
           {
             !this.state.displayMap ?
           <div className="project_buttons_button"
+            id="db_ij_projectbuttons_b"
             onClick={function(){
               self.closeAllWindows();
               self.toggleMap();
@@ -135,6 +137,7 @@ export default class DbViz extends React.Component{
             !this.state.openListado ?
           <div
             className="project_buttons_button"
+            id="db_ij_projectbuttons_c"
             onClick={function(){
               self.closeAllWindows();
               self.nodes.openListado([], self);
@@ -280,7 +283,7 @@ class SSDBControl extends React.Component{
     })
 
     return(
-      <div className="ss_control_node_filter ss_control_group">
+      <div className="ss_control_node_filter ss_control_group" id="db_vc_tdb">
         <div className="ss_control_group_container">
           <div className="ss_control_group_container_title" style={{cursor: "pointer"}} onClick={() => this.setState({showing: !this.state.showing})}>
             <div>Bases de datos</div><Icon>{this.state.showing ? "expand_more" : "expand_less"}</Icon>
@@ -570,7 +573,7 @@ export class Search extends React.Component{
     document.body.classList.toggle('ss_showing_search', this.state.results.length > 0);
     return(
       <ClickAwayListener onClickAway={() => this.setState({showResults: false})}>
-        <div className="db_search_nodes">
+        <div className="db_search_nodes" id="db_ij_search">
           <div className="db_search_nodes_input">
             <input
               onFocus={() => this.searchResults(this.state.v)}
@@ -777,7 +780,16 @@ class Nodes extends React.Component{
 
     window.addEventListener('ss_isolate_node', function(e){
       var id = e.detail;
+      if(id == "ij"){
+        d3.selectAll('.node[data-name="ESGER, Servicios y Construcciones, S. A. de C. V."]')
+          .each(d => id = d.id)
+        console.log('id', id);
+      }
       self.isolateNode(id);
+    })
+
+    window.addEventListener('ss_release_node', function(){
+      self.releaseNode();
     })
 
     window.addEventListener('keydown', function(e){
@@ -789,6 +801,11 @@ class Nodes extends React.Component{
         self.addLevel((w == 187 || w == 171) ? 1 : -1);
       }
     })
+
+    window.addEventListener('ss_add_level', function(){
+      self.addLevel(2);
+    })
+
 
   }
 
@@ -1804,8 +1821,6 @@ class Nodes extends React.Component{
                 return callable(files)
               }
             })
-
-
           })
         }
       })
@@ -1862,7 +1877,7 @@ class Nodes extends React.Component{
   render(){
     var self = this;
     return(
-      <div className="db_viz_nodes" ref={(ref) => this.container = ref}>
+      <div className="db_viz_nodes" ref={(ref) => this.container = ref} id="db_viz_nodes">
 
         {
           this.state.openListado ?
@@ -1875,10 +1890,10 @@ class Nodes extends React.Component{
           null
         }
         <div id="db_viz_nodes_controls">
-          <Fab title="Obtener imágenes" alt="Obtener imágenes" size="small" color="primary" onClick={() => this.getScreenshot()}>
+          <Fab title="Obtener imágenes" alt="Obtener imágenes" size="small" color="primary" onClick={() => this.getScreenshot()} id="db_ij_camera">
             <Icon>camera_alt</Icon>
           </Fab>
-          <Fab title="Refrescar" alt="Refrescar" size="small" color="primary" onClick={() => this.set()}>
+          <Fab title="Refrescar" alt="Refrescar" size="small" color="primary" onClick={() => this.set()}  id="db_ij_refresh">
             <Icon>autorenew</Icon>
           </Fab>
           {
@@ -1892,12 +1907,16 @@ class Nodes extends React.Component{
 
         </div>
         <div className="db_viz_info">
-          {
-            this.state.isolatingNode  ?
-            <SSDoi maxlevel={this.state.maxlevel} level={this.state.level} parent={this} isMinimized={this.state.minimizeDoi} doi={this.state.isoDoi} canvas={this.canvasSvg} display={this.displayDoi} onToggle={() => this.setState({displayDoi: !this.state.displayDoi})}/>
-          : null
-          }
-          <div className="db_viz_info_coincidencias">
+          <div id="ss_ij_doi">
+            <div id="db_ij_l">
+            {
+              this.state.isolatingNode  ?
+              <SSDoi maxlevel={this.state.maxlevel} level={this.state.level} parent={this} isMinimized={this.state.minimizeDoi} doi={this.state.isoDoi} canvas={this.canvasSvg} display={this.displayDoi} onToggle={() => this.setState({displayDoi: !this.state.displayDoi})}/>
+            : null
+            }
+          </div>
+          </div>
+          <div className="db_viz_info_coincidencias" id="db_ij_coincidencias">
             <strong>{this.numberWithCommas(this.state.coincidencias)}</strong> coincidencia{this.state.coincidencias === 1 ? '' : 's'}
           </div>
         </div>
@@ -2466,7 +2485,7 @@ class SSNodeSize extends React.Component{
 
   render(){
     return(
-      <div className="ss_control_node_size ss_control_group">
+      <div className="ss_control_node_size ss_control_group" id="db_vc_gdb">
         <div className="ss_control_group_container">
           <div className="ss_control_group_container_title" style={{cursor: "pointer"}} onClick={() => this.setState({showing: !this.state.showing})}>
             <div>Tamaño de círculos</div><Icon>{this.state.showing ? "expand_more" : "expand_less"}</Icon>
@@ -2704,7 +2723,7 @@ class SSCategoryToggle extends React.Component{
       ...window.dbf.getNewOtros()
     ];
     return(
-      <div className="ss_control_node_filter ss_control_group">
+      <div className="ss_control_node_filter ss_control_group" id="db_vc_fdb">
         <div className="ss_control_group_container">
           <div className="ss_control_group_container_title" style={{cursor: "pointer"}} onClick={() => this.setState({showing: !this.state.showing})}>
             <div>Mostrar</div><Icon>{this.state.showing ? "expand_more" : "expand_less"}</Icon>
@@ -2797,9 +2816,9 @@ class SSDoi extends React.Component{
       textColor = "#F6F6F6";
     }
     return(
-      <div className={cs.join(' ')}>
+      <div className={cs.join(' ')} >
         <div className="ss_doi_window_controls">
-          <div className="ss_doi_window_controls_td ss_doi_window_controls_td_level">
+          <div className="ss_doi_window_controls_td ss_doi_window_controls_td_level" id="db_ij_level">
             Nivel de conexión <strong>{this.props.level}</strong>
             <div className="ss_doi_levels">
               <Icon disabled={this.props.level == this.props.maxlevel} onClick={() => this.props.parent.addLevel(1)}>add</Icon>
