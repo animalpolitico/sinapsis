@@ -83,34 +83,15 @@ export default class DbBuilderPage extends React.Component{
     this.set();
     window.scroll(0,0);
     /* Previene cerrar el navegador */
-    window.addEventListener("beforeunload", (ev) => {
-        ev.preventDefault();
-        return ev.returnValue = '¿Deseas cerrar la pestaña?';
-    });
+    if(!mobile()){
+      window.addEventListener("beforeunload", (ev) => {
+          ev.preventDefault();
+          return ev.returnValue = '¿Deseas cerrar la pestaña?';
+      });
+    }
 
-    window.addEventListener('keypress', function(e){
-      var w = e.which;
-      // if(w == 36){
-      //   self.setState({
-      //     showfps: !self.state.showfps
-      //   })
-      // }
-    })
 
-    // window.addEventListener('mousewheel', function(e){
-    //   if(e.ctrlKey){
-    //     console.log('Prevent');
-    //     e.preventDefault();
-    //     return false;
-    //   }
-    // },{passive: false})
-    //
-    // window.addEventListener('DOMMouseScroll', function(e){
-    //   if(e.ctrlKey){
-    //     e.preventDefault();
-    //     return;
-    //   }
-    // })
+
 
   }
 
@@ -166,7 +147,9 @@ export default class DbBuilderPage extends React.Component{
     if(this.props.match.params.dbid !== this.state.uid){
       var s = true;
       if(!this.props.match.params.dbid && this.state.hasloaded){
-        s = window.confirm('¿Deseas regresar? Guarda tu archivo para no perder los cambios hechos.');
+        if(!mobile()){
+          s = window.confirm('¿Deseas regresar? Guarda tu archivo para no perder los cambios hechos.');
+        }
       }
       if(s){
         this.set();
@@ -532,7 +515,6 @@ class DbLoader extends React.Component{
       {
         this.state.loading ?
         <div id="ssdb_loader">
-          <LinearProgress color="secondary" />
           <div id="ssdb_loader_c">
           </div>
         </div>

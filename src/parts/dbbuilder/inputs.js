@@ -428,7 +428,11 @@ export default class DbInput extends React.Component{
         var fll = '@'+isl.latlng.lat+','+isl.latlng.lng;
         var ggl = isl.googleResult;
         var gm_url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ggl);
+      }else{
+        show_gm = true;
+        var gm_url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(this.state.value);
       }
+
 
 
     }
@@ -466,8 +470,8 @@ export default class DbInput extends React.Component{
               {
                 show_gm ?
                 <div className="ss_db_input_container_label_icon">
-                  <a href={gm_url} target="_blank">
-                    <Icon>my_location</Icon>
+                  <a href={gm_url} target="_blank" style={{color: "#0072ff"}}>
+                    (Ver en Google Maps)
                   </a>
                 </div>
                 : null

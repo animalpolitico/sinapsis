@@ -99,6 +99,8 @@ export default class DbBuilderToolbar extends React.Component{
   }
 
   setLang(code){
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
+
     this.setState({
       lang: code,
       openPopper: false
@@ -198,7 +200,14 @@ export default class DbBuilderToolbar extends React.Component{
             <Dialog open={this.state.openContact} onClose={() => this.setState({openContact: false})}>
               <DialogTitle id="form-dialog-title">¿Necesitas ayuda?</DialogTitle>
               <DialogContent style={{width: 400}}>
-                ¿Necesitas precargar una base de datos?, ¿tienes alguna duda, sugerencia o comentario?<br /><br/>- <a style={{textDecoration: 'underline'}} href="mailto:sinapsis@animalpolitico.com">sinapsis@animalpolitico.com</a><br/>- <a style={{textDecoration: 'underline'}} href="https://t.me/sinapsislat">Grupo de Telegram</a>
+                ¿Necesitas precargar una base de datos?, ¿tienes alguna duda, sugerencia o comentario?
+                <br /><br/>
+                - <a style={{textDecoration: 'underline'}} href="mailto:sinapsis@animalpolitico.com">sinapsis@animalpolitico.com</a>
+                <br/>
+                - <a style={{textDecoration: 'underline'}} target="_blank" href="https://t.me/sinapsislat">Grupo de Telegram</a>
+              <br/>
+              <br/>
+              <div style={{opacity: 0.8, lineHeight: 1.1, fontSize: '0.7rem'}}>*Todos los tipos de cambio que utilizamos se actualizan cada 24 horas, utilizando <a style={{textDecoration: 'underline'}} href="https://fixer.io/" target="_blank">fixer.io</a></div>
               </DialogContent>
               <DialogActions>
                 <Button color="secondary" onClick={() => this.setState({openContact: false})}>

@@ -105,16 +105,27 @@ export default class Analytics extends React.Component{
   getInstancias(){
     var o = [];
 
+    var dbs = this.state.activeDbs;
+
     d3.selectAll('.nodes_label')
       .filter(function(d){
         return d.type == "instancia"
       })
       .each(function(d){
-        var i = {
-          c: d.coincidencias,
-          label: d.name
+        var show = false;
+        d.fields.map(function(_f){
+          if(dbs.indexOf(_f.fromdb) > -1){
+            show = true;
+          }
+        })
+        if(show){
+          var i = {
+            c: d.coincidencias,
+            label: d.name
+          }
+          o.push(i);
         }
-        o.push(i);
+
       })
     if(o.length){
       o.sort(function(a, b){

@@ -3220,6 +3220,9 @@ body.ss_showing_drawer .ss_no_results {
     color: #989898;
     font-size: 0.9rem;
     line-height: 1.3; }
+    @media (min-width: 768px) {
+      .ss_h_s_h1p_p {
+        width: 70%; } }
     .ss_h_s_h1p_p a {
       color: #0072ff;
       font-weight: 500; }
@@ -3256,6 +3259,9 @@ body.ss_showing_drawer .ss_no_results {
       color: #f6f6f6;
       font-size: 1.1rem;
       font-weight: 300; }
+      @media (min-width: 768px) {
+        .ss_h_points_point_title {
+          width: 70%; } }
       .ss_h_points_point_title strong {
         margin-left: 4px; }
     .ss_h_points_point_content {
@@ -3267,6 +3273,16 @@ body.ss_showing_drawer .ss_no_results {
       @media (min-width: 768px) {
         .ss_h_points_point_content {
           width: 60%; } }
+      .ss_h_points_point_content .ss_h_subpoints {
+        width: 100%; }
+        .ss_h_points_point_content .ss_h_subpoints_p {
+          margin: 0.5rem 0; }
+          .ss_h_points_point_content .ss_h_subpoints_p_t {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 0.15rem; }
+            .ss_h_points_point_content .ss_h_subpoints_p_t span {
+              margin-right: 0.2rem; }
       .ss_h_points_point_content a {
         color: #0072ff;
         font-weight: 600; }
@@ -3321,6 +3337,9 @@ body.ss_showing_drawer .ss_no_results {
         text-transform: uppercase;
         font-weight: 300;
         margin-bottom: 0.5rem; }
+        #ss_h_credits .ss_h_s_credits_group_title span {
+          display: block;
+          font-size: 0.6em; }
       #ss_h_credits .ss_h_s_credits_group_container {
         width: 100%; }
         #ss_h_credits .ss_h_s_credits_group_container_p {

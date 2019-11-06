@@ -150,7 +150,16 @@ var credits = {
       credit: 'Bolivia'
     },
     {
-      name: 'Juliana Galvis',
+      name: 'Gisele da Silva Craveiro',
+      medio: 'Warmi.Red',
+      credit: 'Brasil'
+    },
+    {
+      name: 'María Victoria Coutts Silva y Francisca Garay Massardo',
+      credit: 'Chile'
+    },
+    {
+      name: 'Juliana Galvis y Juan Pablo Marín Díaz',
       medio: 'Datasketch',
       credit: 'Colombia'
     },
@@ -160,7 +169,7 @@ var credits = {
       credit: 'Costa Rica'
     },
     {
-      name: 'Camilo Burneo',
+      name: 'Camilo Burneo y Cristina Burneo Salazar',
       credit: 'Ecuador'
     },
     {
@@ -207,7 +216,7 @@ class Credits extends React.Component{
         <div className="ss_h_s_credits">
           <SSH1 bold="Créditos" />
           <CreditsGroup g={credits.main} />
-          <CreditsGroup g={credits.colab} title="Agradecimientos" />
+          <CreditsGroup g={credits.colab} title={<>Agradecimientos <span>(En las equivalencias de términos empresariales)</span></>} />
         </div>
       </div>
     )
@@ -318,20 +327,20 @@ class UsaSinapsis extends React.Component{
         content: 'Sinapsis es y seguirá siendo gratuito para todo el público.'
       },
       {
-        title: ['Apoyado por la', 'comunidad'],
-        content: 'Sinapsis es mantenido por la comunidad datera al ser de código abierto.',
-        link: {
-          text: 'Visita nuestro repositorio.',
-          url: 'https://github.com/animalpolitico/sinapsis'
-        }
+        title: ['Abierto para la', 'comunidad'],
+        content: 'Sinapsis es un proyecto de código abierto, ayúdanos a mantenerlo y contribuye a través de nuestro repositorio.',
+        // link: {
+        //   text: 'Visita nuestro repositorio.',
+        //   url: 'https://github.com/animalpolitico/sinapsis'
+        // }
       },
       {
         title: ['Tus datos son', 'privados'],
-        content: 'Sinapsis funciona directamente en tu navegador, ninguna información es guardada en nuestros servidores por lo cual tu proyecto es confidencial.'
+        content: 'Sinapsis funciona directamente en tu navegador, ninguna información se guarda en nuestros servidores, por lo que tu proyecto es confidencial.'
       },
       {
         title: ['Bases', 'precargadas'],
-        content: 'Precargamos bases de datos públicas de latinoamérica. Algunas de ellas son La Estafa Maestra, las listas de empresas fantasmas del SAT, las 1,000 empresa más grandes por ingresos en 2017 de Colombia, entre otras'
+        content: 'Precargamos bases de datos públicas de Latinoamérica. Algunas de ellas son las de la investigación de La Estafa Maestra, las listas de empresas fantasmas del Servicio de Administración Tributaria (SAT) de México, las mil empresa más grandes por ingresos en 2017 de Colombia, entre otras'
       },
     ]
     return(
@@ -341,11 +350,11 @@ class UsaSinapsis extends React.Component{
           pre="Usa"
           bold="Sinapsis"
         >
-          Sinapsis es una herramienta que permite cruzar distintas bases de datos para obtener conexiones entre empresas.
+          Sinapsis es una herramienta que permite cruzar bases de datos para obtener conexiones entre empresas (a través de personas, fechas, instancias, direcciones, contratos, etc).
           <br/><br/>
-          Puedes elaborar tu propia base, añadir una existente (usando nuestra plantilla), o precargar las públicas que vienen en la herramienta.
+          Puedes elaborar tu propia base, añadir una existente (usando nuestra plantilla), o utilizar una de las bases públicas precargadas.
           <br/><br/>
-          En Animal Político diseñamos este software pensando en las necesidades de periodistas e investigadores.
+          En Animal Político diseñamos este software pensando en las necesidades de periodistas e investigadores y al utilizar la herramienta podrás conocer y replicar la metodología de La Estafa Maestra.
           <br/><br/>
           ¡Úsala!
         </H1AndP>
@@ -362,7 +371,7 @@ class FAQ extends React.Component{
     var points = [
       {
         title: ['¿Sinapsis guarda tus datos personales?'],
-        content: 'No, cada vez que haces un cruce de información se lleva a cabo en el navegador y no se guarda ninguna información, la base de datos que uses está sólo en tu computadora, sin embargo, puedes guardar y compartir tu archivo .sinapsis'
+        content: 'No, cada vez que haces un cruce de información se lleva a cabo en el navegador y no se guarda ninguna información. La base de datos que uses está sólo en tu computadora, sin embargo, puedes guardar y compartir tu archivo .sinapsis'
       },
       {
         title: ['¿Qué conocimientos necesito para usarlo?'],
@@ -370,19 +379,19 @@ class FAQ extends React.Component{
       },
       {
         title: ['¿Qué características debe tener mi computadora para usar Sinapsis?'],
-        content: 'Utilizar un navegador moderno (Chrome, Safari, Firefox o Brave), de preferencia actualizado en su ultima versión. Entre mejores características tenga tu computadora, mayor eficiencia notarás en los procesos, sin embargo, te recomendamos tener al menos 4GB de memoria RAM y una computadora con disco de estado sólido'
+        content: 'Utilizar alguno de los siguientes navegadores: Chrome, Safari, Firefox o Brave, de preferencia actualizado en su última versión. Entre mejores características tenga tu computadora, mayor eficiencia notarás en los procesos, sin embargo, te recomendamos tener al menos 4GB de memoria RAM y una computadora con disco de estado sólido.'
       },
       {
         title: ['¿Cuál es la diferencia entre contrato, convenio y transferencia?'],
-        content: 'Contrato: es un documento legal entre una empresa y una instancia de gobierno, entre una empresa y otra empresa o entre una empresa y un prestador de servicios. Convenio: es un documento legal entre dos instancias o dependencias de gobierno. Transferencia: es el traspaso de dinero de una entidad a otra sin necesidad de un documento legal que lo avale'
+        content: 'Contrato: es un documento legal entre una empresa y una instancia de gobierno, entre una empresa y otra empresa o entre una empresa y un prestador de servicios. Convenio: es un documento legal entre dos instancias o dependencias de gobierno. Transferencia: es el traspaso de dinero de una entidad a otra sin necesidad de un documento legal que lo avale.'
       },
       {
         title: ['¿Por qué hay círculos más grandes que otros?'],
-        content: 'Existen dos formas de ver el tamaño de los círculos, por monto y por cantidad de coincidencias. Si eliges el de monto verás más grande a la empresa que se haya llevado una mayor cantidad de dinero, si eliges por coincidencias el círculo más grande será aquel que tenga más coincidencias, por ejemplo, si 30 contratos se hicieron el 20 de abril y 10 el 18 de septiembre, el círculo de 30 de abril será más grande. Esto puede ayudarte a detectar “focos rojos” muy rápido'
+        content: 'Existen dos formas de ver el tamaño de los círculos, por monto y por cantidad de coincidencias. Si eliges el de monto verás más grande a la empresa que se haya llevado una mayor cantidad de dinero, si eliges por coincidencias el círculo más grande será aquel que tenga más coincidencias, por ejemplo, si 30 contratos se hicieron el 20 de abril y 10 el 18 de septiembre, el círculo de 30 de abril será más grande. Esto puede ayudarte a detectar “focos rojos” muy rápido.'
       },
       {
         title: ['¿Qué significan las líneas azules entre un círculo y otro?'],
-        content: 'Significan conexiones de algún tipo, el objetivo de Sinapsis es mostrar elementos conectados, si quieres saber más detalles de la conexión siempre recomendamos regresar a la base de datos para ver todos los detalles de la empresa relacionada'
+        content: 'Significan conexiones de algún tipo, el objetivo de Sinapsis es mostrar elementos conectados. Si quieres saber más detalles de la conexión siempre recomendamos regresar a la base de datos para ver todos los detalles de la empresa relacionada.'
       },
       {
         title: ['¿Cómo puedo compartir la visualización?'],
@@ -390,7 +399,24 @@ class FAQ extends React.Component{
       },
       {
         title: ['¿Cómo puedo colaborar en Sinapsis?'],
-        content: 'Sinapsis es código abierto, si quieres colaborar a nivel de programación y desarrollo puedes hacerlo en nuestro repo de GitHub'
+        contentPoints: [
+          {
+            title: 'Código',
+            content: <>Sinapsis es código abierto, si quieres colaborar a nivel de programación y desarrollo puedes hacerlo en nuestro <a href="https://github.com/animalpolitico/sinapsis" target="_blank">repo de GitHub</a></>
+          },
+          {
+            title: 'Bases de datos',
+            content: <>Si tienes alguna base pública que no esté cargada envíala a <a href="mailto:sinapsis@animalpolitico.com">sinapis@animalpolitico.com</a></>
+          },
+          {
+            title: 'Equivalencias de términos empresariales',
+            content: <>Aún nos faltan varios países de la región, si el tuyo no está en Sinapsis envíanos un correo con los términos para añadirlo a la herramienta</>
+          },
+          {
+            title: 'Casos de uso',
+            content: <>¿Usaste Sinapsis para alguna investigación?, cuéntanos cómo fue tu experiencia por <a href="mailto:sinapsis@animalpolitico.com">correo</a> o en nuestro <a href="http://t.me/sinapsisap" target="_blank">grupo de Telegram</a></>
+          },
+        ]
       },
       {
         title: ['¿Cómo funciona?'],
@@ -409,9 +435,9 @@ class FAQ extends React.Component{
           <br/>
           ¡Contáctanos!
           <br/>
-          -<a href="mailto:sinapsis@animalpolitico.com">sinapsis@animalpolitico.com</a>
+          <a href="mailto:sinapsis@animalpolitico.com">sinapsis@animalpolitico.com</a>
           <br/>
-          -<a href="https://t.me/sinapsislat" target="_blank">Grupo de Telegram</a>
+          <a href="https://t.me/sinapsislat" target="_blank">Grupo de Telegram</a>
         </H1AndP>
         <Points p={points} />
       </div>
@@ -445,7 +471,7 @@ class Casos extends React.Component{
         <H1AndP
           pre="Casos"
           bold="de uso"
-          text="Sinapsis se construyó durante la investigación de los siguientes proyectos periodísticos"
+          text="Sinapsis se construyó durante la investigación de los siguientes proyectos periodísticos."
         />
 
       <div className="ss_h_s_casos">
@@ -506,10 +532,30 @@ class Point extends React.Component{
           </div>
         </div>
         <div className="ss_h_points_point_content">
-          <div>
-            {d.content}
-          </div>
-          {d.link ? <a href={d.link.url} target="_blank">{d.link.text}</a> : null}
+          {
+            d.content ?
+            <div>
+              {d.content}
+            </div>
+            : null
+          }
+          {
+            d.contentPoints ?
+            <div className="ss_h_subpoints">
+              {
+                d.contentPoints.map(function(p, i){
+                  return (
+                    <div className="ss_h_subpoints_p">
+                      <div className="ss_h_subpoints_p_t"><span>{i + 1 + '.'}</span>{p.title}</div>
+                      <div className="ss_h_subpoints_p_c">{p.content}</div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+            : null
+          }
+
         </div>
       </div>
     )
