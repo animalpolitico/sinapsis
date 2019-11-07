@@ -47,6 +47,13 @@
         color: #f0f0f0;
         display: none;
       }
+      &#ss_db_toolbar_demo{
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        text-decoration: underline;
+        cursor: pointer;
+        color: #f6f6f6;
+      }
       &.ss_db_ctas{
         flex: 1;
         @extend .flex;

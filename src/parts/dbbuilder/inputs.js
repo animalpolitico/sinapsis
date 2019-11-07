@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@material-ui/core/Icon';
-import { _t, isMexico } from '../../vars/countriesDict';
+import { _t, isMexico, getCurrentCountry } from '../../vars/countriesDict';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { getLatLng } from 'react-places-autocomplete';
-import formatMoney from '../../funcs/formatMoney';
+import formatMoney, {convertToActualCurrency} from '../../funcs/formatMoney';
 
 var slugify = require('slugify');
 const uuidv4 = require('uuid/v4');
@@ -432,11 +432,16 @@ export default class DbInput extends React.Component{
         show_gm = true;
         var gm_url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(this.state.value);
       }
-
-
-
     }
 
+    var cco = false;
+    if(this.props.type == "currency" && this.state.value){
+      var cobj = window.dbf.getDbCurrencyObj(this.props.db.id);
+      if(cobj.currency !== getCurrentCountry().currency){
+        cco = Math.round(convertToActualCurrency(this.state.value, cobj.currency));
+        cco = '~ ' + formatMoney(cco);
+      }
+    }
 
 
     return(
@@ -469,7 +474,7 @@ export default class DbInput extends React.Component{
               {this.getLabel()}
               {
                 show_gm ?
-                <div className="ss_db_input_container_label_icon">
+                <div className="ss_db_input_container_label_icon" style={{width: "100%"}}>
                   <a href={gm_url} target="_blank" style={{color: "#0072ff"}}>
                     (Ver en Google Maps)
                   </a>
@@ -495,7 +500,19 @@ export default class DbInput extends React.Component{
             </div>
             : null
             }
+
+            {
+              cco ?
+              <div className="ss_db_input_container_hint">
+                {cco}
+              </div>
+              : null
+            }
           </div>
+
+
+
+
           {
             !this.state.isvalid && this.props.errorLegend ?
             <div className="ss_db_input_container_error">

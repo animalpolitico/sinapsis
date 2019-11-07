@@ -39,7 +39,7 @@ import oldToNew from '../funcs/oldSinapsisToNew';
 import demo from '../funcs/demo';
 import { predbs } from '../vars/rel';
 import Flag from "react-flags";
-import { countries, getLang, _t, getCurrencies } from "../vars/countriesDict";
+import { countries, getLang, _t, getCurrencies, getFlag } from "../vars/countriesDict";
 import { Resizable, ResizableBox } from 'react-resizable';
 
 import buildLink from "../funcs/buildlink";
@@ -271,6 +271,15 @@ export default class DbBuilderPage extends React.Component{
     this.props.history.push(buildLink('/construir'));
   }
 
+  goToDemo(){
+    var s = window.confirm('¿Deseas continuar? Guarda tu archivo para no perder los cambios hechos.');
+    if(s){
+      this.props.history.push(buildLink('/construir/estafa-maestra'));
+      demo();
+    }
+
+  }
+
   intentToRecover(){
     var possibleDbs = [];
     store.each(function(value, key){
@@ -323,6 +332,7 @@ export default class DbBuilderPage extends React.Component{
           <title>{title + ' >> Sinapsis'}</title>
         </Helmet>
         <DbLoader />
+        <DbAlert />
           {
             mobile() ?
             <DbMobileAlert />
@@ -354,6 +364,46 @@ export default class DbBuilderPage extends React.Component{
   }
 }
 
+class DbAlert extends React.Component{
+  state = {
+    show: false,
+    title: '',
+    content: ''
+  }
+
+  componentDidMount(){
+    var self = this;
+
+    window.addEventListener('db_show_alert', function(e){
+      var d = e.detail;
+      self.setState({
+        title: d.title,
+        content: d.content,
+        show: true
+      })
+    })
+  }
+
+  render(){
+    return(
+      <Dialog open={this.state.show} onClose={() => this.setState({ show: false})}>
+        <DialogTitle>{this.state.title}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {this.state.content}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button color="secondary" onClick={() => this.setState({ show: false})}>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+    )
+  }
+
+}
+
 class DbInicio extends React.Component{
 
   state = {
@@ -366,6 +416,11 @@ class DbInicio extends React.Component{
 
   setLang(so){
     var def = "MEX";
+
+    if(so && so == "BRA"){
+      window.dispatchEvent(new CustomEvent('db_show_alert', {detail: {title: 'Aviso', content: 'Até o momento, somente alguns termos oficiais estão traduzidos. Esperamos disponibilizar a ferramenta completa em português em breve.'}}))
+    }
+
     if(!so){
       var s = store.get('sinapsis_lang');
     }else{
@@ -511,16 +566,10 @@ class DbLoader extends React.Component{
 
   render(){
     return(
-      <>
-      {
-        this.state.loading ?
-        <div id="ssdb_loader">
-          <div id="ssdb_loader_c">
-          </div>
+      <div id="ssdb_loader" style={{display: this.state.loading ? 'block': 'none'}}>
+        <div id="ssdb_loader_c">
         </div>
-        : null
-      }
-      </>
+      </div>
     )
   }
 }
@@ -899,7 +948,7 @@ class DbView extends React.Component{
                   : null
                 }
                 <div className="ss_db_view_empresas_currency" id="db_currency_legend">
-                  Montos expresados en <strong>{currencyObj.name + ' ('+currencyObj.symbol+')'}</strong>
+                  <img src={getFlag(this.props.db.country)} /> Montos expresados en <strong>{currencyObj.name + ' ('+currencyObj.symbol+')'}</strong>
                   {
                     !block ?
                     <a href="javascript:void(0)" onClick={() => this.setState({openCurrencyChange: true})}>Editar</a>
@@ -1272,12 +1321,18 @@ class DbDbsNavigationNewDb extends React.Component{
   }
 
   selectPreDB(path, name, blockEdit, country){
+    var self = this;
     this.setState({
       selectedDb: path,
       selectedName: name,
       selectedCountry: country,
       blockEdit: blockEdit
     })
+    window.dispatchEvent(startLoad);
+    setTimeout(function(){
+      self.addPreDb();
+    }, 150)
+
   }
 
   async addPreDb(){
@@ -1492,10 +1547,7 @@ class DbDbsNavigationNewDb extends React.Component{
         </DialogContent>
         <DialogActions>
           <Button color="secondary" onClick={() => this.closeModal()}>
-            Cancelar
-          </Button>
-          <Button color="secondary" disabled={this.state.selectedDb ? false : true} onClick={() => this.addPreDb()}>
-            Agregar al proyecto
+            Cerrar
           </Button>
         </DialogActions>
       </Dialog>
@@ -1505,6 +1557,16 @@ class DbDbsNavigationNewDb extends React.Component{
 }
 
 class PreDb extends React.Component{
+  state = {
+    showContent: false
+  }
+
+  onCta(){
+    var p = this.props.p;
+    var block = p.blockEdit ? true : false;
+    this.props.parent.selectPreDB(p.file, p.name, block, p.country);
+  }
+
   render(){
     var p = this.props.p;
     var m = p.size;
@@ -1525,35 +1587,71 @@ class PreDb extends React.Component{
 
     return(
       <div className="ss_predb_select" disabled={this.props.disabled}>
-        <input type="radio" name="predb_input" onChange={(e) => this.props.parent.selectPreDB(p.file, p.name, block, p.country)}/>
         <div className="ss_predb_select_info">
-        <div className="ss_predb_select_name">
-          {p.name}
-        </div>
-        <div className="ss_predb_select_author">
-          <a href={p.url} target="_blank">De <strong>{p.author}</strong></a>
-        </div>
+          <div className="ss_predb_select_name">
+            <div className="ss_predb_select_name_t" onClick={() => this.setState({showContent: !this.state.showContent})}>
+              {
+                !this.state.showContent ?
+                <div className="ss_predb_select_name_t_n">
+                  <img src={p.flag} />
+                </div>
+                : null
+              }
 
-        <div className="ss_predb_select_country">
-          <img src={p.flag} />
-          <span>{p.countryLabel}</span>
-        </div>
-
-        <div className="ss_predb_select_author">
-          Última actualización: <strong>{p.last}</strong>
-        </div>
-
-        <div className="ss_predb_select_maxtime">
-          Tiempo aproximado de carga: <strong>{ts}</strong>
-        </div>
-        {
-          showAlert ?
-          <div className="ss_predb_select_alert">
-            <Icon>warning</Icon>
-            <label>Esta base de datos es muy grande, podrás notar algunos problemas de procesamiento.</label>
+              <div className="ss_predb_select_name_t_f">
+                {p.name}
+              </div>
+              <div className="ss_predb_select_name_t_a">
+                <Icon>{!this.state.showContent ? "keyboard_arrow_down" : "keyboard_arrow_up"}</Icon>
+              </div>
+            </div>
+            <div className="ss_predb_select_name_cta" onClick={() => this.onCta()}>
+              Cargar
+            </div>
           </div>
+          {
+            this.state.showContent ?
+            <>
+            <div className="ss_predb_select_author">
+              <a href={p.url} target="_blank">De <strong>{p.author}</strong></a>
+            </div>
+            <div className="ss_predb_select_country">
+              <img src={p.flag} />
+              <span>{p.countryLabel}</span>
+            </div>
+            {
+              p.only ?
+              <div className="ss_predb_select_only">
+                <div className="ss_predb_select_only_t">Esta base de datos solo contempla:</div>
+                  <div className="ss_predb_select_only_l">
+                    {
+                      p.only.map(function(m){
+                        return (<div className="ss_predb_select_only_li">-{m}</div>)
+                      })
+                    }
+                  </div>
+              </div>
+              : null
+            }
+
+            <div className="ss_predb_select_author">
+              Última actualización: <strong>{p.last}</strong>
+            </div>
+            <div className="ss_predb_select_maxtime">
+              Tiempo aproximado de carga: <strong>{ts}</strong>
+            </div>
+            </>
           : null
-        }
+          }
+
+          {
+            showAlert ?
+            <div className="ss_predb_select_alert">
+              <Icon>warning</Icon>
+              <label>Esta base de datos es muy grande, podrás notar algunos problemas de procesamiento.</label>
+            </div>
+            : null
+          }
         </div>
       </div>
     )

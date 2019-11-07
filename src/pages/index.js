@@ -151,7 +151,7 @@ var credits = {
     },
     {
       name: 'Gisele da Silva Craveiro',
-      medio: 'Warmi.Red',
+      medio: 'Colab-USP/ILDA',
       credit: 'Brasil'
     },
     {
@@ -328,7 +328,7 @@ class UsaSinapsis extends React.Component{
       },
       {
         title: ['Abierto para la', 'comunidad'],
-        content: 'Sinapsis es un proyecto de código abierto, ayúdanos a mantenerlo y contribuye a través de nuestro repositorio.',
+        content: <>Sinapsis es un proyecto de código abierto, ayúdanos a mantenerlo y contribuye a través de <a href="https://github.com/animalpolitico/sinapsis" target="_blank">nuestro repositorio</a>.</>,
         // link: {
         //   text: 'Visita nuestro repositorio.',
         //   url: 'https://github.com/animalpolitico/sinapsis'
@@ -340,7 +340,7 @@ class UsaSinapsis extends React.Component{
       },
       {
         title: ['Bases', 'precargadas'],
-        content: 'Precargamos bases de datos públicas de Latinoamérica. Algunas de ellas son las de la investigación de La Estafa Maestra, las listas de empresas fantasmas del Servicio de Administración Tributaria (SAT) de México, las mil empresa más grandes por ingresos en 2017 de Colombia, entre otras'
+        content: 'Precargamos bases de datos públicas de Latinoamérica. Algunas de ellas son las de la investigación de La Estafa Maestra, las listas de empresas fantasmas del Servicio de Administración Tributaria (SAT) de México, las mil empresa más grandes por ingresos en 2017 de Colombia, entre otras.'
       },
     ]
     return(
@@ -576,6 +576,9 @@ class GoTo extends React.Component{
       <div className="ss_h_s" id="ss_h_goto">
         <Txtr/>
         <div className="ss_h_s_goto_container">
+          <div className="ss_h_s_goto_container_slogan">
+            <span></span> Herramienta para descubrir<br /><strong>conexiones entre empresas</strong>
+          </div>
           <div className="ss_h_s_goto_container_img">
             <img src={require('../static/brain2.png')} />
           </div>

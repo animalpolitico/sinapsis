@@ -49,7 +49,13 @@ export const predbs = [
     last: '2019-09-30',
     url: "https://privilegiosfiscales.fundar.org.mx/#top",
     flag: require('../static/flags/mexico.svg'),
-    file: require('../static/csvs/pf-7-15.csv')
+    file: require('../static/csvs/pf-7-15.csv'),
+    only: [
+      'Nombre de empresa',
+      'RFC',
+      'Monto condonado',
+      'Representante legal',
+    ]
   },
   {
     name: 'Privilegios Fiscales Cancelaciones (2007-2015)',
@@ -62,7 +68,34 @@ export const predbs = [
     last: '2019-09-30',
     url: "https://privilegiosfiscales.fundar.org.mx/#top",
     flag: require('../static/flags/mexico.svg'),
-    file: require('../static/csvs/pf-cancelaciones-715.csv')
+    file: require('../static/csvs/pf-cancelaciones-715.csv'),
+    only: [
+      'Nombre de empresa',
+      'RFC',
+      'Monto cancelado',
+      'Representante legal',
+    ]
+  },
+  {
+    name: 'Registro Único de Proveedores y Contratistas (RUPC)',
+    description: 'Empresas fantasma definitivas',
+    country: 'MEX',
+    blockEdit: true,
+    countryLabel: 'México',
+    author: 'Secretaría de Hacienda y Crédito Público',
+    size: 5,
+    slug: 'sat-Desvirtuados',
+    last: '2019-11-05',
+    url: "https://cnet.hacienda.gob.mx/servicios/consultaRUPC.jsf",
+    flag: require('../static/flags/mexico.svg'),
+    file: require('../static/csvs/rupc.csv'),
+    only: [
+      'Nombre de empresa',
+      'RFC',
+      'Entidad Federativa',
+      'Giro',
+      'Sitio web'
+    ]
   },
   {
     name: 'SAT Definitivos',
@@ -76,7 +109,11 @@ export const predbs = [
     last: '2019-10-08',
     url: "http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html",
     flag: require('../static/flags/mexico.svg'),
-    file: require('../static/csvs/sat-def.csv')
+    file: require('../static/csvs/sat-def.csv'),
+    only: [
+      'Nombre de empresa',
+      'RFC'
+    ]
   },
   {
     name: 'SAT Presuntos',
@@ -90,7 +127,11 @@ export const predbs = [
     last: '2019-10-08',
     url: "http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html",
     flag: require('../static/flags/mexico.svg'),
-    file: require('../static/csvs/sat-pre.csv')
+    file: require('../static/csvs/sat-pre.csv'),
+    only: [
+      'Nombre de empresa',
+      'RFC'
+    ]
   },
   {
     name: 'SAT Desvirtuados',
@@ -104,7 +145,11 @@ export const predbs = [
     last: '2019-10-08',
     url: "http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html",
     flag: require('../static/flags/mexico.svg'),
-    file: require('../static/csvs/sat-desvirtuados.csv')
+    file: require('../static/csvs/sat-desvirtuados.csv'),
+    only: [
+      'Nombre de empresa',
+      'RFC'
+    ]
   },
   {
     name: 'SAT Favorables',
@@ -118,7 +163,11 @@ export const predbs = [
     last: '2019-10-08',
     url: "http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html",
     flag: require('../static/flags/mexico.svg'),
-    file: require('../static/csvs/sat-favorables.csv')
+    file: require('../static/csvs/sat-favorables.csv'),
+    only: [
+      'Nombre de empresa',
+      'RFC'
+    ]
   },
 
 ]

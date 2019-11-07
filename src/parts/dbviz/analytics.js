@@ -68,6 +68,7 @@ export default class Analytics extends React.Component{
   }
 
   toggleDb(dbid){
+    var self = this;
     var adbs = this.state.activeDbs;
     var io = adbs.indexOf(dbid);
     if(io > -1){
@@ -76,19 +77,25 @@ export default class Analytics extends React.Component{
       adbs.push(dbid);
     }
     this.setState({
-      activeDbs: adbs
+      activeDbs: adbs,
+      rand: Math.random() * 100000
     })
     if(this.top){
-      this.top.graph();
+      setTimeout(function(){
+        self.top.graph();
+      }, 150)
     }
   }
 
   setAll(dba){
+    var self = this;
     this.setState({
       activeDbs: dba
     })
     if(this.top){
-      this.top.graph();
+      setTimeout(function(){
+        self.top.graph();
+      }, 150)
     }
   }
 
@@ -141,6 +148,8 @@ export default class Analytics extends React.Component{
   }
 
   render(){
+
+    console.log('rerendering')
     var dbs = this.getActiveDbs();
     var analytics = window.dbf.buildAnalytics(this.state.activeDbs);
     var analyticsBR = window.dbf.buildAnalyticsBr(this.state.activeDbs);
@@ -398,7 +407,6 @@ class AnalyticsTop10 extends React.Component{
   }
 
   componentDidUpdate(op){
-
   }
   kFormatter(num, digits) {
       var si = [
@@ -589,6 +597,8 @@ class AnalyticsTop10 extends React.Component{
   }
 
   render(){
+    console.log('rerendering 2');
+
     var cs = ["ss_analytics_montos"];
     if(this.state.showingAll){
       cs.push('ss_an_big');

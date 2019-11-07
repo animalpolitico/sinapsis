@@ -586,6 +586,7 @@
         color: black;
         z-index: 2;
         @extend .flex;
+        flex-wrap: wrap;
         align-items: center;
         box-sizing: border-box;
         padding: 0.5rem;
@@ -602,7 +603,7 @@
         &_icon{
           font-size: 0.5rem;
           line-height: 1;
-          margin-left: 0.5rem;
+          margin-top: 0.15rem;
           .material-icons{
             color: $main;
             line-height: 1;
@@ -644,6 +645,11 @@
         font-size: 0.8rem;
         margin-right: 0.25rem;
       }
+    }
+    &_hint{
+      font-size: 0.7rem;
+      color: #888;
+      margin-top: 0.2rem;
     }
   }
   &.ss_invalid{

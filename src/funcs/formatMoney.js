@@ -53,6 +53,10 @@ export function convertCurrency(qty, from, to){
 
 
 export function convertToActualCurrency(qty, origin){
+  if(typeof qty == "string"){
+    qty = qty.replace(/\,/, '')
+  }
+  qty = parseFloat(qty)
   var cr = getCurrentCurrency();
   return convertCurrency(qty, origin, cr);
 }

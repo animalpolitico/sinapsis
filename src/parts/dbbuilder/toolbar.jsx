@@ -16,6 +16,7 @@ import buildLink from "../../funcs/buildlink";
 import Popper from '@material-ui/core/Popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 var store = require('store')
+var mobile = require('is-mobile');
 moment.locale('es');
 
 export default class DbBuilderToolbar extends React.Component{
@@ -100,17 +101,24 @@ export default class DbBuilderToolbar extends React.Component{
 
   setLang(code){
     window.dispatchEvent(new Event('sinapsisStartLoad'));
-
-    this.setState({
+    if(code == "BRA"){
+      window.dispatchEvent(new CustomEvent('db_show_alert', {detail: {title: 'Aviso', content: 'Até o momento, somente alguns termos oficiais estão traduzidos. Esperamos disponibilizar a ferramenta completa em português em breve.'}}))
+    }
+    var self = this;
+    self.setState({
       lang: code,
       openPopper: false
     })
-    store.set('sinapsis_lang', code);
-    var ev = new Event('sinapsis_lang_change');
-    window.dispatchEvent(ev);
+    setTimeout(function(){
 
-    var ev = new Event('ss_lazy_indicator');
-    window.dispatchEvent(ev);
+      store.set('sinapsis_lang', code);
+      var ev = new Event('sinapsis_lang_change');
+      window.dispatchEvent(ev);
+      var ev = new Event('ss_lazy_indicator');
+      window.dispatchEvent(ev);
+    }, 300)
+
+
   }
 
   goBack(){
@@ -145,6 +153,14 @@ export default class DbBuilderToolbar extends React.Component{
           <div className="ss_db_toolbar_info_td">
             <DbBuilderToolbarName parent={this} ref={(ref) => this.toolbarname = ref}/>
           </div>
+          {
+            !mobile() ?
+            <div className="ss_db_toolbar_info_td" id="ss_db_toolbar_demo" onClick={() => this.props.parent.goToDemo()}>
+              Guía
+            </div>
+            : null
+          }
+
           {
             this.state.modifiedString ?
             <div className="ss_db_toolbar_info_td ss_db_lastmodified">

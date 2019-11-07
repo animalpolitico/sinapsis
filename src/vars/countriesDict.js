@@ -26,6 +26,29 @@ export const countries = [
     coords: [-58.443832, -23.442503]
   },
   {
+    name: 'Brasil',
+    code: 'BRA',
+    iso: 'BR',
+    currency: 'BRL',
+    currencySign: 'R$',
+    currencyName: 'Real',
+    toMXN: 4.70,
+    translatedBy: ['Gisele da Silva Craveiro', 'Colab-USP/ILDA'],
+    img: require('../static/flags/brasil.svg'),
+    coords: [-51.92528, -14.235004]
+  },
+  {
+    name: 'Chile',
+    code: 'CHL',
+    iso: 'CL',
+    currency: 'CLP',
+    currencySign: '$',
+    currencyName: 'Peso Chileno',
+    toMXN: 0.026,
+    img: require('../static/flags/chile.svg'),
+    coords: [-71.542969, -35.675147]
+  },
+  {
     name: 'República Dominicana',
     code: 'DOM',
     iso: 'DO',
@@ -184,7 +207,9 @@ const dict = {
     "HND": "RTN",
     "ECU": "RUC",
     "ARG": "CUIT",
-    "COL": "NIT"
+    "COL": "NIT",
+    "BRA": "CNPJ",
+    "CHL": "RUT"
   },
   'objeto-social': {
     "PRY": "Actividades económicas",
@@ -193,7 +218,8 @@ const dict = {
     "VEN": "Actividad comercial",
     "GTM": "Objeto",
     "HND": "Actividad comercial",
-    "ECU": "Actividad económica"
+    "ECU": "Actividad económica",
+    "CHL": "Giro/Objeto"
   },
   'capital-social-minimo': {
     "PRY": "Capital social mínimo",
@@ -207,10 +233,13 @@ const dict = {
     "HND": "Capital social autorizado",
     "ECU": "Capital social",
     "ARG": "Capital social",
-    "COL": "Capital suscrito"
+    "COL": "Capital suscrito",
+    "CHL": "Capital"
   },
   'accionista': {
     "GTM": "Socio",
+    "BRA": "Acionista",
+    "CHL": "Accionista / Socio"
   },
   'accionistas': {
     "GTM": "Socios",
@@ -227,7 +256,8 @@ const dict = {
     "HND": "Comisario",
     "ECU": "Comisario",
     "ARG": "Tesorero",
-    "COL": "Revisor fiscal"
+    "COL": "Revisor fiscal",
+    "BRA": "Auditor"
   },
   'comisarios': {
     "PRY": "Síndicos",
@@ -255,12 +285,14 @@ const dict = {
     "HND": "Notaría",
     "ECU": "Notaría",
     "ARG": "Escribanía",
+    "BRA": "Cartório",
     "COL": "Cámara de comercio"
   },
   'nombre-del-notario': {
     "PRY": "Nombre del escribano",
     "BOL": "Nombre del notario de fe pública",
     "ARG": "Nombre del escribano",
+    "BRA": "Notário nome"
   },
   'no.-notaria': {
     "PRY": "No. de escribanía",
@@ -274,7 +306,8 @@ const dict = {
     "HND": "No. de notaría",
     "ECU": "No. de notaría",
     "ARG": "No. de escribanía",
-    "COL": "No. de cámara de comercio"
+    "COL": "No. de cámara de comercio",
+    "BRA": "No. do cartório"
   },
   'numero-de-notaria': {
     "PRY": "No. de escribanía",
@@ -288,6 +321,7 @@ const dict = {
     "HND": "No. de notaría",
     "ECU": "No. de notaría",
     "ARG": "No. de escribanía",
+    "BRA": "No. do cartório",
     "COL": "No. de cámara de comercio"
   },
   'direccion-de-notaria': {
@@ -302,7 +336,8 @@ const dict = {
     "HND": "Dirección de notaría",
     "ECU": "Dirección de notaría",
     "ARG": "Dirección de escribanía",
-    "COL": "Dirección de cámara de comercio"
+    "COL": "Dirección de cámara de comercio",
+    "BRA": "Endereço do cartório",
   },
   'instancia-dependencia': {
     "PRY": "Dependencia",
@@ -316,7 +351,9 @@ const dict = {
     "HND": "Institución del sector público",
     "ECU": "Ministerio",
     "ARG": "Dependencia",
-    "COL": "Ministerio / Secretaría"
+    "COL": "Ministerio / Secretaría",
+    "BRA": "Órgão",
+    "CHL": "Ministerio"
   },
   'titular-de-instancia': {
     "PRY": "Funcionario de dependencia",
@@ -330,7 +367,8 @@ const dict = {
     "HND": "Funcionario de institución",
     "ECU": "Ministro",
     "ARG": "Funcionario de dependencia",
-    "COL": "Funcionario público"
+    "COL": "Funcionario público",
+    "BRA": "Funcionário"
   },
 }
 
@@ -387,8 +425,12 @@ export function getCurrentCountry(){
   }
 }
 
-export function getFlag(){
-  var country = getLang();
+export function getFlag(code){
+  if(!code){
+    var country = getLang();
+  }else{
+    var country = code;
+  }
   var t = countries.filter(f => f.code == country);
   if(t.length && t[0].coords){
     return t[0].img;

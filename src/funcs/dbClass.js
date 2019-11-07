@@ -208,6 +208,8 @@ export default class DbFactory {
     var omitDbs = this.omitDbs;
     var categories = this.categories;
 
+
+
     var onlyBS = this.onlyBS;
 
     for(key in db){
@@ -217,6 +219,7 @@ export default class DbFactory {
     }
 
     db = filterDb;
+
 
     var dbkeys = Object.keys(db);
     var dbA = Object.values(db);
@@ -337,7 +340,6 @@ export default class DbFactory {
     Object.values(nodes).map(function(e){
       finalObj.nodes = [...finalObj.nodes, e];
     });
-
 
 
 
@@ -612,7 +614,6 @@ export default class DbFactory {
         var empresas = _db.empresas;
             empresas = Object.values(empresas);
         if(t == "empresa"){
-          console.log('empresas', empresas);
           o = [...o, ...empresas];
         }
         if(empresas && t !== "empresa"){
@@ -1499,7 +1500,6 @@ export default class DbFactory {
   **/
   deleteGroup(guid, euid, dbid){
     try{
-      console.log(guid, euid, dbid);
       var ev = new Event('sinapsisStartLoad');
       window.dispatchEvent(ev);
       var f = this.getEmpresaFields(dbid, euid);
@@ -1512,7 +1512,6 @@ export default class DbFactory {
       })
       this.obj.dbs[dbid].empresas[euid].fields = ff;
     }catch(ex){
-      console.log('EX', ex);
     }
 
     this.refresh();
@@ -1720,7 +1719,6 @@ export default class DbFactory {
     })
 
     if(key == "transferencia"){
-      // console.log('f', f);
     }
 
     var o = {};
@@ -1845,7 +1843,6 @@ export default class DbFactory {
   geocode(a){
     var self = this;
     var iso = getISO();
-    console.log('ISO', iso);
     var o = [];
     if(!a){
       return o;

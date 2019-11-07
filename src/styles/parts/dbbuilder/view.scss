@@ -65,6 +65,15 @@
         font-size: 0.6rem;
         color: #888;
         margin-top: 0.15rem;
+        @extend .flex;
+        align-items: center;
+        img{
+          width: 15px;
+          margin-right: 0.25rem;
+        }
+        strong{
+          margin-left: 0.15rem;
+        }
         a{
           margin-left: 0.3rem;
           text-decoration: underline;
