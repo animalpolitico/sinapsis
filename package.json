@@ -2,7 +2,7 @@
   "name": "sinapsis",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://pajaropolitico.com/sinapsisSilver",
+  "homepage": "https://sinapsis.lat",
   "dependencies": {
     "@material-ui/core": "^4.3.2",
     "chart.js": "^2.8.0",

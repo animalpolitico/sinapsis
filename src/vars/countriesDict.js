@@ -415,6 +415,16 @@ export function getCountryCurrency(country){
   }
 }
 
+export function getCurrencyCountry(currency){
+  var t = countries.filter(f => f.currency == currency);
+  if(t.length && t[0].code){
+    return t[0].code;
+  }else{
+    return "MEX";
+  }
+}
+
+
 export function getCurrentCountry(){
   var country = getLang();
   var t = countries.filter(f => f.code == country);

@@ -32,7 +32,7 @@ export default class Header extends React.Component{
                   <Button color="primary" variant="outlined">
                     Tutoriales
                   </Button>
-                  <Link to="/construir">
+                  <Link to="/herramienta">
                     <Button color="primary" variant="outlined">
                       Construir base de datos
                     </Button>

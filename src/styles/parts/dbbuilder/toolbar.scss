@@ -6,6 +6,26 @@
   &.introjs-fixParent{
     z-index: 9999999 !important;
   }
+  #ss_db_guia{
+    @extend .flex;
+    align-items: center;
+    background: #111;
+    border: 1px solid #ff9900;
+    box-sizing: border-box;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    margin-right: 0rem;
+    &:hover{
+      background: darken(#ff9900, 10%);
+    }
+    div{
+      color: white;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+  }
   #ss_db_save{
     @extend .flex;
     align-items: center;
@@ -15,7 +35,7 @@
     padding: 0.25rem 0.5rem;
     cursor: pointer;
     transition: all 0.2s ease-out;
-    margin-right: 0.25rem;
+    margin-right: 0.5rem;
     box-shadow: 0 0 2px rgba($main, 0.5);
     &:hover{
       background: darken($main, 10%);

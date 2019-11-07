@@ -51,8 +51,8 @@ export default class App extends React.Component{
               <Switch>
                 <Route path={buildLink("/")} exact component={Index} />
                 <Route path={buildLink("/cruzar")} exact component={Cruzar} />
-                <Route path={buildLink("/construir/:dbid")} component={DbBuilderPage} />
-                <Route path={buildLink("/construir")} exact component={DbBuilderPage} />
+                <Route path={buildLink("/herramienta/:dbid")} component={DbBuilderPage} />
+                <Route path={buildLink("/herramienta")} exact component={DbBuilderPage} />
                 <Route path={buildLink("/devsandbox")} exact component={DevSandbox} />
                 <Route path="*" component={NotFound} />
               </Switch>

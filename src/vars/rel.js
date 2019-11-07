@@ -11,7 +11,14 @@ export const predbs = [
     last: '2019-11-01',
     url: "http://www.supersociedades.gov.co",
     flag: require('../static/flags/colombia.svg'),
-    file: require('../static/csvs/col-patrimonio-2017.csv')
+    file: require('../static/csvs/col-patrimonio-2017.csv'),
+    only: [
+      'Nombre de empresa',
+      'RUT',
+      'Entidad Federativa',
+      'Supervisor',
+      'Macrosector'
+    ]
   },
   {
     name: 'Estafa Maestra',
@@ -37,65 +44,6 @@ export const predbs = [
     url: "https://www.animalpolitico.com/las-empresas-fantasma-de-veracruz",
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/empresas-fantasma-ver.csv')
-  },
-  {
-    name: 'Privilegios Fiscales Condonados (2007-2015)',
-    country: 'MEX',
-    countryLabel: 'México',
-    blockEdit: true,
-    author: 'Fundar',
-    size: 4,
-    slug: 'estafa-maestra',
-    last: '2019-09-30',
-    url: "https://privilegiosfiscales.fundar.org.mx/#top",
-    flag: require('../static/flags/mexico.svg'),
-    file: require('../static/csvs/pf-7-15.csv'),
-    only: [
-      'Nombre de empresa',
-      'RFC',
-      'Monto condonado',
-      'Representante legal',
-    ]
-  },
-  {
-    name: 'Privilegios Fiscales Cancelaciones (2007-2015)',
-    country: 'MEX',
-    countryLabel: 'México',
-    blockEdit: true,
-    author: 'Fundar',
-    size: 20,
-    slug: 'estafa-maestra',
-    last: '2019-09-30',
-    url: "https://privilegiosfiscales.fundar.org.mx/#top",
-    flag: require('../static/flags/mexico.svg'),
-    file: require('../static/csvs/pf-cancelaciones-715.csv'),
-    only: [
-      'Nombre de empresa',
-      'RFC',
-      'Monto cancelado',
-      'Representante legal',
-    ]
-  },
-  {
-    name: 'Registro Único de Proveedores y Contratistas (RUPC)',
-    description: 'Empresas fantasma definitivas',
-    country: 'MEX',
-    blockEdit: true,
-    countryLabel: 'México',
-    author: 'Secretaría de Hacienda y Crédito Público',
-    size: 5,
-    slug: 'sat-Desvirtuados',
-    last: '2019-11-05',
-    url: "https://cnet.hacienda.gob.mx/servicios/consultaRUPC.jsf",
-    flag: require('../static/flags/mexico.svg'),
-    file: require('../static/csvs/rupc.csv'),
-    only: [
-      'Nombre de empresa',
-      'RFC',
-      'Entidad Federativa',
-      'Giro',
-      'Sitio web'
-    ]
   },
   {
     name: 'SAT Definitivos',
@@ -167,6 +115,65 @@ export const predbs = [
     only: [
       'Nombre de empresa',
       'RFC'
+    ]
+  },
+  {
+    name: 'Privilegios Fiscales Condonados (2007-2015)',
+    country: 'MEX',
+    countryLabel: 'México',
+    blockEdit: true,
+    author: 'Fundar',
+    size: 20,
+    slug: 'estafa-maestra',
+    last: '2019-09-30',
+    url: "https://privilegiosfiscales.fundar.org.mx/#top",
+    flag: require('../static/flags/mexico.svg'),
+    file: require('../static/csvs/pf-7-15.csv'),
+    only: [
+      'Nombre de empresa',
+      'RFC',
+      'Monto condonado',
+      'Representante legal',
+    ]
+  },
+  {
+    name: 'Privilegios Fiscales Cancelaciones (2007-2015)',
+    country: 'MEX',
+    countryLabel: 'México',
+    blockEdit: true,
+    author: 'Fundar',
+    size: 20,
+    slug: 'estafa-maestra',
+    last: '2019-09-30',
+    url: "https://privilegiosfiscales.fundar.org.mx/#top",
+    flag: require('../static/flags/mexico.svg'),
+    file: require('../static/csvs/pf-cancelaciones-715.csv'),
+    only: [
+      'Nombre de empresa',
+      'RFC',
+      'Monto cancelado',
+      'Representante legal',
+    ]
+  },
+  {
+    name: 'Registro Único de Proveedores y Contratistas (RUPC)',
+    description: 'Empresas fantasma definitivas',
+    country: 'MEX',
+    blockEdit: true,
+    countryLabel: 'México',
+    author: 'Secretaría de Hacienda y Crédito Público',
+    size: 11,
+    slug: 'sat-Desvirtuados',
+    last: '2019-11-05',
+    url: "https://cnet.hacienda.gob.mx/servicios/consultaRUPC.jsf",
+    flag: require('../static/flags/mexico.svg'),
+    file: require('../static/csvs/rupc.csv'),
+    only: [
+      'Nombre de empresa',
+      'RFC',
+      'Entidad Federativa',
+      'Giro',
+      'Sitio web'
     ]
   },
 

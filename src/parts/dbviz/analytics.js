@@ -82,6 +82,7 @@ export default class Analytics extends React.Component{
     })
     if(this.top){
       setTimeout(function(){
+        console.log('GRAPHING', adbs);
         self.top.graph();
       }, 150)
     }
@@ -177,7 +178,7 @@ export default class Analytics extends React.Component{
           }
           {
             top10a.length > 1 ?
-            <AnalyticsTopInstancias rand={this.state.rand2} m={top10a} ref={(ref) => this.top = ref} parent={this} active={this.state.activeDbs}/>
+            <AnalyticsTopInstancias rand={this.state.rand2} m={top10a} parent={this} active={this.state.activeDbs}/>
             : null
           }
           {
@@ -210,6 +211,8 @@ class AnalyticsTopInstancias extends React.Component{
     })
     var id = "canvas_top10a";
     // document.getElementById(id).height = null;
+
+
     var self = this;
     var m = this.props.m.slice(0, 10);
     var ctx = document.getElementById(id).getContext('2d');

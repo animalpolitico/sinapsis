@@ -1,7 +1,7 @@
 import moment from 'moment';
 import 'moment/locale/es';
 import { saveAs } from 'file-saver';
-import { countries, getISO, getLang, getCountryCurrency, getCurrentCountry } from '../vars/countriesDict';
+import { countries, getISO, getLang, getCountryCurrency, getFlag, getCurrentCountry, getCurrencyCountry } from '../vars/countriesDict';
 import formatMoney, { convertToActualCurrency } from './formatMoney';
 import ConvertDbToCsv from './tocsv';
 moment.locale('es');
@@ -413,6 +413,7 @@ export default class DbFactory {
 
       var obj = {
         currency: c,
+        country: _db.country,
         name: s.currencyName,
         symbol: s.currencySign,
         toMXN: s.toMXN
@@ -1358,7 +1359,15 @@ export default class DbFactory {
   * @param void
   * @return uid
   **/
-  addDb(){
+  addDb(currency){
+    if(!currency){
+      currency = "MXN";
+    }
+
+    var country = getCurrencyCountry(currency);
+
+    console.log('country', country, currency);
+
     var dbs = this.getDbs();
     var x = Object.values(dbs).length;
     var uid = this.createUid();
@@ -1366,6 +1375,8 @@ export default class DbFactory {
       id: uid,
       name: 'Nueva base de datos #'+ (x+1),
       created: moment.now(),
+      currency: currency,
+      country: country,
       color: gen().rgbString()
     }
     dbs[uid] = o;

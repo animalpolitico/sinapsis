@@ -153,13 +153,7 @@ export default class DbBuilderToolbar extends React.Component{
           <div className="ss_db_toolbar_info_td">
             <DbBuilderToolbarName parent={this} ref={(ref) => this.toolbarname = ref}/>
           </div>
-          {
-            !mobile() ?
-            <div className="ss_db_toolbar_info_td" id="ss_db_toolbar_demo" onClick={() => this.props.parent.goToDemo()}>
-              Guía
-            </div>
-            : null
-          }
+
 
           {
             this.state.modifiedString ?
@@ -178,6 +172,11 @@ export default class DbBuilderToolbar extends React.Component{
               <div id="ss_db_save">
                 <Icon>get_app</Icon>
                 <div>Guardar archivo</div>
+              </div>
+            </div>
+            <div class="ss_db_ctas_td" onClick={() => this.props.parent.goToDemo()}>
+              <div id="ss_db_guia">
+                <div>Guía</div>
               </div>
             </div>
             <div className="ss_db_ctas_custom ss_db_ctas_custom_lang" >

@@ -39,9 +39,10 @@ import oldToNew from '../funcs/oldSinapsisToNew';
 import demo from '../funcs/demo';
 import { predbs } from '../vars/rel';
 import Flag from "react-flags";
-import { countries, getLang, _t, getCurrencies, getFlag } from "../vars/countriesDict";
+import { countries, getLang, _t, getCurrencies, getFlag, getCurrentCountry, getCurrencyCountry } from "../vars/countriesDict";
 import { Resizable, ResizableBox } from 'react-resizable';
 
+import CurrencySelect from '../parts/dbbuilder/currencySelect';
 import buildLink from "../funcs/buildlink";
 import {Helmet} from "react-helmet";
 
@@ -120,7 +121,7 @@ export default class DbBuilderPage extends React.Component{
         })
       }else{
         if(uid !== 'estafa-maestra'){
-          var url = buildLink('/construir/'+uid);
+          var url = buildLink('/herramienta/'+uid);
           this.props.history.push(url);
         }else{
           var hasE = window.dbf.obj.dbs && Object.values(window.dbf.obj.dbs).length > 0;
@@ -211,7 +212,7 @@ export default class DbBuilderPage extends React.Component{
     window.dbf.obj.dbs[j.id].country = "MEX";
     window.dbf.obj.hasEstafa = true;
 
-    this.props.history.push(buildLink('/construir/estafa-maestra'));
+    this.props.history.push(buildLink('/herramienta/estafa-maestra'));
 
     this.setState({
       showcontrol: false,
@@ -228,7 +229,7 @@ export default class DbBuilderPage extends React.Component{
 
   startNewProject(){
     var obj = window.dbf.set();
-    var url = buildLink('/construir/' + obj.uid);
+    var url = buildLink('/herramienta/' + obj.uid);
     this.props.history.push(url);
     this.setState({
       control: 'newproject',
@@ -240,7 +241,8 @@ export default class DbBuilderPage extends React.Component{
   loadFile(e){
     window.dispatchEvent(startLoad);
     this.setState({
-      isloading: true
+      isloading: true,
+      showCSVL: false
     })
     var self = this;
     var em = document.getElementById('ss_file_input');
@@ -252,7 +254,10 @@ export default class DbBuilderPage extends React.Component{
       reader.onload = function(ev){
         var t =  ev.target.result;
         var obj = window.dbf.setFile(t);
-        var url = buildLink('/construir/' + obj.uid);
+
+
+
+        var url = buildLink('/herramienta/' + obj.uid);
         self.props.history.push(url);
         self.setState({
           control: 'fromfile',
@@ -268,16 +273,11 @@ export default class DbBuilderPage extends React.Component{
   }
 
   goBack(){
-    this.props.history.push(buildLink('/construir'));
+    this.props.history.push(buildLink('/herramienta'));
   }
 
   goToDemo(){
-    var s = window.confirm('¿Deseas continuar? Guarda tu archivo para no perder los cambios hechos.');
-    if(s){
-      this.props.history.push(buildLink('/construir/estafa-maestra'));
-      demo();
-    }
-
+    window.open(buildLink('/herramienta/estafa-maestra'));
   }
 
   intentToRecover(){
@@ -308,7 +308,7 @@ export default class DbBuilderPage extends React.Component{
     obj_j.recoveredAt = moment.now();
     window.dbf.obj = obj_j;
 
-    this.props.history.push('/construir/' + obj_j.uid);
+    this.props.history.push('/herramienta/' + obj_j.uid);
     this.setState({
       showcontrol: false,
       showrecoveroptions: false
@@ -645,10 +645,11 @@ class DbBuilderSidebar extends React.Component{
 
   }
 
-  addDB(){
+  addDB(c){
     var self = this;
     var dbf = window.dbf;
-    var dbId = dbf.addDb();
+    var dbId = dbf.addDb(c);
+    window.dispatchEvent(new Event('sinapsis_close_edit'));
     this.fetchDbs();
   }
 
@@ -827,7 +828,6 @@ class DbView extends React.Component{
   }
 
   delete(){
-    console.log('deleting');
     window.dispatchEvent(new Event('sinapsisStartLoad'));
     var self = this;
     setTimeout(function(){
@@ -949,11 +949,6 @@ class DbView extends React.Component{
                 }
                 <div className="ss_db_view_empresas_currency" id="db_currency_legend">
                   <img src={getFlag(this.props.db.country)} /> Montos expresados en <strong>{currencyObj.name + ' ('+currencyObj.symbol+')'}</strong>
-                  {
-                    !block ?
-                    <a href="javascript:void(0)" onClick={() => this.setState({openCurrencyChange: true})}>Editar</a>
-                    : null
-                  }
                 </div>
               </div>
 
@@ -961,17 +956,7 @@ class DbView extends React.Component{
                 <DialogTitle id="form-dialog-title">Moneda</DialogTitle>
                   <DialogContent style={{width: 400}}>
                     <div className="db_empresa_container_group_form">
-                      <div className="ss_db_input_select">
-                        <select onChange={(e) => this.setState({toChangeCurrency: e.target.value})}>
-                          {
-                            getCurrencies().map(function(c){
-                              return (
-                                <option selected={c.currency == currencyObj.currency} value={c.currency}>{c.name} ({c.symbol} {c.currency})</option>
-                              )
-                            })
-                          }
-                        </select>
-                      </div>
+                      <CurrencySelect current={currencyObj.currency} onChange={(e) => console.log('Changed', e)} />
                     </div>
                   </DialogContent>
                 <DialogActions>
@@ -1275,8 +1260,26 @@ class DbDbsNavigationNewDb extends React.Component{
 
     window.addEventListener('ij_open_newdb', function(){
       var e = document.getElementById('new_db_ijs');
-
       self.togglePopper(e, true);
+    })
+
+    window.addEventListener('sinapsis_deleted_db', function(e){
+      var d = e.detail;
+      var c = self.state.loadedDbs;
+      var i = c.indexOf(d.name);
+      if(i > -1){
+        c.splice(i, 1);
+        console.log('c', c);
+        self.setState({
+          loadedDbs: c
+        })
+      }
+      if(d.name == "Estafa Maestra"){
+        window.dbf.obj.hasEstafa = false;
+        self.setState({
+          loadedDbs: c
+        })
+      }
     })
 
   }
@@ -1300,9 +1303,17 @@ class DbDbsNavigationNewDb extends React.Component{
   }
   newDB(){
     this.setState({
-      openPopper: false
+      openPopper: false,
+      showNewL: true
     })
-    this.props.parent.addDB();
+
+  }
+
+  confirmNewDB(){
+    this.setState({
+      showNewL: false
+    })
+    this.props.parent.addDB(this.state.selectedCurrency);
     window.dispatchEvent(onBigChanges);
   }
 
@@ -1379,6 +1390,7 @@ class DbDbsNavigationNewDb extends React.Component{
     this.setState({
       openModal: false,
       openPopper: false,
+      showCSVL: false
     })
     if(f[0]){
       var file = f[0];
@@ -1397,6 +1409,8 @@ class DbDbsNavigationNewDb extends React.Component{
 
         var ont = new oldToNew(name, t);
         var db = ont.save();
+        db.currency = self.state.selectedCurrency;
+        db.country = getCurrencyCountry(self.state.selectedCurrency);
         if(!window.dbf.obj.dbs){
           window.dbf.obj.dbs = {};
         }
@@ -1454,6 +1468,15 @@ class DbDbsNavigationNewDb extends React.Component{
     })
   }
 
+  downloadZip(type){
+    var ex = type == "xls" ? "xlsx" : "csv";
+    var url = process.env.PUBLIC_URL + '/plantilla_sinapsis.zip';
+    window.open(url);
+    this.setState({
+      showInvalid: false
+    })
+  }
+
   render(){
     var self = this;
     var id = 'ss_db_popper';
@@ -1461,6 +1484,9 @@ class DbDbsNavigationNewDb extends React.Component{
     if(this.state.openPopper){
       cs.push('ss_db_newdb_active');
     }
+
+    var currencyObj = getCurrentCountry();
+
     return(
       <>
       <div aria-describedby={id} id="new_db_ijs" className={cs.join(' ')} ref={(e) => this.newdbbtn = e} onClick={(e) => this.togglePopper(e)}>
@@ -1475,13 +1501,7 @@ class DbDbsNavigationNewDb extends React.Component{
           <div className="ss_popper_container_button"  onClick={() => this.selectDB()}>
             <div>Seleccionar precargada</div>
           </div>
-          <div className="ss_popper_container_button ss_poppper_container_button_input">
-            <input
-              type="file"
-              accept=".csv"
-              id="ss_file_input_from_db"
-              onChange={(e) => this.loadFile(e)}
-            />
+          <div className="ss_popper_container_button ss_poppper_container_button_input" onClick={() => this.setState({showCSVL: true, openPopper: false})}>
             <div>Desde plantilla (.csv)</div>
           </div>
           <div className="ss_popper_container_button ss_poppper_container_button_input">
@@ -1496,6 +1516,63 @@ class DbDbsNavigationNewDb extends React.Component{
         </div>
       </ClickAwayListener>
       </Popper>
+
+      <Dialog
+        open={this.state.showNewL}
+        onClose={() => this.setState({showNewL: false})}
+      >
+        <DialogTitle>Nueva base de datos</DialogTitle>
+        <DialogContent>
+          <div className="db_empresa_container_group_form dbe_m">
+            <div className="db_empresa_container_group_form_title">
+              Selecciona la moneda de los montos de tu base
+            </div>
+            <CurrencySelect current={this.state.selectedCurrency || currencyObj.currency} onChange={(e) => this.setState({selectedCurrency: e})} />
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button color="secondary" onClick={() => this.setState({showNewL: false})}>
+            Cancelar
+          </Button>
+          <Button color="secondary" onClick={() => this.confirmNewDB()}>
+            Crear
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={this.state.showCSVL}
+        onClose={() => this.setState({showCSVL: false})}
+      >
+        <DialogTitle>Cargar CSV</DialogTitle>
+        <DialogContent>
+          Para añadir bases de datos grandes a tu proyecto descarga nuestra plantilla, llena las columnas con los títulos tal cual como están y cárgala en Sinapsis
+          <div className="db_empresa_container_group_form dbe_m">
+            <div className="db_empresa_container_group_form_title">
+              Selecciona la moneda de los montos de tu CSV
+            </div>
+            <CurrencySelect current={this.state.selectedCurrency || currencyObj.currency} onChange={(e) => this.setState({selectedCurrency: e})} />
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button color="secondary" onClick={() => this.setState({showCSVL: false})}>
+            Cancelar
+          </Button>
+          <Button color="secondary" onClick={() => this.downloadZip()}>
+            Descargar plantilla
+          </Button>
+          <Button color="secondary" className="btnwinput">
+            <input
+              type="file"
+              accept=".csv"
+              id="ss_file_input_from_db"
+              onChange={(e) => this.loadFile(e)}
+            />
+          Cargar archivo
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <Dialog
         open={this.state.showInvalid}
         onClose={() => this.setState({showInvalid: false})}
@@ -1731,6 +1808,8 @@ class DbDbsNavigationTd extends React.Component{
   deleteDb(){
     window.dispatchEvent(startLoad);
     var self = this;
+
+    window.dispatchEvent(new CustomEvent('sinapsis_deleted_db', {detail: self.props.db}));
 
     setTimeout(function(){
       window.dbf.deleteDb(self.props.db);

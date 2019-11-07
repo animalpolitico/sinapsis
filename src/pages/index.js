@@ -22,7 +22,6 @@ export default class Index extends React.Component{
           <Element name="video">
             <GoTo history={this.props.history}/>
           </Element>
-          <Video />
         </DiagBg>
         <UsaSinapsis />
         <DiagBg>
@@ -584,7 +583,7 @@ class GoTo extends React.Component{
           </div>
 
           <div className="ss_h_s_goto_container_ctas">
-            <div className="ss_h_s_goto_container_ctas_cta" onClick={() => this.props.history.push(buildLink('/construir'))}>
+            <div className="ss_h_s_goto_container_ctas_cta" onClick={() => this.props.history.push(buildLink('/herramienta'))}>
               Ir a la herramienta
             </div>
           </div>

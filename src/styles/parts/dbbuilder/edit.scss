@@ -634,6 +634,16 @@
       font-weight: 400;
       box-sizing: border-box;
       order: 1;
+
+      div{
+        margin-left: 0.25rem;
+        img{
+          width: 12px;
+          display: inline-block;
+          vertical-align: sub;
+          margin-right: 0.1rem;
+        }
+      }
     }
     &_error{
       order: 3;
@@ -649,7 +659,17 @@
     &_hint{
       font-size: 0.7rem;
       color: #888;
+      @extend .flex;
+      align-items: center;
       margin-top: 0.2rem;
+      .material-icons{
+        font-size: 0.8rem;
+        margin-left: 0.2rem;
+      }
+      img{
+        width: 12px;
+        margin-right: 0.2rem;
+      }
     }
   }
   &.ss_invalid{

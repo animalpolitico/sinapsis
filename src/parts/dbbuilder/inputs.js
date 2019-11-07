@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@material-ui/core/Icon';
-import { _t, isMexico, getCurrentCountry } from '../../vars/countriesDict';
+import { _t, isMexico, getCurrentCountry, getCurrencyCountry, getFlag } from '../../vars/countriesDict';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { getLatLng } from 'react-places-autocomplete';
 import formatMoney, {convertToActualCurrency} from '../../funcs/formatMoney';
+import Tooltip from '@material-ui/core/Tooltip';
+
 
 var slugify = require('slugify');
 const uuidv4 = require('uuid/v4');
@@ -385,12 +387,13 @@ export default class DbInput extends React.Component{
   }
 
   getLabel(){
-    var l = _t(this.getName());
+    var l = [];
+    l.push(_t(this.getName()));
     var t = this.props.type;
 
     if(t == "currency"){
       var currency = window.dbf.getDbCurrencyObj(this.props.db.id);
-      l += " ("+ currency.symbol +" "+currency.currency+")";
+      l.push(<div> (<img src={getFlag(currency.country)} /> {currency.symbol} {currency.currency})</div>);
     }
 
 
@@ -438,6 +441,7 @@ export default class DbInput extends React.Component{
     if(this.props.type == "currency" && this.state.value){
       var cobj = window.dbf.getDbCurrencyObj(this.props.db.id);
       if(cobj.currency !== getCurrentCountry().currency){
+        var cco_country = getCurrentCountry().code;
         cco = Math.round(convertToActualCurrency(this.state.value, cobj.currency));
         cco = '~ ' + formatMoney(cco);
       }
@@ -504,7 +508,10 @@ export default class DbInput extends React.Component{
             {
               cco ?
               <div className="ss_db_input_container_hint">
-                {cco}
+                  <img src={getFlag(cco_country)} /> {cco}
+                <Tooltip title="Todos los tipos de cambio que utilizamos se actualizan cada 24 horas, utilizando fixer.io">
+                  <Icon>help</Icon>
+                </Tooltip>
               </div>
               : null
             }
