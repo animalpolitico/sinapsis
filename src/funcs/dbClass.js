@@ -1075,6 +1075,12 @@ export default class DbFactory {
     f.map(function(em){
       var mult = em.category == "monto_recibido" ? 1 : -1;
       var v = em.value;
+      if(typeof v == "string"){
+        v = v.replace(/\,/, '');
+        v = v.replace(/\$/, '');
+        v = v.replace(/\(/, '');
+        v = v.replace(/\)/, '');
+      }
           v = parseFloat(v);
       if(isNaN(v)){
         v = 0;
@@ -1724,26 +1730,31 @@ export default class DbFactory {
   * @return obj
   **/
   getEmpresaGroupsByGroup(dbuid, euid, key){
-    var f = this.getEmpresaFields(dbuid, euid);
-    f = f.filter(function(field){
-      return field.group == key;
-    })
+    try{
+      var f = this.getEmpresaFields(dbuid, euid);
+      f = f.filter(function(field){
+        return field.group == key;
+      })
 
-    if(key == "transferencia"){
+      if(key == "transferencia"){
+      }
+
+      var o = {};
+      f.map(function(field){
+        var guid = field.groupUid;
+        if(!guid){
+          guid = field.guid;
+        }
+        if(!o[guid]){
+          o[guid] = [];
+        }
+        o[guid].push(field);
+      })
+      return Object.values(o);
+    }catch{
+      return [];
     }
 
-    var o = {};
-    f.map(function(field){
-      var guid = field.groupUid;
-      if(!guid){
-        guid = field.guid;
-      }
-      if(!o[guid]){
-        o[guid] = [];
-      }
-      o[guid].push(field);
-    })
-    return Object.values(o);
   }
 
   /**

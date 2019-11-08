@@ -38,6 +38,11 @@
             @extend .flex;
             align-items: center;
             margin: 0.35rem 0;
+            cursor: pointer;
+            opacity: 0.5;
+            &.lactive{
+              opacity: 1;
+            }
             &_a{
               width: 10px;
               height: 10px;

@@ -2941,6 +2941,9 @@ class SSTooltip extends React.Component{
 
 
     var sum = d.fields[0].sum;
+
+    var dbname = window.dbf.getDb(d.fields[0].fromdb).name;
+
     var mnt = "";
     if(!sum){
       mnt = "(sin información)"
@@ -3007,6 +3010,14 @@ class SSTooltip extends React.Component{
           d.type == "empresa" ?
           <div className="db_viz_tooltip_monto" >
             Monto neto que recibió la empresa: <strong>{mnt}</strong>
+          </div>
+          : null
+        }
+
+        {
+          d.type == "empresa" ?
+          <div className="db_viz_tooltip_monto" >
+            En <strong>{dbname}</strong>
           </div>
           : null
         }

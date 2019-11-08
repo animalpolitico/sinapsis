@@ -82,8 +82,12 @@ export default class Analytics extends React.Component{
     })
     if(this.top){
       setTimeout(function(){
-        console.log('GRAPHING', adbs);
         self.top.graph();
+      }, 150)
+    }
+    if(this.topI){
+      setTimeout(function(){
+        self.topI.graph();
       }, 150)
     }
   }
@@ -178,7 +182,7 @@ export default class Analytics extends React.Component{
           }
           {
             top10a.length > 1 ?
-            <AnalyticsTopInstancias rand={this.state.rand2} m={top10a} parent={this} active={this.state.activeDbs}/>
+            <AnalyticsTopInstancias rand={this.state.rand2} ref={(ref) => this.topI = ref} m={top10a} parent={this} active={this.state.activeDbs}/>
             : null
           }
           {

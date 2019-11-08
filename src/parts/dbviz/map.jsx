@@ -16,7 +16,8 @@ export default class SSMap extends React.Component{
     onlyCoincidencias: true,
     zoom: 5,
     st: false,
-    czoom: 5
+    czoom: 5,
+    active: ['df', 'ds'],
   }
   componentDidMount(){
     var self = this;
@@ -69,6 +70,19 @@ export default class SSMap extends React.Component{
     })
   }
 
+  toggleType(type){
+    var c = this.state.active;
+    var i = c.indexOf(type);
+    if(i == -1){
+      c.push(type);
+    }else{
+      c.splice(i, 1);
+    }
+    this.setState({
+      active: c
+    })
+  }
+
   buildMarkers(){
     var self = this;
     var oc = this.state.onlyCoincidencias;
@@ -76,9 +90,9 @@ export default class SSMap extends React.Component{
       'a': [],
       'b': []
     };
-    var coordsMaster = [];
+    var coordsSocios = [];
+    var coordsFiscal = [];
     var m = this.state.markers;
-    console.log('M', m);
 
 
     m.map(function(d){
@@ -87,7 +101,7 @@ export default class SSMap extends React.Component{
       var show = false;
       var hasc = false;
       var coords = [d.latlng.lng, d.latlng.lat];
-      coordsMaster.push(coords);
+
       d3.selectAll('.node[data-id="'+euid+'"]')
         .filter(d => hasc = d.coincidencias > 0);
       var d = {
@@ -98,17 +112,24 @@ export default class SSMap extends React.Component{
         fromdb: d.fromdb,
         value: d.value
       }
-
+      var okdf = self.state.active.indexOf('df') > -1;
+      var okds = self.state.active.indexOf('ds') > -1;
       var isdf = d.type == "Dirección fiscal";
+      if(isdf && okdf){
+        coordsSocios.push(coords);
+      }else if(!isdf && okds){
+        coordsFiscal.push(coords);
+      }
 
+      var isok = (isdf && okdf) || (!isdf && okds);
 
       var marker = <Feature coordinates={coords}
                             properties={{"isdf": isdf ? "1" : "0"}}
                             onClick={function(e){
                               var f = e.feature;
                               var l = f.layer;
-                              var a = ['match', ['get', 'id'], f.properties.id, '#ec991d', "#0072ff"];
-                              self.mapApi.setPaintProperty(l.id, 'circle-color', a);
+                              var a = ['match', ['get', 'id'], f.properties.id, 6, 0];
+                              self.mapApi.setPaintProperty(l.id, 'circle-stroke-width', a);
                               self.openMarker(d);
                             }}
                             onMouseEnter={function(e){
@@ -120,16 +141,16 @@ export default class SSMap extends React.Component{
                               self.layers.setState({st: false});
                             }}
                           />
-      if(hasc){
+      if(hasc && isok){
         o.a.push(marker);
-      }else{
+      }else if(!hasc && isok){
         o.b.push(marker);
       }
     })
 
-    /** Promedios **/
+    /** Promedios Fiscal **/
     var pms = {};
-    coordsMaster.map(function(c){
+    coordsFiscal.map(function(c){
       var lng = c[0];
       var lat = c[1];
 
@@ -142,6 +163,9 @@ export default class SSMap extends React.Component{
       }
       pms[s] = pms[s] + 1;
     })
+
+
+
     var fpms = [];
     var tpms = [];
     var max = 0;
@@ -195,9 +219,81 @@ export default class SSMap extends React.Component{
 
     })
 
-
     o.tpms = tpms;
     o.fpms = fpms;
+    o.max = max;
+
+    var pms = {};
+    coordsSocios.map(function(c){
+      var lng = c[0];
+      var lat = c[1];
+
+      lng = Math.round(lng * 10) / 10;
+      lat = Math.round(lat * 10) / 10;
+
+      var s = lng+','+lat;
+      if(!pms[s]){
+        pms[s] = 0;
+      }
+      pms[s] = pms[s] + 1;
+    })
+
+    var sfpms = [];
+    var stpms = [];
+    var smax = 0;
+
+    var _tmp = [];
+    for(var key in pms){
+      _tmp.push([pms[key], key]);
+    }
+
+    _tmp = _tmp.sort(function(a, b){
+      return b[0] - a[0];
+    })
+
+
+    _tmp.map(function(e){
+      var key = e[1];
+      var s = e[0];
+      var coords = key.split(',');
+      var cc = [];
+      coords.map(function(_c){
+        cc.push(parseFloat(_c));
+      })
+
+      coords = cc;
+
+      max = Math.max(s, max)
+      var marker = <Feature
+                      coordinates={coords}
+                      properties={{"size": pms[key]}}
+                      onClick={(e) => self.setState({defaultZoom: [e.lngLat.lng, e.lngLat.lat], zoom: 10})}
+                      onMouseEnter={function(e){
+                        document.getElementsByClassName('mapboxgl-canvas')[0].style.cursor = "pointer";
+                      }}
+                      onMouseLeave={function(){
+                        document.getElementsByClassName('mapboxgl-canvas')[0].style.cursor = "grab";
+                      }}
+                    />
+      sfpms.push(marker);
+
+      var marker = <Feature
+                      coordinates={coords}
+                      properties={{"size":  pms[key]}}
+                      onMouseEnter={function(e){
+                        document.getElementsByClassName('mapboxgl-canvas')[0].style.cursor = "pointer";
+                      }}
+                      onMouseLeave={function(){
+                        document.getElementsByClassName('mapboxgl-canvas')[0].style.cursor = "grab";
+                      }}
+                    />
+      stpms.push(marker);
+
+    })
+
+
+    o.stpms = stpms;
+    o.sfpms = sfpms;
     o.max = max;
     return o;
   }
@@ -222,8 +318,27 @@ export default class SSMap extends React.Component{
     return(
       <div id="ss_map">
       <div id="ss_map_controls">
+
         <div className="ss_map_controls_group">
           <div className="ss_map_controls_group_title">Mostrar direcciones</div>
+          <div className="ss_map_controls_group_content">
+            <div className="ss_map_controls_group_content_leyends">
+              <div className={"ss_map_controls_group_content_leyends_leyend " + (this.state.active.indexOf('df') > -1 ? 'lactive' : '' )} onClick={() => this.toggleType('df')}>
+                <div className="ss_map_controls_group_content_leyends_leyend_b"><input type="checkbox" checked={this.state.active.indexOf('df') > -1} style={{marginRight: '7px', transform: 'translateY(-2px)'}} /></div>
+                <div className="ss_map_controls_group_content_leyends_leyend_a" style={{backgroundColor: '#f6f6f6'}}></div>
+                <div className="ss_map_controls_group_content_leyends_leyend_b">Direcciones de empresas</div>
+              </div>
+              <div className={"ss_map_controls_group_content_leyends_leyend " + (this.state.active.indexOf('ds') > -1 ? 'lactive' : '' )}  onClick={() => this.toggleType('ds')}>
+                <div className="ss_map_controls_group_content_leyends_leyend_b"><input type="checkbox" checked={this.state.active.indexOf('ds') > -1} style={{marginRight: '7px', transform: 'translateY(-2px)'}} /></div>
+                <div className="ss_map_controls_group_content_leyends_leyend_a" style={{backgroundColor: '#FF00A8'}}></div>
+                <div className="ss_map_controls_group_content_leyends_leyend_b">Direcciones de personas</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div className="ss_map_controls_group">
           <div className="ss_map_controls_group_content">
             <div className="ss_map_controls_group_content_tr">
               <input checked={this.state.onlyCoincidencias} type="radio" name="ssmapcoincidencias" onChange={() => this.setState({onlyCoincidencias: true})} />
@@ -235,23 +350,7 @@ export default class SSMap extends React.Component{
             </div>
           </div>
         </div>
-        <div className="ss_map_controls_group">
-          <div className="ss_map_controls_group_title">Leyenda</div>
-          <div className="ss_map_controls_group_content">
-            <div className="ss_map_controls_group_content_leyends">
-              <div className="ss_map_controls_group_content_leyends_leyend">
-                <div className="ss_map_controls_group_content_leyends_leyend_a" style={{backgroundColor: '#e3e32a'}}></div>
-                <div className="ss_map_controls_group_content_leyends_leyend_b">Direcciones fiscales</div>
-              </div>
-              <div className="ss_map_controls_group_content_leyends_leyend">
-                <div className="ss_map_controls_group_content_leyends_leyend_a" style={{backgroundColor: '#CC99FF'}}></div>
-                <div className="ss_map_controls_group_content_leyends_leyend_b">Direcciones de socios</div>
-              </div>
 
-            </div>
-
-          </div>
-        </div>
 
 
       </div>
@@ -266,7 +365,7 @@ export default class SSMap extends React.Component{
         onStyleLoad={(m) => this.mapApi = m}
       >
       <ZoomControl position="bottom-right"/>
-      <Layers markers={markers} ref={(ref) => this.layers = ref} />
+      <Layers markers={markers} active={this.state.active} ref={(ref) => this.layers = ref} />
       </Map>
       </div>
     )
@@ -276,8 +375,11 @@ export default class SSMap extends React.Component{
 class Layers extends React.Component{
   state = {
     st: false,
-    d: {}
+    d: {},
   }
+
+
+
   render(){
     var markers = this.props.markers;
     return(
@@ -289,7 +391,8 @@ class Layers extends React.Component{
               'base': 5,
               'stops': [[5, 5], [12, 10]]
             },
-            "circle-color": ['match', ['get', 'isdf'], "1", '#e3e32a', "#CC99FF"],
+            "circle-color": ['match', ['get', 'isdf'], "1", '#f6f6f6', "#FF00A8"],
+            "circle-stroke-color": '#0072ff',
             "circle-opacity": {
               'base': 0.3,
               'stops': [[5, 0.3], [12, 0.8]]
@@ -307,7 +410,8 @@ class Layers extends React.Component{
                 'base': 25,
                 'stops': [[5, 25], [12, 10]]
               },
-              "circle-color": "#fb5d5d",
+              "circle-color": ['match', ['get', 'isdf'], "1", '#f6f6f6', "#FF00A8"],
+              "circle-stroke-color": '#0072ff',
               "circle-opacity": {
                 'base': 0.3,
                 'stops': [[5, 0.3], [12, 0.8]]
@@ -319,12 +423,14 @@ class Layers extends React.Component{
         : null
       }
 
+
+
       <Layer type="circle" minZoom={0}
         maxZoom={10}
         paint={
           {
             "circle-radius": ["interpolate",["linear"],["get", "size"],0,4,markers.max,40],
-            "circle-color": "#0072ff",
+            "circle-color": "#FF00A8",
             "circle-opacity": 0.8
           }
         }>
@@ -348,6 +454,37 @@ class Layers extends React.Component{
         }
       >
         {markers.tpms}
+      </Layer>
+
+      <Layer type="circle" minZoom={0}
+        maxZoom={10}
+        paint={
+          {
+            "circle-radius": ["interpolate",["linear"],["get", "size"],0,4,markers.max,40],
+            "circle-color": "#f6f6f6",
+            "circle-opacity": 0.8
+          }
+        }>
+        {markers.sfpms}
+      </Layer>
+
+      <Layer
+        type="symbol"
+        minZoom={0}
+        maxZoom={10}
+        layout={
+          {
+            "text-field": ["get", "size"],
+            "text-size": ["interpolate",["linear"],["get", "size"],0,9,markers.max,40]
+          }
+        }
+        paint={
+          {
+            "text-color": "#0072ff"
+          }
+        }
+      >
+        {markers.stpms}
       </Layer>
 
       {

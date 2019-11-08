@@ -670,7 +670,10 @@ class DbBuilderSidebar extends React.Component{
   render(){
     var self = this;
     var navCs = ['ss_dbbuilder_sidebar_dbs_nav'];
+
+
     var dbsA = Object.values(this.state.dbs);
+
     if(dbsA.length > 1){
       navCs.push('ss_overflow');
     }
@@ -1770,6 +1773,19 @@ class DbDbsNavigationTd extends React.Component{
       }
     })
 
+    window.addEventListener('sinapsis_deleted_db', function(){
+      console.log('HOLA', self.props.db.name);
+      self.setState({
+        name: self.props.db.name
+      })
+    })
+
+  }
+
+
+  componentDidUpdate(op, os){
+
+
   }
 
   handleClick(e){
@@ -1785,6 +1801,9 @@ class DbDbsNavigationTd extends React.Component{
     var em = document.getElementById(em_id);
     em.classList.add('ss_active');
     this.props.parent.selectDb(db.id);
+    this.setState({
+      name: db.name
+    })
   }
 
   handleIntentDelete(){
@@ -1836,6 +1855,9 @@ class DbDbsNavigationTd extends React.Component{
 
   render(){
     var db = this.props.db;
+
+    console.log('db', db);
+
     var cs = ["ss_dbbuilder_sidebar_dbs_nav_td"];
     if(!this.state.showing){
       cs.push('ss_inactive');

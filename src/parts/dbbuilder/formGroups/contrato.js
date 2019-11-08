@@ -147,10 +147,13 @@ export default class DbFormGroupContrato extends React.Component{
     var type = this.state.contratoType;
 
     if(this.state.isedit && !this.state.res){
-      var t = contratos[0].filter(f => f.slug == "contrato-quien-otorga-los-recursos");
-      console.log('T', t);
-      if(t.length){
-        var type = t[0].type;
+      try{
+        var t = contratos[0].filter(f => f.slug == "contrato-quien-otorga-los-recursos");
+        if(t.length){
+          var type = t[0].type;
+        }
+      }catch{
+        var type = "empresa";
       }
     }
 

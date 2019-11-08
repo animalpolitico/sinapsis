@@ -14,6 +14,71 @@ $dwp: 768px;
   }
 }
 
+.ss_footer{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem 0.5rem;
+  @extend .flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &_row{
+    width: 100%;
+    margin: 0.5rem 0;
+    &_ap{
+      width: 110px;
+      margin: 0 auto;
+      img{
+        width: 100%;
+      }
+    }
+    &_redes, &_contacto{
+      width: 100%;
+      @extend .flex;
+      justify-content: center;
+      position: relative;
+      padding-top: 1.25rem;
+      &::before{
+        content: '';
+        display: block;
+        width: 30%;
+        height: 1px;
+        background: $main;
+        @extend .cx;
+        top: 0;
+      }
+      &_td{
+        margin: 0 0.5rem;
+        span{
+          padding: 0.25rem;
+          font-size: 1.1rem;
+          color: #f6f6f6;
+        }
+      }
+    }
+    &_contacto{
+      flex-wrap: wrap;
+      &::before{
+        @media (min-width: $dwp){
+          display: none;
+        }
+      }
+
+      &_td{
+        width: 100%;
+        margin: 0.25rem 0;
+        color: #f6f6f6;
+        font-weight: 500;
+        text-align: center;
+        @media (min-width: $dwp){
+          width: auto;
+          margin: 0 0.75rem;
+        }
+      }
+    }
+  }
+}
+
 .ss_h_h1{
   text-transform: uppercase;
   font-size: 1.5rem;

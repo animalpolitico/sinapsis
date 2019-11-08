@@ -287,7 +287,7 @@ export default class DbFormGroupTransferencias extends React.Component{
                     empresa={this.props.empresa}
                     db={this.props.parent.props.db}
                     ref={this.setChildRef}
-                    matchWith={ this.state.contratoType ? [this.state.contratoType] : null}
+                    matchWith={ this.state.contratoType == "instancia" ? [this.state.contratoType] : []}
                   />
                   <DbInput
                     onChange={(slug, obj) => this.insertField(slug, obj)}

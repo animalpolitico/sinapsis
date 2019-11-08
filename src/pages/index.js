@@ -29,6 +29,75 @@ export default class Index extends React.Component{
           <FAQ />
         </DiagBg>
         <Credits />
+        <Footer />
+      </div>
+    )
+  }
+}
+
+class Footer extends React.Component{
+  render(){
+    var r = [
+      {
+        name: 'Facebook',
+        url: 'https://facebook.com/pajaropolitico',
+        icon: 'facebook'
+      },
+      {
+        name: 'Twitter',
+        url: 'https://twitter.com/pajaropolitico',
+        icon: 'twitter'
+      },
+      {
+        name: 'YouTube',
+        url: 'https://www.youtube.com/channel/UCwUr2RA-8YxAB5COLWTLhOw',
+        icon: 'youtube'
+      },
+      {
+        name: 'Instagram',
+        url: 'https://www.instagram.com/pajaropolitico/?hl=es-la',
+        icon: 'instagram'
+      }
+    ];
+
+    return(
+      <div className="ss_footer">
+        <div className="ss_footer_row">
+          <div className="ss_footer_row_ap">
+            <a href="https://animalpolitico.com" target="_blank">
+              <img src={require('../static/apgray.png')} />
+            </a>
+          </div>
+        </div>
+        <div className="ss_footer_row">
+          <div className="ss_footer_row_redes">
+            {
+              r.map(function(_r){
+                return(
+                  <div className="ss_footer_row_redes_td">
+                    <a target="_blank" href={_r.url}>
+                      <span className={"socicon-"+_r.icon}></span>
+                    </a>
+                  </div>
+                )
+              })
+            }
+          </div>
+        </div>
+        <div className="ss_footer_row">
+          <div className="ss_footer_row_contacto">
+            <div className="ss_footer_row_contacto_td">
+              <a href="mailto:sinapsis@animalpolitico.com">
+                sinapsis@animalpolitico.com
+              </a>
+            </div>
+            <div className="ss_footer_row_contacto_td">
+              <a href="https://t.me/sinapsislat" target="_blank">
+                Grupo de Telegram
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
