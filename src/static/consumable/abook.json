@@ -3517,5 +3517,617 @@
     "name": "Centro Oriente, Colombia",
     "googleResult": "Centro Oriente, Colombia",
     "slug": "centro-oriente"
+  },
+  "aguascalientes": {
+    "latlng": {
+      "lat": 21.8823395,
+      "lng": -102.2825928
+    },
+    "name": "Aguascalientes",
+    "googleResult": "Aguascalientes",
+    "slug": "aguascalientes"
+  },
+  "baja-california": {
+    "latlng": {
+      "lat": 32.6278114,
+      "lng": -115.4544601
+    },
+    "name": "Baja California",
+    "googleResult": "Baja California",
+    "slug": "baja-california"
+  },
+  "baja-california-sur": {
+    "latlng": {
+      "lat": 24.1443691,
+      "lng": -110.300499
+    },
+    "name": "Baja California Sur",
+    "googleResult": "Baja California Sur",
+    "slug": "baja-california-sur"
+  },
+  "campeche": {
+    "latlng": {
+      "lat": 19.8438606,
+      "lng": -90.5255432
+    },
+    "name": "Campeche",
+    "googleResult": "Campeche",
+    "slug": "campeche"
+  },
+  "coahuila-de-zaragoza": {
+    "latlng": {
+      "lat": 25.4232101,
+      "lng": -101.0053024
+    },
+    "name": "Coahuila de Zaragoza",
+    "googleResult": "Coahuila de Zaragoza",
+    "slug": "coahuila-de-zaragoza"
+  },
+  "coahuila": {
+    "latlng": {
+      "lat": 25.4232101,
+      "lng": -101.0053024
+    },
+    "name": "Coahuila de Zaragoza",
+    "googleResult": "Coahuila de Zaragoza",
+    "slug": "coahuila"
+  },
+  "colima": {
+    "latlng": {
+      "lat": 19.2433,
+      "lng": -103.725
+    },
+    "name": "Colima",
+    "googleResult": "Colima",
+    "slug": "colima"
+  },
+  "chiapas": {
+    "latlng": {
+      "lat": 16.7597294,
+      "lng":-93.1130829
+    },
+    "name": "Chiapas",
+    "googleResult": "Chiapas",
+    "slug": "chiapas"
+  },
+  "chihuahua": {
+    "latlng": {
+      "lat": 28.6352806,
+      "lng": -106.0888901
+    },
+    "name": "Chihuahua",
+    "googleResult": "Chihuahua",
+    "slug": "chihuahua"
+  },
+  "distrito-federal": {
+    "latlng": {
+      "lat": 19.3202829,
+      "lng": -99.4328066
+    },
+    "name": "Ciudad de México",
+    "googleResult": "Ciudad de México",
+    "slug": "distrito-federal"
+  },
+  "ciudad-de-mexico": {
+    "latlng": {
+      "lat": 19.4284706,
+      "lng": -99.1276627
+    },
+    "name": "Ciudad de México",
+    "googleResult": "Ciudad de México",
+    "slug": "ciudad-de-mexico"
+  },
+  "durango": {
+    "latlng": {
+      "lat": 25.5698509,
+      "lng": -103.4958801
+    },
+    "name": "Durango",
+    "googleResult": "Durango",
+    "slug": "durango"
+  },
+  "guanajuato": {
+    "latlng": {
+      "lat": 20.5235291,
+      "lng": -100.8156967
+    },
+    "name": "Guanajuato",
+    "googleResult": "Guanajuato",
+    "slug": "guanajuato"
+  },
+  "guerrero": {
+    "latlng": {
+      "lat": 17.5506001,
+      "lng": -99.5057831
+    },
+    "name": "Guerrero",
+    "googleResult": "Guerrero",
+    "slug": "guerrero"
+  },
+  "hidalgo": {
+    "latlng": {
+      "lat": 20.1169701,
+      "lng": -98.7332916
+    },
+    "name": "hidalgo",
+    "googleResult": "Hidalgo",
+    "slug": "hidalgo"
+  },
+  "jalisco": {
+    "latlng": {
+      "lat": 20.6668205,
+      "lng": -103.3918228
+    },
+    "name": "Jalisco",
+    "googleResult": "Jalisco",
+    "slug": "jalisco"
+  },
+  "estado-de-mexico": {
+    "latlng": {
+      "lat": 19.4785099,
+      "lng": -99.2396317
+    },
+    "name": "Estado de México",
+    "googleResult": "Estado de México",
+    "slug": "estado-de-mexico"
+  },
+  "michoacan-de-ocampo": {
+    "latlng": {
+      "lat": 19.7007809,
+      "lng": -101.184433
+    },
+    "name": "Michoacán de Ocampo",
+    "googleResult": "Michoacán de Ocampo",
+    "slug": "michoacan-de-ocampo"
+  },
+  "michoacan": {
+    "latlng": {
+      "lat": 19.7007809,
+      "lng": -101.184433
+    },
+    "name": "Michoacán de Ocampo",
+    "googleResult": "Michoacán de Ocampo",
+    "slug": "michoacan"
+  },
+  "morelos": {
+    "latlng": {
+      "lat": 18.9260998,
+      "lng":-99.230751
+    },
+    "name": "Morelos",
+    "googleResult": "Morelos",
+    "slug": "morelos"
+  },
+  "nayarit": {
+    "latlng": {
+      "lat": 21.50951,
+      "lng": -104.8956909
+    },
+    "name": "Nayarit",
+    "googleResult": "Nayarit",
+    "slug": "nayarit"
+  },
+  "nuevo-leon": {
+    "latlng": {
+      "lat": 25.7416706,
+      "lng":-100.3022232
+    },
+    "name": "Nuevo León",
+    "googleResult": "Nuevo León",
+    "slug": "nuevo-leon"
+  },
+  "oaxaca": {
+    "latlng": {
+      "lat": 17.0654202,
+      "lng": -96.7236481
+    },
+    "name": "Oaxaca",
+    "googleResult": "Oaxaca",
+    "slug": "oaxaca"
+  },
+  "puebla": {
+    "latlng": {
+      "lat": 19.0379295,
+      "lng":-98.2034607
+    },
+    "name": "Puebla",
+    "googleResult": "Puebla",
+    "slug": "puebla"
+  },
+  "queretaro": {
+    "latlng": {
+      "lat": 20.5880604,
+      "lng":-100.3880615
+    },
+    "name": "Querétaro",
+    "googleResult": "Querétaro",
+    "slug": "queretaro"
+  },
+  "quintana-roo": {
+    "latlng": {
+      "lat": 21.1742897,
+      "lng": -86.8465576
+    },
+    "name": "Quintana Roo",
+    "googleResult": "Quintana Roo",
+    "slug": "quintana-roo"
+  },
+  "san-luis-potosi": {
+    "latlng": {
+      "lat": 21.9963093,
+      "lng":-99.0109329
+    },
+    "name": "San Luis Potosí",
+    "googleResult": "San Luis Potosí",
+    "slug": "san-luis-potosi"
+  },
+  "sinaloa": {
+    "latlng": {
+      "lat": 25.7930202,
+      "lng": -108.9980774
+    },
+    "name": "Sinaloa",
+    "googleResult": "Sinaloa",
+    "slug": "sinaloa"
+  },
+  "sonora": {
+    "latlng": {
+      "lat": 27.4864197,
+      "lng":-109.9408264
+    },
+    "name": "Sonora",
+    "googleResult": "Sonora",
+    "slug": "sonora"
+  },
+  "tabasco": {
+    "latlng": {
+      "lat": 17.9868908,
+      "lng": -92.9302826
+    },
+    "name": "Tabasco",
+    "googleResult": "Tabasco",
+    "slug": "tabasco"
+  },
+  "tamaulipas": {
+    "latlng": {
+      "lat": 26.0806103,
+      "lng":-98.288353
+    },
+    "name": "Tamaulipas",
+    "googleResult": "Tamaulipas",
+    "slug": "tamaulipas"
+  },
+  "Tlaxcala": {
+    "latlng": {
+      "lat": 19.3122,
+      "lng":-98.2394
+    },
+    "name": "Tlaxcala",
+    "googleResult": "Tlaxcala",
+    "slug": "tlaxcala"
+  },
+  "veracruz-de-ignacio-de-la-llave": {
+    "latlng": {
+      "lat": 19.1809502,
+      "lng": -96.1428986
+    },
+    "name": "Veracruz de Ignacio de la Llave",
+    "googleResult": "Veracruz de Ignacio de la Llave",
+    "slug": "veracruz-de-ignacio-de-la-llave"
+  },
+  "veracruz": {
+    "latlng": {
+      "lat": 19.1809502,
+      "lng": -96.1428986
+    },
+    "name": "Veracruz de Ignacio de la Llave",
+    "googleResult": "Veracruz de Ignacio de la Llave",
+    "slug": "veracruz"
+  },
+  "yucatan": {
+    "latlng": {
+      "lat": 19.6930200,
+      "lng":-89.0503700
+    },
+    "name": "Yucatán",
+    "googleResult": "Yucatán",
+    "slug": "yucatan"
+  },
+  "zacatecas": {
+    "latlng": {
+      "lat": 22.7684307,
+      "lng": -102.5814133
+    },
+    "name": "Zacatecas",
+    "googleResult": "Zacatecas",
+    "slug": "zacatecas"
+  },
+  "mx-agu": {
+    "latlng": {
+      "lat": 21.8823395,
+      "lng": -102.2825928
+    },
+    "name": "Aguascalientes",
+    "googleResult": "Aguascalientes",
+    "slug": "mx-agu"
+  },
+  "mx-bcn": {
+    "latlng": {
+      "lat": 32.6278114,
+      "lng": -115.4544601
+    },
+    "name": "Baja California",
+    "googleResult": "Baja California",
+    "slug": "mx-bcn"
+  },
+  "mx-bcs": {
+    "latlng": {
+      "lat": 24.1443691,
+      "lng": -110.300499
+    },
+    "name": "Baja California Sur",
+    "googleResult": "Baja California Sur",
+    "slug": "mx-bcs"
+  },
+  "mx-cam": {
+    "latlng": {
+      "lat": 19.8438606,
+      "lng": -90.5255432
+    },
+    "name": "Campeche",
+    "googleResult": "Campeche",
+    "slug": "mx-cam"
+  },
+  "mx-coa": {
+    "latlng": {
+      "lat": 25.4232101,
+      "lng": -101.0053024
+    },
+    "name": "Coahuila de Zaragoza",
+    "googleResult": "Coahuila de Zaragoza",
+    "slug": "coahuila-de-zaragoza"
+  },
+  "mx-col": {
+    "latlng": {
+      "lat": 19.2433,
+      "lng": -103.725
+    },
+    "name": "Colima",
+    "googleResult": "Colima",
+    "slug": "colima"
+  },
+  "mx-chp": {
+    "latlng": {
+      "lat": 16.7597294,
+      "lng":-93.1130829
+    },
+    "name": "Chiapas",
+    "googleResult": "Chiapas",
+    "slug": "mx-chp"
+  },
+  "mx-chh": {
+    "latlng": {
+      "lat": 28.6352806,
+      "lng": -106.0888901
+    },
+    "name": "Chihuahua",
+    "googleResult": "Chihuahua",
+    "slug": "mx-chh"
+  },
+  "mx-cmx": {
+    "latlng": {
+      "lat": 19.4284706,
+      "lng": -99.1276627
+    },
+    "name": "Ciudad de México",
+    "googleResult": "Ciudad de México",
+    "slug": "mx-cmx"
+  },
+  "mx-dur": {
+    "latlng": {
+      "lat": 25.5698509,
+      "lng": -103.4958801
+    },
+    "name": "Durango",
+    "googleResult": "Durango",
+    "slug": "mx-dur"
+  },
+  "mx-gua": {
+    "latlng": {
+      "lat": 20.5235291,
+      "lng": -100.8156967
+    },
+    "name": "Guanajuato",
+    "googleResult": "Guanajuato",
+    "slug": "mx-gua"
+  },
+  "mx-gue": {
+    "latlng": {
+      "lat": 17.5506001,
+      "lng": -99.5057831
+    },
+    "name": "Guerrero",
+    "googleResult": "Guerrero",
+    "slug": "mx-gue"
+  },
+  "mx-hid": {
+    "latlng": {
+      "lat": 20.1169701,
+      "lng": -98.7332916
+    },
+    "name": "hidalgo",
+    "googleResult": "Hidalgo",
+    "slug": "mx-hid"
+  },
+  "mx-jal": {
+    "latlng": {
+      "lat": 20.6668205,
+      "lng": -103.3918228
+    },
+    "name": "Jalisco",
+    "googleResult": "Jalisco",
+    "slug": "mx-jal"
+  },
+  "mx-mex": {
+    "latlng": {
+      "lat": 19.4785099,
+      "lng": -99.2396317
+    },
+    "name": "Estado de México",
+    "googleResult": "Estado de México",
+    "slug": "mx-mex"
+  },
+  "mx-mic": {
+    "latlng": {
+      "lat": 19.7007809,
+      "lng": -101.184433
+    },
+    "name": "Michoacán de Ocampo",
+    "googleResult": "Michoacán de Ocampo",
+    "slug": "mx-mic"
+  },
+  "mx-mor": {
+    "latlng": {
+      "lat": 18.9260998,
+      "lng":-99.230751
+    },
+    "name": "Morelos",
+    "googleResult": "Morelos",
+    "slug": "mx-mor"
+  },
+  "mx-nay": {
+    "latlng": {
+      "lat": 21.50951,
+      "lng": -104.8956909
+    },
+    "name": "Nayarit",
+    "googleResult": "Nayarit",
+    "slug": "mx-nay"
+  },
+  "mx-nle": {
+    "latlng": {
+      "lat": 25.7416706,
+      "lng":-100.3022232
+    },
+    "name": "Nuevo León",
+    "googleResult": "Nuevo León",
+    "slug": "mx-nle"
+  },
+  "mx-oax": {
+    "latlng": {
+      "lat": 17.0654202,
+      "lng": -96.7236481
+    },
+    "name": "Oaxaca",
+    "googleResult": "Oaxaca",
+    "slug": "mx-oax"
+  },
+  "mx-pue": {
+    "latlng": {
+      "lat": 19.0379295,
+      "lng":-98.2034607
+    },
+    "name": "Puebla",
+    "googleResult": "Puebla",
+    "slug": "mx-pue"
+  },
+  "mx-que": {
+    "latlng": {
+      "lat": 20.5880604,
+      "lng":-100.3880615
+    },
+    "name": "Querétaro",
+    "googleResult": "Querétaro",
+    "slug": "mx-que"
+  },
+  "mx-roo": {
+    "latlng": {
+      "lat": 21.1742897,
+      "lng": -86.8465576
+    },
+    "name": "Quintana Roo",
+    "googleResult": "Quintana Roo",
+    "slug": "mx-roo"
+  },
+  "mx-slp": {
+    "latlng": {
+      "lat": 21.9963093,
+      "lng":-99.0109329
+    },
+    "name": "San Luis Potosí",
+    "googleResult": "San Luis Potosí",
+    "slug": "mx-slp"
+  },
+  "mx-sin": {
+    "latlng": {
+      "lat": 25.7930202,
+      "lng": -108.9980774
+    },
+    "name": "Sinaloa",
+    "googleResult": "Sinaloa",
+    "slug": "mx-sin"
+  },
+  "mx-son": {
+    "latlng": {
+      "lat": 27.4864197,
+      "lng":-109.9408264
+    },
+    "name": "Sonora",
+    "googleResult": "Sonora",
+    "slug": "mx-son"
+  },
+  "mx-tab": {
+    "latlng": {
+      "lat": 17.9868908,
+      "lng": -92.9302826
+    },
+    "name": "Tabasco",
+    "googleResult": "Tabasco",
+    "slug": "mx-tab"
+  },
+  "mx-tam": {
+    "latlng": {
+      "lat": 26.0806103,
+      "lng":-98.288353
+    },
+    "name": "Tamaulipas",
+    "googleResult": "Tamaulipas",
+    "slug": "mx-tam"
+  },
+  "mx-tla": {
+    "latlng": {
+      "lat": 19.3122,
+      "lng":-98.2394
+    },
+    "name": "Tlaxcala",
+    "googleResult": "Tlaxcala",
+    "slug": "mx-tla"
+  },
+  "mx-ver": {
+    "latlng": {
+      "lat": 19.1809502,
+      "lng": -96.1428986
+    },
+    "name": "Veracruz de Ignacio de la Llave",
+    "googleResult": "Veracruz de Ignacio de la Llave",
+    "slug": "mx-ver"
+  },
+  "mx-yuc": {
+    "latlng": {
+      "lat": 19.6930200,
+      "lng":-89.0503700
+    },
+    "name": "Yucatán",
+    "googleResult": "Yucatán",
+    "slug": "mx-yuc"
+  },
+  "mx-zac": {
+    "latlng": {
+      "lat": 22.7684307,
+      "lng": -102.5814133
+    },
+    "name": "Zacatecas",
+    "googleResult": "Zacatecas",
+    "slug": "mx-zac"
   }
 }

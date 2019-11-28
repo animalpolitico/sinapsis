@@ -394,12 +394,29 @@ export default class ConvertDbToCsv{
         category: 'monto_otorgado',
       },
     }
+    var invs = ['*'];
     for(var k in ks){
+      invs.push(ks[k].category);
       o[k] = ts[ks[k].category];
     }
 
+    /* Nueva categoría */
+    var nk = [];
+    var nv = [];
+    for(var k in ts){
+      if(invs.indexOf(k) == -1){
+        nk.push(k);
+        nv.push(ts[k]);
+      }
+    }
+
+    o[93] = nk.join(',');
+    o[94] = nv.join(',');
+
     /* Comentarios */
     o[95] = this.searchFieldValue('Comentarios', fields);
+
+    console.log('o', o);
     return this.filterRow(o);
   }
 

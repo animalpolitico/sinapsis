@@ -11,14 +11,14 @@ export default function demo(){
     intro.refresh();
 
     intro.setOptions({
-      skipLabel: 'Cerrar',
-      doneLabel: 'Cerrar',
+      skipLabel: 'X',
+      doneLabel: 'Terminar',
       hidePrev: true,
       showBullets: false,
       disableInteraction: true,
       hideNext: true,
       scrollPadding: 0,
-      exitOnOverlayClick: false,
+      exitOnOverlayClick: true,
       nextLabel: 'Siguiente',
       prevLabel: 'Anterior'
     })

@@ -18,7 +18,8 @@ export default class Analytics extends React.Component{
     window.addEventListener('sinapsisDrawerToggle', function(){
       self.setState({
         rand: Math.random() * 100000,
-        rand2: Math.random() * 100000
+        rand2: Math.random() * 100000,
+        rand3: Math.random() * 100000
       })
     })
   }
@@ -90,6 +91,11 @@ export default class Analytics extends React.Component{
         self.topI.graph();
       }, 150)
     }
+    if(this.topC){
+      setTimeout(function(){
+        self.topC.graph();
+      }, 150)
+    }
   }
 
   setAll(dba){
@@ -125,15 +131,63 @@ export default class Analytics extends React.Component{
       })
       .each(function(d){
         var show = false;
+        var _dbs = [];
         d.fields.map(function(_f){
           if(dbs.indexOf(_f.fromdb) > -1){
             show = true;
+            _dbs.push(_f.fromdb);
           }
         })
         if(show){
+          _dbs = _dbs.filter((v, i, s) => s.indexOf(v) === i);
+
           var i = {
             c: d.coincidencias,
-            label: d.name
+            label: d.name,
+            dbs: _dbs
+          }
+          o.push(i);
+        }
+
+      })
+    if(o.length){
+      o.sort(function(a, b){
+        var as = a.c;
+        var bs = b.c;
+        return as < bs ? 1 : -1;
+      })
+    }
+
+
+    return o;
+
+  }
+
+  getEmpresas(){
+    var o = [];
+
+    var dbs = this.state.activeDbs;
+
+    d3.selectAll('.node')
+      .filter(function(d){
+        return d.type == "empresa"
+      })
+      .each(function(d){
+        var show = false;
+        var _dbs = [];
+        d.fields.map(function(_f){
+          if(dbs.indexOf(_f.fromdb) > -1){
+            show = true;
+            _dbs.push(_f.fromdb);
+          }
+        })
+        if(show){
+          _dbs = _dbs.filter((v, i, s) => s.indexOf(v) === i);
+
+          var i = {
+            c: d.coincidencias,
+            label: d.name,
+            dbs: _dbs
           }
           o.push(i);
         }
@@ -154,12 +208,12 @@ export default class Analytics extends React.Component{
 
   render(){
 
-    console.log('rerendering')
     var dbs = this.getActiveDbs();
     var analytics = window.dbf.buildAnalytics(this.state.activeDbs);
     var analyticsBR = window.dbf.buildAnalyticsBr(this.state.activeDbs);
     var top10m = window.dbf.getTopMontos(this.state.activeDbs, 100);
     var top10a = this.getInstancias();
+    var top10c = this.getEmpresas();
 
 
     return(
@@ -181,6 +235,11 @@ export default class Analytics extends React.Component{
             : null
           }
           {
+            top10c.length > 1 ?
+            <AnalyticsTopCoincidencias rand={this.state.rand3} ref={(ref) => this.topC = ref} m={top10c} parent={this} active={this.state.activeDbs}/>
+            : null
+          }
+          {
             top10a.length > 1 ?
             <AnalyticsTopInstancias rand={this.state.rand2} ref={(ref) => this.topI = ref} m={top10a} parent={this} active={this.state.activeDbs}/>
             : null
@@ -192,6 +251,226 @@ export default class Analytics extends React.Component{
           }
           <AnalyticsPie isBr={false} invert={true} title="Información del llenado" rand={this.state.rand} ref={(ref) => this.pies = ref} parent={this} analytics={analytics} active={this.state.activeDbs}/>
           <div style={{width: '100%', height: '3rem'}}></div>
+        </div>
+      </div>
+    )
+  }
+}
+
+
+class AnalyticsTopCoincidencias extends React.Component{
+  state = {
+    showingAll: false
+  }
+  componentDidMount(){
+    this.graph();
+  }
+
+  graph(){
+    if(this.chart){
+      this.chart.destroy();
+    }
+    this.setState({
+      showingAll: false
+    })
+    var id = "canvas_top10c";
+    // document.getElementById(id).height = null;
+
+
+    var self = this;
+    var m = this.props.m.slice(0, 10);
+    var ctx = document.getElementById(id).getContext('2d');
+    var labels = [];
+    var data = [];
+    var _dbs = [];
+    m.map(function(_m){
+      labels.push(_m.label);
+      data.push(_m.c);
+      _dbs.push(_m.dbs);
+
+    })
+
+    document.getElementById(id).height = labels.length * 20 + 10;
+
+
+
+    var chart = new window.Chart(ctx, {
+      type: 'horizontalBar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Coincidencias',
+          data: data,
+          backgroundColor: "#0072ff",
+          borderWidth: 0
+        }]
+      },
+      options: {
+        aspectRatio: 1,
+        legend: {
+          display: false
+        },
+        tooltips: {
+          callbacks: {
+            label: function(ti,d){
+              return 'Coincidencias: '+ ti.xLabel;
+            },
+            title: function(ti,d){
+              return d.labels[ti[0].index]
+            },
+            footer: function(ti, d){
+              var i = ti[0].index;
+              var _d = _dbs[i];
+              var _dn = [];
+              _d.map((dbid) => _dn.push(window.dbf.getDb(dbid).name));
+              return 'Base'+(_d.length > 1 ? 's' : '')+' de datos: '+  _dn.join(', ');
+            }
+          },
+          custom: function(tooltip) {
+            if (!tooltip) return;
+            tooltip.displayColors = false;
+          },
+        },
+        scales: {
+          xAxes: [{
+            ticks: {
+              beginAtZero: true,
+              stepSize: 1,
+              callback: function(label){
+                return label
+              }
+            }
+
+          }],
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                fontColor: '#f6f6f6',
+                fontSize: 9,
+                stepSize: 1,
+                callback: function(label){
+                  return label.substr(0,5) + '...'
+                }
+              }
+            }
+          ]
+        }
+      }
+    })
+    window.dispatchEvent(new Event('sinapsisEndLoad'));
+
+    this.chart = chart;
+  }
+
+  graphH(){
+    this.chart.destroy();
+    var id = "canvas_top10c";
+    // document.getElementById(id).height = null;
+    var self = this;
+    var m = this.props.m.slice(0, 200);
+    var ctx = document.getElementById(id).getContext('2d');
+    var labels = [];
+    var data = [];
+    m.map(function(_m){
+      labels.push(_m.label);
+      data.push(_m.c);
+    })
+
+    document.getElementById(id).height = labels.length * 10 + 5;
+
+    var chart = new window.Chart(ctx, {
+      type: 'horizontalBar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Coincidencias',
+          data: data,
+          backgroundColor: "#0072ff",
+          borderWidth: 0
+        }]
+      },
+      options: {
+        aspectRatio: 1,
+        legend: {
+          display: false
+        },
+        tooltips: {
+          callbacks: {
+            label: function(ti,d){
+              return 'Coincidencias: '+ ti.xLabel;
+            },
+            title: function(ti,d){
+              return d.labels[ti[0].index]
+            }
+          },
+          custom: function(tooltip) {
+            if (!tooltip) return;
+            tooltip.displayColors = false;
+          },
+        },
+        scales: {
+          xAxes: [{
+            ticks: {
+              callback: function(label){
+                return label
+              }
+            }
+
+          }],
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                fontColor: '#f6f6f6',
+                fontSize: 9,
+                stepSize: 1,
+                callback: function(label){
+                  return label.substr(0,12)+'...'
+                }
+              }
+            }
+          ]
+        }
+      }
+    })
+    window.dispatchEvent(new Event('sinapsisEndLoad'));
+
+    this.chart = chart;
+  }
+
+  showAll(){
+    this.setState({
+      showingAll: true
+    })
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
+    this.graphH();
+
+  }
+
+  toggleAll(){
+    var s = !this.state.showingAll;
+    if(!s){
+      this.graph();
+    }else{
+      this.showAll();
+    }
+    this.setState({
+      showingAll: s
+    })
+
+  }
+
+  render(){
+    var cs = ["ss_analytics_montos"];
+    if(this.state.showingAll){
+      cs.push('ss_an_big');
+    }
+    return(
+      <div className={cs.join(' ')}>
+        <div className="ss_analytics_montos_title">{this.state.showingAll ? 'Empresas por coincidencia' : "Las 10 empresas con más coincidencias"} <span onClick={() => this.showAll()}>Ver todas</span></div>
+        <div className="ssa_top10_canvas">
+          <canvas id="canvas_top10c"></canvas>
         </div>
       </div>
     )
@@ -222,9 +501,12 @@ class AnalyticsTopInstancias extends React.Component{
     var ctx = document.getElementById(id).getContext('2d');
     var labels = [];
     var data = [];
+    var _dbs = [];
     m.map(function(_m){
       labels.push(_m.label);
       data.push(_m.c);
+      _dbs.push(_m.dbs);
+
     })
 
     document.getElementById(id).height = labels.length * 20 + 10;
@@ -254,6 +536,13 @@ class AnalyticsTopInstancias extends React.Component{
             },
             title: function(ti,d){
               return d.labels[ti[0].index]
+            },
+            footer: function(ti, d){
+              var i = ti[0].index;
+              var _d = _dbs[i];
+              var _dn = [];
+              _d.map((dbid) => _dn.push(window.dbf.getDb(dbid).name));
+              return 'Base'+(_d.length > 1 ? 's' : '')+' de datos: '+  _dn.join(', ');
             }
           },
           custom: function(tooltip) {
@@ -449,9 +738,11 @@ class AnalyticsTop10 extends React.Component{
     var ctx = document.getElementById(id).getContext('2d');
     var labels = [];
     var data = [];
+    var dbs = [];
     m.map(function(_m){
       labels.push(_m.name);
       data.push(_m.sum);
+      dbs.push(_m.dbid);
     })
     var chart = new window.Chart(ctx, {
       type: 'bar',
@@ -473,6 +764,11 @@ class AnalyticsTop10 extends React.Component{
           callbacks: {
             label: function(ti,d){
               return 'Monto neto recibido: '+formatMoney(ti.yLabel);
+            },
+            footer: function(ti, d){
+              var _dbid = dbs[ti[0].index];
+              var _dbname = window.dbf.getDb(_dbid).name;
+              return 'Base de datos: '+ _dbname;
             }
           },
           custom: function(tooltip) {

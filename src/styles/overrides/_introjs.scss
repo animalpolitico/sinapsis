@@ -1,6 +1,7 @@
 .introjs-overlay{
   background: #222!important;
 }
+
 .introjs-tooltip{
   border: 2px solid #333;
   max-width: 450px;
@@ -102,5 +103,25 @@ body.ij_nm{
     top: 0!important;
     left: 0!important;
     transform: none!important;
+  }
+}
+
+.introjs-skipbutton:not(.introjs-donebutton){
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background: none!important;
+  border: 0!important;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+.introjs-tooltipbuttons{
+  @extend .flex;
+  justify-content: flex-end;
+  .introjs-donebutton{
+    order: 3;
+    margin-left: 10px;
+    margin-right: 0;
+    background-color: $main!important;
   }
 }

@@ -148,7 +148,11 @@ export default class DbFormGroupPersonas extends React.Component{
     var accionistas = this.getGroup('accionista');
     var administradores = this.getGroup('administrador');
     var comisarios = this.getGroup('comisario');
-    var consejeros = this.getGroup('consejero');
+    var consejeros = this.getGroup('consejero')
+
+    var totalp = repLegales.length + accionistas.length + administradores.length + comisarios.length + consejeros.length;
+
+
     var persons = [
       {
         name: 'Representantes legales',
@@ -179,7 +183,7 @@ export default class DbFormGroupPersonas extends React.Component{
         <ExpansionPanelSummary expandIcon={<Icon>expand_more</Icon>}>
           <div className="dbef_n">
             <div className="dbef_n_n">
-              Personas
+              Personas <span className="dbef_n_n_badge">{totalp}</span>
             </div>
             <div className="dbef_n_ctas">
               <div className="dbef_n_ctas_c" onClick={() => this.open()}>Agregar</div>

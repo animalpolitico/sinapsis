@@ -114,7 +114,7 @@ export default class SSMap extends React.Component{
       }
       var okdf = self.state.active.indexOf('df') > -1;
       var okds = self.state.active.indexOf('ds') > -1;
-      var isdf = d.type == "Dirección fiscal";
+      var isdf = d.type == "Dirección fiscal" || d.type == "Entidad Federativa";
       if(isdf && okdf){
         coordsSocios.push(coords);
       }else if(!isdf && okds){
@@ -124,7 +124,7 @@ export default class SSMap extends React.Component{
       var isok = (isdf && okdf) || (!isdf && okds);
 
       var marker = <Feature coordinates={coords}
-                            properties={{"isdf": isdf ? "1" : "0"}}
+                            properties={{"isdf": isdf ? "1" : "0", "d": d}}
                             onClick={function(e){
                               var f = e.feature;
                               var l = f.layer;
@@ -134,7 +134,8 @@ export default class SSMap extends React.Component{
                             }}
                             onMouseEnter={function(e){
                               document.getElementsByClassName('mapboxgl-canvas')[0].style.cursor = "pointer";
-                              self.layers.setState({d: d, st: true})
+                              var _d = self.underMouse(e);
+                              self.layers.setState({d: _d, st: true})
                             }}
                             onMouseLeave={function(){
                               document.getElementsByClassName('mapboxgl-canvas')[0].style.cursor = "grab";
@@ -298,6 +299,15 @@ export default class SSMap extends React.Component{
     return o;
   }
 
+  underMouse(e){
+    var self = this;
+    var map = self.mapApi;
+    var features = map.queryRenderedFeatures(e.point);
+    console.log('FEATURES', features);
+    var ff = features.filter(o => o.layer.id == "df" || o.layer.id.indexOf('layer-') > -1);
+    return ff;
+  }
+
   openMarker(d){
     var self = this;
     var data = {
@@ -379,12 +389,41 @@ class Layers extends React.Component{
   }
 
 
-
   render(){
     var markers = this.props.markers;
+
+
+    /* Marker */
+    if(this.state.st){
+      var rms = [];
+      var ms = this.state.d;
+      ms.map(function(m){
+        var d = m.properties.d;
+            d = JSON.parse(d);
+        rms.push(d);
+      })
+
+
+      var dbname = false;
+      if(rms.length){
+        var d = rms[0];
+        if(d.fromdb){
+          dbname = window.dbf.getDb(d.fromdb).name;
+        }
+      }
+
+      var enms = [];
+      var ismultiple = rms.length > 1;
+      rms.map(dd => enms.push(dd.name));
+
+    }
+
+
+
     return(
       <>
       <Layer type="circle" minZoom={10}
+        id="df"
         paint={
           {
             "circle-radius": {
@@ -488,31 +527,63 @@ class Layers extends React.Component{
       </Layer>
 
       {
-        this.state.st ?
+        this.state.st && rms.length ?
         <Popup
-          coordinates={this.state.d.coords}
+          coordinates={d.coords}
         >
-        <div className="ss_map_tooltip">
-          {
-            this.state.d.type !== "fpms" ?
-            <>
-            <div className="ss_map_tooltip_type">
-              {this.state.d.type}
-            </div>
-            <div className="ss_map_tooltip_ename">
-              {this.state.d.name}
-            </div>
-            </>
-          : null }
-          <div className="ss_map_tooltip_name">
+        {
+          !ismultiple ?
+          <div className="ss_map_tooltip">
             {
-              this.state.d.type == "fpms" ?
-              (this.state.d.size + ' direcciones')
-              :
-              this.state.d.value
-            }
+              d.type !== "fpms" ?
+              <>
+              <div className="ss_map_tooltip_type">
+                {d.type}
+              </div>
+              <div className="ss_map_tooltip_ename">
+                {dbname}
+              </div>
+              <div className="ss_map_tooltip_ename">
+                {d.name}
+              </div>
+
+              </>
+            : null }
+            <div className="ss_map_tooltip_name">
+              {
+                d.type == "fpms" ?
+                (d.size + ' direcciones')
+                :
+                d.value
+              }
+            </div>
           </div>
-        </div>
+          : <div className="ss_map_tooltip">
+            {
+              d.type !== "fpms" ?
+              <>
+              <div className="ss_map_tooltip_type">
+                {d.type}
+              </div>
+              <div className="ss_map_tooltip_ename">
+                Encontrada en {rms.length} empresas: {enms.join(', ')}
+              </div>
+              <div className="ss_map_tooltip_ename">
+
+              </div>
+              </>
+            : null }
+            <div className="ss_map_tooltip_name">
+              {
+                d.type == "fpms" ?
+                (d.size + ' direcciones')
+                :
+                d.value
+              }
+            </div>
+          </div>
+        }
+
       </Popup>
       : null
       }
