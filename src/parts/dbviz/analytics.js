@@ -183,7 +183,6 @@ export default class Analytics extends React.Component{
         })
         if(show){
           _dbs = _dbs.filter((v, i, s) => s.indexOf(v) === i);
-
           var i = {
             c: d.coincidencias,
             label: d.name,

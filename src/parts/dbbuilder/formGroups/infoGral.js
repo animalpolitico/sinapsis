@@ -20,6 +20,10 @@ export default class DbFormGroupInfoGeneral extends React.Component{
   componentDidMount(){
   }
   render(){
+
+    var entidad = this.props.empresa.fields['entidad-federativa'];
+    var has_entidad = entidad && entidad.value;
+
     return(
       <>
       <ExpansionPanel expanded={this.state.open} onChange={(e, ex) => this.setState({open: ex})}>
@@ -106,6 +110,16 @@ export default class DbFormGroupInfoGeneral extends React.Component{
               type="address"
               empresa={this.props.empresa}
             />
+          {
+            has_entidad ?
+            <DbInput
+              onChange={(slug, obj) => this.props.parent.insertField(slug, obj)}
+              name="Entidad Federativa"
+              empresa={this.props.empresa}
+            />
+          : null
+          }
+
             <DbInput
               onChange={(slug, obj) => this.props.parent.insertField(slug, obj)}
               matchWith={['phone']}

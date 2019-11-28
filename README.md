@@ -43,14 +43,18 @@ Si estás interesade en ayudarnos a mejorar Sinapsis crea un pull request. ¡Est
 ___
 
 ### Contacto
-Si quieres contactar al equipo de desarrollo diréctamente escribe un correo a mauricio@animalpolitico.com o yosune@animalpolitico.com
+Si quieres contactar al equipo de desarrollo directamente escribe un correo a mauricio@animalpolitico.com o yosune@animalpolitico.com
 
 ___
 
 ### Créditos
 
- - Diseño de información y coordinación: Yosune Chamizo Alberro
- - Primera fase de programación: Gilberto León
- - Segunda fase de programación: Mauricio Martínez Robles
- - Diseño de identidad y UI: Jesús Santamaría Reséndiz
- 
+  - DISEÑO DE INFORMACIÓN Y COORDINACIÓN: Yosune Chamizo Alberro
+  - DESAROLLO DE VERSIÓN ALPHA: Gilberto León
+  - DESARROLLO DE VERSIÓN BETA: Mauricio Martínez Robles
+  - DISEÑO Y DESARROLLO WEB: Jesús Santamaría, Mauricio Martínez Robles
+  - IDENTIDAD GRÁFICA: Jesús Santamaría
+  - VIDEO: Rodrigo Crespo
+  - REDES SOCIALES: Jorge Ramis
+  - INVESTIGACIÓN: Nayeli Roldán, Manuel Ureste, Miriam Castillo
+  - DIRECCIÓN Y EDICIÓN GENERAL: Tania L. Montalvo, Francisco Sandoval & Daniel Moreno

@@ -103,7 +103,7 @@ export default class SSMap extends React.Component{
       var coords = [d.latlng.lng, d.latlng.lat];
 
       d3.selectAll('.node[data-id="'+euid+'"]')
-        .filter(d => hasc = d.coincidencias > 0);
+        .each(d => hasc = d.coincidencias > 0);
       var d = {
         coords: coords,
         name: ename,
@@ -115,11 +115,15 @@ export default class SSMap extends React.Component{
       var okdf = self.state.active.indexOf('df') > -1;
       var okds = self.state.active.indexOf('ds') > -1;
       var isdf = d.type == "Dirección fiscal" || d.type == "Entidad Federativa";
-      if(isdf && okdf){
-        coordsSocios.push(coords);
-      }else if(!isdf && okds){
-        coordsFiscal.push(coords);
+
+      if((hasc && oc) || (!oc)){
+        if(isdf && okdf){
+          coordsSocios.push(coords);
+        }else if(!isdf && okds){
+          coordsFiscal.push(coords);
+        }
       }
+
 
       var isok = (isdf && okdf) || (!isdf && okds);
 
@@ -375,7 +379,7 @@ export default class SSMap extends React.Component{
         onStyleLoad={(m) => this.mapApi = m}
       >
       <ZoomControl position="bottom-right"/>
-      <Layers markers={markers} active={this.state.active} ref={(ref) => this.layers = ref} />
+      <Layers markers={markers} onlyCoincidencias={this.state.onlyCoincidencias} ctive={this.state.active} ref={(ref) => this.layers = ref} />
       </Map>
       </div>
     )
@@ -441,7 +445,7 @@ class Layers extends React.Component{
         {markers.a}
       </Layer>
       {
-        !this.state.onlyCoincidencias ?
+        !this.props.onlyCoincidencias ?
         <Layer type="circle" minZoom={10}
           paint={
             {
@@ -566,7 +570,12 @@ class Layers extends React.Component{
                 {d.type}
               </div>
               <div className="ss_map_tooltip_ename">
-                Encontrada en {rms.length} empresas: {enms.join(', ')}
+                Encontrada en {rms.length} empresas:
+                <ul>
+                  {enms.map(function(en){
+                    return <li>{en}</li>
+                  })}
+                </ul>
               </div>
               <div className="ss_map_tooltip_ename">
 

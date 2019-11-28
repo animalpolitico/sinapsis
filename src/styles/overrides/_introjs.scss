@@ -107,13 +107,20 @@ body.ij_nm{
 }
 
 .introjs-skipbutton:not(.introjs-donebutton){
-  position: fixed;
-  top: 60px;
-  right: 20px;
-  background: none!important;
-  border: 0!important;
-  font-size: 1.2rem;
-  font-weight: 300;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 1px solid $main;
+  border-radius: 50%!important;
+  font-size: 0.8rem;
+  padding: 0;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+  font-weight: 600;
+  background: #333;
+  transform: translate(70%, -75%);
 }
 .introjs-tooltipbuttons{
   @extend .flex;
