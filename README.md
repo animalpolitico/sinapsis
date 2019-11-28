@@ -49,12 +49,12 @@ ___
 
 ### Créditos
 
-  - DISEÑO DE INFORMACIÓN Y COORDINACIÓN: Yosune Chamizo Alberro
-  - DESAROLLO DE VERSIÓN ALPHA: Gilberto León
-  - DESARROLLO DE VERSIÓN BETA: Mauricio Martínez Robles
-  - DISEÑO Y DESARROLLO WEB: Jesús Santamaría, Mauricio Martínez Robles
-  - IDENTIDAD GRÁFICA: Jesús Santamaría
-  - VIDEO: Rodrigo Crespo
-  - REDES SOCIALES: Jorge Ramis
-  - INVESTIGACIÓN: Nayeli Roldán, Manuel Ureste, Miriam Castillo
-  - DIRECCIÓN Y EDICIÓN GENERAL: Tania L. Montalvo, Francisco Sandoval & Daniel Moreno
+  - Diseño de información y coordinación: Yosune Chamizo Alberro
+  - Desarrollo de versión alpha: Gilberto León
+  - Desarrollo de versión beta: Mauricio Martínez Robles
+  - Diseño y desarrollo web: Jesús Santamaría, Mauricio Martínez Robles
+  - Identidad gráfica: Jesús Santamaría
+  - Video: Rodrigo Crespo
+  - Redes sociales: Jorge Ramis
+  - Investigación: Nayeli Roldán, Manuel Ureste, Miriam Castillo
+  - Dirección y edición general: Tania L. Montalvo, Francisco Sandoval & Daniel Moreno
