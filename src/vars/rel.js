@@ -46,6 +46,19 @@ export const predbs = [
     file: require('../static/csvs/empresas-fantasma-ver.csv')
   },
   {
+    name: 'La Red Karime-Duarte',
+    country: 'MEX',
+    countryLabel: 'México',
+    author: 'Animal Político',
+    size: 1,
+    blockEdit: true,
+    slug: 'estafa-maestra',
+    last: '2019-10-01',
+    url: "https://www.animalpolitico.com/red-karime-duarte/duarte-entrego-millonarios-recursos.html",
+    flag: require('../static/flags/mexico.svg'),
+    file: require('../static/csvs/red-karime-duarte.csv')
+  },
+  {
     name: 'SAT Definitivos',
     description: 'Empresas fantasma definitivas',
     country: 'MEX',

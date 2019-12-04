@@ -1963,6 +1963,7 @@ class SSNoResults extends React.Component{
   }
 
   getTip(){
+    return false;
     var obj = false;
     if(this.props.nodes.state.coincidencias > 0 || this.props.nodes.state.isolatingNode){
       return obj;
@@ -2912,14 +2913,11 @@ class SSDoiField extends React.Component{
 
 class SSTooltip extends React.Component{
   render(){
-
-
     try{
       var coords = d3.mouse(this.props.canvas);
     }catch{
       var coords = [0, 0];
     }
-
     var d = this.props.doi;
     var node = d3.select('.node[data-id="'+d.id+'"]');
     var color = getTypeColor(d.type);

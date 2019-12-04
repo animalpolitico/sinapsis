@@ -158,6 +158,10 @@ var credits = {
       credit: 'Video',
       persons: [
         {
+          name: 'Elizabeth Cruz',
+          tw: 'elycruzla'
+        },
+        {
           name: 'Rodrigo Crespo',
           tw: 'rodrigocrespo_'
         }
@@ -482,7 +486,7 @@ class FAQ extends React.Component{
           },
           {
             title: 'Casos de uso',
-            content: <>¿Usaste Sinapsis para alguna investigación?, cuéntanos cómo fue tu experiencia por <a href="mailto:sinapsis@animalpolitico.com">correo</a> o en nuestro <a href="http://t.me/sinapsisap" target="_blank">grupo de Telegram</a></>
+            content: <>¿Usaste Sinapsis para alguna investigación?, cuéntanos cómo fue tu experiencia por <a href="mailto:sinapsis@animalpolitico.com">correo</a> o en nuestro <a href="http://t.me/sinapsislat" target="_blank">grupo de Telegram</a></>
           },
         ]
       },
