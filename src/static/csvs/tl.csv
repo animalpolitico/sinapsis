@@ -1,0 +1,308 @@
+Capital humano,Educación,Docencia Totales,Total,,,
+Capital humano,Educación,Docencia Totales,Básico,,,
+Capital humano,Educación,Docencia Totales,Medio,,,
+Capital humano,Educación,Docencia Totales,Medio superior,,,
+Capital humano,Educación,Docencia Totales,Licenciatura,,,
+Capital humano,Educación,Docencia Totales,Posgrado,,,
+Capital humano,Educación,Nivel Educativo,Población con doctorado,,,
+Capital humano,Educación,Nivel Educativo,Población con formación técnica,h_ch_tecnica,,
+Capital humano,Educación,Nivel Educativo,Población con maestría,h_ch_posgrado,,
+Capital humano,Educación,Nivel Educativo,Población con normal,h_ch_normal,,
+Capital humano,Educación,Nivel Educativo,Población con preescolar,h_ch_preescolar,,
+Capital humano,Educación,Nivel Educativo,Población con preparatoria,h_ch_superior,,
+Capital humano,Educación,Nivel Educativo,Población con primaria,h_ch_primaria,,
+Capital humano,Educación,Nivel Educativo,Población con secundaria,h_ch_secundaria,,
+Capital humano,Educación,Nivel Educativo,Población con universidad,,,
+Capital humano,Educación,Nivel Educativo,Población sin escolaridad,h_ch_noescolaridad,,
+Demográficos,Población,General,Total de hogares,,,
+Demográficos,Población,General,Total población,h_d_residentes,,
+Demográficos,Población,Ocupada / Desocupada,Población desocupada,,,
+Demográficos,Población,Ocupada / Desocupada,Población económica inactiva,,,
+Demográficos,Población,Ocupada / Desocupada,Población económicamente activa,h_d_pob_eco_a,,
+Demográficos,Población,Ocupada / Desocupada,Población ocupada,h_d_pob_ocupada,,
+Demográficos,Población,Hogares,Ingreso de los hogares,h_d_ingreso_hogares,,
+Demográficos,Población,Hogares,Gasto de los hogares,h_d_gasto_hogares,,
+Demográficos,Población,Género,Población femenina,h_d_fem,,
+Demográficos,Población,Género,Población masculina,h_d_masc,,
+Demográficos,Población,Rangos de edad,Con más de 85 años femenina,,,
+Demográficos,Población,Rangos de edad,Con más de 85 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 0 y 4 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 0 y 4 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 10 y 14 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 10 y 14 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 15 y 19 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 15 y 19 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 20 y 24 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 20 y 24 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 25 y 29 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 25 y 29 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 30 y 34 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 30 y 34 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 35 y 39 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 35 y 39 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 40 y 44 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 40 y 44 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 45 y 49 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 45 y 49 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 5 y 9 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 5 y 9 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 50 y 54 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 50 y 54 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 55 y 59 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 55 y 59 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 60 y 64 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 60 y 64 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 65 y 69 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 65 y 69 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 70 y 74 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 70 y 74 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 75 y 79 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 75 y 79 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 80 y 84 años femenina,,,
+Demográficos,Población,Rangos de edad,Entre 80 y 84 años masculina,,,
+Demográficos,Población,Rangos de edad,Entre 85 años femenina,,,
+Demográficos,Población,Seguridad social,Población con derechohabiencia a cualquier servicio,h_d_derechohabiencia,,
+Demográficos,Población,Seguridad social,Población con IMSS,h_d_imsss,,
+Demográficos,Población,Seguridad social,Población con ISSSTE,h_d_issste,,
+Demográficos,Población,Seguridad social,Población con ISSSTE estatal,h_d_issste_e,,
+Demográficos,Población,Seguridad social,Población con seguro popular,h_d_ss,,
+Demográficos,Población,Seguridad social,Población sin derechohabiencia a servicios de salud,h_d_sss,,
+Demográficos,Vivienda,General,Ocupantes en viviendas habitadas,,,
+Demográficos,Vivienda,General,Total de viviendas,h_d_viviendas,,
+Demográficos,Vivienda,General,Total de viviendas habitadas,,,
+Económico,Inversión,Producción Bruta,Total,h_inv_pbruta,,
+Económico,Inversión,Valor Agregado,Total,h_inv_vagregado,,
+Económico,Inversión,Consumo de bienes,Total,h_inv_consumo_bienes,,
+Económico,Inversión,Ingreso por bienes,Total,h_inv_ingreso_bienes,,
+Económico,Macroeconómicos,Entorno,% PIB Deficit Público,,,
+Económico,Macroeconómicos,Entorno,Consumo Privado - Millones,,,
+Económico,Macroeconómicos,Entorno,Consumo Privado - Volumen Fisico,,,
+Económico,Macroeconómicos,Entorno,Crecimiento económico,,,
+Económico,Macroeconómicos,Entorno,Crecimiento por Sector,,,
+Económico,Macroeconómicos,Entorno,Exportaciones,,,
+Económico,Macroeconómicos,Entorno,Importaciones,,,
+Económico,Macroeconómicos,Entorno,Indice Nacional De Precios al Consumidor,,,
+Económico,Macroeconómicos,Entorno,Indice Nacional de precios al Productor,,,
+Económico,Macroeconómicos,Entorno,PIB,,,
+Económico,Macroeconómicos,Entorno,Rendimiento de cetes,,,
+Económico,Macroeconómicos,Entorno,Tasa de interés de referencia,,,
+Económico,Macroeconómicos,Entorno,Tipo de Cambio Dolar,,,
+Económico,Sectores,Energía,Minería,,,
+Económico,Sectores,Energía,Produccion de Gas Natural,,,
+Económico,Sectores,Energía,Produccion de Petroleo,,,
+Económico,Sectores,Pecuario,Produccion de Carne de Ovino,,,
+Económico,Sectores,Pecuario,Produccion de Carne de Pollo,,,
+Económico,Sectores,Pecuario,Produccion de Carne de Porcino,,,
+Económico,Sectores,Pecuario,Produccion de Carne de Res,,,
+Económico,Sectores,Pecuario,Produccion de Huevo,,,
+Económico,Sectores,Pecuario,Produccion de Leche,,,
+Económico,Sectores,Pesca,Principales especies de pesca,,,
+Económico,Sectores,Pesca,Produccion pesquera,,,
+Económico,Sectores,Pesca,Regiones productoras,,,
+Económico,Empresas Locales,Empresas Locales,Corredores Comerciales,h_el_corredores,,
+Económico,Empresas Locales,Empresas Locales,Personal Ocupado,h_el_personalocupado,,
+Económico,Empresas Locales,Empresas Locales,Diversificación Productiva,h_el_diversificacion,,
+Económico,Producción,Industrial,Producción total,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Industrial,Inversión total,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Industrial,Per. Ocu. Total,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Industrial,Manufactureras,,lopsum1921.79yh8z7a,102-9ct6ek
+Económico,Producción,Industrial,Alimentaria,,lopsum1921.02mllo5u,101-7p1xz0
+Económico,Producción,Industrial,Bebida,,lopsum1921.bmg1lob1,103-1m3y6c
+Económico,Producción,Industrial,Textilería,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Industrial,Producción textil,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Industrial,Prendas,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Industrial,Piel,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Industrial,Madera,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Industrial,Papel,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Industrial,Impresión,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Industrial,Química,,lopsum1921.79yh8z7a,102-9ct6ek
+Económico,Producción,Industrial,Plástico,,lopsum1921.02mllo5u,101-7p1xz0
+Económico,Producción,Industrial,Mineral,,lopsum1921.bmg1lob1,103-1m3y6c
+Económico,Producción,Industrial,Metálica,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Industrial,Maquinaria,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Industrial,Eléctrica,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Industrial,Transporte,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Industrial,Mueble,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Industrial,Otras,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Agrícola,Aguacate,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Agrícola,Ajonjolí,,lopsum1921.79yh8z7a,102-9ct6ek
+Económico,Producción,Agrícola,Arroz palay,,lopsum1921.02mllo5u,101-7p1xz0
+Económico,Producción,Agrícola,Cacahuate,,lopsum1921.bmg1lob1,103-1m3y6c
+Económico,Producción,Agrícola,Cacao,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Agrícola,Café cereza,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Agrícola,Calabaza semilla o chihua,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Agrícola,Camote,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Agrícola,Caña de azúcar,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Agrícola,Cebolla,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Agrícola,Chayote,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Agrícola,Chile verde,,lopsum1921.79yh8z7a,102-9ct6ek
+Económico,Producción,Agrícola,Ciruela,,lopsum1921.02mllo5u,101-7p1xz0
+Económico,Producción,Agrícola,Col (repollo),,lopsum1921.bmg1lob1,103-1m3y6c
+Económico,Producción,Agrícola,Copra,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Agrícola,Durazno,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Agrícola,Elote,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Agrícola,Frijol,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Agrícola,Guayaba,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Agrícola,Hule hevea,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Agrícola,Limón,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Agrícola,Litchi,,lopsum1921.79yh8z7a,102-9ct6ek
+Económico,Producción,Agrícola,Macadamia,,lopsum1921.02mllo5u,101-7p1xz0
+Económico,Producción,Agrícola,Maíz grano,,lopsum1921.bmg1lob1,103-1m3y6c
+Económico,Producción,Agrícola,Mamey,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Agrícola,Mandarina,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Agrícola,Mango,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Agrícola,Mangostán,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Agrícola,Manzana,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Agrícola,Melón,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Agrícola,Nanche,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Agrícola,Naranja,,lopsum1921.79yh8z7a,102-9ct6ek
+Económico,Producción,Agrícola,Palma africana o de aceite,,lopsum1921.02mllo5u,101-7p1xz0
+Económico,Producción,Agrícola,Palma de ornato camedor (gruesa),,lopsum1921.bmg1lob1,103-1m3y6c
+Económico,Producción,Agrícola,Papa,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Agrícola,Papaya,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Agrícola,Pastos y praderas,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Agrícola,Pepino,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Agrícola,Pera,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Agrícola,Perón,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Agrícola,Pimienta,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Agrícola,Plátano,,lopsum1921.79yh8z7a,102-9ct6ek
+Económico,Producción,Agrícola,Rambután,,lopsum1921.02mllo5u,101-7p1xz0
+Económico,Producción,Agrícola,Sandía,,lopsum1921.bmg1lob1,103-1m3y6c
+Económico,Producción,Agrícola,Semilla de maíz grano,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Agrícola,Semilla de soya,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Agrícola,Sorgo forrajero en verde,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Agrícola,Sorgo grano,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Agrícola,Soya,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Agrícola,Stevia,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Agrícola,Tabaco,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Agrícola,Tamarindo,,lopsum1921.79yh8z7a,102-9ct6ek
+Económico,Producción,Agrícola,Tejocote,,lopsum1921.02mllo5u,101-7p1xz0
+Económico,Producción,Agrícola,Tomate rojo (jitomate),,lopsum1921.bmg1lob1,103-1m3y6c
+Económico,Producción,Agrícola,Tomate verde,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Agrícola,Trigo grano,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Agrícola,Zapote,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Pesca,ATÚN,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Pesca,BANDERA,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Pesca,BARRILETE,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Pesca,BERRUGATA,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Pesca,BESUGO,,lopsum1921.79yh8z7a,102-9ct6ek
+Económico,Producción,Pesca,CABRILLA,,lopsum1921.02mllo5u,101-7p1xz0
+Económico,Producción,Pesca,CAMARÓN,,lopsum1921.bmg1lob1,103-1m3y6c
+Económico,Producción,Pesca,CAZÓN,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Pesca,CORVINA,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Pesca,FAUNA,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Pesca,GUACHINANGO,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Pesca,JAIBA,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Pesca,JUREL,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Pesca,LANGOSTINO,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Pesca,LEBRANCHA,,lopsum1921.79yh8z7a,102-9ct6ek
+Económico,Producción,Pesca,LENGUADO,,lopsum1921.02mllo5u,101-7p1xz0
+Económico,Producción,Pesca,LISA,,lopsum1921.bmg1lob1,103-1m3y6c
+Económico,Producción,Pesca,PARGO,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Pesca,RAYAS,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Pesca,RÓBALO,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Pesca,SIERRA,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Pesca,TIBURÓN,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Acuacultura,BAGRE,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Acuacultura,CAMARÓN,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Acuacultura,CARPA,,lopsum1921.79yh8z7a,102-9ct6ek
+Económico,Producción,Acuacultura,MOJARRA,,lopsum1921.02mllo5u,101-7p1xz0
+Económico,Producción,Acuacultura,OTRAS,,lopsum1921.bmg1lob1,103-1m3y6c
+Económico,Producción,Forestal,Pino,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Forestal,Cipres,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Forestal,Encino,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Forestal,Ambar,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Forestal,Cedro y caoba,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Forestal,Tropicales,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Forestal,Fibras,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Forestal,Plantas,,lopsum1921.79yh8z7a,102-9ct6ek
+Económico,Producción,Forestal,Resinas,,lopsum1921.02mllo5u,101-7p1xz0
+Económico,Producción,Turismo,Llegadas,,lopsum1921.bmg1lob1,103-1m3y6c
+Económico,Producción,Turismo,Turistas x N.,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Turismo,Ocupación Hotelera,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Turismo,Estadía,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Turismo,Restaurantes,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Turismo,Cafeterías,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Turismo,Centros Nocturnos,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Turismo,Bares,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Turismo,Agencias de viaje,,lopsum1921.79yh8z7a,102-9ct6ek
+Económico,Producción,Turismo,Balnearios,,lopsum1921.02mllo5u,101-7p1xz0
+Económico,Producción,Turismo,Alquiler autos,,lopsum1921.bmg1lob1,103-1m3y6c
+Económico,Producción,Turismo,Campos Golf,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Turismo,Centros Convención,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Turismo,Marinas,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Turismo,Admón. Puertos,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Turismo,Modulos Auxiliares,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Turismo,Transporte Terrestre,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Turismo,Tiendas artesanales,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Turismo,Otros servicios,,lopsum1921.crsnqz4m,104-89n6jy
+Económico,Producción,Turismo,Total servicios,,lopsum1921.874x8lzo,105-c9el96
+Económico,Producción,Artestanal,Alfareros/Cerámica,,lopsum1921.c15j6653,106-1qjnh5
+Económico,Producción,Artestanal,Lapid/Cantera,,lopsum1921.9p2kjni7,112-74zwo2
+Económico,Producción,Artestanal,Textilería,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Artestanal,Alimento TI,,lopsum1921.1k08lfnt,10-btb0ui
+Económico,Producción,Artestanal,Joyería,,lopsum1921.ad074oy8,100-7ohocw
+Económico,Producción,Artestanal,Talabartería,,lopsum1921.cz4jynxf,1-528jtp
+Económico,Producción,Artestanal,Madera,,lopsum1921.1k08lfnt,10-btb0ui
+Geografía,Recursos naturales,Agua,Agua,helena_water,,
+Geografía,Recursos naturales,,Caracteristicas geograficas de regiones,,,
+Geografía,Recursos naturales,Terreno,Topografía,terrain,,
+Geografía,Territorio,Clima,Tipo de clima,,,
+Geografía,Territorio,Propiedad de la tierra,Áreas protegidas,,,
+Geografía,Territorio,Propiedad de la tierra,Ejido,,,
+Geografía,Territorio,Propiedad de la tierra,Propiedad privada,,,
+Geografía,Territorio,Regiones,Región,,,
+Indicadores,Demográficos,Crecimiento poblacional,Tasa de crecimiento poblacional,,,
+Indicadores,Demográficos,Densidad poblacional,Densidad poblacional,h_d_densidad,,
+Indicadores,Demográficos,Densidad poblacional,Índice de Densidad de Población Laboral,,,
+Indicadores,Demográficos,Densidad poblacional,Índice de Densidad de Población Laboral Alto,,,
+Indicadores,Demográficos,Densidad poblacional,Índice de Densidad de Población Laboral Bajo,,,
+Indicadores,Demográficos,Densidad poblacional,Índice de Densidad de Población Laboral Medio,,,
+Indicadores,Demográficos,Densidad poblacional,Índice de Densidad de Población Laboral Muy Alto,,,
+Indicadores,Demográficos,Densidad poblacional,Índice de Densidad de Población Laboral Muy Bajo,,,
+Indicadores,Demográficos,Densidad poblacional,Índice de Densidad Poblacional,,,
+Indicadores,Económicos,Nivel Socio Económico,Hogares AB,h_d_nse_ab,,
+Indicadores,Económicos,Nivel Socio Económico,Hogares C,h_d_nse_c,,
+Indicadores,Económicos,Nivel Socio Económico,Hogares C-,h_d_nse_c2,,
+Indicadores,Económicos,Nivel Socio Económico,Hogares C+,h_d_nse_c1,,
+Indicadores,Económicos,Nivel Socio Económico,Hogares D-,h_d_nse_d1,,
+Indicadores,Económicos,Nivel Socio Económico,Hogares D+,h_d_nse_d2,,
+Indicadores,Económicos,Nivel Socio Económico,Hogares E,h_d_nse_e,,
+Indicadores,Económicos,Nivel Socio Económico,Nivel Socioeconómico Preponderante,,,
+Indicadores,Educación,Alfabetismo,Población analfabeta,,,
+Indicadores,Educación,Alfabetismo,Población analfabeta - hombres,,,
+Indicadores,Educación,Alfabetismo,Población analfabeta - mujeres,,,
+Indicadores,Educación,Alfabetismo,Tasa de Alfabetismo,,,
+Indicadores,Educación,Escolaridad,Municipios con mayor nivel educativo,,,
+Indicadores,Educación,Escolaridad,Grado promedio de estudios por seccion geografica,,,
+Indicadores,Educación,Escolaridad,grado promedio de estudios hombres,,,
+Indicadores,Educación,Escolaridad,grado promedio de estudios mujeres,,,
+Infraestructura,Banca y ahorro,Banca y ahorro,Total de cajeros,,,
+Infraestructura,Banca y ahorro,Banca y ahorro,Total de sucursales bancarias,h_i_bancos,,
+Infraestructura,Conectividad,Conectividad,Aeropuertos,helena_airport,,
+Infraestructura,Conectividad,Conectividad,Puertos,,,
+Infraestructura,Educación,Medio superior,Medio superior,h_ch_p_preparatoria,,
+Infraestructura,Educación,Básica,Básica,,,
+Infraestructura,Educación,Preescolar,Preescolar,,,
+Infraestructura,Educación,Superior,Superior,,,
+Infraestructura,Electricidad,Electricidad,Total,h_i_electricidad,,
+Infraestructura,Empresas Locales,Unidades Ecómicas,Sector,h_el_ueco,,
+Infraestructura,Empresas Locales,Unidades Ecómicas,Tamaño,h_el_ueco_size,,
+Infraestructura,Transporte,General,Urbano,h_i_turbano,,
+Infraestructura,Transporte,General,Foráneo,h_i_foraneo,,
+Infraestructura,Turismo,General,Total,h_i_turismo,,
+Infraestructura,Digital,General,Hogares con fibra óptica,,,
+Infraestructura,Digital,General,Hogares con servicio de internet fijo,,,
+Infraestructura,Digital,General,Hogares con servicio de telefonía fija,,,
+Infraestructura,Digital,General,Total de líneas con servicio de internet inalámbrico,,,
+Infraestructura,Digital,General,Total de líneas de telefonía móvil,,,
+Infraestructura,Salud,Servicios de salud,Consultorios de medicina especializada del sector privado,,,
+Infraestructura,Salud,Servicios de salud,Consultorios de medicina general del sector privado,,,
+Infraestructura,Salud,Servicios de salud,Consultorios de medicina general del sector público,,,
+Infraestructura,Salud,Servicios de salud,Total,h_i_salud,,
+Justicia y seguridad,Seguridad pública,Incidencia delictiva,Extorsion,,,
+Justicia y seguridad,Seguridad pública,Incidencia delictiva,Fraude,,,
+Justicia y seguridad,Seguridad pública,Incidencia delictiva,Homicidio,,,
+Justicia y seguridad,Seguridad pública,Incidencia delictiva,Privaciòn de la libertad,,,
+Justicia y seguridad,Seguridad pública,Incidencia delictiva,Robo a Negocio con violencia,,,
+Justicia y seguridad,Seguridad pública,Incidencia delictiva,Robo a Negocio sin violencia,,,

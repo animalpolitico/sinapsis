@@ -32,7 +32,7 @@ $dwp: 768px;
         width: 100%;
       }
     }
-    &_redes, &_contacto{
+    &_redes, .single_sharers, &_contacto{
       width: 100%;
       @extend .flex;
       justify-content: center;
@@ -563,6 +563,18 @@ $dwp: 768px;
     @media (min-width: $dwp){
       width: 500px;
     }
+    &_slogan_two{
+      width: 100%;
+      text-align: center;
+      margin-top: 1rem;
+      color: #f6f6f6;
+      font-size: 1.2rem;
+      font-weight: 500;
+      span{
+        text-shadow: 0 0 2px $main;
+        color: $main;
+      }
+    }
     &_slogan{
       font-size: 1.2rem;
       text-transform: uppercase;
@@ -573,7 +585,7 @@ $dwp: 768px;
       position: relative;
       max-width: 350px;
       margin: 0 auto 0;
-      padding-top: 2rem;
+      padding-top: 8rem;
       strong{
         font-weight: 600;
       }
@@ -633,6 +645,36 @@ $dwp: 768px;
             box-shadow: 0 0 8px 4px rgba($main, 0.7);
           }
         }
+      }
+    }
+  }
+}
+.single_sharers{
+  width: 100%;
+  @extend .flex;
+  flex-wrap: wrap!important;
+  justify-content: center;
+  &_td{
+    width: 100%;
+    text-align: center;
+    @extend .flex;
+    justify-content: center;
+    &.single_sharers_td_label{
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: white;
+      font-weight: 600;
+    }
+    &.single_sharers_td_content{
+      width: 100%;
+      margin-top: 0.75rem;
+      margin-bottom: 0.25rem;
+      align-items: center;
+      @extend .flex;
+      .ssh_td{
+        color: #f6f6f6;
+        padding: 0 0.75rem;
+        font-size: 1.1rem;
       }
     }
   }

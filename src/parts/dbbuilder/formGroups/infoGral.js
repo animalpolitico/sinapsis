@@ -62,6 +62,7 @@ export default class DbFormGroupInfoGeneral extends React.Component{
               validate={['rfc']}
               name="RFC"
               type="text"
+              description="Clave que otorga el Servicio de Administración Tributaria (SAT), ésta es la Cédula de Identificación Fiscal de la empresa."
               errorType="warning"
               errorLegend="Quizá debas eliminar guiones o puntos"
               empresa={this.props.empresa}
@@ -71,6 +72,7 @@ export default class DbFormGroupInfoGeneral extends React.Component{
               name="Folio Mercantil"
               type="text"
               unique
+              description="Las empresas tienen la obligación de inscribirse en el Registro Público del Comercio para que la sociedad sepa de su existencia. Cuando una empresa queda inscrita en el Registro éste le asigna un folio mercantil para identificarla."
               errorType="warning"
               errorLegend="Ya insertaste este folio mercantil"
               empresa={this.props.empresa}
