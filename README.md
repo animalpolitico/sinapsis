@@ -54,7 +54,7 @@ ___
   - Desarrollo de versión beta: Mauricio Martínez Robles
   - Diseño y desarrollo web: Jesús Santamaría, Mauricio Martínez Robles
   - Identidad gráfica: Jesús Santamaría
-  - Video: Elizabeth Cruz, Rodrigo Crespo
+  - Video: Elizabeth Cruz, Ethan Murillo
   - Redes sociales: Jorge Ramis
-  - Investigación: Nayeli Roldán, Manuel Ureste, Miriam Castillo
+  - Investigación: Nayeli Roldán, Manuel Ureste, Miriam Castillo & Arturo Ángel
   - Dirección y edición general: Tania L. Montalvo, Francisco Sandoval & Daniel Moreno

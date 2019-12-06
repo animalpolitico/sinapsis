@@ -156,8 +156,7 @@ var credits = {
           tw: 'elycruzla'
         },
         {
-          name: 'Rodrigo Crespo',
-          tw: 'rodrigocrespo_'
+          name: 'Ethan Murillo',
         }
       ]
     },
@@ -184,6 +183,10 @@ var credits = {
         {
           name: 'Miriam Castillo',
           tw: 'Micmoya'
+        },
+        {
+          name: 'Arturo Ángel',
+          tw: 'arturoangel20'
         }
       ]
     },

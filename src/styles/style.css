@@ -159,7 +159,8 @@ a, a:link, a:visited, a:hover {
       flex: 1;
       justify-content: center; }
       .ssmhb_row_td.ssmhb_slogo img {
-        width: 170px; }
+        width: 170px;
+        height: 0% !important; }
     .ssmhb_row_td.ssmhb_actions {
       justify-content: flex-end;
       align-items: center; }
@@ -182,7 +183,8 @@ a, a:link, a:visited, a:hover {
       .ssmhb_row_td.ssmhb_logo {
         min-width: 170px; } }
     .ssmhb_row_td.ssmhb_logo img {
-      width: 48px; }
+      width: 48px;
+      height: auto !important; }
       @media (min-width: 1090px) {
         .ssmhb_row_td.ssmhb_logo img {
           width: 53px; } }
@@ -2587,6 +2589,9 @@ body.ss_dragging .ss_guide {
           color: white;
           font-weight: 600;
           align-items: center; }
+        .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_td span {
+          opacity: 0.8;
+          font-weight: 300; }
         .ss_control_group .ss_control_group_container_switches .ss_ctr_ch_td_ball {
           width: 8px;
           height: 8px;
@@ -3947,6 +3952,9 @@ body.ss_showing_drawer .ss_no_results {
 .MuiButtonBase-root.Mui-focused {
   background: #222 !important; }
 
+#sssilogo {
+  display: none; }
+
 @media (max-width: 1090px) {
   .ss_db_toolbar_info_td.ss_db_lastmodified, .ss_db_builder_project_name_placeholder {
     display: none; }
@@ -4002,6 +4010,27 @@ body.ss_showing_drawer .ss_no_results {
   min-width: 0 !important; }
 .ss_mobile #db_viz_nodes_controls {
   display: none !important; }
+.ss_mobile #db_ij_projectname {
+  text-align: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex: 1; }
+.ss_mobile .ss_db_builder_project_name_goback {
+  margin-right: 0; }
+.ss_mobile #ssbraingoback {
+  display: none; }
+.ss_mobile .ss_db_toolbar_info_td {
+  width: 100%; }
+.ss_mobile #sssilogo {
+  display: block;
+  padding: 0 0.25rem;
+  box-sizing: border-box;
+  text-align: center;
+  width: 65px; }
+  .ss_mobile #sssilogo img {
+    width: 100%;
+    height: 0%;
+    transform: translateY(3px); }
 .ss_mobile .nodes_controls {
   display: none; }
 .ss_mobile .nodes_controls_button {

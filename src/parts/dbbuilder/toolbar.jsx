@@ -313,7 +313,7 @@ class DbBuilderToolbarName extends React.Component{
         <div className="ss_db_builder_project_name_goback" onClick={() => window.open("https://animalpolitico.com")}>
           <img src={require('../../static/api.png')} />
         </div>
-        <div className="ss_db_builder_project_name_goback" onClick={() => this.goBack()}>
+        <div className="ss_db_builder_project_name_goback" id="ssbraingoback" onClick={() => this.goBack()}>
           <img src={require('../../static/imagotipo.png')} />
         </div>
         <div className="ss_db_builder_project_name_placeholder" >
@@ -324,6 +324,9 @@ class DbBuilderToolbarName extends React.Component{
           <div className="ss_db_builder_project_name_icon" onClick={() => this.setState({showEdit: true})}>
             <Icon>edit</Icon>
           </div>
+        </div>
+        <div id="sssilogo" onClick={() => window.location.href = "https://sinapsis.lat"}>
+          <img src={require('../../static/logo.png')} />
         </div>
       </div>
       <Dialog open={this.state.showEdit} onClose={() => this.handleDialogClose()}>

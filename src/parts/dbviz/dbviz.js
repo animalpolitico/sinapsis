@@ -1010,6 +1010,10 @@ class Nodes extends React.Component{
                             .append('g')
                             .attr('class', 'nodes_label node')
                             .attr('data-id', d => d.id)
+                            .attr('data-type', function(d){
+
+                              return d.type;
+                            })
                             .call(this.drag())
 
       var rects = nodesLabels
@@ -1243,18 +1247,26 @@ class Nodes extends React.Component{
         var c = d.coincidencias;
         var id = d.id;
         var x = 0;
-        var ls = d3.selectAll('.nodes_link')
-                    .filter(function(l){
-                      return !d3.select(this).classed('node_dont_touch') && ((l.source.id == id && l.source.type == "empresa") || (l.target.id == id && l.type == "empresa"))
-                    })
-                    .each(function(l){
-                      console.log('l', l);
-                      x++;
-                    });
+        d3.select(this).attr('data-old-coincidencias', c);
+        if(window.dbf.obj.isEmptyFilter){
+          var ls = d3.selectAll('.nodes_link')
+                      .filter(function(l){
+                        return !d3.select(this).classed('node_dont_touch') &&  ((l.source.id == id && l.source.type == "empresa") || (l.target.id == id && l.type == "empresa"))
+                      })
+                      .each(function(l){
+                        x++;
+                      });
+        }else{
+          var x = d3.select(this).attr('data-old-coincidencias') || c;
+
+        }
+
         d.coincidencias = x;
         d3.select(this).attr('data-coincidencias', x);
 
       })
+
+
 
 
 
@@ -1706,6 +1718,7 @@ class Nodes extends React.Component{
     })
 
     var hasInter = window.dbf.obj.hasInterEmpresas;
+    window.dbf.obj.isEmptyFilter = isempty;
     if(hasInter){
       this.removeEmpty();
     }else{
@@ -2752,6 +2765,16 @@ class SSCategoryToggle extends React.Component{
   }
 
 
+  getTypeCoincidencias(t){
+    var c = 0;
+    d3.selectAll('.node[data-type="'+t+'"], .nodes_label[data-type="'+t+'"]:not(.node_dont_touch)')
+      .each(function(l){
+        c += l.coincidencias;
+      })
+
+    return c;
+  }
+
   handleChange(e, v){
     var vals = this.state.vals;
     var ischecked = e.target.checked;
@@ -2862,6 +2885,8 @@ class SSCategoryToggle extends React.Component{
             </div>
             {
               types.map(function(m){
+                var c = self.getTypeCoincidencias(m);
+
                 return(
                   <div className="ss_ctr_ch" data-type={m}>
                     <input
@@ -2878,7 +2903,7 @@ class SSCategoryToggle extends React.Component{
                           </div>
                         </div>
                       </div>
-                      <div className="ss_ctr_ch_td">{getTypeName(m)}</div>
+                      <div className="ss_ctr_ch_td">{getTypeName(m)} <span>({c})</span></div>
                     </div>
 
                   </div>

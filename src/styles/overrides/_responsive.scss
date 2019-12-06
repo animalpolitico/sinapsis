@@ -1,3 +1,6 @@
+#sssilogo{
+  display: none;
+}
 @media (max-width: $ss){
   .ss_db_toolbar_info_td.ss_db_lastmodified, .ss_db_builder_project_name_placeholder{
     display: none;
@@ -77,6 +80,33 @@
     .MuiButtonBase-root{
       &:first-child{
       }
+    }
+  }
+  #db_ij_projectname{
+    text-align: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex: 1;
+  }
+  .ss_db_builder_project_name_goback{
+    margin-right: 0;
+  }
+  #ssbraingoback{
+    display: none;
+  }
+  .ss_db_toolbar_info_td{
+    width: 100%;
+  }
+  #sssilogo{
+    display: block;
+    padding: 0 0.25rem;
+    box-sizing: border-box;
+    text-align: center;
+    width: 65px;
+    img{
+      width: 100%;
+      height: 0%;
+      transform: translateY(3px);
     }
   }
   .nodes_controls{
