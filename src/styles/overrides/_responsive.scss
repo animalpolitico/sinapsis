@@ -40,10 +40,12 @@
 
   .ss_db_choose{
     width: 100%;
+    justify-content: center;
   }
   .ss_dbbuilder_front{
     min-height: 600px!important;
     .ss_db_choose_td{
+      max-width: 400px;
       &:not(.ss_db_estafa){
         display: none;
       }

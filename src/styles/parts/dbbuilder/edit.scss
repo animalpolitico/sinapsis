@@ -600,6 +600,23 @@
         font-size: 0.7rem;
         font-weight: 600;
         transform: translateY(-100%);
+        &_tl{
+          @extend .flex;
+          align-items: center;
+          flex-wrap: wrap;
+          > div:not(.ssi_tooltip){
+            width: 40%;
+          }
+          .ssi_tooltip{
+            .material-icons{
+              margin-left: 0.25rem;
+              color: #777;
+              font-size: 0.8rem;
+              line-height: 1;
+              display: block;
+            }
+          }
+        }
         &_icon{
           font-size: 0.5rem;
           line-height: 1;

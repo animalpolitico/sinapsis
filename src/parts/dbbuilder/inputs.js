@@ -475,7 +475,20 @@ export default class DbInput extends React.Component{
           {
             !this.props.hideLabel ?
             <div className="ss_db_input_container_label">
-              {this.getLabel()}
+              <div className="ss_db_input_container_label_tl">
+                {this.getLabel()}
+                {
+                  isMexico() && this.props.description?
+                  <div className="ssi_tooltip">
+                    <Tooltip
+                      title={this.props.description}
+                    >
+                        <Icon size="small">info</Icon>
+                    </Tooltip>
+                  </div>
+                  : null
+                }
+              </div>
               {
                 show_gm ?
                 <div className="ss_db_input_container_label_icon" style={{width: "100%"}}>

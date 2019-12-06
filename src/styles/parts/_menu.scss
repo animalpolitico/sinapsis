@@ -24,10 +24,6 @@
         justify-content: center;
         img{
           width: 170px;
-          @media (max-width: $ss){
-            display: none;
-
-          }
         }
       }
       &.ssmhb_actions{
@@ -85,5 +81,16 @@
     top: 0;
     left: 0;
     pointer-events: none;
+  }
+}
+.wrapper_mobile{
+  .ssmhb_slogo{
+    justify-content: flex-end!important;
+    img{
+      width: 100px!important;
+    }
+  }
+  .ssmhb_actions_td_btn{
+    display: none!important;
   }
 }

@@ -244,6 +244,7 @@ export default class DbFormGroupContrato extends React.Component{
                       type="text"
                       category="emisor"
                       group="contrato"
+                      description='Nombre de la dependencia (recomendamos escribir siglas, ej. SEDESOL), nombre de la instancia (puede ser el de una universidad, ej. UAEM) o el nombre de la empresa.'
                       empresa={this.props.empresa}
                       db={this.props.parent.props.db}
                       ref={this.setChildRef}
@@ -283,6 +284,7 @@ export default class DbFormGroupContrato extends React.Component{
                       name="Servicio realizado"
                       type="text"
                       group="contrato"
+                      description='Es la descripción de las actividades que se van a llevar a cabo durante el contrato, por ejemplo "consultoría en tecnología" o "servicios de arquitectura y construcción"'
                       empresa={this.props.empresa}
                       db={this.props.parent.props.db}
                       ref={this.setChildRef}
@@ -293,6 +295,7 @@ export default class DbFormGroupContrato extends React.Component{
                       name="Persona que firma"
                       type="text"
                       group="contrato"
+                      description='Nombre completo de la persona que firma el contrato'
                       empresa={this.props.empresa}
                       db={this.props.parent.props.db}
                       ref={this.setChildRef}
@@ -301,6 +304,7 @@ export default class DbFormGroupContrato extends React.Component{
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       name="Cargo de quien firma"
                       type="text"
+                      description='Cargo de la persona que firma el contrato'
                       group="contrato"
                       empresa={this.props.empresa}
                       db={this.props.parent.props.db}

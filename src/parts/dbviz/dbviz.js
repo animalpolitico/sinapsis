@@ -30,7 +30,7 @@ var mobile = require('is-mobile');
 export default class DbViz extends React.Component{
   state = {
     showSearch: true,
-    showcontrols: mobile() ? false : true,
+    showcontrols: mobile({tablet: true}) ? false : true,
     displayAnalytics: false,
     displayMap: false,
     r: 0
@@ -478,6 +478,9 @@ function getTypeName(t){
 function getTypeIcon(t){
   var o = "";
   switch(t){
+    case "empresa":
+      o =  "apartment";
+    break;
     case "rfc":
       o =  "home_work";
     break;
@@ -497,7 +500,7 @@ function getTypeIcon(t){
       o =  "monetization_on";
     break;
     case "instancia":
-      o =  "apartment";
+      o =  "business";
     break;
     case "titular":
       o =  "person_outline";
@@ -988,7 +991,9 @@ class Nodes extends React.Component{
 
 
       bgs.on('click', function(){
-              self.releaseNode();
+              if(self.state.isolatingNode){
+                self.releaseNode();
+              }
               self.simulation.stop();
             })
 
@@ -1156,7 +1161,7 @@ class Nodes extends React.Component{
           }
         })
         .on('click', function(d){
-          if(!mobile()){
+          if(!mobile({tablet: true})){
             d.isclicked = true;
             self.isolateNode(d.id)
           }
@@ -1224,9 +1229,37 @@ class Nodes extends React.Component{
       coincidencias: x
     })
 
+    this.setEmpresasNodesCoincidencias();
+
     return x;
 
   }
+
+  setEmpresasNodesCoincidencias(){
+
+    d3.selectAll('.node_circle')
+      .filter(d => d.type == "empresa")
+      .each(function(d){
+        var c = d.coincidencias;
+        var id = d.id;
+        var x = 0;
+        var ls = d3.selectAll('.nodes_link')
+                    .filter(function(l){
+                      return !d3.select(this).classed('node_dont_touch') && ((l.source.id == id && l.source.type == "empresa") || (l.target.id == id && l.type == "empresa"))
+                    })
+                    .each(function(l){
+                      console.log('l', l);
+                      x++;
+                    });
+        d.coincidencias = x;
+        d3.select(this).attr('data-coincidencias', x);
+
+      })
+
+
+
+  }
+
 
   filterInitNodes(){
     var n = this.nodesData.nodes;
@@ -1319,11 +1352,26 @@ class Nodes extends React.Component{
     })
     var links = [];
 
+    var ems = [];
+
     n.map(function(d){
       var id = d.id;
       var f = d.fields;
       var econv = []; // Convenios en la empresa
       var isempresa = d.type == "empresa";
+
+      if(isempresa){
+        var slug = d.name.replace(/[.\s]/g, '');
+            slug = slugify(slug, {lower: true, remove: /[*,\/+~.()'"!:@]/g});
+        var _em = {
+          value: d.name,
+          slug: slug,
+          db: d.fields[0].fromdb,
+          id: d.id
+        }
+        ems.push(_em);
+      }
+
       f.map(function(_f){
         var t = _f.empresauid;
 
@@ -1365,6 +1413,25 @@ class Nodes extends React.Component{
       })
 
     })
+
+
+    /* Cruces entre empresas */
+    var ds = [];
+    var dsx = 0;
+    ems.map(function(_d){
+      var r = ems.find(f => f.slug == _d.slug && f.id !== _d.id && ds.indexOf(_d.slug) == -1);
+      if(r){
+        ds.push(_d.slug);
+        dsx++;
+        links.push({
+          source: _d.id,
+          target: r.id
+        })
+      }
+    })
+
+
+    window.dbf.obj.hasInterEmpresas = dsx > 0;
 
 
 
@@ -1637,12 +1704,20 @@ class Nodes extends React.Component{
 
 
     })
-    if(!isempty){
+
+    var hasInter = window.dbf.obj.hasInterEmpresas;
+    if(hasInter){
       this.removeEmpty();
     }else{
-      d3.selectAll('.node[data-type="empresa"]')
-        .classed('node_dont_touch', false)
+      if(!isempty){
+        this.removeEmpty();
+      }else{
+        d3.selectAll('.node[data-type="empresa"]')
+          .classed('node_dont_touch', false)
+      }
     }
+
+
 
     this.getCoincidenciasSize();
     this.setNodeCircleSize();
@@ -1653,9 +1728,18 @@ class Nodes extends React.Component{
       .each(function(d){
         var c = 0;
         var id = d.id;
-        d3.selectAll('.nodes_link[data-to="'+ id +'"]:not(.node_dont_touch)')
+        d3.selectAll('.nodes_link:not(.node_dont_touch)')
           .each(function(l){
-            c++;
+            if(l.source.type !== "empresa" || l.target.type !== "empresa"){
+              if(l.source.id == id || l.target.id == id){
+                c++;
+              }
+            }else{
+              if(l.source.id == id || l.target.id == id){
+                c++;
+              }
+            }
+
           })
         d.coincidencias = c;
         var n = d3.select(this);
@@ -1760,6 +1844,8 @@ class Nodes extends React.Component{
     s = s.replace(/stroke\-width\=\"40px\"/g, 'stroke-width="1px"');
     s = s.replace(/stroke\-width\=\"4px\"/g, 'stroke-width="0px"');
     s = s.replace(/stroke\-width\=\"24\"/g, 'stroke-width="1px"');
+    s = s.replace(/stroke\-width\=\"6\"/g, 'stroke-width="0.15"');
+    s = s.replace(/stroke\-width\=\"6px\"/g, 'stroke-width="0.15"');
     s = s.replace(/stroke\-width\=\"57px\"/g, 'stroke-width="0.15"');
     s = s.replace(/stroke\-width\=\"16px\"/g, 'stroke-width="0.15"');
     s = s.replace(/stroke\-width\=\"17px\"/g, 'stroke-width="0.15"');
@@ -1874,6 +1960,11 @@ class Nodes extends React.Component{
 
   }
 
+  onZoomInOut(n){
+    console.log('n', n);
+    this.zoom.scaleBy(this.canvas, n == -1 ? 0.8 : 1.2);
+  }
+
   render(){
     var self = this;
     return(
@@ -1896,13 +1987,12 @@ class Nodes extends React.Component{
           <Fab title="Refrescar" alt="Refrescar" size="small" color="primary" onClick={() => this.set()}  id="db_ij_refresh">
             <Icon>autorenew</Icon>
           </Fab>
-          {
-            !this.state.isPerfectZoom ?
+
             <Fab title="Centrar" alt="Centrar" size="small" color="primary" disabled={this.state.isPerfectZoom} onClick={() => this.setInitialZoom()}>
               <Icon>center_focus_strong</Icon>
             </Fab>
-            : null
-          }
+
+          <ZoomInOut onClick={(n) => this.onZoomInOut(n)}/>
 
 
         </div>
@@ -1933,6 +2023,21 @@ class Nodes extends React.Component{
           <div className="db_viz_guides_guide dguide_x"></div>
         </div>
         <div className="db_viz_glow_indicator"></div>
+      </div>
+    )
+  }
+}
+
+class ZoomInOut extends React.Component{
+  render(){
+    return(
+      <div className="ss_zoom_in_out">
+        <div className="ss_zoom_in_out_btn" onClick={() => this.props.onClick(1)}>
+          <Icon>add</Icon>
+        </div>
+        <div className="ss_zoom_in_out_btn" onClick={() => this.props.onClick(-1)}>
+          <Icon>remove</Icon>
+        </div>
       </div>
     )
   }
@@ -2104,7 +2209,7 @@ class SSListado extends React.Component{
   set(){
     var self = this;
     var v = this.props.v;
-    v = [...v, ...window.dbf.getNewOtros()];
+    v = ["empresa", ...v, ...window.dbf.getNewOtros()];
     var nds = d3.selectAll('.node');
     var d = {};
 
@@ -2129,13 +2234,16 @@ class SSListado extends React.Component{
     }
     nds.filter(d => d.type == t)
        .each(function(d){
-         var coin = d.coincidencias;
-         obj.coincidencias = obj.coincidencias + coin;
-         if(!d.istitular){
-           obj.fields.push(d.fields);
-         }else{
-           obj.t.push(d.fields);
+         if(!d3.select(this).classed('node_dont_touch')){
+           var coin = d.coincidencias;
+           obj.coincidencias = obj.coincidencias + coin;
+           if(!d.istitular){
+             obj.fields.push(d.fields);
+           }else{
+             obj.t.push(d.fields);
+           }
          }
+
        })
 
     obj.fields.sort(function(a, b){
@@ -2251,7 +2359,7 @@ class SSListado extends React.Component{
 
   render(){
     var v = this.props.v;
-    v = [...window.dbf.getNewOtros(), ...v]
+    v = [...window.dbf.getNewOtros(), "empresa", ...v]
 
     var self = this;
     var eoi = this.state.eoi;
@@ -2334,7 +2442,6 @@ class SSListado extends React.Component{
                   var f = fg[0];
                   var fn = f.value;
                   var istitular = f.matchWith && f.matchWith.indexOf('titular') > -1;
-                  console.log('fg', fg);
                   return(
                     <div className="ss_listado_table_group">
                       <input type="checkbox" />
@@ -3021,7 +3128,7 @@ class SSTooltip extends React.Component{
         }
 
         {
-          !mobile() ?
+          !mobile({tablet: true}) ?
           <div className="db_viz_tooltip_click" style={{color: d.type == "instancia" ? textColor : color}}>
             {
               d.type == "instancia" ?

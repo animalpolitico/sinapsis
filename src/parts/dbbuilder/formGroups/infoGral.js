@@ -83,6 +83,7 @@ export default class DbFormGroupInfoGeneral extends React.Component{
               name="Objeto social"
               type="text"
               multiline
+              description='Es la descripción de las actividades que va a llevar a cabo la empresa, por ejemplo "consultoría en tecnología" o "servicios de arquitectura y construcción"'
               empresa={this.props.empresa}
             />
             <DbInput
@@ -102,6 +103,7 @@ export default class DbFormGroupInfoGeneral extends React.Component{
               onChange={(slug, obj) => this.props.parent.insertField(slug, obj)}
               name="Capital social mínimo"
               type="currency"
+              description='Se refiere a la cantidad de dinero con la que se registró la empresa.'
               db={this.props.parent.props.db}
               empresa={this.props.empresa}
             />
@@ -110,6 +112,7 @@ export default class DbFormGroupInfoGeneral extends React.Component{
               name="Dirección fiscal"
               matchWith={['address']}
               type="address"
+              description='Domicilio de la empresa, ésta debe aparecer en los contratos o convenios'
               empresa={this.props.empresa}
             />
           {
@@ -117,6 +120,7 @@ export default class DbFormGroupInfoGeneral extends React.Component{
             <DbInput
               onChange={(slug, obj) => this.props.parent.insertField(slug, obj)}
               name="Entidad Federativa"
+              description='En qué estado se creó la empresa (CDMX, Veracruz, Chiapas, etc). Este dato se encuentra en el acta constitutiva'
               empresa={this.props.empresa}
             />
           : null
@@ -128,6 +132,7 @@ export default class DbFormGroupInfoGeneral extends React.Component{
               mask="tel"
               name="Teléfono"
               type="text"
+              description='Número telefónico de la empresa (procura no usar guiones, ni paréntesis, ni espacios)'
               empresa={this.props.empresa}
             />
             <DbInput
@@ -136,6 +141,7 @@ export default class DbFormGroupInfoGeneral extends React.Component{
               validate={['website']}
               name="Sitio web"
               type="text"
+              description='Dirección electrónica del sitio web de la empresa'
               errorLegend="Sitio web inválido"
               empresa={this.props.empresa}
             />
@@ -145,6 +151,7 @@ export default class DbFormGroupInfoGeneral extends React.Component{
               validate={['email']}
               name="Correo electrónico"
               type="text"
+              description='Dirección de correo electrónico de la empresa'
               errorLegend="Correo electrónico inválido"
               empresa={this.props.empresa}
             />

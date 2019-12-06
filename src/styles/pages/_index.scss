@@ -82,6 +82,11 @@ $dwp: 768px;
 .ss_h_h1{
   text-transform: uppercase;
   font-size: 1.5rem;
+  @media (min-width: $dwp){
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+  }
   &_s{
     color: #f6f6f6;
     font-weight: 300;
@@ -119,7 +124,9 @@ $dwp: 768px;
     font-size: 0.9rem;
     line-height: 1.3;
     @media (min-width: $dwp){
-      width: 60%;
+      width: 65%;
+      margin-left: auto;
+      margin-right: auto;
     }
     a{
       color: $main;
@@ -150,7 +157,8 @@ $dwp: 768px;
       top: 0;
       left: 0;
       @media (min-width: $dwp){
-        width: 60%;
+        width: 65%;
+        left: 17.5%;
       }
       div{
         width: 60%;
@@ -168,7 +176,9 @@ $dwp: 768px;
       font-size: 1.1rem;
       font-weight: 300;
       @media (min-width: $dwp){
-        width: 60%;
+        width: 65%;
+        margin-left: auto;
+        margin-right: auto;
       }
       strong{
         margin-left: 4px;
@@ -181,7 +191,9 @@ $dwp: 768px;
       font-size: 0.9rem;
       line-height: 1.3;
       @media (min-width: $dwp){
-        width: 60%;
+        width: 65%;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .ss_h_subpoints{

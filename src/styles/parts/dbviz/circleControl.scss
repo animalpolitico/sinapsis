@@ -1,3 +1,33 @@
+.ss_zoom_in_out{
+  width: 70%;
+  margin: 0.5rem auto 0;
+  @extend .flex;
+  flex-direction: column;
+  border: 1px solid #444;
+  box-sizing: border-box;
+  &_btn{
+    width: 100%;
+    box-sizing: border-box;
+    @extend .flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0.35rem 0.5rem;
+    background: #333;
+    cursor:pointer;
+    justify-content: center;
+    &:first-child{
+      border-bottom: 1px solid #444;
+    }
+    &:hover{
+      background: #444;
+    }
+    .material-icons{
+      color: #f6f6f6;
+      font-size: 0.8rem;
+    }
+  }
+}
+
 .nodes_controls{
   width: 200px;
   position: absolute;

@@ -46,7 +46,7 @@ export default class App extends React.Component{
     return(
       <ThemeProvider theme={theme}>
         <Router>
-          <div id="wrapper" className={mobile() ? 'wrapper_mobile' : ''}>
+          <div id="wrapper" className={mobile({tablet: true}) ? 'wrapper_mobile' : ''}>
             <div id="binder">
               <Switch>
                 <Route path={buildLink("/")} exact component={Index} />

@@ -41,6 +41,7 @@ export default class DbFormGroupNotaria extends React.Component{
               matchWith={['person']}
               name="Nombre del notario"
               type="text"
+              description='Nombre completo del notario que firma el acta constitutiva de la empresa.'
               group="Notaría"
               empresa={this.props.empresa}
             />

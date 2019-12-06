@@ -51,6 +51,7 @@ export default class DbFormGroupComentarios extends React.Component{
               onChange={(slug, obj) => this.props.parent.insertField(slug, obj)}
               name="Comentarios"
               textarea
+              description='En este campo eres libre de escribir lo que quieras, nada de lo que aparezca aquí se cruzará, solo sirve de referencia por si el investigador quiere escribir algo relacionado con la empresa que lo ayude a recordar o a tener presente información adicional'
               hideLabel
               placeholder="Escribe un comentario..."
               type="text"

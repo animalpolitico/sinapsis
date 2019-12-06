@@ -645,22 +645,23 @@ class GoTo extends React.Component{
           <div className="ss_h_s_goto_container_slogan">
             <span></span> Herramienta para descubrir<br /><strong>conexiones entre empresas</strong>
           </div>
-          <div className="ss_h_s_goto_container_slogan_two">
-            <span>#</span>SinapsisLat
-          </div>
-          <div className="ss_h_s_goto_container_img">
-            <img src={require('../static/brain2.png')} />
-          </div>
-          <div style={{marginBottom: '1.2rem'}}>
-            <SingleSharers />
-          </div>
-
-
+          <div style={{marginBottom: '1.2rem'}}></div>
           <div className="ss_h_s_goto_container_ctas">
             <div className="ss_h_s_goto_container_ctas_cta" onClick={() => this.props.history.push(buildLink('/herramienta'))}>
               Ir a la herramienta
             </div>
           </div>
+          <div className="ss_h_s_goto_container_img">
+            <img src={require('../static/brain2.png')} />
+          </div>
+          <div className="ss_h_s_goto_container_slogan_two">
+            <span>#</span>SinapsisLat
+          </div>
+          <div style={{marginBottom: '1.2rem'}}></div>
+          <SingleSharers />
+
+
+
 
         </div>
       </div>

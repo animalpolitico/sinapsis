@@ -84,7 +84,7 @@ export default class DbBuilderPage extends React.Component{
     this.set();
     window.scroll(0,0);
     /* Previene cerrar el navegador */
-    if(!mobile()){
+    if(!mobile({tablet: true})){
       window.addEventListener("beforeunload", (ev) => {
           ev.preventDefault();
           return ev.returnValue = '¿Deseas cerrar la pestaña?';
@@ -125,7 +125,7 @@ export default class DbBuilderPage extends React.Component{
           this.props.history.push(url);
         }else{
           var hasE = window.dbf.obj.dbs && Object.values(window.dbf.obj.dbs).length > 0;
-          if(!mobile()){
+          if(!mobile({tablet: true})){
             demo();
           }
           if(!hasE){
@@ -148,7 +148,7 @@ export default class DbBuilderPage extends React.Component{
     if(this.props.match.params.dbid !== this.state.uid){
       var s = true;
       if(!this.props.match.params.dbid && this.state.hasloaded){
-        if(!mobile()){
+        if(!mobile({tablet: true})){
           s = window.confirm('¿Deseas regresar? Guarda tu archivo para no perder los cambios hechos.');
         }
       }
@@ -322,7 +322,7 @@ export default class DbBuilderPage extends React.Component{
       var title = "Proyecto: " + window.dbf.obj.info.name;
     }
     var cs = ["ss_page"];
-    if(mobile()){
+    if(mobile({tablet: true})){
       cs.push('ss_mobile');
     }
 
@@ -334,7 +334,7 @@ export default class DbBuilderPage extends React.Component{
         <DbLoader />
         <DbAlert />
           {
-            mobile() ?
+            mobile({tablet: true}) ?
             <DbMobileAlert />
             : null
           }
@@ -1856,7 +1856,6 @@ class DbDbsNavigationTd extends React.Component{
   render(){
     var db = this.props.db;
 
-    console.log('db', db);
 
     var cs = ["ss_dbbuilder_sidebar_dbs_nav_td"];
     if(!this.state.showing){

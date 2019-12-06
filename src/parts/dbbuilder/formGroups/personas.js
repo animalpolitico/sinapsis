@@ -262,6 +262,7 @@ export default class DbFormGroupPersonas extends React.Component{
                       validate={['rfc']}
                       name="RFC"
                       type="text"
+                      description='Clave que otorga el Servicio de Administración Tributaria (SAT)'
                       errorType="warning"
                       category="rfc"
                       group={this.state.personType}
@@ -286,6 +287,7 @@ export default class DbFormGroupPersonas extends React.Component{
                         sumWith={['inner_capital_aportado']}
                         name="Capital aportado"
                         type="currency"
+                        description='Cantidad de dinero que aportó el/la accionista.'
                         db={this.props.parent.props.db}
                         group={this.state.personType}
                         empresa={this.props.empresa}
@@ -320,6 +322,7 @@ export default class DbFormGroupPersonas extends React.Component{
                         matchWith={['instancia']}
                         name="Nombre de la dependencia"
                         type="text"
+                        description='Nombre de la dependencia donde fue o es funcionarix.'
                         group={this.state.personType}
                         empresa={this.props.empresa}
                         db={this.props.parent.props.db}

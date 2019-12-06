@@ -210,6 +210,7 @@ export default class DbFormGroupConvenio extends React.Component{
                       type="text"
                       category="emisor"
                       group="convenio"
+                      description='Nombre de la dependencia que otorga (recomendamos escribir siglas, ej. SEDESOL), nombre de la instancia (puede ser el de una universidad, ej. UAEM).'
                       empresa={this.props.empresa}
                       db={this.props.parent.props.db}
                       ref={this.setChildRef}
@@ -218,6 +219,7 @@ export default class DbFormGroupConvenio extends React.Component{
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       matchWith={['instancia']}
                       name="¿Quién recibe los recursos?"
+                      description='Nombre de la dependencia que recibe (recomendamos escribir siglas, ej. SEDESOL), nombre de la instancia (puede ser el de una universidad, ej. UAEM).'
                       aka="¿Qué instancia recibe los recursos?"
                       type="text"
                       category="receptor"
@@ -260,6 +262,7 @@ export default class DbFormGroupConvenio extends React.Component{
                       onChange={(slug, obj) => this.insertField(slug, obj)}
                       name="Objeto del convenio"
                       type="text"
+                      description='Es la descripción de las actividades que se van a llevar a cabo durante el convenio, por ejemplo "consultoría en tecnología" o "servicios de arquitectura y construcción"'
                       group="convenio"
                       empresa={this.props.empresa}
                       db={this.props.parent.props.db}

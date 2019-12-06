@@ -10,11 +10,16 @@ export default class SSMenuHomeBar extends React.Component{
     var self = this;
     window.scroll(0,0);
     window.addEventListener('scroll', function(e){
-      var ty = document.getElementById('ss_my').getBoundingClientRect().top;
-      var s = ty <= 0;
-      self.setState({
-        show: s
-      })
+      try{
+        var ty = document.getElementById('ss_my').getBoundingClientRect().top;
+        var s = ty <= 0;
+        self.setState({
+          show: s
+        })
+      }catch{
+        
+      }
+
     })
 
   }
