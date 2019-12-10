@@ -1402,7 +1402,7 @@ class DbDbsNavigationNewDb extends React.Component{
       reader.readAsText(file, "UTF-8");
       reader.onload = function(ev){
         var t =  ev.target.result;
-        if(!(t.indexOf('EMPRESA:') === 1)){
+        if(!(t.indexOf('EMPRESA:') === 1 || t.indexOf('%V') === 1)){
           self.setState({
             showInvalid: true
           })

@@ -1328,7 +1328,7 @@ export default class DbFactory {
       '',
       '¿Dudas?, ¿sugerencias?, ¿observaciones?:',
       '',
-      '- sinapsis@animalpolitico.com',
+      '- hola@sinapsis.lat',
       '- https://t.me/sinapsislat (grupo de Telegram)'
     ];
 

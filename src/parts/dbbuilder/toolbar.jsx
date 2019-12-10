@@ -217,7 +217,7 @@ export default class DbBuilderToolbar extends React.Component{
               <DialogContent style={{width: 400}}>
                 ¿Necesitas precargar una base de datos?, ¿tienes alguna duda, sugerencia o comentario?
                 <br /><br/>
-                - <a style={{textDecoration: 'underline'}} href="mailto:sinapsis@animalpolitico.com">sinapsis@animalpolitico.com</a>
+                - <a style={{textDecoration: 'underline'}} href="mailto:hola@sinapsis.lat">hola@sinapsis.lat</a>
                 <br/>
                 - <a style={{textDecoration: 'underline'}} target="_blank" href="https://t.me/sinapsislat">Grupo de Telegram</a>
               <br/>
@@ -231,7 +231,7 @@ export default class DbBuilderToolbar extends React.Component{
                 <Button color="secondary" onClick={() => this.contactAction('https://t.me/sinapsislat')}>
                   Ir a Telegram
                 </Button>
-                <Button color="secondary" onClick={() => this.contactAction('mailto:sinapsis@animalpolitico.com')}>
+                <Button color="secondary" onClick={() => this.contactAction('mailto:hola@sinapsis.lat')}>
                   Escribir correo
                 </Button>
               </DialogActions>

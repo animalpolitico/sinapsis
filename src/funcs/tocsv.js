@@ -20,7 +20,7 @@ export default class ConvertDbToCsv{
 
   prepareCSV(){
     var c = [
-      "EMPRESA: \nRazón social (nombre de la empresa)",
+      "%V1%EMPRESA: \nRazón social (nombre de la empresa)",
       "EMPRESA: \nRFC",
       "EMPRESA: \nFolio mercantil",
       "EMPRESA: \nObjeto social (descripción de actividades)",

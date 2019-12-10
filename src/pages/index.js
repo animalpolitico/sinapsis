@@ -24,11 +24,11 @@ export default class Index extends React.Component{
         </Helmet>
         <Landing />
         <DiagBg>
-          <div id="ss_my" style={{paddingTop: '4rem'}}></div>
           <Element name="video">
             <GoTo history={this.props.history}/>
           </Element>
         </DiagBg>
+        <Video />
         <UsaSinapsis />
         <DiagBg>
           <Casos />
@@ -81,8 +81,8 @@ class Footer extends React.Component{
         <div className="ss_footer_row">
           <div className="ss_footer_row_contacto">
             <div className="ss_footer_row_contacto_td">
-              <a href="mailto:sinapsis@animalpolitico.com">
-                sinapsis@animalpolitico.com
+              <a href="mailto:hola@sinapsis.lat">
+                hola@sinapsis.lat
               </a>
             </div>
             <div className="ss_footer_row_contacto_td">
@@ -475,7 +475,7 @@ class FAQ extends React.Component{
           },
           {
             title: 'Bases de datos',
-            content: <>Si tienes alguna base pública que no esté cargada envíala a <a href="mailto:sinapsis@animalpolitico.com">sinapis@animalpolitico.com</a></>
+            content: <>Si tienes alguna base pública que no esté cargada envíala a <a href="mailto:hola@sinapsis.lat">hola@sinapsis.lat</a></>
           },
           {
             title: 'Equivalencias de términos empresariales',
@@ -483,7 +483,7 @@ class FAQ extends React.Component{
           },
           {
             title: 'Casos de uso',
-            content: <>¿Usaste Sinapsis para alguna investigación?, cuéntanos cómo fue tu experiencia por <a href="mailto:sinapsis@animalpolitico.com">correo</a> o en nuestro <a href="http://t.me/sinapsislat" target="_blank">grupo de Telegram</a></>
+            content: <>¿Usaste Sinapsis para alguna investigación?, cuéntanos cómo fue tu experiencia por <a href="mailto:hola@sinapsis.lat">correo</a> o en nuestro <a href="http://t.me/sinapsislat" target="_blank">grupo de Telegram</a></>
           },
         ]
       },
@@ -504,7 +504,7 @@ class FAQ extends React.Component{
           <br/>
           ¡Contáctanos!
           <br/>
-          <a href="mailto:sinapsis@animalpolitico.com">sinapsis@animalpolitico.com</a>
+          <a href="mailto:hola@sinapsis.lat">hola@sinapsis.lat</a>
           <br/>
           <a href="https://t.me/sinapsislat" target="_blank">Grupo de Telegram</a>
         </H1AndP>
@@ -676,11 +676,13 @@ class Video extends React.Component{
   render(){
     return(
         <div className="ss_h_s" id="ss_h_video">
-          <div className="ss_h_s_video">
-            <div className="ss_h_s_video_ball"></div>
-            <div className="ss_h_s_video_icon"><Icon>play_circle_outline</Icon></div>
-            <SSH1 pre="¿Qué es" bold="Sinapsis?" />
-          </div>
+          <a href="https://www.youtube.com/watch?reload=9&v=PT3UGsBkPfI&feature=youtu.be" target="_blank">
+            <div className="ss_h_s_video">
+              <div className="ss_h_s_video_ball"></div>
+              <div className="ss_h_s_video_icon"><Icon>play_circle_outline</Icon></div>
+              <SSH1 pre="¿Qué es" bold="Sinapsis?" />
+            </div>
+          </a>
         </div>
     )
   }
@@ -712,11 +714,12 @@ class Landing extends React.Component{
           <div className="ss_h_s_c_g">
 
           </div>
-          <ScrollLink to="video" smooth={true}>
+          <ScrollLink to="video" smooth={true} offset={-100}>
             <div className="ss_h_s_c_arrows">
               <Icon>keyboard_arrow_down</Icon>
               <Icon>keyboard_arrow_down</Icon>
             </div>
+            <div id="ss_my"></div>
           </ScrollLink>
         </div>
       </div>

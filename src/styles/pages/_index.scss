@@ -529,7 +529,7 @@ $dwp: 768px;
     background: url('../static/brain1.png') no-repeat center center;
     background-size: contain;
     @media (min-width: $dwp){
-      width: 850px;
+      width: 700px;
     }
     &_ball{
       width: 15px;
@@ -566,7 +566,6 @@ $dwp: 768px;
   }
 }
 #ss_h_goto{
-  margin-top: 4rem;
   .ss_h_s_goto_container{
     width: 80%;
     margin: 0 auto;
@@ -597,7 +596,7 @@ $dwp: 768px;
       position: relative;
       max-width: 350px;
       margin: 0 auto 0;
-      padding-top: 8rem;
+      padding-top: 2rem;
       strong{
         font-weight: 600;
       }

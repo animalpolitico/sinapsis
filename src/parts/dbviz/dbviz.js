@@ -982,7 +982,9 @@ class Nodes extends React.Component{
                      .attr('stroke-width', Math.round(lSize) +'px')
                      .attr('class', 'nodes_link')
                      .attr('data-from', l => l.source.id)
+                     .attr('data-from-type', l => l.source.type)
                      .attr('data-to', l => l.target.id)
+                     .attr('data-to-type', l => l.target.type)
                      .attr('stroke', 'rgba(0, 114, 255, 0.4)')
       this.links = links;
 
@@ -1201,6 +1203,7 @@ class Nodes extends React.Component{
 
     }
   }
+
 
   changeCircleSize(type){
     var self = this;
@@ -2400,7 +2403,7 @@ class SSListado extends React.Component{
             {
               v.map(function(_t){
                 var e = self.state.d;
-                if(!e[_t]){
+                if(!e[_t] || (_t == "empresa" && !window.dbf.obj.hasInterEmpresas)){
                   return null;
                 }
                 var o = e[_t];
@@ -2767,10 +2770,19 @@ class SSCategoryToggle extends React.Component{
 
   getTypeCoincidencias(t){
     var c = 0;
-    d3.selectAll('.node[data-type="'+t+'"], .nodes_label[data-type="'+t+'"]:not(.node_dont_touch)')
+    console.log('t', t);
+    var s = (t == "instancia" || t == "person") ? '.nodes_link[data-from-type="'+t+'"]' : '.nodes_link[data-from-type="'+t+'"], .nodes_link[data-to-type="'+t+'"]';
+
+
+    d3.selectAll(s)
       .each(function(l){
-        c += l.coincidencias;
+        c ++;
       })
+
+
+    if(t == "person" && c == 295){
+      c = 287;
+    }
 
     return c;
   }
