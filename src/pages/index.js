@@ -78,6 +78,9 @@ class Footer extends React.Component{
         <div className="ss_footer_row">
           <SingleSharers />
         </div>
+        <div className="ss_footer_row" style={{textAlign: 'center'}}>
+          <img src={require('../static/openi.png')} style={{width: 50}}/>
+        </div>
         <div className="ss_footer_row">
           <div className="ss_footer_row_contacto">
             <div className="ss_footer_row_contacto_td">
@@ -210,7 +213,8 @@ var credits = {
   ],
   colab: [
     {
-      name: 'Nicolás',
+      name: 'Nicolás Grossman',
+      medio: 'socios.red',
       credit: 'Argentina'
     },
     {
