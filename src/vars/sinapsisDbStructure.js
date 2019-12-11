@@ -11,57 +11,57 @@ export const sinapsisDbObject = [
             hint: 'Nombre de la empresa',
             type: 'text',
             required: true,
-            matchWith: ['empresa']
+            matchWith: ['empresa'],
           },
           {
             name: 'RFC',
             type: 'text',
             validate: ['rfc'],
-            matchWith: ['rfc']
+            matchWith: ['rfc'],
           },
           {
             name: 'Folio mercantil',
             type: 'text',
             validate: ['folio_mercantil'],
-            unique: true
+            unique: true,
           },
           {
             name: 'Objeto social',
             type: 'text',
-            multiline: true
+            multiline: true,
           },
           {
             name: 'Fecha de creación',
             type: 'date',
-            matchWith: ['date']
+            matchWith: ['date'],
           },
           {
             name: 'Capital social mínimo',
-            type: 'currency'
+            type: 'currency',
           },
           {
             name: 'Dirección fiscal',
             type: 'address',
             matchWith: ['address'],
-            geocode: true
+            geocode: true,
           },
           {
             name: 'Teléfono',
             type: 'phone',
-            matchWith: ['phone']
+            matchWith: ['phone'],
           },
           {
             name: 'Sitio web',
             type: 'text',
             validate: ['website'],
-            matchWith: ['website']
+            matchWith: ['website'],
           },
           {
             name: 'Correo electrónico',
             type: 'email',
-            matchWith: ['email']
-          }
-        ]
+            matchWith: ['email'],
+          },
+        ],
       },
       {
         name: 'Personas',
@@ -74,19 +74,19 @@ export const sinapsisDbObject = [
                   name: 'Nombre completo',
                   type: 'text',
                   mask: ['person'],
-                  matchWith: ['person']
+                  matchWith: ['person'],
                 },
                 {
                   name: 'RFC',
                   type: 'text',
                   validate: ['rfc'],
-                  matchWith: ['rfc']
+                  matchWith: ['rfc'],
                 },
                 {
                   name: 'Dirección',
                   type: 'address',
                   matchWith: ['address'],
-                  geocode: true
+                  geocode: true,
                 },
                 {
                   name: '¿Fue funcionario?',
@@ -101,22 +101,22 @@ export const sinapsisDbObject = [
                         {
                           name: 'Nombre de la dependencia',
                           type: 'text',
-                          matchWith: ['dependencia']
+                          matchWith: ['dependencia'],
                         },
                         {
                           name: 'Último año activo',
-                          type: 'year'
-                        }
-                      ]
+                          type: 'year',
+                        },
+                      ],
                     },
                     {
                       name: 'No',
-                      value: 'no'
-                    }
-                  ]
+                      value: 'no',
+                    },
+                  ],
                 },
-              ]
-            }
+              ],
+            },
           },
           {
             name: 'Accionistas',
@@ -127,19 +127,19 @@ export const sinapsisDbObject = [
                   name: 'Nombre completo',
                   type: 'text',
                   mask: ['person'],
-                  matchWith: ['person']
+                  matchWith: ['person'],
                 },
                 {
                   name: 'RFC',
                   type: 'text',
                   validate: ['rfc'],
-                  matchWith: ['rfc']
+                  matchWith: ['rfc'],
                 },
                 {
                   name: 'Dirección',
                   type: 'address',
                   matchWith: ['address'],
-                  geocode: true
+                  geocode: true,
                 },
                 {
                   name: '¿Fue funcionario?',
@@ -154,26 +154,26 @@ export const sinapsisDbObject = [
                         {
                           name: 'Nombre de la dependencia',
                           type: 'text',
-                          matchWith: ['dependencia']
+                          matchWith: ['dependencia'],
                         },
                         {
                           name: 'Último año activo',
-                          type: 'year'
-                        }
-                      ]
+                          type: 'year',
+                        },
+                      ],
                     },
                     {
                       name: 'No',
-                      value: 'no'
-                    }
-                  ]
+                      value: 'no',
+                    },
+                  ],
                 },
                 {
                   name: 'Capital aportado',
-                  type: 'currency'
-                }
-              ]
-            }
+                  type: 'currency',
+                },
+              ],
+            },
           },
           {
             name: 'Administrador',
@@ -183,19 +183,19 @@ export const sinapsisDbObject = [
                   name: 'Nombre completo',
                   type: 'text',
                   mask: ['person'],
-                  matchWith: ['person']
+                  matchWith: ['person'],
                 },
                 {
                   name: 'RFC',
                   type: 'text',
                   validate: ['rfc'],
-                  matchWith: ['rfc']
+                  matchWith: ['rfc'],
                 },
                 {
                   name: 'Dirección',
                   type: 'address',
                   matchWith: ['address'],
-                  geocode: true
+                  geocode: true,
                 },
                 {
                   name: '¿Fue funcionario?',
@@ -210,22 +210,22 @@ export const sinapsisDbObject = [
                         {
                           name: 'Nombre de la dependencia',
                           type: 'text',
-                          matchWith: ['dependencia']
+                          matchWith: ['dependencia'],
                         },
                         {
                           name: 'Último año activo',
-                          type: 'year'
-                        }
-                      ]
+                          type: 'year',
+                        },
+                      ],
                     },
                     {
                       name: 'No',
-                      value: 'no'
-                    }
-                  ]
-                }
-              ]
-            }
+                      value: 'no',
+                    },
+                  ],
+                },
+              ],
+            },
           },
           {
             name: 'Comisario',
@@ -235,19 +235,19 @@ export const sinapsisDbObject = [
                   name: 'Nombre completo',
                   type: 'text',
                   mask: ['person'],
-                  matchWith: ['person']
+                  matchWith: ['person'],
                 },
                 {
                   name: 'RFC',
                   type: 'text',
                   validate: ['rfc'],
-                  matchWith: ['rfc']
+                  matchWith: ['rfc'],
                 },
                 {
                   name: 'Dirección',
                   type: 'address',
                   matchWith: ['address'],
-                  geocode: true
+                  geocode: true,
                 },
                 {
                   name: '¿Fue funcionario?',
@@ -262,22 +262,22 @@ export const sinapsisDbObject = [
                         {
                           name: 'Nombre de la dependencia',
                           type: 'text',
-                          matchWith: ['dependencia']
+                          matchWith: ['dependencia'],
                         },
                         {
                           name: 'Último año activo',
-                          type: 'year'
-                        }
-                      ]
+                          type: 'year',
+                        },
+                      ],
                     },
                     {
                       name: 'No',
-                      value: 'no'
-                    }
-                  ]
-                }
-              ]
-            }
+                      value: 'no',
+                    },
+                  ],
+                },
+              ],
+            },
           },
           {
             name: 'Consejero',
@@ -287,19 +287,19 @@ export const sinapsisDbObject = [
                   name: 'Nombre completo',
                   type: 'text',
                   mask: ['person'],
-                  matchWith: ['person']
+                  matchWith: ['person'],
                 },
                 {
                   name: 'RFC',
                   type: 'text',
                   validate: ['rfc'],
-                  matchWith: ['rfc']
+                  matchWith: ['rfc'],
                 },
                 {
                   name: 'Dirección',
                   type: 'address',
                   matchWith: ['address'],
-                  geocode: true
+                  geocode: true,
                 },
                 {
                   name: '¿Fue funcionario?',
@@ -314,24 +314,24 @@ export const sinapsisDbObject = [
                         {
                           name: 'Nombre de la dependencia',
                           type: 'text',
-                          matchWith: ['dependencia']
+                          matchWith: ['dependencia'],
                         },
                         {
                           name: 'Último año activo',
-                          type: 'year'
-                        }
-                      ]
+                          type: 'year',
+                        },
+                      ],
                     },
                     {
                       name: 'No',
-                      value: 'no'
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        ]
+                      value: 'no',
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        ],
       },
       {
         name: 'Notaría',
@@ -340,20 +340,20 @@ export const sinapsisDbObject = [
             name: 'Nombre del notario',
             type: 'text',
             mask: ['person'],
-            matchWith: ['person']
+            matchWith: ['person'],
           },
           {
             name: 'Número de la notaría',
             type: 'text',
-            matchWith: ['notaria_number']
+            matchWith: ['notaria_number'],
           },
           {
             name: 'Dirección',
             type: 'address',
             matchWith: ['address'],
-            geocode: true
-          }
-        ]
+            geocode: true,
+          },
+        ],
       },
       {
         name: 'Info. oficial',
@@ -362,219 +362,219 @@ export const sinapsisDbObject = [
             {
               name: '¿Está inscrito RUPC?',
               type: 'checkbox',
-              value: 'si'
+              value: 'si',
             },
             {
               name: '¿Está registrado en CompraNet?',
               type: 'checkbox',
-              value: 'si'
+              value: 'si',
             },
             {
               name: '¿Es SAT presunta?',
               type: 'checkbox',
-              value: 'si'
+              value: 'si',
             },
             {
               name: '¿Es SAT definitiva?',
               type: 'checkbox',
-              value: 'si'
+              value: 'si',
             },
             {
               name: 'No está localizado por la ASF',
               type: 'checkbox',
-              value: 'si'
+              value: 'si',
             },
             {
               name: 'No tiene antecedentes registrales',
               type: 'checkbox',
-              value: 'si'
-            }
-          ]
-        }
-      }
-    ]
+              value: 'si',
+            },
+          ],
+        },
+      },
+    ],
   },
   {
-   name: 'Contrato',
-   multiple: true,
-   inputs: [
-     {
-       name: '¿Quién otorga los recursos?',
-       type: 'text',
-       matchWith: ['empresa', 'person']
-     },
-     {
-       name: 'Número de contrato',
-       type: 'text'
-     },
-     {
-       name: 'Fecha de inicio',
-       type: 'date'
-     },
-     {
-       name: 'Fecha de término',
-       type: 'date'
-     },
-     {
-       name: 'Servicio realizado',
-       type: 'text',
-       multiline: true
-     },
-     {
-       name: 'Persona que firma',
-       type: 'text',
-       mask: ['person'],
-       matchWith: ['person']
-     },
-     {
-       name: 'Cargo de quien firma',
-       type: 'text'
-     },
-     {
-       name: 'Monto del contrato',
-       type: 'currency',
-       sumWith: ['montos_contrato', 'montos_totales']
-     },
-     {
-       name: '¿Fue parte de una licitacion?',
-       type: 'radio',
-       defaultValue: 'no',
-       inputs: [
-         {
-           name: 'Sí',
-           value: 'si',
-           onselect: 'showchilds',
-           childs: [
-             {
-               name: 'Fecha de fallo',
-               type: 'date'
-             },
-             {
-               name: 'Monto total',
-               type: 'currency',
-               sumWith: ['montos_licitacion']
-             }
-           ]
-         },
-         {
-           name: 'No',
-           value: 'no'
-         }
-       ]
-     },
-     {
-       name: '¿Se subcontrataron empresas?',
-       type: 'radio',
-       defaultValue: 'no',
-       inputs: [
-         {
-           name: 'Sí',
-           value: 'si',
-           onselect: 'addEmpresaFromSubcontratos'
-         },
-         {
-           name: 'No',
-           value: 'no'
-         }
-       ]
-     },
-     {
-       name: 'Funcionario de instancia',
-       hint: 'Titular',
-       type: 'text',
-       mask: ['person'],
-       matchWith: ['person']
-     },
-   ]
-  },
-  {
-  name: 'Convenio',
-  multiple: true,
-  inputs: [
+    name: 'Contrato',
+    multiple: true,
+    inputs: [
       {
         name: '¿Quién otorga los recursos?',
         type: 'text',
-        matchWith: ['dependencia', 'instancia']
+        matchWith: ['empresa', 'person'],
       },
       {
-        name: '¿Quién recibe los recursos?',
+        name: 'Número de contrato',
         type: 'text',
-        matchWith: ['instancia']
-      },
-      {
-        name: 'Número de convenio',
-        type: 'text'
       },
       {
         name: 'Fecha de inicio',
-        type: 'date'
+        type: 'date',
       },
       {
         name: 'Fecha de término',
-        type: 'date'
+        type: 'date',
       },
       {
-        name: 'Objeto del convenio',
+        name: 'Servicio realizado',
         type: 'text',
-        multiline: true
+        multiline: true,
       },
       {
-        name: 'Nombre de quien firma',
-        hint: 'Recibe recursos',
+        name: 'Persona que firma',
         type: 'text',
         mask: ['person'],
-        matchWith: ['person']
+        matchWith: ['person'],
       },
       {
         name: 'Cargo de quien firma',
-        hint: 'Recibe recursos',
-        type: 'text'
-      },
-      {
-        name: 'Nombre de quien firma',
-        hint: 'Otorga recursos',
         type: 'text',
-        mask: ['person'],
-        matchWith: ['person']
       },
       {
-        name: 'Cargo de quien firma',
-        hint: 'Recibe recursos',
-        type: 'text'
-      },
-      {
-        name: 'Monto del convenio',
+        name: 'Monto del contrato',
         type: 'currency',
-        sumWith: ['montos_convenio', 'montos_totales']
+        sumWith: ['montos_contrato', 'montos_totales'],
+      },
+      {
+        name: '¿Fue parte de una licitacion?',
+        type: 'radio',
+        defaultValue: 'no',
+        inputs: [
+          {
+            name: 'Sí',
+            value: 'si',
+            onselect: 'showchilds',
+            childs: [
+              {
+                name: 'Fecha de fallo',
+                type: 'date',
+              },
+              {
+                name: 'Monto total',
+                type: 'currency',
+                sumWith: ['montos_licitacion'],
+              },
+            ],
+          },
+          {
+            name: 'No',
+            value: 'no',
+          },
+        ],
+      },
+      {
+        name: '¿Se subcontrataron empresas?',
+        type: 'radio',
+        defaultValue: 'no',
+        inputs: [
+          {
+            name: 'Sí',
+            value: 'si',
+            onselect: 'addEmpresaFromSubcontratos',
+          },
+          {
+            name: 'No',
+            value: 'no',
+          },
+        ],
       },
       {
         name: 'Funcionario de instancia',
         hint: 'Titular',
         type: 'text',
         mask: ['person'],
-        matchWith: ['person']
+        matchWith: ['person'],
       },
-    ]
+    ],
   },
   {
-  name: 'Transferencia',
-  multiple: true,
-  inputs: [
+    name: 'Convenio',
+    multiple: true,
+    inputs: [
       {
         name: '¿Quién otorga los recursos?',
         type: 'text',
-        matchWith: ['dependencia', 'instancia', 'empresa', 'person']
+        matchWith: ['dependencia', 'instancia'],
+      },
+      {
+        name: '¿Quién recibe los recursos?',
+        type: 'text',
+        matchWith: ['instancia'],
+      },
+      {
+        name: 'Número de convenio',
+        type: 'text',
+      },
+      {
+        name: 'Fecha de inicio',
+        type: 'date',
+      },
+      {
+        name: 'Fecha de término',
+        type: 'date',
+      },
+      {
+        name: 'Objeto del convenio',
+        type: 'text',
+        multiline: true,
+      },
+      {
+        name: 'Nombre de quien firma',
+        hint: 'Recibe recursos',
+        type: 'text',
+        mask: ['person'],
+        matchWith: ['person'],
+      },
+      {
+        name: 'Cargo de quien firma',
+        hint: 'Recibe recursos',
+        type: 'text',
+      },
+      {
+        name: 'Nombre de quien firma',
+        hint: 'Otorga recursos',
+        type: 'text',
+        mask: ['person'],
+        matchWith: ['person'],
+      },
+      {
+        name: 'Cargo de quien firma',
+        hint: 'Recibe recursos',
+        type: 'text',
+      },
+      {
+        name: 'Monto del convenio',
+        type: 'currency',
+        sumWith: ['montos_convenio', 'montos_totales'],
+      },
+      {
+        name: 'Funcionario de instancia',
+        hint: 'Titular',
+        type: 'text',
+        mask: ['person'],
+        matchWith: ['person'],
+      },
+    ],
+  },
+  {
+    name: 'Transferencia',
+    multiple: true,
+    inputs: [
+      {
+        name: '¿Quién otorga los recursos?',
+        type: 'text',
+        matchWith: ['dependencia', 'instancia', 'empresa', 'person'],
       },
       {
         name: 'Nombre de a quién se realiza la transferencia',
         type: 'text',
-        matchWith: ['empresa', 'person']
+        matchWith: ['empresa', 'person'],
       },
       {
         name: 'Monto de transferencia',
         type: 'currency',
-        sumWith: ['montos_transferencia', 'montos_totales']
-      }
-    ]
-  }
-]
+        sumWith: ['montos_transferencia', 'montos_totales'],
+      },
+    ],
+  },
+];

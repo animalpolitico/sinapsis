@@ -1,15 +1,17 @@
 import { getISO } from '../vars/countriesDict';
+
 const queryString = require('query-string');
-export function GCBuildLink(a){
-  var iso = getISO();
-  var baseUrl= "https://maps.googleapis.com/maps/api/geocode/json";
-  var params = {
-    'key': "AIzaSyAXc86Sj6eDybMXNU-201kM-d740uoaMqk",
-    'address': a,
-    'language': 'es',
-    'region': iso
+
+export function GCBuildLink(a) {
+  const iso = getISO();
+  const baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
+  const params = {
+    key: 'AIzaSyAXc86Sj6eDybMXNU-201kM-d740uoaMqk',
+    address: a,
+    language: 'es',
+    region: iso,
   };
-  var paramString = queryString.stringify(params);
-  var url = baseUrl + '?' + paramString;
+  const paramString = queryString.stringify(params);
+  const url = `${baseUrl}?${paramString}`;
   return url;
 }

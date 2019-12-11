@@ -9,7 +9,7 @@ export const predbs = [
     size: 3,
     slug: 'sat-favorables',
     last: '2019-11-01',
-    url: "http://www.supersociedades.gov.co",
+    url: 'http://www.supersociedades.gov.co',
     flag: require('../static/flags/colombia.svg'),
     file: require('../static/csvs/col-patrimonio-2017.csv'),
     only: [
@@ -17,8 +17,8 @@ export const predbs = [
       'RUT',
       'Entidad Federativa',
       'Supervisor',
-      'Macrosector'
-    ]
+      'Macrosector',
+    ],
   },
   {
     name: 'Estafa Maestra',
@@ -28,9 +28,9 @@ export const predbs = [
     size: 2,
     slug: 'estafa-maestra',
     last: '2019-11-01',
-    url: "https://animalpolitico.com/estafa-maestra",
+    url: 'https://animalpolitico.com/estafa-maestra',
     flag: require('../static/flags/mexico.svg'),
-    file: require('../static/csvs/estafa-maestra.csv')
+    file: require('../static/csvs/estafa-maestra.csv'),
   },
   {
     name: 'Empresas Fantasma de Veracruz',
@@ -41,9 +41,9 @@ export const predbs = [
     blockEdit: true,
     slug: 'estafa-maestra',
     last: '2019-10-01',
-    url: "https://www.animalpolitico.com/las-empresas-fantasma-de-veracruz",
+    url: 'https://www.animalpolitico.com/las-empresas-fantasma-de-veracruz',
     flag: require('../static/flags/mexico.svg'),
-    file: require('../static/csvs/empresas-fantasma-ver.csv')
+    file: require('../static/csvs/empresas-fantasma-ver.csv'),
   },
   {
     name: 'La Red Karime-Duarte',
@@ -54,9 +54,9 @@ export const predbs = [
     blockEdit: true,
     slug: 'estafa-maestra',
     last: '2019-10-01',
-    url: "https://www.animalpolitico.com/red-karime-duarte/duarte-entrego-millonarios-recursos.html",
+    url: 'https://www.animalpolitico.com/red-karime-duarte/duarte-entrego-millonarios-recursos.html',
     flag: require('../static/flags/mexico.svg'),
-    file: require('../static/csvs/red-karime-duarte.csv')
+    file: require('../static/csvs/red-karime-duarte.csv'),
   },
   {
     name: 'SAT Definitivos',
@@ -68,13 +68,13 @@ export const predbs = [
     size: 5,
     slug: 'sat-definitivos',
     last: '2019-10-08',
-    url: "http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html",
+    url: 'http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html',
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/sat-def.csv'),
     only: [
       'Nombre de empresa',
-      'RFC'
-    ]
+      'RFC',
+    ],
   },
   {
     name: 'SAT Presuntos',
@@ -86,13 +86,13 @@ export const predbs = [
     size: 3,
     slug: 'sat-definitivos',
     last: '2019-10-08',
-    url: "http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html",
+    url: 'http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html',
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/sat-pre.csv'),
     only: [
       'Nombre de empresa',
-      'RFC'
-    ]
+      'RFC',
+    ],
   },
   {
     name: 'SAT Desvirtuados',
@@ -104,13 +104,13 @@ export const predbs = [
     size: 3,
     slug: 'sat-Desvirtuados',
     last: '2019-10-08',
-    url: "http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html",
+    url: 'http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html',
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/sat-desvirtuados.csv'),
     only: [
       'Nombre de empresa',
-      'RFC'
-    ]
+      'RFC',
+    ],
   },
   {
     name: 'SAT Favorables',
@@ -122,13 +122,13 @@ export const predbs = [
     size: 3,
     slug: 'sat-favorables',
     last: '2019-10-08',
-    url: "http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html",
+    url: 'http://omawww.sat.gob.mx/cifras_sat/Paginas/datos/vinculo.html?page=ListCompleta69B.html',
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/sat-favorables.csv'),
     only: [
       'Nombre de empresa',
-      'RFC'
-    ]
+      'RFC',
+    ],
   },
   {
     name: 'Privilegios Fiscales Condonados (2007-2015)',
@@ -139,7 +139,7 @@ export const predbs = [
     size: 20,
     slug: 'estafa-maestra',
     last: '2019-09-30',
-    url: "https://privilegiosfiscales.fundar.org.mx/#top",
+    url: 'https://privilegiosfiscales.fundar.org.mx/#top',
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/pf-7-15.csv'),
     only: [
@@ -147,7 +147,7 @@ export const predbs = [
       'RFC',
       'Monto condonado',
       'Representante legal',
-    ]
+    ],
   },
   {
     name: 'Privilegios Fiscales Cancelaciones (2007-2015)',
@@ -158,7 +158,7 @@ export const predbs = [
     size: 20,
     slug: 'estafa-maestra',
     last: '2019-09-30',
-    url: "https://privilegiosfiscales.fundar.org.mx/#top",
+    url: 'https://privilegiosfiscales.fundar.org.mx/#top',
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/pf-cancelaciones-715.csv'),
     only: [
@@ -166,7 +166,7 @@ export const predbs = [
       'RFC',
       'Monto cancelado',
       'Representante legal',
-    ]
+    ],
   },
   {
     name: 'Registro Único de Proveedores y Contratistas (RUPC)',
@@ -178,7 +178,7 @@ export const predbs = [
     size: 11,
     slug: 'sat-Desvirtuados',
     last: '2019-11-05',
-    url: "https://cnet.hacienda.gob.mx/servicios/consultaRUPC.jsf",
+    url: 'https://cnet.hacienda.gob.mx/servicios/consultaRUPC.jsf',
     flag: require('../static/flags/mexico.svg'),
     file: require('../static/csvs/rupc.csv'),
     only: [
@@ -186,8 +186,8 @@ export const predbs = [
       'RFC',
       'Entidad Federativa',
       'Giro',
-      'Sitio web'
-    ]
+      'Sitio web',
+    ],
   },
 
-]
+];
