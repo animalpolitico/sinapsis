@@ -1,5 +1,5 @@
-export default class Empresa{
-  constructor(euid, dbuid){
+export default class Empresa {
+  constructor(euid, dbuid) {
     this.projectObj = window.dbf.obj;
     this.db = this.obj.dbs[dbuid];
     this.dbuid = dbuid;
@@ -8,10 +8,6 @@ export default class Empresa{
     this.set();
   }
 
-  set(){
+  set() {
   }
-
-
-
-
 }
