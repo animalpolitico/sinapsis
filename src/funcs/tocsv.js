@@ -147,6 +147,7 @@ export default class ConvertDbToCsv {
 
     /* Representantes */
     const representantes = this.getByGroup('representante', fields);
+    console.log('representantes', representantes);
     o[13] = representantes['Nombre completo'] ? representantes['Nombre completo'] : '';
     o[14] = representantes.RFC ? representantes.RFC : '';
     o[15] = representantes['Dirección'] ? representantes['Dirección'] : '';
@@ -416,7 +417,6 @@ export default class ConvertDbToCsv {
     /* Comentarios */
     o[95] = this.searchFieldValue('Comentarios', fields);
 
-    console.log('o', o);
     return this.filterRow(o);
   }
 
@@ -522,8 +522,17 @@ export default class ConvertDbToCsv {
     keys.map((key) => {
       p[key] = [];
       o.map((v) => {
+        var comentarios = '';
+        var cf = v.filter(f => f['Comentarios'] ? true : false);
+        if(cf && cf.length){
+          comentarios = cf[0]['Comentarios'];
+        }
         v.map((_v) => {
           if (_v[key]) {
+            if(key.indexOf('Nombre') > -1 && comentarios){
+              _v[key] = _v[key] + ' //'+comentarios;
+            }
+
             p[key].push(_v[key]);
           }
         });

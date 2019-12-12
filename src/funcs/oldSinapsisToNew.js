@@ -165,9 +165,31 @@ export default class ConvertOldToDb {
       if (ind < 1) {
         const cuid = uuidv4();
         let x = 0;
+
         for (const key in arr) {
-          const value = arr[key];
+          var value = arr[key];
           var inf = snps_ka[key];
+
+          if(key == 13 && value.indexOf('//') > -1){
+            /* Tiene comentarios */
+            const comentarios = value.split('//')[1].replace('//', '');
+            const preslug = slugify(`${inf.bigGroup}-Comentarios`, { lower: true });
+            var slug = slugify(`${cuid}-${preslug}`, { lower: true });
+            var ff = {
+              name: 'Comentarios',
+              slug: preslug,
+              isvalid: true,
+              value: comentarios,
+              group: inf.bigGroup,
+              groupUid: cuid,
+              empresauid: uid,
+              guid: cuid,
+            };
+            f[slug] = ff;
+            x++;
+            value = value.split('//')[0];
+          }
+
           const preslug = slugify(`${inf.bigGroup}-${inf.name}`, { lower: true });
           var slug = slugify(`${cuid}-${preslug}`, { lower: true });
           var ff = {
@@ -221,6 +243,27 @@ export default class ConvertOldToDb {
         let value = arr[key];
         value = value.trim();
         var inf = snps_ka[key];
+
+        if(key == 20 && value.indexOf('//') > -1){
+          /* Tiene comentarios */
+          const comentarios = value.split('//')[1].replace('//', '');
+          const preslug = slugify(`${inf.bigGroup}-Comentarios`, { lower: true });
+          var slug = slugify(`${cuid}-${preslug}`, { lower: true });
+          var ff = {
+            name: 'Comentarios',
+            slug: preslug,
+            isvalid: true,
+            value: comentarios,
+            group: inf.bigGroup,
+            groupUid: cuid,
+            empresauid: uid,
+            guid: cuid,
+          };
+          f[slug] = ff;
+          x++;
+          value = value.split('//')[0];
+        }
+
         const preslug = slugify(`${inf.bigGroup}-${inf.name}`, { lower: true });
         var slug = slugify(`${cuid}-${preslug}`, { lower: true });
         var ff = {
@@ -275,6 +318,27 @@ export default class ConvertOldToDb {
         let value = arr[key];
         value = value.trim();
         var inf = snps_ka[key];
+
+        if(key == 28 && value.indexOf('//') > -1){
+          /* Tiene comentarios */
+          const comentarios = value.split('//')[1].replace('//', '');
+          const preslug = slugify(`${inf.bigGroup}-Comentarios`, { lower: true });
+          var slug = slugify(`${cuid}-${preslug}`, { lower: true });
+          var ff = {
+            name: 'Comentarios',
+            slug: preslug,
+            isvalid: true,
+            value: comentarios,
+            group: inf.bigGroup,
+            groupUid: cuid,
+            empresauid: uid,
+            guid: cuid,
+          };
+          f[slug] = ff;
+          x++;
+          value = value.split('//')[0];
+        }
+
         const preslug = slugify(`${inf.bigGroup}-${inf.name}`, { lower: true });
         var slug = slugify(`${cuid}-${preslug}`, { lower: true });
         var ff = {
@@ -329,6 +393,27 @@ export default class ConvertOldToDb {
         let value = arr[key];
         value = value.trim();
         var inf = snps_ka[key];
+
+        if(key == 35 && value.indexOf('//') > -1){
+          /* Tiene comentarios */
+          const comentarios = value.split('//')[1].replace('//', '');
+          const preslug = slugify(`${inf.bigGroup}-Comentarios`, { lower: true });
+          var slug = slugify(`${cuid}-${preslug}`, { lower: true });
+          var ff = {
+            name: 'Comentarios',
+            slug: preslug,
+            isvalid: true,
+            value: comentarios,
+            group: inf.bigGroup,
+            groupUid: cuid,
+            empresauid: uid,
+            guid: cuid,
+          };
+          f[slug] = ff;
+          x++;
+          value = value.split('//')[0];
+        }
+
         const preslug = slugify(`${inf.bigGroup}-${inf.name}`, { lower: true });
         var slug = slugify(`${cuid}-${preslug}`, { lower: true });
         var ff = {

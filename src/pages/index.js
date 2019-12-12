@@ -81,15 +81,7 @@ class Footer extends React.Component {
         <div className="ss_footer_row">
           <SingleSharers />
         </div>
-<<<<<<< HEAD
 
-=======
-        <div className="ss_footer_row" style={{ textAlign: 'center' }}>
-          <a href="https://opensource.org/licenses/MIT" target="_blank">
-            <img src={require('../static/openi.png')} style={{ width: 65, marginTop: '1.5rem' }} />
-          </a>
-        </div>
->>>>>>> fe506c5e5a8a816e79cc54ba7203f1d08e202c73
         <div className="ss_footer_row">
           <div className="ss_footer_row_contacto">
             <div className="ss_footer_row_contacto_td">

@@ -427,11 +427,17 @@ class PersonRow extends React.Component{
 
     /* Comentarios */
     var fil = this.props.p;
-        fil = fil.filter(f => f.slug.indexOf('comentarios') > -1);
+    console.log('fil', fil);
     var com = '';
-    if(fil && fil.length){
-      com = fil[0].value;
+    try{
+      fil = fil.filter(f => f.slug && f.slug.indexOf('comentarios') > -1);
+      if(fil && fil.length){
+        com = fil[0].value;
+      }
+    }catch{
+
     }
+
     return(
       <>
       <div className="ss_transaction_row">
