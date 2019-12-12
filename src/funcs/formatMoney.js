@@ -1,18 +1,18 @@
 import * as C from '../vars/countriesDict';
 
-var country = C.getCurrentCountry();
+const country = C.getCurrentCountry();
 
-export default function formatMoney(qty, obj){
-  var country = C.getCurrentCountry();
-  var q = qty;
-  if(isNaN(q)){
+export default function formatMoney(qty, obj) {
+  const country = C.getCurrentCountry();
+  let q = qty;
+  if (isNaN(q)) {
     q = 0;
   }
 
-  if(obj){
+  if (obj) {
     var s = obj.symbol;
     var c = obj.currency;
-  }else{
+  } else {
     var s = country.currencySign;
     var c = country.currency;
   }
@@ -20,48 +20,48 @@ export default function formatMoney(qty, obj){
 
   q = parseFloat(q);
   q = q.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-  q = s + q + ' ' + c;
+  q = `${s + q} ${c}`;
   return q;
 }
 
-function toMXN(qty, from){
-  var c = C.countries;
-  var s = c.filter(e => e.currency == from);
+function toMXN(qty, from) {
+  const c = C.countries;
+  let s = c.filter((e) => e.currency == from);
   s = s[0];
-  var q = qty * s.toMXN;
+  const q = qty * s.toMXN;
   return q;
 }
 
-function MXNto(qty, to){
-  var c = C.countries;
-  var s = c.filter(e => e.currency == to);
-      s = s[0];
-  var q = qty / s.toMXN;
+function MXNto(qty, to) {
+  const c = C.countries;
+  let s = c.filter((e) => e.currency == to);
+  s = s[0];
+  const q = qty / s.toMXN;
   return q;
 }
 
 
-export function convertCurrency(qty, from, to){
+export function convertCurrency(qty, from, to) {
   from = !from ? 'MXN' : from;
   to = !to ? country.currency : to;
 
-  var q = from !== 'MXN' ? toMXN(qty, from) : qty;
-      q = MXNto(q, to);
+  let q = from !== 'MXN' ? toMXN(qty, from) : qty;
+  q = MXNto(q, to);
 
   return q;
 }
 
 
-export function convertToActualCurrency(qty, origin){
-  if(typeof qty == "string"){
-    qty = qty.replace(/\,/, '')
+export function convertToActualCurrency(qty, origin) {
+  if (typeof qty === 'string') {
+    qty = qty.replace(/\,/, '');
   }
-  qty = parseFloat(qty)
-  var cr = getCurrentCurrency();
+  qty = parseFloat(qty);
+  const cr = getCurrentCurrency();
   return convertCurrency(qty, origin, cr);
 }
 
-function getCurrentCurrency(){
-  var country = C.getCurrentCountry();
+function getCurrentCurrency() {
+  const country = C.getCurrentCountry();
   return country.currency;
 }
