@@ -3,7 +3,8 @@ import 'moment/locale/es';
 import * as d3 from 'd3';
 import { saveAs } from 'file-saver';
 import formatMoney from './formatMoney';
-import { snps_ka } from '../vars/compatibilityArray';
+import { snps_ka as ssk} from '../vars/compatibilityArray';
+import { snps_kav2 } from '../vars/compatibilityArray2';
 
 moment.locale('es');
 const ntol = require('number-to-letter');
@@ -14,7 +15,8 @@ const uuidv4 = require('uuid/v4');
 
 
 export default class ConvertOldToDb {
-  constructor(name, file, alreadyConverted) {
+  constructor(name, file, alreadyConverted, v) {
+    this.v = v ? v : 1;
     this.name = name;
     this.file = file;
     this.alreadyConverted = !!alreadyConverted;
@@ -122,9 +124,18 @@ export default class ConvertOldToDb {
     const e = this.obj.empresas[uid];
     const f = e.fields;
 
+    const v2a = this.v == 2 ? 7 : 0;
+    if(this.v == 2){
+      var snps_ka = snps_kav2;
+    }else{
+      var snps_ka = ssk;
+    }
+
+
+
     fields.map((value, i) => {
-      value = value.trim();
-      if (snps_ka[i] && ((i < 13 || (i > 41 && i < 45)) || i == 95)) {
+      value = value ? value.trim() : value;
+      if (snps_ka[i] && ((i < 13 || (i > (41 + v2a) && i < (45 + v2a))) || i == (95 + v2a))) {
         if (!snps_ka[i].bypass) {
           let slug = slugify(snps_ka[i].name, { lower: true });
           if (snps_ka[i].group) {
@@ -233,8 +244,86 @@ export default class ConvertOldToDb {
       }
     });
 
+    if(this.v == 2){
+      /** Apoderado legal * */
+      var range = [20, 26];
+      var _fields = this.groupByRange(fields, range);
+      _fields.map((arr, ind) => {
+        if (ind < 1) {
+          const cuid = uuidv4();
+          let x = 0;
+
+          for (const key in arr) {
+            var value = arr[key];
+            var inf = snps_ka[key];
+
+            if(key == 20 && value.indexOf('//') > -1){
+              /* Tiene comentarios */
+              const comentarios = value.split('//')[1].replace('//', '');
+              const preslug = slugify(`${inf.bigGroup}-Comentarios`, { lower: true });
+              var slug = slugify(`${cuid}-${preslug}`, { lower: true });
+              var ff = {
+                name: 'Comentarios',
+                slug: preslug,
+                isvalid: true,
+                value: comentarios,
+                group: inf.bigGroup,
+                groupUid: cuid,
+                empresauid: uid,
+                guid: cuid,
+              };
+              f[slug] = ff;
+              x++;
+              value = value.split('//')[0];
+            }
+
+            const preslug = slugify(`${inf.bigGroup}-${inf.name}`, { lower: true });
+            var slug = slugify(`${cuid}-${preslug}`, { lower: true });
+            var ff = {
+              name: inf.name,
+              slug: preslug,
+              isvalid: true,
+              value,
+              group: inf.bigGroup,
+              groupUid: cuid,
+              empresauid: uid,
+              guid: cuid,
+            };
+            if (inf.type) {
+              ff.type = inf.type;
+            }
+            if (inf.category) {
+              ff.category = inf.category;
+            }
+            if (inf.matchWith) {
+              ff.matchWith = inf.matchWith;
+            }
+            if (value && !inf.bypass) {
+              f[slug] = ff;
+              x++;
+            }
+          }
+          if (x > 0) {
+            var slug = slugify(`${cuid}-tipo-persona`, { lower: true });
+            var ff = {
+              name: 'Tipo de persona',
+              slug,
+              isvalid: true,
+              value: inf.bigGroup,
+              group: inf.bigGroup,
+              bigGroup: 'persona',
+              groupUid: cuid,
+              guid: cuid,
+            };
+            f[slug] = ff;
+          }
+        }
+      });
+    }
+
+
     /** Accionistas * */
-    var range = [20, 27];
+    var range = [20 + v2a, 27 + v2a];
     var _fields = this.groupByRange(fields, range);
     _fields.map((arr, ind) => {
       const cuid = uuidv4();
@@ -244,7 +333,7 @@ export default class ConvertOldToDb {
         value = value.trim();
         var inf = snps_ka[key];
 
-        if(key == 20 && value.indexOf('//') > -1){
+        if(key == (20 + v2a) && value.indexOf('//') > -1){
           /* Tiene comentarios */
           const comentarios = value.split('//')[1].replace('//', '');
           const preslug = slugify(`${inf.bigGroup}-Comentarios`, { lower: true });
@@ -309,7 +398,7 @@ export default class ConvertOldToDb {
       }
     });
     /** Admin * */
-    var range = [28, 34];
+    var range = [28 + v2a, 34 + v2a];
     var _fields = this.groupByRange(fields, range);
     _fields.map((arr, ind) => {
       const cuid = uuidv4();
@@ -319,7 +408,7 @@ export default class ConvertOldToDb {
         value = value.trim();
         var inf = snps_ka[key];
 
-        if(key == 28 && value.indexOf('//') > -1){
+        if(key == (28 + v2a) && value.indexOf('//') > -1){
           /* Tiene comentarios */
           const comentarios = value.split('//')[1].replace('//', '');
           const preslug = slugify(`${inf.bigGroup}-Comentarios`, { lower: true });
@@ -384,7 +473,7 @@ export default class ConvertOldToDb {
       }
     });
     /** Consejero * */
-    var range = [35, 41];
+    var range = [35 + v2a, 41 + v2a];
     var _fields = this.groupByRange(fields, range);
     _fields.map((arr, ind) => {
       const cuid = uuidv4();
@@ -394,7 +483,7 @@ export default class ConvertOldToDb {
         value = value.trim();
         var inf = snps_ka[key];
 
-        if(key == 35 && value.indexOf('//') > -1){
+        if(key == (35 + v2a) && value.indexOf('//') > -1){
           /* Tiene comentarios */
           const comentarios = value.split('//')[1].replace('//', '');
           const preslug = slugify(`${inf.bigGroup}-Comentarios`, { lower: true });
@@ -460,7 +549,7 @@ export default class ConvertOldToDb {
     });
 
     /** Banderas Rojas* */
-    var range = [47, 48];
+    var range = [47 + v2a, 48 + v2a];
     var _fields = this.groupByRange(fields, range);
     const bs = [];
     _fields.map((ob) => {
@@ -479,7 +568,7 @@ export default class ConvertOldToDb {
 
 
     /** Contratos * */
-    var range = [49, 59];
+    var range = [49 + v2a, 59 + v2a];
     var _fields = this.groupByRange(fields, range);
     _fields.map((arr, ind) => {
       const cuid = uuidv4();
@@ -525,7 +614,7 @@ export default class ConvertOldToDb {
     });
 
     /** Convenios * */
-    var range = [60, 72];
+    var range = [60 + v2a, 72 + v2a];
     var _fields = this.groupByRange(fields, range);
     _fields.map((arr, ind) => {
       const cuid = uuidv4();
@@ -571,7 +660,7 @@ export default class ConvertOldToDb {
     });
 
     /** Transferencias de dependencia a instancia * */
-    var range = [73, 75];
+    var range = [73 + v2a, 75 + v2a];
     var _fields = this.groupByRange(fields, range);
     _fields.map((arr, ind) => {
       const cuid = uuidv4();
@@ -634,7 +723,7 @@ export default class ConvertOldToDb {
     });
 
     /** Transferencia de empresa a esta empresa  * */
-    var range = [76, 77];
+    var range = [76 + v2a, 77 + v2a];
     var _fields = this.groupByRange(fields, range);
     _fields.map((arr, ind) => {
       const cuid = uuidv4();
@@ -697,7 +786,7 @@ export default class ConvertOldToDb {
     });
 
     /** Transferencia de esta empresa a otras empresas * */
-    var range = [78, 79];
+    var range = [78 + v2a, 79 + v2a];
     var _fields = this.groupByRange(fields, range);
     _fields.map((arr, ind) => {
       const cuid = uuidv4();
@@ -759,7 +848,7 @@ export default class ConvertOldToDb {
     });
 
     /** Otros * */
-    var otrosRange = [80, 92];
+    var otrosRange = [80 + v2a, 92 + v2a];
     for (var i = otrosRange[0]; i <= otrosRange[1]; i++) {
       var sn = snps_ka[i];
       try {
@@ -811,7 +900,7 @@ export default class ConvertOldToDb {
       });
     }
     /** OTROS NUEVO * */
-    var otrosRange = [93, 94];
+    var otrosRange = [93 + v2a, 94 + v2a];
     for (var i = 0; i < 1; i++) {
       try {
         var _fields = this.groupByRange(fields, otrosRange);

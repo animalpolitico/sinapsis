@@ -1410,7 +1410,16 @@ class DbDbsNavigationNewDb extends React.Component{
           return;
         }
 
-        var ont = new oldToNew(name, t);
+        var v = 1;
+        if(t.indexOf('%V') > -1){
+          v = t.match(/\%V([0-9]+)\%/);
+          if(v.length && v[1]){
+            v = parseInt(v[1]);
+          }
+        }
+
+
+        var ont = new oldToNew(name, t, false, v);
         var db = ont.save();
         db.currency = self.state.selectedCurrency;
         db.country = getCurrencyCountry(self.state.selectedCurrency);

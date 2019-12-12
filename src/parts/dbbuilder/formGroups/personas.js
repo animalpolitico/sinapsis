@@ -145,18 +145,23 @@ export default class DbFormGroupPersonas extends React.Component{
     var self = this;
     var addL = this.state.isedit ? 'Guardar' : 'Agregar';
     var repLegales = this.getGroup('representante');
+    var apLegales = this.getGroup('apoderado');
     var accionistas = this.getGroup('accionista');
     var administradores = this.getGroup('administrador');
     var comisarios = this.getGroup('comisario');
     var consejeros = this.getGroup('consejero')
 
-    var totalp = repLegales.length + accionistas.length + administradores.length + comisarios.length + consejeros.length;
+    var totalp = repLegales.length + apLegales.length + accionistas.length + administradores.length + comisarios.length + consejeros.length;
 
 
     var persons = [
       {
         name: 'Representantes legales',
         fields: repLegales
+      },
+      {
+        name: 'Apoderados legales',
+        fields: apLegales
       },
       {
         name: 'Accionistas',
@@ -233,10 +238,11 @@ export default class DbFormGroupPersonas extends React.Component{
                 <select onChange={(e) => this.onSelectPersonType(e)}>
                   <option value="-" selected disabled>Selecciona un tipo de persona</option>
                   <option value="representante">Representante Legal</option>
+                  <option value="apoderado">Apoderada/o Legal</option>
                   <option value="accionista">{_t("Accionista")}</option>
                   <option value="administrador">{_t("Administrador")}</option>
                   <option value="comisario">{_t("Comisaria/o")}</option>
-                  <option value="consejero">{_t("Conesjera/o")}</option>
+                  <option value="consejero">{_t("Consejera/o")}</option>
                 </select>
               </div>
               : null

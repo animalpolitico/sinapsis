@@ -20,7 +20,7 @@ export default class ConvertDbToCsv {
 
   prepareCSV() {
     const c = [
-      '%V1%EMPRESA: \nRazón social (nombre de la empresa)',
+      '%V2%EMPRESA: \nRazón social (nombre de la empresa)',
       'EMPRESA: \nRFC',
       'EMPRESA: \nFolio mercantil',
       'EMPRESA: \nObjeto social (descripción de actividades)',
@@ -40,6 +40,15 @@ export default class ConvertDbToCsv {
       'REP LEGAL: \nEntidad Federativa (llena esta columna sólo si no tienes la dirección y/o la coordenada geográfica)',
       'REP LEGAL: \nNombre de la dependencia donde fue funcionario (si es que aplica)',
       'REP LEGAL: \nÚltimo año en activo de la dependencia donde fue funcionario (si es que aplica)',
+
+      'APO LEGAL: \nNombre completo',
+      'APO LEGAL: \nRFC',
+      'APO LEGAL: \nDirección',
+      'APO LEGAL: \nLatitud y longitud (separadas por coma)',
+      'APO LEGAL: \nEntidad Federativa (llena esta columna sólo si no tienes la dirección y/o la coordenada geográfica)',
+      'APO LEGAL: \nNombre de la dependencia donde fue funcionario (si es que aplica)',
+      'APO LEGAL: \nÚltimo año en activo de la dependencia donde fue funcionario (si es que aplica)',
+
       'ACCIONISTAS: \nNombre completo (separar nombres con punto y coma)',
       'ACCIONISTAS:\nRFC',
       'ACCIONISTAS: \nDirección',
@@ -147,34 +156,39 @@ export default class ConvertDbToCsv {
 
     /* Representantes */
     const representantes = this.getByGroup('representante', fields);
-    console.log('representantes', representantes);
     o[13] = representantes['Nombre completo'] ? representantes['Nombre completo'] : '';
     o[14] = representantes.RFC ? representantes.RFC : '';
     o[15] = representantes['Dirección'] ? representantes['Dirección'] : '';
 
+    /* Apoderado Legal */
+    const apol = this.getByGroup('apoderado', fields);
+    o[20] = apol['Nombre completo'] ? apol['Nombre completo'] : '';
+    o[21] = apol.RFC ? apol.RFC : '';
+    o[22] = apol['Dirección'] ? apol['Dirección'] : '';
+
     /* Accionistas */
     var pe = this.getByGroup('accionista', fields);
-    o[20] = pe['Nombre completo'] ? pe['Nombre completo'] : '';
-    o[21] = pe.RFC ? pe.RFC : '';
-    o[22] = pe['Dirección'] ? pe['Dirección'] : '';
-    o[27] = pe['Capital aportado'] ? pe['Capital aportado'] : '';
+    o[27] = pe['Nombre completo'] ? pe['Nombre completo'] : '';
+    o[28] = pe.RFC ? pe.RFC : '';
+    o[29] = pe['Dirección'] ? pe['Dirección'] : '';
+    o[34] = pe['Capital aportado'] ? pe['Capital aportado'] : '';
 
     /* Admin */
     var pe = this.getByGroup('administrador', fields);
-    o[28] = pe['Nombre completo'] ? pe['Nombre completo'] : '';
-    o[29] = pe.RFC ? pe.RFC : '';
-    o[30] = pe['Dirección'] ? pe['Dirección'] : '';
-
-    /* Comisario */
-    var pe = this.getByGroup('consejero', fields);
     o[35] = pe['Nombre completo'] ? pe['Nombre completo'] : '';
     o[36] = pe.RFC ? pe.RFC : '';
     o[37] = pe['Dirección'] ? pe['Dirección'] : '';
 
+    /* Comisario */
+    var pe = this.getByGroup('consejero', fields);
+    o[42] = pe['Nombre completo'] ? pe['Nombre completo'] : '';
+    o[43] = pe.RFC ? pe.RFC : '';
+    o[44] = pe['Dirección'] ? pe['Dirección'] : '';
+
     /* Notaría */
-    o[42] = this.searchFieldValue('Nombre del notario', fields);
-    o[43] = this.searchFieldValue('Número de notaría', fields);
-    o[44] = this.searchFieldValue('Dirección de notaría', fields);
+    o[49] = this.searchFieldValue('Nombre del notario', fields);
+    o[50] = this.searchFieldValue('Número de notaría', fields);
+    o[51] = this.searchFieldValue('Dirección de notaría', fields);
 
     /* Banderas rojas */
     let bs = this.searchFieldValueBySlug('banderas-rojas', fields);
@@ -182,14 +196,14 @@ export default class ConvertDbToCsv {
       bs = bs[0].bs;
       const bs_a = ['InscritoRUPC', 'NoInscritoRUPC', 'RegCompraNet'];
       const s = {
-        47: [],
-        48: [],
+        54: [],
+        55: [],
       };
       bs.map((b) => {
         if (bs_a.indexOf(b) > -1) {
-          s[47].push(b);
+          s[54].push(b);
         } else {
-          s[48].push(b);
+          s[55].push(b);
         }
       });
       for (var key in s) {
@@ -200,37 +214,37 @@ export default class ConvertDbToCsv {
 
     /* Contrato */
     var t = {
-      49: {
+      56: {
         name: '¿Quién otorga los recursos?',
       },
-      50: {
+      57: {
         name: 'Número de contrato',
       },
-      51: {
+      58: {
         name: 'Fecha de inicio',
       },
-      52: {
+      59: {
         name: 'Fecha de término',
       },
-      53: {
+      60: {
         name: 'Servicio realizado',
       },
-      54: {
+      61: {
         name: 'Persona que firma',
       },
-      55: {
+      62: {
         name: 'Cargo de quien firma',
       },
-      56: {
+      63: {
         name: 'Monto del contrato',
       },
-      57: {
+      64: {
         name: 'Número de licitación',
       },
-      58: {
+      65: {
         name: 'Fecha de fallo',
       },
-      59: {
+      66: {
         name: 'Monto total de licitación',
       },
     };
@@ -242,68 +256,68 @@ export default class ConvertDbToCsv {
 
     /* Convenio */
     var t = {
-      60: {
+      67: {
         name: '¿Quién otorga los recursos?',
         group: 'convenio',
         bigGroup: 'convenio',
         category: 'emisor',
         matchWith: ['instancia'],
       },
-      61: {
+      68: {
         name: '¿Quién recibe los recursos?',
         group: 'convenio',
         bigGroup: 'convenio',
         category: 'receptor',
         matchWith: ['instancia'],
       },
-      62: {
+      69: {
         name: 'Número de convenio',
         group: 'convenio',
         bigGroup: 'convenio',
         matchWith: ['convenio'],
       },
-      63: {
+      70: {
         name: 'Fecha de inicio',
         group: 'convenio',
         bigGroup: 'convenio',
         matchWith: ['date'],
         type: 'date',
       },
-      64: {
+      71: {
         name: 'Fecha de término',
         group: 'convenio',
         bigGroup: 'convenio',
         matchWith: ['date'],
         type: 'date',
       },
-      65: {
+      72: {
         name: 'Objeto del convenio',
         group: 'convenio',
         bigGroup: 'convenio',
       },
-      66: {
+      73: {
         name: 'Persona que firma (otorga)',
         group: 'convenio',
         bigGroup: 'convenio',
         matchWith: ['person'],
       },
-      67: {
+      74: {
         name: 'Cargo de quien firma (otorga)',
         group: 'convenio',
         bigGroup: 'convenio',
       },
-      68: {
+      75: {
         name: 'Persona que firma (recibe)',
         group: 'convenio',
         bigGroup: 'convenio',
         matchWith: ['person'],
       },
-      69: {
+      76: {
         name: 'Cargo de quien firma (recibe)',
         group: 'convenio',
         bigGroup: 'convenio',
       },
-      70: {
+      77: {
         name: 'Monto del convenio',
         type: 'currency',
         category: 'monto',
@@ -311,13 +325,13 @@ export default class ConvertDbToCsv {
         bigGroup: 'convenio',
         sumWith: ['montos_convenio'],
       },
-      71: {
+      78: {
         name: 'Titular de instancia que otorga al momento de firmar el convenio',
         group: 'convenio',
         bigGroup: 'convenio',
         matchWith: ['person', 'titular'],
       },
-      72: {
+      79: {
         name: 'Titular de instancia que recibe al momento de firmar el convenio',
         group: 'convenio',
         bigGroup: 'convenio',
@@ -332,65 +346,65 @@ export default class ConvertDbToCsv {
 
     /* Transferencias (REVISAR SI VOLTEAR EMISOR POR RECEPTOR) */
     var ts = this.getTransferenciaGroup('receptor', fields);
-    o[76] = ts.recursos ? ts.recursos : '';
-    o[77] = ts['Monto de la transferencia'] ? ts['Monto de la transferencia'] : '';
+    o[80] = ts.recursos ? ts.recursos : '';
+    o[81] = ts['Monto de la transferencia'] ? ts['Monto de la transferencia'] : '';
 
     var ts = this.getTransferenciaGroup('emisor', fields);
-    o[78] = ts.recursos ? ts.recursos : '';
-    o[79] = ts['Monto de la transferencia'] ? ts['Monto de la transferencia'] : '';
+    o[83] = ts.recursos ? ts.recursos : '';
+    o[84] = ts['Monto de la transferencia'] ? ts['Monto de la transferencia'] : '';
 
     /* Otros */
     var ts = this.getByGroup('otros', fields, 'category');
     const ks = {
-      80: {
+      87: {
         name: 'Nombre de la empresa',
         category: 'empresa',
       },
-      81: {
+      88: {
         name: 'Nombre de persona',
         category: 'person',
       },
-      82: {
+      89: {
         name: 'Dirección',
         category: 'address',
       },
-      83: {
+      90: {
         name: 'RFC',
         category: 'rfc',
       },
-      84: {
+      91: {
         name: 'Fecha',
         category: 'date',
       },
-      85: {
+      92: {
         name: 'Correo electrónico',
         category: 'email',
       },
-      86: {
+      93: {
         name: 'Sitio web',
         category: 'website',
       },
-      87: {
+      94: {
         name: 'Teléfono',
         category: 'phone',
       },
-      88: {
+      95: {
         name: 'Número de contrato o convenio',
         category: 'convenio',
       },
-      89: {
+      96: {
         name: 'Dependencia / Instancia',
         category: 'instancia',
       },
-      90: {
+      97: {
         name: 'Monto recibido',
         category: 'monto_recibido',
       },
-      91: {
+      98: {
         name: 'Titulares de instancia',
         category: 'titular',
       },
-      92: {
+      99: {
         name: 'Monto otorgado',
         category: 'monto_otorgado',
       },
@@ -411,11 +425,11 @@ export default class ConvertDbToCsv {
       }
     }
 
-    o[93] = nk.join(',');
-    o[94] = nv.join(',');
+    o[100] = nk.join(',');
+    o[101] = nv.join(',');
 
     /* Comentarios */
-    o[95] = this.searchFieldValue('Comentarios', fields);
+    o[102] = this.searchFieldValue('Comentarios', fields);
 
     return this.filterRow(o);
   }
