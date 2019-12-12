@@ -2770,9 +2770,7 @@ class SSCategoryToggle extends React.Component{
 
   getTypeCoincidencias(t){
     var c = 0;
-    console.log('t', t);
     var s = (t == "instancia" || t == "person") ? '.nodes_link[data-from-type="'+t+'"]' : '.nodes_link[data-from-type="'+t+'"], .nodes_link[data-to-type="'+t+'"]';
-
 
     d3.selectAll(s)
       .each(function(l){

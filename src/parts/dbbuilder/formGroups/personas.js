@@ -314,6 +314,8 @@ export default class DbFormGroupPersonas extends React.Component{
                       </div>
                     </div>
 
+
+
                     {
                       funcionario ?
                       <>
@@ -342,7 +344,17 @@ export default class DbFormGroupPersonas extends React.Component{
                     : null
 
                     }
-
+                    <DbInput
+                      onChange={(slug, obj) => this.insertField(slug, obj)}
+                      name="Comentarios"
+                      type="text"
+                      textarea
+                      description='En este campo eres libre de escribir lo que quieras, nada de lo que aparezca aquí se cruzará, solo sirve de referencia por si el investigador quiere escribir algo relacionado con la persone que lo ayude a recordar o a tener presente información adicional'
+                      db={this.props.parent.props.db}
+                      group={this.state.personType}
+                      empresa={this.props.empresa}
+                      ref={this.setChildRef}
+                    />
                   </>
               : null}
 
@@ -412,13 +424,29 @@ class PersonRow extends React.Component{
 
   render(){
     var n = this.getName();
+
+    /* Comentarios */
+    var fil = this.props.p;
+        fil = fil.filter(f => f.slug.indexOf('comentarios') > -1);
+    var com = '';
+    if(fil && fil.length){
+      com = fil[0].value;
+    }
     return(
       <>
       <div className="ss_transaction_row">
-        <div className="ss_transaction_row_c">
+        <div className="ss_transaction_row_c" style={{flexWrap: 'wrap'}}>
           <div className="ss_transaction_row_n">
             {n}
           </div>
+          {
+            com ?
+            <div className="ss_transaction_row_n" style={{width: '100%', marginTop: '0.25rem', fontSize: '0.65rem', opacity: 0.8}}>
+              {com}
+            </div>
+            : null
+          }
+
         </div>
         <div className="ss_transaction_row_d" onClick={() => this.edit()}>
           <Icon size="small">edit</Icon>
