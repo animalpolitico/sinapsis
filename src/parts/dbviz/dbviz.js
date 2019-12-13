@@ -175,16 +175,19 @@ export default class DbViz extends React.Component{
 class SSDBControl extends React.Component{
   state = {
     hiddenDbs: [],
-    showing: true
+    showing: true,
+    mch: 'all'
   }
 
   componentDidMount(){
     var self = this;
     window.addEventListener('ss_activate_all_dbs', () => this.showAll())
+    window.addEventListener('sinapsis_deleted_db', () => this.handleMostrarCoincidencias('all'));
     window.addEventListener('ss_toggle_db', function(e){
       try{
         var id = e.detail.id;
         self.toggleDb(id);
+
       }catch{
 
       }
@@ -267,6 +270,9 @@ class SSDBControl extends React.Component{
   handleMostrarCoincidencias(type){
     window.dispatchEvent(startLoad);
     this.props.nodesMap.toggleOnlyAll(type);
+    this.setState({
+      mch: type
+    })
   }
 
   render(){
@@ -327,7 +333,7 @@ class SSDBControl extends React.Component{
                 <div className="ss_control_extra">
                   <label>Mostrar coincidencias</label>
                   <div className="ss_control_extra_f"><Icon>keyboard_arrow_down</Icon></div>
-                  <select onChange={(e) => this.handleMostrarCoincidencias(e.target.value)}>
+                  <select onChange={(e) => this.handleMostrarCoincidencias(e.target.value)} value={this.state.mch}>
                     <option value="all">TODAS (dentro de la misma base de datos y entre otras bases de datos)</option>
 
                     <option value="twoormore">MÍNIMO 2 (tiene que coincidir en por lo menos 2 distintas bases)</option>
@@ -1323,11 +1329,13 @@ class Nodes extends React.Component{
       var compMax = 0;
       d3.selectAll('.node_circle:not(.node_dont_touch)')
         .each(function(d){
-          if(!d.blockShow){
+          if(!d.blockShow && d.coincidencias){
             compMax = Math.max(d.coincidencias, compMax);
           }
         })
     }
+
+    compMax = compMax ? compMax : 1;
 
     d3.selectAll('.node_circle')
       .transition()
