@@ -1604,6 +1604,7 @@ class Nodes extends React.Component{
   }
 
   toggleGrouped(){
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
     var self = this;
     var cx = 0;
     var cy = 0;
@@ -1665,6 +1666,10 @@ class Nodes extends React.Component{
     })
 
     self.simulation.tick(1);
+    setTimeout(function(){
+      self.simulation.tick();
+      window.dispatchEvent(new Event('sinapsisEndLoad'));
+    }, 150);
   }
 
   releaseNode(){
