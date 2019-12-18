@@ -1625,7 +1625,29 @@ class Nodes extends React.Component{
                     var ecy = parseFloat(e.attr('cy'));
                     cx = ecx;
                     cy = ecy;
+                  }else{
+                    var t = e.style("transform");
+                    console.log('t',t);
+                    if(t && t !== "none"){
+                      t = t.replace('matrix(','');
+                      t = t.replace(')', '');
+                      var a = t.split(', ');
+                      var ecx = parseFloat(a[4]);
+                      var ecy = parseFloat(a[5]);
+                      cx = ecx;
+                      cy = ecy;
+                    }else if(t == "none"){
+                      var t = e.attr('transform');
+                      t = t.replace('translate(','');
+                      t = t.replace(')', '');
+                      var a = t.split(',');
+                      var ecx = parseFloat(a[0]);
+                      var ecy = parseFloat(a[1]);
+                      cx = ecx;
+                      cy = ecy;
+                    }
                   }
+
 
                 }
                 if(!lvls[d.level]){
@@ -1650,9 +1672,9 @@ class Nodes extends React.Component{
 
       var s = lvls[l];
 
-      var sang = 220;
+      var sang = 255;
       var ps = sang / s;
-          ps = (cnt[l] * ps) + 90;
+          ps = (cnt[l] * ps) + 65;
       var ang = d.ang ? d.ang : ps;
       d.ang = ang;
       var x = Math.cos((ang) * 0.0174533) * (r * l);
@@ -1665,11 +1687,12 @@ class Nodes extends React.Component{
       cnt[l] = cnt[l] + 1;
     })
 
-    self.simulation.tick(1);
+    self.simulation.tick();
     setTimeout(function(){
       self.simulation.tick();
+      self.drawNodes();
       window.dispatchEvent(new Event('sinapsisEndLoad'));
-    }, 150);
+    }, 350);
   }
 
   releaseNode(){
@@ -1940,6 +1963,10 @@ class Nodes extends React.Component{
     s = s.replace(/stroke\-width\=\"4px\"/g, 'stroke-width="0px"');
     s = s.replace(/stroke\-width\=\"24\"/g, 'stroke-width="1px"');
     s = s.replace(/stroke\-width\=\"6\"/g, 'stroke-width="0.15"');
+    s = s.replace(/stroke\-width\=\"12\"/g, 'stroke-width="0.15"');
+    s = s.replace(/stroke\-width\=\"12px\"/g, 'stroke-width="0.15"');
+    s = s.replace(/stroke\-width\=\"8\"/g, 'stroke-width="0.15"');
+    s = s.replace(/stroke\-width\=\"8px\"/g, 'stroke-width="0.15"');
     s = s.replace(/stroke\-width\=\"6px\"/g, 'stroke-width="0.15"');
     s = s.replace(/stroke\-width\=\"57px\"/g, 'stroke-width="0.15"');
     s = s.replace(/stroke\-width\=\"16px\"/g, 'stroke-width="0.15"');
