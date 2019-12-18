@@ -1603,6 +1603,70 @@ class Nodes extends React.Component{
 
   }
 
+  toggleGrouped(){
+    var self = this;
+    var cx = 0;
+    var cy = 0;
+    var set = false;
+
+    var lvls = {};
+
+    var g = d3.selectAll('.node')
+              .filter(d => d.level === 0 || d.level)
+              .each(function(d){
+                d.fixed = false;
+                d.fx = null;
+                d.fy = null;
+                if(!set && d.level == 0){
+                  var e = d3.select(this);
+                  if(e.attr('cx')){
+                    var ecx = parseFloat(e.attr('cx'));
+                    var ecy = parseFloat(e.attr('cy'));
+                    cx = ecx;
+                    cy = ecy;
+                  }
+
+                }
+                if(!lvls[d.level]){
+                  lvls[d.level] = 0;
+                }
+
+                lvls[d.level] = lvls[d.level] + 1;
+
+              })
+
+
+
+    var cnt = {};
+
+    g.each(function(d, i){
+      var r = 5000;
+
+      var l = d.level;
+      if(!cnt[l]){
+        cnt[l] = 0;
+      }
+
+      var s = lvls[l];
+
+      var sang = 220;
+      var ps = sang / s;
+          ps = (cnt[l] * ps) + 90;
+      var ang = d.ang ? d.ang : ps;
+      d.ang = ang;
+      var x = Math.cos((ang) * 0.0174533) * (r * l);
+      var y = Math.sin(ang * 0.0174533) * (r * l);
+
+
+      d.fx = -x + cx;
+      d.fy = -y + cy;
+
+      cnt[l] = cnt[l] + 1;
+    })
+
+    self.simulation.tick(1);
+  }
+
   releaseNode(){
     this.setState({
       displayTooltip: false
@@ -1614,6 +1678,8 @@ class Nodes extends React.Component{
         .each(function(d){
           d.doi = false;
           d.level = null;
+          d.ang = false;
+          d.fixed = false;
         })
     this.setState({
       isolatingNode: false,
@@ -2974,6 +3040,11 @@ class SSDoi extends React.Component{
             <div className="ss_doi_levels">
               <Icon disabled={this.props.level == this.props.maxlevel} onClick={() => this.props.parent.addLevel(1)}>add</Icon>
               <Icon disabled={this.props.level == 0} onClick={() => this.props.parent.addLevel(-1)}>remove</Icon>
+            </div>
+          </div>
+          <div className="ss_doi_window_controls_td" onClick={() => this.props.parent.toggleGrouped()}>
+            <div className="ss_doi_window_controls_td_min">
+              <Icon>group_work</Icon>
             </div>
           </div>
           <div className="ss_doi_window_controls_td" onClick={() => this.props.parent.toggleMinimizeDoi()}>
