@@ -1244,6 +1244,8 @@ class Nodes extends React.Component{
 
     this.setEmpresasNodesCoincidencias();
 
+    window.dispatchEvent(new Event('sinapsis_force_filter'));
+
     return x;
 
   }
@@ -1780,7 +1782,7 @@ class Nodes extends React.Component{
 
   filterCategory(vals){
     /* Actualiza el mapa de nodos */
-    // if(vals.indexOf('empresa') == -1){
+    // if(vals.indexOf('empresa') == -1)
     //   vals.push('empresa');
     // }
     //
@@ -2227,26 +2229,6 @@ class SSNoResults extends React.Component{
       }
     }
 
-    /* Filtros */
-    // if(this.props.nodes && this.props.nodes.props.categoryToggle){
-    //   var v = this.props.nodes.props.categoryToggle.state;
-    //   if((v.vals.length < 10 && !(v.vals.length === 1))){
-    //     var obj = {
-    //       tip: 'Tienes algunos filtros activados, cambia la configuración de estos filtros.',
-    //       cta: 'Quitar todos los filtros',
-    //       removeEstadisticas: true,
-    //       action: () => this.filterNone()
-    //     }
-    //     return obj;
-    //   }
-    // }
-
-
-    /* No dbs showing */
-    //
-    // var obj = {
-    //   tip: 'Es probable que tus bases de datos no tengan datos que coincidan, intenta agregar más información.',
-    // }
     return false;
   }
 
@@ -2871,6 +2853,11 @@ class SSCategoryToggle extends React.Component{
         s: ''
       })
     })
+    window.addEventListener('sinapsis_force_filter', function(){
+      self.setState({
+        n: ''
+      })
+    })
   }
 
 
@@ -2910,12 +2897,17 @@ class SSCategoryToggle extends React.Component{
   }
 
   toggleBS(){
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
+    var self = this;
     var ns = !this.state.bs
     this.setState({
       bs: ns
     })
-    window.dbf.onlyBS = ns;
-    this.props.nodesMap.set();
+    setTimeout(function(){
+      window.dbf.onlyBS = ns;
+      self.props.nodesMap.set();
+    }, 200);
+
   }
 
   majorChange(type){
