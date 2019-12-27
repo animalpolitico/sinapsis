@@ -703,12 +703,24 @@ class SearchResults extends React.Component{
               cs.push('ss_selected');
             }
             var c = getTypeColor(result.type);
+            var fromdb = false;
+            if(result.type == "empresa"){
+              fromdb = result.fields[0].fromdb;
+              fromdb = window.dbf.getDb(fromdb).name;
+            }
+
             return(
               <div id={"ss_r_" + (i + 1)}className={cs.join(' ')} onClick={(e) => self.isolateNode(result.id, result.name)}>
                 <div className="ss_search_result_container">
                   <div className="ss_search_result_type">
+
                     <span style={{color: c}}>/</span> <div>{getTypeName(result.type)}</div>
                   </div>
+                  {
+                    fromdb ?
+                    <div style={{fontSize: '0.8em', marginBottom: '2px', marginTop: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)'}}>{fromdb}</div>
+                    : null
+                  }
                   <div className="ss_search_result_name">
                     {result.name}
                   </div>
