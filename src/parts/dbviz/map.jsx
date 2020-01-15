@@ -16,6 +16,7 @@ export default class SSMap extends React.Component{
     defaultZoom: getCoords(),
     markers: [],
     all: [],
+    selected: [0,0],
     onlyCoincidencias: true,
     zoom: 5,
     st: false,
@@ -137,7 +138,7 @@ export default class SSMap extends React.Component{
 
       var isok = (isdf && okdf) || (!isdf && okds);
 
-      var isselected = d.euid == self.state.selected ? "1" : "0";
+      var isselected = (d.coords[0] == self.state.selected[0] && d.coords[1] == self.state.selected[1]) ? "1" : "0";
       console.log('isselected', isselected);
 
       var marker = <Feature coordinates={coords}
@@ -435,7 +436,7 @@ class MapSearch extends React.Component{
     var coords = s.coords;
     this.props.parent.setState({
       defaultZoom: coords,
-      selected: s.euid,
+      selected: coords,
       zoom: 13
     })
     this.setState({
@@ -518,7 +519,7 @@ class Layers extends React.Component{
               'base': 5,
               'stops': [[5, 5], [12, 10]]
             },
-            "circle-stroke-width": ['match', ['get', 'isselected'], "1", 10, 0],
+            "circle-stroke-width": ['match', ['get', 'isselected'], "1", 8, 0],
             "circle-color": ['match', ['get', 'isdf'], "1", '#f6f6f6', "#FF00A8"],
             "circle-stroke-color": '#0072ff',
             "circle-opacity": {
@@ -538,7 +539,7 @@ class Layers extends React.Component{
                 'base': 25,
                 'stops': [[5, 25], [12, 10]]
               },
-              "circle-stroke-width": ['match', ['get', 'isselected'], "1", 10, 0],
+              "circle-stroke-width": ['match', ['get', 'isselected'], "1", 8, 0],
               "circle-color": ['match', ['get', 'isdf'], "1", '#f6f6f6', "#FF00A8"],
               "circle-stroke-color": '#0072ff',
               "circle-opacity": {
@@ -630,11 +631,13 @@ class Layers extends React.Component{
               <div className="ss_map_tooltip_type">
                 {d.type}
               </div>
-              <div className="ss_map_tooltip_enam" style={{marginTop: '0.35rem', marginBottom: '0.15rem', color: '#f6f6f6'}}>
-                {dbname}
-              </div>
+
               <div className="ss_map_tooltip_ename">
                 {d.name}
+              </div>
+
+              <div className="ss_map_tooltip_enam" style={{marginTop: '0.35rem', marginBottom: '0.15rem', color: '#ccc', fontSize: '0.8em'}}>
+                Base de datos: {dbname}
               </div>
 
               </>
