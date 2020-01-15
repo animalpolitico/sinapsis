@@ -68,20 +68,45 @@ export default class DbEditEmpresa extends React.Component{
     }
   }
   insertField(slug, obj){
+    var self = this;
+
     try{
       var e = window.dbf.getEmpresa(this.props.db.id, this.props.empresa.uid);
+      var c = false;
       var f = e.fields;
       if(!f){
         f = {};
       }
       f[slug] = obj;
-      window.dbf.addFieldsToEmpresa(this.props.db.id, this.props.empresa.uid, f);
-      this.searchErrors();
+      /* ¿Existe parecida?*/
+      var ex = window.dbf.findEmpresaBySlug(this.props.empresa.slug, this.props.db.id);
+      if(ex && !obj.uid){
+        setTimeout(function(){
+          self.setState({
+            showEditExternal: true,
+            controlDbId: self.props.db.id,
+            controlEuid: self.props.empresa.uid,
+            controlFields: f
+          })
+        }, 100)
+
+      }else{
+        window.dbf.addFieldsToEmpresa(this.props.db.id, this.props.empresa.uid, f, c);
+        this.searchErrors();
+      }
     }catch(ex){
 
     }
 
   }
+
+  continueEdit(c){
+    window.dbf.addFieldsToEmpresa(this.state.controlDbId, this.state.controlEuid, this.state.controlFields, c);
+    this.setState({
+      showEditExternal: false
+    })
+  }
+
   insertMultipleFields(fields){
     var e = window.dbf.getEmpresa(this.props.db.id, this.props.empresa.uid);
     var f = e.fields;
@@ -176,6 +201,28 @@ export default class DbEditEmpresa extends React.Component{
               </Button>
               <Button color="secondary" onClick={() => this.delete()}>
                 Continuar
+              </Button>
+            </DialogActions>
+          </Dialog>
+
+          <Dialog
+            open={this.state.showEditExternal}
+            onClose={() => this.setState({showEditExternal: false})}
+          >
+            <DialogTitle>Editar empresa</DialogTitle>
+            <DialogContent>
+              <div className="db_empresa_container_group_form dbe_m">
+                <div className="db_empresa_container_group_form_title">
+                  Esta empresa ya existe en otra base de datos. ¿Deseas aplicar estos cambios en la misma empresa?
+                </div>
+              </div>
+            </DialogContent>
+            <DialogActions>
+              <Button color="secondary" onClick={() => this.continueEdit(false)}>
+                No, mantener los cambios solo en esta base
+              </Button>
+              <Button color="secondary" onClick={() => this.continueEdit(true)}>
+                Sí, aplicar en la otra base de datos
               </Button>
             </DialogActions>
           </Dialog>

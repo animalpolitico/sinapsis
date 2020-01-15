@@ -3046,6 +3046,58 @@ body.ss_showing_drawer .ss_analytics_pie {
       height: 30px;
       background: #e4c260; }
 
+.map_search {
+  width: 100%;
+  position: relative;
+  z-index: 10; }
+  .map_search_results {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
+    background: #333;
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto; }
+    .map_search_results_r {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.5rem;
+      color: white;
+      cursor: pointer;
+      font-size: 0.6rem;
+      border-bottom: 1px solid #444; }
+      .map_search_results_r:hover {
+        background: rgba(255, 255, 255, 0.05); }
+      .map_search_results_r_label {
+        text-transform: uppercase;
+        font-weight: 600; }
+        .map_search_results_r_label::before {
+          content: '/';
+          color: #0072ff;
+          margin-right: 0.25rem; }
+      .map_search_results_r_empresa {
+        margin-top: 0.25rem; }
+      .map_search_results_r_add {
+        margin-top: 0.25rem;
+        opacity: 0.75; }
+  .map_search_input {
+    width: 100%; }
+    .map_search_input input {
+      display: block;
+      background: transparent;
+      width: 100%;
+      color: white;
+      border: 1px solid #444;
+      padding: 0.3rem 0.5rem;
+      line-height: 1;
+      font-size: 0.7rem;
+      color: #f6f6f6;
+      box-sizing: border-box; }
+      .map_search_input input:focus {
+        outline: 0; }
+
 #ss_listado {
   width: 100%;
   height: 100%;

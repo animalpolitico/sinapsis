@@ -1293,7 +1293,6 @@ class DbDbsNavigationNewDb extends React.Component{
   togglePopper(e, force){
 
     var a = !force ? e.currentTarget : e;
-    console.log('a', a);
 
     var s = !force ? !this.state.openPopper : true;
 
@@ -1528,6 +1527,9 @@ class DbDbsNavigationNewDb extends React.Component{
         </div>
       </ClickAwayListener>
       </Popper>
+
+
+
 
       <Dialog
         open={this.state.showNewL}
@@ -1783,7 +1785,6 @@ class DbDbsNavigationTd extends React.Component{
     })
 
     window.addEventListener('sinapsis_deleted_db', function(){
-      console.log('HOLA', self.props.db.name);
       self.setState({
         name: self.props.db.name
       })

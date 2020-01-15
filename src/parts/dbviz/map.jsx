@@ -5,6 +5,8 @@ import { getCoords } from '../../vars/countriesDict';
 import Icon from '@material-ui/core/Icon';
 import * as d3 from "d3";
 
+var slugify = require('slugify');
+
 const Map = ReactMapboxGl({
   accessToken: mapboxKeys.access
 });
@@ -13,6 +15,7 @@ export default class SSMap extends React.Component{
   state = {
     defaultZoom: getCoords(),
     markers: [],
+    all: [],
     onlyCoincidencias: true,
     zoom: 5,
     st: false,
@@ -94,6 +97,7 @@ export default class SSMap extends React.Component{
     var coordsFiscal = [];
     var m = this.state.markers;
 
+    var all = [];
 
     m.map(function(d){
       var ename = window.dbf.getEmpresa(d.fromdb, d.empresauid).name
@@ -107,11 +111,17 @@ export default class SSMap extends React.Component{
       var d = {
         coords: coords,
         name: ename,
+        nameSlug: slugify(ename.replace(/[.\s]/g, ''), {lower: true, remove: /[*+~.,()'"!:@]/g}),
         type: d.name,
         euid: euid,
         fromdb: d.fromdb,
-        value: d.value
+        value: d.value,
+        addressSlug: slugify(d.value.replace(/[.\s]/g, ''), {lower: true, remove: /[*+~.,()'"!:@]/g}),
       }
+
+      all.push(d);
+
+
       var okdf = self.state.active.indexOf('df') > -1;
       var okds = self.state.active.indexOf('ds') > -1;
       var isdf = d.type == "Dirección fiscal" || d.type == "Entidad Federativa";
@@ -127,8 +137,11 @@ export default class SSMap extends React.Component{
 
       var isok = (isdf && okdf) || (!isdf && okds);
 
+      var isselected = d.euid == self.state.selected ? "1" : "0";
+      console.log('isselected', isselected);
+
       var marker = <Feature coordinates={coords}
-                            properties={{"isdf": isdf ? "1" : "0", "d": d}}
+                            properties={{"isdf": isdf ? "1" : "0", "d": d, "isselected": isselected}}
                             onClick={function(e){
                               var f = e.feature;
                               var l = f.layer;
@@ -296,7 +309,10 @@ export default class SSMap extends React.Component{
 
     })
 
-
+    // this.setState({
+    //   all: all
+    // })
+    o.all = all;
     o.stpms = stpms;
     o.sfpms = sfpms;
     o.max = max;
@@ -332,6 +348,13 @@ export default class SSMap extends React.Component{
     return(
       <div id="ss_map">
       <div id="ss_map_controls">
+
+        <div className="ss_map_controls_group">
+          <div className="ss_map_controls_group_title">Buscar</div>
+          <div className="ss_map_controls_group_content">
+            <MapSearch all={markers.all} parent={this}/>
+          </div>
+        </div>
 
         <div className="ss_map_controls_group">
           <div className="ss_map_controls_group_title">Mostrar direcciones</div>
@@ -386,6 +409,67 @@ export default class SSMap extends React.Component{
   }
 }
 
+class MapSearch extends React.Component{
+
+  state = {
+    r: []
+  }
+
+  doSearch(v){
+
+    if(v){
+      var a = this.props.all;
+      var s = slugify(v.replace(/[.\s]/g, ''), {lower: true, remove: /[*+~.,()'"!:@]/g});
+      var o = a.filter(_o => _o.addressSlug.indexOf(s) > -1 || _o.nameSlug.indexOf(s) > -1);
+    }else{
+      var o = [];
+    }
+
+    this.setState({
+      r: o,
+      v: v
+    })
+  }
+
+  fly(s){
+    var coords = s.coords;
+    this.props.parent.setState({
+      defaultZoom: coords,
+      selected: s.euid,
+      zoom: 13
+    })
+    this.setState({
+      v: s.name,
+      r: []
+    })
+  }
+
+  render(){
+    var self = this;
+    return(
+      <div className="map_search">
+        <div className="map_search_input">
+          <input value={this.state.v} onChange={(e) => this.doSearch(e.target.value)} type="text" placeholder="Dirección o nombre de empresa" />
+        </div>
+        <div className="map_search_results">
+          {
+            this.state.r.map(function(s){
+              return(
+                <div className="map_search_results_r" onClick={() => self.fly(s)}>
+                  <div className="map_search_results_r_label">{s.type}</div>
+                  <div className="map_search_results_r_empresa">{s.name}</div>
+                  <div className="map_search_results_r_add">{s.value}</div>
+                </div>
+              )
+            })
+          }
+        </div>
+      </div>
+    )
+
+  }
+}
+
 class Layers extends React.Component{
   state = {
     st: false,
@@ -434,6 +518,7 @@ class Layers extends React.Component{
               'base': 5,
               'stops': [[5, 5], [12, 10]]
             },
+            "circle-stroke-width": ['match', ['get', 'isselected'], "1", 10, 0],
             "circle-color": ['match', ['get', 'isdf'], "1", '#f6f6f6', "#FF00A8"],
             "circle-stroke-color": '#0072ff',
             "circle-opacity": {
@@ -453,6 +538,7 @@ class Layers extends React.Component{
                 'base': 25,
                 'stops': [[5, 25], [12, 10]]
               },
+              "circle-stroke-width": ['match', ['get', 'isselected'], "1", 10, 0],
               "circle-color": ['match', ['get', 'isdf'], "1", '#f6f6f6', "#FF00A8"],
               "circle-stroke-color": '#0072ff',
               "circle-opacity": {
@@ -544,7 +630,7 @@ class Layers extends React.Component{
               <div className="ss_map_tooltip_type">
                 {d.type}
               </div>
-              <div className="ss_map_tooltip_ename">
+              <div className="ss_map_tooltip_enam" style={{marginTop: '0.35rem', marginBottom: '0.15rem', color: '#f6f6f6'}}>
                 {dbname}
               </div>
               <div className="ss_map_tooltip_ename">

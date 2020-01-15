@@ -866,6 +866,7 @@ class Nodes extends React.Component{
       var onlyinall = this.state.onlyinall;
       var nodesData = window.dbf.getMatches(onlyinall);
       this.nodesData = nodesData;
+      this.moneyLinks = nodesData.moneyLinks;
       var _links = this.buildLinks();
       nodesData.links = _links;
 
@@ -944,6 +945,9 @@ class Nodes extends React.Component{
 
       /* Convenios solo vía contratos */
       data.links = data.links.filter(function(l){
+        if(l.type == "money"){
+          return true;
+        }
         var s = l.source;
         var t = l.target;
         var pass = true;
@@ -1003,7 +1007,10 @@ class Nodes extends React.Component{
                      .attr('data-from-type', l => l.source.type)
                      .attr('data-to', l => l.target.id)
                      .attr('data-to-type', l => l.target.type)
-                     .attr('stroke', 'rgba(0, 114, 255, 0.4)')
+                     .attr('stroke-dasharray', (d) => d.type == "money" ? '20,20' : 0)
+                     .attr('stroke', function(d){
+                         return d.type == "money" ? 'rgba(232, 224, 43, 0.38)' : 'rgba(0, 114, 255, 0.4)';
+                     })
       this.links = links;
 
 
@@ -1298,7 +1305,7 @@ class Nodes extends React.Component{
 
   filterInitNodes(){
     var n = this.nodesData.nodes;
-    var l = this.nodesData.links;
+    var l = [...this.nodesData.links];
 
 
 
@@ -1488,8 +1495,7 @@ class Nodes extends React.Component{
       }
     })
 
-
-
+    // links = [...this.moneyLinks];
 
     return links;
   }
@@ -1578,7 +1584,9 @@ class Nodes extends React.Component{
       var nextNodes = [];
 
       d3.selectAll(cnds)
-        .attr('stroke', 'rgba(0, 114, 255, 0.4)')
+        .attr('stroke', function(d){
+          return d.type == "money" ? 'rgba(232, 224, 43, 0.38)' : 'rgba(0, 114, 255, 0.4)';
+        })
         .each(function(d){
           d.selected = true;
           var aid = d.source.id;
@@ -1713,7 +1721,9 @@ class Nodes extends React.Component{
     this.setState({
       displayTooltip: false
     })
-    this.nodesContainer.selectAll('.nodes_link').attr('stroke', 'rgba(0, 114, 255, 0.4)');
+    this.nodesContainer.selectAll('.nodes_link').attr('stroke', function(d){
+      return d.type == "money" ? 'rgba(232, 224, 43, 0.38)' : 'rgba(0, 114, 255, 0.4)';
+    });
     this.nodesContainer
         .selectAll('.node')
         .attr('opacity', d => !d.blockShow ? 1 : 0)
@@ -1792,6 +1802,27 @@ class Nodes extends React.Component{
 
   }
 
+  resetFilters(){
+    var v = [
+      "rfc",
+      "website",
+      "person",
+      "date",
+      "email",
+      "phone",
+      "instancia",
+      "convenio",
+      "address",
+      "no_notaria",
+      'empresa',
+      ...window.dbf.getNewOtros()
+    ];
+    this.filterCategory(v);
+    setTimeout(function(){
+      window.dispatchEvent(new Event('sinapsis_realforce_filter'));
+    }, 100);
+  }
+
   filterCategory(vals){
     /* Actualiza el mapa de nodos */
     // if(vals.indexOf('empresa') == -1)
@@ -1849,6 +1880,9 @@ class Nodes extends React.Component{
       }
     }
 
+    this.setState({
+      filterS: vals.length
+    })
 
 
     this.getCoincidenciasSize();
@@ -2321,6 +2355,7 @@ class SSListado extends React.Component{
     window.addEventListener('sinapsis_lang_change', function(){
       self.set();
     })
+
   }
   set(){
     var self = this;
@@ -2329,13 +2364,16 @@ class SSListado extends React.Component{
     var nds = d3.selectAll('.node');
     var d = {};
 
+
+
     v.map(function(t){
       var c = self.getCoincidenciasFromType(t, nds);
       d[t] = c;
     })
 
     this.setState({
-      d: d
+      d: d,
+      hasFilters: this.props.nodesMap.state.filterS && this.props.nodesMap.state.filterS < 11
     })
   }
 
@@ -2373,7 +2411,6 @@ class SSListado extends React.Component{
 
     obj.coincidenciasFormatted = this.props.nodesMap.numberWithCommas(obj.coincidencias);
 
-    console.log('obj', obj);
 
     return obj;
   }
@@ -2473,6 +2510,14 @@ class SSListado extends React.Component{
     }
   }
 
+  resetFilters(){
+    var self = this;
+    this.props.nodesMap.resetFilters();
+    setTimeout(function(){
+      self.set();
+    }, 100);
+  }
+
   render(){
     var v = this.props.v;
     v = [...window.dbf.getNewOtros(), "empresa", ...v]
@@ -2495,9 +2540,17 @@ class SSListado extends React.Component{
               <strong><CountTo to={this.props.nodesMap.state.coincidencias} speed={1000}>{value => self.props.nodesMap.numberWithCommas(value)}</CountTo></strong>
               &nbsp;coincidencias en {this.fnumber(activeDbs.length)} base{activeDbs.length === 1 ? '' : 's'} de datos
             </div>
+            {
+              this.state.hasFilters ?
+              <div className="ss_listado_main_info_sec">
+                Se muestran solo algunas categorías (<span style={{textDecoration: 'underline', cursor: 'pointer'}} onClick={() => this.resetFilters()}>Quitar filtros</span>)
+              </div>
+              : null
+            }
             <div className="ss_listado_main_info_sec">
              ({activeDbsNames.join(', ')})
             </div>
+
           </div>
           <div className="ss_listado_container">
             {
@@ -2870,6 +2923,9 @@ class SSCategoryToggle extends React.Component{
         n: ''
       })
     })
+    window.addEventListener('sinapsis_realforce_filter', function(){
+      self.reset();
+    })
   }
 
 
@@ -3031,6 +3087,7 @@ class SSCategoryToggle extends React.Component{
               })
             }
           </div>
+
           {
             isMexico() ?
             <div className={"ss_ctr_br " + (this.state.bs ? "ss_ctr_br_c" : "")} onClick={() => this.toggleBS()}>

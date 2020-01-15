@@ -261,7 +261,12 @@ export default class DbFactory {
         normalized = [...normalized, ...dbfields];
       }
     })
+
+
     var nodes = {};
+    var allFields = [];
+    var aF = [];
+    var toadd = [];
     normalized.map(function(f){
       var v = f.value.replace(/[.\s]/g, '');
       var slug = slugify(f.type + '-' + v, {lower: true, remove: /[*,\/+~.()'"!:@]/g});
@@ -291,7 +296,59 @@ export default class DbFactory {
         }
       }
       nodes[slug].fields.push(f);
+      allFields.push({slug, f});
+      aF.push(f);
     })
+
+
+    var guids = {};
+    var moneyLinks = [];
+    allFields.map(function(o){
+      var slug = o.slug;
+      var _f = o.f;
+      if((_f.category == "emisor" || _f.value == "emisor" || _f.name == "emisor") && _f.group !== "transferencia"){
+        guids[_f.guid] = slug; // Grupo -> Emisor
+      }
+
+      if((_f.category == "receptor" || _f.value == "receptor" || _f.name == "receptor") && _f.group == "transferencia"){
+        guids[_f.guid] = slug; // Grupo -> Emisor
+      }
+
+    });
+
+
+    for(var guid in guids){
+      var emisor = guids[guid];
+      var f = aF.filter((f) => f.guid == guid);
+      var receptor = f[0].empresauid;
+      if(receptor == emisor){
+
+        continue;
+      }else{
+        f = f.filter((f) => f.category == "receptor" || f.value == "receptor");
+      }
+      if(f.length){
+        var v = f[0].value;
+        if(f[0].type == "instancia"){
+          v = v.replace(/[.\s]/g, '');
+          var slug = slugify('instancia-' + v, {lower: true, remove: /[*,\/+~.()'"!:@]/g});
+          receptor = slug;
+        }
+      }
+
+
+
+      moneyLinks.push({
+        source: emisor,
+        target: receptor,
+        type: 'money'
+      });
+
+      toadd.push(emisor);
+      toadd.push(receptor);
+
+    }
+
 
 
     /* Solo campos con conexiones */
@@ -311,6 +368,7 @@ export default class DbFactory {
           if(diff.indexOf(euid) == -1){
             diff.push(euid);
           }
+
         })
 
         var _add = false;
@@ -325,17 +383,22 @@ export default class DbFactory {
         }
         var add = _add;
 
-        if(diff.length > 1 && add){
+
+
+
+        if((diff.length > 1 && add) || toadd.indexOf(key) > -1){
           fnodes[key] = n;
         }
       }
+
     }
 
 
     nodes = fnodes;
     var finalObj = {
       nodes: [],
-      links: []
+      links: [],
+      moneyLinks: moneyLinks
     };
     Object.values(nodes).map(function(e){
       finalObj.nodes = [...finalObj.nodes, e];
@@ -1418,11 +1481,26 @@ export default class DbFactory {
     if(!db.empresas){
       db.empresas = {};
     }
+
+    var slug = slugify(v, {lower: true});
+
+    /** Busca si la empresa existe **/
+    var ex = this.findEmpresaBySlug(slug);
+    var fs = {};
+    if(ex && ex.fields){
+      for(var k in ex.fields){
+        var i = ex.fields[k];
+        if(!i.guid){
+          fs[k] = i;
+        }
+      }
+    }
+
     var empresa = {
       name: v,
-      slug: slugify(v, {lower: true}),
+      slug: slug,
       uid: this.createUid(),
-      fields: {}
+      fields: fs
     };
     db.empresas[empresa.uid] = empresa;
 
@@ -1468,10 +1546,54 @@ export default class DbFactory {
 
 
 
+
     this.editDb(db.id, db);
     this.refresh();
     return [db, empresa];
   }
+
+  /**
+  * Obtiene tooodas las empresas
+  *
+  * @param void
+  * @return []
+  **/
+  getAllEmpresas(dbuid){
+    var dbs = this.getDbs();
+        dbs = Object.values(dbs);
+    var emp = [];
+
+    dbs.map(function(db){
+      if(!(dbuid && dbuid == db.id)){
+        var e = db.empresas ? db.empresas : {}
+            e = Object.values(e);
+        e.map(function(_e){
+          _e.fromdb = db.id;
+          emp.push(_e);
+        })
+      }
+    });
+
+    return emp;
+  }
+
+  /**
+  * Encuentra una empresa por slug
+  *
+  * @param slug
+  * @return {} | false
+  **/
+  findEmpresaBySlug(s, dbuid){
+    var e = this.getAllEmpresas(dbuid);
+    var f = e.filter(d => d.slug == s);
+    if(f.length){
+      return f[0];
+    }else{
+      return false;
+    }
+
+  }
+
 
   /**
   * Obtiene la base de datos
@@ -1542,12 +1664,31 @@ export default class DbFactory {
   * @param euid
   * @param fields
   **/
-  addFieldsToEmpresa(dbuid, euid, fields){
+  addFieldsToEmpresa(dbuid, euid, fields, edit){
     var obj = this.obj;
     var e = obj.dbs[dbuid].empresas[euid];
     e.fields = fields;
     this.obj.dbs[dbuid].empresas[euid] = e;
     this.obj.dbs[dbuid].modified = moment.now();
+
+    /* Guarda los cambios */
+    if(edit){
+      var sl = this.obj.dbs[dbuid].empresas[euid].slug;
+      var esl = this.findEmpresaBySlug(sl, dbuid);
+      if(esl){
+        var f = esl.fields ? esl.fields : {};
+        for(var key in fields){
+          var fk = fields[key];
+          if(!fk.guid){
+            f[key] = fk;
+          }
+        }
+        console.log('f', f);
+        this.obj.dbs[esl.fromdb].fields = f;
+      }
+    }
+
+
     this.refresh();
     this.setModified();
     return e;
@@ -1795,6 +1936,32 @@ export default class DbFactory {
         }
         if(guid !== empresa.uid){
           this.addFieldsFromGuid(db.id, guid, _gi, z);
+        }
+      }
+    }catch{
+      console.warn('Ocurrió un error al agregar la empresa de la transferencia.');
+      return false;
+    }
+  }
+
+  addEmpresaFromContrato(db, empresa, guid, y){
+    try{
+      var z = JSON.parse(y);
+      var _gi = null;
+
+
+      for(var key in z){
+        var e = z[key];
+        _gi = e.guid;
+        if(e.name.indexOf('Nombre de la empresa') > -1){
+          var ne = e.value;
+        }
+      }
+      if(ne){
+        var guid = this.empresaExists(ne, db);
+        if(!guid){
+          var rspns = this.addEmpresaToDb(db, ne);
+          var guid = rspns[1].uid;
         }
       }
     }catch{

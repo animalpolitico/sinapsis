@@ -174,3 +174,66 @@
     }
   }
 }
+
+.map_search{
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  &_results{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
+    background: #333;
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+    &_r{
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.5rem;
+      color: white;
+      cursor: pointer;
+      font-size: 0.6rem;
+      border-bottom: 1px solid #444;
+      &:hover{
+        background: rgba(white, 0.05);
+      }
+      &_label{
+        text-transform: uppercase;
+        font-weight: 600;
+        &::before{
+          content: '/';
+          color: $main;
+          margin-right: 0.25rem;
+        }
+      }
+      &_empresa{
+        margin-top: 0.25rem;
+      }
+      &_add{
+        margin-top: 0.25rem;
+        opacity: 0.75;
+      }
+    }
+  }
+  &_input{
+    width: 100%;
+    input{
+      display: block;
+      background: transparent;
+      width: 100%;
+      color: white;
+      border: 1px solid #444;
+      padding: 0.3rem 0.5rem;
+      line-height: 1;
+      font-size: 0.7rem;
+      color: #f6f6f6;
+      box-sizing: border-box;
+      &:focus{
+        outline: 0;
+      }
+    }
+  }
+}

@@ -78,14 +78,23 @@ export default class DbFormGroupContrato extends React.Component{
 
   }
 
+  addNewEmpresa(z){
+    var y = JSON.stringify(z);
+    window.dbf.addEmpresaFromContrato(this.props.parent.props.db, this.props.empresa, this.state.guid, y);
+  }
+
   add(){
     var self = this;
-    window.dispatchEvent(new Event('sinapsisStartLoad'));
+    window.dispatchEvent(new Event('sinapsisStartLoad'))
+
     setTimeout(function(){
       var fs = self.state.fields;
       var dbuid = self.props.parent.props.db.id;
       var euid = self.props.empresa.uid;
       window.dbf.addFieldsFromGuid(dbuid, euid, self.state.guid, fs);
+      if(!self.state.isedit){
+        self.addNewEmpresa(fs);
+      }
       self.close();
       window.dispatchEvent(new Event('sinapsisEndLoad'));
     }, 300)
