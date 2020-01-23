@@ -175,6 +175,7 @@ export default class Analytics extends React.Component{
       .each(function(d){
         var show = false;
         var _dbs = [];
+        var nd = d3.select(this);
         d.fields.map(function(_f){
           if(dbs.indexOf(_f.fromdb) > -1){
             show = true;
@@ -183,8 +184,12 @@ export default class Analytics extends React.Component{
         })
         if(show){
           _dbs = _dbs.filter((v, i, s) => s.indexOf(v) === i);
+          var x = parseInt(nd.attr('data-fixed-coincidencias'));
+          if(!x){
+            x = parseInt(nd.attr('data-coincidencias'));
+          }
           var i = {
-            c: d.coincidencias,
+            c: x,
             label: d.name,
             dbs: _dbs
           }

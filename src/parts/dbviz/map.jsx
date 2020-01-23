@@ -501,6 +501,8 @@ class Layers extends React.Component{
         }
       }
 
+      console.log('d', d);
+
       var enms = [];
       var ismultiple = rms.length > 1;
       rms.map(dd => enms.push(dd.name));
@@ -626,7 +628,7 @@ class Layers extends React.Component{
           !ismultiple ?
           <div className="ss_map_tooltip">
             {
-              d.type !== "fpms" ?
+              d.type !== "fpms" && d.type !== "Entidad Fedrerativa" ?
               <>
               <div className="ss_map_tooltip_type">
                 {d.type}
@@ -653,30 +655,50 @@ class Layers extends React.Component{
           </div>
           : <div className="ss_map_tooltip">
             {
-              d.type !== "fpms" ?
+              d.type !== "fpms" && d.type !== "Entidad Federativa" ?
               <>
               <div className="ss_map_tooltip_type">
                 {d.type}
               </div>
               <div className="ss_map_tooltip_ename">
-                Encontrada en {rms.length} empresas:
-                <ul>
-                  {enms.map(function(en){
-                    return <li>{en}</li>
-                  })}
-                </ul>
+                Encontrada en {rms.length} empresas
+                {
+                  rms.length < 10 ?
+                  (<ul>
+                    {enms.map(function(en){
+                      return <li>{en}</li>
+                    })}
+                  </ul>)
+                  : null
+                }
+
               </div>
               <div className="ss_map_tooltip_ename">
 
               </div>
               </>
             : null }
+
+            {
+              d.type == "Entidad Federativa" ?
+
+              <>
+              <div className="ss_map_tooltip_ename">
+                En la base de datos {dbname} se ingresaron {rms.length} empresas en {d.value}
+              </div>
+              </>
+
+            : null
+
+            }
+
+
             <div className="ss_map_tooltip_name">
               {
                 d.type == "fpms" ?
                 (d.size + ' direcciones')
                 :
-                d.value
+                d.type !== "Entidad Federativa" ? d.value : ""
               }
             </div>
           </div>

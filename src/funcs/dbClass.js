@@ -35,7 +35,7 @@ export default class DbFactory {
     this.originalData = [];
     this.omitDbs = [];
     this.onlyBS = false;
-    this.geocoder = new window.google.maps.Geocoder();
+    this.geocoder = window.google ? new window.google.maps.Geocoder() : null;
   }
 
   /**
@@ -1585,7 +1585,12 @@ export default class DbFactory {
   **/
   findEmpresaBySlug(s, dbuid){
     var e = this.getAllEmpresas(dbuid);
-    var f = e.filter(d => d.slug == s);
+    console.log('e', e);
+    console.log('s', s);
+
+    var t = s.replace(/[*+~\-.,()'"!:@]/g, "");
+    console.log('t', t);
+    var f = e.filter(d => d.slug.replace(/[*+~\-.,()'"!:@]/g, "") == t || d.slug == s || d.slug == t);
     if(f.length){
       return f[0];
     }else{

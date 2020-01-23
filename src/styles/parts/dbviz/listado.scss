@@ -81,6 +81,30 @@
           margin-right: 0.5rem;
         }
       }
+      &_cat{
+        @extend .flex;
+        align-items: center;
+        color: yellow;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        .material-icons{
+          line-height: 1;
+          font-size: 1em;
+          margin-right: 0.25rem;
+        }
+        div{
+          background: #333;
+          border: 1px solid $main;
+          color: white;
+          text-transform: uppercase;
+          font-size: 0.8em;
+          cursor: pointer;
+          box-sizing: border-box;
+          padding: 0.15rem 0.35rem;
+          margin-left: 0.5rem;
+        }
+      }
       &_sec{
         font-size: 1.1rem;
         color: #ccc;

@@ -1,6 +1,10 @@
 .MuiButton-root{
   border-radius: 0!important;
   box-shadow: none!important;
+  white-space: nowrap;
+  .MuiButton-label{
+    font-size: 0.65rem!important;
+  }
 }
 .ss_modal_edit{
   .MuiDialogContent-root{

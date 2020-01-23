@@ -1180,6 +1180,7 @@ class Nodes extends React.Component{
           d.coincidencias = c;
           return c;
         })
+        .attr('data-fixed-coincidencias', d => d.coincidencias)
         .on('dblclick', function(d){
           self.releaseNode();
         })
@@ -1293,7 +1294,6 @@ class Nodes extends React.Component{
 
         d.coincidencias = x;
         d3.select(this).attr('data-coincidencias', x);
-
       })
 
 
@@ -2542,8 +2542,8 @@ class SSListado extends React.Component{
             </div>
             {
               this.state.hasFilters ?
-              <div className="ss_listado_main_info_sec">
-                Se muestran solo algunas categorías (<span style={{textDecoration: 'underline', cursor: 'pointer'}} onClick={() => this.resetFilters()}>Quitar filtros</span>)
+              <div className="ss_listado_main_info_cat">
+                <Icon>warning</Icon> Se muestran solo algunas categorías <div onClick={() => this.resetFilters()}>Quitar filtros</div>
               </div>
               : null
             }
@@ -2563,6 +2563,9 @@ class SSListado extends React.Component{
                 var cs = ['ss_listado_container_e'];
                 if(!o.coincidencias){
                   cs.push('ss_empty_listado');
+                }
+                if(o.coincidenciasFormatted.length > 15){
+                  return null;
                 }
                 return(
                   <div className={cs.join(' ')} onClick={() => self.openCoincidencia(o)}>

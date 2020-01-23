@@ -213,16 +213,16 @@ export default class DbEditEmpresa extends React.Component{
             <DialogContent>
               <div className="db_empresa_container_group_form dbe_m">
                 <div className="db_empresa_container_group_form_title">
-                  Esta empresa ya existe en otra base de datos. ¿Deseas aplicar estos cambios en la misma empresa?
+                  Esta empresa ya existe en otra base de datos de tu proyecto. ¿Deseas aplicar los cambios en todas las bases?
                 </div>
               </div>
             </DialogContent>
             <DialogActions>
               <Button color="secondary" onClick={() => this.continueEdit(false)}>
-                No, mantener los cambios solo en esta base
+                NO, QUE LOS CAMBIOS SÓLO APLIQUEN EN ESTA BASE
               </Button>
               <Button color="secondary" onClick={() => this.continueEdit(true)}>
-                Sí, aplicar en la otra base de datos
+                SÍ, APLICAR LOS CAMBIOS EN TODAS LAS BASES
               </Button>
             </DialogActions>
           </Dialog>
