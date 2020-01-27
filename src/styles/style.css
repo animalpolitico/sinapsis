@@ -887,6 +887,12 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
       padding-left: 0.5rem;
       border-bottom: 1px solid #444;
       margin-bottom: 0.25rem; }
+      .ss_db_view_empresas_title span {
+        max-width: 100%;
+        white-space: nowrap;
+        display: block;
+        text-overflow: ellipsis;
+        overflow: hidden; }
       .ss_db_view_empresas_title .ss_db_view_empresas_currency {
         width: 100%;
         font-size: 0.6rem;

@@ -317,37 +317,37 @@ export default class DbFactory {
     });
 
 
-    for(var guid in guids){
-      var emisor = guids[guid];
-      var f = aF.filter((f) => f.guid == guid);
-      var receptor = f[0].empresauid;
-      if(receptor == emisor){
-
-        continue;
-      }else{
-        f = f.filter((f) => f.category == "receptor" || f.value == "receptor");
-      }
-      if(f.length){
-        var v = f[0].value;
-        if(f[0].type == "instancia"){
-          v = v.replace(/[.\s]/g, '');
-          var slug = slugify('instancia-' + v, {lower: true, remove: /[*,\/+~.()'"!:@]/g});
-          receptor = slug;
-        }
-      }
-
-
-
-      moneyLinks.push({
-        source: emisor,
-        target: receptor,
-        type: 'money'
-      });
-
-      toadd.push(emisor);
-      toadd.push(receptor);
-
-    }
+    // for(var guid in guids){
+    //   var emisor = guids[guid];
+    //   var f = aF.filter((f) => f.guid == guid);
+    //   var receptor = f[0].empresauid;
+    //   if(receptor == emisor){
+    //
+    //     continue;
+    //   }else{
+    //     f = f.filter((f) => f.category == "receptor" || f.value == "receptor");
+    //   }
+    //   if(f.length){
+    //     var v = f[0].value;
+    //     if(f[0].type == "instancia"){
+    //       v = v.replace(/[.\s]/g, '');
+    //       var slug = slugify('instancia-' + v, {lower: true, remove: /[*,\/+~.()'"!:@]/g});
+    //       receptor = slug;
+    //     }
+    //   }
+    //
+    //
+    //
+    //   moneyLinks.push({
+    //     source: emisor,
+    //     target: receptor,
+    //     type: 'money'
+    //   });
+    //
+    //   toadd.push(emisor);
+    //   toadd.push(receptor);
+    //
+    // }
 
 
 
