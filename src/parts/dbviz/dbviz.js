@@ -756,6 +756,7 @@ class Nodes extends React.Component{
     displayDoi: true,
     minimizeDoi: false,
     initLoaded: false,
+    isbig: false,
     level: 0,
     listadoTypes: [
       "rfc",
@@ -848,6 +849,12 @@ class Nodes extends React.Component{
 
   }
 
+
+  setBig(matches){
+
+
+  }
+
   async set(){
     try{
       if(this.props.categoryToggle){
@@ -865,6 +872,22 @@ class Nodes extends React.Component{
       var container = this.container;
       var onlyinall = this.state.onlyinall;
       var nodesData = window.dbf.getMatches(onlyinall);
+
+      var s = JSON.stringify(window.dbf.obj).length * 0.000000125;
+      if(s > 5000){
+        /* Caso donde es muy grande el proyecto */
+        this.setState({
+          isbig: true
+        })
+        window.dbf.obj.isbig = true;
+        this.setBig(nodesData);
+        return;
+      }
+      window.dbf.obj.isbig = false;
+      this.setState({
+        isbig: false
+      })
+
       this.nodesData = nodesData;
       this.moneyLinks = nodesData.moneyLinks;
       var _links = this.buildLinks();
@@ -1219,6 +1242,7 @@ class Nodes extends React.Component{
             .attr('class', 'ss_guide')
 
       window.dispatchEvent(endLoad);
+      window.dbf.getPerformance('Final D3');
       setTimeout(function(){
         self.setState({
           loading: false,
@@ -1462,17 +1486,22 @@ class Nodes extends React.Component{
     /* Cruces entre empresas */
     var ds = [];
     var dsx = 0;
-    ems.map(function(_d){
-      var r = ems.find(f => f.slug == _d.slug && f.id !== _d.id && ds.indexOf(_d.slug) == -1);
-      if(r){
-        ds.push(_d.slug);
-        dsx++;
-        links.push({
-          source: _d.id,
-          target: r.id
-        })
-      }
-    })
+    if(this.state.onlyinall !== "onlyinall"){
+
+      ems.map(function(_d){
+        var r = ems.find(f => f.slug == _d.slug && f.id !== _d.id && ds.indexOf(_d.slug) == -1);
+        var isindb = _d
+        if(r){
+          ds.push(_d.slug);
+          dsx++;
+          links.push({
+            source: _d.id,
+            target: r.id
+          })
+        }
+      })
+    }
+
 
 
     window.dbf.obj.hasInterEmpresas = dsx > 0;
@@ -1929,6 +1958,7 @@ class Nodes extends React.Component{
 
   toggleOnlyAll(onlyinall){
     var self = this;
+    console.log('ONLY IN ALL', onlyinall);
     this.setState({
       onlyinall: onlyinall
     })
@@ -2229,16 +2259,16 @@ class SSNoResults extends React.Component{
     var self = this;
     setTimeout(function(){
       var t = self.getTip();
+      console.log('t', t);
       self.setState({
         tip: t,
-        show: true
+        show: true,
       })
     }, 500);
 
   }
 
   getTip(){
-    return false;
     var obj = false;
     if(this.props.nodes.state.coincidencias > 0 || this.props.nodes.state.isolatingNode){
       return obj;
@@ -2250,32 +2280,41 @@ class SSNoResults extends React.Component{
       dbsSize = dbs.length;
     }
 
-    /* No info */
-    if(!dbsSize){
+    if(!this.props.nodes.state.coincidencias && dbsSize > 0){
       var obj = {
-        title: 'Proyecto nuevo',
-        tip: 'No tienes ninguna base de datos, agrega una para comenzar.',
-        cta: 'Agregar base',
-        action: () => this.addDb(),
-        removeEstadisticas:true
-      }
-      return obj;
-    }
-
-    if(dbsSize){
-      var notShowing = 0;
-      dbs.map((db) => db.hide ? notShowing++ : null);
-      if(notShowing == dbsSize){
-        var obj = {
-          tip: 'No tienes ninguna base de datos activa, activa una al menos.',
-          cta: 'Activar bases de datos',
-          action: () => this.activateAllDbs()
+          title: 'Sin coincidencias',
+          tip: 'No encontramos ninguna coincidencia en tu proyecto.',
+          removeEstadisticas:true
         }
-        return obj;
-      }
     }
 
-    return false;
+
+    /* No info */
+    // if(!dbsSize){
+    //   var obj = {
+    //     title: 'Proyecto nuevo',
+    //     tip: 'No tienes ninguna base de datos, agrega una para comenzar.',
+    //     cta: 'Agregar base',
+    //     action: () => this.addDb(),
+    //     removeEstadisticas:true
+    //   }
+    //   return obj;
+    // }
+
+    // if(dbsSize){
+    //   var notShowing = 0;
+    //   dbs.map((db) => db.hide ? notShowing++ : null);
+    //   if(notShowing == dbsSize){
+    //     var obj = {
+    //       tip: 'No tienes ninguna base de datos activa, activa una al menos.',
+    //       cta: 'Activar bases de datos',
+    //       action: () => this.activateAllDbs()
+    //     }
+    //     return obj;
+    //   }
+    // }
+
+    return obj;
   }
 
   filterNone(){

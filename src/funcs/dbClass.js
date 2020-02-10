@@ -34,9 +34,26 @@ export default class DbFactory {
     this.manualSaves = 0;
     this.originalData = [];
     this.omitDbs = [];
+    this.ptime = 0;
     this.onlyBS = false;
     this.geocoder = window.google ? new window.google.maps.Geocoder() : null;
   }
+
+  startPerformance(m){
+    var n = performance.now();
+    this.ptime = n;
+    console.log('Inicio proceso', m);
+  }
+
+  getPerformance(m){
+    var n = performance.now();
+
+    var d = n - this.ptime;
+
+    console.log('Fin proceso', m, d / 1000 +'s');
+
+  }
+
 
   /**
   * Crea un objeto que después podrá ser exportado
@@ -192,9 +209,6 @@ export default class DbFactory {
   }
 
 
-
-
-
   /**
   * Crea los cruces
   *
@@ -202,6 +216,9 @@ export default class DbFactory {
   * @return obj
   **/
   getMatches(onlyinall){
+
+
+
     var self = this;
     var db = this.getDbs();
     var filterDb = {};
@@ -274,12 +291,12 @@ export default class DbFactory {
         slug = f.id;
       }
       /* Fecha */
-      if(f.type == "date"){
-        var time = moment(v);
-        if(time.isValid()){
-          slug = time.unix();
-        }
-      }
+      // if(f.type == "date"){
+      //   var time = moment(v);
+      //   if(time.isValid()){
+      //     slug = time.unix();
+      //   }
+      // }
 
       if(!nodes[slug]){
         nodes[slug] = {
@@ -304,15 +321,15 @@ export default class DbFactory {
     var guids = {};
     var moneyLinks = [];
     allFields.map(function(o){
-      var slug = o.slug;
-      var _f = o.f;
-      if((_f.category == "emisor" || _f.value == "emisor" || _f.name == "emisor") && _f.group !== "transferencia"){
-        guids[_f.guid] = slug; // Grupo -> Emisor
-      }
-
-      if((_f.category == "receptor" || _f.value == "receptor" || _f.name == "receptor") && _f.group == "transferencia"){
-        guids[_f.guid] = slug; // Grupo -> Emisor
-      }
+      // var slug = o.slug;
+      // var _f = o.f;
+      // if((_f.category == "emisor" || _f.value == "emisor" || _f.name == "emisor") && _f.group !== "transferencia"){
+      //   guids[_f.guid] = slug; // Grupo -> Emisor
+      // }
+      //
+      // if((_f.category == "receptor" || _f.value == "receptor" || _f.name == "receptor") && _f.group == "transferencia"){
+      //   guids[_f.guid] = slug; // Grupo -> Emisor
+      // }
 
     });
 

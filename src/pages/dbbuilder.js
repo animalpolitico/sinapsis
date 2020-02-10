@@ -1151,19 +1151,33 @@ class DbEmpresasList extends React.Component{
   render(){
     var self = this;
     var db = this.props.db;
-    var em = db.empresas;
+    var em = db.empresas ? db.empresas : [];
+    var ems = Object.values(em);
+    var size = ems.length;
     if(em){
-      var hasEmpresas = Object.values(em).length > 0;
+      var hasEmpresas = size > 0;
     }else{
       var hasEmpresas = false;
     }
+
+    ems = ems.slice(0, 4000);
+
     return(
       <div className="ss_db_ve_c" ref={(ref) => this.listContainer = ref}>
+        {
+          size > 20000 && false ?
+          <div className="ss_db_view_empresas_notice">
+            <Icon>info</Icon>
+            <div>Esta base de datos es muy grande, se mostrarán solo las primeras 20,000 empresas.</div>
+          </div>
+          : null
+        }
+
         {
           hasEmpresas ?
           <div className="ss_db_ve_c_empresas_list">
             {
-              Object.values(em).map(function(empresa, k){
+              ems.map(function(empresa, k){
                 return(
                 <DbEmpresa
                     empresa={empresa}
@@ -1713,7 +1727,7 @@ class PreDb extends React.Component{
             {
               p.only ?
               <div className="ss_predb_select_only">
-                <div className="ss_predb_select_only_t">Esta base de datos solo contempla:</div>
+                <div className="ss_predb_select_only_t">Esta base de datos contempla todos sus campos:</div>
                   <div className="ss_predb_select_only_l">
                     {
                       p.only.map(function(m){
