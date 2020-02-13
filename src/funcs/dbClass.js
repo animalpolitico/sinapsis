@@ -950,6 +950,11 @@ export default class DbFactory {
         no = controlKey.value;
       }
 
+      if(!no){
+        no = Math.random() * 99999999 + 'conv';
+
+      }
+
       no = slugify(no, {lower: true, remove: /[\/\-*+~.()'"!:@]/g});
 
       /* Busca el monto */
