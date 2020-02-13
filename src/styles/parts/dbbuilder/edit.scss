@@ -745,7 +745,9 @@
     display: none!important;
   }
   .ss_transaction_row_d{
-    display: none!important;
+    .material-icons{
+      display: none!important;
+    }
   }
   .br_i{
     pointer-events: none!important;

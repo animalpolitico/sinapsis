@@ -34,6 +34,9 @@ import DbViz from '../parts/dbviz/dbviz';
 import DbMobileAlert from '../parts/dbbuilder/mobilealert';
 import DbInput from '../parts/dbbuilder/inputs';
 
+import formatMoney, {convertCurrency} from '../funcs/formatMoney';
+
+
 
 import oldToNew from '../funcs/oldSinapsisToNew';
 import demo from '../funcs/demo';
@@ -1814,7 +1817,13 @@ class PreDb extends React.Component{
 
               <div className="ss_predb_select_name_t_f">
                 {p.name}
+                {
+                  p.moneySum ?
+                  <span>Monto total: {formatMoney(p.moneySum)}</span>
+                  : null
+                }
               </div>
+
               <div className="ss_predb_select_name_t_a">
                 <Icon>{!this.state.showContent ? "keyboard_arrow_down" : "keyboard_arrow_up"}</Icon>
               </div>

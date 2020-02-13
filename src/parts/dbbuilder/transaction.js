@@ -16,6 +16,7 @@ export default class TransactionRow extends React.Component{
     var f = this.props.g;
     var t = f[0];
     var emisor, monto, receptor = false;
+    console.log('T1', t);
     if(t.group !== "transferencia"){
       // console.log('t', t.category);
       f.map(function(e){
@@ -78,6 +79,7 @@ export default class TransactionRow extends React.Component{
       monto: monto,
       showT: emisor ? true : false
     };
+
     return o;
   }
 
@@ -100,6 +102,8 @@ export default class TransactionRow extends React.Component{
   render(){
     var n = this.buildName();
     var c = window.dbf.getDbCurrencyObj(this.props.db.id);
+
+    console.log('N1', n);
 
     return(
       <>

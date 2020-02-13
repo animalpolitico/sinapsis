@@ -348,7 +348,7 @@ body.ss_show_sidebar{
         border-color: rgb(209, 54, 54);
       }
       &_r{
-        color: rgb(209, 54, 54); 
+        color: rgb(209, 54, 54);
       }
     }
   }
@@ -413,6 +413,16 @@ body.ss_show_sidebar{
             flex: 1;
             box-sizing: border-box;
             padding-right: 0.5rem;
+            span{
+              font-size: 0.95em;
+              color: #ccc;
+              &::before{
+                content: '/';
+                font-weight: 600;
+                color: $main;
+                margin: 0 0.35rem;
+              }
+            }
           }
         }
         &_cta{

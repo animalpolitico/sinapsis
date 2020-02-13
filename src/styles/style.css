@@ -528,6 +528,14 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
         flex: 1;
         box-sizing: border-box;
         padding-right: 0.5rem; }
+        .ss_modal_dbpre .ss_predb_select_name_t_f span {
+          font-size: 0.95em;
+          color: #ccc; }
+          .ss_modal_dbpre .ss_predb_select_name_t_f span::before {
+            content: '/';
+            font-weight: 600;
+            color: #0072ff;
+            margin: 0 0.35rem; }
     .ss_modal_dbpre .ss_predb_select_name_cta {
       background: #222;
       text-transform: uppercase;
@@ -1695,7 +1703,7 @@ body.ss_show_sidebar .ss_dbbuilder_sidebar {
   border-color: #ccc !important; }
 .db_empresa_edit_container.db_block_edit .dbef_n_ctas_c {
   display: none !important; }
-.db_empresa_edit_container.db_block_edit .ss_transaction_row_d {
+.db_empresa_edit_container.db_block_edit .ss_transaction_row_d .material-icons {
   display: none !important; }
 .db_empresa_edit_container.db_block_edit .br_i {
   pointer-events: none !important; }

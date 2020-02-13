@@ -949,6 +949,9 @@ export default class DbFactory {
       if(controlKey){
         no = controlKey.value;
       }
+      if(!no){
+        no = Math.random() * 9999999999999 + '_convc';
+      }
 
       no = slugify(no, {lower: true, remove: /[\/\-*+~.()'"!:@]/g});
 

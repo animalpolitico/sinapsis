@@ -2286,9 +2286,8 @@ class SSNoResults extends React.Component{
       dbsSize = dbs.length;
     }
 
-    console.log('TIP', window.dbf.obj.mostrarV);
 
-    if(!window.dbf.obj.mostrarV  && !this.props.nodes.state.coincidencias && dbsSize > 0){
+    if(!window.dbf.obj.mostrarV && !this.props.nodes.state.coincidencias && dbsSize > 0){
       var obj = {
           title: 'Sin coincidencias',
           tip: 'No encontramos ninguna coincidencia en tu proyecto.',
