@@ -2165,6 +2165,83 @@ class Nodes extends React.Component{
     this.zoom.scaleBy(this.canvas, n == -1 ? 0.8 : 1.2);
   }
 
+  orderNodes(){
+    window.dispatchEvent(new Event('sinapsisStartLoad'));
+    var self = this;
+    // var cx = 0;
+    // var cy = 0;
+    // var set = false;
+    // var lvls = {};
+    // var g = d3.selectAll('.node')
+    //           .each(function(d){
+    //             d.fixed = false;
+    //             d.fx = null;
+    //             d.fy = null;
+    //             if(!set){
+    //               var e = d3.select(this);
+    //               if(e.attr('cx')){
+    //                 var ecx = parseFloat(e.attr('cx'));
+    //                 var ecy = parseFloat(e.attr('cy'));
+    //                 cx = ecx;
+    //                 cy = ecy;
+    //               }else{
+    //                 var t = e.style("transform");
+    //                 console.log('t',t);
+    //                 if(t && t !== "none"){
+    //                   t = t.replace('matrix(','');
+    //                   t = t.replace(')', '');
+    //                   var a = t.split(', ');
+    //                   var ecx = parseFloat(a[4]);
+    //                   var ecy = parseFloat(a[5]);
+    //                   cx = ecx;
+    //                   cy = ecy;
+    //                 }else if(t == "none"){
+    //                   var t = e.attr('transform');
+    //                   t = t.replace('translate(','');
+    //                   t = t.replace(')', '');
+    //                   var a = t.split(',');
+    //                   var ecx = parseFloat(a[0]);
+    //                   var ecy = parseFloat(a[1]);
+    //                   cx = ecx;
+    //                   cy = ecy;
+    //                 }
+    //               }
+    //             }
+    //           })
+    //
+    //
+    //
+    // var cnt = {};
+
+    var cx = window.innerWidth;
+    var dx = 480;
+
+    console.log('CXDX', cx, dx);
+
+    d3.selectAll('.node')
+      .filter(d => d.type == "empresa")
+      .sort(function(a, b){
+        if(!a.sum){
+          return 0;
+        }
+        return a.sum <= b.sum ? 1 : -1;
+      })
+      .each(function(d, i){
+        d.fx = (i * dx) - (cx * 10);
+        d.fy = 0;
+        d.fixed = true;
+      })
+
+    self.simulation.tick();
+    setTimeout(function(){
+      self.simulation.tick();
+      self.drawNodes();
+      window.dispatchEvent(new Event('sinapsisEndLoad'));
+    }, 350);
+
+
+  }
+
   render(){
     var self = this;
     return(
@@ -2188,8 +2265,13 @@ class Nodes extends React.Component{
             <Icon>autorenew</Icon>
           </Fab>
 
+
             <Fab title="Centrar" alt="Centrar" size="small" color="primary" disabled={this.state.isPerfectZoom} onClick={() => this.setInitialZoom()}>
               <Icon>center_focus_strong</Icon>
+            </Fab>
+
+            <Fab title="Ordenar" alt="Ordenar" size="small" color="primary" onClick={() => this.orderNodes()}>
+              <Icon>linear_scale</Icon>
             </Fab>
 
           <ZoomInOut onClick={(n) => this.onZoomInOut(n)}/>
