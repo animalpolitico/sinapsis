@@ -253,6 +253,7 @@ class SSDBControl extends React.Component{
       this.setState({
         mostrarV: v
       })
+      window.dbf.obj.mostrarV = false;
       window.dispatchEvent(startLoad);
       this.props.nodesMap.toggleEmpresas(showall);
     }
@@ -265,6 +266,10 @@ class SSDBControl extends React.Component{
       mostrarV: 'all',
       showWarning: false
     })
+    window.dbf.obj.mostrarV = true;
+    setTimeout(function(){
+      window.dispatchEvent(new Event('ss_change_mostrarv'))
+    }, 100);
   }
 
   handleMostrarCoincidencias(type){
@@ -2253,6 +2258,7 @@ class SSNoResults extends React.Component{
     this.set();
     window.addEventListener('ss_lazy_indicator', () => this.set())
     window.addEventListener('sinapsisEndLoad', () => this.set())
+    window.addEventListener('ss_change_mostrarv', () => this.set())
   }
 
   set(){
@@ -2280,7 +2286,9 @@ class SSNoResults extends React.Component{
       dbsSize = dbs.length;
     }
 
-    if(!this.props.nodes.state.coincidencias && dbsSize > 0){
+    console.log('TIP', window.dbf.obj.mostrarV);
+
+    if(!window.dbf.obj.mostrarV  && !this.props.nodes.state.coincidencias && dbsSize > 0){
       var obj = {
           title: 'Sin coincidencias',
           tip: 'No encontramos ninguna coincidencia en tu proyecto.',
