@@ -1160,7 +1160,7 @@ class DbEmpresasList extends React.Component{
       var hasEmpresas = false;
     }
 
-    ems = ems.slice(0, 4000);
+    ems = ems.slice(0, 20000);
 
     return(
       <div className="ss_db_ve_c" ref={(ref) => this.listContainer = ref}>
@@ -1511,6 +1511,30 @@ class DbDbsNavigationNewDb extends React.Component{
     }
 
     var currencyObj = getCurrentCountry();
+    var predbsObj = [];
+
+    predbs.map(function(group, i){
+      var gn = group.groupName;
+      var dbs = group.dbs;
+      var h = [];
+      dbs.map(function(predb){
+        var ok = true;
+        if(predb.onlyIn){
+          var ok = predb.onlyIn.indexOf(getLang()) > -1;
+        }
+        var blockEstafa = false;
+        if(predb.name == "Estafa Maestra" && window.dbf.obj.hasEstafa){
+          blockEstafa = true;
+        }
+        if(ok){
+          h.push(<PreDb disabled={self.state.loadedDbs.indexOf(predb.name) > -1 || blockEstafa} parent={self} p={predb} />)
+        }
+      })
+      const gob = <PreDbGroup dbs={h} name={gn} index={i}/>;
+      predbsObj.push(gob);
+    })
+
+
 
     return(
       <>
@@ -1630,24 +1654,7 @@ class DbDbsNavigationNewDb extends React.Component{
         <DialogTitle>Selecciona una base de datos</DialogTitle>
         <DialogContent>
           <div className="ss_modal_dbpre_select">
-          {
-            predbs.map(function(predb){
-              var ok = true;
-              if(predb.onlyIn){
-                var ok = predb.onlyIn.indexOf(getLang()) > -1;
-              }
-              var blockEstafa = false;
-              if(predb.name == "Estafa Maestra" && window.dbf.obj.hasEstafa){
-                blockEstafa = true;
-              }
-
-              if(ok){
-                return <PreDb disabled={self.state.loadedDbs.indexOf(predb.name) > -1 || blockEstafa} parent={self} p={predb} />
-              }else{
-                return null;
-              }
-            })
-          }
+          {predbsObj}
           </div>
         </DialogContent>
         <DialogActions>
@@ -1659,6 +1666,108 @@ class DbDbsNavigationNewDb extends React.Component{
       </>
     )
   }
+}
+
+class PreDbGroup extends React.Component{
+  state = {
+    isactive: false,
+    search: ''
+  }
+  render(){
+    var cs = ['ss_predb_gob'];
+    if(this.state.isactive){
+      cs.push('ss_active');
+    }
+
+    var dbs = this.props.dbs;
+    var size = dbs.length;
+
+    var group = predbs[this.props.index];
+    var groupDbs = group.dbs;
+
+    var flags = [];
+    groupDbs.map((d) => flags.indexOf(d.flag) == -1 ? flags.push(d.flag) : null);
+    flags = flags.sort();
+
+    var fdbs = [];
+
+    if(this.state.search){
+
+      var s = this.state.search;
+      var ss = s.replace(/[.\s]/g, '');
+          ss = slugify(ss, {lower: true, remove: /[*,\/+~.()'"!:@]/g});
+
+      dbs.map(function(d){
+        var n = d.props.p.name.replace(/[.\s]/g, '');
+            n = slugify(n, {lower: true, remove: /[*,\/+~.()'"!:@]/g});
+        var a = d.props.p.author.replace(/[.\s]/g, '');
+            a = slugify(a, {lower: true, remove: /[*,\/+~.()'"!:@]/g});
+
+        if(n.indexOf(ss) > -1 || ss.indexOf(n) > -1 || a.indexOf(ss) > -1){
+          fdbs.push(d);
+        }
+
+      })
+
+
+
+
+    }else{
+      fdbs = dbs;
+    }
+
+
+    if(!fdbs.length){
+      cs.push('ss_search_invalid');
+    }
+
+
+    return(
+      <div className={cs.join(' ')}>
+        <div className="ss_predb_gob_name" onClick={() => this.setState({isactive: !this.state.isactive})}>
+          <div className="ss_predb_gob_name_a">{this.props.name}</div>
+          <div className="ss_predb_gob_name_b"><Icon>{!this.state.isactive ? "keyboard_arrow_down" : "keyboard_arrow_up"}</Icon></div>
+          <div className="ss_predb_gob_name_h"></div>
+            <div className="ss_predb_gob_name_d">
+              <span>Países:</span>
+              <div>
+                {
+                  flags.map(function(flag){
+                    return <img src={flag} />
+                  })
+                }
+              </div>
+            </div>
+            <div className="ss_predb_gob_name_c">
+              {size + ' base'+(size > 1 ? 's' : '')+' de datos'}
+            </div>
+
+        </div>
+        {
+          this.state.isactive ?
+          <div className="ss_predb_gob_content">
+            <div className="ss_predb_gob_content_s">
+              <input type="text" placeholder="Busca por nombre de base de datos" onChange={(e) => this.setState({search: e.target.value})} value={this.state.search}/>
+              {
+                s ?
+                <div className="ss_predb_gob_content_s_r">
+                  {fdbs.length + ' base' + (fdbs.length === 1 ? '' : 's')+' de datos coincide'+ (fdbs.length === 1 ? '' : 'n  ')+' con la búsqueda'}
+                </div>
+                : null
+              }
+
+            </div>
+            <div className="ss_predb_gob_content_dbs">
+              {fdbs}
+            </div>
+          </div>
+          : null
+        }
+
+      </div>
+    )
+  }
+
 }
 
 class PreDb extends React.Component{

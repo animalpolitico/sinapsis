@@ -216,7 +216,152 @@ body.ss_show_sidebar{
   padding-top: 0.75rem!important;
   padding-right: 1rem!important;
 }
+.ss_predb_gob{
+  width: 100%;
+  background: rgba(black, 0.08);
+  margin: 0.5rem 0;
+  &_content{
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    &_s{
+      margin-bottom: 0.5rem;
+      position: relative;
+      &_r{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.3rem 0.5rem 0;
+        font-size: 0.6rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      input{
+        width: 100%;
+        display: block;
+        height: 30px;
+        line-height: 30px;
+        font-size: 0.9rem;
+        border: 1px solid #444;
+        box-sizing: border-box;
+        padding: 0 0.5rem;
+        color: #ccc;
+        background: rgba(black, 0.1);
+        &:focus{
+          outline: 0;
+        }
+      }
+    }
+    &_dbs{
+      width: 100%;
+      max-height: 175px;
+      overflow: hidden;
+      overflow-y: auto;
+    }
+    .ss_predb_select{
+      &:last-child{
+        .ss_predb_select_info{
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+  &_name{
+    width: 100%;
+    @extend .flex;
+    cursor: pointer;
+    flex-wrap: wrap;
+    cursor: pointer;
+    background: #222;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    align-items: center;
+    padding-bottom: 0.75rem;
+    position: relative;
+    &::after{
+      content: '';
+      display: block;
+      width: 0;
+      transition: all 0.25s ease;
+      height: 0.1rem;
+      background: $main;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+    &:hover{
+      &::after{
+        width: 100%;
+      }
+    }
+    &_h{
+      width: 100%;
+    }
+    &_a{
+      flex: 1;
+      font-size: 1.1rem;
+      font-weight: 300;
+      &::before{
+        content: '/';
+        color: $main;
+        font-weight: 600;
+        margin-right: 0.35rem;
+      }
+    }
+    &_b{
+      .material-icons{
+        font-size: 1.8rem;
+        line-height: 1;
+        transform: translateY(10%);
+      }
+    }
+    &_c{
+      margin-left: 0.5rem;
+      color: #ccc;
+      font-size: 0.9rem;
+      &::before{
+        content: '/';
+        font-weight: 600;
+        color: #bbb;
+        margin-right: 0.5rem;
+      }
+    }
+    &_d{
+      @extend .flex;
+      align-items: center;
+      color: #ccc;
+      font-size: 0.9rem;
+      div{
+        margin-left: 0.25rem;
+        @extend .flex;
+      }
+      img{
+        height: 0.8rem;
+        margin-left: 0.15rem
+      }
+    }
+  }
+  &.ss_search_invalid{
+    .ss_predb_gob_name::after{
+      background: rgb(209, 54, 54);
+    }
+    .ss_predb_gob_content_s{
+      input{
+        border-color: rgb(209, 54, 54);
+      }
+      &_r{
+        color: rgb(209, 54, 54); 
+      }
+    }
+  }
+  &.ss_active{
+    .ss_predb_gob_name::after{
+      width: 100%;
+    }
+  }
+}
+
 .ss_modal_dbpre{
+
+
   .ss_predb{
     &_select{
       width: 100%;
