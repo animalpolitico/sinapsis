@@ -15,7 +15,7 @@ export default class TransactionRow extends React.Component{
   buildName(){
     var f = this.props.g;
     var t = f[0];
-    var emisor, monto, receptor = false;
+    var emisor, monto, receptor, nocontrato = false;
     console.log('T1', t);
     if(t.group !== "transferencia"){
       // console.log('t', t.category);
@@ -31,6 +31,10 @@ export default class TransactionRow extends React.Component{
             receptor = e.value;
           break;
         }
+        if(e.slug.indexOf('numero')){
+          nocontrato = e.value;
+        }
+
       })
       if(this.props.receptorIsEmpresa){
         receptor = this.props.empresa.name;
@@ -73,6 +77,11 @@ export default class TransactionRow extends React.Component{
       }
     }
 
+    if(t.group == "contrato" && !emisor && nocontrato){
+      emisor = "Contrato "+nocontrato
+    }
+
+
     var o = {
       receptor: receptor,
       emisor: emisor,
@@ -90,7 +99,6 @@ export default class TransactionRow extends React.Component{
 
   delete(){
     var g = this.props.g;
-    console.log('t', this.props);
     var t = g[0];
     var euid = this.props.empresa.uid;
     var dbid = this.props.parent.props.dbid;
@@ -103,8 +111,7 @@ export default class TransactionRow extends React.Component{
     var n = this.buildName();
     var c = window.dbf.getDbCurrencyObj(this.props.db.id);
 
-    console.log('N1', n);
-
+    console.log('contrato', this.props);
     return(
       <>
       <div className="ss_transaction_row">
