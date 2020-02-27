@@ -1378,7 +1378,18 @@ class DbDbsNavigationNewDb extends React.Component{
     })
     var c = await d3.csv(v);
     setTimeout(function(){
-      var ont = new oldToNew(n, c, true);
+      var v = 1;
+
+      var columns = c.columns;
+      var fcolumn = columns[0];
+
+      if(fcolumn.indexOf('2') > -1){
+        v = 2;
+      }
+
+      console.log('v', v);
+
+      var ont = new oldToNew(n, c, true, v);
       var db = ont.save();
       if(!window.dbf.obj.dbs){
         window.dbf.obj.dbs = {};

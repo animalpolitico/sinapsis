@@ -2362,7 +2362,7 @@ class SSNoResults extends React.Component{
       dbsSize = dbs.length;
     }
 
-    if(!this.props.nodes.state.coincidencias && dbsSize > 0){
+    if(!this.props.nodes.state.coincidencias && dbsSize > 0 && dbs[0].empresas && Object.values(dbs[0].empresas).length > 2){
       var obj = {
           title: 'Sin coincidencias',
           tip: 'No encontramos ninguna coincidencia en tu proyecto.',
