@@ -20,7 +20,7 @@
     "is-mobile": "^2.1.0",
     "jszip": "^3.2.2",
     "mapbox-gl": "^1.4.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "number-to-letter": "^1.0.1",
     "particles.js": "^2.0.0",
     "query-string": "^6.8.3",
