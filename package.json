@@ -18,7 +18,7 @@
     "http-build-query": "^0.7.0",
     "intro.js": "^2.9.3",
     "is-mobile": "^2.1.0",
-    "jszip": "^3.2.2",
+    "jszip": "^3.7.0",
     "mapbox-gl": "^1.4.1",
     "moment": "^2.24.0",
     "number-to-letter": "^1.0.1",
